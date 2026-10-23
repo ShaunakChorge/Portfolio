@@ -59,6 +59,12 @@ npx serve .
 - **Colour meaning:** cyan = AI / LLM / agents, magenta = computer vision / media, purple = ML / data / speech, blue = backend / web / tooling.
 - **Contact form:** posts to a Formspree endpoint configured in `src/contact.html`; enable spam protection and a domain allow-list for the live origin in the Formspree dashboard.
 
+## Repository layout
+
+- `new_portfolio/` - the current site (everything below: `index.html`, `assets/`, `src/`, `build.mjs`, `site.webmanifest`). Run all build commands from inside this folder.
+- `old_portfolio/` - the previous site, kept unchanged and still served at `/Portfolio/old_portfolio/`.
+- Repo root - `index.html` (redirect to `new_portfolio/`), `404.html`, `robots.txt`, `sitemap.xml`, `.nojekyll`, this README.
+
 ## Deploy on GitHub Pages
 
 1. Repository `ShaunakChorge/Portfolio` -> **Settings -> Pages** -> *Build and deployment*: **Deploy from a branch**, branch `main`, folder `/ (root)`.
