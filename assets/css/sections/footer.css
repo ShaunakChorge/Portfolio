@@ -1,0 +1,106 @@
+/* =====================================================================
+   NEURAL NEON - footer.css   (CONTACT engineer)   <footer class="footer">
+   Scope: .footer / .footer__*.  Un-layered, so it wins over base.css (@layer pf).
+   IMPORTANT: the floating FAB (.contact-fab) lives inside this footer and is position:fixed, so the footer must NEVER get
+   transform / filter / backdrop-filter / contain / content-visibility / will-change (each would trap the fixed FAB).
+   Contents: 1 shell + neon hairline  2 grid + columns  3 bottom bar  4 ghost wordmark  5 breakpoints  6 print
+   ===================================================================== */
+
+/*#region 1 shell*/
+.footer {
+  position: relative; margin-top: clamp(1rem, .5rem + 2vw, 2.5rem);
+  padding-top: clamp(2.5rem, 1.8rem + 3vw, 4.5rem);
+  background: linear-gradient(to bottom, rgb(5 6 10 / .82), rgb(2 3 6 / .94));
+  border-top: 1px solid var(--line-neon);
+}
+.footer__line {   /* subtle neon hairline sitting on the top edge */
+  position: absolute; top: -1px; left: 0; right: 0; height: 2px; pointer-events: none;
+  background: linear-gradient(90deg, transparent 0%, rgb(var(--accent) / .75) 22%, rgb(var(--purple) / .65) 55%, rgb(var(--magenta) / .6) 80%, transparent 100%);
+  box-shadow: 0 0 18px rgb(var(--accent) / .3);
+}
+/*#endregion*/
+
+/*#region 2 grid + columns*/
+.footer__grid { display: grid; gap: clamp(2rem, 1.4rem + 2.4vw, 3rem); padding-bottom: clamp(2rem, 1.5rem + 2vw, 3rem); }
+.footer__grid > * { min-width: 0; }
+.footer__brand { display: grid; gap: .9rem; align-content: start; justify-items: start; }
+.footer__logo { display: inline-flex; align-items: center; gap: .6rem; color: rgb(var(--accent)); }
+.footer__blurb { max-width: 34ch; font-size: var(--fs-sm); line-height: 1.6; color: var(--text-muted); }
+.footer__loc { display: inline-flex; align-items: center; gap: .5rem; font: 400 .8125rem/1.4 var(--font-mono); letter-spacing: .04em; color: var(--text-dim); }
+.footer__loc .icon { color: rgb(var(--magenta-ink)); }
+
+.footer__h { margin-bottom: .85rem; font: 700 .8125rem/1.3 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: rgb(var(--accent-ink)); text-wrap: initial; }
+.footer__links, .footer__social { display: grid; gap: .1rem; margin: 0; padding: 0; list-style: none; }
+.footer__links a, .footer__social a {
+  display: inline-flex; align-items: center; gap: .75rem; min-height: 44px; padding-inline: 0 .5rem;
+  font-size: 1rem; line-height: 1.3; color: var(--text-muted); text-decoration: none;
+  transition: color .2s var(--ease), translate .25s var(--ease), text-shadow .2s var(--ease);
+}
+.footer__links a:hover, .footer__social a:hover { text-shadow: none; text-decoration: none; }
+.footer__links a:hover, .footer__links a:focus-visible, .footer__social a:hover, .footer__social a:focus-visible { color: var(--text-strong); translate: 4px 0; }
+.footer__links a:hover .footer__num, .footer__links a:focus-visible .footer__num { color: rgb(var(--accent)); text-shadow: 0 0 8px rgb(var(--accent) / .6); }
+.footer__num { font: 700 .75rem/1 var(--font-mono); letter-spacing: .08em; color: var(--text-dim); transition: color .2s var(--ease), text-shadow .2s var(--ease); font-variant-numeric: tabular-nums; }
+
+.footer__sicon {
+  display: grid; place-items: center; flex: none; width: 2.25rem; height: 2.25rem; border-radius: .625rem;
+  border: 1px solid rgb(var(--tone) / .3); background: rgb(var(--tone) / .06); color: rgb(var(--tone-ink));
+  transition: border-color .25s var(--ease), box-shadow .25s var(--ease), background-color .25s var(--ease);
+}
+.footer__sicon .icon { width: 1.1rem; height: 1.1rem; }
+.footer__social a:hover .footer__sicon, .footer__social a:focus-visible .footer__sicon { border-color: rgb(var(--tone)); background: rgb(var(--tone) / .14); box-shadow: 0 0 15px rgb(var(--tone) / .4); }
+/*#endregion*/
+
+/*#region 3 bottom bar*/
+.footer__bar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .85rem 1.5rem;
+  padding-block: 1.25rem; border-top: 1px solid var(--line);
+  font-size: .875rem; color: var(--text-dim);
+}
+.footer__copy { color: var(--text-muted); }
+.footer__credit { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--font-mono); font-size: .75rem; letter-spacing: .04em; color: var(--text-dim); }
+.footer__credit .icon { color: rgb(var(--accent-ink)); }
+.footer__top { min-height: 44px; }
+/*#endregion*/
+
+/*#region 4 ghost wordmark (decorative; text lives in a pseudo-element so it is not in the DOM text)*/
+.footer__ghost {
+  position: relative; overflow: hidden; height: clamp(2.75rem, 1.6rem + 5vw, 6.25rem); margin-top: .25rem; pointer-events: none; user-select: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 25%, transparent 100%); mask-image: linear-gradient(to bottom, #000 25%, transparent 100%);
+}
+.footer__ghost::before {
+  content: "SHAUNAK CHORGE"; position: absolute; left: 50%; top: 0; translate: -50% 0; white-space: nowrap;
+  font: 900 min(7.6vw, 6.25rem)/1 var(--font-display); letter-spacing: .04em; color: transparent;
+  -webkit-text-stroke: 1px rgb(var(--accent) / .28);
+}
+/*#endregion*/
+
+/*#region 5 breakpoints*/
+@media (min-width: 768px) {
+  .footer__grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr); }
+}
+@media (min-width: 1024px) {
+  .footer__grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.35fr) minmax(0, 1fr); }
+  .footer__links { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1.5rem; grid-auto-flow: column; grid-template-rows: repeat(4, auto); }
+}
+@media (max-width: 639px) {
+  .footer__grid { gap: 1.5rem; padding-bottom: 1.5rem; }
+  .footer__links { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1rem; }      /* 7 links in two columns */
+  .footer__social { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }          /* icon row: 4 x 44px + Resume */
+  .footer__social a { padding-inline: 0 .75rem; gap: .6rem; }
+  .footer__social .footer__sicon { width: 2.75rem; height: 2.75rem; }
+  .footer__social .footer__ic a { padding-inline: 0; }
+  .footer__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }   /* icon-only on phones, name stays for screen readers */
+  .footer__ghost { display: none; }
+  .footer__bar { flex-direction: column; align-items: flex-start; }
+  .footer__top { width: 100%; }
+}
+/*#endregion*/
+
+/*#region 6 reduced motion + print*/
+@media (prefers-reduced-motion: reduce) {
+  .footer__links a:hover, .footer__social a:hover { translate: 0 0; }
+}
+@media print {
+  .footer__ghost, .footer__line, .footer__top, .contact-fab { display: none !important; }
+}
+/*#endregion*/

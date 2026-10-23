@@ -1,0 +1,1273 @@
+<section id="work" class="section projects" data-rail="05·work" aria-labelledby="work-title">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Work</p>
+      <h2 id="work-title" class="section__title">Selected <span class="hl">work</span></h2>
+      <p class="section__lead">Six case studies with the evidence attached, then the smaller and earlier builds. Open any card for the problem, the approach and the numbers and caveats.</p>
+    </header>
+
+    <div class="projects__bar" data-reveal>
+      <div class="projects__filters" role="group" aria-label="Filter projects by category">
+        <ul class="chips" role="list">
+          <li><button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="chip__count" aria-hidden="true">19</span><span class="sr-only">(19 projects)</span></button></li>
+          <li><button type="button" class="chip" data-filter="llm" data-tone="cyan" aria-pressed="false">LLM &amp; agents <span class="chip__count" aria-hidden="true">2</span><span class="sr-only">(2 projects)</span></button></li>
+          <li><button type="button" class="chip" data-filter="vision" data-tone="magenta" aria-pressed="false">Vision <span class="chip__count" aria-hidden="true">3</span><span class="sr-only">(3 projects)</span></button></li>
+          <li><button type="button" class="chip" data-filter="speech-ml" data-tone="purple" aria-pressed="false">ML, speech &amp; NLP <span class="chip__count" aria-hidden="true">5</span><span class="sr-only">(5 projects)</span></button></li>
+          <li><button type="button" class="chip" data-filter="backend" data-tone="blue" aria-pressed="false">Backend &amp; APIs <span class="chip__count" aria-hidden="true">3</span><span class="sr-only">(3 projects)</span></button></li>
+          <li><button type="button" class="chip" data-filter="automation" data-tone="blue" aria-pressed="false">Automation <span class="chip__count" aria-hidden="true">2</span><span class="sr-only">(2 projects)</span></button></li>
+          <li><button type="button" class="chip" data-filter="web-tools" data-tone="blue" aria-pressed="false">Web, tools &amp; games <span class="chip__count" aria-hidden="true">4</span><span class="sr-only">(4 projects)</span></button></li>
+        </ul>
+      </div>
+      <p class="projects__count" id="work-count" role="status" aria-live="polite" aria-atomic="true">Showing <strong>19</strong> of 19 projects</p>
+    </div>
+
+    <div class="projects__featured" id="work-featured">
+      <h3 class="sr-only">Featured projects</h3>
+      <ul class="projects__grid" role="list">
+      <li class="projects__item is-wide" data-pid="observable-ai-backend" data-kind="card" data-cat="backend" data-n="1" data-title="Observable AI Backend" data-category="LLM &amp; Backend" data-year="2026" data-tone="blue" data-vis="network" data-shot="true" style="--s3:2">
+        <article class="card projects__card" data-tone="blue" data-tilt data-reveal style="--i:0" aria-labelledby="work-t-observable-ai-backend">
+          <div class="projects__media">
+            <div class="pv" data-visual="network" data-variant="observable-ai-backend" data-tone="blue" aria-hidden="true"></div>
+            <img class="projects__shot" src="assets/img/projects/observable-ai-backend.webp" alt="" width="1200" height="362" loading="lazy" decoding="async" style="--pos:0% 0%">
+            <span class="projects__real" aria-hidden="true"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-image"/></svg>Real output</span>
+          </div>
+          <div class="projects__body">
+            <p class="projects__meta"><span class="projects__metal"><span class="projects__idx" aria-hidden="true">// 01</span><span class="projects__cat">LLM &amp; Backend</span></span><span class="projects__year">2026</span></p>
+            <h4 class="projects__title" id="work-t-observable-ai-backend">Observable AI Backend</h4>
+            <p class="projects__blurb">LLM-routed FastAPI service with trace IDs, Prometheus metrics and Jaeger traces.</p>
+            <p class="projects__stat"><span class="projects__num">~15 s to &lt;50 ms</span><span class="projects__statlabel">tool span, slow vs fixed lookup (synthetic data)</span></p>
+            <ul class="tags projects__stack" role="list" aria-label="Stack"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Pydantic</li><li class="tag">OpenTelemetry</li><li class="tag tag--dim"><span aria-hidden="true">+6</span><span class="sr-only">and 6 more</span></li></ul>
+            <div class="projects__foot">
+              <ul class="projects__links" role="list"><li><span class="projects__private">Private repo</span></li></ul>
+              <button type="button" class="projects__open link-arrow" data-open="observable-ai-backend" aria-haspopup="dialog"><span class="projects__open-label">Case study</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="sr-only">: Observable AI Backend</span></button>
+            </div>
+          </div>
+        <details class="projects__case">
+          <summary>Read the case study: Observable AI Backend</summary>
+        <div class="projects__case-body">
+          <figure class="projects__figure" data-tone="blue" data-orient="wide">
+            <a class="projects__zoom" href="assets/img/projects/observable-ai-backend-full.webp" target="_blank" rel="noopener noreferrer">
+              <span class="projects__frame"><img src="assets/img/projects/observable-ai-backend.webp" alt="Jaeger trace waterfall for one POST /ask request: 8 spans over 505 ms covering the route, the ticket query and the summary step." width="1200" height="362" loading="lazy" decoding="async"></span>
+              <span class="projects__zoomhint">Open full size<svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg><span class="sr-only"> (opens in a new tab)</span></span>
+            </a>
+            <figcaption>Jaeger trace of one /ask request.</figcaption>
+          </figure>
+          <p class="pc__tagline">An LLM-routed API you can debug from the outside.</p>
+          <div class="pc">
+            <div class="pc__main">
+              <p class="pc__lede">A FastAPI service where an LLM picks one of three business actions (query tickets, create a ticket, sales report) and then summarises the result. A trace ID follows each /ask request through structured JSON logs, Prometheus metrics and OpenTelemetry traces in Jaeger, so a slow or failing call can be diagnosed from the outside. It runs fully offline with a deterministic keyword router when no API key is set. Built as a take-home for an AI platform role, with design decisions and rejected options logged in the repo.</p>
+              <h4 class="pc__h">Problem</h4>
+              <p>An AI endpoint can return HTTP 200 and still be slow, degraded or quietly falling back to another model, and you only find out when users complain.</p>
+              <h4 class="pc__h">Approach</h4>
+              <p>Stamp one trace ID on every log line and span of a request. Hand-write low-cardinality Prometheus metrics for requests, LLM latency, tokens and model fallbacks. Chain three Groq-hosted models with a per-model timeout and an explicit ‘degraded’ flag so a silent fallback is visible.</p>
+              <h4 class="pc__h">Highlights</h4>
+              <ul class="dot-list pc__list">
+                <li>Trace ID on every /ask response and on every log line inside a request</li>
+                <li>Tracing demonstrated on a deliberately injected slow lookup (a toggleable O(n × m) join over 60,000 synthetic tickets): the tool span falls from about 15 s to under 50 ms once it is indexed</li>
+                <li>Three-model fallback chain with per-model timeout, a ‘degraded’ flag and a fallback counter</li>
+                <li>Runs with no API key or network: deterministic routing and 10 offline pytest tests</li>
+                <li>Docker Compose stack running the app, Jaeger and Prometheus together</li>
+              </ul>
+            </div>
+            <div class="pc__side">
+              <h4 class="pc__h">Key numbers</h4>
+              <dl class="pc__metrics">
+            <div class="pc__metric is-long"><dt>Tool span, slow vs fixed lookup (synthetic data)</dt><dd>About 15 s to &lt;50 ms (slow runs up to ~27 s)</dd></div>
+            <div class="pc__metric is-long"><dt>Offline tests</dt><dd>10 pytest tests, no key or network</dd></div>
+            <div class="pc__metric is-long"><dt>Mock dataset</dt><dd>60,000 tickets / 25,000 users</dd></div>
+              </dl>
+              <h4 class="pc__h">Stack</h4>
+              <ul class="tags pc__stack">
+                <li class="tag">Python</li>
+                <li class="tag">FastAPI</li>
+                <li class="tag">Pydantic</li>
+                <li class="tag">OpenTelemetry</li>
+                <li class="tag">Jaeger</li>
+                <li class="tag">Prometheus</li>
+                <li class="tag">Groq (LLM routing)</li>
+                <li class="tag">httpx</li>
+                <li class="tag">Docker Compose</li>
+                <li class="tag">pytest</li>
+              </ul>
+              <h4 class="pc__h">Role</h4>
+              <p>Sole committer. AI-assisted (Claude Code); design decisions and rejected options are logged in the repo.</p>
+              <h4 class="pc__h">Status</h4>
+              <p>Private repo · take-home project</p>
+              <h4 class="pc__h">Links</h4>
+              <ul class="pc__links">
+            <li class="pc__private">The repository is private and available on request. <a href="#contact">Get in touch</a>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </details>
+        </article>
+      </li>
+      <li class="projects__item" data-pid="ai-rag-healthcare-assistant" data-kind="card" data-cat="llm" data-n="2" data-title="Healthcare Policy RAG Assistant" data-category="LLM &amp; RAG" data-year="2026" data-tone="cyan" data-vis="chat" data-shot="false" style="--s3:1">
+        <article class="card projects__card" data-tone="cyan" data-tilt data-reveal style="--i:1" aria-labelledby="work-t-ai-rag-healthcare-assistant">
+          <div class="projects__media">
+            <div class="pv" data-visual="chat" data-variant="ai-rag-healthcare-assistant" data-tone="cyan" aria-hidden="true"></div>
+          </div>
+          <div class="projects__body">
+            <p class="projects__meta"><span class="projects__metal"><span class="projects__idx" aria-hidden="true">// 02</span><span class="projects__cat">LLM &amp; RAG</span></span><span class="projects__year">2026</span></p>
+            <h4 class="projects__title" id="work-t-ai-rag-healthcare-assistant">Healthcare Policy RAG Assistant</h4>
+            <p class="projects__blurb">RAG assistant over synthetic healthcare policies that cites sources or says it does not know.</p>
+            <p class="projects__stat"><span class="projects__num">Cited</span><span class="projects__statlabel">answers cite the source chunk, or say “not found”</span></p>
+            <ul class="tags projects__stack" role="list" aria-label="Stack"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">LangChain</li><li class="tag">ChromaDB</li><li class="tag tag--dim"><span aria-hidden="true">+6</span><span class="sr-only">and 6 more</span></li></ul>
+            <div class="projects__foot">
+              <ul class="projects__links" role="list"><li><a class="projects__link" href="https://github.com/ShaunakChorge/AI-RAG" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for Healthcare Policy RAG Assistant (opens in a new tab)</span></a></li></ul>
+              <button type="button" class="projects__open link-arrow" data-open="ai-rag-healthcare-assistant" aria-haspopup="dialog"><span class="projects__open-label">Case study</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="sr-only">: Healthcare Policy RAG Assistant</span></button>
+            </div>
+          </div>
+        <details class="projects__case">
+          <summary>Read the case study: Healthcare Policy RAG Assistant</summary>
+        <div class="projects__case-body">
+          <p class="pc__tagline">Cited answers, or an honest ‘not found’.</p>
+          <div class="pc">
+            <div class="pc__main">
+              <p class="pc__lede">A retrieval-augmented Q&amp;A backend over six synthetic healthcare policy documents (appointments, discharge, HIPAA, insurance, refills, telehealth). A three-way router sends booking requests to a mock scheduling tool, chit-chat to a persona prompt and everything else to the RAG pipeline, which returns the answer with its source chunk and a confidence label. Weak retrievals are dropped before the LLM is called, so out-of-scope questions get a fixed fallback sentence instead of a guess. It was a prototype for an AI engineer assignment and uses no real patient data.</p>
+              <h4 class="pc__h">Problem</h4>
+              <p>Healthcare answers must be grounded in the right document, and a confident wrong answer is worse than no answer.</p>
+              <h4 class="pc__h">Approach</h4>
+              <p>Three anti-hallucination layers: intent gating, a similarity-score threshold applied before any LLM call, and a strict prompt with an exact fallback phrase. Prompts and tunables live in config files, and a chain of Groq models keeps the service running when one model is retired.</p>
+              <h4 class="pc__h">Highlights</h4>
+              <ul class="dot-list pc__list">
+                <li>RAG answers return the source document, chunk and a confidence percentage</li>
+                <li>Score threshold filters weak chunks before the LLM ever sees them</li>
+                <li>Agentic 3-way router: mock scheduling tool, RAG, or persona chat</li>
+                <li>LLM fallback chain survives a model being retired with no code change</li>
+                <li>Dockerised FastAPI backend, Streamlit chat front end and pytest smoke tests</li>
+              </ul>
+            </div>
+            <div class="pc__side">
+              <h4 class="pc__h">Key numbers</h4>
+              <dl class="pc__metrics">
+            <div class="pc__metric is-long"><dt>Knowledge base</dt><dd>6 synthetic documents</dd></div>
+            <div class="pc__metric is-long"><dt>Retrieval settings</dt><dd>chunk 500, overlap 50, top-3</dd></div>
+            <div class="pc__metric"><dt>Tests</dt><dd>6 pytest smoke tests</dd></div>
+              </dl>
+              <h4 class="pc__h">Stack</h4>
+              <ul class="tags pc__stack">
+                <li class="tag">Python</li>
+                <li class="tag">FastAPI</li>
+                <li class="tag">LangChain</li>
+                <li class="tag">ChromaDB</li>
+                <li class="tag">sentence-transformers</li>
+                <li class="tag">Groq</li>
+                <li class="tag">Pydantic Settings</li>
+                <li class="tag">Streamlit</li>
+                <li class="tag">Docker</li>
+                <li class="tag">pytest</li>
+              </ul>
+              <h4 class="pc__h">Role</h4>
+              <p>Sole author (all 28 commits, 3–21 Jun 2026).</p>
+              <h4 class="pc__h">Status</h4>
+              <p>Public repo · take-home prototype</p>
+              <h4 class="pc__h">Links</h4>
+              <ul class="pc__links">
+            <li><a class="btn btn--sm" href="https://github.com/ShaunakChorge/AI-RAG" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for Healthcare Policy RAG Assistant (opens in a new tab)</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </details>
+        </article>
+      </li>
+      <li class="projects__item" data-pid="agentic-honeypot" data-kind="card" data-cat="llm" data-n="3" data-title="Agentic Honey-Pot" data-category="AI Agents" data-year="2026" data-tone="cyan" data-vis="chat" data-shot="false" style="--s3:1">
+        <article class="card projects__card" data-tone="cyan" data-tilt data-reveal style="--i:2" aria-labelledby="work-t-agentic-honeypot">
+          <div class="projects__media">
+            <div class="pv" data-visual="chat" data-variant="agentic-honeypot" data-tone="cyan" aria-hidden="true"></div>
+          </div>
+          <div class="projects__body">
+            <p class="projects__meta"><span class="projects__metal"><span class="projects__idx" aria-hidden="true">// 03</span><span class="projects__cat">AI Agents</span></span><span class="projects__year">2026</span></p>
+            <h4 class="projects__title" id="work-t-agentic-honeypot">Agentic Honey-Pot</h4>
+            <p class="projects__blurb">Counter-scam agent: an LLM persona stalls scammers and logs the UPI IDs and links they reveal.</p>
+            <p class="projects__with"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-users"/></svg><span>With Prasanna Patil</span></p>
+            <p class="projects__stat"><span class="projects__num">Extracts</span><span class="projects__statlabel">UPI IDs, URLs and phone numbers from scammers</span></p>
+            <ul class="tags projects__stack" role="list" aria-label="Stack"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Pydantic</li><li class="tag">Groq API</li><li class="tag tag--dim"><span aria-hidden="true">+5</span><span class="sr-only">and 5 more</span></li></ul>
+            <div class="projects__foot">
+              <ul class="projects__links" role="list"><li><a class="projects__link" href="https://github.com/prasanna4149/agentic-honeypot" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for Agentic Honey-Pot (opens in a new tab)</span></a></li></ul>
+              <button type="button" class="projects__open link-arrow" data-open="agentic-honeypot" aria-haspopup="dialog"><span class="projects__open-label">Case study</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="sr-only">: Agentic Honey-Pot</span></button>
+            </div>
+          </div>
+        <details class="projects__case">
+          <summary>Read the case study: Agentic Honey-Pot</summary>
+        <div class="projects__case-body">
+          <p class="pc__tagline">An AI victim that keeps scammers talking and takes notes.</p>
+          <div class="pc">
+            <div class="pc__main">
+              <p class="pc__lede">A counter-scam system I built with Prasanna Patil for a GUVI AI hackathon in February 2026. A FastAPI backend scores each message with regex-based scam signals, moves between four engagement styles (passive, engaged, vulnerable, stalling) and replies as an LLM-driven persona served by Groq. Regex extractors pull out UPI IDs, URLs and phone numbers, and a React dashboard shows the detection signals, current style and extracted details live. My part was the hardening and LLM layer: a filter for prompt-injection phrases, a per-IP rate limiter, the move from Gemini to Groq and persona tuning.</p>
+              <h4 class="pc__h">Problem</h4>
+              <p>A blocked scammer simply tries the next number, and nobody learns how the scam is run. Keeping them talking to a bot protects real people for as long as it lasts and leaves a transcript of exactly what they ask for.</p>
+              <h4 class="pc__h">Approach</h4>
+              <p>Run a FastAPI service that scores each incoming message for scam signals, picks an engagement style and answers with an LLM-written reply. Pull payment and contact details out of the conversation with regex extractors and stream everything to a React dashboard.</p>
+              <h4 class="pc__h">Highlights</h4>
+              <ul class="dot-list pc__list">
+                <li>Rule-based strategy selector: passive, engaged, vulnerable and stalling styles</li>
+                <li>Keyword-based prompt-injection filter and a per-IP token-bucket rate limiter (1 request/s, burst of 5)</li>
+                <li>LLM layer moved from Gemini to a Groq-hosted gpt-oss-120b, with rewritten persona prompts</li>
+                <li>Regex extraction of UPI IDs, URLs and phone numbers, with a fixed confidence per pattern type</li>
+                <li>Live React dashboard, interactive API docs (Scalar) and Docker setup</li>
+              </ul>
+            </div>
+            <div class="pc__side">
+              <h4 class="pc__h">Key numbers</h4>
+              <dl class="pc__metrics">
+            <div class="pc__metric is-long"><dt>My commits in the repo</dt><dd>4 authored + 4 PR merges (19 in total)</dd></div>
+            <div class="pc__metric is-long"><dt>Rate limit</dt><dd>1 request/s per IP, burst of 5</dd></div>
+              </dl>
+              <h4 class="pc__h">Stack</h4>
+              <ul class="tags pc__stack">
+                <li class="tag">Python</li>
+                <li class="tag">FastAPI</li>
+                <li class="tag">Pydantic</li>
+                <li class="tag">Groq API</li>
+                <li class="tag">React 19</li>
+                <li class="tag">Vite</li>
+                <li class="tag">Axios</li>
+                <li class="tag">Docker</li>
+                <li class="tag">Scalar (OpenAPI docs)</li>
+              </ul>
+              <h4 class="pc__h">Role &amp; collaborators</h4>
+              <p>Co-author with Prasanna Patil. I added the keyword-based prompt-injection filter and the token-bucket rate limiter, moved the LLM layer from Gemini to Groq, rewrote persona prompts and extraction regexes and reworked parts of the React dashboard. Prasanna wrote the initial scaffold, Docker setup and README.</p>
+              <p class="pc__collab">With <a href="https://prasannapatil.in" target="_blank" rel="noopener noreferrer">Prasanna Patil<span class="sr-only"> (opens in a new tab)</span></a></p>
+              <h4 class="pc__h">Status</h4>
+              <p>Public repo · co-authored hackathon build</p>
+              <h4 class="pc__h">Links</h4>
+              <ul class="pc__links">
+            <li><a class="btn btn--sm" href="https://github.com/prasanna4149/agentic-honeypot" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for Agentic Honey-Pot (opens in a new tab)</span></a><span class="pc__note">Repository owned by Prasanna Patil.</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </details>
+        </article>
+      </li>
+      <li class="projects__item is-wide" data-pid="speech-emotion-recognition" data-kind="card" data-cat="speech-ml" data-n="4" data-title="Speech Emotion Recognition" data-category="Speech &amp; ML" data-year="2025" data-tone="purple" data-vis="waveform" data-shot="true" style="--s3:2">
+        <article class="card projects__card" data-tone="purple" data-tilt data-reveal style="--i:0" aria-labelledby="work-t-speech-emotion-recognition">
+          <div class="projects__media">
+            <div class="pv" data-visual="waveform" data-variant="speech-emotion-recognition" data-tone="purple" aria-hidden="true"></div>
+            <img class="projects__shot" src="assets/img/projects/speech-emotion-recognition-hover.webp" alt="" width="942" height="365" loading="lazy" decoding="async" style="--pos:0% 0%">
+            <span class="projects__real" aria-hidden="true"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-image"/></svg>Real output</span>
+          </div>
+          <div class="projects__body">
+            <p class="projects__meta"><span class="projects__metal"><span class="projects__idx" aria-hidden="true">// 04</span><span class="projects__cat">Speech &amp; ML</span></span><span class="projects__year">2025</span></p>
+            <h4 class="projects__title" id="work-t-speech-emotion-recognition">Speech Emotion Recognition</h4>
+            <p class="projects__blurb">1-D CNN that labels seven emotions in speech: 93.87% on a held-out split, with live mic inference.</p>
+            <p class="projects__stat"><span class="projects__num count-stable" data-count="93.87" data-decimals="2" data-suffix="%">93.87%</span><span class="projects__statlabel">accuracy on a random 20% held-out split</span></p>
+            <ul class="tags projects__stack" role="list" aria-label="Stack"><li class="tag">Python</li><li class="tag">TensorFlow / Keras</li><li class="tag">librosa</li><li class="tag">scikit-learn</li><li class="tag tag--dim"><span aria-hidden="true">+6</span><span class="sr-only">and 6 more</span></li></ul>
+            <div class="projects__foot">
+              <ul class="projects__links" role="list"><li><a class="projects__link" href="https://github.com/ShaunakChorge/Speech-Emotion-Recognition-System" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for Speech Emotion Recognition (opens in a new tab)</span></a></li></ul>
+              <button type="button" class="projects__open link-arrow" data-open="speech-emotion-recognition" aria-haspopup="dialog"><span class="projects__open-label">Case study</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="sr-only">: Speech Emotion Recognition</span></button>
+            </div>
+          </div>
+        <details class="projects__case">
+          <summary>Read the case study: Speech Emotion Recognition</summary>
+        <div class="projects__case-body">
+          <figure class="projects__figure" data-tone="purple" data-orient="portrait">
+            <a class="projects__zoom" href="assets/img/projects/speech-emotion-recognition.webp" target="_blank" rel="noopener noreferrer">
+              <span class="projects__frame"><img src="assets/img/projects/speech-emotion-recognition.webp" alt="Confusion matrix heat-map for the seven emotion classes; the diagonal dominates." width="942" height="868" loading="lazy" decoding="async"></span>
+              <span class="projects__zoomhint">Open full size<svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg><span class="sr-only"> (opens in a new tab)</span></span>
+            </a>
+            <figcaption>Confusion matrix on the held-out split (notebook output).</figcaption>
+          </figure>
+          <p class="pc__tagline">Hear the mood in a voice clip, live from the mic.</p>
+          <div class="pc">
+            <div class="pc__main">
+              <p class="pc__lede">A deep-learning system that labels the emotion in a speech clip as angry, disgust, fear, happy, neutral, sad or surprise. Audio from four public corpora (RAVDESS, CREMA-D, TESS, SAVEE) was expanded with noise and pitch-shift augmentation into 48,648 feature vectors of zero-crossing rate, RMS energy and MFCCs, then fed to a 1-D CNN that reaches 93.87% on a random 20% held-out split (augmented copies of one clip can fall on both sides, so it is not speaker-independent). A notebook runs live microphone inference, and a Streamlit dashboard adds upload or record, class probabilities and waveform and spectrogram views.</p>
+              <h4 class="pc__h">Problem</h4>
+              <p>Emotion lives in tone, pitch and energy rather than words, so a text model is the wrong tool.</p>
+              <h4 class="pc__h">Approach</h4>
+              <p>Merge four corpora, augment each clip, extract hand-crafted audio features with librosa, train a five-block Conv1D network with batch-norm and dropout, then serve it through inference notebooks and a Streamlit dashboard.</p>
+              <h4 class="pc__h">Highlights</h4>
+              <ul class="dot-list pc__list">
+                <li>Four public corpora merged into one 12,162-clip dataset</li>
+                <li>4x augmentation (noise, pitch shift, both) giving 48,648 feature vectors</li>
+                <li>93.87% accuracy and weighted F1 0.94 on a random 20% held-out split; per-class F1 between 0.92 and 0.97</li>
+                <li>Live microphone detection in a notebook and in a Streamlit dashboard</li>
+              </ul>
+            </div>
+            <div class="pc__side">
+              <h4 class="pc__h">Key numbers</h4>
+              <dl class="pc__metrics">
+            <div class="pc__metric"><dt>Accuracy on a random 20% held-out split</dt><dd>93.87%</dd></div>
+            <div class="pc__metric is-long"><dt>Data</dt><dd>12,162 clips, 48,648 samples, 2,376 features</dd></div>
+            <div class="pc__metric"><dt>Model size</dt><dd>7.19M parameters</dd></div>
+              </dl>
+              <h4 class="pc__h">Stack</h4>
+              <ul class="tags pc__stack">
+                <li class="tag">Python</li>
+                <li class="tag">TensorFlow / Keras</li>
+                <li class="tag">librosa</li>
+                <li class="tag">scikit-learn</li>
+                <li class="tag">NumPy</li>
+                <li class="tag">pandas</li>
+                <li class="tag">Streamlit</li>
+                <li class="tag">Plotly</li>
+                <li class="tag">sounddevice</li>
+                <li class="tag">Jupyter</li>
+              </ul>
+              <h4 class="pc__h">Role</h4>
+              <p>Adapted a public Kaggle training recipe, retrained and evaluated it locally on four corpora, then wrote the inference notebook and the Streamlit dashboard.</p>
+              <h4 class="pc__h">Status</h4>
+              <p>Public repo · personal project</p>
+              <h4 class="pc__h">Links</h4>
+              <ul class="pc__links">
+            <li><a class="btn btn--sm btn--purple" href="https://github.com/ShaunakChorge/Speech-Emotion-Recognition-System" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for Speech Emotion Recognition (opens in a new tab)</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </details>
+        </article>
+      </li>
+      <li class="projects__item is-wide" data-pid="deepfake-video-detection" data-kind="card" data-cat="vision" data-n="5" data-title="DeepFake Video Detection" data-category="Computer Vision" data-year="2025" data-tone="magenta" data-vis="scan-grid" data-shot="true" style="--s3:2">
+        <article class="card projects__card" data-tone="magenta" data-tilt data-reveal style="--i:1" aria-labelledby="work-t-deepfake-video-detection">
+          <div class="projects__media">
+            <div class="pv" data-visual="scan-grid" data-variant="deepfake-video-detection" data-tone="magenta" aria-hidden="true"></div>
+            <img class="projects__shot" src="assets/img/projects/deepfake-video-detection-hover.webp" alt="" width="1160" height="490" loading="lazy" decoding="async" style="--pos:50% 0%">
+            <span class="projects__real" aria-hidden="true"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-image"/></svg>Real output</span>
+          </div>
+          <div class="projects__body">
+            <p class="projects__meta"><span class="projects__metal"><span class="projects__idx" aria-hidden="true">// 05</span><span class="projects__cat">Computer Vision</span></span><span class="projects__year">2025</span></p>
+            <h4 class="projects__title" id="work-t-deepfake-video-detection">DeepFake Video Detection</h4>
+            <p class="projects__blurb">Frame-by-frame deepfake scoring with a Streamlit app and PDF report. B.Tech team project, 74.16%.</p>
+            <p class="projects__with"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-users"/></svg><span>With Prasanna Patil</span></p>
+            <p class="projects__stat"><span class="projects__num count-stable" data-count="74.16" data-decimals="2" data-suffix="%">74.16%</span><span class="projects__statlabel">test accuracy on a random frame-level split</span></p>
+            <ul class="tags projects__stack" role="list" aria-label="Stack"><li class="tag">Python</li><li class="tag">TensorFlow / Keras</li><li class="tag">OpenCV</li><li class="tag">Streamlit</li><li class="tag tag--dim"><span aria-hidden="true">+3</span><span class="sr-only">and 3 more</span></li></ul>
+            <div class="projects__foot">
+              <ul class="projects__links" role="list"><li><a class="projects__link" href="https://github.com/ShaunakChorge/DeepFakeAnalysis" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for DeepFake Video Detection (opens in a new tab)</span></a></li></ul>
+              <button type="button" class="projects__open link-arrow" data-open="deepfake-video-detection" aria-haspopup="dialog"><span class="projects__open-label">Case study</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="sr-only">: DeepFake Video Detection</span></button>
+            </div>
+          </div>
+        <details class="projects__case">
+          <summary>Read the case study: DeepFake Video Detection</summary>
+        <div class="projects__case-body">
+          <figure class="projects__figure" data-tone="magenta" data-orient="portrait">
+            <a class="projects__zoom" href="assets/img/projects/deepfake-video-detection-full.webp" target="_blank" rel="noopener noreferrer">
+              <span class="projects__frame"><img src="assets/img/projects/deepfake-video-detection.webp" alt="Streamlit results page: a Fake verdict with a confidence score, the frame-by-frame confidence chart and an interpretation banner." width="1160" height="1160" loading="lazy" decoding="async"></span>
+              <span class="projects__zoomhint">Open full size<svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg><span class="sr-only"> (opens in a new tab)</span></span>
+            </a>
+            <figcaption>Streamlit results page: verdict, frame-by-frame chart and interpretation.</figcaption>
+          </figure>
+          <p class="pc__tagline">Frame-by-frame verdicts with a downloadable report.</p>
+          <div class="pc">
+            <div class="pc__main">
+              <p class="pc__lede">A face-swap deepfake detector from a three-person B.Tech team (Shaunak Chorge, Prasanna Patil and a classmate) in 2024–25. A small three-block CNN trained on Celeb-DF frames scores every frame of an uploaded video; the app averages the scores into a Real/Fake verdict, plots frame-by-frame confidence and exports a PDF report. Test accuracy is 74.16% on a random frame-level split, which the team’s own report lists as room for improvement. The write-up covers requirements, risks, schedule and a literature survey.</p>
+              <h4 class="pc__h">Problem</h4>
+              <p>Face-swap videos are hard to spot by eye, so reviewers need a quick, explainable first screen.</p>
+              <h4 class="pc__h">Approach</h4>
+              <p>Take the first ten frames of each Celeb-DF video at 224×224, train a CNN with augmentation, then put it behind a six-page Streamlit app that scores all frames and explains confidence bands.</p>
+              <h4 class="pc__h">Highlights</h4>
+              <ul class="dot-list pc__list">
+                <li>End-to-end flow: upload, frame extraction, CNN scoring, confidence chart and PDF report</li>
+                <li>Trained on Celeb-DF real, YouTube-real and synthetic videos, with augmentation</li>
+                <li>31-page project report with SRS, risk table and literature survey</li>
+                <li>Upfront about limits: 74.16% accuracy on a random frame-level split</li>
+              </ul>
+            </div>
+            <div class="pc__side">
+              <h4 class="pc__h">Key numbers</h4>
+              <dl class="pc__metrics">
+            <div class="pc__metric"><dt>Test accuracy (random frame-level split)</dt><dd>74.16%</dd></div>
+            <div class="pc__metric is-long"><dt>Training set</dt><dd>7,856 frames at 224×224</dd></div>
+              </dl>
+              <h4 class="pc__h">Stack</h4>
+              <ul class="tags pc__stack">
+                <li class="tag">Python</li>
+                <li class="tag">TensorFlow / Keras</li>
+                <li class="tag">OpenCV</li>
+                <li class="tag">Streamlit</li>
+                <li class="tag">ReportLab</li>
+                <li class="tag">Celeb-DF dataset</li>
+                <li class="tag">gdown</li>
+              </ul>
+              <h4 class="pc__h">Role &amp; collaborators</h4>
+              <p>Member of a three-person B.Tech team; repository published from my account.</p>
+              <p class="pc__collab">With <a href="https://prasannapatil.in" target="_blank" rel="noopener noreferrer">Prasanna Patil<span class="sr-only"> (opens in a new tab)</span></a></p>
+              <h4 class="pc__h">Status</h4>
+              <p>Public repo · B.Tech team project</p>
+              <h4 class="pc__h">Links</h4>
+              <ul class="pc__links">
+            <li><a class="btn btn--sm btn--magenta" href="https://github.com/ShaunakChorge/DeepFakeAnalysis" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for DeepFake Video Detection (opens in a new tab)</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </details>
+        </article>
+      </li>
+      <li class="projects__item" data-pid="django-box-selection-api" data-kind="card" data-cat="backend" data-n="6" data-title="Box Selection API" data-category="Backend" data-year="2026" data-tone="blue" data-vis="bars" data-shot="false" style="--s3:1">
+        <article class="card projects__card" data-tone="blue" data-tilt data-reveal style="--i:2" aria-labelledby="work-t-django-box-selection-api">
+          <div class="projects__media">
+            <div class="pv" data-visual="bars" data-variant="django-box-selection-api" data-tone="blue" aria-hidden="true"></div>
+          </div>
+          <div class="projects__body">
+            <p class="projects__meta"><span class="projects__metal"><span class="projects__idx" aria-hidden="true">// 06</span><span class="projects__cat">Backend</span></span><span class="projects__year">2026</span></p>
+            <h4 class="projects__title" id="work-t-django-box-selection-api">Box Selection API</h4>
+            <p class="projects__blurb">Django REST API that picks the fewest, cheapest shipping boxes for an order. 27 passing tests.</p>
+            <p class="projects__stat"><span class="projects__num count-stable" data-count="27">27</span><span class="projects__statlabel">passing tests (11 unit, 16 API)</span></p>
+            <ul class="tags projects__stack" role="list" aria-label="Stack"><li class="tag">Python 3.12</li><li class="tag">Django 5</li><li class="tag">Django REST Framework</li><li class="tag">SQLite</li><li class="tag tag--dim"><span aria-hidden="true">+1</span><span class="sr-only">and 1 more</span></li></ul>
+            <div class="projects__foot">
+              <ul class="projects__links" role="list"><li><a class="projects__link" href="https://github.com/ShaunakChorge/PythonDjangoAssignment" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for Box Selection API (opens in a new tab)</span></a></li></ul>
+              <button type="button" class="projects__open link-arrow" data-open="django-box-selection-api" aria-haspopup="dialog"><span class="projects__open-label">Case study</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="sr-only">: Box Selection API</span></button>
+            </div>
+          </div>
+        <details class="projects__case">
+          <summary>Read the case study: Box Selection API</summary>
+        <div class="projects__case-body">
+          <p class="pc__tagline">The fewest, cheapest boxes for any order.</p>
+          <div class="pc">
+            <div class="pc__main">
+              <p class="pc__lede">A Django + DRF backend that takes a basket of products and recommends which shipping boxes to use. The packing logic is plain Python with no Django imports, so it is tested in isolation; it checks all six axis-aligned rotations and both volume and weight budgets, and returns a clear 400 naming the product when nothing fits. The repo’s AI_USAGE.md records the tools used (Claude for planning, Antigravity for implementation), the mistakes caught and how the result was verified.</p>
+              <h4 class="pc__h">Problem</h4>
+              <p>Picking shipping boxes by hand over- or under-packs orders. The logic has to be correct, explainable and testable.</p>
+              <h4 class="pc__h">Approach</h4>
+              <p>Three layers: inventory models, a pure-Python packing algorithm and a DRF API. A greedy heuristic sorts units by volume and puts each in the cheapest open box with budget left, otherwise opens the cheapest box that fits. It is deliberately not full 3D bin-packing, and the repo says so.</p>
+              <h4 class="pc__h">Highlights</h4>
+              <ul class="dot-list pc__list">
+                <li>27 tests: 11 algorithm unit tests and 16 API integration tests</li>
+                <li>Algorithm decoupled from the framework, with zero Django imports</li>
+                <li>Explicit error contract: a 400 naming the unshippable product, not an exception</li>
+                <li>Seed data chosen to hit edge cases, such as a tablet just over the small-box limit</li>
+                <li>AI_USAGE.md documents the tooling, accepted and rejected output and the checks run</li>
+              </ul>
+            </div>
+            <div class="pc__side">
+              <h4 class="pc__h">Key numbers</h4>
+              <dl class="pc__metrics">
+            <div class="pc__metric is-long"><dt>Tests</dt><dd>27 passing (11 unit, 16 API)</dd></div>
+            <div class="pc__metric is-long"><dt>Seed data</dt><dd>5 box types, 8 products</dd></div>
+              </dl>
+              <h4 class="pc__h">Stack</h4>
+              <ul class="tags pc__stack">
+                <li class="tag">Python 3.12</li>
+                <li class="tag">Django 5</li>
+                <li class="tag">Django REST Framework</li>
+                <li class="tag">SQLite</li>
+                <li class="tag">Django test runner</li>
+              </ul>
+              <h4 class="pc__h">Role</h4>
+              <p>Sole committer (4 commits, 26 Jun 2026). Planned with Claude and implemented with Google’s Antigravity agent (see AI_USAGE.md); I wrote the input-validation requirements, fixed a renderer misconfiguration and committed the test log.</p>
+              <h4 class="pc__h">Status</h4>
+              <p>Public repo · take-home project</p>
+              <h4 class="pc__h">Links</h4>
+              <ul class="pc__links">
+            <li><a class="btn btn--sm btn--blue" href="https://github.com/ShaunakChorge/PythonDjangoAssignment" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for Box Selection API (opens in a new tab)</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </details>
+        </article>
+      </li>
+      </ul>
+    </div>
+    <p class="projects__none" id="work-none" hidden>No featured case study in this category yet. The smaller projects below match it.</p>
+
+    <div class="projects__more" id="work-more">
+      <div class="projects__more-head" data-tone="blue" data-reveal>
+        <span class="projects__sub-ico"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-folder"/></svg></span>
+        <h3 class="projects__more-title" id="work-more-title">More projects</h3>
+        <span class="projects__sub-line" aria-hidden="true"></span>
+      </div>
+      <p class="projects__more-lead">Team builds, take-homes and earlier work. Select a row for the case study.</p>
+      <ul class="projects__list" role="list" aria-labelledby="work-more-title">
+        <li class="projects__row" data-pid="advanced-cctv-analytics" data-kind="row" data-cat="vision" data-n="7" data-title="CCTV Crime &amp; Crowd Analytics" data-category="Computer Vision" data-year="2023" data-tone="magenta" data-vis="scan-grid" data-shot="false">
+          <article class="projects__rowin" data-tone="magenta" aria-labelledby="work-t-advanced-cctv-analytics">
+            <span class="projects__rowidx" aria-hidden="true">// 07</span>
+            <div class="projects__rowmain">
+              <h4 class="projects__rowtitle" id="work-t-advanced-cctv-analytics">CCTV Crime &amp; Crowd Analytics</h4>
+              <p class="projects__rowblurb">Smart India Hackathon team prototype: crowd limits, crime-frame classification and face recognition.</p>
+            </div>
+            <p class="projects__rowmeta"><span class="projects__cat">Computer Vision</span><span class="projects__year">2023</span><span class="tag tag--dim">Team</span></p>
+            <ul class="tags projects__rowstack" role="list" aria-label="Stack"><li class="tag">Python</li><li class="tag">OpenCV</li><li class="tag">PyTorch</li><li class="tag tag--dim"><span aria-hidden="true">+5</span><span class="sr-only">and 5 more</span></li></ul>
+            <div class="projects__rowactions">
+              <ul class="projects__links" role="list"><li><a class="projects__link" href="https://github.com/prasanna4149/Advanced-CCTV-Analytics-System" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for CCTV Crime &amp; Crowd Analytics (opens in a new tab)</span></a></li></ul>
+              <button type="button" class="projects__open link-arrow" data-open="advanced-cctv-analytics" aria-haspopup="dialog"><span class="projects__open-label">Case study</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="sr-only">: CCTV Crime &amp; Crowd Analytics</span></button>
+            </div>
+        <details class="projects__case">
+          <summary>Read the case study: CCTV Crime &amp; Crowd Analytics</summary>
+        <div class="projects__case-body">
+          <p class="pc__tagline">Three watchers on one camera feed.</p>
+          <div class="pc">
+            <div class="pc__main">
+              <p class="pc__lede">A CCTV-monitoring prototype built by a Smart India Hackathon 2023 team, in a repository owned by teammate Prasanna Patil. It has three modules: a crowd counter that beeps and sends a WhatsApp alert when a people limit is crossed, a crime classifier that samples a frame every few seconds and labels it with a pre-trained UCF-Crime Vision Transformer from Hugging Face, and a face-recognition tool for persons of interest. Evidence frames and labels are stored in MongoDB and alerts go out through Twilio.</p>
+              <h4 class="pc__h">Problem</h4>
+              <p>Public-safety teams cannot watch every camera, so overcrowding, suspicious events and known faces can go unnoticed.</p>
+              <h4 class="pc__h">Approach</h4>
+              <p>Split the job into three small modules (crowd count, crime classification, face recognition) that each save evidence to MongoDB and raise an alert.</p>
+              <h4 class="pc__h">Highlights</h4>
+              <ul class="dot-list pc__list">
+                <li>Three-module pipeline: crowd limit, crime classification and face recognition</li>
+                <li>Uses a pre-trained UCF-Crime Vision Transformer (14 categories), sampling a frame every 3 seconds</li>
+                <li>Evidence frames saved to MongoDB, alerts through Twilio WhatsApp</li>
+              </ul>
+            </div>
+            <div class="pc__side">
+              <h4 class="pc__h">Key numbers</h4>
+              <dl class="pc__metrics">
+            <div class="pc__metric"><dt>Crime classes</dt><dd>14 UCF-Crime labels</dd></div>
+              </dl>
+              <h4 class="pc__h">Stack</h4>
+              <ul class="tags pc__stack">
+                <li class="tag">Python</li>
+                <li class="tag">OpenCV</li>
+                <li class="tag">PyTorch</li>
+                <li class="tag">Hugging Face Transformers (ViT)</li>
+                <li class="tag">Flask</li>
+                <li class="tag">MongoDB</li>
+                <li class="tag">Twilio WhatsApp API</li>
+                <li class="tag">tkinter</li>
+              </ul>
+              <h4 class="pc__h">Role &amp; collaborators</h4>
+              <p>Member of the hackathon team; the repository is owned by Prasanna Patil.</p>
+              <p class="pc__collab">With <a href="https://prasannapatil.in" target="_blank" rel="noopener noreferrer">Prasanna Patil<span class="sr-only"> (opens in a new tab)</span></a></p>
+              <h4 class="pc__h">Status</h4>
+              <p>Public repo · team hackathon project</p>
+              <h4 class="pc__h">Links</h4>
+              <ul class="pc__links">
+            <li><a class="btn btn--sm btn--magenta" href="https://github.com/prasanna4149/Advanced-CCTV-Analytics-System" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for CCTV Crime &amp; Crowd Analytics (opens in a new tab)</span></a><span class="pc__note">Repository owned by Prasanna Patil.</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </details>
+          </article>
+        </li>
+        <li class="projects__row" data-pid="spam-classifier" data-kind="row" data-cat="speech-ml" data-n="8" data-title="Email/SMS Spam Classifier" data-category="NLP" data-year="2025" data-tone="purple" data-vis="screenshot" data-shot="true">
+          <article class="projects__rowin" data-tone="purple" aria-labelledby="work-t-spam-classifier">
+            <span class="projects__rowidx" aria-hidden="true">// 08</span>
+            <div class="projects__rowmain">
+              <h4 class="projects__rowtitle" id="work-t-spam-classifier">Email/SMS Spam Classifier</h4>
+              <p class="projects__rowblurb">NLTK, TF-IDF and Naive Bayes spam filter: 100% precision and 97.1% accuracy on 1,034 test messages.</p>
+            </div>
+            <p class="projects__rowmeta"><span class="projects__cat">NLP</span><span class="projects__year">2025</span></p>
+            <ul class="tags projects__rowstack" role="list" aria-label="Stack"><li class="tag">Python</li><li class="tag">NLTK</li><li class="tag">scikit-learn</li><li class="tag tag--dim"><span aria-hidden="true">+5</span><span class="sr-only">and 5 more</span></li></ul>
+            <div class="projects__rowactions">
+              <ul class="projects__links" role="list"><li><a class="projects__link" href="https://github.com/ShaunakChorge/Spam-Classifier" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for Email/SMS Spam Classifier (opens in a new tab)</span></a></li></ul>
+              <button type="button" class="projects__open link-arrow" data-open="spam-classifier" aria-haspopup="dialog"><span class="projects__open-label">Case study</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="sr-only">: Email/SMS Spam Classifier</span></button>
+            </div>
+        <details class="projects__case">
+          <summary>Read the case study: Email/SMS Spam Classifier</summary>
+        <div class="projects__case-body">
+          <figure class="projects__figure" data-tone="purple" data-orient="wide">
+            <a class="projects__zoom" href="assets/img/projects/spam-classifier.webp" target="_blank" rel="noopener noreferrer">
+              <span class="projects__frame"><img src="assets/img/projects/spam-classifier.webp" alt="Streamlit spam classifier with a pasted lottery message and the verdict Spam." width="1200" height="566" loading="lazy" decoding="async"></span>
+              <span class="projects__zoomhint">Open full size<svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg><span class="sr-only"> (opens in a new tab)</span></span>
+            </a>
+            <figcaption>Streamlit front end of the spam classifier.</figcaption>
+          </figure>
+          <p class="pc__tagline">NLP spam filter with zero false positives on its test set.</p>
+          <div class="pc">
+            <div class="pc__main">
+              <p class="pc__lede">An SMS/email spam detector built as my project for the AICTE internship on AI with TechSaksham, a Microsoft and SAP CSR initiative. The notebook cleans and explores the data, stems and tokenises text with NLTK, builds TF-IDF features and trains Multinomial Naive Bayes, chosen for its precision of 1.0: on 1,034 held-out messages it reaches 97.1% accuracy and 78.3% recall without flagging a single legitimate message. A Streamlit app and a CLI predictor wrap the model, and a formal project report accompanies it.</p>
+              <h4 class="pc__h">Problem</h4>
+              <p>Spam filters are only useful if they do not bury real messages, so precision matters more than a headline accuracy.</p>
+              <h4 class="pc__h">Approach</h4>
+              <p>Clean and stem the text, build TF-IDF features (3,000 max), train Multinomial Naive Bayes and keep the model with perfect precision.</p>
+              <h4 class="pc__h">Highlights</h4>
+              <ul class="dot-list pc__list">
+                <li>97.1% accuracy with 100% precision on held-out messages (recall 78.3%)</li>
+                <li>NLTK text pipeline: cleaning, tokenising, stemming and TF-IDF features</li>
+                <li>Streamlit app plus a command-line predictor</li>
+                <li>Formal internship project report</li>
+              </ul>
+            </div>
+            <div class="pc__side">
+              <h4 class="pc__h">Key numbers</h4>
+              <dl class="pc__metrics">
+            <div class="pc__metric is-long"><dt>Accuracy / precision / recall</dt><dd>97.10% / 100% / 78.26%</dd></div>
+            <div class="pc__metric is-long"><dt>Test set</dt><dd>1,034 messages, confusion matrix [[896, 0], [30, 108]]</dd></div>
+              </dl>
+              <h4 class="pc__h">Stack</h4>
+              <ul class="tags pc__stack">
+                <li class="tag">Python</li>
+                <li class="tag">NLTK</li>
+                <li class="tag">scikit-learn</li>
+                <li class="tag">TF-IDF</li>
+                <li class="tag">Multinomial Naive Bayes</li>
+                <li class="tag">Streamlit</li>
+                <li class="tag">pandas</li>
+                <li class="tag">WordCloud</li>
+              </ul>
+              <h4 class="pc__h">Role</h4>
+              <p>Sole author (20 commits, Nov 2024 to May 2025), under the programme’s project guide.</p>
+              <h4 class="pc__h">Status</h4>
+              <p>Public repo · AICTE internship project</p>
+              <h4 class="pc__h">Links</h4>
+              <ul class="pc__links">
+            <li><a class="btn btn--sm btn--purple" href="https://github.com/ShaunakChorge/Spam-Classifier" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for Email/SMS Spam Classifier (opens in a new tab)</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </details>
+          </article>
+        </li>
+        <li class="projects__row" data-pid="house-price-predictor" data-kind="row" data-cat="speech-ml" data-n="9" data-title="House Price Predictor" data-category="Machine Learning" data-year="2026" data-tone="purple" data-vis="bars" data-shot="true">
+          <article class="projects__rowin" data-tone="purple" aria-labelledby="work-t-house-price-predictor">
+            <span class="projects__rowidx" aria-hidden="true">// 09</span>
+            <div class="projects__rowmain">
+              <h4 class="projects__rowtitle" id="work-t-house-price-predictor">House Price Predictor</h4>
+              <p class="projects__rowblurb">Ames housing price model on eight features: Random Forest (R² 0.89) beats the linear baseline.</p>
+            </div>
+            <p class="projects__rowmeta"><span class="projects__cat">Machine Learning</span><span class="projects__year">2026</span></p>
+            <ul class="tags projects__rowstack" role="list" aria-label="Stack"><li class="tag">Python</li><li class="tag">pandas</li><li class="tag">NumPy</li><li class="tag tag--dim"><span aria-hidden="true">+5</span><span class="sr-only">and 5 more</span></li></ul>
+            <div class="projects__rowactions">
+              <ul class="projects__links" role="list"><li><a class="projects__link" href="https://github.com/ShaunakChorge/HousePricePredictor" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for House Price Predictor (opens in a new tab)</span></a></li></ul>
+              <button type="button" class="projects__open link-arrow" data-open="house-price-predictor" aria-haspopup="dialog"><span class="projects__open-label">Case study</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="sr-only">: House Price Predictor</span></button>
+            </div>
+        <details class="projects__case">
+          <summary>Read the case study: House Price Predictor</summary>
+        <div class="projects__case-body">
+          <figure class="projects__figure" data-tone="purple" data-orient="portrait">
+            <a class="projects__zoom" href="assets/img/projects/house-price-predictor.webp" target="_blank" rel="noopener noreferrer">
+              <span class="projects__frame"><img src="assets/img/projects/house-price-predictor.webp" alt="Correlation heat-map of eight housing features and the sale price." width="869" height="784" loading="lazy" decoding="async"></span>
+              <span class="projects__zoomhint">Open full size<svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg><span class="sr-only"> (opens in a new tab)</span></span>
+            </a>
+            <figcaption>Feature correlation matrix from the notebook.</figcaption>
+          </figure>
+          <p class="pc__tagline">Eight features and an honest model comparison.</p>
+          <div class="pc">
+            <div class="pc__main">
+              <p class="pc__lede">A data-science assessment (27 June 2026) delivered as a single notebook. It cuts the Ames Housing data down to eight numeric features, compares Linear Regression with a Random Forest on 292 held-out houses (RMSE $28,821, R² 0.89 for the forest) and writes and launches a Streamlit app from inside the notebook. The app exposes four intuitive inputs and fills the other four features with medians.</p>
+              <h4 class="pc__h">Problem</h4>
+              <p>Predict a sale price from a handful of features a buyer can actually describe.</p>
+              <h4 class="pc__h">Approach</h4>
+              <p>Median imputation, an 80/20 split, a scaler fitted on the training set only, then a linear baseline against a 100-tree Random Forest.</p>
+              <h4 class="pc__h">Highlights</h4>
+              <ul class="dot-list pc__list">
+                <li>Random Forest clearly beats the linear baseline on RMSE, MAE and R²</li>
+                <li>Notebook generates and launches its own Streamlit app, so the submission is one file</li>
+                <li>UI exposes four inputs and auto-fills four background features with medians</li>
+              </ul>
+            </div>
+            <div class="pc__side">
+              <h4 class="pc__h">Key numbers</h4>
+              <dl class="pc__metrics">
+            <div class="pc__metric is-long"><dt>Random Forest</dt><dd>RMSE $28,821, MAE $18,457, R² 0.8917</dd></div>
+            <div class="pc__metric is-long"><dt>Linear Regression baseline</dt><dd>RMSE $39,466, MAE $24,572, R² 0.7969</dd></div>
+              </dl>
+              <h4 class="pc__h">Stack</h4>
+              <ul class="tags pc__stack">
+                <li class="tag">Python</li>
+                <li class="tag">pandas</li>
+                <li class="tag">NumPy</li>
+                <li class="tag">scikit-learn</li>
+                <li class="tag">Random Forest</li>
+                <li class="tag">Streamlit</li>
+                <li class="tag">seaborn</li>
+                <li class="tag">Jupyter</li>
+              </ul>
+              <h4 class="pc__h">Role</h4>
+              <p>Sole author (10 commits, all on 27 Jun 2026).</p>
+              <h4 class="pc__h">Status</h4>
+              <p>Public repo · data-science assessment</p>
+              <h4 class="pc__h">Links</h4>
+              <ul class="pc__links">
+            <li><a class="btn btn--sm btn--purple" href="https://github.com/ShaunakChorge/HousePricePredictor" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for House Price Predictor (opens in a new tab)</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </details>
+          </article>
+        </li>
+        <li class="projects__row" data-pid="astra-telegram-bot" data-kind="row" data-cat="automation" data-n="10" data-title="ASTRA Telegram Bot" data-category="Automation" data-year="2024" data-tone="blue" data-vis="chat" data-shot="true">
+          <article class="projects__rowin" data-tone="blue" aria-labelledby="work-t-astra-telegram-bot">
+            <span class="projects__rowidx" aria-hidden="true">// 10</span>
+            <div class="projects__rowmain">
+              <h4 class="projects__rowtitle" id="work-t-astra-telegram-bot">ASTRA Telegram Bot</h4>
+              <p class="projects__rowblurb">Telegram bot that walks you through zodiac sign and date and replies with the daily horoscope.</p>
+            </div>
+            <p class="projects__rowmeta"><span class="projects__cat">Automation</span><span class="projects__year">2024</span></p>
+            <ul class="tags projects__rowstack" role="list" aria-label="Stack"><li class="tag">Python</li><li class="tag">pyTelegramBotAPI</li><li class="tag">requests</li><li class="tag tag--dim"><span aria-hidden="true">+1</span><span class="sr-only">and 1 more</span></li></ul>
+            <div class="projects__rowactions">
+              
+              <button type="button" class="projects__open link-arrow" data-open="astra-telegram-bot" aria-haspopup="dialog"><span class="projects__open-label">Case study</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="sr-only">: ASTRA Telegram Bot</span></button>
+            </div>
+        <details class="projects__case">
+          <summary>Read the case study: ASTRA Telegram Bot</summary>
+        <div class="projects__case-body">
+          <figure class="projects__figure" data-tone="blue" data-orient="portrait">
+            <a class="projects__zoom" href="assets/img/projects/astra-telegram-bot-full.webp" target="_blank" rel="noopener noreferrer">
+              <span class="projects__frame"><img src="assets/img/projects/astra-telegram-bot.webp" alt="Telegram chat with the ASTRA bot: after the sign is chosen the bot asks which day, a date is entered and the daily horoscope comes back." width="880" height="998" loading="lazy" decoding="async"></span>
+              <span class="projects__zoomhint">Open full size<svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg><span class="sr-only"> (opens in a new tab)</span></span>
+            </a>
+            <figcaption>The ASTRA bot in a Telegram chat: day choice, date prompt and the horoscope reply.</figcaption>
+          </figure>
+          <p class="pc__tagline">Daily horoscopes, one keyboard tap at a time.</p>
+          <div class="pc">
+            <div class="pc__main">
+              <p class="pc__lede">ASTRA (Astrology &amp; Stars Telegram Responsive Assistant) is a Telegram bot built with pyTelegramBotAPI. /horoscope opens a keyboard of the twelve signs, then asks for today, tomorrow, yesterday or a specific date within the last year, validates the input and fetches the reading from a public horoscope API. API failures and bad dates get friendly error messages. The bot answers only while the script is running, so it is not hosted.</p>
+              <h4 class="pc__h">Problem</h4>
+              <p>Make a chat flow forgiving enough that people can get a horoscope without typing commands.</p>
+              <h4 class="pc__h">Approach</h4>
+              <p>Chain reply keyboards with next-step handlers, validate dates against a rolling one-year window and handle API errors gracefully.</p>
+              <h4 class="pc__h">Highlights</h4>
+              <ul class="dot-list pc__list">
+                <li>Keyboard-driven multi-step conversation</li>
+                <li>Date validation with a rolling 365-day window</li>
+                <li>Graceful handling of API failures and invalid input</li>
+              </ul>
+            </div>
+            <div class="pc__side">
+              <h4 class="pc__h">Key numbers</h4>
+              <dl class="pc__metrics">
+            <div class="pc__metric is-long"><dt>Coverage</dt><dd>12 signs × 4 day options, dates up to 365 days back</dd></div>
+              </dl>
+              <h4 class="pc__h">Stack</h4>
+              <ul class="tags pc__stack">
+                <li class="tag">Python</li>
+                <li class="tag">pyTelegramBotAPI</li>
+                <li class="tag">requests</li>
+                <li class="tag">Telegram Bot API</li>
+              </ul>
+              <h4 class="pc__h">Role</h4>
+              <p>Sole author (7 commits, Nov-Dec 2024).</p>
+              <h4 class="pc__h">Status</h4>
+              <p>Public repo · learning project</p>
+            </div>
+          </div>
+        </div>
+        </details>
+          </article>
+        </li>
+        <li class="projects__row" data-pid="zapvi-web-scraper" data-kind="row" data-cat="automation" data-n="11" data-title="Zapvi Web Scraper" data-category="Automation" data-year="2024" data-tone="blue" data-vis="terminal" data-shot="false">
+          <article class="projects__rowin" data-tone="blue" aria-labelledby="work-t-zapvi-web-scraper">
+            <span class="projects__rowidx" aria-hidden="true">// 11</span>
+            <div class="projects__rowmain">
+              <h4 class="projects__rowtitle" id="work-t-zapvi-web-scraper">Zapvi Web Scraper</h4>
+              <p class="projects__rowblurb">Requests and BeautifulSoup notebook that scrapes product listings into pandas and CSV.</p>
+            </div>
+            <p class="projects__rowmeta"><span class="projects__cat">Automation</span><span class="projects__year">2024</span></p>
+            <ul class="tags projects__rowstack" role="list" aria-label="Stack"><li class="tag">Python</li><li class="tag">Requests</li><li class="tag">BeautifulSoup</li><li class="tag tag--dim"><span aria-hidden="true">+2</span><span class="sr-only">and 2 more</span></li></ul>
+            <div class="projects__rowactions">
+              <ul class="projects__links" role="list"><li><a class="projects__link" href="https://github.com/ShaunakChorge/Zapvi-Web-Scrapper" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for Zapvi Web Scraper (opens in a new tab)</span></a></li></ul>
+              <button type="button" class="projects__open link-arrow" data-open="zapvi-web-scraper" aria-haspopup="dialog"><span class="projects__open-label">Case study</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="sr-only">: Zapvi Web Scraper</span></button>
+            </div>
+        <details class="projects__case">
+          <summary>Read the case study: Zapvi Web Scraper</summary>
+        <div class="projects__case-body">
+          <p class="pc__tagline">Product listings to a clean table.</p>
+          <div class="pc">
+            <div class="pc__main">
+              <p class="pc__lede">A notebook that loops over paginated listings of smartphone back covers on zapvi.in, parses each product card with BeautifulSoup, de-duplicates by name, cleans the price strings and exports a CSV. A local variant parses saved Amazon search pages the same way into an Excel sheet.</p>
+              <h4 class="pc__h">Problem</h4>
+              <p>Copying product data by hand from paginated store pages is slow and error-prone.</p>
+              <h4 class="pc__h">Approach</h4>
+              <p>Request each page, parse the product cards, clean and de-duplicate, then export with pandas.</p>
+              <h4 class="pc__h">Highlights</h4>
+              <ul class="dot-list pc__list">
+                <li>Scrape, clean and export in one notebook</li>
+                <li>De-duplication and fallbacks for missing fields</li>
+              </ul>
+            </div>
+            <div class="pc__side">
+              <h4 class="pc__h">Stack</h4>
+              <ul class="tags pc__stack">
+                <li class="tag">Python</li>
+                <li class="tag">Requests</li>
+                <li class="tag">BeautifulSoup</li>
+                <li class="tag">pandas</li>
+                <li class="tag">Jupyter</li>
+              </ul>
+              <h4 class="pc__h">Role</h4>
+              <p>Sole author (3 commits, Nov 2024).</p>
+              <h4 class="pc__h">Status</h4>
+              <p>Public repo · learning project</p>
+              <h4 class="pc__h">Links</h4>
+              <ul class="pc__links">
+            <li><a class="btn btn--sm btn--blue" href="https://github.com/ShaunakChorge/Zapvi-Web-Scrapper" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for Zapvi Web Scraper (opens in a new tab)</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </details>
+          </article>
+        </li>
+        <li class="projects__row" data-pid="cv-fundamentals-yolov8" data-kind="row" data-cat="vision" data-n="12" data-title="Computer Vision Fundamentals + YOLOv8 on Video" data-category="Computer Vision" data-year="2025" data-tone="magenta" data-vis="scan-grid" data-shot="false">
+          <article class="projects__rowin" data-tone="magenta" aria-labelledby="work-t-cv-fundamentals-yolov8">
+            <span class="projects__rowidx" aria-hidden="true">// 12</span>
+            <div class="projects__rowmain">
+              <h4 class="projects__rowtitle" id="work-t-cv-fundamentals-yolov8">Computer Vision Fundamentals + YOLOv8 on Video</h4>
+              <p class="projects__rowblurb">Grayscale, resize and blur, then Faster R-CNN on an image and YOLOv8n on video frames.</p>
+            </div>
+            <p class="projects__rowmeta"><span class="projects__cat">Computer Vision</span><span class="projects__year">2025</span></p>
+            <ul class="tags projects__rowstack" role="list" aria-label="Stack"><li class="tag">Python</li><li class="tag">OpenCV</li><li class="tag">Matplotlib</li><li class="tag tag--dim"><span aria-hidden="true">+3</span><span class="sr-only">and 3 more</span></li></ul>
+            <div class="projects__rowactions">
+              
+              <button type="button" class="projects__open link-arrow" data-open="cv-fundamentals-yolov8" aria-haspopup="dialog"><span class="projects__open-label">Case study</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="sr-only">: Computer Vision Fundamentals + YOLOv8 on Video</span></button>
+            </div>
+        <details class="projects__case">
+          <summary>Read the case study: Computer Vision Fundamentals + YOLOv8 on Video</summary>
+        <div class="projects__case-body">
+          <p class="pc__tagline">From grayscale to detections on video frames.</p>
+          <div class="pc">
+            <div class="pc__main">
+              <p class="pc__lede">A notebook for a computer-vision internship assignment. It loads, grayscales, resizes (300×300) and Gaussian-blurs an image, runs a pre-trained Faster R-CNN to draw bounding boxes, then applies the same chain to every fifth frame of a video with YOLOv8n, saving the original, gray, resized, blurred and annotated frames.</p>
+              <h4 class="pc__h">Problem</h4>
+              <p>Show the basic image-processing toolkit and pre-trained detection models working together on stills and video.</p>
+              <h4 class="pc__h">Approach</h4>
+              <p>OpenCV and Matplotlib for the image steps, torchvision Faster R-CNN for the still image and an Ultralytics YOLOv8n loop for video frames.</p>
+              <h4 class="pc__h">Highlights</h4>
+              <ul class="dot-list pc__list">
+                <li>Same preprocessing chain applied to still images and video</li>
+                <li>Annotated output saved per frame</li>
+              </ul>
+            </div>
+            <div class="pc__side">
+              <h4 class="pc__h">Key numbers</h4>
+              <dl class="pc__metrics">
+            <div class="pc__metric"><dt>Video frames processed</dt><dd>56 (every 5th frame)</dd></div>
+              </dl>
+              <h4 class="pc__h">Stack</h4>
+              <ul class="tags pc__stack">
+                <li class="tag">Python</li>
+                <li class="tag">OpenCV</li>
+                <li class="tag">Matplotlib</li>
+                <li class="tag">PyTorch / torchvision</li>
+                <li class="tag">Ultralytics YOLOv8n</li>
+                <li class="tag">Jupyter</li>
+              </ul>
+              <h4 class="pc__h">Role</h4>
+              <p>Solo assignment submission.</p>
+              <h4 class="pc__h">Status</h4>
+              <p>Assignment · notebook only</p>
+            </div>
+          </div>
+        </div>
+        </details>
+          </article>
+        </li>
+        <li class="projects__row" data-pid="german-english-translate-summarize" data-kind="row" data-cat="speech-ml" data-n="13" data-title="German to English Translate &amp; Summarize" data-category="NLP" data-year="2025" data-tone="purple" data-vis="code" data-shot="false">
+          <article class="projects__rowin" data-tone="purple" aria-labelledby="work-t-german-english-translate-summarize">
+            <span class="projects__rowidx" aria-hidden="true">// 13</span>
+            <div class="projects__rowmain">
+              <h4 class="projects__rowtitle" id="work-t-german-english-translate-summarize">German to English Translate &amp; Summarize</h4>
+              <p class="projects__rowblurb">Streamlit utility that translates German to English with MarianMT, then summarises with BART.</p>
+            </div>
+            <p class="projects__rowmeta"><span class="projects__cat">NLP</span><span class="projects__year">2025</span></p>
+            <ul class="tags projects__rowstack" role="list" aria-label="Stack"><li class="tag">Python</li><li class="tag">Streamlit</li><li class="tag">Hugging Face Transformers</li><li class="tag tag--dim"><span aria-hidden="true">+2</span><span class="sr-only">and 2 more</span></li></ul>
+            <div class="projects__rowactions">
+              <ul class="projects__links" role="list"><li><a class="projects__link" href="https://github.com/ShaunakChorge/DeepFakeAnalysis/blob/main/app.py" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>Source</span><span class="sr-only"> code for German to English Translate &amp; Summarize (opens in a new tab)</span></a></li></ul>
+              <button type="button" class="projects__open link-arrow" data-open="german-english-translate-summarize" aria-haspopup="dialog"><span class="projects__open-label">Case study</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="sr-only">: German to English Translate &amp; Summarize</span></button>
+            </div>
+        <details class="projects__case">
+          <summary>Read the case study: German to English Translate &amp; Summarize</summary>
+        <div class="projects__case-body">
+          <p class="pc__tagline">Translate first, then shrink it.</p>
+          <div class="pc">
+            <div class="pc__main">
+              <p class="pc__lede">A small Streamlit app that loads two Hugging Face pipelines: Helsinki-NLP/opus-mt-de-en to translate German text and facebook/bart-large-cnn to summarise it. Long inputs are split into overlapping 2,000-character chunks, translated chunk by chunk and summarised with a map-reduce step, with timing shown for each action.</p>
+              <h4 class="pc__h">Problem</h4>
+              <p>Read long German text quickly in English.</p>
+              <h4 class="pc__h">Approach</h4>
+              <p>Chunk with overlap, translate each chunk, then summarise in a map-reduce pass.</p>
+              <h4 class="pc__h">Highlights</h4>
+              <ul class="dot-list pc__list">
+                <li>Two-stage translate-then-summarise pipeline with long-text chunking</li>
+              </ul>
+            </div>
+            <div class="pc__side">
+              <h4 class="pc__h">Stack</h4>
+              <ul class="tags pc__stack">
+                <li class="tag">Python</li>
+                <li class="tag">Streamlit</li>
+                <li class="tag">Hugging Face Transformers</li>
+                <li class="tag">MarianMT</li>
+                <li class="tag">BART</li>
+              </ul>
+              <h4 class="pc__h">Role</h4>
+              <p>Small utility committed to my public DeepFakeAnalysis repo (root app.py); separate from the deepfake project.</p>
+              <h4 class="pc__h">Status</h4>
+              <p>Small utility · in a public repo</p>
+              <h4 class="pc__h">Links</h4>
+              <ul class="pc__links">
+            <li><a class="btn btn--sm btn--purple" href="https://github.com/ShaunakChorge/DeepFakeAnalysis/blob/main/app.py" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>Source</span><span class="sr-only"> code for German to English Translate &amp; Summarize (opens in a new tab)</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </details>
+          </article>
+        </li>
+        <li class="projects__row" data-pid="medical-insurance-cost-prediction" data-kind="row" data-cat="speech-ml" data-n="14" data-title="Medical Insurance Cost Prediction" data-category="Machine Learning" data-year="2024" data-tone="purple" data-vis="bars" data-shot="false">
+          <article class="projects__rowin" data-tone="purple" aria-labelledby="work-t-medical-insurance-cost-prediction">
+            <span class="projects__rowidx" aria-hidden="true">// 14</span>
+            <div class="projects__rowmain">
+              <h4 class="projects__rowtitle" id="work-t-medical-insurance-cost-prediction">Medical Insurance Cost Prediction</h4>
+              <p class="projects__rowblurb">EDA and linear regression on 1,338 insurance records: R² 0.74 on test data.</p>
+            </div>
+            <p class="projects__rowmeta"><span class="projects__cat">Machine Learning</span><span class="projects__year">2024</span><span class="tag tag--dim">Early work</span></p>
+            <ul class="tags projects__rowstack" role="list" aria-label="Stack"><li class="tag">Python</li><li class="tag">pandas</li><li class="tag">NumPy</li><li class="tag tag--dim"><span aria-hidden="true">+4</span><span class="sr-only">and 4 more</span></li></ul>
+            <div class="projects__rowactions">
+              
+              <button type="button" class="projects__open link-arrow" data-open="medical-insurance-cost-prediction" aria-haspopup="dialog"><span class="projects__open-label">Case study</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="sr-only">: Medical Insurance Cost Prediction</span></button>
+            </div>
+        <details class="projects__case">
+          <summary>Read the case study: Medical Insurance Cost Prediction</summary>
+        <div class="projects__case-body">
+          <p class="pc__tagline">A first end-to-end regression workflow.</p>
+          <div class="pc">
+            <div class="pc__main">
+              <p class="pc__lede">A data-science course case study from April 2024 that follows a widely used public tutorial notebook. It explores age, BMI, smoking and region, encodes the categorical columns, fits a linear regression on an 80/20 split and reports R² of 0.75 on training and 0.74 on test data, ending with a function that estimates charges for a new person. A 29-slide deck walks through the workflow.</p>
+              <h4 class="pc__h">Problem</h4>
+              <p>Estimate individual medical charges from a few personal attributes.</p>
+              <h4 class="pc__h">Approach</h4>
+              <p>EDA, label-encode the categoricals, split 80/20, fit LinearRegression, evaluate with R² and wrap it in a predict function.</p>
+              <h4 class="pc__h">Highlights</h4>
+              <ul class="dot-list pc__list">
+                <li>Full tabular-ML workflow from EDA to a prediction function</li>
+              </ul>
+            </div>
+            <div class="pc__side">
+              <h4 class="pc__h">Key numbers</h4>
+              <dl class="pc__metrics">
+            <div class="pc__metric"><dt>R² (train / test)</dt><dd>0.7515 / 0.7447</dd></div>
+              </dl>
+              <h4 class="pc__h">Stack</h4>
+              <ul class="tags pc__stack">
+                <li class="tag">Python</li>
+                <li class="tag">pandas</li>
+                <li class="tag">NumPy</li>
+                <li class="tag">scikit-learn</li>
+                <li class="tag">Matplotlib</li>
+                <li class="tag">Seaborn</li>
+                <li class="tag">Google Colab</li>
+              </ul>
+              <h4 class="pc__h">Role</h4>
+              <p>Solo case study (slides credit me alone).</p>
+              <h4 class="pc__h">Status</h4>
+              <p>Course case study · follows a public tutorial notebook</p>
+            </div>
+          </div>
+        </div>
+        </details>
+          </article>
+        </li>
+        <li class="projects__row" data-pid="qr-code-generator" data-kind="row" data-cat="web-tools" data-n="15" data-title="QR Code Generator" data-category="Web" data-year="2024" data-tone="blue" data-vis="qr" data-shot="true">
+          <article class="projects__rowin" data-tone="blue" aria-labelledby="work-t-qr-code-generator">
+            <span class="projects__rowidx" aria-hidden="true">// 15</span>
+            <div class="projects__rowmain">
+              <h4 class="projects__rowtitle" id="work-t-qr-code-generator">QR Code Generator</h4>
+              <p class="projects__rowblurb">Single-page tool that turns short text or a URL into a QR code. Live on GitHub Pages.</p>
+            </div>
+            <p class="projects__rowmeta"><span class="projects__cat">Web</span><span class="projects__year">2024</span><span class="tag tag--dim">Early work</span></p>
+            <ul class="tags projects__rowstack" role="list" aria-label="Stack"><li class="tag">HTML</li><li class="tag">CSS</li><li class="tag">JavaScript</li><li class="tag tag--dim"><span aria-hidden="true">+1</span><span class="sr-only">and 1 more</span></li></ul>
+            <div class="projects__rowactions">
+              <ul class="projects__links" role="list"><li><a class="projects__link" href="https://github.com/ShaunakChorge/QR-Code-Generator" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for QR Code Generator (opens in a new tab)</span></a></li><li><a class="projects__link" href="https://shaunakchorge.github.io/QR-Code-Generator/" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg><span>Live demo</span><span class="sr-only"> of QR Code Generator (opens in a new tab)</span></a></li></ul>
+              <button type="button" class="projects__open link-arrow" data-open="qr-code-generator" aria-haspopup="dialog"><span class="projects__open-label">Case study</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="sr-only">: QR Code Generator</span></button>
+            </div>
+        <details class="projects__case">
+          <summary>Read the case study: QR Code Generator</summary>
+        <div class="projects__case-body">
+          <figure class="projects__figure" data-tone="blue" data-orient="wide">
+            <a class="projects__zoom" href="assets/img/projects/qr-code-generator.webp" target="_blank" rel="noopener noreferrer">
+              <span class="projects__frame"><img src="assets/img/projects/qr-code-generator.webp" alt="QR Code Generator page with a URL typed in and the generated QR code below it." width="1200" height="750" loading="lazy" decoding="async"></span>
+              <span class="projects__zoomhint">Open full size<svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg><span class="sr-only"> (opens in a new tab)</span></span>
+            </a>
+            <figcaption>The finished QR Code Generator page.</figcaption>
+          </figure>
+          <p class="pc__tagline">Text or a URL in, scannable QR out.</p>
+          <div class="pc">
+            <div class="pc__main">
+              <p class="pc__lede">A zero-dependency page in HTML, CSS and JavaScript that sends the input to the public api.qrserver.com service and animates the QR image into view. Empty input triggers a shake animation instead of a request.</p>
+              <h4 class="pc__h">Problem</h4>
+              <p>Turn a link into something a phone can scan without installing anything.</p>
+              <h4 class="pc__h">Approach</h4>
+              <p>One input, one call to a QR image API and a short CSS reveal animation.</p>
+              <h4 class="pc__h">Highlights</h4>
+              <ul class="dot-list pc__list">
+                <li>Clean card UI with a smooth reveal</li>
+                <li>Shake animation on empty input</li>
+                <li>No dependencies, deployed on GitHub Pages</li>
+              </ul>
+            </div>
+            <div class="pc__side">
+              <h4 class="pc__h">Stack</h4>
+              <ul class="tags pc__stack">
+                <li class="tag">HTML</li>
+                <li class="tag">CSS</li>
+                <li class="tag">JavaScript</li>
+                <li class="tag">api.qrserver.com</li>
+              </ul>
+              <h4 class="pc__h">Role</h4>
+              <p>Sole author (5 commits, 4 Dec 2024).</p>
+              <h4 class="pc__h">Status</h4>
+              <p>Public repo · live on GitHub Pages</p>
+              <h4 class="pc__h">Links</h4>
+              <ul class="pc__links">
+            <li><a class="btn btn--sm btn--blue" href="https://github.com/ShaunakChorge/QR-Code-Generator" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for QR Code Generator (opens in a new tab)</span></a></li>
+            <li><a class="btn btn--sm btn--blue" href="https://shaunakchorge.github.io/QR-Code-Generator/" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg><span>Live demo</span><span class="sr-only"> of QR Code Generator (opens in a new tab)</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </details>
+          </article>
+        </li>
+        <li class="projects__row" data-pid="quiz-game-c" data-kind="row" data-cat="web-tools" data-n="16" data-title="Ultimate Quiz Game (C)" data-category="Games" data-year="2023" data-tone="blue" data-vis="terminal" data-shot="true">
+          <article class="projects__rowin" data-tone="blue" aria-labelledby="work-t-quiz-game-c">
+            <span class="projects__rowidx" aria-hidden="true">// 16</span>
+            <div class="projects__rowmain">
+              <h4 class="projects__rowtitle" id="work-t-quiz-game-c">Ultimate Quiz Game (C)</h4>
+              <p class="projects__rowblurb">Console quiz in C with accounts, six topics, two difficulty levels and a persistent leaderboard.</p>
+            </div>
+            <p class="projects__rowmeta"><span class="projects__cat">Games</span><span class="projects__year">2023</span><span class="tag tag--dim">Early work</span></p>
+            <ul class="tags projects__rowstack" role="list" aria-label="Stack"><li class="tag">C</li><li class="tag">GCC</li><li class="tag">File I/O</li></ul>
+            <div class="projects__rowactions">
+              <ul class="projects__links" role="list"><li><a class="projects__link" href="https://github.com/ShaunakChorge/Quiz-Game" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for Ultimate Quiz Game (C) (opens in a new tab)</span></a></li></ul>
+              <button type="button" class="projects__open link-arrow" data-open="quiz-game-c" aria-haspopup="dialog"><span class="projects__open-label">Case study</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="sr-only">: Ultimate Quiz Game (C)</span></button>
+            </div>
+        <details class="projects__case">
+          <summary>Read the case study: Ultimate Quiz Game (C)</summary>
+        <div class="projects__case-body">
+          <figure class="projects__figure" data-tone="blue" data-orient="wide">
+            <a class="projects__zoom" href="assets/img/projects/quiz-game-c.webp" target="_blank" rel="noopener noreferrer">
+              <span class="projects__frame"><img src="assets/img/projects/quiz-game-c.webp" alt="Console window with the quiz game welcome banner and a main menu: Register, Login, View HighScores, Quit." width="1101" height="396" loading="lazy" decoding="async"></span>
+              <span class="projects__zoomhint">Open full size<svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg><span class="sr-only"> (opens in a new tab)</span></span>
+            </a>
+            <figcaption>Main menu of the console quiz.</figcaption>
+          </figure>
+          <p class="pc__tagline">A console quiz with accounts and a leaderboard.</p>
+          <div class="pc">
+            <div class="pc__main">
+              <p class="pc__lede">A project-based-learning (PBL) team project in plain C: structs, file handling, string parsing and sorting. Players register and log in, pick one of six topics (History, Politics, Geography, Bollywood, Current Affairs, Sports) and a difficulty, and their scores are saved to a sorted leaderboard. Questions live in twelve plain-text files, 88 questions in total.</p>
+              <h4 class="pc__h">Problem</h4>
+              <p>Build a complete interactive program in C using only files and the standard library.</p>
+              <h4 class="pc__h">Approach</h4>
+              <p>A menu-driven loop, question files parsed at runtime and a high-score module that loads, de-duplicates per user, sorts and rewrites the table.</p>
+              <h4 class="pc__h">Highlights</h4>
+              <ul class="dot-list pc__list">
+                <li>Accounts, six topics and two difficulty levels</li>
+                <li>Persistent high-score table</li>
+                <li>Flowcharts and algorithm slides for the PBL submission</li>
+              </ul>
+            </div>
+            <div class="pc__side">
+              <h4 class="pc__h">Key numbers</h4>
+              <dl class="pc__metrics">
+            <div class="pc__metric is-long"><dt>Question bank</dt><dd>88 questions in 12 files</dd></div>
+              </dl>
+              <h4 class="pc__h">Stack</h4>
+              <ul class="tags pc__stack">
+                <li class="tag">C</li>
+                <li class="tag">GCC</li>
+                <li class="tag">File I/O</li>
+              </ul>
+              <h4 class="pc__h">Role</h4>
+              <p>Member of a three-person PBL team (with two classmates); repository published from my account.</p>
+              <h4 class="pc__h">Status</h4>
+              <p>Public repo · college PBL team project</p>
+              <h4 class="pc__h">Links</h4>
+              <ul class="pc__links">
+            <li><a class="btn btn--sm btn--blue" href="https://github.com/ShaunakChorge/Quiz-Game" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for Ultimate Quiz Game (C) (opens in a new tab)</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </details>
+          </article>
+        </li>
+        <li class="projects__row" data-pid="atm-simulator" data-kind="row" data-cat="backend" data-n="17" data-title="ATM Simulator (Java Swing)" data-category="Desktop" data-year="2024" data-tone="blue" data-vis="screenshot" data-shot="false">
+          <article class="projects__rowin" data-tone="blue" aria-labelledby="work-t-atm-simulator">
+            <span class="projects__rowidx" aria-hidden="true">// 17</span>
+            <div class="projects__rowmain">
+              <h4 class="projects__rowtitle" id="work-t-atm-simulator">ATM Simulator (Java Swing)</h4>
+              <p class="projects__rowblurb">Java Swing and MySQL ATM: signup, card and PIN login, deposits, withdrawals, mini statement.</p>
+            </div>
+            <p class="projects__rowmeta"><span class="projects__cat">Desktop</span><span class="projects__year">2024</span><span class="tag tag--dim">Early work</span></p>
+            <ul class="tags projects__rowstack" role="list" aria-label="Stack"><li class="tag">Java</li><li class="tag">Swing / AWT</li><li class="tag">JDBC</li><li class="tag tag--dim"><span aria-hidden="true">+1</span><span class="sr-only">and 1 more</span></li></ul>
+            <div class="projects__rowactions">
+              <ul class="projects__links" role="list"><li><a class="projects__link" href="https://github.com/ShaunakChorge/ATM-Simulator" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for ATM Simulator (Java Swing) (opens in a new tab)</span></a></li></ul>
+              <button type="button" class="projects__open link-arrow" data-open="atm-simulator" aria-haspopup="dialog"><span class="projects__open-label">Case study</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="sr-only">: ATM Simulator (Java Swing)</span></button>
+            </div>
+        <details class="projects__case">
+          <summary>Read the case study: ATM Simulator (Java Swing)</summary>
+        <div class="projects__case-body">
+          <p class="pc__tagline">A full ATM workflow on a MySQL ledger.</p>
+          <div class="pc">
+            <div class="pc__main">
+              <p class="pc__lede">A Java Swing desktop app backed by MySQL over JDBC, about 1,960 lines across 14 classes. A three-page signup generates a card number and PIN, login checks both, and the balance is computed from the transaction ledger with overdraw protection. I built it by following the ‘Code for Interview’ YouTube tutorial series, as a way to learn Java, OOP and SQL together.</p>
+              <h4 class="pc__h">Problem</h4>
+              <p>Practise OOP, GUI design and relational persistence in one realistic workflow.</p>
+              <h4 class="pc__h">Approach</h4>
+              <p>One Swing window per screen, a shared JDBC connection helper and five MySQL tables for signup, login and transactions.</p>
+              <h4 class="pc__h">Highlights</h4>
+              <ul class="dot-list pc__list">
+                <li>Multi-screen banking workflow with relational storage</li>
+                <li>Balance derived from the ledger, with ‘Insufficient Balance’ protection</li>
+              </ul>
+            </div>
+            <div class="pc__side">
+              <h4 class="pc__h">Key numbers</h4>
+              <dl class="pc__metrics">
+            <div class="pc__metric is-long"><dt>Size</dt><dd>~1,960 lines of Java, 14 classes, 5 MySQL tables</dd></div>
+              </dl>
+              <h4 class="pc__h">Stack</h4>
+              <ul class="tags pc__stack">
+                <li class="tag">Java</li>
+                <li class="tag">Swing / AWT</li>
+                <li class="tag">JDBC</li>
+                <li class="tag">MySQL</li>
+              </ul>
+              <h4 class="pc__h">Role</h4>
+              <p>Sole committer (6 commits); built following the ‘Code for Interview’ tutorial series.</p>
+              <h4 class="pc__h">Status</h4>
+              <p>Public repo · tutorial-based learning project</p>
+              <h4 class="pc__h">Links</h4>
+              <ul class="pc__links">
+            <li><a class="btn btn--sm btn--blue" href="https://github.com/ShaunakChorge/ATM-Simulator" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for ATM Simulator (Java Swing) (opens in a new tab)</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </details>
+          </article>
+        </li>
+        <li class="projects__row" data-pid="tetris-raylib-cpp" data-kind="row" data-cat="web-tools" data-n="18" data-title="Tetris (C++ / raylib)" data-category="Games" data-year="2024" data-tone="blue" data-vis="game" data-shot="true">
+          <article class="projects__rowin" data-tone="blue" aria-labelledby="work-t-tetris-raylib-cpp">
+            <span class="projects__rowidx" aria-hidden="true">// 18</span>
+            <div class="projects__rowmain">
+              <h4 class="projects__rowtitle" id="work-t-tetris-raylib-cpp">Tetris (C++ / raylib)</h4>
+              <p class="projects__rowblurb">Object-oriented C++ Tetris on raylib: rotation, line clearing, scoring, preview and sound.</p>
+            </div>
+            <p class="projects__rowmeta"><span class="projects__cat">Games</span><span class="projects__year">2024</span><span class="tag tag--dim">Early work</span></p>
+            <ul class="tags projects__rowstack" role="list" aria-label="Stack"><li class="tag">C++</li><li class="tag">raylib</li><li class="tag">Make / g++</li></ul>
+            <div class="projects__rowactions">
+              <ul class="projects__links" role="list"><li><a class="projects__link" href="https://github.com/ShaunakChorge/Tetris-Game" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for Tetris (C++ / raylib) (opens in a new tab)</span></a></li></ul>
+              <button type="button" class="projects__open link-arrow" data-open="tetris-raylib-cpp" aria-haspopup="dialog"><span class="projects__open-label">Case study</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="sr-only">: Tetris (C++ / raylib)</span></button>
+            </div>
+        <details class="projects__case">
+          <summary>Read the case study: Tetris (C++ / raylib)</summary>
+        <div class="projects__case-body">
+          <figure class="projects__figure" data-tone="blue" data-orient="portrait">
+            <a class="projects__zoom" href="assets/img/projects/tetris-raylib-cpp.webp" target="_blank" rel="noopener noreferrer">
+              <span class="projects__frame"><img src="assets/img/projects/tetris-raylib-cpp.webp" alt="raylib Tetris window with the falling-block board, a score panel and a next-piece preview." width="504" height="652" loading="lazy" decoding="async"></span>
+              <span class="projects__zoomhint">Open full size<svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg><span class="sr-only"> (opens in a new tab)</span></span>
+            </a>
+            <figcaption>The raylib Tetris window mid-game.</figcaption>
+          </figure>
+          <p class="pc__tagline">Object-oriented Tetris with sound.</p>
+          <div class="pc">
+            <div class="pc__main">
+              <p class="pc__lede">Tetris written in object-oriented C++ with raylib: seven tetromino classes with four rotation states each, collision checks, line clearing, scoring, a next-piece panel, music and sound effects, and game-over and restart handling. Built following public raylib tutorial material (the Educ8s raylib starter template).</p>
+              <h4 class="pc__h">Problem</h4>
+              <p>Learn game-loop structure and OOP in C++ by rebuilding a classic.</p>
+              <h4 class="pc__h">Approach</h4>
+              <p>Block, Grid and Game classes, a 20×10 grid and a 60 FPS raylib loop with a gravity tick.</p>
+              <h4 class="pc__h">Highlights</h4>
+              <ul class="dot-list pc__list">
+                <li>Object-oriented game architecture</li>
+                <li>Audio, scoring and next-piece preview</li>
+              </ul>
+            </div>
+            <div class="pc__side">
+              <h4 class="pc__h">Key numbers</h4>
+              <dl class="pc__metrics">
+            <div class="pc__metric is-long"><dt>Board</dt><dd>20×10 grid, 7 tetromino types, 60 FPS</dd></div>
+              </dl>
+              <h4 class="pc__h">Stack</h4>
+              <ul class="tags pc__stack">
+                <li class="tag">C++</li>
+                <li class="tag">raylib</li>
+                <li class="tag">Make / g++</li>
+              </ul>
+              <h4 class="pc__h">Role</h4>
+              <p>Sole committer (5 commits); built following public raylib tutorial material.</p>
+              <h4 class="pc__h">Status</h4>
+              <p>Public repo · tutorial-based learning project</p>
+              <h4 class="pc__h">Links</h4>
+              <ul class="pc__links">
+            <li><a class="btn btn--sm btn--blue" href="https://github.com/ShaunakChorge/Tetris-Game" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for Tetris (C++ / raylib) (opens in a new tab)</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </details>
+          </article>
+        </li>
+        <li class="projects__row" data-pid="password-generator" data-kind="row" data-cat="web-tools" data-n="19" data-title="Password Generator" data-category="Tools" data-year="2023" data-tone="blue" data-vis="monogram" data-shot="false">
+          <article class="projects__rowin" data-tone="blue" aria-labelledby="work-t-password-generator">
+            <span class="projects__rowidx" aria-hidden="true">// 19</span>
+            <div class="projects__rowmain">
+              <h4 class="projects__rowtitle" id="work-t-password-generator">Password Generator</h4>
+              <p class="projects__rowblurb">First-year Python OOP mini-project: random passwords of a chosen length, saved to a text file.</p>
+            </div>
+            <p class="projects__rowmeta"><span class="projects__cat">Tools</span><span class="projects__year">2023</span><span class="tag tag--dim">Early work</span></p>
+            <ul class="tags projects__rowstack" role="list" aria-label="Stack"><li class="tag">Python</li><li class="tag">OOP</li><li class="tag">File I/O</li></ul>
+            <div class="projects__rowactions">
+              <ul class="projects__links" role="list"><li><a class="projects__link" href="https://github.com/ShaunakChorge/Password-Generator" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for Password Generator (opens in a new tab)</span></a></li></ul>
+              <button type="button" class="projects__open link-arrow" data-open="password-generator" aria-haspopup="dialog"><span class="projects__open-label">Case study</span><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span class="sr-only">: Password Generator</span></button>
+            </div>
+        <details class="projects__case">
+          <summary>Read the case study: Password Generator</summary>
+        <div class="projects__case-body">
+          <p class="pc__tagline">My first OOP mini-project in Python.</p>
+          <div class="pc">
+            <div class="pc__main">
+              <p class="pc__lede">A first-year mini-project for ‘Problem Solving by Programming’ (2022–23) with two small classes, a password generator and a manager that saves to a file, plus input validation. It uses Python’s random module and a plain text file, so it is a learning exercise, not a security tool.</p>
+              <h4 class="pc__h">Problem</h4>
+              <p>Practise classes, file handling and exception handling in a small, complete program.</p>
+              <h4 class="pc__h">Approach</h4>
+              <p>PasswordGenerator builds random strings from letters, digits and punctuation; PasswordManager appends them to a file.</p>
+              <h4 class="pc__h">Highlights</h4>
+              <ul class="dot-list pc__list">
+                <li>OOP design with two classes</li>
+                <li>Submitted with a report, algorithm and flowchart</li>
+              </ul>
+            </div>
+            <div class="pc__side">
+              <h4 class="pc__h">Stack</h4>
+              <ul class="tags pc__stack">
+                <li class="tag">Python</li>
+                <li class="tag">OOP</li>
+                <li class="tag">File I/O</li>
+              </ul>
+              <h4 class="pc__h">Role</h4>
+              <p>Solo mini-project; repo published Jan 2025.</p>
+              <h4 class="pc__h">Status</h4>
+              <p>Public repo · first-year mini-project</p>
+              <h4 class="pc__h">Links</h4>
+              <ul class="pc__links">
+            <li><a class="btn btn--sm btn--blue" href="https://github.com/ShaunakChorge/Password-Generator" target="_blank" rel="noopener noreferrer"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> repository for Password Generator (opens in a new tab)</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </details>
+          </article>
+        </li>
+      </ul>
+    </div>
+
+    <div class="projects__cta" data-reveal>
+      <a class="btn btn--ghost" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener noreferrer" data-magnetic><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>All repositories on GitHub</span><span class="sr-only"> (opens in a new tab)</span></a>
+    </div>
+  </div>
+
+  <dialog class="projects__dialog" id="work-dialog" aria-labelledby="work-dialog-title">
+    <div class="projects__sheet" data-tone="cyan">
+      <header class="projects__dhead">
+        <p class="projects__dcount" aria-hidden="true"><span data-dlg-count>// 01</span></p>
+        <p class="projects__dhint" aria-hidden="true"><kbd class="kbd">←</kbd><kbd class="kbd">→</kbd> browse <kbd class="kbd">Esc</kbd> close</p>
+        <div class="projects__dnav">
+          <button type="button" class="icon-btn" data-dlg="prev" aria-label="Previous project"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg></button>
+          <button type="button" class="icon-btn" data-dlg="next" aria-label="Next project"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></button>
+          <button type="button" class="icon-btn projects__copy" data-dlg="copy" aria-label="Copy link to this case study"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-link"/></svg></button>
+          <button type="button" class="icon-btn" data-dlg="close" aria-label="Close case study"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button>
+        </div>
+      </header>
+      <div class="projects__dscroll" data-dlg-scroll>
+        <div class="projects__dbody" data-dlg-body></div>
+        <nav class="projects__pager" aria-label="More case studies" data-dlg-pager>
+          <button type="button" class="projects__pg projects__pg--prev" data-dlg="prev"><span class="projects__pglabel"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg> Previous</span><span class="projects__pgtitle" data-dlg-prev-title></span></button>
+          <button type="button" class="projects__pg projects__pg--next" data-dlg="next"><span class="projects__pglabel">Next <svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span><span class="projects__pgtitle" data-dlg-next-title></span></button>
+        </nav>
+      </div>
+      <p class="sr-only" role="status" aria-live="polite" data-dlg-live></p>
+    </div>
+  </dialog>
+</section>

@@ -1,0 +1,12 @@
+# local tooling
+node_modules/
+package-lock.json
+package.json
+
+# editor / assistant workspaces
+.claude/
+.vscode/
+
+# scratch
+preview-*.html
+*.log

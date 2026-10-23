@@ -1,0 +1,236 @@
+/* =====================================================================
+   NEURAL NEON - contact.css   (CONTACT engineer)   section #contact + the floating "Let's talk" FAB
+   Scope: #contact / .contact__* / .contact-fab.  Un-layered, so it wins over base.css (@layer pf).
+   Contents: 0 keyframes  1 CTA band  2 status terminal + phone caption  3 channel rows  4 form panel  5 form states
+             6 FAB  7 breakpoints  8 reduced motion + mobile perf
+   ===================================================================== */
+
+/*#region 0 keyframes*/
+@keyframes contact-orbit { to { rotate: 360deg; } }
+@keyframes contact-pop { from { opacity: 0; scale: .92; } to { opacity: 1; scale: 1; } }
+/*#endregion*/
+
+/*#region 1 CTA band*/
+#contact.contact { --contact-gap: clamp(1.5rem, 1rem + 2.2vw, 2.75rem); }
+
+.contact__band {
+  position: relative; isolation: isolate; overflow: hidden; border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, .9rem + 3.2vw, 3.75rem);
+  margin-bottom: var(--contact-gap);
+  box-shadow: 0 0 36px rgb(var(--accent) / .16), 0 0 90px rgb(var(--purple) / .1);
+}
+/* rotating light on the 2px frame: a huge square conic-gradient rotates behind an inset panel (transform only, paused off-screen) */
+.contact__band::before {
+  content: ""; position: absolute; z-index: -2; left: 50%; top: 50%; width: max(170%, 56rem); aspect-ratio: 1; translate: -50% -50%;
+  background:
+    conic-gradient(from 0deg, transparent 0deg, rgb(var(--accent) / .25) 190deg, rgb(var(--accent)) 270deg, rgb(var(--purple)) 318deg, rgb(var(--magenta)) 346deg, transparent 360deg),
+    linear-gradient(rgb(var(--accent) / .26), rgb(var(--accent) / .26));
+  animation: contact-orbit 11s linear infinite;
+}
+.contact__band::after {
+  content: ""; position: absolute; z-index: -1; inset: 2px; border-radius: calc(var(--radius-lg) - 2px);
+  background:
+    radial-gradient(ellipse 60% 110% at 92% 0%, rgb(var(--purple) / .2), transparent 62%),
+    radial-gradient(ellipse 55% 100% at 0% 100%, rgb(var(--accent) / .13), transparent 62%),
+    radial-gradient(ellipse 40% 80% at 50% 120%, rgb(var(--magenta) / .1), transparent 70%),
+    #06070c;
+}
+.js .contact__band:not(.is-live)::before { animation-play-state: paused; }
+.contact__line {   /* static gradient hairline along the top edge */
+  position: absolute; z-index: 1; top: 2px; left: 8%; right: 8%; height: 2px; border-radius: 2px; pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgb(var(--accent)), rgb(var(--purple)), rgb(var(--magenta)), transparent);
+  box-shadow: 0 0 14px rgb(var(--accent) / .55);
+}
+.contact__band > .bg-grid, .contact__band > .bg-circuit { z-index: 0; }
+.contact__band-in { position: relative; z-index: 2; display: grid; gap: clamp(1.75rem, 1.2rem + 2vw, 3rem); align-items: center; }
+.contact__band-in > * { min-width: 0; }
+
+.contact__head { display: grid; gap: 1rem; justify-items: start; }
+.contact__title {
+  font-size: clamp(1.875rem, 1.05rem + 3.2vw, 3.25rem); line-height: 1.08; letter-spacing: -.015em; text-wrap: balance;
+  text-shadow: 0 0 30px rgb(var(--accent) / .28);
+}
+.contact__lead { max-width: 54ch; font-size: var(--fs-lead); line-height: 1.6; color: var(--text-body); }
+.contact__avail { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; max-width: 100%; }
+.contact__avail-text { font-size: var(--fs-sm); line-height: 1.5; color: var(--text-muted); max-width: 44ch; }
+.contact__actions { display: flex; flex-wrap: wrap; gap: .85rem 1rem; margin-top: .5rem; }
+.contact__caption { display: none; max-width: 40ch; font: 400 .75rem/1.6 var(--font-mono); letter-spacing: .04em; color: var(--text-muted); }
+.contact__caption [data-clock] { white-space: nowrap; font-variant-numeric: tabular-nums; }
+/*#endregion*/
+
+/*#region 2 status terminal*/
+.contact__term {
+  overflow: hidden; border: 1px solid rgb(var(--accent) / .32); border-radius: var(--radius-md);
+  background: rgb(0 0 0 / .55); box-shadow: 0 0 24px rgb(var(--accent) / .1);
+}
+.contact__term-bar { display: flex; align-items: center; gap: .4rem; padding: .65rem .9rem; border-bottom: 1px solid var(--line); background: rgb(255 255 255 / .03); font: 400 .75rem/1 var(--font-mono); letter-spacing: .06em; color: var(--text-dim); }
+.contact__term-bar i { display: block; width: 10px; height: 10px; border-radius: 50%; background: rgb(var(--magenta)); box-shadow: 0 0 8px rgb(var(--magenta) / .7); }
+.contact__term-bar i:nth-child(2) { background: rgb(var(--purple)); box-shadow: 0 0 8px rgb(var(--purple) / .7); }
+.contact__term-bar i:nth-child(3) { background: rgb(var(--accent)); box-shadow: 0 0 8px rgb(var(--accent) / .7); margin-right: .4rem; }
+.contact__term-body { margin: 0; padding: .35rem 0; }
+.contact__kv { display: grid; gap: .15rem 1rem; padding: .75rem 1rem; }
+.contact__kv + .contact__kv { border-top: 1px solid var(--line); }
+.contact__kv dt { font: 700 .75rem/1.4 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: rgb(var(--accent-ink)); }
+.contact__kv dt::before { content: "> "; opacity: .6; }
+.contact__kv dd { margin: 0; display: flex; align-items: center; gap: .6rem; font-size: var(--fs-sm); line-height: 1.5; color: var(--text); }
+.contact__kv dd [data-clock] { font: 400 .875rem/1.4 var(--font-mono); letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+@media (min-width: 480px) { .contact__kv { grid-template-columns: 6.75rem minmax(0, 1fr); align-items: baseline; } }
+/*#endregion*/
+
+/*#region 3 columns + channel rows*/
+.contact__cols { display: grid; gap: var(--contact-gap); align-items: start; }
+.contact__cols > * { min-width: 0; }
+.contact__channels { container: contact-channels / inline-size; }
+.contact__sub { display: grid; gap: .5rem; margin-bottom: 1.25rem; }
+.contact__h { font-size: var(--fs-h3); line-height: 1.25; color: var(--text-strong); }
+.contact__note { max-width: 52ch; font-size: var(--fs-sm); line-height: 1.55; color: var(--text-muted); }
+
+.contact__list { display: grid; gap: .75rem; margin: 0; padding: 0; list-style: none; }
+.contact__row {
+  position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .35rem 1rem;
+  padding: .85rem 1rem; border: 1px solid rgb(var(--tone) / .28); border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgb(var(--tone) / .08), transparent 62%), var(--surface);
+  transition: translate .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+}
+.contact__row:focus-within { border-color: rgb(var(--tone) / .7); box-shadow: 0 0 22px rgb(var(--tone) / .22); }
+@media (hover: hover) { .contact__row:not(.contact__row--static):hover { translate: 0 -2px; border-color: rgb(var(--tone) / .7); box-shadow: 0 0 24px rgb(var(--tone) / .25); } }
+.contact__icon { width: 2.75rem; height: 2.75rem; border-radius: .625rem; }
+.contact__icon .icon { width: 1.35rem; height: 1.35rem; }
+.contact__row:not(.contact__row--static):hover .contact__icon, .contact__row:focus-within .contact__icon { border-color: rgb(var(--tone) / .6); box-shadow: 0 0 16px rgb(var(--tone) / .3); }
+.contact__meta { display: grid; gap: .1rem; min-width: 0; }
+.contact__label { font: 700 .75rem/1.3 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--text-dim); }
+.contact__value { display: block; font-size: 1rem; font-weight: 600; line-height: 1.4; color: var(--text-strong); overflow-wrap: anywhere; transition: color .25s var(--ease); }
+a.contact__value::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }     /* stretched link: the whole row is the target */
+a.contact__value:focus-visible { outline: none; }
+a.contact__value:focus-visible::after { outline: 2px solid rgb(var(--tone)); outline-offset: 3px; }
+.contact__row:not(.contact__row--static):hover .contact__value { color: rgb(var(--tone-ink)); }
+.contact__go { pointer-events: none; color: rgb(var(--tone-ink)); opacity: .75; transition: translate .3s var(--ease), opacity .3s var(--ease); }
+.contact__row:hover .contact__go, .contact__row:focus-within .contact__go { translate: 2px -2px; opacity: 1; }
+
+.contact__copy {
+  position: relative; z-index: 2; display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-width: 44px; min-height: 44px; padding: 0 .7rem;
+  border: 1px solid rgb(var(--tone) / .5); border-radius: .625rem; background: rgb(var(--tone) / .07); color: rgb(var(--tone-ink));
+  font: 700 .75rem/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; cursor: pointer;
+  transition: background-color .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
+}
+.contact__copy:hover, .contact__copy:focus-visible { background: rgb(var(--tone) / .16); border-color: rgb(var(--tone)); box-shadow: 0 0 16px rgb(var(--tone) / .35); }
+.contact__copy:focus-visible { outline: 2px solid rgb(var(--tone)); outline-offset: 3px; }
+.contact__copy.is-copied { color: rgb(var(--green-ink)); border-color: rgb(var(--green) / .7); background: rgb(var(--green) / .1); }
+html:not(.js) .contact__copy { display: none; }
+@media (max-width: 479px) {
+  .contact__row { padding: .75rem; gap: .35rem .75rem; }
+  .contact__icon { width: 2.5rem; height: 2.5rem; }
+  .contact__value { font-size: .9375rem; }
+  .contact__row--copy { grid-template-columns: auto minmax(0, 1fr); }
+  .contact__row--copy .contact__copy { grid-column: 2; justify-self: start; }
+}
+/*#endregion*/
+
+/*#region 4 form panel*/
+.contact__formwrap { container-type: inline-size; }
+.contact__formwrap::before { background: linear-gradient(to right, transparent, rgb(var(--accent) / .8), rgb(var(--purple) / .6), transparent); }
+.contact__form { display: grid; gap: 1.15rem; }
+.contact__pair { display: grid; gap: 1.15rem; align-items: start; }
+.contact__pair > * { min-width: 0; }
+@container (min-width: 34rem) { .contact__pair { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.contact__labelrow { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.contact__count { font: 400 .75rem/1 var(--font-mono); letter-spacing: .06em; color: var(--text-dim); font-variant-numeric: tabular-nums; }
+.contact__count.is-near { color: rgb(var(--magenta-ink)); }
+.contact__form .field { gap: .5rem; }
+.contact__form textarea { min-height: 9.5rem; }
+
+/* error rows are always in the accessibility tree (live region), collapsed to 0 height until a message is set */
+.contact__form .field__error { display: grid; grid-template-rows: 0fr; margin-top: -.5rem; min-height: 0; opacity: 0; pointer-events: none; transition: grid-template-rows .25s var(--ease), opacity .2s var(--ease), margin-top .25s var(--ease); }
+.contact__form .field--error .field__error { grid-template-rows: 1fr; margin-top: 0; opacity: 1; }
+.contact__form .field__error-in { display: flex; align-items: flex-start; gap: .45rem; min-height: 0; overflow: hidden; font-size: .875rem; line-height: 1.45; color: var(--danger); }
+.contact__form .field__error-in .icon { margin-top: .15rem; }
+
+.contact__submit { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.25rem; margin-top: .25rem; }
+.contact__status { flex: 1 1 14rem; min-height: 0; margin: 0; }
+.contact__status:empty { display: none; }
+@media (max-width: 479px) { .contact__submit .btn { width: 100%; } }
+/*#endregion*/
+
+/*#region 5 form states: error panel + success panel*/
+.contact__fail {
+  display: flex; align-items: flex-start; gap: .9rem; padding: 1rem 1.1rem; border: 2px solid rgb(var(--red) / .55); border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgb(var(--red) / .1), rgb(var(--red) / .04)); box-shadow: 0 0 22px rgb(var(--red) / .14);
+  animation: contact-pop .3s var(--ease-out) both;
+}
+.contact__fail[hidden] { display: none; }
+.contact__fail-icon { color: rgb(var(--red)); margin-top: .1rem; }
+.contact__fail-body { display: grid; gap: .5rem; justify-items: start; min-width: 0; }
+.contact__fail-title { font: 700 .875rem/1.3 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--danger); }
+.contact__fail-text { font-size: var(--fs-sm); line-height: 1.55; color: var(--text); }
+.contact__fail .btn { margin-top: .25rem; white-space: normal; text-align: center; }
+
+.contact__done { display: grid; justify-items: start; align-content: center; gap: .9rem; padding-block: .5rem; min-height: min(var(--cf-h, 0px), 40rem); }
+.contact__done:not([hidden]) { animation: contact-pop .4s var(--ease-expo) both; }
+.contact__done:focus { outline: none; }
+.contact__done-icon {
+  display: grid; place-items: center; width: 4rem; height: 4rem; border-radius: 50%; color: rgb(var(--green));
+  border: 2px solid rgb(var(--green) / .6); background: rgb(var(--green) / .08); box-shadow: 0 0 26px rgb(var(--green) / .4), inset 0 0 14px rgb(var(--green) / .15);
+}
+.contact__done .btn { margin-top: .5rem; }
+/*#endregion*/
+
+/*#region 6 floating "Let's talk" FAB (markup lives in footer.html; base.css provides .fab-wrap / .fab / .fab-tip)*/
+.contact-fab {
+  visibility: hidden; opacity: 0; translate: 0 18px; scale: .9;
+  transition: opacity .3s var(--ease-out), translate .4s var(--ease-expo), scale .4s var(--ease-expo), visibility 0s linear .4s;
+}
+html:not(.is-locked) .contact-fab.is-shown { visibility: visible; opacity: 1; translate: 0 0; scale: 1; transition: opacity .3s var(--ease-out), translate .4s var(--ease-expo), scale .4s var(--ease-expo), visibility 0s; }
+.contact-fab:not(.is-shown) .fab { animation-play-state: paused; }
+.contact-fab .fab { text-decoration: none; }
+/* phones / touch: out of the way while scrolling down, back as soon as the reader scrolls up (contact.js toggles .is-away) */
+html:not(.is-locked) .contact-fab.is-shown.is-away {
+  visibility: hidden; opacity: 0; translate: 0 12px; pointer-events: none;
+  transition: opacity .2s var(--ease-out), translate .3s var(--ease-expo), scale .3s var(--ease-expo), visibility 0s linear .3s;
+}
+/* below the rail breakpoint and on touch the button is a 48px target, not 64px */
+@media (max-width: 1279px), (pointer: coarse) {
+  .contact-fab .fab { width: 48px; height: 48px; }
+  .contact-fab .fab .icon { width: 1.5rem; height: 1.5rem; }
+}
+@media (pointer: coarse) { .contact-fab .fab { animation: none; } }
+@media (max-height: 520px) and (orientation: landscape) { .contact-fab { display: none; } }
+/*#endregion*/
+
+/*#region 7 breakpoints*/
+@media (max-width: 639px) {
+  .contact__term { display: none; }
+  .contact__caption { display: block; }
+}
+@media (min-width: 900px) {
+  .contact__band-in { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+}
+@media (min-width: 960px) {
+  .contact__cols { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+}
+/* narrow channel column (about 960-1020px viewports): the copy button turns into an icon-only 44px square so the email stays on one line */
+@media (min-width: 480px) {
+  @container contact-channels (max-width: 25.75rem) {
+    .contact__copy { padding: 0; width: 44px; }
+    .contact__copy-text { display: none; }
+  }
+}
+@media (min-width: 1536px) {
+  .contact__title { font-size: 3.5rem; }
+}
+/*#endregion*/
+
+/*#region 8 reduced motion + mobile perf*/
+/* phones / touch / reduced motion: the frame is a plain static gradient (no rotating layer) */
+@media (max-width: 767px), (pointer: coarse) {
+  .contact__band::before { inset: 0; width: auto; aspect-ratio: auto; translate: none; animation: none; background: linear-gradient(135deg, rgb(var(--accent) / .85), rgb(var(--accent) / .25) 30%, rgb(var(--purple) / .4) 62%, rgb(var(--magenta) / .75)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact__band::before { inset: 0; width: auto; aspect-ratio: auto; translate: none; animation: none !important; background: linear-gradient(135deg, rgb(var(--accent) / .85), rgb(var(--accent) / .25) 30%, rgb(var(--purple) / .4) 62%, rgb(var(--magenta) / .75)); }
+  .contact__fail, .contact__done:not([hidden]) { animation: none !important; }
+  .contact-fab { translate: 0 0; scale: 1; }
+  .contact__row:hover { translate: 0 0 !important; }
+}
+@media (forced-colors: active) {
+  .contact__row, .contact__copy, .contact__term, .contact__fail { border-color: CanvasText; }
+}
+/*#endregion*/

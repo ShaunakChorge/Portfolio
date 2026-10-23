@@ -1,0 +1,84 @@
+<section id="about" class="section about" data-rail="02·about" aria-labelledby="about-title">
+  <div class="container">
+    <header class="section__head">
+      <p class="eyebrow">About</p>
+      <h2 id="about-title" class="section__title" data-reveal="scan">Python and AI, <span class="hl">end to end</span></h2>
+      <p class="section__lead">Python first, mostly AI and backend, and happiest taking a project from model to API to a small interface people can try.</p>
+    </header>
+
+    <div class="about__layout">
+      <figure class="about__portrait" data-tilt data-reveal="scale">
+        <div class="about__stage">
+          <div class="about__fill" aria-hidden="true">
+            <span class="about__ring about__ring--a"></span>
+            <span class="about__ring about__ring--b"></span>
+          </div>
+          <svg class="about__line" viewBox="0 0 80 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="about-grad" x1="0" y1="0" x2="80" y2="100" gradientUnits="userSpaceOnUse">
+                <stop class="about__stop about__stop--a" offset="0"/><stop class="about__stop about__stop--b" offset=".55"/><stop class="about__stop about__stop--c" offset="1"/>
+              </linearGradient>
+            </defs>
+            <path class="about__outline" d="M5 0H66L80 14V95L75 100H14L0 86V5Z" fill="none" stroke="url(#about-grad)" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+            <path class="about__tick" d="M-3 9V-3H9M83 91V103H71" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+          </svg>
+          <div class="about__fig">
+            <span class="about__ghost about__ghost--c" aria-hidden="true"></span>
+            <span class="about__ghost about__ghost--m" aria-hidden="true"></span>
+            <picture>
+              <source type="image/avif" srcset="assets/img/about/portrait-480.avif 480w, assets/img/about/portrait-800.avif 800w" sizes="(min-width: 900px) 24rem, (min-width: 640px) 20rem, 17rem">
+              <source type="image/webp" srcset="assets/img/about/portrait-480.webp 480w, assets/img/about/portrait-800.webp 800w" sizes="(min-width: 900px) 24rem, (min-width: 640px) 20rem, 17rem">
+              <img src="assets/img/about/portrait-800.webp" width="800" height="1186" loading="lazy" decoding="async" alt="Illustrated portrait of Shaunak Chorge: smiling, wearing glasses and a dark henley shirt.">
+            </picture>
+          </div>
+          <span class="about__scan" aria-hidden="true"></span>
+          <span class="about__tag about__tag--l" aria-hidden="true">B.Tech AI &amp; DS</span>
+          <span class="about__tag about__tag--r" aria-hidden="true" data-tone="magenta">CGPA 9.62</span>
+        </div>
+        <figcaption class="about__cap">
+          <svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>
+          <span>Pune / Mumbai, India</span>
+          <span class="about__coords">18.5204&deg; N, 73.8567&deg; E</span>
+        </figcaption>
+      </figure>
+
+      <div class="about__bio">
+        <p class="about__lead" data-reveal>I&rsquo;m Shaunak, a software developer who works mostly in <span class="about__hl">Python on AI and backend systems</span>.</p>
+        <p class="about__p" data-reveal>I graduated in May 2026 with a <span class="about__hl">B.Tech in Artificial Intelligence &amp; Data Science</span> (CGPA 9.62/10). My two industry internships covered REST APIs and local-LLM document pipelines at Osource Global, and client-facing RAG chatbots on Supabase and PostgreSQL at Shivohini Tech-AI.</p>
+        <div class="about__p about__build" data-reveal>
+          <p class="about__build-lead">Outside work I like to build things end to end:</p>
+          <ul class="dot-list about__list">
+            <li data-tone="cyan">a RAG assistant that cites its sources or admits it doesn&rsquo;t know</li>
+            <li data-tone="blue">an observable LLM-routed API with traces and metrics</li>
+            <li data-tone="cyan">a counter-scam agent built with <a href="https://prasannapatil.in" target="_blank" rel="noopener">Prasanna Patil<svg class="icon icon--sm about__ext" aria-hidden="true" focusable="false"><use href="#i-arrow-up-right"/></svg><span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li data-tone="purple">speech and vision models wrapped in small apps</li>
+          </ul>
+        </div>
+        <p class="about__p about__open" data-reveal><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-sparkles"/></svg> Open to AI and backend engineering roles, internships and collaborations.</p>
+        <p class="about__langs" data-reveal><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-languages"/></svg><span class="about__langs-k">languages</span><span>English / Hindi / Marathi / German / French</span></p>
+        <div class="about__cta" data-reveal>
+          <a class="btn btn--ghost" href="assets/Shaunak-Chorge-Resume.pdf" target="_blank" rel="noopener" download>Download resume <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-download"/></svg></a>
+          <a class="link-arrow" href="#contact">Say hello <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="about__term" role="group" aria-label="Quick facts about Shaunak" data-reveal>
+      <div class="about__bar" aria-hidden="true">
+        <span class="about__dots"><i></i><i></i><i></i></span>
+        <span class="about__bar-title">shaunak@pune: ~/about</span>
+        <span class="about__bar-tag">whoami.sh</span>
+      </div>
+      <div class="about__body">
+        <p class="about__prompt" aria-hidden="true"><span class="about__ps">$</span> <span class="about__cmd" style="--n:6">whoami</span><span class="about__caret"></span></p>
+        <dl class="about__facts">
+          <div class="about__fact about__fact--s3" data-tone="blue" style="--r:1"><dt>education</dt><dd>B.Tech in AI &amp; Data Science <span class="about__cgpa">CGPA <b class="about__cgpa-num count-stable" data-final="9.62/10">9.62/10</b></span><span class="about__sub">Dr. D. Y. Patil School of Science &amp; Technology, DPU</span><span class="about__sub about__sub--date">2022 - May 2026</span></dd></div>
+          <div class="about__fact about__fact--s3" data-tone="magenta" style="--r:2"><dt>focus</dt><dd><ul class="tags about__tags"><li><span class="tag" data-tone="cyan">LLM apps &amp; RAG</span></li><li><span class="tag" data-tone="blue">Backend &amp; APIs</span></li><li><span class="tag" data-tone="magenta">Computer vision</span></li><li><span class="tag" data-tone="purple">Speech, NLP &amp; ML</span></li><li><span class="tag" data-tone="blue">Automation</span></li></ul></dd></div>
+          <div class="about__fact about__fact--s3" data-tone="purple" style="--r:3"><dt>languages</dt><dd><ul class="tags about__tags"><li><span class="tag tag--dim">English</span></li><li><span class="tag tag--dim">Hindi</span></li><li><span class="tag tag--dim">Marathi</span></li><li><span class="tag tag--dim">German</span></li><li><span class="tag tag--dim">French</span></li></ul></dd></div>
+          <div class="about__fact about__fact--s3" data-tone="cyan" style="--r:4"><dt>exploring</dt><dd><ul class="tags about__tags"><li><span class="tag" data-tone="cyan">LangGraph agent workflows</span></li></ul></dd></div>
+        </dl>
+        <p class="about__prompt about__prompt--end" aria-hidden="true"><span class="about__ps">$</span> <span class="about__caret about__caret--idle"></span></p>
+      </div>
+    </div>
+  </div>
+</section>

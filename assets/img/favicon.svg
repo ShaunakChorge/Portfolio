@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
+  <defs>
+    <linearGradient id="f" x1="4" y1="2" x2="36" y2="38" gradientUnits="userSpaceOnUse"><stop stop-color="#00FFFF"/><stop offset="1" stop-color="#B553F2"/></linearGradient>
+    <radialGradient id="p" cx="50%" cy="42%" r="75%"><stop offset="0" stop-color="#0a1822"/><stop offset="1" stop-color="#020308"/></radialGradient>
+    <filter id="b" x="-25%" y="-25%" width="150%" height="150%"><feGaussianBlur stdDeviation="1.25"/></filter>
+  </defs>
+  <g>
+    <path d="M10 2h20l8 8v20l-8 8H10l-8-8V10z" fill="url(#p)"/>
+    <g filter="url(#b)" opacity=".85">
+      <path d="M10 2h20l8 8v20l-8 8H10l-8-8V10z" stroke="url(#f)" stroke-width="3.4000000000000004" stroke-linejoin="round"/>
+      <path d="M17 10H9.5A2.5 2.5 0 0 0 7 12.5v5A2.5 2.5 0 0 0 9.5 20h5a2.5 2.5 0 0 1 2.5 2.5v5a2.5 2.5 0 0 1-2.5 2.5H7" stroke="#00FFFF" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M33 10H25.5A2.5 2.5 0 0 0 23 12.5v15a2.5 2.5 0 0 0 2.5 2.5H33" stroke="#FF006E" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <path d="M10 2h20l8 8v20l-8 8H10l-8-8V10z" stroke="url(#f)" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M17 10H9.5A2.5 2.5 0 0 0 7 12.5v5A2.5 2.5 0 0 0 9.5 20h5a2.5 2.5 0 0 1 2.5 2.5v5a2.5 2.5 0 0 1-2.5 2.5H7" stroke="#00FFFF" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M33 10H25.5A2.5 2.5 0 0 0 23 12.5v15a2.5 2.5 0 0 0 2.5 2.5H33" stroke="#FF006E" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

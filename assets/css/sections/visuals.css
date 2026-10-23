@@ -1,0 +1,143 @@
+/* =====================================================================
+   NEURAL NEON - sections/visuals.css  (VISUALS)
+   Container chrome for the generative project visuals:
+     <div class="pv" data-visual="waveform|scan-grid|chat|network|bars|terminal|code|qr|game|monogram|screenshot"
+          data-variant="project-id" data-tone="cyan|magenta|purple|blue" aria-hidden="true">
+   The canvases themselves are drawn by assets/js/sections/visuals.js.
+   Sizing is deliberately zero-specificity (:where) so a card can set its own height / aspect-ratio / radius:
+       .projects__card .pv { aspect-ratio: 21 / 9; --pv-radius: 12px 12px 0 0; }
+   Prefix: .pv / .pv-*   Keyframes: pvx-*
+   ===================================================================== */
+
+:where(.pv) { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; }
+
+.pv {
+  --pv-tone: var(--tone, var(--accent, 0 255 255));
+  isolation: isolate;
+  overflow: hidden;
+  contain: layout paint;
+  border-radius: var(--pv-radius, 0);
+  color: var(--text-muted, #a3adc2);
+  background:
+    radial-gradient(120% 100% at 12% -12%, rgb(var(--pv-tone) / .18), transparent 62%),
+    radial-gradient(90% 90% at 108% 108%, rgb(var(--pv-tone) / .09), transparent 64%),
+    linear-gradient(180deg, #080a11 0%, #05060a 100%);
+}
+
+/* dotted instrument texture (static, masked toward the edges) */
+.pv::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: radial-gradient(rgb(255 255 255 / .075) 1px, transparent 1.3px);
+  background-size: 14px 14px; background-position: 7px 7px;
+  -webkit-mask-image: radial-gradient(ellipse 92% 92% at 50% 46%, #000 18%, transparent 80%);
+  mask-image: radial-gradient(ellipse 92% 92% at 50% 46%, #000 18%, transparent 80%);
+}
+/* tone ring + floor shade; brightens when the host card is hovered / focused / the visual is "hot" */
+.pv::after {
+  content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background: linear-gradient(180deg, transparent 90%, rgb(0 0 0 / .22));   /* floor shade stays out of the label rows */
+  box-shadow: inset 0 0 0 1px rgb(var(--pv-tone) / .13), inset 0 0 0 rgb(var(--pv-tone) / 0);
+  transition: box-shadow .45s var(--ease, ease);
+}
+.card:hover .pv::after,
+.card:focus-within .pv::after,
+.pv[data-hot]::after {
+  box-shadow: inset 0 0 0 1px rgb(var(--pv-tone) / .5), inset 0 0 34px rgb(var(--pv-tone) / .16);
+}
+
+/* generated (non-screenshot) visuals carry a visible 'Illustration' strip (added by visuals.js); the canvas stops above it */
+.pv.has-tag { --pv-tag-h: 22px; }
+.pv > .pv-canvas {
+  position: absolute; inset: 0 0 var(--pv-tag-h, 0px) 0; z-index: 1; display: block; width: 100%; height: calc(100% - var(--pv-tag-h, 0px));
+  opacity: 0; transition: opacity .6s var(--ease, ease);
+  pointer-events: none;
+}
+.pv.is-ready > .pv-canvas { opacity: 1; }
+.pv-tag {
+  position: absolute; z-index: 4; left: 0; right: 0; bottom: 0; height: var(--pv-tag-h, 22px);
+  display: flex; align-items: center; gap: .5rem; padding-inline: .7rem; pointer-events: none;
+  font: 700 .75rem/1 var(--font-mono, ui-monospace, monospace); letter-spacing: .1em; text-transform: uppercase;
+  color: var(--text-muted, #a3adc2); background: rgb(0 0 0 / .5); border-top: 1px solid rgb(var(--pv-tone) / .22);
+}
+.pv-tag::before { content: ""; flex: none; width: 6px; height: 6px; rotate: 45deg; border: 1.5px solid rgb(var(--pv-tone)); }
+.pv.pv--failed > .pv-canvas { opacity: 0; }
+
+/* ---------------------------------------------------------------------
+   screenshot: framed <img> with title bar, scanlines, corner brackets and a sweeping scan line.
+   Works without JS (everything but the sweep is CSS).
+   --------------------------------------------------------------------- */
+.pv[data-visual="screenshot"] { --pv-bar: 22px; }
+.pv[data-visual="screenshot"]::before {
+  inset: 0 0 auto 0; height: var(--pv-bar); z-index: 2;
+  -webkit-mask-image: none; mask-image: none;
+  background:
+    radial-gradient(circle at 12px 11px, rgb(255 95 109 / .65) 3px, transparent 3.6px),
+    radial-gradient(circle at 25px 11px, rgb(255 189 68 / .65) 3px, transparent 3.6px),
+    radial-gradient(circle at 38px 11px, rgb(52 255 140 / .65) 3px, transparent 3.6px),
+    rgb(255 255 255 / .045);
+  border-bottom: 1px solid rgb(255 255 255 / .09);
+}
+.pv[data-visual="screenshot"] > img {
+  position: absolute; z-index: 1; display: block;
+  left: 8px; right: 8px; top: calc(var(--pv-bar) + 8px); bottom: 8px;
+  width: calc(100% - 16px); height: calc(100% - var(--pv-bar) - 16px); max-width: none;
+  object-fit: var(--pv-fit, cover); object-position: var(--pv-pos, top center);
+  border-radius: 4px; background: #0b0d14;
+  box-shadow: 0 0 0 1px rgb(var(--pv-tone) / .35), 0 0 18px rgb(var(--pv-tone) / .18);
+  filter: saturate(.9) contrast(1.04) brightness(.86);
+  transition: filter .4s var(--ease, ease);
+}
+.card:hover .pv[data-visual="screenshot"] > img,
+.card:focus-within .pv[data-visual="screenshot"] > img,
+.pv[data-visual="screenshot"][data-hot] > img { filter: saturate(1.06) contrast(1.06) brightness(1); }
+/* scanlines + 4 corner brackets live on ::after (replaces the plain ring) */
+.pv[data-visual="screenshot"]::after {
+  --b: rgb(var(--pv-tone) / .9);
+  inset: calc(var(--pv-bar) + 4px) 4px 4px 4px;
+  box-shadow: none;
+  background:
+    linear-gradient(var(--b), var(--b)) 0 0 / 14px 2px no-repeat,
+    linear-gradient(var(--b), var(--b)) 0 0 / 2px 14px no-repeat,
+    linear-gradient(var(--b), var(--b)) 100% 0 / 14px 2px no-repeat,
+    linear-gradient(var(--b), var(--b)) 100% 0 / 2px 14px no-repeat,
+    linear-gradient(var(--b), var(--b)) 0 100% / 14px 2px no-repeat,
+    linear-gradient(var(--b), var(--b)) 0 100% / 2px 14px no-repeat,
+    linear-gradient(var(--b), var(--b)) 100% 100% / 14px 2px no-repeat,
+    linear-gradient(var(--b), var(--b)) 100% 100% / 2px 14px no-repeat,
+    repeating-linear-gradient(0deg, rgb(0 0 0 / .20) 0 1px, transparent 1px 3px);
+  transition: none;
+}
+.card:hover .pv[data-visual="screenshot"]::after,
+.card:focus-within .pv[data-visual="screenshot"]::after,
+.pv[data-visual="screenshot"][data-hot]::after { box-shadow: none; }
+.pv-sweep {
+  position: absolute; z-index: 2; left: 8px; right: 8px; top: calc(var(--pv-bar, 22px) + 8px); bottom: 8px;
+  overflow: hidden; pointer-events: none; border-radius: 4px;
+}
+.pv-sweep > i {
+  position: absolute; inset: 0; display: block;
+  background: linear-gradient(180deg, transparent 0%, transparent 62%, rgb(var(--pv-tone) / .10) 90%, rgb(var(--pv-tone) / .34) 98.2%, rgb(255 255 255 / .95) 98.2%, rgb(255 255 255 / .95) 100%);
+  transform: translate3d(0, -100%, 0);
+  animation: pvx-sweep 4.8s linear infinite; animation-play-state: paused;
+  will-change: transform;
+}
+.pv.is-live .pv-sweep > i { animation-play-state: running; }
+.card:hover .pv.is-live .pv-sweep > i, .card:focus-within .pv.is-live .pv-sweep > i, .pv.is-live[data-hot] .pv-sweep > i { animation-duration: 2.4s; }
+@keyframes pvx-sweep {
+  0%, 18% { transform: translate3d(0, -100%, 0); opacity: 0; }
+  26%     { opacity: 1; }
+  88%     { opacity: 1; }
+  100%    { transform: translate3d(0, 0, 0); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pv > .pv-canvas, .pv::after, .pv[data-visual="screenshot"] > img { transition: none; }
+  .pv-sweep { display: none; }
+}
+@media (max-width: 767px), (pointer: coarse) {
+  .pv::before { background-size: 16px 16px; }
+}
+@media (forced-colors: active) {
+  .pv { border: 1px solid CanvasText; }
+  .pv-tag { color: CanvasText; background: Canvas; border-top-color: CanvasText; }
+}
