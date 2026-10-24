@@ -473,8 +473,8 @@ main, footer { position: relative; z-index: var(--z-content); }
 .site-header__tools { display: flex; flex-wrap: nowrap; align-items: center; gap: .5rem; margin-left: auto; min-width: 0; }
 
 .logo { display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; flex: none; color: rgb(var(--accent)); }
-.logo__mark { width: 2.25rem; height: 2.25rem; flex: none; filter: drop-shadow(0 0 6px rgb(var(--cyan) / .55)); transition: filter .3s var(--ease), transform .4s var(--ease-expo); }
-.logo:hover .logo__mark, .logo:focus-visible .logo__mark { filter: drop-shadow(0 0 10px rgb(var(--cyan) / .9)) drop-shadow(0 0 4px rgb(var(--magenta) / .6)); transform: rotate(-6deg) scale(1.05); }
+.logo__mark { width: 3.4rem; height: 2.25rem; flex: none; filter: drop-shadow(0 0 6px rgb(var(--cyan) / .5)) drop-shadow(0 0 5px rgb(var(--magenta) / .25)); transition: filter .3s var(--ease), transform .4s var(--ease-expo); } /* </S> code-tag mark (wide) */
+.logo:hover .logo__mark, .logo:focus-visible .logo__mark { filter: drop-shadow(0 0 10px rgb(var(--cyan) / .9)) drop-shadow(0 0 4px rgb(var(--magenta) / .6)); transform: rotate(-4deg) scale(1.05); }
 .logo__word { font: 800 1.0625rem/1 var(--font-display); letter-spacing: .14em; color: var(--text-strong); text-shadow: 0 0 14px rgb(var(--accent) / .55); }
 .site-header.is-scrolled .logo__mark { transform: scale(.92); }
 

@@ -24,8 +24,12 @@
 .footer__grid { display: grid; gap: clamp(2rem, 1.4rem + 2.4vw, 3rem); padding-bottom: clamp(2rem, 1.5rem + 2vw, 3rem); }
 .footer__grid > * { min-width: 0; }
 .footer__brand { display: grid; gap: .9rem; align-content: start; justify-items: start; }
-.footer__logo { display: inline-flex; align-items: center; gap: .6rem; color: rgb(var(--accent)); }
-.footer__blurb { max-width: 34ch; font-size: var(--fs-sm); line-height: 1.6; color: var(--text-muted); }
+.footer__logo { display: inline-flex; align-items: center; gap: .7rem; color: rgb(var(--accent)); }
+.footer__mark {   /* "</S>" brand mark (U5): wide glyph lockup, subtle neon glow */
+  display: block; height: 1.05rem; width: auto; flex: none;
+  filter: drop-shadow(0 0 6px rgb(var(--cyan) / .4)) drop-shadow(0 0 2px rgb(var(--magenta) / .35));
+}
+.footer__blurb { max-width: 40ch; font-size: var(--fs-sm); line-height: 1.6; color: var(--text-muted); }
 .footer__loc { display: inline-flex; align-items: center; gap: .5rem; font: 400 .8125rem/1.4 var(--font-mono); letter-spacing: .04em; color: var(--text-dim); }
 .footer__loc .icon { color: rgb(var(--magenta-ink)); }
 

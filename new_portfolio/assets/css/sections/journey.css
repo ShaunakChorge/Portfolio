@@ -1,7 +1,7 @@
 /* =====================================================================
    JOURNEY  (#journey)  -  owner: JOURNEY engineer
    Sticky summary + neon timeline (spine draws on scroll, latest node pulses),
-   education (CGPA ring), certifications (3-col neon cards), trophy cards.
+   education (graduation badge), certifications (3-col neon cards), trophy cards.
    Prefix: .journey__*   Everything un-layered so it wins over @layer pf.
    ===================================================================== */
 
@@ -191,10 +191,10 @@
 @media (min-width: 900px) { #journey .journey__edu-grid { grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr); } }
 #journey .journey__edu {
   display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem; padding: clamp(1.25rem, 1rem + 1.5vw, 2.25rem);
-  grid-template-areas: "head" "main" "gauge" "more";
+  grid-template-areas: "head" "main" "grad" "more";
 }
 @media (min-width: 640px) {
-  #journey .journey__edu { grid-template-columns: minmax(0, 1fr) auto; column-gap: clamp(1.5rem, 1rem + 2vw, 3rem); grid-template-areas: "head gauge" "main gauge" "more more"; }
+  #journey .journey__edu { grid-template-columns: minmax(0, 1fr) auto; column-gap: clamp(1.5rem, 1rem + 2vw, 3rem); grid-template-areas: "head grad" "main grad" "more more"; }
 }
 #journey .journey__edu-head { grid-area: head; display: flex; align-items: center; gap: 1rem; }
 #journey .journey__edu-main { grid-area: main; display: grid; gap: .45rem; align-content: start; }
@@ -206,21 +206,23 @@
 #journey .journey__act { display: flex; align-items: flex-start; gap: .6rem; font-size: .9375rem; line-height: 1.5; color: var(--text-muted); }
 #journey .journey__act .icon { margin-top: .2em; color: rgb(var(--tone-ink)); }
 
-#journey .journey__gauge { grid-area: gauge; position: relative; width: clamp(7.75rem, 6rem + 6vw, 9.5rem); aspect-ratio: 1; align-self: center; justify-self: start; }
-@media (min-width: 640px) { #journey .journey__gauge { justify-self: center; } }
-#journey .journey__ring { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 0 7px rgb(var(--purple) / .5)); }
-#journey .journey__track, #journey .journey__arc { fill: none; stroke-width: 8; transform-origin: 50% 50%; transform-box: fill-box; rotate: -90deg; }
-#journey .journey__track { stroke: rgb(255 255 255 / .09); }
-#journey .journey__arc { stroke: url(#journey-grad); stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: var(--to, 0); transition: stroke-dashoffset 1.9s var(--ease-expo) .25s; }
-.js #journey .journey__edu:not(.is-in) .journey__arc { stroke-dashoffset: 100; }
-#journey .journey__stop--a { stop-color: rgb(var(--cyan)); }
-#journey .journey__stop--b { stop-color: rgb(var(--purple)); }
-#journey .journey__stop--c { stop-color: rgb(var(--magenta)); }
-#journey .journey__gauge-in { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: .15rem; text-align: center; }
-#journey .journey__gauge-val { display: flex; align-items: baseline; gap: .1rem; font-family: var(--font-display); line-height: 1; }
-#journey .journey__gauge-num { font-size: clamp(1.4rem, 1.05rem + 1.1vw, 1.875rem); font-weight: 800; color: rgb(var(--cyan)); text-shadow: var(--text-glow-cyan); font-variant-numeric: tabular-nums; }
-#journey .journey__gauge-label { font: 700 .75rem/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
-#journey .journey__gauge-label span { color: var(--text-dim); }
+/* graduation badge (replaces the old grade ring - no grade figures anywhere, U1) */
+#journey .journey__grad {
+  grid-area: grad; align-self: center; justify-self: start;
+  display: inline-flex; align-items: center; gap: .9rem;
+  padding: .9rem 1.2rem; border: 1px solid rgb(var(--tone) / .42); border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgb(var(--tone) / .13), rgb(var(--tone) / .03) 68%), var(--surface-2);
+  box-shadow: 0 0 20px rgb(var(--tone) / .14), inset 0 0 16px rgb(var(--tone) / .05);
+}
+@media (min-width: 640px) { #journey .journey__grad { justify-self: center; } }
+#journey .journey__grad-ico {
+  display: grid; place-items: center; flex: none; width: 2.6rem; height: 2.6rem; border-radius: 50%;
+  color: rgb(var(--green)); border: 1px solid rgb(var(--green) / .5); background: rgb(var(--green) / .08);
+  box-shadow: 0 0 14px rgb(var(--green) / .25);
+}
+#journey .journey__grad-body { display: grid; gap: .35rem; }
+#journey .journey__grad-k { font: 700 .6875rem/1 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: rgb(var(--tone-ink)); }
+#journey .journey__grad-v { font: 700 1.0625rem/1.1 var(--font-display); letter-spacing: .02em; color: var(--text-strong); white-space: nowrap; }
 
 #journey .journey__edu-side { display: grid; gap: var(--j-gap); align-content: start; }
 @media (min-width: 900px) { #journey .journey__edu-side { grid-template-rows: repeat(2, minmax(0, 1fr)); align-content: stretch; } }
@@ -340,8 +342,6 @@
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   #journey .journey__head { display: none !important; }
-  #journey .journey__arc { transition: none; }
-  .js #journey .journey__edu:not(.is-in) .journey__arc { stroke-dashoffset: var(--to, 0); }
   #journey .journey__medal, #journey .journey__trophy:hover .journey__medal { transition: none; rotate: 0deg; scale: 1; }
 }
 /* no-JS: the spine and every node are fully lit (base keeps --fill: 1) */

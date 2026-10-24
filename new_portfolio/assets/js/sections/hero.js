@@ -1,7 +1,7 @@
 /* =====================================================================
    NEURAL NEON - hero.js   (HERO engineer)   section #home
    * typed / rotating role line (one pass through every role, then rests on the first)
-   * rAF-driven typing of the code window (~120 chars/s, whole intro ~5-6 s), then "$ python shaunak.py" + printed output
+   * rAF-driven typing of the code window (~120 chars/s, the whole intro lands in ~4-5 s)
    * typing starts once the code window is on screen (>= 25%, phones >= 60%: it sits below the CTAs), not on load
    * mouse click / key / Skip button finishes everything instantly (a touch that starts a scroll does not); Replay restarts it
    * paused while the hero is off-screen (IntersectionObserver) and while the tab is hidden (core raf)
@@ -14,12 +14,9 @@
   var doc = document;
   var P = window.Portfolio;
 
-  var CPS = 120;             /* code typing speed, chars per second (whole intro lands in ~5-6 s) */
+  var CPS = 120;             /* code typing speed, chars per second */
   var LINE_PAUSE = 0.04;     /* s, "Enter" between code lines */
-  var CMD_CPS = 45;          /* the shell command is typed a little slower */
-  var OUT_GAP = 0.05;        /* s between printed output lines */
   var START_DELAY = 0.4;     /* s: wait for the entrance sequence (counted from the moment the stage is on screen) */
-  var GAP_CODE_CMD = 0.25, GAP_CMD_OUT = 0.15;   /* s between the three phases */
   var ROLE_HOLD = 1.4, ROLE_TYPE_CPS = 28, ROLE_DEL_CPS = 60;   /* all four roles cycle in ~10 s */
 
   function qs(sel, ctx) { return (ctx || doc).querySelector(sel); }
@@ -30,16 +27,13 @@
     if (!root) return;
 
     var codeList = qs('.hero__lines', root);
-    var term = qs('.hero__term', root);
-    var cmdText = qs('.hero__cmdtext', root);
-    var outList = qs('.hero__out', root);
     var roleEl = qs('[data-hero-role]', root);
     var roleBox = qs('.hero__roles', root);
     var ctrl = qs('[data-hero-ctrl]', root);
     var roles = (root.getAttribute('data-roles') || '').split('|').filter(Boolean);
 
     var reduced = P ? P.prefersReducedMotion : (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-    var canAnimate = !!(P && P.raf && codeList && cmdText && outList && 'IntersectionObserver' in window);
+    var canAnimate = !!(P && P.raf && codeList && 'IntersectionObserver' in window);
 
     if (reduced || !canAnimate) {                 /* static hero: complete text, no controls */
       root.classList.add('is-ready');
@@ -48,8 +42,8 @@
     }
 
     /* ------------------------------------------------------------ state */
-    var pristine = { code: codeList.innerHTML, cmd: cmdText.textContent, rows: outList.innerHTML };
-    var S = { phase: 'idle', delay: 0, code: null, cmd: null, rows: [], outI: 0, outWait: 0, role: null, visible: true, running: false, armed: false };
+    var pristine = codeList.innerHTML;
+    var S = { phase: 'idle', delay: 0, code: null, role: null, visible: true, running: false, armed: false };
     var lineEls = [];
     var caret = doc.createElement('span');
     caret.className = 'hero__caret is-live';
@@ -152,20 +146,13 @@
 
     /* ------------------------------------------------------------ setup / reset (also used by replay) */
     function prepare() {
-      codeList.innerHTML = pristine.code;
-      cmdText.textContent = pristine.cmd;
-      outList.innerHTML = pristine.rows;
+      codeList.innerHTML = pristine;
       lineEls = qsa('.hero__line', codeList);
       var srcs = qsa('.hero__src', codeList);
       S.code = typer(buildUnits(srcs), CPS, LINE_PAUSE, setCurLine);
-      S.cmd = typer(buildUnits([cmdText]), CMD_CPS, 0, null);
-      S.rows = qsa('.hero__row', outList);
-      S.rows.forEach(function (r) { r.classList.add('is-pending'); });
-      S.outI = 0; S.outWait = 0;
       S.role = roles.length > 1 && roleEl ? newRole() : null;
       if (roleEl && roles[0]) roleNode().data = roles[0];
       if (roleBox) roleBox.classList.remove('is-typing');
-      term.classList.add('is-run');
       dropCaret();
       if (S.code.u.length) { moveCaret(S.code.u[0].typed); setCurLine(0); }   /* caret waits on line 1 */
       S.phase = 'delay'; S.delay = START_DELAY;
@@ -193,31 +180,7 @@
           busy = true;
           if (stepTyper(S.code, dt)) {
             setCurLine(-1); dropCaret();
-            if (term.offsetParent === null) {         /* terminal pane hidden (phones): nothing to wait for */
-              completeTyper(S.cmd);
-              S.rows.forEach(function (r) { r.classList.remove('is-pending'); });
-              S.outI = S.rows.length; S.phase = 'done'; term.classList.remove('is-run'); setCtrl('replay');
-            } else { S.phase = 'gap1'; S.delay = GAP_CODE_CMD; }
-          }
-          break;
-        case 'gap1':
-          S.delay -= dt; busy = true;
-          if (S.delay <= 0) { S.phase = 'cmd'; }
-          break;
-        case 'cmd':
-          busy = true;
-          if (stepTyper(S.cmd, dt)) { dropCaret(); S.phase = 'gap2'; S.delay = GAP_CMD_OUT; }
-          break;
-        case 'gap2':
-          S.delay -= dt; busy = true;
-          if (S.delay <= 0) { S.phase = 'out'; S.outWait = 0; }
-          break;
-        case 'out':
-          busy = true;
-          S.outWait -= dt;
-          if (S.outWait <= 0) {
-            if (S.outI < S.rows.length) { S.rows[S.outI].classList.remove('is-pending'); S.outI++; S.outWait = OUT_GAP; }
-            if (S.outI >= S.rows.length) { S.phase = 'done'; term.classList.remove('is-run'); setCtrl('replay'); }
+            S.phase = 'done'; setCtrl('replay');
           }
           break;
         default: break;
@@ -236,13 +199,10 @@
 
     /* ------------------------------------------------------------ skip / replay */
     function finish() {
-      completeTyper(S.code); completeTyper(S.cmd);
+      completeTyper(S.code);
       setCurLine(-1); dropCaret();
-      S.rows.forEach(function (r) { r.classList.remove('is-pending'); });
-      S.outI = S.rows.length;
       if (S.role) { S.role.phase = 'done'; S.role.text = roles[0]; S.role.node.data = roles[0]; }
       roleBox.classList.remove('is-typing');
-      term.classList.remove('is-run');
       S.phase = 'done';
       setCtrl('replay');
       if (S.running) { S.running = false; P.raf.remove(loop); }

@@ -1,7 +1,7 @@
 /* =====================================================================
    NEURAL NEON - hero.css   (HERO engineer)   section #home
    Scope: .hero / .hero__* / .tk-* (code tokens).  Un-layered, so it wins over base.css (@layer pf).
-   Contents: 0 keyframes  1 section + background  2 copy column  3 code window + terminal
+   Contents: 0 keyframes  1 section + background  2 copy column  3 code window
              4 stat card  5 scroll cue  6 entrance + typing states  7 breakpoints  8 reduced motion
    ===================================================================== */
 
@@ -19,7 +19,7 @@
 /*#region 1 section + background*/
 #home.hero {
   --hero-fs: clamp(2.75rem, .9rem + 10.6vw, 5.25rem);        /* single column: 44 -> 84px */
-  --code-fs: clamp(.75rem, .4425rem + .48vw, .9375rem);       /* 12px at 1024, 14 at 1440, 15 from 1700 (never below 12) */
+  --code-fs: clamp(.8125rem, .42rem + .55vw, .9375rem);       /* 13px at 1024, ~14.6 at 1440, 15 from ~1500 (the editor got the terminal's room) */
   position: relative; isolation: isolate; overflow: clip;
   display: flex; flex-direction: column; justify-content: center;
   min-height: 100vh; min-height: 100svh;
@@ -29,7 +29,7 @@
 .hero__bg .bg-rails { opacity: .62; }                     /* rails stay visible but do not cut through the copy at full strength */
 .hero__wrap { position: relative; z-index: var(--z-raised); padding-block: clamp(1.25rem, .8rem + 2vw, 2.5rem) 2.5rem; }
 @media (min-width: 640px) { .hero__wrap { padding-bottom: clamp(5.25rem, 4.5rem + 2vw, 6rem); } }   /* room for the scroll cue */
-@media (min-width: 1024px) and (max-height: 1000px) { .hero__wrap { padding-block: 1.25rem 3rem; } }   /* laptops: keep the stat card inside the first view */
+@media (min-width: 1024px) and (max-height: 1000px) { .hero__wrap { padding-block: 1rem 2.25rem; } }   /* laptops: keep the stat card inside the first view */
 .hero__grid { display: grid; gap: clamp(2.25rem, 1.5rem + 3vw, 3.5rem); align-items: center; }
 .hero__grid > * { min-width: 0; }
 
@@ -89,6 +89,11 @@
 
 .hero__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: clamp(1.5rem, 1.2rem + 1vw, 2.1rem); }
 .hero__cta .btn:is(:hover, :focus-visible) { position: relative; z-index: 2; }       /* the magnetic pull must never weld two glows together */
+
+/* one-line freelance signal under the CTAs: a quiet mono link, no button chrome */
+.hero__free { flex: 1 0 100%; min-width: 0; margin-top: -.2rem; font-weight: 400; font-size: .8125rem; letter-spacing: .05em; color: var(--text-muted); }
+.hero__free .icon { color: rgb(var(--accent-ink)); }
+.hero__free:hover, .hero__free:focus-visible { color: rgb(var(--accent-ink)); }
 .hero__social { flex: 1 0 100%; display: flex; align-items: center; gap: .6rem; margin: .35rem 0 0; }
 .hero__social-cap { margin-right: .35rem; font: 400 .75rem/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); }
 @media (max-width: 479px) { .hero__cta .btn { flex: 1 1 100%; } }
@@ -129,7 +134,7 @@
 .hero__ctrl > span { display: inline-flex; align-items: center; gap: .4rem; }
 .hero__ctrl[data-state="skip"] .hero__ctrl-replay, .hero__ctrl[data-state="replay"] .hero__ctrl-skip { display: none; }
 
-.hero__editor { position: relative; padding: .75rem 0 .85rem; font: 400 var(--code-fs)/1.62 var(--font-mono); color: var(--text); }
+.hero__editor { position: relative; padding: .95rem 0 1.05rem; font: 400 var(--code-fs)/1.68 var(--font-mono); color: var(--text); }
 .hero__scan { position: absolute; inset: 0; z-index: 2; opacity: .7; }
 .hero__lines { position: relative; z-index: 1; margin: 0; padding: 0; list-style: none; }
 .hero__line { display: flex; align-items: flex-start; gap: 1rem; padding: 0 1rem; box-shadow: inset 2px 0 0 transparent; transition: background-color .15s var(--ease), box-shadow .15s var(--ease); }
@@ -151,27 +156,6 @@
 .hero .tk-sp { color: rgb(var(--purple-ink)); }
 .hero .tk-cm { color: var(--text-dim); font-style: italic; }
 
-.hero__term {
-  overflow: hidden; border: 2px solid rgb(var(--purple) / .36); border-radius: var(--radius-lg);
-  background: linear-gradient(180deg, rgb(var(--purple) / .08), transparent 60%), var(--surface);
-  box-shadow: 0 0 30px rgb(var(--purple) / .15), 0 20px 48px -26px rgb(0 0 0 / .95);
-}
-.hero__bar--term { min-height: 2.25rem; gap: .6rem; padding-right: 1rem; font: 700 .75rem/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); }
-.hero__bar--term .icon { color: rgb(var(--purple-ink)); }
-.hero__bar-meta { margin-left: auto; font-weight: 400; letter-spacing: .06em; color: var(--text-dim); }
-.hero__termbody { padding: .7rem 1rem .8rem; font: 400 var(--code-fs)/1.6 var(--font-mono); color: var(--text-body); }
-.hero__cmd { display: flex; align-items: baseline; gap: 1ch; margin: 0; }
-.hero__ps1 { flex: none; font-weight: 700; color: rgb(var(--green-ink)); }
-.hero__cmdtext { color: var(--text-strong); }
-.hero__out { margin: .3rem 0; padding: 0; list-style: none; }
-.hero__row { display: flex; align-items: baseline; min-width: 0; transition: opacity .28s var(--ease-out), translate .28s var(--ease-out); }
-.hero__k { flex: none; width: 8ch; text-align: right; color: rgb(var(--cyan-ink)); }
-.hero__colon { flex: none; color: var(--text-dim); white-space: pre; }
-.hero__v { min-width: 0; color: var(--text-body); overflow-wrap: anywhere; }
-.hero__row--note { color: rgb(var(--magenta-ink)); }
-.hero__row.is-pending { opacity: 0; translate: -10px 0; }
-.hero__term.is-run .hero__cmd--idle { visibility: hidden; }
-
 /* tilt (desktop + hover devices only), straightens on hover / keyboard focus; the hit area is the un-tilted .hero__stage */
 @media (min-width: 1024px) and (hover: hover) and (prefers-reduced-motion: no-preference) {
   .hero__code { transform: perspective(1800px) rotateY(-2deg) rotateX(.6deg); transform-origin: 50% 50%; }          /* subtle: 6 degrees made the 13px mono text soft and slanted */
@@ -182,7 +166,7 @@
 
 /*#region 4 stat card (NeoTech glow card, 4 evidence-based stats)*/
 .hero__stats {
-  --cols: 4; list-style: none; margin: clamp(2rem, 1.4rem + 2vw, 3rem) 0 0; gap: 1.25rem 1rem; grid-template-columns: repeat(2, minmax(0, 1fr));
+  --cols: 4; list-style: none; margin: clamp(1.5rem, 1rem + 1.75vw, 2.5rem) 0 0; gap: 1.25rem 1rem; grid-template-columns: repeat(2, minmax(0, 1fr));
   border: 2px solid rgb(var(--accent) / .26); box-shadow: 0 0 30px rgb(var(--accent) / .1), inset 0 0 44px rgb(var(--purple) / .07);
   background: linear-gradient(to right, rgb(0 0 0 / .62), rgb(var(--purple) / .12) 50%, rgb(0 0 0 / .62));
 }
@@ -190,10 +174,8 @@
 .hero__stat > .icon { width: 1.5rem; height: 1.5rem; }
 .hero__statbody { display: flex; flex-direction: column; align-items: center; gap: .5rem; min-width: 0; }
 .hero__stats .stat__num { font-size: clamp(1.75rem, 1.35rem + 1.4vw, 2.5rem); }
-.hero__statnum { display: inline-flex; align-items: baseline; gap: .2em; }
-.hero__stat-suffix { font: 700 1rem/1 var(--font-display); color: var(--text-muted); }
 .hero__stats .stat__label { text-wrap: balance; }
-@media (min-width: 1024px) and (max-height: 1000px) { .hero__stats { margin-top: 1.25rem; } }
+@media (min-width: 1024px) and (max-height: 1000px) { .hero__stats { margin-top: 1rem; } }
 @media (min-width: 760px) {                            /* 4 columns, icon / number / label stacked */
   .hero__stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; padding: 1.25rem .5rem; }
   .hero__stat { padding: .25rem .75rem; }
@@ -232,24 +214,22 @@
 .js .hero [data-hero-in="fade"] { animation-name: hero-fade; animation-duration: .8s; }
 .hero.is-skipped [data-hero-in], .hero.is-skipped .hero__name { animation: none !important; }
 
-/* typed copies stay hidden until hero.js has prepared them; if the script never arrives they appear after 2.2 s */
-.js .hero:not(.is-ready) :is(.hero__src, .hero__cmdtext, .hero__row) { visibility: hidden; animation: hero-unhide 0s linear 2.2s forwards; }
+/* typed copy stays hidden until hero.js has prepared it; if the script never arrives it appears after 2.2 s */
+.js .hero:not(.is-ready) .hero__src { visibility: hidden; animation: hero-unhide 0s linear 2.2s forwards; }
 /*#endregion*/
 
 /*#region 7 breakpoints*/
 @media (min-width: 1024px) {
   .hero__copy::before { inset: -2.5rem -3rem; }
   #home.hero { --hero-fs: clamp(3.25rem, .5rem + 4.6vw, 5rem); }           /* two columns: 52 -> 80px */
-  .hero__grid { grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr); }
+  .hero__grid { grid-template-columns: minmax(0, .84fr) minmax(0, 1.16fr); }   /* the editor takes the room the terminal pane freed */
 }
 @media (min-width: 1536px) { #home.hero { --hero-fs: 5.5rem; } }
-@media (max-width: 639px) { .hero__term { display: none; } }                  /* decorative (aria-hidden) and 300px of scrolling on phones; the editor stays */
 @media (max-width: 359px) { .hero__dots { display: none; } .hero__bar { padding-left: .75rem; } }
 @media (max-height: 520px) and (orientation: landscape) { #home.hero { --hero-fs: clamp(2.5rem, 13vh, 3.75rem); min-height: auto; } }   /* landscape phones: the name must not fill the screen */
 @media (max-width: 479px) {
   .hero__editor { padding-top: .75rem; }
   .hero__line { gap: .7rem; padding-inline: .75rem; }
-  .hero__termbody { padding-inline: .75rem; }
 }
 /*#endregion*/
 
@@ -258,7 +238,6 @@
   .hero [data-hero-in], .hero__name { animation: none !important; }
   .hero__caret::after, .hero__scroll-line::after { animation: none !important; }
   .hero__scroll-line::after { translate: 0 0; opacity: .7; }
-  .hero__row.is-pending { opacity: 1; translate: 0 0; }
   .hero__code { transform: none !important; }
 }
 /*#endregion*/

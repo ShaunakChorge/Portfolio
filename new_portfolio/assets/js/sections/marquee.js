@@ -30,7 +30,8 @@
         if (!track || !set) return;
         var animated = window.getComputedStyle(track).animationName !== 'none';
         if (!animated) { row.style.removeProperty('--mq-dur'); return; }
-        var w = set.getBoundingClientRect().width;
+        /* the loop distance is -50% of the track (translation does not change the rect width), which works for any even set count */
+        var w = track.getBoundingClientRect().width / 2;
         if (w > 0) row.style.setProperty('--mq-dur', Math.max(24, Math.round(w / SPEEDS[i % SPEEDS.length])) + 's');
       });
     }

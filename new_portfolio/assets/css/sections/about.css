@@ -160,8 +160,6 @@
 #about .about__fact { min-width: 0; padding-left: .95rem; border-left: 2px solid rgb(var(--tone) / .55); }
 #about .about__fact dt { font: 700 .75rem/1.2 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: rgb(var(--tone-ink)); }
 #about .about__fact dd { margin: .4rem 0 0; font-size: 1.0625rem; line-height: 1.45; color: var(--text); }
-#about .about__cgpa { display: inline-flex; align-items: baseline; gap: .4ch; margin-left: .35rem; padding: .05rem .55rem; border: 1px solid rgb(var(--tone) / .5); border-radius: 5px; background: rgb(var(--tone) / .1); color: rgb(var(--tone-ink)); font: 700 .8125rem/1.5 var(--font-mono); letter-spacing: .04em; vertical-align: .08em; white-space: nowrap; }
-#about .about__cgpa-num { font: inherit; color: var(--text-strong); font-variant-numeric: tabular-nums; }
 #about .about__sub { display: block; margin-top: .25rem; font-size: var(--fs-sm); line-height: 1.5; color: var(--text-muted); }
 #about .about__sub--date { margin-top: 0; font-family: var(--font-mono); font-size: .8125rem; color: var(--text-dim); }
 #about .about__tags { gap: .45rem; }
