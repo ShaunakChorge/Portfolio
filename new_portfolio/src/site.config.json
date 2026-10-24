@@ -1,0 +1,34 @@
+{
+  "name": "Shaunak Chorge",
+  "tagline": "AI Engineer and freelance developer in Mumbai: AI chatbots, Python backend APIs, computer vision and automation.",
+  "email": "shaunak.chorge@gmail.com",
+  "og_image": "assets/img/og-image.png",
+  "sameAs": [
+    "https://github.com/ShaunakChorge",
+    "https://www.linkedin.com/in/shaunak-chorge",
+    "https://www.instagram.com/_shaunakkk/"
+  ],
+  "person": {
+    "jobTitle": "AI Engineer",
+    "employer": "Claptek Pvt Ltd",
+    "city": "Mumbai",
+    "countryCode": "IN",
+    "alumniOf": "Dr. D. Y. Patil School of Science and Technology",
+    "knowsAbout": [
+      "Python",
+      "FastAPI",
+      "Django",
+      "PostgreSQL",
+      "Docker",
+      "Large language models (AI language models)",
+      "Retrieval-augmented generation (AI that answers from your own documents)",
+      "LangChain",
+      "Computer vision",
+      "OpenCV",
+      "PyTorch",
+      "TensorFlow",
+      "scikit-learn",
+      "Speech emotion recognition"
+    ]
+  }
+}

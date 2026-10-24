@@ -1,0 +1,39 @@
+# Shaunak Chorge - AI Engineer at Claptek Pvt Ltd (Mumbai, India)
+
+> Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India, with a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026). He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job.
+
+Facts: role AI Engineer; employer Claptek Pvt Ltd; location Mumbai, Maharashtra, India (IST, UTC+5:30); education Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026), Dr. D. Y. Patil School of Science and Technology; works remotely; takes select freelance AI and backend projects.
+Contact: https://shaunakchorge.github.io/Portfolio/new_portfolio/contact/ - shaunak.chorge@gmail.com
+Profiles: https://github.com/ShaunakChorge - https://www.linkedin.com/in/shaunak-chorge
+
+## Hire (freelance services)
+- [All services](https://shaunakchorge.github.io/Portfolio/new_portfolio/services/): Six freelance services from Shaunak Chorge: AI chatbots, document AI, Python backend APIs, computer vision, machine learning and automation.
+- [Freelance AI chatbot and document assistant development](https://shaunakchorge.github.io/Portfolio/new_portfolio/services/llm-rag-development/): Hire a freelance AI developer to build chatbots that answer from your own documents, show their sources and say "I do not know" when unsure.
+- [Document AI and data extraction](https://shaunakchorge.github.io/Portfolio/new_portfolio/services/ai-document-compliance-automation/): Freelance document AI: tools that pull data from documents with source quotes, draft text with built-in checks and answer data questions.
+- [Python backend and API development](https://shaunakchorge.github.io/Portfolio/new_portfolio/services/ai-backend-fastapi-django/): Freelance Python backend developer: FastAPI and Django APIs with PostgreSQL, Docker, automated tests and logs you can use to find problems fast.
+- [Computer vision development](https://shaunakchorge.github.io/Portfolio/new_portfolio/services/computer-vision/): Freelance computer vision: tools that detect, count and classify things in photos and video with OpenCV, PyTorch and YOLOv8, with honest accuracy figures.
+- [Speech, text and machine learning](https://shaunakchorge.github.io/Portfolio/new_portfolio/services/speech-nlp-ml/): Freelance machine learning on audio, text and spreadsheet data: speech emotion detection, spam filters and price prediction, with honest accuracy.
+- [Automation, bots and integrations](https://shaunakchorge.github.io/Portfolio/new_portfolio/services/python-automation-integrations/): Freelance Python automation: web scrapers, Telegram bots and WhatsApp links through the Meta Cloud API and Twilio, with background jobs and error handling.
+
+## Case studies
+- [All projects](https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/): Selected AI chatbot, computer vision and Python backend projects by Shaunak Chorge, with case studies, results and the tools behind each one.
+- [AMS AI Finding Drafting Engine](https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/ams-ai-finding-engine/): Case study: an AI service at Claptek that drafts audit findings with no invented facts across 27 checked drafts and about 28 times faster responses.
+- [Obligation Management System](https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/obligation-management-system/): Case study: an AI service that lists obligations from regulatory PDFs, with 97.2% of 1,266 records linked to an exact, highlightable source passage.
+- [Core-Banking Text-to-SQL Assistant](https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/core-banking-text-to-sql/): Case study: an on-premise assistant that turns plain questions into bank database queries, lifting the share of accounts found from 34% to 54%.
+- [Healthcare Policy Chatbot](https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/ai-rag-healthcare-assistant/): Case study: a chatbot over healthcare policy documents that cites its source and refuses out-of-scope questions instead of guessing.
+- [Scam-Catching AI Honey-Pot](https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/agentic-honeypot/): Case study: an AI persona that keeps scammers talking while it flags scam intent and logs payment IDs and links. Co-built with Prasanna Patil.
+- [CCTV Crime and Crowd Analytics](https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/advanced-cctv-analytics/): Case study: a Smart India Hackathon prototype that watches one CCTV feed for crowd limits, crime types and faces. Co-built with Prasanna Patil.
+- [Speech Emotion Recognition](https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/speech-emotion-recognition/): Case study: a neural network that labels seven emotions in speech, 93.87% on a random test split, with live microphone input and a web app.
+- [DeepFake Video Detection](https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/deepfake-video-detection/): Case study: a neural network that scores each video frame as real or fake, with a web app and PDF report. 74.16% on a random frame split.
+- [Traceable AI Backend](https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/observable-ai-backend/): Case study: an AI-routed backend with request IDs, metrics and traces. A slow step fell from about 15 seconds to under 50 milliseconds on made-up data.
+
+## About and contact
+- [Home](https://shaunakchorge.github.io/Portfolio/new_portfolio/): Freelance AI developer and Python developer in Mumbai. I build AI chatbots, computer vision tools and backend APIs. See my work or send a brief.
+- [About Shaunak](https://shaunakchorge.github.io/Portfolio/new_portfolio/about/): Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai. Read about his background, experience, tools and how he works with clients.
+- [Resume](https://shaunakchorge.github.io/Portfolio/new_portfolio/resume/): Resume of Shaunak Chorge, AI Engineer: work at Claptek Pvt Ltd, Osource Global and Shivohini Tech-AI, education, certifications and awards.
+- [Freelance AI developer FAQ](https://shaunakchorge.github.io/Portfolio/new_portfolio/faq/): Answers about hiring Shaunak Chorge: cost, how to start, time zone, NDAs, ownership, fixing existing projects and support after delivery.
+- [Hire me for your AI or backend project](https://shaunakchorge.github.io/Portfolio/new_portfolio/contact/): Send a short brief to hire Shaunak Chorge, a freelance AI developer in Mumbai, for chatbots, computer vision, Python backend APIs or automation.
+
+## Optional
+- [Full text of these pages](https://shaunakchorge.github.io/Portfolio/new_portfolio/llms-full.txt): plain-text version of the services, case studies, about page and FAQ
+- [Sitemap](https://shaunakchorge.github.io/Portfolio/sitemap.xml): every page

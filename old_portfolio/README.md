@@ -7,7 +7,7 @@ A **responsive, component‑based portfolio website** showcasing my professional
 ### ✨ Project Highlights
 - **Modular Architecture** – All major sections (`home`, `about`, `skills`, `qualification`, `portfolio`, `contact`, `footer`) live in `components/` and are injected at runtime via `packages/js/loadComponents.js`.
 - **Premium UI** – Modern typography, smooth gradients, glass‑morphism cards, and micro‑animations create a wow‑factor experience.
-- **Dynamic Image Management** – Images are stored in `packages/images/` with clear, descriptive names. Thumbnails follow a `thumbnail_` naming convention; unused assets are safely isolated in `packages/images/trash/`.
+- **Dynamic Image Management** – Images are stored in `packages/images/` with clear, descriptive names. Thumbnails follow a `thumbnail_` naming convention.
 - **Responsive Design** – Fully mobile‑first, using CSS Grid/Flex and media queries.
 - **Easy Deployment** – Works out‑of‑the‑box on GitHub Pages; just push the repository.
 
@@ -24,7 +24,7 @@ A **responsive, component‑based portfolio website** showcasing my professional
 
 ### 📁 Project Structure
 ```
-Portfolio/
+old_portfolio/
 ├─ components/           # HTML fragments for each page section
 │   ├─ about.html
 │   ├─ home.html
@@ -33,13 +33,11 @@ Portfolio/
 │   └─ …
 ├─ packages/
 │   ├─ css/               # styles.css, swiper‑bundle.min.css
-│   ├─ images/            # all used images + thumbnails
-│   │   ├─ thumbnail_*.jpeg
-│   │   └─ trash/          # unused assets (safe to delete)
+│   ├─ images/            # logo, profile pictures and project thumbnails
+│   │   └─ thumbnail_*.jpeg
 │   └─ js/                # main.js, loadComponents.js, swiper‑bundle.min.js
 ├─ index.html            # primary entry point with placeholders
-├─ README.md             # this documentation
-└─ .git/                # Git repository (auto‑generated)
+└─ README.md             # this documentation
 ```
 
 ---
@@ -55,7 +53,7 @@ Portfolio/
    npx -y http-server ./ -p 8080   # or use VS Code Live Server
    ```
 3. **Edit components** – modify any file inside `components/`; the changes appear instantly after a page reload.
-4. **Add/rename images** – place new assets in `packages/images/`. Follow the `thumbnail_` prefix for gallery images and run `update_image_refs.py` (already included) to auto‑update HTML src attributes.
+4. **Add/rename images** – place new assets in `packages/images/`. Follow the `thumbnail_` prefix for gallery images and point the matching `<img src>` in `components/portfolio.html` at the new file.
 5. **Commit & push** – see the **Git workflow** section below.
 
 ---
@@ -63,7 +61,7 @@ Portfolio/
 ### 📤 Deployment to GitHub Pages
 The repository is configured for static hosting. After pushing, enable GitHub Pages in the repo settings (source → `master`/`main` branch, root folder). The site will be live at:
 ```
-https://ShaunakChorge.github.io/Portfolio/
+https://ShaunakChorge.github.io/Portfolio/old_portfolio/
 ```
 
 ---

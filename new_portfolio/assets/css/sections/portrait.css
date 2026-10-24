@@ -1,0 +1,182 @@
+/* Animated neon portrait. Prefix np-. Uses the site neon triplets with fallbacks, so it also runs standalone.
+   Animated properties: transform / translate / opacity only. All motion is off under prefers-reduced-motion. */
+.np {
+  --np-cyan: var(--cyan, 0 255 255);
+  --np-magenta: var(--magenta, 255 0 110);
+  --np-purple: var(--purple, 181 83 242);
+  --np-w: 24rem;
+  --np-rx: 0deg; --np-ry: 0deg;          /* tilt, written by portrait.js */
+  --np-px: 0; --np-py: 0;                /* pointer -1..1, written by portrait.js */
+  position: relative;
+  width: min(100%, var(--np-w));
+  margin: 0 auto;
+  isolation: isolate;
+}
+@media (max-width: 899.98px) { .np { --np-w: 20rem; } }
+@media (max-width: 639.98px) { .np { --np-w: 17rem; } }
+
+.np__stage {
+  position: relative;
+  aspect-ratio: 3 / 4;                    /* reserves the box: no layout shift */
+  overflow: hidden;
+  border-radius: 18px;
+  background:
+    radial-gradient(120% 70% at 50% 12%, rgb(var(--np-purple) / .20), transparent 62%),
+    radial-gradient(90% 60% at 100% 100%, rgb(var(--np-magenta) / .16), transparent 70%),
+    radial-gradient(90% 60% at 0% 100%, rgb(var(--np-cyan) / .12), transparent 70%),
+    #05060a;
+  box-shadow:
+    inset 0 0 0 1px rgb(var(--np-cyan) / .22),
+    0 0 0 1px rgb(0 0 0 / .6),
+    0 24px 60px -24px rgb(var(--np-purple) / .55),
+    0 0 40px -10px rgb(var(--np-cyan) / .25);
+  touch-action: pan-y;
+  contain: paint;
+}
+
+/* ------------------------------ backdrop ------------------------------ */
+.np__back { position: absolute; inset: 0; z-index: 0; pointer-events: none; translate: calc(var(--np-px) * -7px) calc(var(--np-py) * -7px); }
+.np__grid {
+  position: absolute; inset: -4% -4% 0;
+  background:
+    linear-gradient(rgb(var(--np-cyan) / .09) 1px, transparent 1px) 0 0 / 100% 28px,
+    linear-gradient(90deg, rgb(var(--np-cyan) / .07) 1px, transparent 1px) 0 0 / 28px 100%;
+  -webkit-mask-image: radial-gradient(70% 60% at 50% 38%, #000 10%, transparent 75%);
+          mask-image: radial-gradient(70% 60% at 50% 38%, #000 10%, transparent 75%);
+}
+.np__ring {
+  position: absolute; left: 50%; top: 27%;
+  width: 66%; aspect-ratio: 1;
+  margin: -33% 0 0 -33%;
+  border-radius: 50%;
+  border: 1px dashed rgb(var(--np-cyan) / .38);
+}
+.np__ring--b { width: 82%; margin: -41% 0 0 -41%; border: 1px solid rgb(var(--np-magenta) / .22); border-top-color: rgb(var(--np-magenta) / .7); border-left-color: transparent; }
+.np__light {
+  position: absolute; left: 50%; top: 30%;
+  width: 90%; aspect-ratio: 1; margin: -45% 0 0 -45%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(var(--np-cyan) / .20), rgb(var(--np-purple) / .10) 55%, transparent 100%);
+  translate: calc(var(--np-px) * 18px) calc(var(--np-py) * 14px);
+}
+
+/* --------------------------- tilt + figure --------------------------- */
+.np__tilt {
+  position: absolute; inset: 0; z-index: 2;
+  transform: perspective(900px) rotateX(var(--np-rx)) rotateY(var(--np-ry));
+  transform-origin: 50% 70%;
+  will-change: transform;
+}
+.np__float { position: absolute; inset: 0; animation: np-float 7.5s ease-in-out infinite alternate; }
+.np__fig { position: absolute; inset: 0; }
+.np__pic, .np__rim { position: absolute; inset: 0; display: block; }
+.np__pic img, .np__rim img, .np__ghost img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
+.np__img { filter: drop-shadow(0 0 22px rgb(var(--np-purple) / .35)); }
+
+.np__rim { mix-blend-mode: screen; pointer-events: none; animation: np-pulse 3.8s ease-in-out infinite; translate: calc(var(--np-px) * 4px) calc(var(--np-py) * 3px); }
+
+/* RGB-split ghosts, cloned by portrait.js; invisible except during the glitch */
+.np__ghost { position: absolute; inset: 0; display: block; opacity: 0; pointer-events: none; mix-blend-mode: screen; }
+.np__ghost--c { filter: brightness(.9) sepia(1) hue-rotate(135deg) saturate(8); animation: np-ghost-c 7s steps(1, end) 2.6s infinite; }
+.np__ghost--m { filter: brightness(.9) sepia(1) hue-rotate(285deg) saturate(8); animation: np-ghost-m 7s steps(1, end) 2.6s infinite; }
+.np__fig.is-glitchy { animation: np-jolt 7s steps(1, end) 2.6s infinite; }
+
+/* vertical scan sweep */
+.np__scan {
+  position: absolute; left: 0; right: 0; top: 0; height: 22%;
+  background: linear-gradient(to bottom, transparent, rgb(var(--np-cyan) / .08) 62%, rgb(var(--np-cyan) / .3) 98%, transparent 100%);
+  mix-blend-mode: screen; pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+  transform: translateY(-110%);
+  animation: np-sweep 6.2s cubic-bezier(.4, 0, .6, 1) 1.2s infinite;
+}
+
+/* ------------------------------- dust -------------------------------- */
+.np__dust { position: absolute; inset: 0; z-index: 3; pointer-events: none; translate: calc(var(--np-px) * 14px) calc(var(--np-py) * 10px); }
+.np__dust i {
+  position: absolute; left: var(--x); bottom: -6px;
+  width: var(--s); height: var(--s);
+  border-radius: 50%;
+  background: rgb(var(--c));
+  box-shadow: 0 0 8px 1px rgb(var(--c) / .85);
+  opacity: 0;
+  animation: np-rise var(--d) linear var(--t) infinite;
+}
+
+/* ---------------------------- HUD + tag ------------------------------ */
+.np__hud { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+.np__corner { position: absolute; width: 26px; height: 26px; border: 2px solid rgb(var(--np-cyan) / .9); filter: drop-shadow(0 0 6px rgb(var(--np-cyan) / .8)); animation: np-bracket 4.2s ease-in-out infinite; }
+.np__corner--tl { top: 10px; left: 10px; border-right: 0; border-bottom: 0; border-top-left-radius: 6px; }
+.np__corner--tr { top: 10px; right: 10px; border-left: 0; border-bottom: 0; border-top-right-radius: 6px; border-color: rgb(var(--np-magenta) / .95); filter: drop-shadow(0 0 6px rgb(var(--np-magenta) / .8)); animation-delay: -1s; }
+.np__corner--bl { bottom: 10px; left: 10px; border-right: 0; border-top: 0; border-bottom-left-radius: 6px; animation-delay: -2s; }
+.np__corner--br { bottom: 10px; right: 10px; border-left: 0; border-top: 0; border-bottom-right-radius: 6px; border-color: rgb(var(--np-magenta) / .95); filter: drop-shadow(0 0 6px rgb(var(--np-magenta) / .8)); animation-delay: -3s; }
+
+.np__tag {
+  position: absolute; z-index: 5; left: 50%; bottom: 14px; translate: -50% 0;
+  display: inline-flex; align-items: center; gap: .55em;
+  max-width: calc(100% - 28px);
+  padding: .42em .85em;
+  font: 500 .6875rem/1.2 var(--font-mono, 'Space Mono', ui-monospace, monospace);
+  letter-spacing: .06em; text-transform: uppercase; white-space: nowrap;
+  color: rgb(var(--cyan-ink, 0 255 255));
+  background: rgb(5 6 10 / .78);
+  border: 1px solid rgb(var(--np-cyan) / .35);
+  border-radius: 999px;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+.np__dot { width: 7px; height: 7px; border-radius: 50%; background: rgb(var(--green, 52 255 140)); box-shadow: 0 0 8px rgb(var(--green, 52 255 140) / .9); animation: np-blink 2.4s ease-in-out infinite; }
+@media (max-width: 380px) { .np__tag { font-size: .625rem; letter-spacing: .04em; } }
+
+/* mobile / coarse pointer: lighter dust, no tilt hint of will-change */
+@media (max-width: 639.98px), (pointer: coarse) { .np__dust i:nth-child(n+7) { display: none; } }
+
+/* -------------------------------- keyframes -------------------------------- */
+@keyframes np-float { from { transform: translateY(0) rotate(-.25deg); } to { transform: translateY(-9px) rotate(.25deg); } }
+@keyframes np-pulse { 0%, 100% { opacity: .62; } 50% { opacity: 1; } }
+@keyframes np-sweep { 0% { transform: translateY(-110%); opacity: 0; } 8% { opacity: 1; } 78% { opacity: 1; } 100% { transform: translateY(470%); opacity: 0; } }
+@keyframes np-rise { 0% { transform: translateY(0) scale(.6); opacity: 0; } 12% { opacity: .9; } 70% { opacity: .55; } 100% { transform: translateY(-410px) scale(1.1); opacity: 0; } }
+@keyframes np-bracket { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+@keyframes np-blink { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+@keyframes np-spin { to { transform: rotate(360deg); } }
+@keyframes np-spin-r { to { transform: rotate(-360deg); } }
+/* glitch: active window ~5.4% of 7s = 0.38s, then 6.6s of calm */
+@keyframes np-ghost-c {
+  0%, 94% { opacity: 0; transform: translate(0, 0); clip-path: inset(0 0 0 0); }
+  94.01% { opacity: .6; transform: translate(-7px, 0);  clip-path: inset(8% 0 62% 0); }
+  96%    { opacity: .6; transform: translate(-4px, 1px); clip-path: inset(46% 0 30% 0); }
+  98%    { opacity: .6; transform: translate(-8px, -1px); clip-path: inset(70% 0 6% 0); }
+  99.4%, 100% { opacity: 0; transform: translate(0, 0); clip-path: inset(0 0 0 0); }
+}
+@keyframes np-ghost-m {
+  0%, 94% { opacity: 0; transform: translate(0, 0); clip-path: inset(0 0 0 0); }
+  94.01% { opacity: .6; transform: translate(7px, 0);  clip-path: inset(30% 0 46% 0); }
+  96%    { opacity: .6; transform: translate(5px, -1px); clip-path: inset(12% 0 70% 0); }
+  98%    { opacity: .6; transform: translate(8px, 1px); clip-path: inset(58% 0 14% 0); }
+  99.4%, 100% { opacity: 0; transform: translate(0, 0); clip-path: inset(0 0 0 0); }
+}
+@keyframes np-jolt {
+  0%, 94% { transform: translate(0, 0); }
+  94.01% { transform: translate(2px, 0); }
+  96% { transform: translate(-2px, 1px); }
+  98% { transform: translate(1px, 0); }
+  99.4%, 100% { transform: translate(0, 0); }
+}
+
+/* rings only spin where motion is allowed (declared here, not above, so reduced motion never sees them) */
+@media (prefers-reduced-motion: no-preference) {
+  .np__ring--a { animation: np-spin 60s linear infinite; }
+  .np__ring--b { animation: np-spin-r 38s linear infinite; }
+}
+
+/* paused when off screen (portrait.js toggles .is-paused) */
+.np.is-paused *, .np.is-paused { animation-play-state: paused !important; }
+
+/* ------------------------------ reduced motion ------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .np *, .np *::before, .np *::after { animation: none !important; transition: none !important; }
+  .np__tilt { transform: none; will-change: auto; }
+  .np__rim { opacity: .85; }
+  .np__scan, .np__dust, .np__ghost { display: none; }
+  .np__back, .np__light, .np__rim { translate: none; }
+}

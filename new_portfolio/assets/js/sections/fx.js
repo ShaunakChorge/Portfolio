@@ -15,21 +15,24 @@
      9  console banner
     10  Konami code -> overdrive
 
+   Round 3 (FX_R3): palette + terminal navigate between the real pages of the site (BASE comes from this script's own URL), data from
+   content.v3.json (no project years, no spoken languages, two stack tiers). Home sections are #home #offer #selected #bio #roles #process #faq #contact.
+
    Public API:  Portfolio.fx = { openPalette, closePalette, togglePalette, openTerminal, closeTerminal,
                                  exec, overdrive, scramble, stats, data }
    Bus events emitted: portfolio:palette {open}, portfolio:terminal {open}, portfolio:overdrive
-   Bus events used:    portfolio:open-palette, portfolio:motion, portfolio:accent,
-                       (emits) portfolio:filter {cat, source:'fx'}, portfolio:open-project {id, source:'fx'}
+   Bus events used:    portfolio:open-palette, portfolio:motion, portfolio:accent
    ===================================================================== */
 (function () {
   'use strict';
+  /* FX_R3 */
 
   var win = window, doc = document, root = doc.documentElement;
   if (win.__pfFx) return;
   win.__pfFx = true;
 
   /* compact facts, generated from research/content.final.json by build/_fx_tools/gen.mjs (do not hand-edit between the markers) */
-  var DATA = /*@@DATA*/{"name":"Shaunak Chorge","short":"Shaunak","role":"AI & Python developer","roles":["AI & Python developer","LLM & RAG builder","Backend API developer","Automation tinkerer"],"headline":"AI Developer building LLM apps, vision systems and Python backends - taking select freelance projects","tagline":"I turn models and messy workflows into software that actually runs.","loc":"Pune / Mumbai, India","email":"shaunak.chorge@gmail.com","status":"AI Developer @ Claptek","avail":"Taking select freelance AI and backend projects alongside my full-time AI Developer role at Claptek (Mumbai). Remote-friendly from Pune / Mumbai (IST) - the contact form or email is the fastest way to start one.","langs":["English","Hindi","Marathi","German","French"],"gh":"https://github.com/ShaunakChorge","li":"https://www.linkedin.com/in/shaunak-chorge","ig":"https://www.instagram.com/_shaunakkk/","resume":"assets/Shaunak-Chorge-Resume.pdf","short_bio":"AI Developer at Claptek with a B.Tech in Artificial Intelligence & Data Science (graduated May 2026). I build grounded LLM systems for enterprise audit platforms, and take select freelance AI and backend projects - RAG, computer vision, FastAPI services and automation.","bio":["I'm Shaunak, a software developer who works mostly in Python on AI and backend systems. I graduated in May 2026 with a B.Tech in Artificial Intelligence & Data Science, and I now build AI features for audit and GRC platforms as an AI Developer at Claptek: grounded drafting pipelines that are not allowed to make things up, evidence-linked document extraction and on-prem text-to-SQL.","Before that, two industry internships taught me how production systems behave: REST APIs and local-LLM document pipelines at Osource Global, and client-facing RAG chatbots on Supabase and PostgreSQL at Shivohini Tech-AI. Outside work I build things end to end - a RAG assistant that cites its sources or admits it doesn't know, an observable LLM-routed API with traces and metrics, a counter-scam agent built with Prasanna Patil, and speech and vision models wrapped in small apps.","Alongside the full-time role I take on select freelance AI and backend projects. If you need an LLM feature, a retrieval pipeline, a vision prototype or a Python API built carefully, the contact form below is the fastest way to reach me."],"freelance":"Taking select freelance AI & backend projects","degree":"B.Tech in Artificial Intelligence & Data Science","period":"2022 - May 2026","hero":{"stack":["Python","FastAPI","PostgreSQL","Docker"]},"stats":[{"l":"Enterprise AI systems shipped","v":7,"s":""},{"l":"Industry roles","v":3,"s":""},{"l":"Contest & hackathon podiums","v":3,"s":""},{"l":"Projects on this page","v":23,"s":""}],"skills":{"daily":["Python","FastAPI","PostgreSQL","Docker","Git","pandas","Streamlit","LLM APIs (Groq, OpenAI)"],"shipped":["Django","Django REST Framework","RAG","LangChain","ChromaDB","sentence-transformers","Pydantic","pytest","OpenTelemetry","Prometheus","Jaeger","Supabase","MongoDB","MySQL","SQL","scikit-learn","TensorFlow / Keras","PyTorch","OpenCV","YOLOv8","librosa","NLTK","Hugging Face Transformers","Local LLMs","React","Vite","Twilio","WhatsApp Cloud API (prototype)","Telegram Bot API","BeautifulSoup","JavaScript","HTML / CSS","Java","C / C++"],"learning":["LangGraph agent workflows"],"labels":{"daily":{"title":"Daily drivers","caption":"What I reach for first on a new build."},"shipped":{"title":"Used in projects and work","caption":"Tools I have used in the projects and internships on this page."},"learning":{"title":"Exploring","caption":"Early experiments, nothing shipped yet."}}},"filters":[{"id":"all","label":"All"},{"id":"llm","label":"LLM & agents"},{"id":"vision","label":"Vision"},{"id":"speech-ml","label":"ML, speech & NLP"},{"id":"backend","label":"Backend & APIs"},{"id":"automation","label":"Automation"},{"id":"web-tools","label":"Web, tools & games"}],"projects":[{"id":"observable-ai-backend","t":"Observable AI Backend","y":"2026","tone":"blue","g":"backend","f":true,"early":false,"cat":"LLM & Backend","b":"LLM-routed FastAPI service with trace IDs, Prometheus metrics and Jaeger traces.","d":"FastAPI service where an LLM routes each question to a business action, with JSON logs, Prometheus metrics and OpenTelemetry traces.","st":["Python","FastAPI","Pydantic","OpenTelemetry","Jaeger","Prometheus"],"status":"Private repo \u00b7 take-home project","repo":"","live":"","by":"","w":""},{"id":"ai-rag-healthcare-assistant","t":"Healthcare Policy RAG Assistant","y":"2026","tone":"cyan","g":"llm","f":true,"early":false,"cat":"LLM & RAG","b":"RAG assistant over synthetic healthcare policies that cites sources or says it does not know.","d":"RAG assistant over synthetic healthcare policies (FastAPI, ChromaDB, Groq). Answers cite sources and confidence; out-of-scope questions are refused.","st":["Python","FastAPI","LangChain","ChromaDB","sentence-transformers","Groq"],"status":"Public repo \u00b7 take-home prototype","repo":"https://github.com/ShaunakChorge/AI-RAG","live":"","by":"","w":""},{"id":"agentic-honeypot","t":"Agentic Honey-Pot","y":"2026","tone":"cyan","g":"llm","f":true,"early":false,"cat":"AI Agents","b":"Counter-scam agent: an LLM persona stalls scammers and logs the UPI IDs and links they reveal.","d":"Counter-scam system: an LLM plays an easily fooled target, keeps scammers chatting and logs the UPI IDs, links and phone numbers they reveal.","st":["Python","FastAPI","Pydantic","Groq API","React 19","Vite"],"status":"Public repo \u00b7 co-authored hackathon build","repo":"https://github.com/ShaunakChorge/agentic-honeypot","live":"","by":"","w":"Prasanna Patil"},{"id":"speech-emotion-recognition","t":"Speech Emotion Recognition","y":"2025","tone":"purple","g":"speech-ml","f":true,"early":false,"cat":"Speech & ML","b":"Seven emotions from one voice clip - a 1-D CNN at 93.87% on a held-out split, with live mic inference.","d":"1-D CNN that labels seven emotions in speech, trained on four public datasets: 93.87% on a held-out 20% split, with live microphone inference.","st":["Python","TensorFlow / Keras","librosa","scikit-learn","NumPy","pandas"],"status":"Public repo \u00b7 personal project","repo":"https://github.com/ShaunakChorge/Speech-Emotion-Recognition-System","live":"","by":"","w":""},{"id":"deepfake-video-detection","t":"DeepFake Video Detection","y":"2025","tone":"magenta","g":"vision","f":true,"early":false,"cat":"Computer Vision","b":"Frame-by-frame deepfake scoring with a Streamlit app and PDF report. B.Tech team project, 74.16%.","d":"B.Tech team project: a small CNN scores each video frame as real or fake, with a Streamlit app, confidence chart and PDF report. 74.16% test accuracy.","st":["Python","TensorFlow / Keras","OpenCV","Streamlit","ReportLab","Celeb-DF dataset"],"status":"Public repo \u00b7 B.Tech team project","repo":"https://github.com/ShaunakChorge/DeepFakeAnalysis","live":"","by":"","w":"Prasanna Patil"},{"id":"django-box-selection-api","t":"Box Selection API","y":"2026","tone":"blue","g":"backend","f":true,"early":false,"cat":"Backend","b":"Given an order, this Django REST API picks the fewest, cheapest boxes - rotation-aware, 27 tests green.","d":"Django REST API that recommends the fewest, cheapest shipping boxes for an order using a rotation-aware packing heuristic, with 27 passing tests.","st":["Python 3.12","Django 5","Django REST Framework","SQLite","Django test runner"],"status":"Public repo \u00b7 take-home project","repo":"https://github.com/ShaunakChorge/PythonDjangoAssignment","live":"","by":"","w":""},{"id":"ams-ai-finding-engine","t":"AMS AI Finding Drafting Engine","y":"2026","tone":"cyan","g":"llm","f":false,"early":false,"cat":"LLM & Backend","b":"Three grounded draft variants per audit finding, with code-enforced zero-hallucination gates and batch mode.","d":"Microservice that turns audit checklist observations into grounded draft findings - three variants each, batch mode and cluster reports.","st":["Python","FastAPI","Pydantic v2","TF-IDF","Local LLMs","Spring Boot"],"status":"Private enterprise repo","repo":"","live":"","by":"","w":""},{"id":"obligation-management-system","t":"Obligation Management System","y":"2026","tone":"cyan","g":"llm","f":false,"early":false,"cat":"LLM & Documents","b":"Extracts obligation registers from regulatory PDFs with verbatim evidence highlighting: 97.2% span-located.","d":"Domain-agnostic extraction service that reads circulars, permits and master directions and returns structured obligations with highlightable source evidence.","st":["Python","FastAPI","Ollama","PyMuPDF","pdf.js","React"],"status":"Private enterprise repo","repo":"","live":"","by":"","w":""},{"id":"finacle-text-to-sql","t":"Core-Banking Text-to-SQL Assistant","y":"2026","tone":"blue","g":"backend","f":false,"early":false,"cat":"LLM & Data","b":"On-prem NL-to-Oracle-SQL assistant for core-banking reporting, with execution-guided self-correction.","d":"Air-gapped assistant: plain-English reporting questions become executable multi-table Oracle SQL over a 1,628-table core-banking schema.","st":["Python","FastAPI","sqlglot","Oracle","vLLM","BM25"],"status":"Private enterprise repo","repo":"","live":"","by":"","w":"One Claptek teammate (schema retrieval, SQL guardrail, seeding)"},{"id":"whatsapp-ai-agent-platform","t":"WhatsApp Automation & AI Agent Platform","y":"2025-26","tone":"blue","g":"automation","f":false,"early":false,"cat":"Automation","b":"Webhook-driven WhatsApp platform with async AI replies, user state tracking and operator alerts.","d":"Client platform that ingests WhatsApp webhooks, tracks conversation state and answers asynchronously through LLM agents.","st":["Python","FastAPI","PostgreSQL","Supabase","Redis","Celery"],"status":"Private enterprise repo","repo":"","live":"","by":"","w":""},{"id":"advanced-cctv-analytics","t":"CCTV Crime & Crowd Analytics","y":"2023","tone":"magenta","g":"vision","f":false,"early":false,"cat":"Computer Vision","b":"Smart India Hackathon team prototype: crowd limits, crime-frame classification and face recognition.","d":"Smart India Hackathon team project: crowd-limit alerts, frame-based crime classification and face recognition on CCTV video, logged to MongoDB.","st":["Python","OpenCV","PyTorch","Hugging Face Transformers (ViT)","Flask","MongoDB"],"status":"Public repo \u00b7 team hackathon project","repo":"https://github.com/ShaunakChorge/Advanced-CCTV-Analytics-System","live":"","by":"","w":"Prasanna Patil"},{"id":"spam-classifier","t":"Email/SMS Spam Classifier","y":"2025","tone":"purple","g":"speech-ml","f":false,"early":false,"cat":"NLP","b":"NLTK, TF-IDF and Naive Bayes spam filter: 100% precision and 97.1% accuracy on 1,034 test messages.","d":"NLTK, TF-IDF and Naive Bayes spam detector: 97.1% accuracy and 100% precision on 1,034 test messages, served through a Streamlit app.","st":["Python","NLTK","scikit-learn","TF-IDF","Multinomial Naive Bayes","Streamlit"],"status":"Public repo \u00b7 AICTE internship project","repo":"https://github.com/ShaunakChorge/Spam-Classifier","live":"","by":"","w":""},{"id":"house-price-predictor","t":"House Price Predictor","y":"2026","tone":"purple","g":"speech-ml","f":false,"early":false,"cat":"Machine Learning","b":"Ames housing prices from eight features: Random Forest (R\u00b2 0.89) against an honest linear baseline.","d":"Ames-housing price model on eight features: Random Forest beats the linear baseline (R\u00b2 0.89), with a Streamlit predictor launched from the notebook.","st":["Python","pandas","NumPy","scikit-learn","Random Forest","Streamlit"],"status":"Public repo \u00b7 data-science assessment","repo":"https://github.com/ShaunakChorge/HousePricePredictor","live":"","by":"","w":""},{"id":"astra-telegram-bot","t":"ASTRA Telegram Bot","y":"2024","tone":"blue","g":"automation","f":false,"early":false,"cat":"Automation","b":"Keyboard-driven Telegram bot: pick a zodiac sign and a date, get the day's horoscope with friendly errors.","d":"Telegram bot that walks users through zodiac sign and date (up to a year back) and returns the daily horoscope, with validation and error handling.","st":["Python","pyTelegramBotAPI","requests","Telegram Bot API"],"status":"Public repo \u00b7 learning project","repo":"","live":"","by":"","w":""},{"id":"zapvi-web-scraper","t":"Zapvi Web Scraper","y":"2024","tone":"blue","g":"automation","f":false,"early":false,"cat":"Automation","b":"Paginated store listings scraped into a clean pandas table and CSV, with Requests and BeautifulSoup.","d":"Requests and BeautifulSoup notebook that scrapes product names, prices and URLs from an online store into pandas and CSV.","st":["Python","Requests","BeautifulSoup","pandas","Jupyter"],"status":"Public repo \u00b7 learning project","repo":"https://github.com/ShaunakChorge/Zapvi-Web-Scrapper","live":"","by":"","w":""},{"id":"cv-fundamentals-yolov8","t":"Computer Vision Fundamentals + YOLOv8 on Video","y":"2025","tone":"magenta","g":"vision","f":false,"early":false,"cat":"Computer Vision","b":"Grayscale, resize and blur, then Faster R-CNN on an image and YOLOv8n on video frames.","d":"Assignment notebook: grayscale, resize and blur, then Faster R-CNN detection on an image and YOLOv8n detection on every fifth frame of a video.","st":["Python","OpenCV","Matplotlib","PyTorch / torchvision","Ultralytics YOLOv8n","Jupyter"],"status":"Assignment \u00b7 notebook only","repo":"","live":"","by":"","w":""},{"id":"german-english-translate-summarize","t":"German to English Translate & Summarize","y":"2025","tone":"purple","g":"speech-ml","f":false,"early":false,"cat":"NLP","b":"Two chained Hugging Face pipelines in Streamlit: MarianMT German-to-English, then BART summaries.","d":"Streamlit utility that translates German text to English with MarianMT, then summarises it with BART, chunking long inputs map-reduce style.","st":["Python","Streamlit","Hugging Face Transformers","MarianMT","BART"],"status":"Small utility \u00b7 in a public repo","repo":"https://github.com/ShaunakChorge/DeepFakeAnalysis/blob/main/app.py","live":"","by":"","w":""},{"id":"medical-insurance-cost-prediction","t":"Medical Insurance Cost Prediction","y":"2024","tone":"purple","g":"speech-ml","f":false,"early":true,"cat":"Machine Learning","b":"EDA and linear regression on 1,338 insurance records: R\u00b2 0.74 on test data.","d":"Data-science course case study: EDA and linear regression on 1,338 insurance records (R\u00b2 0.74 on test) with a small cost-estimate function.","st":["Python","pandas","NumPy","scikit-learn","Matplotlib","Seaborn"],"status":"Course case study \u00b7 follows a public tutorial notebook","repo":"","live":"","by":"","w":""},{"id":"qr-code-generator","t":"QR Code Generator","y":"2024","tone":"blue","g":"web-tools","f":false,"early":true,"cat":"Web","b":"Short text or a URL in, a scannable QR code out - no dependencies, live on GitHub Pages.","d":"Single-page web tool: type short text or a simple URL, get a QR code with a reveal animation. Live on GitHub Pages.","st":["HTML","CSS","JavaScript","api.qrserver.com"],"status":"Public repo \u00b7 live on GitHub Pages","repo":"https://github.com/ShaunakChorge/QR-Code-Generator","live":"https://shaunakchorge.github.io/QR-Code-Generator/","by":"","w":""},{"id":"quiz-game-c","t":"Ultimate Quiz Game (C)","y":"2023","tone":"blue","g":"web-tools","f":false,"early":true,"cat":"Games","b":"Console quiz in C with accounts, six topics, two difficulty levels and a persistent leaderboard.","d":"Console quiz in C: registration and login, six topics at two difficulty levels (88 questions) and a persistent sorted high-score table.","st":["C","GCC","File I/O"],"status":"Public repo \u00b7 college PBL team project","repo":"https://github.com/ShaunakChorge/Quiz-Game","live":"","by":"","w":""},{"id":"atm-simulator","t":"ATM Simulator (Java Swing)","y":"2024","tone":"blue","g":"backend","f":false,"early":true,"cat":"Desktop","b":"Java Swing and MySQL ATM: signup, card and PIN login, deposits, withdrawals, mini statement.","d":"Java Swing and MySQL desktop app: three-page signup, card and PIN login, deposit, withdrawal, fast cash, mini statement and PIN change.","st":["Java","Swing / AWT","JDBC","MySQL"],"status":"Public repo \u00b7 tutorial-based learning project","repo":"https://github.com/ShaunakChorge/ATM-Simulator","live":"","by":"","w":""},{"id":"tetris-raylib-cpp","t":"Tetris (C++ / raylib)","y":"2024","tone":"blue","g":"web-tools","f":false,"early":true,"cat":"Games","b":"Object-oriented C++ Tetris on raylib: rotation, line clearing, scoring, preview and sound.","d":"Object-oriented C++ Tetris on raylib: seven tetromino classes, rotation, line clearing, scoring, next-piece preview and sound effects.","st":["C++","raylib","Make / g++"],"status":"Public repo \u00b7 tutorial-based learning project","repo":"https://github.com/ShaunakChorge/Tetris-Game","live":"","by":"","w":""},{"id":"password-generator","t":"Password Generator","y":"2023","tone":"blue","g":"web-tools","f":false,"early":true,"cat":"Tools","b":"First-year Python OOP mini-project: random passwords of a chosen length, saved to a text file.","d":"First-year Python OOP mini-project: generates random passwords of a chosen length and saves them with a name to a text file.","st":["Python","OOP","File I/O"],"status":"Public repo \u00b7 first-year mini-project","repo":"https://github.com/ShaunakChorge/Password-Generator","live":"","by":"","w":""}],"exp":[{"o":"Claptek","r":"AI Developer","p":"Jul 2026 - Present","g":"work","b":["Sole engineer on an LLM audit-finding drafting service (Python, FastAPI, Pydantic v2): grounded RAG pipeline with code-enforced zero-hallucination gates, three draft variants per finding, batch spreadsheet drafting and AI cluster reports - adopted into the client's audit product the day after handover.","Shipped a ~28x latency fix (7.9 min to 16.9 s end-to-end) by root-causing hidden reasoning tokens in the LLM gateway and benchmarking four candidate models with accuracy held constant."]},{"o":"Osource Global Pvt. Ltd.","r":"Python Automation Intern","p":"Mar 2026 - Jun 2026","g":"work","b":["Engineered RESTful backend APIs in Python, FastAPI and PostgreSQL to sync data across internal company systems.","Integrated local LLMs into a document pipeline that generates structured enterprise reports from unformatted input."]},{"o":"Shivohini Tech-AI LLP","r":"AI & ML Intern","p":"Sep 2025 - Mar 2026","g":"work","b":["Developed and deployed client-facing conversational AI chatbots using LLaMA, the OpenAI API and retrieval-augmented generation.","Designed PostgreSQL and Supabase schemas for chat history and user profiles, enabling stateful bot conversations."]},{"o":"Edunet","r":"AI & Data Analytics Green Skills Intern","p":"Jan 2025 - Feb 2025","g":"programme","b":[]},{"o":"TechSaksham (AICTE internship, Microsoft & SAP CSR initiative)","r":"AI & Transformative Learning Intern","p":"Dec 2024 - Jan 2025","g":"programme","b":[]},{"o":"Osource India Pvt. Ltd.","r":"Python Automation Developer Intern","p":"Jul 2024 - Aug 2024","g":"programme","b":[]},{"o":"IBM SkillsBuild","r":"Front-End Development Intern","p":"Jun 2024 - Jul 2024","g":"programme","b":[]},{"o":"Academor","r":"AI & Python Intern","p":"Jan 2023","g":"programme","b":[]}],"edu":[{"i":"Dr. D. Y. Patil School of Science & Technology, DPU","d":"B.Tech in Artificial Intelligence & Data Science","p":"2022 - May 2026","l":"Pune, India"}],"certs":[{"n":"Oracle Cloud Infrastructure 2025 Certified Generative AI Professional","i":"Oracle","y":2025},{"n":"Generative AI Certification","i":"GeeksforGeeks","y":""},{"n":"IgniteX Program Participant","i":"Wadhwani Foundation","y":""},{"n":"Python for Data Science","i":"Infosys Springboard","y":""},{"n":"Python Django","i":"SimpliLearn","y":""},{"n":"Introduction to SQL","i":"SimpliLearn","y":""},{"n":"Getting Started with Enterprise Data Science (digital badge)","i":"IBM (IBM SkillsBuild)","y":2024}],"awards":[{"t":"1st Runner-up, Code Golf (INNIXO - SWASTIK)","y":2025},{"t":"1st Runner-up, Code Quest Infinity","y":2024},{"t":"Winners, SIH Internal Round Hackathon","y":2023}]}/*@@END*/;
+  var DATA = /*@@DATA*/{"name":"Shaunak Chorge","short":"Shaunak","role":"AI Engineer","roles":["AI Engineer","Freelance AI developer","Python backend developer","Computer vision builder"],"headline":"AI Engineer building AI chatbots, computer vision tools and Python backends, taking select freelance projects","tagline":"I turn AI models and messy workflows into software that actually runs.","loc":"Mumbai, India","email":"shaunak.chorge@gmail.com","status":"AI Engineer at Claptek Pvt Ltd","avail":"I take select freelance AI and backend projects alongside my full\u002dtime job as AI Engineer at Claptek Pvt Ltd. I am based in Mumbai and work remotely in Indian Standard Time (IST). The contact form or email is the fastest way to start.","gh":"https://github.com/ShaunakChorge","li":"https://www.linkedin.com/in/shaunak\u002dchorge","ig":"https://www.instagram.com/_shaunakkk/","resume":"assets/Shaunak\u002dChorge\u002dResume.pdf","short_bio":"Artificial Intelligence (AI) Engineer at Claptek Pvt Ltd in Mumbai, with a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026). I build trustworthy AI tools for audit and compliance software, and take select freelance projects: chatbots, computer vision, backend APIs and automation.","bio":["I am Shaunak, a software engineer who works mostly in Python on Artificial Intelligence (AI) and backend systems. I hold a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026). Today I am an AI Engineer at Claptek Pvt Ltd in Mumbai, where I build AI tools for audit and compliance software. One tool drafts findings and is not allowed to make things up. Another reads documents and points to its evidence. A third turns plain questions into database queries on a bank's own servers.","Before that, two internships showed me how real systems behave. At Osource Global I built backend APIs and document tools that use AI models running on company machines. At Shivohini Tech\u002dAI I built AI chatbots for clients. Outside work I build whole projects myself. They include a chatbot that cites its sources or admits it does not know, and a backend that shows where each request slows down. I also built a scam\u002dfighting AI with Prasanna Patil, plus speech and vision models inside small apps.","Alongside my full\u002dtime job I take select freelance AI and backend projects. If you need a chatbot, a document reader, a computer vision prototype or a Python backend built carefully, the contact page is the fastest way to reach me."],"freelance":"Taking select freelance AI and backend projects","degree":"Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026)","school":"Dr. D. Y. Patil School of Science and Technology, DPU","hero":{"stack":["Python","FastAPI","PostgreSQL","Docker"]},"stats":[{"l":"Industry roles","v":3},{"l":"Contest and hackathon podium finishes","v":3},{"l":"Selected projects","v":12}],"skills":{"core":["Python","FastAPI","PostgreSQL","Docker","Git","AI model APIs (Groq, OpenAI)","RAG (answers from documents)","LangChain","ChromaDB","pandas","Streamlit"],"also":["Django","Django REST Framework","Pydantic","pytest","sentence\u002dtransformers","Local AI models (Ollama, vLLM)","PyMuPDF","sqlglot","Redis","Celery","WebSockets","OpenTelemetry","Prometheus","Jaeger","Supabase","MongoDB","MySQL","SQL","NumPy","scikit\u002dlearn","TensorFlow / Keras","PyTorch","OpenCV","YOLOv8","librosa","NLTK","Hugging Face Transformers","React","Vite","Flask","Twilio","WhatsApp Cloud API (prototype)","Telegram Bot API","Requests","BeautifulSoup","JavaScript","HTML / CSS","Java","C / C++"],"labels":{"core":{"title":"Core stack","caption":"What I reach for first on a new build."},"also":{"title":"Also work with","caption":"Other tools I have used across these projects and roles."}}},"pages":[{"path":"","label":"Home","hint":"Shaunak Chorge","kw":"home"},{"path":"projects/","label":"Work","hint":"Projects","kw":"projects"},{"path":"services/","label":"Services","hint":"Freelance AI and backend services","kw":"services"},{"path":"about/","label":"About","hint":"About Shaunak","kw":"about"},{"path":"faq/","label":"FAQ","hint":"Freelance AI developer FAQ","kw":"faq"},{"path":"contact/","label":"Contact","hint":"Hire me for your AI or backend project","kw":"contact"},{"path":"resume/","label":"Resume","hint":"Resume","kw":"resume"}],"services":[{"slug":"llm\u002dapps\u002drag","label":"AI chatbots and assistants","blurb":"Chatbots that answer from your documents, show their sources and say so when they do not know."},{"slug":"document\u002dai\u002dextraction","label":"Document AI","blurb":"Tools that read documents, draft text and answer data questions, with every result traceable to its evidence."},{"slug":"python\u002dbackend\u002dapis","label":"Backend and APIs","blurb":"FastAPI and Django services with clear rules, automated tests and logs that make problems easy to find."},{"slug":"computer\u002dvision","label":"Computer vision","blurb":"Tools that detect, classify and monitor things in photos and video, tested honestly on your own data."},{"slug":"speech\u002dnlp\u002dml","label":"Speech and machine learning","blurb":"Models trained on audio and text, tested honestly and wrapped in small apps people can try."},{"slug":"automation\u002dintegrations","label":"Automation and bots","blurb":"Scrapers, bots and messaging links that take repetitive work off your team."}],"projects":[{"id":"ams\u002dai\u002dfinding\u002dengine","slug":"ams\u002dai\u002dfinding\u002dengine","t":"AMS AI Finding Drafting Engine","tone":"cyan","g":"llm","cs":1,"early":0,"cat":"AI and backend","b":"Turns short audit notes into three draft findings, with code that blocks any invented fact. Drafts whole spreadsheets in bulk.","d":"A service that turns audit checklist notes into draft findings, three versions each, with checks that block invented facts, plus bulk drafting.","st":["Python","FastAPI","Pydantic v2","TF\u002dIDF","Local AI models","Spring Boot"],"status":"Private enterprise repo","repo":"","w":""},{"id":"obligation\u002dmanagement\u002dsystem","slug":"obligation\u002dmanagement\u002dsystem","t":"Obligation Management System","tone":"cyan","g":"llm","cs":1,"early":0,"cat":"AI and documents","b":"Reads regulatory PDFs and lists every obligation, each linked to the exact highlighted passage. 97.2% of 1,266 records located.","d":"A service that reads circulars, permits and regulations and returns a structured list of obligations, each linked to a highlightable source passage.","st":["Python","FastAPI","Ollama","PyMuPDF","pdf.js","React"],"status":"Private enterprise repo","repo":"","w":""},{"id":"finacle\u002dtext\u002dto\u002dsql","slug":"core\u002dbanking\u002dtext\u002dto\u002dsql","t":"Core\u002dBanking Text\u002dto\u002dSQL Assistant","tone":"blue","g":"backend","cs":1,"early":0,"cat":"AI and data","b":"Turns plain questions into database queries for core\u002dbanking reports, on the bank's own servers, with a self\u002dcorrecting loop.","d":"An assistant that turns plain questions into working Oracle database queries (SQL) across a 1,628\u002dtable core\u002dbanking system, fully on the bank's own servers.","st":["Python","FastAPI","sqlglot","Oracle","vLLM","BM25"],"status":"Private enterprise repo","repo":"","w":""},{"id":"ai\u002drag\u002dhealthcare\u002dassistant","slug":"ai\u002drag\u002dhealthcare\u002dassistant","t":"Healthcare Policy Chatbot","tone":"cyan","g":"llm","cs":1,"early":0,"cat":"AI chatbot","b":"A chatbot over healthcare policy documents that cites its source, or says it does not know.","d":"A chatbot (FastAPI, ChromaDB, Groq) that answers from six sample healthcare policies, cites its source and confidence, and refuses out\u002dof\u002dscope questions.","st":["Python","FastAPI","LangChain","ChromaDB","sentence\u002dtransformers","Groq"],"status":"Public repo · take\u002dhome prototype","repo":"https://github.com/ShaunakChorge/AI\u002dRAG","w":""},{"id":"agentic\u002dhoneypot","slug":"agentic\u002dhoneypot","t":"Scam\u002dCatching AI Honey\u002dPot","tone":"cyan","g":"llm","cs":1,"early":0,"cat":"AI agent","b":"An AI plays an easily fooled victim, keeps scammers chatting and logs the payment IDs, links and phone numbers they reveal.","d":"A counter\u002dscam system: an AI plays an easily fooled target, keeps scammers talking and records the UPI payment IDs, links and phone numbers they reveal.","st":["Python","FastAPI","Pydantic","Groq API","React 19","Vite"],"status":"Public repo · team hackathon build","repo":"https://github.com/ShaunakChorge/agentic\u002dhoneypot","w":"Prasanna Patil"},{"id":"advanced\u002dcctv\u002danalytics","slug":"advanced\u002dcctv\u002danalytics","t":"CCTV Crime and Crowd Analytics","tone":"magenta","g":"vision","cs":1,"early":0,"cat":"Computer vision","b":"Smart India Hackathon team prototype: crowd\u002dlimit alerts, crime detection from video frames and face recognition on one camera feed.","d":"A Smart India Hackathon team project that watches one CCTV video three ways: crowd\u002dlimit alerts, crime labels from video frames and face recognition, all logged to a database.","st":["Python","OpenCV","PyTorch","Hugging Face Transformers (ViT)","Flask","MongoDB"],"status":"Public repo · team hackathon project","repo":"https://github.com/ShaunakChorge/Advanced\u002dCCTV\u002dAnalytics\u002dSystem","w":"Prasanna Patil"},{"id":"speech\u002demotion\u002drecognition","slug":"speech\u002demotion\u002drecognition","t":"Speech Emotion Recognition","tone":"purple","g":"speech\u002dml","cs":1,"early":0,"cat":"Speech and machine learning","b":"Detects seven emotions in a voice clip with a neural network: 93.87% on a random test split, with live microphone input.","d":"A neural network that labels seven emotions in speech, trained on four public datasets: 93.87% on a random 20% test split, with live microphone input.","st":["Python","TensorFlow / Keras","librosa","scikit\u002dlearn","NumPy","pandas"],"status":"Public repo · personal project","repo":"https://github.com/ShaunakChorge/Speech\u002dEmotion\u002dRecognition\u002dSystem","w":""},{"id":"deepfake\u002dvideo\u002ddetection","slug":"deepfake\u002dvideo\u002ddetection","t":"DeepFake Video Detection","tone":"magenta","g":"vision","cs":1,"early":0,"cat":"Computer vision","b":"Scores each frame of a video as real or fake, with a web app and PDF report. College team project, 74.16% accuracy.","d":"A college team project: a small neural network scores each video frame as real or fake, with a Streamlit app, confidence chart and PDF report. 74.16% test accuracy.","st":["Python","TensorFlow / Keras","OpenCV","Streamlit","ReportLab","Celeb\u002dDF dataset"],"status":"Public repo · college team project","repo":"https://github.com/ShaunakChorge/DeepFakeAnalysis","w":"Prasanna Patil"},{"id":"observable\u002dai\u002dbackend","slug":"observable\u002dai\u002dbackend","t":"Traceable AI Backend","tone":"blue","g":"backend","cs":1,"early":0,"cat":"AI and backend","b":"An AI\u002drouted backend that shows exactly where each request goes and where it slows down, with request IDs, metrics and traces.","d":"A FastAPI service where an AI picks the right business action for each question, with request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger.","st":["Python","FastAPI","Pydantic","OpenTelemetry","Jaeger","Prometheus"],"status":"Private repo · job\u002dapplication task","repo":"","w":""},{"id":"django\u002dbox\u002dselection\u002dapi","slug":"django\u002dbox\u002dselection\u002dapi","t":"Box Selection API","tone":"blue","g":"backend","cs":0,"early":0,"cat":"Backend","b":"Give it an order and this Django API picks the fewest, cheapest shipping boxes. It tries every rotation, and 27 tests pass.","d":"A Django REST API that recommends the fewest, cheapest shipping boxes for an order using a rotation\u002daware packing method, with 27 passing tests.","st":["Python 3.12","Django 5","Django REST Framework","SQLite","Django test runner"],"status":"Public repo · job\u002dapplication task","repo":"https://github.com/ShaunakChorge/PythonDjangoAssignment","w":""},{"id":"whatsapp\u002dai\u002dagent\u002dplatform","slug":"whatsapp\u002dai\u002dagent\u002dplatform","t":"WhatsApp Automation and AI Agent Platform","tone":"blue","g":"automation","cs":0,"early":0,"cat":"Automation","b":"A client WhatsApp platform: AI replies run in the background, each chat is tracked and human operators get alerts.","d":"A client platform that receives WhatsApp messages, tracks each conversation and replies through AI agents in the background.","st":["Python","FastAPI","PostgreSQL","Supabase","Redis","Celery"],"status":"Private enterprise repo","repo":"","w":""},{"id":"spam\u002dclassifier","slug":"spam\u002dclassifier","t":"Email and SMS Spam Classifier","tone":"purple","g":"speech\u002dml","cs":0,"early":0,"cat":"Natural language","b":"Spots spam in texts and emails: 97.1% accurate on 1,034 test messages, and it never flagged a genuine message.","d":"A spam detector using NLTK, TF\u002dIDF and Naive Bayes: 97.1% accuracy and 100% precision on 1,034 test messages, in a Streamlit app.","st":["Python","NLTK","scikit\u002dlearn","TF\u002dIDF","Multinomial Naive Bayes","Streamlit"],"status":"Public repo · internship project","repo":"https://github.com/ShaunakChorge/Spam\u002dClassifier","w":""},{"id":"house\u002dprice\u002dpredictor","slug":"house\u002dprice\u002dpredictor","t":"House Price Predictor","tone":"purple","g":"speech\u002dml","cs":0,"early":1,"cat":"Machine learning","b":"Predicts house prices from eight features. A Random Forest beats a simple baseline (R² 0.89, where 1.0 is perfect).","d":"An Ames house\u002dprice model on eight features: a Random Forest beats the linear baseline (R² 0.89), with a Streamlit price predictor launched from the notebook.","st":["Python","pandas","NumPy","scikit\u002dlearn","Random Forest","Streamlit"],"status":"Public repo · data science assessment","repo":"https://github.com/ShaunakChorge/HousePricePredictor","w":""},{"id":"cv\u002dfundamentals\u002dyolov8","slug":"cv\u002dfundamentals\u002dyolov8","t":"Computer Vision Basics and YOLOv8 on Video","tone":"magenta","g":"vision","cs":0,"early":1,"cat":"Computer vision","b":"Basic image steps (grayscale, resize, blur), then object detection with Faster R\u002dCNN on an image and YOLOv8n on video frames.","d":"An assignment notebook: grayscale, resize and blur an image, detect objects with Faster R\u002dCNN, then run YOLOv8n on every fifth frame of a video.","st":["Python","OpenCV","Matplotlib","PyTorch / torchvision","Ultralytics YOLOv8n","Jupyter"],"status":"Assignment · notebook only","repo":"","w":""},{"id":"zapvi\u002dweb\u002dscraper","slug":"zapvi\u002dweb\u002dscraper","t":"Zapvi Web Scraper","tone":"blue","g":"automation","cs":0,"early":1,"cat":"Automation","b":"Collects product names, prices and links from online store pages into a clean table and CSV file.","d":"A Requests and BeautifulSoup notebook that scrapes product names, prices and links from an online store into pandas and CSV.","st":["Python","Requests","BeautifulSoup","pandas","Jupyter"],"status":"Public repo · personal project","repo":"https://github.com/ShaunakChorge/Zapvi\u002dWeb\u002dScrapper","w":""},{"id":"astra\u002dtelegram\u002dbot","slug":"astra\u002dtelegram\u002dbot","t":"ASTRA Telegram Bot","tone":"blue","g":"automation","cs":0,"early":1,"cat":"Automation","b":"A Telegram bot: pick a zodiac sign and a date, and get the day's horoscope, with friendly error messages.","d":"A Telegram bot that walks users through zodiac sign and date (up to a year back) and returns the daily horoscope, with input checks and error handling.","st":["Python","pyTelegramBotAPI","requests","Telegram Bot API"],"status":"Public repo · personal project","repo":"","w":""},{"id":"medical\u002dinsurance\u002dcost\u002dprediction","slug":"medical\u002dinsurance\u002dcost\u002dprediction","t":"Medical Insurance Cost Prediction","tone":"purple","g":"speech\u002dml","cs":0,"early":1,"cat":"Machine learning","b":"Studies 1,338 insurance records and predicts costs with linear regression: R² 0.74 on test data.","d":"A data science course case study: data exploration and linear regression on 1,338 insurance records (R² 0.74 on test data), with a small cost\u002destimate function.","st":["Python","pandas","NumPy","scikit\u002dlearn","Matplotlib","Seaborn"],"status":"Course case study · follows a public tutorial","repo":"","w":""},{"id":"atm\u002dsimulator","slug":"atm\u002dsimulator","t":"ATM Simulator (Java desktop app)","tone":"blue","g":"backend","cs":0,"early":1,"cat":"Desktop app","b":"A Java desktop ATM with MySQL: signup, card and PIN login, deposits, withdrawals, mini statement and PIN change.","d":"A Java Swing and MySQL desktop app: three\u002dpage signup, card and PIN login, deposit, withdrawal, fast cash, mini statement and PIN change.","st":["Java","Swing / AWT","JDBC","MySQL"],"status":"Public repo · tutorial\u002dbased project","repo":"https://github.com/ShaunakChorge/ATM\u002dSimulator","w":""},{"id":"qr\u002dcode\u002dgenerator","slug":"qr\u002dcode\u002dgenerator","t":"QR Code Generator","tone":"blue","g":"web\u002dtools","cs":0,"early":1,"cat":"Web tool","b":"Type a short text or a link and get a scannable QR code. No dependencies, live on GitHub Pages.","d":"A single\u002dpage web tool: type short text or a simple link and get a QR code with a reveal animation. Live on GitHub Pages.","st":["HTML","CSS","JavaScript","api.qrserver.com"],"status":"Public repo · live on GitHub Pages","repo":"https://github.com/ShaunakChorge/QR\u002dCode\u002dGenerator","w":""},{"id":"quiz\u002dgame\u002dc","slug":"quiz\u002dgame\u002dc","t":"Ultimate Quiz Game (C)","tone":"blue","g":"web\u002dtools","cs":0,"early":1,"cat":"Games","b":"A quiz game in C with accounts, six topics, two difficulty levels and a saved leaderboard.","d":"A console quiz in C: sign\u002dup and login, six topics at two difficulty levels (88 questions) and a saved, sorted high\u002dscore table.","st":["C","GCC","File I/O"],"status":"Public repo · college team project","repo":"https://github.com/ShaunakChorge/Quiz\u002dGame","w":""},{"id":"tetris\u002draylib\u002dcpp","slug":"tetris\u002draylib\u002dcpp","t":"Tetris (C++ and raylib)","tone":"blue","g":"web\u002dtools","cs":0,"early":1,"cat":"Games","b":"Tetris in C++ with raylib: rotation, line clearing, scoring, next\u002dpiece preview and sound.","d":"Object\u002doriented C++ Tetris on raylib: seven piece types, rotation, line clearing, scoring, next\u002dpiece preview and sound effects.","st":["C++","raylib","Make / g++"],"status":"Public repo · tutorial\u002dbased project","repo":"https://github.com/ShaunakChorge/Tetris\u002dGame","w":""},{"id":"password\u002dgenerator","slug":"password\u002dgenerator","t":"Password Generator","tone":"blue","g":"web\u002dtools","cs":0,"early":1,"cat":"Tools","b":"A first\u002dyear Python mini\u002dproject: random passwords of a chosen length, saved to a text file.","d":"A first\u002dyear Python mini\u002dproject: generates random passwords of a chosen length and saves them with a name to a text file.","st":["Python","OOP","File I/O"],"status":"Public repo · first\u002dyear mini\u002dproject","repo":"https://github.com/ShaunakChorge/Password\u002dGenerator","w":""}],"exp":[{"o":"Claptek Pvt Ltd","r":"AI Engineer","p":"Jul 2026 \u002d Present","g":"work","b":["Sole engineer on an AI service that drafts audit findings from short checklist notes. It writes three versions of each finding, drafts whole spreadsheets in one go and builds summary reports. Code\u002dlevel checks reject any draft that invents a figure, date or owner. The client's audit product adopted it the day after handover.","Made it about 28 times faster (7.9 minutes down to 16.9 seconds). I found hidden extra processing in how the system called the AI models and compared four candidate models, with accuracy unchanged."]},{"o":"Osource Global Pvt. Ltd.","r":"Python Automation Intern","p":"Mar 2026 \u002d Jun 2026","g":"work","b":["Built backend APIs in Python, FastAPI and PostgreSQL that sync data between internal company systems.","Connected AI models running on company machines to a document tool that turns unformatted input into structured business reports."]},{"o":"Shivohini Tech\u002dAI LLP","r":"AI and Machine Learning Intern","p":"Sep 2025 \u002d Mar 2026","g":"work","b":["Built and launched AI chatbots for clients using LLaMA, the OpenAI API and retrieval (answers drawn from stored documents).","Designed PostgreSQL and Supabase databases for chat history and user profiles, so bots can remember each conversation."]},{"o":"Edunet","r":"AI and Data Analytics Green Skills Intern","p":"Jan 2025 \u002d Feb 2025","g":"programme","b":[]},{"o":"TechSaksham (AICTE internship, a Microsoft and SAP CSR initiative)","r":"AI and Transformative Learning Intern","p":"Dec 2024 \u002d Jan 2025","g":"programme","b":[]},{"o":"Osource India Pvt. Ltd.","r":"Python Automation Developer Intern","p":"Jul 2024 \u002d Aug 2024","g":"programme","b":[]},{"o":"IBM SkillsBuild","r":"Front\u002dEnd Development Intern","p":"Jun 2024 \u002d Jul 2024","g":"programme","b":[]},{"o":"Academor","r":"AI and Python Intern","p":"Jan 2023","g":"programme","b":[]}],"certs":[{"n":"Oracle Cloud Infrastructure 2025 Certified Generative AI Professional","i":"Oracle"},{"n":"Generative AI Certification","i":"GeeksforGeeks"},{"n":"IgniteX Program Participant","i":"Wadhwani Foundation"},{"n":"Python for Data Science","i":"Infosys Springboard"},{"n":"Python Django","i":"SimpliLearn"},{"n":"Introduction to SQL","i":"SimpliLearn"},{"n":"Getting Started with Enterprise Data Science (digital badge)","i":"IBM (IBM SkillsBuild)"}],"awards":[{"t":"First runner\u002dup, Code Golf (INNIXO \u002d SWASTIK)"},{"t":"First runner\u002dup, Code Quest Infinity"},{"t":"Winners, Smart India Hackathon internal round"}]}/*@@END*/;
 
   var P = win.Portfolio = win.Portfolio || {};
   var SVGNS = 'http://www.w3.org/2000/svg';
@@ -359,7 +362,7 @@
     doc.body.appendChild(lab);
     hooks.move.push(function (e) {
       if (reduced()) { if (shown) { shown = false; lab.classList.remove('is-on'); } return; }
-      var t = e.target && e.target.closest ? e.target.closest('.projects__card, .projects__row') : null;
+      var t = e.target && e.target.closest ? e.target.closest('.projects__card, .projects__row, [data-cursor="case"]') : null;
       var hit = !!t && !e.target.closest('a, button');
       if (hit !== shown) {
         shown = hit; lab.classList.toggle('is-on', hit);
@@ -588,50 +591,72 @@
   /* ================================================================== 5  COMMAND PALETTE */
   var pal = { built: false, open: false, dlg: null, input: null, list: null, empty: null, live: null, items: [], all: [], idx: -1, ret: null, timer: 0, q: '' };
 
-  var SEC_ICON = { home: 'sparkles', about: 'users', build: 'layers', stack: 'cpu', work: 'folder', journey: 'trending-up', contact: 'mail' };
+  var SEC_ICON = { home: 'sparkles', offer: 'layers', selected: 'folder', bio: 'users', roles: 'briefcase', process: 'workflow', faq: 'message-circle', contact: 'mail' };
+  var SEC_LABEL = { home: 'Top of this page', offer: 'Services', selected: 'Selected work', bio: 'About me', roles: 'Experience', process: 'How a project runs', faq: 'FAQ', contact: 'Hire me (form and contacts)' };
   var GROUP_ICON = { llm: 'brain-circuit', vision: 'scan-eye', 'speech-ml': 'audio-lines', backend: 'server', automation: 'bot', 'web-tools': 'globe' };
+  var PAGE_ICON = { '': 'sparkles', 'projects/': 'folder', 'services/': 'layers', 'about/': 'users', 'faq/': 'message-circle', 'contact/': 'mail', 'resume/': 'file-text' };
+
+  /* site root relative to the current page, taken from this script's own URL (.../assets/dist/js/fx.min.js or .../assets/js/sections/fx.js) */
+  var BASE = (function () {
+    var sc = doc.currentScript || qs('script[src*="fx."]'), src = sc && sc.getAttribute('src'), m = src && /^(.*?)assets\//.exec(src);
+    return m ? m[1] : '';
+  })();
+  function pageUrl(path) { try { return new URL(BASE + path, win.location.href); } catch (e) { return null; } }
+  function samePath(a, b) { return a.replace(/index\.html$/, '') === b.replace(/index\.html$/, ''); }
+  function isHere(path) { var u = pageUrl(path.replace(/#.*$/, '')); return !!u && samePath(u.pathname, win.location.pathname); }
+  function go(path) {
+    var u = pageUrl(path); if (!u) return;
+    if (isHere(path) && !/#/.test(path)) { if (P.goto) P.goto('top'); else win.scrollTo(0, 0); return; }
+    win.location.href = u.href;
+  }
 
   function sectionItems() {
     var out = [];
     qsa('section[id][data-rail]').forEach(function (s) {
       var id = s.id, rail = s.getAttribute('data-rail') || id;
       var m = /^(\d+)\s*\S\s*(.+)$/.exec(rail);
-      var link = qs('.nav__link[href="#' + id + '"]');
-      var label = (link && link.textContent.trim()) || (m ? cap(m[2]) : cap(id));
       var hd = qs('h1, h2', s);
       out.push({
-        type: 'section', id: 'sec-' + id, label: label, hint: hd ? trunc(hd.textContent, 64) : 'Go to section', kw: id + ' ' + (m ? m[2] : '') + ' section go to jump',
+        type: 'section', id: 'sec-' + id, label: SEC_LABEL[id] || (m ? cap(m[2]) : cap(id)), hint: hd ? trunc(hd.textContent, 64) : 'Go to section', kw: id + ' ' + (m ? m[2] : '') + ' section go to jump scroll',
         icon: SEC_ICON[id] || 'hash', meta: m ? m[1] : '', nav: true,
         run: function () { if (P.goto) P.goto(id); else { var el = doc.getElementById(id); if (el) el.scrollIntoView(); } }
       });
     });
     return out;
   }
-  function projectItems() {
-    var src = (P.projects && P.projects.length) ? P.projects : null, byId = {}, out = [];
-    DATA.projects.forEach(function (p) { byId[p.id] = p; });
-    var list = src ? src.map(function (p) { return { id: p.id, title: p.title, tone: p.tone, group: p.group, year: p.year, category: p.category }; })
-      : DATA.projects.map(function (p) { return { id: p.id, title: p.t, tone: p.tone, group: p.g, year: p.y, category: p.cat }; });
-    if (!src) {
-      qsa('[data-project-id]').forEach(function (n) { /* DOM fallback, only if DATA lacks the id */
-        var id = n.getAttribute('data-project-id'); if (id && !byId[id]) list.push({ id: id, title: (qs('h3', n) || n).textContent.trim(), tone: n.getAttribute('data-tone') || 'cyan', group: '', year: '', category: '' });
-      });
-    }
-    list.forEach(function (p, i) {
-      var d = byId[p.id] || {};
+  function pageItems() {
+    var out = [];
+    DATA.pages.forEach(function (pg) {
       out.push({
-        type: 'project', id: 'prj-' + p.id, label: p.title, tone: p.tone, featured: i < 6,
-        hint: [p.category || (DATA.filters.filter(function (f) { return f.id === p.group; })[0] || {}).label || '', p.year].filter(Boolean).join(' \u00b7 '),
-        kw: [d.st ? d.st.join(' ') : '', d.b || '', p.group || '', p.category || '', 'project'].join(' '),
-        icon: GROUP_ICON[p.group] || 'folder', meta: 'Project', nav: true,
+        type: 'page', id: 'page-' + (pg.path || 'home'), label: pg.label, hint: isHere(pg.path) ? 'You are here' : pg.hint, kw: pg.kw + ' page open go to',
+        icon: PAGE_ICON[pg.path] || 'hash', meta: 'Page', nav: true, run: function () { go(pg.path); }
+      });
+    });
+    DATA.services.forEach(function (sv) {
+      out.push({
+        type: 'page', id: 'svc-' + sv.slug, label: sv.label, hint: 'Freelance service', kw: 'service freelance hire ' + sv.slug.replace(/-/g, ' ') + ' ' + sv.blurb,
+        icon: 'rocket', meta: 'Service', quiet: true, nav: true, run: function () { go('services/' + sv.slug + '/'); }
+      });
+    });
+    return out;
+  }
+  function projectItems() {
+    var out = [];
+    DATA.projects.forEach(function (p, i) {
+      out.push({
+        type: 'project', id: 'prj-' + p.id, label: p.t, tone: p.tone, featured: !!p.cs && i < 6,
+        hint: p.cat,
+        kw: [p.st.join(' '), p.b || '', p.g || '', p.cat || '', 'project case study work'].join(' '),
+        icon: GROUP_ICON[p.g] || 'folder', meta: p.cs ? 'Case study' : 'Project', nav: true,
         run: function () { openProject(p.id); }
       });
     });
     return out;
   }
   function openProject(id) {
-    if (P.work && typeof P.work.open === 'function') P.work.open(id);
-    else { emit('portfolio:open-project', { id: id, source: 'fx' }); if (P.goto) P.goto('work'); }
+    var p = null;
+    DATA.projects.forEach(function (x) { if (x.id === id) p = x; });
+    if (p && p.cs) go('projects/' + p.slug + '/'); else go('projects/#more');
   }
   function copyText(txt) {
     function legacy() {
@@ -662,8 +687,9 @@
     doc.body.appendChild(a); a.click(); a.remove();
   }
   function gotoContact() {
-    /* "hire" action. The FIRST long jump on a cold page can land short (content-visibility sections above
-       expand while the smooth scroll runs), so once the scroll settles we re-align if clearly off. */
+    /* on the home page the hire section is #contact; anywhere else it is contact/#hire. The FIRST long jump on a cold page can land short
+       (content-visibility sections above expand while the smooth scroll runs), so once the scroll settles we re-align if clearly off. */
+    if (!doc.getElementById('contact')) { go('contact/#hire'); return; }
     if (P.goto) P.goto('contact'); else { var e0 = doc.getElementById('contact'); if (e0) e0.scrollIntoView(); }
     var tries = 0, last = -1;
     var iv = win.setInterval(function () {
@@ -695,26 +721,21 @@
   function actionItems() {
     var cur = accentName();
     var A = [
+      { id: 'act-hire', label: 'Hire me', hint: DATA.freelance, kw: 'hire freelance project brief work together commission contact start', icon: 'rocket', nav: true, run: function () { gotoContact(); toast('Let’s build something', 'success'); } },
       { id: 'act-terminal', label: 'Open terminal', hint: 'Mini shell: help, whoami, projects', kw: 'terminal shell console cli command line bash', icon: 'terminal', meta: 'Ctrl `', terminal: true, run: function () { /* handled in runItem */ } },
-      { id: 'act-resume', label: 'Download resume', hint: 'PDF', kw: 'resume cv pdf download', icon: 'download', run: downloadResume },
+      { id: 'act-resume', label: 'Download resume (PDF)', hint: 'PDF', kw: 'resume cv pdf download', icon: 'download', run: downloadResume },
       { id: 'act-email', label: 'Copy email address', hint: DATA.email, kw: 'copy email mail clipboard', icon: 'copy', run: copyEmail },
       { id: 'act-mail', label: 'Send an email', hint: DATA.email, kw: 'send email mail write contact', icon: 'mail', quiet: true, run: function () { win.location.href = 'mailto:' + DATA.email; } },
-      { id: 'act-hire', label: 'Start a project', hint: DATA.freelance, kw: 'hire freelance project brief work together commission contact', icon: 'rocket', nav: true, run: function () { gotoContact(); toast('Let’s build something', 'success'); } },
       { id: 'act-gh', label: 'Open GitHub', hint: 'github.com/ShaunakChorge', kw: 'github git code repos source', icon: 'github', run: function () { openExternal(DATA.gh); } },
       { id: 'act-li', label: 'Open LinkedIn', hint: 'linkedin.com/in/shaunak-chorge', kw: 'linkedin profile network', icon: 'linkedin', run: function () { openExternal(DATA.li); } },
-      { id: 'act-ig', label: 'Open Instagram', hint: 'instagram.com/_shaunakkk', kw: 'instagram insta social', icon: 'instagram', run: function () { openExternal(DATA.ig); } },
+      { id: 'act-ig', label: 'Open Instagram', hint: 'instagram.com/_shaunakkk', kw: 'instagram insta social', icon: 'instagram', quiet: true, run: function () { openExternal(DATA.ig); } },
       { id: 'act-accent', label: 'Switch accent colour', hint: 'Now: ' + cur + ' (cycles cyan, magenta, purple, green)', kw: 'accent colour color theme switch cycle neon', icon: 'wand-sparkles', run: cycleAccent },
       { id: 'act-motion', label: motionPaused() ? 'Resume effects' : 'Pause effects', hint: motionPaused() ? 'Turn the background and motion effects back on' : 'Stop the background network, typing and other motion', kw: 'pause resume stop effects animation motion reduce background canvas', icon: motionPaused() ? 'play' : 'pause', run: toggleMotion },
-      { id: 'act-top', label: 'Scroll to top', hint: 'Back to the hero', kw: 'top scroll up start home', icon: 'arrow-up', nav: true, run: function () { if (P.goto) P.goto('top'); else win.scrollTo(0, 0); } }
+      { id: 'act-top', label: 'Scroll to top', hint: 'Back to the top of this page', kw: 'top scroll up start', icon: 'arrow-up', nav: true, run: function () { if (P.goto) P.goto('top'); else win.scrollTo(0, 0); } }
     ];
     ACCENTS.forEach(function (nm) {
       if (nm === cur) return;
       A.push({ id: 'act-acc-' + nm, label: 'Accent: ' + cap(nm), hint: 'Switch the neon accent', kw: 'accent colour color theme ' + nm, icon: 'sparkles', quiet: true, dot: RGB[nm], run: function () { setAccent(nm); toast('Accent: ' + nm, 'info'); } });
-    });
-    DATA.filters.forEach(function (f) {
-      if (f.id === 'all') return;
-      A.push({ id: 'act-f-' + f.id, label: 'Filter work: ' + f.label, hint: 'Show only these projects', kw: 'filter projects work category ' + f.id, icon: 'folder', quiet: true, nav: true,
-        run: function () { emit('portfolio:filter', { cat: f.id, source: 'fx' }); if (P.goto) P.goto('work'); } });
     });
     A.forEach(function (a) { a.type = 'action'; if (!a.meta && a.type === 'action') a.meta = 'Action'; });
     return A;
@@ -763,7 +784,7 @@
     return out.slice(0, 24);
   }
   function buildAll() {
-    var all = sectionItems().concat(actionItems(), projectItems());
+    var all = pageItems().concat(sectionItems(), actionItems(), projectItems());
     all.forEach(function (it) { it.ll = it.label.toLowerCase(); it.kl = (it.kw || '').toLowerCase(); it.hl = (it.hint || '').toLowerCase(); });
     pal.all = all;
   }
@@ -803,9 +824,10 @@
       pal.items = rows.map(function (r) { return r.it; });
     } else {
       var groups = [
-        ['Jump to', pal.all.filter(function (x) { return x.type === 'section'; })],
+        ['Go to', pal.all.filter(function (x) { return x.type === 'page' && !x.quiet; })],
+        ['On this page', pal.all.filter(function (x) { return x.type === 'section'; })],
         ['Quick actions', pal.all.filter(function (x) { return x.type === 'action' && !x.quiet; })],
-        ['Featured projects', pal.all.filter(function (x) { return x.type === 'project' && x.featured; })]
+        ['Featured case studies', pal.all.filter(function (x) { return x.type === 'project' && x.featured; })]
       ];
       var i = 0, flat = [];
       groups.forEach(function (g, gi) {
@@ -847,7 +869,7 @@
     var dlg = h('dialog', 'fx-dialog fx-pal', null, { 'aria-label': 'Command palette' });
     var input = h('input', 'fx-pal__input', null, {
       type: 'text', role: 'combobox', 'aria-expanded': 'true', 'aria-controls': 'fx-pal-list', 'aria-autocomplete': 'list', 'aria-haspopup': 'listbox',
-      'aria-label': 'Search sections, projects and actions', placeholder: small() ? 'Search or jump to\u2026' : 'Search sections, projects, actions\u2026', autocomplete: 'off', autocapitalize: 'off', autocorrect: 'off', spellcheck: 'false', enterkeyhint: 'go'
+      'aria-label': 'Search pages, projects and actions', placeholder: small() ? 'Search or jump to\u2026' : 'Search pages, projects, actions\u2026', autocomplete: 'off', autocapitalize: 'off', autocorrect: 'off', spellcheck: 'false', enterkeyhint: 'go'
     });
     var closeBtn = h('button', 'fx-pal__x', [h('span', 'fx-pal__esc', 'Esc'), icon('x')], { type: 'button', 'aria-label': 'Close command palette' });
     var top = h('div', 'fx-pal__top', [icon('search'), input, closeBtn]);
@@ -932,9 +954,12 @@
 
   /* ================================================================== 6  MINI TERMINAL */
   var term = { built: false, open: false, dlg: null, box: null, body: null, out: null, input: null, ret: null, hist: [], hi: 0, draft: '', started: false, mx: null, timers: [], timer: 0 };
-  var SEC_ALIAS = { home: 'home', intro: 'home', about: 'about', build: 'build', services: 'build', stack: 'stack', skills: 'stack', work: 'work', projects: 'work', journey: 'journey', experience: 'journey', contact: 'contact' };
+  /* terminal "goto": real pages first, then (on the home page) the sections of the page */
+  var PAGE_ALIAS = { home: '', '/': '', projects: 'projects/', work: 'projects/', services: 'services/', about: 'about/', faq: 'faq/', contact: 'contact/', hire: 'contact/#hire', resume: 'resume/', cv: 'resume/' };
+  var SEC_ALIAS = { home: 'home', intro: 'home', top: 'home', services: 'offer', build: 'offer', offer: 'offer', work: 'selected', projects: 'selected', selected: 'selected', about: 'bio', bio: 'bio', experience: 'roles', roles: 'roles', process: 'process', faq: 'faq', contact: 'contact', hire: 'contact' };
 
   function termSections() { return qsa('section[id][data-rail]').map(function (s) { return s.id; }); }
+  function termPages() { return ['home'].concat(DATA.pages.filter(function (pg) { return pg.path; }).map(function (pg) { return pg.path.replace(/\/$/, ''); })); }
   function tone(c) { return 'fx-c-' + c; }
   function toneOf(t) { return { cyan: 'cyan', magenta: 'mag', purple: 'pur', blue: 'blu' }[t] || 'acc'; }
   function ps() { return [{ t: 'shaunak@portfolio', c: tone('grn') }, { t: ':', c: tone('dim') }, { t: '~', c: tone('cyan') }, { t: '$ ', c: tone('dim') }]; }
@@ -980,13 +1005,25 @@
     var hit = L.filter(function (p) { return p.id === a; })[0] || L.filter(function (p) { return p.id.indexOf(a) === 0; })[0] || L.filter(function (p) { return p.t.toLowerCase().indexOf(a) >= 0; })[0];
     return hit || null;
   }
-  function filterLabel(g) { var f = DATA.filters.filter(function (x) { return x.id === g; })[0]; return f ? f.label : g; }
+  function filterLabel(g) { var f = (DATA.filters || []).filter(function (x) { return x.id === g; })[0]; return f ? f.label : g; }
   function goSection(arg, c) {
-    var id = SEC_ALIAS[String(arg || '').toLowerCase().replace(/\/$/, '')] || String(arg || '').toLowerCase();
-    if (!doc.getElementById(id) || termSections().indexOf(id) < 0) { err('goto: no such section: ' + arg + '. Try: ' + termSections().join(', ')); return; }
-    row([{ t: '-> ', c: tone('dim') }, 'scrolling to ', { t: id, c: tone('acc') }]);
-    closeTerminal({ instant: false, restore: false });
-    setTimeout(function () { if (P.goto) P.goto(id); }, 60);
+    var key = String(arg || '').toLowerCase().replace(/\/$/, '');
+    if (key === 'hire') { row([{ t: '-> ', c: tone('dim') }, 'opening ', { t: 'the contact form', c: tone('acc') }]); closeTerminal({ instant: false, restore: false }); setTimeout(gotoContact, 60); return; }
+    if (Object.prototype.hasOwnProperty.call(PAGE_ALIAS, key)) {             /* real pages win over section names that share a word (about, services, faq, contact) */
+      var path = PAGE_ALIAS[key];
+      row([{ t: '-> ', c: tone('dim') }, 'opening ', { t: path || 'home', c: tone('acc') }]);
+      closeTerminal({ instant: false, restore: false });
+      setTimeout(function () { go(path); }, 80);
+      return;
+    }
+    var onPage = termSections().indexOf(SEC_ALIAS[key] || key) >= 0 ? (SEC_ALIAS[key] || key) : '';
+    if (onPage) {
+      row([{ t: '-> ', c: tone('dim') }, 'scrolling to ', { t: onPage, c: tone('acc') }]);
+      closeTerminal({ instant: false, restore: false });
+      setTimeout(function () { if (P.goto) P.goto(onPage); }, 60);
+      return;
+    }
+    err('goto: no such page or section: ' + arg + '. Try: ' + termPages().join(', ') + (termSections().length ? ' | on this page: ' + termSections().join(', ') : ''));
   }
 
   var LOGO = [' ____    ____ ', '/ ___|  / ___|', '\\___ \\ | |    ', ' ___) || |___ ', '|____/  \\____|'];
@@ -995,30 +1032,39 @@
       d: 'list commands', run: function () {
         say('Commands (click one, or type and press Enter). Tab completes, Up/Down recall history.', tone('dim'));
         Object.keys(CMDS).forEach(function (k) { if (!CMDS[k].hide) kv({ t: k, cmd: k, c: tone('acc') }, { t: CMDS[k].d, c: tone('dim') }); });
-        say('Also try: neofetch, matrix, sudo hire-me', tone('dim'));
+        say('Also try: neofetch, theme, matrix, sudo hire-me', tone('dim'));
       }
     },
     whoami: {
       d: 'who is behind this site', run: function () {
         row([{ t: DATA.name, c: tone('w') + ' fx-t-b' }, '  |  ', { t: DATA.role, c: tone('acc') }]);
-        say(DATA.degree + ' (' + DATA.period + ')');
+        say(DATA.degree + ' | ' + DATA.school);
         say(DATA.loc + '  |  ' + DATA.status);
         say(DATA.tagline, tone('dim'));
       }
     },
     about: {
-      d: 'short bio', run: function () { DATA.bio.forEach(function (p, i) { if (i) blank(); say(p); }); }
+      d: 'short bio', run: function () { DATA.bio.forEach(function (p, i) { if (i) blank(); say(p); }); row([{ t: '-> ', c: tone('dim') }, { t: 'goto about', cmd: 'goto about', c: tone('acc') }, { t: '  opens the About page', c: tone('dim') }]); }
     },
     skills: {
-      d: 'tools I use, by tier', run: function () {
-        ['daily', 'shipped', 'learning'].forEach(function (k, i) {
+      d: 'tools I use, in two tiers', run: function () {
+        ['core', 'also'].forEach(function (k, i) {
           var lab = DATA.skills.labels[k]; if (i) blank();
           row([{ t: lab.title, c: tone('acc') + ' fx-t-b' }, { t: '  ' + lab.caption, c: tone('dim') }]);
           var r = h('div', 'fx-term__row fx-term__tags');
-          DATA.skills[k].forEach(function (s) { r.appendChild(h('span', 'fx-t-tag ' + (k === 'daily' ? 'is-hot' : ''), s)); });
+          DATA.skills[k].forEach(function (s) { r.appendChild(h('span', 'fx-t-tag ' + (k === 'core' ? 'is-hot' : ''), s)); });
           term.out.appendChild(r);
         });
         term.body.scrollTop = term.body.scrollHeight;
+      }
+    },
+    services: {
+      d: 'what I take on as a freelancer', run: function () {
+        say('Select freelance AI and backend projects. Click one to open its page.', tone('dim'));
+        DATA.services.forEach(function (sv) {
+          kv({ t: sv.label, href: BASE + 'services/' + sv.slug + '/', c: tone('acc'), ext: false }, { t: sv.blurb, c: tone('dim') }, 'fx-term__tp');
+        });
+        row([{ t: '-> ', c: tone('dim') }, { t: 'hire', cmd: 'hire', c: tone('acc') }, { t: '  starts a project', c: tone('dim') }]);
       }
     },
     projects: {
@@ -1027,21 +1073,20 @@
         if (a[0]) {
           var p = findProject(a[0]);
           if (!p) { err('projects: no project matches "' + a[0] + '"'); return; }
-          row([{ t: p.t, c: tone('w') + ' fx-t-b' }, { t: '  ' + p.y + '  ', c: tone('dim') }, { t: '[' + (p.cat || filterLabel(p.g)) + ']', c: tone(toneOf(p.tone)) }]);
-          if (p.w) say('With ' + p.w, tone('acc'));
+          row([{ t: p.t, c: tone('w') + ' fx-t-b' }, { t: '  [' + (p.cat || filterLabel(p.g)) + ']', c: tone(toneOf(p.tone)) }]);
+          if (p.w) say('Co-built with ' + p.w, tone('acc'));
           say(p.d);
           kv({ t: 'stack', c: tone('dim') }, p.st.join(', '));
           kv({ t: 'status', c: tone('dim') }, p.status);
-          if (p.repo) kv({ t: 'repo', c: tone('dim') }, [{ t: p.repo.replace(/^https?:\/\//, ''), href: p.repo, c: tone('acc') }, p.by ? { t: '  (repo owned by ' + p.by + ')', c: tone('dim') } : '']);
-          if (p.live) kv({ t: 'live', c: tone('dim') }, { t: p.live.replace(/^https?:\/\//, ''), href: p.live, c: tone('acc') });
-          row([{ t: '-> ', c: tone('dim') }, { t: 'open ' + p.id, cmd: 'open ' + p.id, c: tone('acc') }, { t: '  opens the case study', c: tone('dim') }]);
+          if (p.repo) kv({ t: 'repo', c: tone('dim') }, { t: p.repo.replace(/^https?:\/\//, ''), href: p.repo, c: tone('acc') });
+          row([{ t: '-> ', c: tone('dim') }, { t: 'open ' + p.id, cmd: 'open ' + p.id, c: tone('acc') }, { t: p.cs ? '  opens the case study' : '  opens the project list', c: tone('dim') }]);
           return;
         }
         say(DATA.projects.length + ' projects. Click one or type: projects <number | id>', tone('dim'));
         DATA.projects.forEach(function (p, i) {
           var r = h('div', 'fx-term__row fx-term__prj');
           r.appendChild(h('span', tone('dim'), String(i + 1).padStart(2, '0')));
-          r.appendChild(h('span', tone('dim'), p.y));
+          r.appendChild(h('span', tone('dim'), p.cs ? 'case' : 'more'));
           r.appendChild(piece({ t: p.t, cmd: 'projects ' + (i + 1), c: tone(toneOf(p.tone)) }));
           r.appendChild(h('span', tone('dim') + ' fx-term__area', p.cat || filterLabel(p.g)));
           term.out.appendChild(r);
@@ -1050,7 +1095,7 @@
       }
     },
     open: {
-      d: 'open a project case study (open <n | id>)', complete: function () { return DATA.projects.map(function (p) { return p.id; }); },
+      d: 'open a project page (open <n | id>)', complete: function () { return DATA.projects.map(function (p) { return p.id; }); },
       run: function (a) {
         var p = findProject(a[0]);
         if (!a[0]) { err('usage: open <number | id>   (see: projects)'); return; }
@@ -1061,40 +1106,40 @@
       }
     },
     experience: {
-      d: 'internships and work', run: function () {
+      d: 'industry roles and programmes', run: function () {
         var nWork = DATA.exp.filter(function (e) { return e.g === 'work'; }).length, nProg = DATA.exp.length - nWork;
-        say('INTERNSHIPS', tone('acc') + ' fx-t-b');
+        say('INDUSTRY ROLES', tone('acc') + ' fx-t-b');
         DATA.exp.filter(function (e) { return e.g === 'work'; }).forEach(function (e) {
           kv([{ t: e.r, c: tone('w') + ' fx-t-b' }, ' - ' + e.o], { t: e.p, c: tone('dim') }, 'fx-term__tp');
           e.b.forEach(function (b) { row([{ t: '  - ', c: tone('dim') }, b], 'fx-term__li'); });
         });
-        blank(); say('PROGRAMMES & SHORT STINTS', tone('acc') + ' fx-t-b');
+        blank(); say('PROGRAMMES AND SHORT STINTS', tone('acc') + ' fx-t-b');
         DATA.exp.filter(function (e) { return e.g !== 'work'; }).forEach(function (e) { kv([e.r + ' - ' + e.o], { t: e.p, c: tone('dim') }, 'fx-term__tp'); });
-        blank(); say(nWork + ' internships + ' + nProg + ' programmes', tone('dim'));
+        blank(); say(nWork + ' industry roles + ' + nProg + ' programmes', tone('dim'));
       }
     },
     education: {
-      d: 'degree, certifications', run: function () {
-        DATA.edu.forEach(function (e) { kv([{ t: e.d, c: tone('w') + ' fx-t-b' }, ' - ' + e.i], { t: e.p + (e.g ? '  |  ' + e.g : ''), c: tone('dim') }, 'fx-term__tp'); });
+      d: 'degree and certifications', run: function () {
+        kv([{ t: DATA.degree, c: tone('w') + ' fx-t-b' }], { t: DATA.school, c: tone('dim') }, 'fx-term__tp');
         blank(); say('CERTIFICATIONS', tone('acc') + ' fx-t-b');
-        DATA.certs.forEach(function (c) { kv([c.n], { t: c.i + (c.y ? ' ' + c.y : ''), c: tone('dim') }, 'fx-term__tp'); });
+        DATA.certs.forEach(function (c) { kv([c.n], { t: c.i, c: tone('dim') }, 'fx-term__tp'); });
       }
     },
     awards: {
-      d: 'contests and hackathons', run: function () { DATA.awards.forEach(function (a) { kv([a.t], { t: String(a.y), c: tone('dim') }, 'fx-term__tp'); }); }
+      d: 'contests and hackathons', run: function () { DATA.awards.forEach(function (a) { say(a.t); }); }
     },
     contact: {
       d: 'how to reach me', run: function () {
         kv({ t: 'email', c: tone('dim') }, [{ t: DATA.email, href: 'mailto:' + DATA.email, c: tone('acc') }, '  ', { t: '[copy]', cmd: 'copy', c: tone('dim') }]);
         kv({ t: 'github', c: tone('dim') }, { t: DATA.gh.replace(/^https?:\/\//, ''), href: DATA.gh, c: tone('acc') });
         kv({ t: 'linkedin', c: tone('dim') }, { t: DATA.li.replace(/^https?:\/\/(www\.)?/, ''), href: DATA.li, c: tone('acc') });
-        kv({ t: 'instagram', c: tone('dim') }, { t: DATA.ig.replace(/^https?:\/\/(www\.)?/, ''), href: DATA.ig, c: tone('acc') });
         kv({ t: 'location', c: tone('dim') }, DATA.loc);
-        row([{ t: '-> ', c: tone('dim') }, { t: 'goto contact', cmd: 'goto contact', c: tone('acc') }, { t: '  jumps to the contact form', c: tone('dim') }]);
+        row([{ t: '-> ', c: tone('dim') }, { t: 'hire', cmd: 'hire', c: tone('acc') }, { t: '  jumps to the contact form', c: tone('dim') }]);
       }
     },
-    hire: { d: 'start a freelance project (jumps to the contact form)', run: function () { toast('Let’s build something', 'success'); row([{ t: '-> ', c: tone('dim') }, 'scrolling to ', { t: 'contact', c: tone('acc') }]); closeTerminal({ instant: false, restore: false }); setTimeout(gotoContact, 60); } },
-    resume: { d: 'download my resume (PDF)', run: function () { row([{ t: '-> ', c: tone('dim') }, 'downloading ', { t: 'Shaunak-Chorge-Resume.pdf', c: tone('acc') }]); downloadResume(); } },
+    hire: { d: 'start a freelance project (opens the contact form)', run: function () { toast('Let’s build something', 'success'); row([{ t: '-> ', c: tone('dim') }, 'opening ', { t: 'the contact form', c: tone('acc') }]); closeTerminal({ instant: false, restore: false }); setTimeout(gotoContact, 60); } },
+    resume: { d: 'open my resume page', run: function () { row([{ t: '-> ', c: tone('dim') }, 'opening ', { t: 'resume', c: tone('acc') }, { t: '  (PDF: type "pdf")', c: tone('dim') }]); closeTerminal({ instant: false, restore: false }); setTimeout(function () { go('resume/'); }, 80); } },
+    pdf: { d: 'download my resume (PDF)', run: function () { row([{ t: '-> ', c: tone('dim') }, 'downloading ', { t: 'Shaunak-Chorge-Resume.pdf', c: tone('acc') }]); downloadResume(); } },
     github: { d: 'open GitHub', run: function () { row([{ t: '-> ', c: tone('dim') }, { t: DATA.gh, href: DATA.gh, c: tone('acc') }]); openExternal(DATA.gh); } },
     linkedin: { d: 'open LinkedIn', run: function () { row([{ t: '-> ', c: tone('dim') }, { t: DATA.li, href: DATA.li, c: tone('acc') }]); openExternal(DATA.li); } },
     instagram: { d: 'open Instagram', run: function () { row([{ t: '-> ', c: tone('dim') }, { t: DATA.ig, href: DATA.ig, c: tone('acc') }]); openExternal(DATA.ig); } },
@@ -1110,13 +1155,13 @@
       }
     },
     goto: {
-      d: 'jump to a section (goto <name>)', complete: function () { return termSections(); },
-      run: function (a) { if (!a[0]) { row(['sections: ', { t: termSections().join('  '), c: tone('acc') }]); return; } goSection(a[0]); }
+      d: 'open a page or jump to a section (goto <name>)', complete: function () { return termPages().concat(termSections()); },
+      run: function (a) { if (!a[0]) { row(['pages: ', { t: termPages().join('  '), c: tone('acc') }]); if (termSections().length) row(['on this page: ', { t: termSections().join('  '), c: tone('acc') }]); return; } goSection(a[0]); }
     },
     ls: {
-      d: 'list sections', run: function () {
+      d: 'list pages', run: function () {
         var r = h('div', 'fx-term__row fx-term__ls');
-        termSections().forEach(function (id) { r.appendChild(piece({ t: id + '/', cmd: 'goto ' + id, c: tone('cyan') })); });
+        termPages().forEach(function (id) { r.appendChild(piece({ t: id + '/', cmd: 'goto ' + id, c: tone('cyan') })); });
         term.out.appendChild(r); term.body.scrollTop = term.body.scrollHeight;
       }
     },
@@ -1131,14 +1176,14 @@
         var info = h('div', 'fx-term__nfi');
         info.appendChild(h('div', null, [h('span', tone('grn') + ' fx-t-b', 'shaunak'), '@', h('span', tone('cyan') + ' fx-t-b', 'portfolio')]));
         info.appendChild(h('div', tone('dim'), '------------------'));
-        [['role', DATA.role], ['degree', DATA.degree.replace('B.Tech in ', 'B.Tech, ')], ['location', DATA.loc], ['stack', DATA.hero.stack.join(', ')], ['freelance', DATA.freelance], ['status', DATA.status], ['accent', accentName()]].forEach(function (x) {
+        [['role', DATA.role], ['degree', DATA.degree], ['location', DATA.loc], ['stack', DATA.hero.stack.join(', ')], ['freelance', DATA.freelance], ['status', DATA.status], ['accent', accentName()]].forEach(function (x) {
           info.appendChild(h('div', null, [h('span', tone('acc') + ' fx-t-b', x[0] + ' '.repeat(Math.max(1, 10 - x[0].length))), x[1]]));
         });
         r.appendChild(logo); r.appendChild(info); term.out.appendChild(r); term.body.scrollTop = term.body.scrollHeight;
       }
     },
     date: {
-      d: 'local time in Pune', run: function () {
+      d: 'local time in Mumbai', run: function () {
         var s; try { s = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', dateStyle: 'full', timeStyle: 'medium' }).format(new Date()) + ' IST'; } catch (e) { s = new Date().toString(); }
         say(s);
       }
@@ -1163,7 +1208,7 @@
           function () { row([{ t: 'ACCESS GRANTED', c: tone('grn') + ' fx-t-b' }]); },
           function () { say(DATA.name + ' is ' + DATA.avail.charAt(0).toLowerCase() + DATA.avail.slice(1)); },
           function () { kv({ t: 'email', c: tone('dim') }, [{ t: DATA.email, href: 'mailto:' + DATA.email, c: tone('acc') }, '  ', { t: '[copy]', cmd: 'copy', c: tone('dim') }]); },
-          function () { row([{ t: '-> ', c: tone('dim') }, { t: 'goto contact', cmd: 'goto contact', c: tone('acc') }, { t: '  or use the form', c: tone('dim') }]); }
+          function () { row([{ t: '-> ', c: tone('dim') }, { t: 'hire', cmd: 'hire', c: tone('acc') }, { t: '  or use the form', c: tone('dim') }]); }
         ];
         steps.forEach(function (fn, i) { if (reduced()) fn(); else later(fn, i * 380); });
       }
@@ -1290,7 +1335,7 @@
     });
     var hint = h('p', 'sr-only', 'Type a command and press Enter. Tab completes, Up and Down recall history, Escape closes the terminal.', { id: 'fx-term-hint' });
     var quick = h('div', 'fx-term__quick');
-    ['help', 'whoami', 'projects', 'skills', 'contact', 'theme', 'exit'].forEach(function (c) { quick.appendChild(h('button', 'fx-term__qb', c, { type: 'button', 'data-cmd': c })); });
+    ['help', 'whoami', 'services', 'projects', 'skills', 'hire', 'exit'].forEach(function (c) { quick.appendChild(h('button', 'fx-term__qb', c, { type: 'button', 'data-cmd': c })); });
     var prompt = h('div', 'fx-term__prompt', [h('span', 'fx-term__ps', [h('span', tone('grn'), 'shaunak@portfolio'), h('span', tone('dim'), ':'), h('span', tone('cyan'), '~'), h('span', tone('dim'), '$')], { 'aria-hidden': 'true' }), input]);
     var box = h('div', 'fx-term__box', [bar, body, quick, prompt, hint]);
     dlg.appendChild(h('div', 'fx-dialog__wrap', box));
@@ -1428,7 +1473,7 @@
     try {
       console.log('%c' + art, 'color:#00ffff;font:700 13px/1.15 ui-monospace,Menlo,Consolas,monospace;text-shadow:0 0 8px #00ffff;');
       console.log('%c Hello, fellow developer. %c You opened the console, so we will probably get along.', 'background:#00ffff;color:#000;font-weight:700;padding:2px 6px;border-radius:3px;' + base, 'color:#c8d3e0;' + base);
-      console.log('%cI build LLM apps, vision and speech models and the Python backends around them. ' + DATA.status + ' - if you are hiring, say hi.', 'color:#ff2d86;' + base);
+      console.log('%cI build AI chatbots, computer vision tools and the Python backends behind them. ' + DATA.status + ' - if you are hiring, say hi.', 'color:#ff2d86;' + base);
       console.log('%cGitHub  %c' + DATA.gh + '\n%cEmail   %c' + DATA.email, 'color:#8b95aa;' + base, 'color:#00ffff;' + base, 'color:#8b95aa;' + base, 'color:#00ffff;' + base);
       console.log('%cTip: Ctrl+K opens the command palette, Ctrl+` opens a terminal, and there is a Konami code.', 'color:#8b95aa;font-style:italic;' + base);
     } catch (e) { /* ignore */ }

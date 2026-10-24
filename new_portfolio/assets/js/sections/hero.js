@@ -22,7 +22,23 @@
   function qs(sel, ctx) { return (ctx || doc).querySelector(sel); }
   function qsa(sel, ctx) { return Array.prototype.slice.call((ctx || doc).querySelectorAll(sel)); }
 
+  /* decorative photos start loading just after the first paint (markup holds data-src / data-srcset behind a 1px placeholder),
+     so they never compete with the CSS and fonts that paint the text. Runs even when the hero animation is off. */
+  function lateImages() {
+    qsa('[data-late]').forEach(function (pic) {
+      qsa('source[data-srcset]', pic).forEach(function (s) { s.srcset = s.getAttribute('data-srcset'); s.removeAttribute('data-srcset'); });
+      var img = qs('img[data-src]', pic);
+      if (img) { img.src = img.getAttribute('data-src'); img.removeAttribute('data-src'); }
+      pic.removeAttribute('data-late');
+    });
+  }
+  function scheduleLate() {
+    var go = function () { setTimeout(lateImages, 80); };
+    if (doc.readyState === 'complete') go(); else window.addEventListener('load', go, { once: true });
+  }
+
   function boot() {
+    scheduleLate();
     var root = doc.getElementById('home');
     if (!root) return;
 
@@ -245,14 +261,14 @@
     }, { threshold: 0 });
     io.observe(root);
 
-    /* typing begins when the code window is actually on screen (>= 25%): on phones it sits below the CTAs */
+    /* typing begins when the code window is actually on screen (>= 25%): on phones it sits below the text */
     var ioStage = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (!en.isIntersecting || S.armed) return;
         S.armed = true; ioStage.disconnect(); start();
       });
     }, { threshold: P.isMobile ? 0.6 : 0.25 });   /* phones: wait until most of the (shorter) editor is in view */
-    var stageEl = qs('.hero__stage', root);
+    var stageEl = qs('.hero__code', root);
     if (stageEl) ioStage.observe(stageEl); else S.armed = true;
 
     /* OS "reduce motion" switched on while the page is open: finish at once */

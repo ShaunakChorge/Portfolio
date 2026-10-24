@@ -1,14 +1,16 @@
 # local tooling
 node_modules/
-package-lock.json
-package.json
 
-# editor / assistant workspaces
+# generated on every build (node build.mjs --min recreates them); the deployed pages and assets/dist stay tracked
+new_portfolio/src/generated/
+
+# private source material and assistant workspaces (stay on this computer)
+_private/
 .claude/
 .vscode/
 
 # scratch
 preview-*.html
 *.log
-profile.md
-import_shared_repos.ps1
+.DS_Store
+Thumbs.db

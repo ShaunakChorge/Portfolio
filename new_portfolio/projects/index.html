@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI and Backend Projects | Shaunak Chorge</title>
+  <meta name="description" content="Selected AI chatbot, computer vision and Python backend projects by Shaunak Chorge, with case studies, results and the tools behind each one.">
+  <meta name="author" content="Shaunak Chorge">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Shaunak Chorge">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:title" content="AI and Backend Projects | Shaunak Chorge">
+  <meta property="og:description" content="Selected AI chatbot, computer vision and Python backend projects by Shaunak Chorge, with case studies, results and the tools behind each one.">
+  <meta property="og:url" content="https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/">
+  <meta property="og:image" content="https://shaunakchorge.github.io/Portfolio/new_portfolio/assets/img/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Shaunak Chorge, AI Engineer and freelance developer in Mumbai">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI and Backend Projects | Shaunak Chorge">
+  <meta name="twitter:description" content="Selected AI chatbot, computer vision and Python backend projects by Shaunak Chorge, with case studies, results and the tools behind each one.">
+  <meta name="twitter:image" content="https://shaunakchorge.github.io/Portfolio/new_portfolio/assets/img/og-image.png">
+  <meta name="twitter:image:alt" content="Shaunak Chorge, AI Engineer and freelance developer in Mumbai">
+
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/img/favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="../site.webmanifest">
+
+  <link rel="preload" href="../assets/fonts/orbitron-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+  <script>
+    /* progressive enhancement: content is readable without JS; [data-reveal] hides only under .js.
+       Also restores the saved accent colour before first paint (no flash). */
+    document.documentElement.classList.add('js');
+    try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
+    try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../assets/dist/site.min.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/#webpage",
+      "url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/",
+      "name": "AI and Backend Projects | Shaunak Chorge",
+      "description": "Selected AI chatbot, computer vision and Python backend projects by Shaunak Chorge, with case studies, results and the tools behind each one.",
+      "isPartOf": {
+        "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/#breadcrumb"
+      },
+      "mainEntity": {
+        "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/#cases"
+      },
+      "about": {
+        "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/#person"
+      }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/#cases",
+      "name": "Case studies",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AMS AI Finding Drafting Engine",
+          "url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/ams-ai-finding-engine/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Obligation Management System",
+          "url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/obligation-management-system/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Core-Banking Text-to-SQL Assistant",
+          "url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/core-banking-text-to-sql/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Healthcare Policy Chatbot",
+          "url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/ai-rag-healthcare-assistant/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Scam-Catching AI Honey-Pot",
+          "url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/agentic-honeypot/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "CCTV Crime and Crowd Analytics",
+          "url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/advanced-cctv-analytics/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "name": "Speech Emotion Recognition",
+          "url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/speech-emotion-recognition/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "name": "DeepFake Video Detection",
+          "url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/deepfake-video-detection/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "name": "Traceable AI Backend",
+          "url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/observable-ai-backend/"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://shaunakchorge.github.io/Portfolio/new_portfolio/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Projects",
+          "item": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/"
+        }
+      ],
+      "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/#breadcrumb"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/#person",
+      "name": "Shaunak Chorge",
+      "url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/"
+    }
+  ]
+}
+</script>
+</head>
+<body data-page="projects">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="top"></div>
+
+  <!-- page-fixed background: colour wash + 3 drifting orbs + shimmer + film grain (decorative) -->
+  <div class="bg-fixed" aria-hidden="true">
+    <div class="bg-wash"></div>
+    <div class="bg-orbs"><i class="orb orb--cyan"></i><i class="orb orb--purple"></i><i class="orb orb--magenta"></i></div>
+    <div class="bg-shimmer"></div>
+    <div class="bg-grain"></div>
+  </div>
+
+  <div class="progress" aria-hidden="true"><span class="progress__bar"></span><span class="progress__head"></span></div>
+
+  <header class="site-header">
+    <div class="site-header__bar">
+      <div class="site-header__in">
+        <a class="logo" href="../" aria-label="Shaunak Chorge, home">
+          <!-- electric-S mark (original artwork, see build/logo/mark.svg): cyan -> purple -> magenta -->
+          <svg class="logo__mark" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false"><defs><linearGradient id="lg-mark" x1="6" y1="2" x2="58" y2="62" gradientUnits="userSpaceOnUse"><stop stop-color="#00FFFF"/><stop offset=".52" stop-color="#B553F2"/><stop offset="1" stop-color="#FF006E"/></linearGradient></defs><path d="M44.76 1L3 7.32L3 15.5L39.02 38.91L3 61.49L3 63L9.03 63L61 43L61 36.5L27.4 14.66L61 2.07L61 1Z" fill="url(#lg-mark)"/></svg>
+          <span class="logo__word">SHAUNAK</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          <ul class="nav__list">
+            <li><a class="nav__link" href="../">Home</a></li>
+            <li><a class="nav__link" href="../projects/" aria-current="page">Projects</a></li>
+            <li><a class="nav__link" href="../services/">Services</a></li>
+            <li><a class="nav__link" href="../about/">About</a></li>
+            <li><a class="nav__link" href="../faq/">FAQ</a></li>
+            <li><a class="nav__link" href="../contact/">Contact</a></li>
+          </ul>
+          <span class="nav__ind" aria-hidden="true"></span>
+        </nav>
+
+        <div class="site-header__tools">
+          <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST" title="Local time in Mumbai">MUMBAI</span>
+          <button class="cmd" type="button" data-open-palette aria-label="Search, open command palette" aria-keyshortcuts="Control+K Meta+K">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
+            <span class="cmd__text">Search</span>
+            <kbd class="kbd" data-kbd aria-hidden="true">Ctrl K</kbd>
+          </button>
+          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+          <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+            <span class="burger__lines" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="drawer" id="drawer" aria-label="Mobile">
+    <ul class="drawer__list">
+      <li><a class="drawer__link" href="../" style="--i:0"><small>01</small>Home</a></li>
+      <li><a class="drawer__link" href="../projects/" aria-current="page" style="--i:1"><small>02</small>Projects</a></li>
+      <li><a class="drawer__link" href="../services/" style="--i:2"><small>03</small>Services</a></li>
+      <li><a class="drawer__link" href="../about/" style="--i:3"><small>04</small>About</a></li>
+      <li><a class="drawer__link" href="../faq/" style="--i:4"><small>05</small>FAQ</a></li>
+      <li><a class="drawer__link" href="../contact/" style="--i:5"><small>06</small>Contact</a></li>
+    </ul>
+    <div class="drawer__foot">
+      <a class="btn btn--solid btn--glow btn--sm drawer__hire" href="../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+      <a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a>
+      <a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a>
+      <a class="icon-btn" href="mailto:shaunak.chorge@gmail.com" aria-label="Email Shaunak"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
+      <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST">MUMBAI</span>
+    </div>
+  </nav>
+
+  <nav class="rail" aria-label="Page sections" hidden><ol class="rail__list"></ol></nav>
+
+  <main id="main" tabindex="-1">
+<section class="pg-head">
+  <div class="container">
+    <nav class="pg-crumbs" aria-label="Breadcrumb"><ol><li><a href="../">Home</a></li><li><span aria-current="page">Projects</span></li></ol></nav>
+    <div class="pg-head__grid">
+      <div class="pg-head__main">
+        <p class="eyebrow">Projects</p>
+        <h1 class="pg-h1">Projects</h1>
+        <p class="pg-lead">A selection of the Artificial Intelligence (AI) chatbot, computer vision, speech and backend work I have built, at my job and on my own. Nine have full case studies, including what I can add for a client.</p>
+        <p class="pg-answer" data-answer>Shaunak Chorge's work includes AI systems built at Claptek for audit and compliance, a chatbot that cites its sources, a backend that shows where requests slow down, speech and vision models, and automation. Nine projects have full case studies with the problem, what he built, measured results and what he can add for a client. Smaller builds are listed at the end.</p>
+        <div class="pg-actions"><a class="btn btn--solid btn--lg btn--glow" href="../contact/#hire">Hire me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="btn btn--ghost btn--lg" href="../services/">See services <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+      </div>
+      
+    </div>
+  </div>
+</section><section id="case-studies" class="section pg-sec" aria-labelledby="case-studies-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Case studies</p>
+      <h2 id="case-studies-h" class="section__title">Case studies with <span class="hl">the evidence</span></h2>
+      <p class="section__lead">Each one covers the problem, what I built, what it does and what the results do not show.</p>
+    </header>
+<div class="pg-filterbar" data-filterbar hidden data-reveal>
+      <div role="group" aria-label="Filter selected projects by category"><ul class="chips" role="list"><li><button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="chip__count" aria-hidden="true">12</span><span class="sr-only">(12 projects)</span></button></li><li><button type="button" class="chip" data-filter="llm" data-tone="cyan" aria-pressed="false">AI chatbots and agents <span class="chip__count" aria-hidden="true">4</span><span class="sr-only">(4 projects)</span></button></li><li><button type="button" class="chip" data-filter="vision" data-tone="magenta" aria-pressed="false">Computer vision <span class="chip__count" aria-hidden="true">2</span><span class="sr-only">(2 projects)</span></button></li><li><button type="button" class="chip" data-filter="speech-ml" data-tone="purple" aria-pressed="false">Machine learning and speech <span class="chip__count" aria-hidden="true">2</span><span class="sr-only">(2 projects)</span></button></li><li><button type="button" class="chip" data-filter="backend" data-tone="blue" aria-pressed="false">Backend and APIs <span class="chip__count" aria-hidden="true">3</span><span class="sr-only">(3 projects)</span></button></li><li><button type="button" class="chip" data-filter="automation" data-tone="blue" aria-pressed="false">Automation <span class="chip__count" aria-hidden="true">1</span><span class="sr-only">(1 project)</span></button></li></ul></div>
+      <p class="pg-filtercount" data-filtercount role="status" aria-live="polite" aria-atomic="true">Showing <strong>12</strong> of 12 projects</p>
+    </div>
+    <ul class="pg-grid pg-grid--cases" role="list" data-filterable><li class="pg-grid__item" data-pid="ams-ai-finding-engine" data-cat="llm">
+      <article class="card pg-proj" data-tone="cyan" data-tilt data-reveal style="--i:0" aria-labelledby="pj-ams-ai-finding-engine">
+        <div class="pg-proj__media"><div class="pv" data-visual="code" data-variant="ams-ai-finding-engine" data-tone="cyan" aria-hidden="true"></div></div>
+        <div class="pg-proj__body">
+          <p class="pg-proj__meta">AI and backend</p>
+          <h3 class="pg-proj__title" id="pj-ams-ai-finding-engine">AMS AI Finding Drafting Engine</h3>
+          <p class="pg-proj__blurb">Turns short audit notes into three draft findings, with code that blocks any invented fact. Drafts whole spreadsheets in bulk.</p>
+          <p class="pg-proj__stat"><span class="pg-proj__num">7.9 min to 16.9 s</span><span class="pg-proj__statlabel">Time per request (about 28x faster)</span></p>
+          <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Pydantic v2</li><li class="tag">TF-IDF</li></ul>
+          <div class="pg-proj__foot"><a class="link-arrow card__link" href="../projects/ams-ai-finding-engine/">Read case study<span class="sr-only">: AMS AI Finding Drafting Engine</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+        </div>
+      </article>
+    </li><li class="pg-grid__item" data-pid="obligation-management-system" data-cat="llm">
+      <article class="card pg-proj" data-tone="cyan" data-tilt data-reveal style="--i:1" aria-labelledby="pj-obligation-management-system">
+        <div class="pg-proj__media"><div class="pv" data-visual="screenshot" data-variant="generic-obligation-management-system" data-tone="cyan" aria-hidden="true"></div></div>
+        <div class="pg-proj__body">
+          <p class="pg-proj__meta">AI and documents</p>
+          <h3 class="pg-proj__title" id="pj-obligation-management-system">Obligation Management System</h3>
+          <p class="pg-proj__blurb">Reads regulatory PDFs and lists every obligation, each linked to the exact highlighted passage. 97.2% of 1,266 records located.</p>
+          <p class="pg-proj__stat"><span class="pg-proj__num">97.2% of 1,266</span><span class="pg-proj__statlabel">Records linked to an exact passage</span></p>
+          <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Ollama</li><li class="tag">PyMuPDF</li></ul>
+          <div class="pg-proj__foot"><a class="link-arrow card__link" href="../projects/obligation-management-system/">Read case study<span class="sr-only">: Obligation Management System</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+        </div>
+      </article>
+    </li><li class="pg-grid__item" data-pid="finacle-text-to-sql" data-cat="backend">
+      <article class="card pg-proj" data-tone="blue" data-tilt data-reveal style="--i:2" aria-labelledby="pj-finacle-text-to-sql">
+        <div class="pg-proj__media"><div class="pv" data-visual="terminal" data-variant="finacle-text-to-sql" data-tone="blue" aria-hidden="true"></div></div>
+        <div class="pg-proj__body">
+          <p class="pg-proj__meta">AI and data</p>
+          <h3 class="pg-proj__title" id="pj-finacle-text-to-sql">Core-Banking Text-to-SQL Assistant</h3>
+          <p class="pg-proj__blurb">Turns plain questions into database queries for core-banking reports, on the bank's own servers, with a self-correcting loop.</p>
+          <p class="pg-proj__stat"><span class="pg-proj__num">34% to 54%</span><span class="pg-proj__statlabel">Accounts found (recall)</span></p>
+          <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">sqlglot</li><li class="tag">Oracle</li></ul>
+          <div class="pg-proj__foot"><a class="link-arrow card__link" href="../projects/core-banking-text-to-sql/">Read case study<span class="sr-only">: Core-Banking Text-to-SQL Assistant</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+        </div>
+      </article>
+    </li><li class="pg-grid__item" data-pid="ai-rag-healthcare-assistant" data-cat="llm">
+      <article class="card pg-proj" data-tone="cyan" data-tilt data-reveal style="--i:0" aria-labelledby="pj-ai-rag-healthcare-assistant">
+        <div class="pg-proj__media"><div class="pv" data-visual="chat" data-variant="ai-rag-healthcare-assistant" data-tone="cyan" aria-hidden="true"></div></div>
+        <div class="pg-proj__body">
+          <p class="pg-proj__meta">AI chatbot</p>
+          <h3 class="pg-proj__title" id="pj-ai-rag-healthcare-assistant">Healthcare Policy Chatbot</h3>
+          <p class="pg-proj__blurb">A chatbot over healthcare policy documents that cites its source, or says it does not know.</p>
+          <p class="pg-proj__stat"><span class="pg-proj__num">6</span><span class="pg-proj__statlabel">Sample policy documents (made up, no real patient data)</span></p>
+          <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">LangChain</li><li class="tag">ChromaDB</li></ul>
+          <div class="pg-proj__foot"><a class="link-arrow card__link" href="../projects/ai-rag-healthcare-assistant/">Read case study<span class="sr-only">: Healthcare Policy Chatbot</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+        </div>
+      </article>
+    </li><li class="pg-grid__item" data-pid="agentic-honeypot" data-cat="llm">
+      <article class="card pg-proj" data-tone="cyan" data-tilt data-reveal style="--i:1" aria-labelledby="pj-agentic-honeypot">
+        <div class="pg-proj__media"><div class="pv" data-visual="chat" data-variant="agentic-honeypot" data-tone="cyan" aria-hidden="true"></div></div>
+        <div class="pg-proj__body">
+          <p class="pg-proj__meta">AI agent</p>
+          <h3 class="pg-proj__title" id="pj-agentic-honeypot">Scam-Catching AI Honey-Pot</h3>
+          <p class="pg-proj__blurb">An AI plays an easily fooled victim, keeps scammers chatting and logs the payment IDs, links and phone numbers they reveal.</p>
+          <p class="pg-proj__stat"><span class="pg-proj__num">4 written, 4 merged</span><span class="pg-proj__statlabel">My contributions (19 changes in total)</span></p>
+          <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Pydantic</li><li class="tag">Groq API</li></ul>
+          <div class="pg-proj__foot"><a class="link-arrow card__link" href="../projects/agentic-honeypot/">Read case study<span class="sr-only">: Scam-Catching AI Honey-Pot</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+        </div>
+      </article>
+    </li><li class="pg-grid__item" data-pid="advanced-cctv-analytics" data-cat="vision">
+      <article class="card pg-proj" data-tone="magenta" data-tilt data-reveal style="--i:2" aria-labelledby="pj-advanced-cctv-analytics">
+        <div class="pg-proj__media"><div class="pv" data-visual="scan-grid" data-variant="advanced-cctv-analytics" data-tone="magenta" aria-hidden="true"></div></div>
+        <div class="pg-proj__body">
+          <p class="pg-proj__meta">Computer vision</p>
+          <h3 class="pg-proj__title" id="pj-advanced-cctv-analytics">CCTV Crime and Crowd Analytics</h3>
+          <p class="pg-proj__blurb">Smart India Hackathon team prototype: crowd-limit alerts, crime detection from video frames and face recognition on one camera feed.</p>
+          <p class="pg-proj__stat"><span class="pg-proj__num">14</span><span class="pg-proj__statlabel">Crime categories recognised</span></p>
+          <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">OpenCV</li><li class="tag">PyTorch</li><li class="tag">Hugging Face Transformers (ViT)</li></ul>
+          <div class="pg-proj__foot"><a class="link-arrow card__link" href="../projects/advanced-cctv-analytics/">Read case study<span class="sr-only">: CCTV Crime and Crowd Analytics</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+        </div>
+      </article>
+    </li><li class="pg-grid__item" data-pid="speech-emotion-recognition" data-cat="speech-ml">
+      <article class="card pg-proj" data-tone="purple" data-tilt data-reveal style="--i:0" aria-labelledby="pj-speech-emotion-recognition">
+        <div class="pg-proj__media"><div class="pv" data-visual="waveform" data-variant="speech-emotion-recognition" data-tone="purple" aria-hidden="true"></div></div>
+        <div class="pg-proj__body">
+          <p class="pg-proj__meta">Speech and machine learning</p>
+          <h3 class="pg-proj__title" id="pj-speech-emotion-recognition">Speech Emotion Recognition</h3>
+          <p class="pg-proj__blurb">Detects seven emotions in a voice clip with a neural network: 93.87% on a random test split, with live microphone input.</p>
+          <p class="pg-proj__stat"><span class="pg-proj__num">93.87%</span><span class="pg-proj__statlabel">Accuracy on a random 20% test split</span></p>
+          <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">TensorFlow / Keras</li><li class="tag">librosa</li><li class="tag">scikit-learn</li></ul>
+          <div class="pg-proj__foot"><a class="link-arrow card__link" href="../projects/speech-emotion-recognition/">Read case study<span class="sr-only">: Speech Emotion Recognition</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+        </div>
+      </article>
+    </li><li class="pg-grid__item" data-pid="deepfake-video-detection" data-cat="vision">
+      <article class="card pg-proj" data-tone="magenta" data-tilt data-reveal style="--i:1" aria-labelledby="pj-deepfake-video-detection">
+        <div class="pg-proj__media"><div class="pv" data-visual="scan-grid" data-variant="deepfake-video-detection" data-tone="magenta" aria-hidden="true"></div></div>
+        <div class="pg-proj__body">
+          <p class="pg-proj__meta">Computer vision</p>
+          <h3 class="pg-proj__title" id="pj-deepfake-video-detection">DeepFake Video Detection</h3>
+          <p class="pg-proj__blurb">Scores each frame of a video as real or fake, with a web app and PDF report. College team project, 74.16% accuracy.</p>
+          <p class="pg-proj__stat"><span class="pg-proj__num">74.16%</span><span class="pg-proj__statlabel">Test accuracy (random frame split)</span></p>
+          <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">TensorFlow / Keras</li><li class="tag">OpenCV</li><li class="tag">Streamlit</li></ul>
+          <div class="pg-proj__foot"><a class="link-arrow card__link" href="../projects/deepfake-video-detection/">Read case study<span class="sr-only">: DeepFake Video Detection</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+        </div>
+      </article>
+    </li><li class="pg-grid__item" data-pid="observable-ai-backend" data-cat="backend">
+      <article class="card pg-proj" data-tone="blue" data-tilt data-reveal style="--i:2" aria-labelledby="pj-observable-ai-backend">
+        <div class="pg-proj__media"><div class="pv" data-visual="network" data-variant="observable-ai-backend" data-tone="blue" aria-hidden="true"></div></div>
+        <div class="pg-proj__body">
+          <p class="pg-proj__meta">AI and backend</p>
+          <h3 class="pg-proj__title" id="pj-observable-ai-backend">Traceable AI Backend</h3>
+          <p class="pg-proj__blurb">An AI-routed backend that shows exactly where each request goes and where it slows down, with request IDs, metrics and traces.</p>
+          <p class="pg-proj__stat"><span class="pg-proj__num">15 s to under 50 ms</span><span class="pg-proj__statlabel">Slow lookup, before and after the fix (made-up data)</span></p>
+          <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Pydantic</li><li class="tag">OpenTelemetry</li></ul>
+          <div class="pg-proj__foot"><a class="link-arrow card__link" href="../projects/observable-ai-backend/">Read case study<span class="sr-only">: Traceable AI Backend</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+        </div>
+      </article>
+    </li></ul>
+  </div>
+</section><section id="also-selected" class="section pg-sec section--tint" aria-labelledby="also-selected-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Also selected</p>
+      <h2 id="also-selected-h" class="section__title">More selected <span class="hl hl--blue">work</span></h2>
+      <p class="section__lead">Smaller builds, and client work, that do not have a full write-up.</p>
+    </header>
+<ul class="pg-grid pg-grid--mini" role="list" data-filterable><li class="pg-grid__item" data-pid="django-box-selection-api" data-cat="backend" id="p-django-box-selection-api">
+      <article class="card pg-mini card--flat" data-tone="blue" data-reveal style="--i:0" aria-labelledby="pj-django-box-selection-api">
+        <p class="pg-proj__meta">Backend</p>
+        <h3 class="pg-proj__title" id="pj-django-box-selection-api">Box Selection API</h3>
+        <p class="pg-proj__blurb">Give it an order and this Django API picks the fewest, cheapest shipping boxes. It tries every rotation, and 27 tests pass.</p>
+        <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python 3.12</li><li class="tag">Django 5</li><li class="tag">Django REST Framework</li><li class="tag">SQLite</li></ul>
+        <div class="pg-proj__foot"><a class="link-arrow" href="https://github.com/ShaunakChorge/PythonDjangoAssignment" target="_blank" rel="noopener noreferrer">View code on GitHub<span class="sr-only"> for Box Selection API (opens in a new tab)</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-up-right"/></svg></a></div>
+      </article>
+    </li><li class="pg-grid__item" data-pid="whatsapp-ai-agent-platform" data-cat="automation" id="p-whatsapp-ai-agent-platform">
+      <article class="card pg-mini card--flat" data-tone="blue" data-reveal style="--i:1" aria-labelledby="pj-whatsapp-ai-agent-platform">
+        <p class="pg-proj__meta">Automation</p>
+        <h3 class="pg-proj__title" id="pj-whatsapp-ai-agent-platform">WhatsApp Automation and AI Agent Platform</h3>
+        <p class="pg-proj__blurb">A client WhatsApp platform: AI replies run in the background, each chat is tracked and human operators get alerts.</p>
+        <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">PostgreSQL</li><li class="tag">Supabase</li></ul>
+        <div class="pg-proj__foot"><span class="pg-proj__private">Private enterprise repository</span></div>
+      </article>
+    </li><li class="pg-grid__item" data-pid="spam-classifier" data-cat="speech-ml" id="p-spam-classifier">
+      <article class="card pg-mini card--flat" data-tone="purple" data-reveal style="--i:2" aria-labelledby="pj-spam-classifier">
+        <p class="pg-proj__meta">Natural language</p>
+        <h3 class="pg-proj__title" id="pj-spam-classifier">Email and SMS Spam Classifier</h3>
+        <p class="pg-proj__blurb">Spots spam in texts and emails: 97.1% accurate on 1,034 test messages, and it never flagged a genuine message.</p>
+        <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">NLTK</li><li class="tag">scikit-learn</li><li class="tag">TF-IDF</li></ul>
+        <div class="pg-proj__foot"><a class="link-arrow" href="https://github.com/ShaunakChorge/Spam-Classifier" target="_blank" rel="noopener noreferrer">View code on GitHub<span class="sr-only"> for Email and SMS Spam Classifier (opens in a new tab)</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-up-right"/></svg></a></div>
+      </article>
+    </li></ul>
+  </div>
+</section><section id="more-projects" class="section pg-sec" aria-labelledby="more-projects-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Smaller builds</p>
+      <h2 id="more-projects-h" class="section__title">More <span class="hl hl--purple">projects</span></h2>
+      
+    </header>
+<details class="pg-morebox" id="more" data-reveal>
+      <summary class="pg-morebox__sum"><span>Show the 10 smaller projects</span><svg class="icon pg-morebox__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <ul class="pg-more" role="list"><li class="pg-more__row" id="m-house-price-predictor">
+          <div><p class="pg-more__t">House Price Predictor</p><p class="pg-more__d">Predicts house prices from eight features. A Random Forest beats a simple baseline (R2 0.89, where 1.0 is perfect).</p></div>
+          <div class="pg-more__side"><span class="pg-more__tech">Python / pandas / NumPy</span><span class="pg-more__links"><a class="link" href="https://github.com/ShaunakChorge/HousePricePredictor" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for House Price Predictor (opens in a new tab)</span></a></span></div>
+        </li><li class="pg-more__row" id="m-cv-fundamentals-yolov8">
+          <div><p class="pg-more__t">Computer Vision Basics and YOLOv8 on Video</p><p class="pg-more__d">Basic image steps (grayscale, resize, blur), then object detection with Faster R-CNN on an image and YOLOv8n on video frames.</p></div>
+          <div class="pg-more__side"><span class="pg-more__tech">Python / OpenCV / Matplotlib</span></div>
+        </li><li class="pg-more__row" id="m-zapvi-web-scraper">
+          <div><p class="pg-more__t">Zapvi Web Scraper</p><p class="pg-more__d">Collects product names, prices and links from online store pages into a clean table and CSV file.</p></div>
+          <div class="pg-more__side"><span class="pg-more__tech">Python / Requests / BeautifulSoup</span><span class="pg-more__links"><a class="link" href="https://github.com/ShaunakChorge/Zapvi-Web-Scrapper" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for Zapvi Web Scraper (opens in a new tab)</span></a></span></div>
+        </li><li class="pg-more__row" id="m-astra-telegram-bot">
+          <div><p class="pg-more__t">ASTRA Telegram Bot</p><p class="pg-more__d">A Telegram bot: pick a zodiac sign and a date, and get the day's horoscope, with friendly error messages.</p></div>
+          <div class="pg-more__side"><span class="pg-more__tech">Python / pyTelegramBotAPI / requests</span></div>
+        </li><li class="pg-more__row" id="m-medical-insurance-cost-prediction">
+          <div><p class="pg-more__t">Medical Insurance Cost Prediction</p><p class="pg-more__d">Studies 1,338 insurance records and predicts costs with linear regression: R2 0.74 on test data.</p></div>
+          <div class="pg-more__side"><span class="pg-more__tech">Python / pandas / NumPy</span></div>
+        </li><li class="pg-more__row" id="m-atm-simulator">
+          <div><p class="pg-more__t">ATM Simulator (Java desktop app)</p><p class="pg-more__d">A Java desktop ATM with MySQL: signup, card and PIN login, deposits, withdrawals, mini statement and PIN change.</p></div>
+          <div class="pg-more__side"><span class="pg-more__tech">Java / Swing / AWT / JDBC</span><span class="pg-more__links"><a class="link" href="https://github.com/ShaunakChorge/ATM-Simulator" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for ATM Simulator (Java desktop app) (opens in a new tab)</span></a></span></div>
+        </li><li class="pg-more__row" id="m-qr-code-generator">
+          <div><p class="pg-more__t">QR Code Generator</p><p class="pg-more__d">Type a short text or a link and get a scannable QR code. No dependencies, live on GitHub Pages.</p></div>
+          <div class="pg-more__side"><span class="pg-more__tech">HTML / CSS / JavaScript</span><span class="pg-more__links"><a class="link" href="https://github.com/ShaunakChorge/QR-Code-Generator" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for QR Code Generator (opens in a new tab)</span></a><span aria-hidden="true"> &middot; </span><a class="link" href="https://shaunakchorge.github.io/QR-Code-Generator/" target="_blank" rel="noopener noreferrer">Live<span class="sr-only"> demo of QR Code Generator (opens in a new tab)</span></a></span></div>
+        </li><li class="pg-more__row" id="m-quiz-game-c">
+          <div><p class="pg-more__t">Ultimate Quiz Game (C)</p><p class="pg-more__d">A quiz game in C with accounts, six topics, two difficulty levels and a saved leaderboard.</p></div>
+          <div class="pg-more__side"><span class="pg-more__tech">C / GCC / File I/O</span><span class="pg-more__links"><a class="link" href="https://github.com/ShaunakChorge/Quiz-Game" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for Ultimate Quiz Game (C) (opens in a new tab)</span></a></span></div>
+        </li><li class="pg-more__row" id="m-tetris-raylib-cpp">
+          <div><p class="pg-more__t">Tetris (C++ and raylib)</p><p class="pg-more__d">Tetris in C++ with raylib: rotation, line clearing, scoring, next-piece preview and sound.</p></div>
+          <div class="pg-more__side"><span class="pg-more__tech">C++ / raylib / Make / g++</span><span class="pg-more__links"><a class="link" href="https://github.com/ShaunakChorge/Tetris-Game" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for Tetris (C++ and raylib) (opens in a new tab)</span></a></span></div>
+        </li><li class="pg-more__row" id="m-password-generator">
+          <div><p class="pg-more__t">Password Generator</p><p class="pg-more__d">A first-year Python mini-project: random passwords of a chosen length, saved to a text file.</p></div>
+          <div class="pg-more__side"><span class="pg-more__tech">Python / OOP / File I/O</span><span class="pg-more__links"><a class="link" href="https://github.com/ShaunakChorge/Password-Generator" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for Password Generator (opens in a new tab)</span></a></span></div>
+        </li></ul>
+    </details>
+  </div>
+</section><section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
+  <div class="container">
+    <div class="pg-hire__band" data-reveal="scale">
+      <span class="pg-hire__line" aria-hidden="true"></span>
+      <div class="pg-hire__text">
+        <p class="badge badge--accent"><span class="badge__dot" aria-hidden="true"></span>Taking select freelance AI and backend projects</p>
+        <h2 id="hire-band-h" class="pg-hire__title">Want something <span class="hl">like this built?</span></h2>
+        <p class="pg-hire__lead">Send a short brief: what you want to build, roughly when you need it and anything I should know.</p>
+      </div>
+      <div class="pg-hire__act">
+        <a class="btn btn--solid btn--lg btn--glow" href="../contact/#hire" data-magnetic>Hire me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+        <p class="pg-hire__alt"><a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a><span aria-hidden="true"> &middot; </span><a class="link" href="../projects/">View work</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+  </main>
+
+<footer class="footer" id="site-footer">
+  <span class="footer__line" aria-hidden="true"></span>
+  <div class="container">
+
+    <!-- closing hire strip (hidden on /contact/, which is the form itself) -->
+    <div class="footer__cta">
+      <p class="footer__cta-text"><strong>Ready to start?</strong> Tell me what you need built.</p>
+      <a class="btn btn--solid btn--glow btn--sm" href="../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+    </div>
+
+    <div class="footer__grid">
+
+      <div class="footer__brand">
+        <p class="footer__logo">
+          <!-- electric-S mark (same path as header, ids unique) -->
+          <svg class="footer__mark" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false"><defs><linearGradient id="ftm-g" x1="6" y1="2" x2="58" y2="62" gradientUnits="userSpaceOnUse"><stop stop-color="#00FFFF"/><stop offset=".52" stop-color="#B553F2"/><stop offset="1" stop-color="#FF006E"/></linearGradient></defs><path d="M44.76 1L3 7.32L3 15.5L39.02 38.91L3 61.49L3 63L9.03 63L61 43L61 36.5L27.4 14.66L61 2.07L61 1Z" fill="url(#ftm-g)"/></svg>
+          <span class="logo__word">SHAUNAK</span>
+        </p>
+        <p class="footer__blurb">AI Engineer at Claptek Pvt Ltd. Taking select freelance AI and backend projects.</p>
+        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India &ndash; working remotely (IST)</p>
+        <ul class="footer__soc" aria-label="Profiles">
+          <li><a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a></li>
+          <li><a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a></li>
+          <li><a class="icon-btn" href="https://www.instagram.com/_shaunakkk/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-instagram"/></svg></a></li>
+          <li><a class="icon-btn" href="mailto:shaunak.chorge@gmail.com" aria-label="Email Shaunak"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a></li>
+        </ul>
+      </div>
+
+      <div class="footer__cols">
+        <nav class="footer__col" aria-labelledby="footer-pages-h">
+          <h2 class="footer__h" id="footer-pages-h">Pages</h2>
+          <ul class="footer__links">
+            <li><a href="../">Home</a></li>
+            <li><a href="../projects/">Projects</a></li>
+            <li><a href="../services/">Services</a></li>
+            <li><a href="../about/">About</a></li>
+            <li><a href="../faq/">FAQ</a></li>
+            <li><a href="../contact/">Contact</a></li>
+            <li><a href="../resume/">Resume</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__col footer__col--wide" aria-labelledby="footer-services-h">
+          <h2 class="footer__h" id="footer-services-h">Services</h2>
+          <ul class="footer__links">
+            <li><a href="../services/llm-rag-development/">AI chatbots and assistants</a></li>
+            <li><a href="../services/ai-document-compliance-automation/">Document AI</a></li>
+            <li><a href="../services/ai-backend-fastapi-django/">Backend and APIs</a></li>
+            <li><a href="../services/computer-vision/">Computer vision</a></li>
+            <li><a href="../services/speech-nlp-ml/">Speech and machine learning</a></li>
+            <li><a href="../services/python-automation-integrations/">Automation and bots</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__col" aria-labelledby="footer-work-h">
+          <h2 class="footer__h" id="footer-work-h">Work</h2>
+          <ul class="footer__links">
+            <li><a href="../projects/observable-ai-backend/">Traceable AI Backend</a></li>
+            <li><a href="../projects/ai-rag-healthcare-assistant/">Healthcare Policy Chatbot</a></li>
+            <li><a href="../projects/agentic-honeypot/">Scam-Catching AI Honey-Pot</a></li>
+            <li><a href="../projects/deepfake-video-detection/">DeepFake Video Detection</a></li>
+            <li><a href="../projects/">All projects</a></li>
+          </ul>
+        </nav>
+      </div>
+
+    </div>
+
+    <div class="footer__bar">
+      <p class="footer__copy">&copy; 2026 Shaunak Chorge</p>
+      <a class="btn btn--ghost btn--sm footer__top" href="#top" data-back-to-top>Back to top <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg></a>
+    </div>
+  </div>
+
+  <div class="footer__ghost" aria-hidden="true"></div>
+
+  <!-- floating "Hire me" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js) -->
+  <div class="fab-wrap contact-fab">
+    <a class="fab" href="../contact/#hire" aria-label="Hire me"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
+    <div class="fab-tip" aria-hidden="true">Hire me</div>
+  </div>
+</footer>
+
+  <div class="toasts" id="toasts" aria-live="polite" aria-relevant="additions"></div>
+
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></symbol>
+    <symbol id="i-external-link" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></symbol>
+    <symbol id="i-message-square" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></symbol>
+    <symbol id="i-workflow" viewBox="0 0 24 24"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></symbol>
+    <symbol id="i-graduation-cap" viewBox="0 0 24 24"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></symbol>
+    <symbol id="i-command" viewBox="0 0 24 24"><path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"/></symbol>
+    <symbol id="i-sun-dim" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 4h.01"/><path d="M20 12h.01"/><path d="M12 20h.01"/><path d="M4 12h.01"/><path d="M17.657 6.343h.01"/><path d="M17.657 17.657h.01"/><path d="M6.343 17.657h.01"/><path d="M6.343 6.343h.01"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+    <symbol id="i-git-branch" viewBox="0 0 24 24"><line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+    <symbol id="i-brain" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></symbol>
+    <symbol id="i-scan-face" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></symbol>
+    <symbol id="i-audio-lines" viewBox="0 0 24 24"><path d="M2 10v3"/><path d="M6 6v11"/><path d="M10 3v18"/><path d="M14 8v7"/><path d="M18 5v13"/><path d="M22 10v3"/></symbol>
+    <symbol id="i-bar-chart" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></symbol>
+    <symbol id="i-qr-code" viewBox="0 0 24 24"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></symbol>
+    <symbol id="i-gamepad-2" viewBox="0 0 24 24"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></symbol>
+    <symbol id="i-bug" viewBox="0 0 24 24"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M20.97 5c0 2.1-1.6 3.8-3.5 4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></symbol>
+    <symbol id="i-languages" viewBox="0 0 24 24"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol>
+    <symbol id="i-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></symbol>
+    <symbol id="i-scan-eye" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="1"/><path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0"/></symbol>
+    <symbol id="i-audio-waveform" viewBox="0 0 24 24"><path d="M2 13a2 2 0 0 0 2-2V7a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0V4a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0v-4a2 2 0 0 1 2-2"/></symbol>
+    <symbol id="i-trending-up" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
+    <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-triangle-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+    <symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
+    <symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+    <symbol id="i-medal" viewBox="0 0 24 24"><path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15"/><path d="M11 12 5.12 2.2"/><path d="m13 12 5.88-9.8"/><path d="M8 7h8"/><circle cx="12" cy="17" r="5"/><path d="M12 18v-2h-.5"/></symbol>
+    <symbol id="i-building-2" viewBox="0 0 24 24"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></symbol>
+    <symbol id="i-book-open" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></symbol>
+    <symbol id="i-flask-conical" viewBox="0 0 24 24"><path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/><path d="M6.453 15h11.094"/><path d="M8.5 2h7"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></symbol>
+    <symbol id="i-file-code" viewBox="0 0 24 24"><path d="M10 12.5 8 15l2 2.5"/><path d="m14 12.5 2 2.5-2 2.5"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/></symbol>
+    <symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol>
+    <symbol id="i-hash" viewBox="0 0 24 24"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></symbol>
+    <symbol id="i-wand-sparkles" viewBox="0 0 24 24"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/></symbol>
+    <symbol id="i-plug" viewBox="0 0 24 24"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></symbol>
+    <symbol id="i-loader" viewBox="0 0 24 24"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/></symbol>
+  </svg>
+
+  <script defer src="../assets/dist/js/core.min.js"></script>
+  <script defer src="../assets/dist/js/contact.min.js"></script>
+  <script defer src="../assets/dist/js/footer.min.js"></script>
+  <script defer src="../assets/dist/js/fx.min.js"></script>
+  <script defer src="../assets/dist/js/hero.min.js"></script>
+  <script defer src="../assets/dist/js/pages.min.js"></script>
+  <script defer src="../assets/dist/js/portrait.min.js"></script>
+  <script defer src="../assets/dist/js/projects.min.js"></script>
+  <script defer src="../assets/dist/js/visuals.min.js"></script>
+</body>
+</html>

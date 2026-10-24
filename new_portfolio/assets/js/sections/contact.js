@@ -326,7 +326,7 @@
   function initFab() {
     var wrap = qs('.contact-fab');
     if (!wrap) return;
-    var hero = doc.getElementById('home'), contact = doc.getElementById('contact'), foot = qs('footer.footer');
+    var hero = doc.getElementById('home') || qs('#main > *'), contact = doc.getElementById('contact'), foot = qs('footer.footer');
     var st = { hero: true, contact: false, foot: false, ready: false };
 
     function apply() {

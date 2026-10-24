@@ -1,8 +1,9 @@
 /* =====================================================================
    NEURAL NEON - hero.css   (HERO engineer)   section #home
    Scope: .hero / .hero__* / .tk-* (code tokens).  Un-layered, so it wins over base.css (@layer pf).
-   Contents: 0 keyframes  1 section + background  2 copy column  3 code window
-             4 stat card  5 scroll cue  6 entrance + typing states  7 breakpoints  8 reduced motion
+   Round 3 layout: neon portrait (portrait.css) + compact typed shaunak.py window + 3 modest stats.
+   Contents: 0 keyframes  1 section + background  2 copy column  3 portrait + code window
+             4 stat card  6 entrance + typing states  7 breakpoints  8 reduced motion
    ===================================================================== */
 
 /*#region 0 keyframes*/
@@ -13,7 +14,7 @@
 @keyframes hero-unhide { to { visibility: visible; } }
 @keyframes hero-blink { 50% { opacity: 0; } }                                                      /* one dip per cycle, steps(1): see .hero__caret */
 @keyframes hero-boot { 0% { opacity: .4; } 30% { opacity: 1; } 46% { opacity: .78; } 62%, 100% { opacity: 1; } }   /* one slow neon "power-on" dip (< 3 flashes / s) */
-@keyframes hero-cue  { 0% { translate: 0 -105%; opacity: 0; } 25%, 70% { opacity: 1; } 100% { translate: 0 105%; opacity: 0; } }
+@keyframes hero-ping { 0% { scale: 1; opacity: .75; } 70%, 100% { scale: 2.6; opacity: 0; } }                  /* the freelance dot: a few quiet pings, then rests */
 /*#endregion*/
 
 /*#region 1 section + background*/
@@ -27,11 +28,15 @@
 }
 .hero__bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: clip; }
 .hero__bg .bg-rails { opacity: .62; }                     /* rails stay visible but do not cut through the copy at full strength */
-.hero__wrap { position: relative; z-index: var(--z-raised); padding-block: clamp(1.25rem, .8rem + 2vw, 2.5rem) 2.5rem; }
-@media (min-width: 640px) { .hero__wrap { padding-bottom: clamp(5.25rem, 4.5rem + 2vw, 6rem); } }   /* room for the scroll cue */
+.hero__wrap { position: relative; z-index: var(--z-raised); padding-block: clamp(1rem, .6rem + 1.6vw, 2rem) clamp(2rem, 1.5rem + 2.4vw, 3.5rem); }
 @media (min-width: 1024px) and (max-height: 1000px) { .hero__wrap { padding-block: 1rem 2.25rem; } }   /* laptops: keep the stat card inside the first view */
-.hero__grid { display: grid; gap: clamp(2.25rem, 1.5rem + 3vw, 3.5rem); align-items: center; }
+.hero__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1.5rem, 1.1rem + 2vw, 2.5rem); align-items: center; }
 .hero__grid > * { min-width: 0; }
+/* phones and tablets: portrait above the text (smaller), the typed window after it; the stage wrapper dissolves so its children join the grid */
+.hero__photo { order: -1; justify-self: center; }
+.hero__copy { order: 0; }
+.hero__stage { display: contents; }
+.hero__stage .hero__code { order: 1; }
 
 /* faint corner coordinate readout (decorative) */
 .hero__hud {
@@ -48,7 +53,9 @@
 
 /* status pill: ping dot + status + location */
 .hero__status { flex-wrap: wrap; align-items: center; column-gap: .65rem; row-gap: .2rem; font-size: .8125rem; letter-spacing: .03em; }
-.hero__status-txt { color: var(--text-strong); }
+.hero__status-main { display: inline-flex; align-items: center; gap: .65rem; min-width: 0; }
+.hero__status-txt { color: var(--text-strong); min-width: 0; }
+@media (max-width: 359px) { .hero__status { font-size: .75rem; letter-spacing: 0; } }
 .hero__loc { display: inline-flex; align-items: center; gap: .4rem; font-weight: 400; color: var(--text-muted); }
 .hero__loc::before { content: ""; width: 1px; height: 1.05em; margin-right: .25rem; background: var(--line-2); }
 .hero__loc .icon { color: rgb(var(--accent-ink)); }
@@ -90,18 +97,21 @@
 .hero__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: clamp(1.5rem, 1.2rem + 1vw, 2.1rem); }
 .hero__cta .btn:is(:hover, :focus-visible) { position: relative; z-index: 2; }       /* the magnetic pull must never weld two glows together */
 
-/* one-line freelance signal under the CTAs: a quiet mono link, no button chrome */
-.hero__free { flex: 1 0 100%; min-width: 0; margin-top: -.2rem; font-weight: 400; font-size: .8125rem; letter-spacing: .05em; color: var(--text-muted); }
-.hero__free .icon { color: rgb(var(--accent-ink)); }
-.hero__free:hover, .hero__free:focus-visible { color: rgb(var(--accent-ink)); }
-.hero__social { flex: 1 0 100%; display: flex; align-items: center; gap: .6rem; margin: .35rem 0 0; }
-.hero__social-cap { margin-right: .35rem; font: 400 .75rem/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); }
+/* the freelance signal: one quiet line under the buttons (a status dot + plain text, no button chrome) */
+.hero__free { flex: 1 0 100%; display: flex; align-items: center; gap: .65rem; min-width: 0; margin: .15rem 0 0; font: 400 .8125rem/1.45 var(--font-mono); letter-spacing: .04em; color: var(--text-muted); }
+.hero__free-dot { position: relative; flex: none; width: 8px; height: 8px; border-radius: 50%; background: rgb(var(--green)); box-shadow: 0 0 8px rgb(var(--green) / .9); }
+.hero__free-dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: rgb(var(--green)); animation: hero-ping 2.2s ease-out 5 1.2s both; }
 @media (max-width: 479px) { .hero__cta .btn { flex: 1 1 100%; } }
 /*#endregion*/
 
-/*#region 3 code window + terminal*/
-.hero__stage { width: 100%; max-width: none; justify-self: stretch; min-width: 0; margin-top: .5rem; }
-.hero__code { display: grid; gap: .7rem; min-width: 0; transition: transform .6s var(--ease-expo); }
+/*#region 3 portrait + code window*/
+/* the portrait itself is portrait.css (.np); here only its size, tag position and the overlap with the typed window */
+.hero { --photo-w: 13rem; }
+@media (min-width: 640px) { .hero { --photo-w: 17rem; } }
+.hero .np { --np-w: var(--photo-w); }
+.hero__photo { width: min(100%, var(--photo-w)); }
+.hero .np__img--ns { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: cover; }   /* no-JS fallback photo (the late-loaded picture needs hero.js) */
+.hero__code { --code-fs: .75rem; display: grid; gap: .7rem; width: 100%; max-width: 26rem; justify-self: center; min-width: 0; transition: transform .6s var(--ease-expo); }
 
 .hero__window {
   position: relative; min-width: 0; overflow: hidden; overflow-wrap: anywhere; border: 2px solid rgb(var(--accent) / .34); border-radius: var(--radius-lg);
@@ -134,10 +144,10 @@
 .hero__ctrl > span { display: inline-flex; align-items: center; gap: .4rem; }
 .hero__ctrl[data-state="skip"] .hero__ctrl-replay, .hero__ctrl[data-state="replay"] .hero__ctrl-skip { display: none; }
 
-.hero__editor { position: relative; padding: .95rem 0 1.05rem; font: 400 var(--code-fs)/1.68 var(--font-mono); color: var(--text); }
+.hero__editor { position: relative; padding: .8rem 0 .9rem; font: 400 var(--code-fs)/1.55 var(--font-mono); color: var(--text); }
 .hero__scan { position: absolute; inset: 0; z-index: 2; opacity: .7; }
 .hero__lines { position: relative; z-index: 1; margin: 0; padding: 0; list-style: none; }
-.hero__line { display: flex; align-items: flex-start; gap: 1rem; padding: 0 1rem; box-shadow: inset 2px 0 0 transparent; transition: background-color .15s var(--ease), box-shadow .15s var(--ease); }
+.hero__line { display: flex; align-items: flex-start; gap: .85rem; padding: 0 .9rem; box-shadow: inset 2px 0 0 transparent; transition: background-color .15s var(--ease), box-shadow .15s var(--ease); }
 .hero__line.is-cur { background: rgb(var(--accent) / .07); box-shadow: inset 2px 0 0 rgb(var(--accent)); }
 .hero__ln { flex: none; width: 2ch; min-width: 2.4ch; white-space: nowrap; text-align: right; color: var(--placeholder); user-select: none; font-variant-numeric: tabular-nums; }
 .hero__src { flex: 1; min-width: 0; padding-left: calc(var(--ind, 0) * 1ch); white-space: pre-wrap; overflow-wrap: anywhere; }
@@ -156,17 +166,12 @@
 .hero .tk-sp { color: rgb(var(--purple-ink)); }
 .hero .tk-cm { color: var(--text-dim); font-style: italic; }
 
-/* tilt (desktop + hover devices only), straightens on hover / keyboard focus; the hit area is the un-tilted .hero__stage */
-@media (min-width: 1024px) and (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .hero__code { transform: perspective(1800px) rotateY(-2deg) rotateX(.6deg); transform-origin: 50% 50%; }          /* subtle: 6 degrees made the 13px mono text soft and slanted */
-  .hero__stage:hover .hero__code, .hero__stage:focus-within .hero__code { transform: none; }
-}
-.hero__stage:hover .hero__window, .hero__stage:focus-within .hero__window { border-color: rgb(var(--accent) / .62); box-shadow: 0 0 46px rgb(var(--accent) / .26), 0 24px 60px -26px rgb(0 0 0 / .95); }
+.hero__code:hover .hero__window, .hero__code:focus-within .hero__window { border-color: rgb(var(--accent) / .62); box-shadow: 0 0 46px rgb(var(--accent) / .26), 0 24px 60px -26px rgb(0 0 0 / .95); }
 /*#endregion*/
 
-/*#region 4 stat card (NeoTech glow card, 4 evidence-based stats)*/
+/*#region 4 stat card (NeoTech glow card, 3 modest stats)*/
 .hero__stats {
-  --cols: 4; list-style: none; margin: clamp(1.5rem, 1rem + 1.75vw, 2.5rem) 0 0; gap: 1.25rem 1rem; grid-template-columns: repeat(2, minmax(0, 1fr));
+  --cols: 3; list-style: none; margin: clamp(1.5rem, 1rem + 1.75vw, 2.5rem) 0 0; gap: .35rem; grid-template-columns: minmax(0, 1fr); padding: .6rem 1rem;
   border: 2px solid rgb(var(--accent) / .26); box-shadow: 0 0 30px rgb(var(--accent) / .1), inset 0 0 44px rgb(var(--purple) / .07);
   background: linear-gradient(to right, rgb(0 0 0 / .62), rgb(var(--purple) / .12) 50%, rgb(0 0 0 / .62));
 }
@@ -175,35 +180,24 @@
 .hero__statbody { display: flex; flex-direction: column; align-items: center; gap: .5rem; min-width: 0; }
 .hero__stats .stat__num { font-size: clamp(1.75rem, 1.35rem + 1.4vw, 2.5rem); }
 .hero__stats .stat__label { text-wrap: balance; }
-@media (min-width: 1024px) and (max-height: 1000px) { .hero__stats { margin-top: 1rem; } }
-@media (min-width: 760px) {                            /* 4 columns, icon / number / label stacked */
-  .hero__stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; padding: 1.25rem .5rem; }
+@media (max-width: 639px) {                            /* phones: one compact row per stat (icon, number, label) */
+  .hero__stat { flex-direction: row; justify-content: flex-start; gap: .9rem; text-align: left; padding: .35rem 0; }
+  .hero__stat + .hero__stat { border-top: 1px solid var(--line); }
+  .hero__statbody { flex-direction: row; align-items: center; gap: .9rem; }
+  .hero__stats .stat__num { min-width: 2.4ch; font-size: 1.75rem; }
+}
+@media (min-width: 640px) {                            /* 3 columns, icon / number / label stacked */
+  .hero__stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; padding: 1.1rem .5rem; }
   .hero__stat { padding: .25rem .75rem; }
   .hero__stat + .hero__stat { border-left: 1px solid var(--line); }
 }
-@media (min-width: 1360px) {                           /* wide: compact row (icon tile beside number + label) */
-  .hero__stats { padding: 1.1rem 1.25rem; }
-  .hero__stat { flex-direction: row; align-items: center; gap: .95rem; padding: .25rem 1rem; text-align: left; }
+@media (min-width: 1100px) {                           /* wide: compact row (icon tile beside number + label) */
+  .hero__stats { padding: 1rem 1.25rem; }
+  .hero__stat { flex-direction: row; align-items: center; justify-content: center; gap: .95rem; padding: .25rem 1rem; text-align: left; }
   .hero__stat > .icon { box-sizing: content-box; flex: none; padding: .65rem; border: 1px solid rgb(var(--tone) / .3); border-radius: var(--radius-md); background: rgb(var(--tone) / .07); }
   .hero__statbody { align-items: flex-start; gap: .2rem; }
 }
-/*#endregion*/
-
-/*#region 5 scroll cue*/
-.hero__scroll {
-  position: absolute; left: 50%; bottom: 1rem; z-index: var(--z-raised); translate: -50% 0; display: none; flex-direction: column; align-items: center; gap: .5rem;
-  min-width: 44px; min-height: 44px; padding: .25rem .9rem; font: 400 .75rem/1 var(--font-mono); letter-spacing: .26em; text-transform: uppercase; color: var(--text-dim);
-  transition: color .25s var(--ease);
-}
-.hero__scroll:hover, .hero__scroll:focus-visible { color: rgb(var(--accent-ink)); }
-.hero__scroll-txt { padding-left: .26em; }
-.hero__scroll-line { position: relative; display: block; width: 1px; height: 2.25rem; overflow: hidden; background: rgb(255 255 255 / .14); }
-.hero__scroll-line::after {
-  content: ""; position: absolute; inset: 0 -1px; background: linear-gradient(to bottom, transparent, rgb(var(--accent)), transparent);
-  box-shadow: 0 0 8px rgb(var(--accent) / .8); animation: hero-cue 2s var(--ease) 8;
-}
-@media (min-width: 640px) { .hero__scroll { display: flex; } }
-@media (min-width: 1024px) and (max-height: 1000px) { .hero__scroll { display: none; } }   /* laptops: the stat card is the cue */
+@media (min-width: 1024px) and (max-height: 1000px) { .hero__stats { margin-top: 1rem; } }
 /*#endregion*/
 
 /*#region 6 entrance sequence + typing states*/
@@ -222,22 +216,40 @@
 @media (min-width: 1024px) {
   .hero__copy::before { inset: -2.5rem -3rem; }
   #home.hero { --hero-fs: clamp(3.25rem, .5rem + 4.6vw, 5rem); }           /* two columns: 52 -> 80px */
-  .hero__grid { grid-template-columns: minmax(0, .84fr) minmax(0, 1.16fr); }   /* the editor takes the room the terminal pane freed */
+  .hero__grid { grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr); grid-template-areas: "copy stage"; column-gap: clamp(1.5rem, 1rem + 2vw, 3rem); }
+  .hero__copy { grid-area: copy; order: 0; }
+  /* portrait and typed window share one grid cell: the photo sits right, the window overlaps its lower-left corner */
+  .hero__photo, .hero__stage .hero__code { grid-area: stage; order: 0; }
+  .hero__photo { justify-self: end; align-self: center; margin-right: calc(var(--photo-shift) * -1); }
+  .hero__stage .hero__code { width: min(100%, var(--win-w)); justify-self: start; align-self: end; z-index: 2; margin-bottom: clamp(.5rem, 1.5vw, 1.5rem); }
+  /* the window may cover only the left shoulder of the portrait (about a quarter of its width), never the face: the sizes below are tuned to the
+     stage column width at each breakpoint (the left rail narrows the container from 1280px), and the photo may lean into the page margin */
+  .hero { --photo-w: 14.5rem; --win-w: 23.5rem; --photo-shift: 0rem; }
+  .hero .hero__code { --code-fs: .6875rem; }
+  .hero .np__tag { display: none; }                                          /* the location already sits in the typed window; the tag stays on phones and tablets */
 }
+@media (min-width: 1100px) { .hero { --photo-w: 16rem; --win-w: 24rem; } }
+@media (min-width: 1180px) { .hero { --photo-w: 18rem; --win-w: 25.5rem; } .hero .hero__code { --code-fs: .75rem; } }
+@media (min-width: 1280px) { .hero { --photo-w: 19rem; --win-w: 24.5rem; --photo-shift: 6rem; } .hero .hero__code { --code-fs: .6875rem; } }
+@media (min-width: 1366px) { .hero { --photo-w: 21rem; --win-w: 25.5rem; --photo-shift: 6rem; } .hero .hero__code { --code-fs: .75rem; } }
+@media (min-width: 1440px) { .hero { --photo-shift: 5rem; } }
+@media (min-width: 1536px) { .hero { --photo-shift: 0rem; } }
 @media (min-width: 1536px) { #home.hero { --hero-fs: 5.5rem; } }
 @media (max-width: 359px) { .hero__dots { display: none; } .hero__bar { padding-left: .75rem; } }
+@media (max-width: 339px) { .hero__roles { font-size: .8125rem; } }        /* the longest typed role must fit one line at 320px */
 @media (max-height: 520px) and (orientation: landscape) { #home.hero { --hero-fs: clamp(2.5rem, 13vh, 3.75rem); min-height: auto; } }   /* landscape phones: the name must not fill the screen */
 @media (max-width: 479px) {
   .hero__editor { padding-top: .75rem; }
-  .hero__line { gap: .7rem; padding-inline: .75rem; }
+  .hero__line { gap: .5rem; padding-inline: .5rem; }
+  .hero__src { padding-left: calc(var(--ind, 0) * .6ch); }   /* phones: a 4-space indent shows as about 2.4 characters, so the 21-line snippet keeps one line per row */
 }
 /*#endregion*/
 
 /*#region 8 reduced motion (static hero: no entrance, no typing, no caret blink, no parallax, no cue movement)*/
 @media (prefers-reduced-motion: reduce) {
   .hero [data-hero-in], .hero__name { animation: none !important; }
-  .hero__caret::after, .hero__scroll-line::after { animation: none !important; }
-  .hero__scroll-line::after { translate: 0 0; opacity: .7; }
+  .hero__caret::after, .hero__free-dot::after { animation: none !important; }
+  .hero__free-dot::after { display: none; }
   .hero__code { transform: none !important; }
 }
 /*#endregion*/

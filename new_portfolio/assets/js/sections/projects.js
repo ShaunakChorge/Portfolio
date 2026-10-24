@@ -42,7 +42,7 @@
       var d = li.dataset;
       var it = {
         el: li, id: d.pid, kind: d.kind, cat: d.cat, n: parseInt(d.n, 10) || 0, title: d.title || '', category: d.category || '',
-        tone: d.tone || 'cyan', year: d.year || '', vis: d.vis || 'code', visible: !li.hidden,
+        tone: d.tone || 'cyan', year: d.year || '', vis: d.vis || 'generic', variant: d.variant || d.pid, visible: !li.hidden,
         btn: qs('.projects__open', li)
       };
       byId[it.id] = it;
@@ -208,7 +208,7 @@
     else {
       var pv = el('div', 'pv');
       pv.setAttribute('data-visual', it.vis);
-      pv.setAttribute('data-variant', it.id);
+      pv.setAttribute('data-variant', it.variant || it.id);
       pv.setAttribute('data-tone', it.tone);
       pv.setAttribute('aria-hidden', 'true');   /* decorative: the case study text carries the meaning */
       media.appendChild(pv);

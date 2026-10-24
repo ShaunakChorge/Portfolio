@@ -1,0 +1,12 @@
+{
+  "name": "shaunak-chorge-portfolio",
+  "private": true,
+  "description": "Static portfolio and freelance site. Build: node build.mjs --min",
+  "scripts": {
+    "build": "node build.mjs --min",
+    "build:dev": "node build.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
+}

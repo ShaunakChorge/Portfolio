@@ -105,7 +105,6 @@
 @keyframes toast-out { to { opacity: 0; translate: 14px 0; } }
 @keyframes tooltip-in { from { opacity: 0; translate: 10px 0; } to { opacity: 1; translate: 0 0; } }
 @keyframes fab-breathe { to { opacity: 1; } }
-@keyframes pv-marquee { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
 /*#endregion*/
 
 @layer pf {
@@ -473,7 +472,7 @@ main, footer { position: relative; z-index: var(--z-content); }
 .site-header__tools { display: flex; flex-wrap: nowrap; align-items: center; gap: .5rem; margin-left: auto; min-width: 0; }
 
 .logo { display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; flex: none; color: rgb(var(--accent)); }
-.logo__mark { width: 3.4rem; height: 2.25rem; flex: none; filter: drop-shadow(0 0 6px rgb(var(--cyan) / .5)) drop-shadow(0 0 5px rgb(var(--magenta) / .25)); transition: filter .3s var(--ease), transform .4s var(--ease-expo); } /* </S> code-tag mark (wide) */
+.logo__mark { width: 2.4rem; height: 2.4rem; flex: none; overflow: visible; filter: drop-shadow(0 0 6px rgb(var(--cyan) / .5)) drop-shadow(0 0 5px rgb(var(--magenta) / .25)); transition: filter .3s var(--ease), transform .4s var(--ease-expo); } /* electric-S mark (square, 64x64 viewBox) */
 .logo:hover .logo__mark, .logo:focus-visible .logo__mark { filter: drop-shadow(0 0 10px rgb(var(--cyan) / .9)) drop-shadow(0 0 4px rgb(var(--magenta) / .6)); transform: rotate(-4deg) scale(1.05); }
 .logo__word { font: 800 1.0625rem/1 var(--font-display); letter-spacing: .14em; color: var(--text-strong); text-shadow: 0 0 14px rgb(var(--accent) / .55); }
 .site-header.is-scrolled .logo__mark { transform: scale(.92); }
@@ -497,7 +496,7 @@ main, footer { position: relative; z-index: var(--z-content); }
 .clock {
   display: none; align-items: center; gap: .55rem; min-height: 32px; padding: 0 .8rem; border: 1px solid var(--line-2); border-radius: 999px;
   font: 700 .75rem/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; font-variant-numeric: tabular-nums;
-  min-width: 9.8rem; justify-content: center;   /* reserves the width of "PUNE 21:04 IST" so the time arriving never shifts the header */
+  min-width: 11.25rem; justify-content: center;   /* reserves the width of "MUMBAI 21:04 IST" so the time arriving never shifts the header */
 }
 .clock::before { content: ""; flex: none; width: 6px; height: 6px; border-radius: 50%; background: rgb(var(--green)); box-shadow: 0 0 8px rgb(var(--green) / .9); animation: pv-pulse 2s ease-in-out infinite; }
 
@@ -512,8 +511,9 @@ main, footer { position: relative; z-index: var(--z-content); }
 html:not(.js) .cmd, html:not(.js) .burger { display: none; }
 html:not(.js) .nav { display: block; max-width: 100%; overflow-x: auto; }   /* no-JS: nav stays usable at any width */
 
-.site-header .hdr-resume { display: none; }
-@media (min-width: 40em) { .site-header .hdr-resume { display: inline-flex; } }
+.site-header .hdr-hire { display: none; flex: none; white-space: nowrap; box-shadow: 0 0 16px rgb(var(--c) / .55), 0 0 34px rgb(var(--c) / .25); }   /* primary CTA: solid neon + glow (phones: the drawer and the FAB carry it) */
+.site-header .hdr-hire:hover, .site-header .hdr-hire:focus-visible { box-shadow: 0 0 24px rgb(var(--c) / .8), 0 0 54px rgb(var(--c) / .35); }
+@media (min-width: 30em) { .site-header .hdr-hire { display: inline-flex; } }
 
 .burger { position: relative; display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: .625rem; border: 1px solid var(--line-2); color: rgb(var(--accent)); transition: border-color .25s var(--ease), background-color .25s var(--ease), box-shadow .25s; }
 .burger:hover, .burger[aria-expanded="true"] { border-color: rgb(var(--accent) / .6); background: rgb(var(--accent) / .08); box-shadow: 0 0 14px rgb(var(--accent) / .25); }
@@ -535,18 +535,11 @@ html:not(.js) .nav { display: block; max-width: 100%; overflow-x: auto; }   /* n
 }
 /* The media queries above use em (= the browser's default font size, which is what people actually change). These container
    queries use rem (= the live root font size, so they also follow html{font-size}) and shrink the header's own width budget:
-   extras first (clock, search label, key hint), then the Resume button, then the inline nav gives way to the burger. */
+   extras first (clock, search label, key hint), then the inline nav gives way to the burger (the Hire me button always keeps its text). */
 @container hdr (max-width: 62rem) { .clock, .cmd__text, .cmd .kbd { display: none; } .cmd { padding: 0 .6rem; } }
 @container hdr (max-width: 54rem) { .nav__link { padding: 0 .5rem; } }
-@media (min-width: 64em) {
-  @container hdr (min-width: 46.01rem) and (max-width: 54rem) {   /* inline nav + not much room: Resume becomes its icon (below this the burger replaces the nav and the word fits again) */
-    .site-header .hdr-resume { width: 44px; min-height: 44px; padding: 0; }
-    .site-header .hdr-resume .hdr-resume__t { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-    .site-header .hdr-resume .icon { width: 1.125rem; height: 1.125rem; }
-  }
-}
 @container hdr (max-width: 46rem) { .nav { display: none; } .burger { display: inline-grid; } }
-@container hdr (max-width: 15rem) { .logo__word { display: none; } }   /* very large text on a phone: the monogram alone keeps the bar inside the screen */
+@container hdr (max-width: 15rem) { .logo__word { display: none; } }   /* very large text on a phone: the mark alone keeps the bar inside the screen */
 
 /* mobile drawer: full-height, sits BELOW the header (z 45 < 50) so the burger stays the close control */
 .drawer {
@@ -572,6 +565,7 @@ html:not(.js) .nav { display: block; max-width: 100%; overflow-x: auto; }   /* n
 .drawer.is-open .drawer__link { animation: menu-link-in .45s var(--ease-expo) both; animation-delay: calc(var(--i, 0) * 45ms + 80ms); opacity: 1; }
 .drawer__foot { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1rem; margin-top: auto; padding-top: 2rem; }
 .drawer__foot .clock { display: inline-flex; margin-left: auto; min-width: 0; }
+.drawer__hire { flex: 1 1 100%; min-height: 52px; justify-content: center; font-size: .9375rem; }   /* the primary action: full width above the social icons */
 @media (max-height: 680px) { .drawer { padding-top: calc(var(--header-h-s) + 1rem); } .drawer__link { min-height: 48px; padding-block: .4rem; } .drawer__foot { padding-top: 1.25rem; } }   /* short phones (320x568): everything fits without scrolling */
 @media (max-height: 520px) and (orientation: landscape) {   /* phones on their side: two columns so every link and action fits */
   .drawer { padding-top: calc(var(--header-h-s) + .75rem); padding-bottom: .75rem; }

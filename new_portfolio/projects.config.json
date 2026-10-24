@@ -1,0 +1,27 @@
+{
+  "show": [
+    "ams-ai-finding-engine",
+    "obligation-management-system",
+    "finacle-text-to-sql",
+    "ai-rag-healthcare-assistant",
+    "agentic-honeypot",
+    "advanced-cctv-analytics",
+    "speech-emotion-recognition",
+    "deepfake-video-detection",
+    "observable-ai-backend",
+    "django-box-selection-api",
+    "whatsapp-ai-agent-platform",
+    "spam-classifier"
+  ],
+  "casestudy": [
+    "ams-ai-finding-engine",
+    "obligation-management-system",
+    "finacle-text-to-sql",
+    "ai-rag-healthcare-assistant",
+    "agentic-honeypot",
+    "advanced-cctv-analytics",
+    "speech-emotion-recognition",
+    "deepfake-video-detection",
+    "observable-ai-backend"
+  ]
+}

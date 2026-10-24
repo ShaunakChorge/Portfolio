@@ -260,7 +260,7 @@
   function updateIndicator() {
     var nav = els.nav, list = els.navList;
     if (!nav || !list) return;
-    var a = qs('.nav__link.is-active', list);
+    var a = qs('.nav__link.is-active', list) || qs('.nav__link[aria-current="page"]', list);   /* multi-page nav: the server marks the current page; home sections mark by hash */
     if (!a || !a.offsetWidth) { nav.classList.remove('is-ready'); return; }
     var cs = win.getComputedStyle(a);
     var pad = parseFloat(cs.paddingLeft) || 0;

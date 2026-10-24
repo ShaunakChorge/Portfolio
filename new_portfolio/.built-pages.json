@@ -1,0 +1,23 @@
+[
+ "services/",
+ "services/llm-rag-development/",
+ "services/ai-document-compliance-automation/",
+ "services/ai-backend-fastapi-django/",
+ "services/computer-vision/",
+ "services/speech-nlp-ml/",
+ "services/python-automation-integrations/",
+ "projects/",
+ "projects/ams-ai-finding-engine/",
+ "projects/obligation-management-system/",
+ "projects/core-banking-text-to-sql/",
+ "projects/ai-rag-healthcare-assistant/",
+ "projects/agentic-honeypot/",
+ "projects/advanced-cctv-analytics/",
+ "projects/speech-emotion-recognition/",
+ "projects/deepfake-video-detection/",
+ "projects/observable-ai-backend/",
+ "about/",
+ "faq/",
+ "contact/",
+ "resume/"
+]

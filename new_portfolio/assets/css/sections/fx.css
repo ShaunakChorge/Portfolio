@@ -18,7 +18,7 @@
   width: var(--fx-w, 100vw); height: var(--fx-h, 100vh); opacity: 0; transition: opacity 1.4s ease;
 }
 .fx-net.is-on { opacity: 1; }
-html[data-sec="work"] .fx-net.is-on, html[data-sec="journey"] .fx-net.is-on { opacity: .3; }   /* ambient energy follows content density: calm behind the long reading runs */
+html[data-sec="selected"] .fx-net.is-on, html[data-sec="roles"] .fx-net.is-on { opacity: .3; }   /* ambient energy follows content density: calm behind the long reading runs */
 /*#endregion*/
 
 /*#region 2 cursor glow orb (fine pointers)*/
@@ -221,24 +221,18 @@ html.is-locked .fx-accent { visibility: hidden; }
 .fx-accent__sw[aria-pressed="true"] i { border-color: #fff; box-shadow: 0 0 14px rgb(var(--sw)); }
 /*#endregion*/
 
-/*#region section numbers (un-layered: wins over @layer pf)*/
+/*#region section numbers (un-layered: wins over @layer pf). A section opts in with data-num="02": "02 // SERVICES" and the outlined ghost numeral*/
 .section[id] .eyebrow::before { letter-spacing: .1em; opacity: .85; }
-#about .eyebrow::before { content: "02 //"; content: "02 //" / ""; }
-#build .eyebrow::before { content: "03 //"; content: "03 //" / ""; }
-#stack .eyebrow::before { content: "04 //"; content: "04 //" / ""; }
-#work .eyebrow::before { content: "05 //"; content: "05 //" / ""; }
-#journey .eyebrow::before { content: "06 //"; content: "06 //" / ""; }
-#contact .eyebrow::before { content: "07 //"; content: "07 //" / ""; }
+.section[data-num="01"] { --num: "01"; } .section[data-num="02"] { --num: "02"; } .section[data-num="03"] { --num: "03"; } .section[data-num="04"] { --num: "04"; }
+.section[data-num="05"] { --num: "05"; } .section[data-num="06"] { --num: "06"; } .section[data-num="07"] { --num: "07"; } .section[data-num="08"] { --num: "08"; }
+.section[data-num] .eyebrow::before { content: var(--num) " //"; content: var(--num) " //" / ""; }
 @media (min-width: 80em) {
-  :is(#about, #build, #stack, #work) { overflow-x: clip; }   /* the ghost numeral may sit beyond the viewport when text is enlarged: it must not widen the page */
-  :is(#about, #build, #stack, #work) .section__head::after {
+  .section[data-num] { overflow-x: clip; }   /* the ghost numeral may sit beyond the viewport when text is enlarged: it must not widen the page */
+  .section[data-num] .section__head::after {
+    content: var(--num); content: var(--num) / "";
     position: absolute; left: calc(100% + 1.5rem); top: -.18em; font: 900 clamp(6.5rem, 11vw, 10rem)/.9 var(--font-display); letter-spacing: -.04em;
     color: transparent; -webkit-text-stroke: 1px rgb(var(--accent) / .17); pointer-events: none; user-select: none;
   }
-  #about .section__head::after { content: "02"; content: "02" / ""; }
-  #build .section__head::after { content: "03"; content: "03" / ""; }
-  #stack .section__head::after { content: "04"; content: "04" / ""; }
-  #work .section__head::after { content: "05"; content: "05" / ""; }
 }
 /*#endregion*/
 

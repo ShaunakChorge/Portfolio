@@ -5,10 +5,13 @@
    hover/focus intensify, reduced-motion static frame, 30 fps (full rate only while hovered / focused), at most 2 visuals animating at once
    (the others are parked on their last frame), lower DPR on mobile/coarse, a visible 'Illustration' strip on every generated visual.
    Types: waveform scan-grid chat network bars terminal code qr game monogram screenshot generic.
-   Variants are picked from data-variant (project id) by simple patterns: chat -> honeypot | telegram/astra | rag (default);
-   scan-grid -> deepfake | cv-fund/yolo | cctv (default); bars -> box | house | scatter (default); terminal -> quiz | zapvi/scrap | generic;
+   Variants are picked from data-variant (the project id, or content.projects[].visual_variant) by simple patterns:
+   chat -> honeypot | telegram/astra | rag/healthcare; scan-grid -> deepfake | cv-fund/yolo | cctv; bars -> box | house | insurance;
+   terminal -> quiz | zapvi/scrap | text-to-sql | neutral; code -> translate | ams | neutral; network -> observable-ai-backend;
    screenshot -> an <img> child is framed, otherwise a canvas mock (spam | atm | generic app); monogram -> data-initials or the
    first letters of the first two variant words.
+   Every type may declare accepts(variant). A variant a type does not recognise is drawn with the neutral 'generic' visual, so a
+   project never shows another project's content (no translator on an unrelated card, no insurance chart on an API project).
    Public API: Portfolio.visuals = { refresh(), mount(el), stats(), types, list(), activeCount(), visibleCount() }.  Bus: listens to 'pv:refresh'.
    (Generated from build/pv/parts/*.js - edit the parts, then run build/pv/build-visuals.mjs.)
    ===================================================================== */
@@ -126,6 +129,16 @@
   /* ---------- type registry ---------- */
   var TYPES = {};
   function reg(name, def) { TYPES[name] = def; }
+  /* which data-variant values each project-specific type can draw truthfully; anything else falls back to the generic visual */
+  var ACCEPTS = {
+    waveform: /speech|emotion|voice|audio/,
+    'scan-grid': /cctv|crowd|camera|deepfake|df|cv-fund|yolo/,
+    chat: /honeypot|telegram|astra|rag|-rag-|healthcare|policy/,
+    network: /observab|trace|otel|jaeger/,
+    bars: /box|house|insurance|medical/,
+    qr: /qr|qr-/,
+    game: /tetris|game/
+  };
 
   /* =====================================================================
      WAVEFORM - speech emotion: mirrored voice bars that reshape per emotion,
@@ -631,7 +644,7 @@
     still: function (v) { return v.st.kind === 'cctv' ? cctvStill(v) : (v.st.kind === 'yolo' ? YOLO_STAGE * 2 + 2.2 : DF_SCAN + 1.5); },
     init: function (v) {
       var vr = v.variant;
-      v.st.kind = /deepfake|df/.test(vr) ? 'df' : (/cv-fund|yolo/.test(vr) ? 'yolo' : 'cctv');
+      v.st.kind = /deepfake|df/.test(vr) ? 'df' : (/cv-fund|yolo/.test(vr) ? 'yolo' : 'cctv');
       if (v.st.kind === 'cctv') cctvInit(v); else if (v.st.kind === 'yolo') yoloInit(v);
     },
     layout: function (v) {
@@ -946,7 +959,7 @@
     still: function (v) { var D = v.st.def; return D.ex[0].t1 - 1.0; },
     init: function (v) {
       var vr = v.variant;
-      var src = /honeypot/.test(vr) ? CHAT_DEFS.honeypot : (/telegram|astra/.test(vr) ? CHAT_DEFS.telegram : CHAT_DEFS.rag);
+      var src = /honeypot/.test(vr) ? CHAT_DEFS.honeypot : (/telegram|astra/.test(vr) ? CHAT_DEFS.telegram : CHAT_DEFS.rag);   /* mount() only routes rag / healthcare / policy variants here */
       v.st.def = JSON.parse(JSON.stringify(src));      /* per-instance copy: layout writes measurements into it */
       chatFlatten(v.st.def);
       chatBuild(v.st.def);
@@ -1367,6 +1380,17 @@
         { k: 'out', seg: [['Correct!', 'grn'], ['  score saved to leaderboard', 'dim']] }
       ]
     },
+    sql: {
+      title: 'ask.py', cps: 44,
+      lines: [
+        { k: 'cmd', seg: [['$ ', 'grn'], ['ask ', 'txt'], ['"deposits by branch"', 'amb']] },
+        { k: 'out', seg: [['schema match: ', 'dim'], ['3 tables', 'cya']] },
+        { k: 'out', seg: [['SELECT ', 'pur'], ['branch, SUM(amt)', 'txt']] },
+        { k: 'out', seg: [['FROM ', 'pur'], ['deposits ', 'txt'], ['GROUP BY ', 'pur'], ['branch', 'txt']] },
+        { k: 'out', seg: [['sqlglot: ', 'dim'], ['read-only ', 'txt'], ['ok', 'grn']] },
+        { k: 'out', seg: [['+ ', 'grn'], ['rows returned', 'txt']] }
+      ]
+    },
     generic: {
       title: 'terminal', cps: 42,
       lines: [
@@ -1406,7 +1430,7 @@
     freezeStill: true,
     still: function (v) { return v.st.def.tEnd + .3; },
     init: function (v) {
-      var vr = v.variant, src = /quiz/.test(vr) ? TERMS.quiz : (/zapvi|scrap/.test(vr) ? TERMS.scraper : TERMS.generic);
+      var vr = v.variant, src = /quiz/.test(vr) ? TERMS.quiz : (/zapvi|scrap/.test(vr) ? TERMS.scraper : (/sql|finacle/.test(vr) ? TERMS.sql : TERMS.generic));
       v.st.def = JSON.parse(JSON.stringify(src)); termBuild(v.st.def);
     },
     layout: function (v) {
@@ -1467,6 +1491,15 @@
     [['en ', 'txt'], ['= ', 'dim'], ['mt', 'cya'], ['(chunk)[0]', 'txt'], ['["translation_text"]', 'grn']],
     [['out ', 'txt'], ['= ', 'dim'], ['tldr', 'cya'], ['(en)[0]', 'txt'], ['["summary_text"]', 'grn']]
   ];
+  /* AMS: the FastAPI service that drafts audit findings and refuses ungrounded facts */
+  var CODE_AMS = [
+    [['@router', 'pur'], ['.post', 'cya'], ['("/findings/draft")', 'grn']],
+    [['async def ', 'pur'], ['draft', 'cya'], ['(req: Finding):', 'txt']],
+    [['    ', 'txt'], ['ctx ', 'txt'], ['= ', 'dim'], ['ground', 'cya'], ['(req.evidence)', 'txt']],
+    [['    ', 'txt'], ['out ', 'txt'], ['= ', 'dim'], ['llm.draft', 'cya'], ['(req, ctx, n=', 'txt'], ['3', 'amb'], [')', 'txt']],
+    [['    ', 'txt'], ['gates.check', 'cya'], ['(out, ctx)', 'txt']],
+    [['    ', 'txt'], ['return ', 'pur'], ['rank(out)', 'txt']]
+  ];
   var CODE_CPS = 62, CODE_GENERIC = [
     [['def ', 'pur'], ['predict', 'cya'], ['(x):', 'txt']],
     [['    ', 'txt'], ['z ', 'txt'], ['= ', 'dim'], ['model', 'cya'], ['.run(x)', 'txt']],
@@ -1476,7 +1509,8 @@
   ];
 
   function codeBuild(v) {
-    var lines = /german|translate|summar/.test(v.variant) || !/generic|gallery/.test(v.variant) ? CODE_LINES : CODE_GENERIC, t = .5, out = [];
+    var vr = v.variant, kind = /german|translate|summar/.test(vr) ? 'translate' : (/ams|^ams-|finding/.test(vr) ? 'ams' : 'neutral');
+    var lines = kind === 'translate' ? CODE_LINES : (kind === 'ams' ? CODE_AMS : CODE_GENERIC), t = .5, out = [];
     lines.forEach(function (ln) {
       var len = 0; ln.forEach(function (sg) { len += sg[0].length; });
       var o = { seg: ln, len: len, t0: t, dur: Math.max(.15, len / CODE_CPS) };
@@ -1484,7 +1518,9 @@
     });
     v.st.lines = out; v.st.tEnd = t;
     v.st.flowT = t + .15; v.st.period = v.st.flowT + 4.0;
-    v.st.isTranslate = lines === CODE_LINES;
+    v.st.kind = kind;
+    v.st.file = kind === 'translate' ? 'translate.py' : (kind === 'ams' ? 'finding_engine.py' : 'main.py');
+    v.st.flow = kind === 'translate' ? ['DE', 'MarianMT', 'EN', 'BART', 'SUMMARY'] : (kind === 'ams' ? ['EVIDENCE', 'GROUND', 'DRAFT', 'GATES', 'FINDING'] : null);
   }
 
   reg('code', {
@@ -1500,13 +1536,13 @@
       L.fs = clamp(Math.min(10.4 * s, L.bodyW / ((maxCh + 1) * .612)), 9, 16);
       L.lh = L.fs * 1.5; L.cw = L.fs * .612;
       var n = v.st.lines.length, bodyTop = L.py + 17 * s + 5 * s;
-      L.flow = v.st.isTranslate && (L.ph - 22 * s - n * L.lh) > 20 * s;
+      L.flow = !!v.st.flow && (L.ph - 22 * s - n * L.lh) > 20 * s;
       L.bodyY = bodyTop; L.flowY = L.py + L.ph - 13 * s;
     },
     draw: function (v, c, t) {
       var S = v.st, L = v.L, s = v.s, w = v.w, tone = v.tone, tone2 = v.tone2, i, k;
       var lt = mod(t, S.period), A = 1 - sstep(S.period - .3, S.period, lt);
-      panel(v, c, L.px, L.py, L.pw, L.ph, S.isTranslate ? 'translate.py' : 'main.py', tone);
+      panel(v, c, L.px, L.py, L.pw, L.ph, S.file, tone);
       c.save(); c.beginPath(); c.rect(L.px + 1, L.py + 17 * s, L.pw - 2, L.ph - 17 * s - 1); c.clip();
       c.globalAlpha = A;
       font(c, L.fs, 400); c.textBaseline = 'middle';
@@ -1529,7 +1565,7 @@
 
       /* translate -> summarise flow, lit once the code is written */
       if (L.flow) {
-        var fy = L.flowY, lf = lt - S.flowT, items = [['DE', 22], ['MarianMT', 0], ['EN', 22], ['BART', 0], ['SUMMARY', 0]];
+        var fy = L.flowY, lf = lt - S.flowT, items = S.flow.map(function (n) { return [n, 0]; });
         font(c, fsz(v, 8.5), 700); track(c, .6);
         var widths = [], tot = 0;
         for (i = 0; i < items.length; i++) { var wd = c.measureText(items[i][0]).width + (i % 2 === 0 ? 12 * s : 6 * s); widths.push(wd); tot += wd; }
@@ -2251,6 +2287,7 @@
     var type = (el.getAttribute('data-visual') || '').toLowerCase();
     if (!TYPES[type]) type = TYPES.generic ? 'generic' : '';
     if (!type) return null;
+    if (ACCEPTS[type] && !ACCEPTS[type].test((el.getAttribute('data-variant') || '').toLowerCase())) type = TYPES.generic ? 'generic' : type;
     var v = new Visual(el, type);
     el.__pv = v;
     live.push(v);
