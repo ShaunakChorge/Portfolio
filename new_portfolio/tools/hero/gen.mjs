@@ -1,16 +1,13 @@
-// Round 3: generates src/generated/hero.html (HOME hero: neon portrait + compact typed shaunak.py window + 3 modest stats)
-// from content/content.json (single source of truth). The marquee partial is no longer generated (not on the home page).
-// node tools/<name>/gen.mjs
+// Generates src/generated/hero.html (HOME hero: neon portrait + compact typed shaunak.py window + 3 modest stats)
+// from content/content.json (hero, profile, stats) and the project selection (the "projects" stat). Run by build.mjs, or alone:  node tools/hero/gen.mjs
 import fs from 'node:fs';
 import path from 'node:path';
+import { GENERATED, readContent, statValues, esc, escText, icon } from '../lib.mjs';
+import { findBanned } from '../rules.mjs';
+import { loadSelection } from '../selection.mjs';
 
-import { CONTENT_FILE, GEN_DIR } from '../paths.mjs';
-const C = JSON.parse(fs.readFileSync(CONTENT_FILE, 'utf8'));
-const OUT = GEN_DIR;
-
-const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const escA = s => esc(s).replace(/"/g, '&quot;');
-const icon = (n, cls = '') => `<svg class="icon${cls ? ' ' + cls : ''}" aria-hidden="true" focusable="false"><use href="#i-${n}"/></svg>`;
+const C = readContent();
+const OUT = GENERATED;
 
 /* ------------------------------------------------------------------ python tokenizer (just enough for the snippet) */
 const KW = new Set(['for', 'in', 'if', 'else', 'elif', 'import', 'from', 'as', 'def', 'return', 'class', 'while', 'with', 'and', 'or', 'not', 'is', 'lambda', 'try', 'except', 'finally', 'pass', 'break', 'continue', 'yield', 'None', 'True', 'False']);
@@ -111,10 +108,10 @@ function tokenize(src) {
   }
   return toks;
 }
-const toksToHtml = toks => toks.map(t => (t.c ? `<span class="tk-${t.c}">${esc(t.t)}</span>` : esc(t.t))).join('');
+const toksToHtml = toks => toks.map(t => (t.c ? `<span class="tk-${t.c}">${escText(t.t)}</span>` : escText(t.t))).join('');
 
 
-/* ------------------------------------------------------------------ HERO (round 3) */
+/* ------------------------------------------------------------------ HERO */
 const H = C.hero, P = C.profile;
 const roles = H.roles;
 if (!H.freelance_line) { console.error('hero.freelance_line missing'); process.exit(1); }
@@ -132,9 +129,10 @@ const codeHtml = codeLines.map((raw, idx) => {
 }).join('\n');
 const codePlain = codeLines.join('\n');
 
-/* stats (D5): modest, honest. projects = size of the active selection (computed, never typed) */
+/* stats: modest, honest. projects = size of the active selection (projects.config.json, computed, never typed) */
 const STAT_UI = { roles: { icon: 'briefcase', tone: 'magenta' }, podiums: { icon: 'trophy', tone: 'purple' }, projects: { icon: 'layers', tone: 'blue' } };
-const stats = C.stats.map(s => ({ ...s, value: s.id === 'projects' ? C.selection_default.show.length : s.value }));
+const values = statValues(C, loadSelection(C));
+const stats = C.stats.map(s => ({ ...s, value: values[s.id] }));
 if (stats.length !== 3) { console.error('exactly 3 stats expected'); process.exit(1); }
 const statsHtml = stats.map(s => {
   const u = STAT_UI[s.id] || { icon: 'star', tone: 'cyan' };
@@ -165,10 +163,11 @@ const portrait = `<figure class="np" data-neon-portrait data-reveal="scale">
                     <picture class="np__pic" data-late>
                       <source type="image/avif" data-srcset="{{base}}assets/img/portrait/portrait-480.avif 480w, {{base}}assets/img/portrait/portrait-800.avif 800w" sizes="${SIZES}">
                       <source type="image/webp" data-srcset="{{base}}assets/img/portrait/portrait-480.webp 480w, {{base}}assets/img/portrait/portrait-800.webp 800w" sizes="${SIZES}">
-                      <img class="np__img" src="${PIXEL}" data-src="{{base}}assets/img/portrait/portrait-800.webp" width="800" height="1067" decoding="async" alt="Illustrated portrait of Shaunak Chorge, smiling, wearing glasses and a dark jacket with arms crossed">
+                      <img class="np__img" src="${PIXEL}" data-src="{{base}}assets/img/portrait/portrait-800.webp" width="800" height="1067" decoding="async" alt="Illustrated portrait of Shaunak Chorge, a freelance AI engineer in Mumbai, smiling and wearing glasses and a dark jacket with arms crossed">
                     </picture>
-                    <noscript><img class="np__img np__img--ns" src="{{base}}assets/img/portrait/portrait-800.webp" width="800" height="1067" alt="Illustrated portrait of Shaunak Chorge, smiling, wearing glasses and a dark jacket with arms crossed"></noscript>
+                    <noscript><img class="np__img np__img--ns" src="{{base}}assets/img/portrait/portrait-800.webp" width="800" height="1067" alt="Illustrated portrait of Shaunak Chorge, a freelance AI engineer in Mumbai, smiling and wearing glasses and a dark jacket with arms crossed"></noscript>
                     <picture class="np__rim" aria-hidden="true" data-late>
+                      <source type="image/avif" data-srcset="{{base}}assets/img/portrait/rim-480.avif 480w, {{base}}assets/img/portrait/rim-800.avif 800w" sizes="${SIZES}">
                       <source type="image/webp" data-srcset="{{base}}assets/img/portrait/rim-480.webp 480w, {{base}}assets/img/portrait/rim-800.webp 800w" sizes="${SIZES}">
                       <img src="${PIXEL}" data-src="{{base}}assets/img/portrait/rim-800.webp" width="800" height="1067" decoding="async" alt="">
                     </picture>
@@ -198,7 +197,7 @@ const portrait = `<figure class="np" data-neon-portrait data-reveal="scale">
             </div>
           </figure>`;
 
-const hero = `<section id="home" class="hero" data-rail="01·intro" aria-labelledby="hero-title" data-roles="${escA(roles.join('|'))}">
+const hero = `<section id="home" class="hero" data-rail="01·intro" aria-labelledby="hero-title" data-roles="${esc(roles.join('|'))}">
   <div class="hero__bg" aria-hidden="true">
     <div class="bg-grid bg-grid--fade" data-parallax="0.3"></div>
     <div class="bg-rails"><i></i><i></i><i></i><i></i><i></i><i></i></div>
@@ -231,8 +230,8 @@ const hero = `<section id="home" class="hero" data-rail="01·intro" aria-labelle
         <p class="hero__lede" data-hero-in style="--d:320">${esc(H.lede)}</p>
 
         <div class="hero__cta" data-hero-in style="--d:420">
-          <a class="btn btn--solid btn--glow" href="{{base}}${escA(H.cta_primary.href)}#hire" data-magnetic>${esc(H.cta_primary.label)} ${icon('arrow-right')}</a>
-          <a class="btn btn--purple" href="{{base}}${escA(H.cta_secondary.href)}" data-magnetic>${esc(H.cta_secondary.label)} ${icon('arrow-right')}</a>
+          <a class="btn btn--solid btn--glow" href="{{base}}${esc(H.cta_primary.href)}#hire" data-magnetic>${esc(H.cta_primary.label)} ${icon('arrow-right')}</a>
+          <a class="btn btn--purple" href="{{base}}${esc(H.cta_secondary.href)}" data-magnetic>${esc(H.cta_secondary.label)} ${icon('arrow-right')}</a>
           <p class="hero__free"><span class="hero__free-dot" aria-hidden="true"></span>${esc(H.freelance_line)}</p>
         </div>
       </div>
@@ -241,7 +240,7 @@ const hero = `<section id="home" class="hero" data-rail="01·intro" aria-labelle
         <figure class="hero__code" data-hero-in="right" style="--d:380" aria-labelledby="hero-code-cap">
           <figcaption id="hero-code-cap" class="sr-only">${esc(H.code_snippet_file)}, a short Python sketch of how a project runs from idea to working product.</figcaption>
           <div class="sr-only">
-            <pre><code>${esc(codePlain)}</code></pre>
+            <pre><code>${escText(codePlain)}</code></pre>
           </div>
 
           <div class="hero__window">
@@ -271,10 +270,9 @@ ${statsHtml}
 </section>
 `;
 
-/* guard rails (directives D2 D4 D5 D6 D10) */
-const BAD = /Pune|LangGraph|exploring|learning|English|Hindi|Marathi|German|French|CGPA|systems shipped|industry-level/i;
-const hit = BAD.exec(hero);
-if (hit) { console.error('FORBIDDEN text in hero:', hit[0]); process.exit(1); }
+/* guard rails: banned words (tools/rules.mjs) */
+const hit = findBanned(hero, { languages: true, learning: true });
+if (hit) { console.error('FORBIDDEN text in hero:', hit); process.exit(1); }
 
 fs.mkdirSync(OUT, { recursive: true });
 fs.writeFileSync(path.join(OUT, 'hero.html'), hero);

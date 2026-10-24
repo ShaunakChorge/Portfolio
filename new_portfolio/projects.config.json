@@ -23,5 +23,37 @@
     "speech-emotion-recognition",
     "deepfake-video-detection",
     "observable-ai-backend"
+  ],
+  "more": [
+    "house-price-predictor",
+    "cv-fundamentals-yolov8",
+    "zapvi-web-scraper",
+    "astra-telegram-bot",
+    "medical-insurance-cost-prediction",
+    "atm-simulator",
+    "qr-code-generator",
+    "quiz-game-c",
+    "tetris-raylib-cpp",
+    "password-generator"
+  ],
+  "home_featured": [
+    "ams-ai-finding-engine",
+    "obligation-management-system",
+    "ai-rag-healthcare-assistant",
+    "agentic-honeypot",
+    "advanced-cctv-analytics",
+    "speech-emotion-recognition"
+  ],
+  "footer_work": [
+    "observable-ai-backend",
+    "ai-rag-healthcare-assistant",
+    "agentic-honeypot",
+    "deepfake-video-detection"
+  ],
+  "resume_featured": [
+    "ams-ai-finding-engine",
+    "ai-rag-healthcare-assistant",
+    "observable-ai-backend",
+    "agentic-honeypot"
   ]
 }

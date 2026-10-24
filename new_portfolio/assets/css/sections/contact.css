@@ -1,8 +1,8 @@
 /* =====================================================================
-   NEURAL NEON - contact.css   (CONTACT engineer)   section #contact + the floating "Let's talk" FAB
-   Scope: #contact / .contact__* / .contact-fab.  Un-layered, so it wins over base.css (@layer pf).
-   Contents: 0 keyframes  1 CTA band  2 status terminal + phone caption  3 channel rows  4 form panel  5 form states
-             6 FAB  7 breakpoints  8 reduced motion + mobile perf
+   NEURAL NEON - contact.css   section #contact on the home page and the /contact/ page (loaded only there; see assetTags() in build.mjs)
+   Scope: #contact / .contact__*.  Un-layered, so it wins over base.css (@layer pf).
+   The floating "Let's talk" button (.contact-fab) is in footer.css because it is on every page.
+   Contents: 0 keyframes  1 CTA band  3 channel rows  4 form panel  5 form states  7 breakpoints  8 reduced motion + mobile perf
    ===================================================================== */
 
 /*#region 0 keyframes*/
@@ -51,30 +51,8 @@
   text-shadow: 0 0 30px rgb(var(--accent) / .28);
 }
 .contact__lead { max-width: 54ch; font-size: var(--fs-lead); line-height: 1.6; color: var(--text-body); }
-.contact__avail { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; max-width: 100%; }
-.contact__avail-text { font-size: var(--fs-sm); line-height: 1.5; color: var(--text-muted); max-width: 44ch; }
 .contact__actions { display: flex; flex-wrap: wrap; gap: .85rem 1rem; margin-top: .5rem; }
-.contact__caption { display: none; max-width: 40ch; font: 400 .75rem/1.6 var(--font-mono); letter-spacing: .04em; color: var(--text-muted); }
-.contact__caption [data-clock] { white-space: nowrap; font-variant-numeric: tabular-nums; }
-/*#endregion*/
-
-/*#region 2 status terminal*/
-.contact__term {
-  overflow: hidden; border: 1px solid rgb(var(--accent) / .32); border-radius: var(--radius-md);
-  background: rgb(0 0 0 / .55); box-shadow: 0 0 24px rgb(var(--accent) / .1);
-}
-.contact__term-bar { display: flex; align-items: center; gap: .4rem; padding: .65rem .9rem; border-bottom: 1px solid var(--line); background: rgb(255 255 255 / .03); font: 400 .75rem/1 var(--font-mono); letter-spacing: .06em; color: var(--text-dim); }
-.contact__term-bar i { display: block; width: 10px; height: 10px; border-radius: 50%; background: rgb(var(--magenta)); box-shadow: 0 0 8px rgb(var(--magenta) / .7); }
-.contact__term-bar i:nth-child(2) { background: rgb(var(--purple)); box-shadow: 0 0 8px rgb(var(--purple) / .7); }
-.contact__term-bar i:nth-child(3) { background: rgb(var(--accent)); box-shadow: 0 0 8px rgb(var(--accent) / .7); margin-right: .4rem; }
-.contact__term-body { margin: 0; padding: .35rem 0; }
-.contact__kv { display: grid; gap: .15rem 1rem; padding: .75rem 1rem; }
-.contact__kv + .contact__kv { border-top: 1px solid var(--line); }
-.contact__kv dt { font: 700 .75rem/1.4 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: rgb(var(--accent-ink)); }
-.contact__kv dt::before { content: "> "; opacity: .6; }
-.contact__kv dd { margin: 0; display: flex; align-items: center; gap: .6rem; font-size: var(--fs-sm); line-height: 1.5; color: var(--text); }
-.contact__kv dd [data-clock] { font: 400 .875rem/1.4 var(--font-mono); letter-spacing: .04em; font-variant-numeric: tabular-nums; }
-@media (min-width: 480px) { .contact__kv { grid-template-columns: 6.75rem minmax(0, 1fr); align-items: baseline; } }
+@media (max-width: 479px) { .contact__actions .btn { flex: 1 1 100%; justify-content: center; } }   /* phones: both buttons the same full width, like the hero buttons */
 /*#endregion*/
 
 /*#region 3 columns + channel rows*/
@@ -83,6 +61,7 @@
 .contact__channels { container: contact-channels / inline-size; }
 .contact__sub { display: grid; gap: .5rem; margin-bottom: 1.25rem; }
 .contact__h { font-size: var(--fs-h3); line-height: 1.25; color: var(--text-strong); }
+.contact__done .contact__h--done { font-family: var(--font-display); font-weight: 700; letter-spacing: -.01em; text-wrap: balance; color: var(--text-strong); }
 .contact__note { max-width: 52ch; font-size: var(--fs-sm); line-height: 1.55; color: var(--text-muted); }
 
 .contact__list { display: grid; gap: .75rem; margin: 0; padding: 0; list-style: none; }
@@ -174,66 +153,7 @@ html:not(.js) .contact__copy { display: none; }
 .contact__done .btn { margin-top: .5rem; }
 /*#endregion*/
 
-/*#region 5b FAQ (native <details> accordion; markup generated from content.final.json)*/
-.contact__faq { margin-top: var(--contact-gap); }
-.contact__faq .contact__sub { margin-bottom: 1rem; }
-.contact__faq-list { display: grid; gap: .75rem; max-width: 56rem; }
-.contact__qa {
-  border: 1px solid rgb(var(--accent) / .26); border-radius: var(--radius-md);
-  background: linear-gradient(135deg, rgb(var(--accent) / .05), transparent 58%), var(--surface);
-  transition: border-color .25s var(--ease), box-shadow .25s var(--ease);
-}
-.contact__qa[open] { border-color: rgb(var(--accent) / .55); box-shadow: 0 0 22px rgb(var(--accent) / .13); }
-.contact__q {
-  display: flex; align-items: center; gap: .9rem; min-height: 48px; padding: .85rem 1.1rem;
-  border-radius: calc(var(--radius-md) - 2px); cursor: pointer; list-style: none; -webkit-tap-highlight-color: transparent;
-}
-.contact__q::-webkit-details-marker, .contact__q::marker { display: none; content: ""; }
-.contact__q:focus-visible { outline: 2px solid rgb(var(--accent)); outline-offset: 3px; }
-.contact__q-num { flex: none; font: 700 .75rem/1 var(--font-mono); letter-spacing: .08em; color: rgb(var(--accent-ink)); font-variant-numeric: tabular-nums; }
-.contact__q-text { flex: 1 1 auto; min-width: 0; font-size: 1rem; font-weight: 600; line-height: 1.45; color: var(--text); }
-.contact__q-chev { flex: none; color: rgb(var(--accent-ink)); transition: rotate .3s var(--ease); }
-.contact__qa[open] > .contact__q .contact__q-chev { rotate: 180deg; }
-@media (hover: hover) {
-  .contact__qa:not([open]):hover { border-color: rgb(var(--accent) / .5); }
-  .contact__qa:hover .contact__q-text { color: var(--text-strong); }
-}
-.contact__qa[open] > .contact__q .contact__q-text { color: var(--text-strong); }
-.contact__a { padding: 0 1.1rem 1.1rem; }
-.contact__a p { max-width: 68ch; margin: 0; padding-top: .85rem; font-size: .9375rem; line-height: 1.65; color: var(--text-body); border-top: 1px dashed var(--line-2); }
-@media (max-width: 479px) {
-  .contact__q { padding: .75rem .85rem; gap: .65rem; }
-  .contact__a { padding: 0 .85rem .9rem; }
-}
-/*#endregion*/
-
-/*#region 6 floating "Let's talk" FAB (markup lives in footer.html; base.css provides .fab-wrap / .fab / .fab-tip)*/
-.contact-fab {
-  visibility: hidden; opacity: 0; translate: 0 18px; scale: .9;
-  transition: opacity .3s var(--ease-out), translate .4s var(--ease-expo), scale .4s var(--ease-expo), visibility 0s linear .4s;
-}
-html:not(.is-locked) .contact-fab.is-shown { visibility: visible; opacity: 1; translate: 0 0; scale: 1; transition: opacity .3s var(--ease-out), translate .4s var(--ease-expo), scale .4s var(--ease-expo), visibility 0s; }
-.contact-fab:not(.is-shown) .fab { animation-play-state: paused; }
-.contact-fab .fab { text-decoration: none; }
-/* phones / touch: out of the way while scrolling down, back as soon as the reader scrolls up (contact.js toggles .is-away) */
-html:not(.is-locked) .contact-fab.is-shown.is-away {
-  visibility: hidden; opacity: 0; translate: 0 12px; pointer-events: none;
-  transition: opacity .2s var(--ease-out), translate .3s var(--ease-expo), scale .3s var(--ease-expo), visibility 0s linear .3s;
-}
-/* below the rail breakpoint and on touch the button is a 48px target, not 64px */
-@media (max-width: 1279px), (pointer: coarse) {
-  .contact-fab .fab { width: 48px; height: 48px; }
-  .contact-fab .fab .icon { width: 1.5rem; height: 1.5rem; }
-}
-@media (pointer: coarse) { .contact-fab .fab { animation: none; } }
-@media (max-height: 520px) and (orientation: landscape) { .contact-fab { display: none; } }
-/*#endregion*/
-
 /*#region 7 breakpoints*/
-@media (max-width: 639px) {
-  .contact__term { display: none; }
-  .contact__caption { display: block; }
-}
 @media (min-width: 900px) {
   .contact__band-in { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
 }
@@ -260,11 +180,9 @@ html:not(.is-locked) .contact-fab.is-shown.is-away {
 @media (prefers-reduced-motion: reduce) {
   .contact__band::before { inset: 0; width: auto; aspect-ratio: auto; translate: none; animation: none !important; background: linear-gradient(135deg, rgb(var(--accent) / .85), rgb(var(--accent) / .25) 30%, rgb(var(--purple) / .4) 62%, rgb(var(--magenta) / .75)); }
   .contact__fail, .contact__done:not([hidden]) { animation: none !important; }
-  .contact-fab { translate: 0 0; scale: 1; }
   .contact__row:hover { translate: 0 0 !important; }
-  .contact__q-chev { transition: none; }
 }
 @media (forced-colors: active) {
-  .contact__row, .contact__copy, .contact__term, .contact__fail, .contact__qa { border-color: CanvasText; }
+  .contact__row, .contact__copy, .contact__fail { border-color: CanvasText; }
 }
 /*#endregion*/

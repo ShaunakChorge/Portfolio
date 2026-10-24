@@ -1,0 +1,548 @@
+{
+  "version": 1,
+  "approved": "2026-10-24",
+  "note": "The approved keyword map. One primary keyword per page, never shared. The copy (title, description, H1, H2s, first paragraph, FAQ answers) is in content.json; tools/pages/keywords.mjs fails the build when a page breaks these rules. Phrases are matched loosely: small filler words (in, for, a, an, with, to) and plurals are ignored.",
+  "research": "Autocomplete suggestions from Google, Bing and DuckDuckGo (1,608 requests, English, India). Autocomplete frequency is a proxy for demand, not search volume; the primary keywords are chosen for intent fit and low competition, not for traffic.",
+  "rules": {
+    "title_max": 60,
+    "description_max": 155,
+    "faq_answer_words": [
+      40,
+      60
+    ],
+    "primary_in_body_max": 3,
+    "primary_must_be_in": [
+      "title",
+      "h1",
+      "first paragraph"
+    ]
+  },
+  "pages": {
+    "/": {
+      "primary": "freelance ai engineer mumbai",
+      "secondary": [
+        "ai developer in mumbai",
+        "ai developer in india",
+        "ai engineer in india",
+        "freelance ai developer",
+        "shaunak chorge portfolio",
+        "remote ai engineer india"
+      ],
+      "questions": [
+        "Can I hire an AI engineer who also has a full-time job?",
+        "Do you take on freelance projects?",
+        "What kinds of projects do you build?"
+      ],
+      "anchors": {
+        "other": [
+          "Shaunak Chorge",
+          "freelance AI engineer in Mumbai",
+          "home page",
+          "back to the portfolio"
+        ]
+      }
+    },
+    "projects/": {
+      "primary": "ai engineer portfolio projects",
+      "secondary": [
+        "ai developer portfolio projects",
+        "ai engineer portfolio",
+        "python ai project examples",
+        "computer vision portfolio projects"
+      ],
+      "questions": [
+        "What are some real world AI project examples?"
+      ],
+      "anchors": {
+        "other": [
+          "AI engineer portfolio",
+          "all case studies",
+          "selected work",
+          "project portfolio"
+        ]
+      }
+    },
+    "projects/ams-ai-finding-engine/": {
+      "primary": "ai audit finding generator",
+      "secondary": [
+        "audit automation tools in india",
+        "software for financial audit automation",
+        "audit automation software",
+        "ai audit report writing",
+        "audit checklist notes to draft findings"
+      ],
+      "questions": [
+        "Can AI write audit findings without making things up?",
+        "Could the same approach work on my reports or tickets?"
+      ],
+      "anchors": {
+        "footer": "AI audit finding generator",
+        "related": "AI that drafts audit findings"
+      }
+    },
+    "projects/obligation-management-system/": {
+      "primary": "regulatory obligation extraction ai",
+      "secondary": [
+        "compliance automation software ai",
+        "extract obligations from regulatory documents",
+        "compliance obligation management software",
+        "regulatory circular analysis ai",
+        "evidence linked compliance obligations"
+      ],
+      "questions": [
+        "How do you extract obligations from regulatory documents?",
+        "How do you keep the citations accurate?",
+        "Does it only work for one kind of regulation?"
+      ],
+      "anchors": {
+        "footer": "Regulatory obligation extraction",
+        "related": "AI that reads circulars and permits"
+      }
+    },
+    "projects/core-banking-text-to-sql/": {
+      "primary": "text to sql llm",
+      "secondary": [
+        "text to sql rag",
+        "text to sql agent",
+        "text to sql for banking",
+        "oracle text to sql llm",
+        "on premise text to sql"
+      ],
+      "questions": [
+        "What is text to SQL?",
+        "Is text to SQL safe for a bank database?",
+        "How do you measure whether the generated query is right?",
+        "Does any data leave the machine?"
+      ],
+      "anchors": {
+        "footer": "Text-to-SQL for banking",
+        "related": "Turning plain questions into database queries"
+      }
+    },
+    "projects/ai-rag-healthcare-assistant/": {
+      "primary": "healthcare rag chatbot",
+      "secondary": [
+        "rag chatbot langchain",
+        "rag chatbot python",
+        "rag chatbot architecture",
+        "healthcare policy chatbot",
+        "chatbot that cites its sources"
+      ],
+      "questions": [
+        "How do you build a RAG chatbot?",
+        "How do you evaluate a RAG chatbot?",
+        "What happens when the answer is not in the documents?",
+        "Does it use real patient data?"
+      ],
+      "anchors": {
+        "footer": "Healthcare policy chatbot",
+        "related": "A chatbot that cites its sources"
+      }
+    },
+    "projects/agentic-honeypot/": {
+      "primary": "ai scam honeypot",
+      "secondary": [
+        "ai agent to catch scammers",
+        "scam detection ai agent",
+        "honeypot chatbot for scammers",
+        "upi fraud scammer chatbot",
+        "ai agent development example"
+      ],
+      "questions": [
+        "What is an AI honeypot?",
+        "How do you create an AI agent?",
+        "Who built which part?",
+        "How well does it resist prompt injection?"
+      ],
+      "anchors": {
+        "footer": "AI scam honeypot",
+        "related": "An AI agent that keeps scammers talking"
+      }
+    },
+    "projects/advanced-cctv-analytics/": {
+      "primary": "cctv video analytics python",
+      "secondary": [
+        "cctv real-time video analytics",
+        "cctv with video analytics",
+        "crowd counting cctv python",
+        "crime detection from cctv video",
+        "face recognition cctv project"
+      ],
+      "questions": [
+        "What is video analytics in CCTV?",
+        "How accurate is the crime classifier?",
+        "Did you build all of it yourself?"
+      ],
+      "anchors": {
+        "footer": "CCTV analytics in Python",
+        "related": "Three watchers on one camera feed"
+      }
+    },
+    "projects/speech-emotion-recognition/": {
+      "primary": "speech emotion recognition project",
+      "secondary": [
+        "speech recognition with emotions project",
+        "emotion recognition from speech",
+        "speech emotion recognition dataset",
+        "speech emotion recognition api",
+        "speech emotion recognition python"
+      ],
+      "questions": [
+        "What is speech emotion recognition?",
+        "How accurate is speech emotion recognition?",
+        "Can it work with my own recordings?"
+      ],
+      "anchors": {
+        "footer": "Speech emotion recognition",
+        "related": "Hearing the mood in a voice clip"
+      }
+    },
+    "projects/deepfake-video-detection/": {
+      "primary": "deepfake video detection project",
+      "secondary": [
+        "deepfake detection system project",
+        "real time deepfake detection",
+        "deepfake detection python",
+        "deepfake detection streamlit app",
+        "celeb-df deepfake detection model"
+      ],
+      "questions": [
+        "What is deepfake detection?",
+        "How can you detect a deepfake video?",
+        "How accurate is the detector?",
+        "Who worked on it?"
+      ],
+      "anchors": {
+        "footer": "Deepfake video detection",
+        "related": "Frame-by-frame real or fake verdicts"
+      }
+    },
+    "projects/observable-ai-backend/": {
+      "primary": "fastapi opentelemetry tracing",
+      "secondary": [
+        "fastapi observability",
+        "fastapi jaeger tracing",
+        "prometheus metrics fastapi",
+        "traceable ai backend",
+        "fastapi request id logging"
+      ],
+      "questions": [
+        "What is observability in a FastAPI app?",
+        "Is this a production system?",
+        "Can it run without an AI key?"
+      ],
+      "anchors": {
+        "footer": "FastAPI tracing with OpenTelemetry",
+        "related": "An API you can debug from the outside"
+      }
+    },
+    "services/": {
+      "primary": "ai development services mumbai",
+      "secondary": [
+        "custom ai development services",
+        "ai development in india",
+        "freelance python developer",
+        "python developer in mumbai"
+      ],
+      "questions": [
+        "Which AI development service do I need?"
+      ],
+      "anchors": {
+        "other": [
+          "all six services",
+          "what I can build for you",
+          "freelance AI development services",
+          "see the services"
+        ]
+      }
+    },
+    "services/llm-rag-development/": {
+      "primary": "freelance ai chatbot developer",
+      "secondary": [
+        "rag chatbot for company documents",
+        "custom chatbot development services",
+        "llm application development",
+        "openai api integration services",
+        "hire ai agent developer"
+      ],
+      "questions": [
+        "What is a RAG chatbot?",
+        "How do you stop a chatbot from making things up?",
+        "Can a chatbot run on my own servers?",
+        "How much does an AI chatbot cost for a website?",
+        "What kinds of documents can the chatbot use?",
+        "Can my team maintain it after you finish?"
+      ],
+      "anchors": {
+        "footer": "AI chatbot development",
+        "related": "Freelance chatbot developer",
+        "hire": "AI chatbot development",
+        "other": [
+          "a chatbot that answers from your documents",
+          "RAG chatbot service",
+          "build a document chatbot"
+        ]
+      }
+    },
+    "services/ai-document-compliance-automation/": {
+      "primary": "document data extraction ai",
+      "secondary": [
+        "invoice ocr processing services",
+        "document data extraction software",
+        "compliance automation solutions",
+        "ocr invoice extraction",
+        "pdf data extraction with ai"
+      ],
+      "questions": [
+        "What is document AI?",
+        "How much does document AI cost?",
+        "How accurate is AI data extraction from PDFs?",
+        "Can my documents stay on our own servers?",
+        "How do you stop AI from adding invented details?",
+        "Can this connect to our existing product?"
+      ],
+      "anchors": {
+        "footer": "Document data extraction",
+        "related": "Pull data out of PDFs with AI",
+        "hire": "document data extraction",
+        "other": [
+          "document extraction service",
+          "AI for compliance documents",
+          "read documents automatically"
+        ]
+      }
+    },
+    "services/ai-backend-fastapi-django/": {
+      "primary": "hire fastapi developers",
+      "secondary": [
+        "freelance backend developer",
+        "fastapi development services",
+        "api development in python using fastapi",
+        "rest api development services",
+        "backend developer in mumbai",
+        "api development cost in india"
+      ],
+      "questions": [
+        "Is FastAPI used in production?",
+        "Which is better, FastAPI or Django?",
+        "Can you take over an existing Python backend?",
+        "Can you set up background jobs and live progress updates?",
+        "Will the API come with tests?"
+      ],
+      "anchors": {
+        "footer": "FastAPI backend development",
+        "related": "Hire a FastAPI developer",
+        "hire": "Python and FastAPI backend development",
+        "other": [
+          "backend APIs in Python",
+          "FastAPI and Django services",
+          "build an API for my app"
+        ]
+      }
+    },
+    "services/computer-vision/": {
+      "primary": "computer vision development services",
+      "secondary": [
+        "computer vision developers",
+        "computer vision engineer in india",
+        "computer vision outsourced development costs"
+      ],
+      "questions": [
+        "What is YOLO object detection?",
+        "How accurate is computer vision?",
+        "How much does a computer vision project cost?",
+        "Can you train a model on my own images or video?",
+        "Can it work on live camera feeds?",
+        "What about privacy for face or surveillance projects?"
+      ],
+      "anchors": {
+        "footer": "Computer vision development",
+        "related": "Object detection and video analytics",
+        "hire": "computer vision development",
+        "other": [
+          "freelance computer vision developer",
+          "tools that count and detect in video",
+          "computer vision service"
+        ]
+      }
+    },
+    "services/speech-nlp-ml/": {
+      "primary": "machine learning model development",
+      "secondary": [
+        "machine learning development services",
+        "machine learning model implementation",
+        "freelance machine learning engineer",
+        "machine learning project freelance",
+        "nlp developer",
+        "nlp development services"
+      ],
+      "questions": [
+        "How do you deploy a machine learning model?",
+        "How much data do I need to train a model?",
+        "Can you classify my own audio or text data?",
+        "How do you report accuracy?",
+        "Do you use ready-made models?"
+      ],
+      "anchors": {
+        "footer": "Machine learning development",
+        "related": "Speech and text machine learning",
+        "hire": "machine learning model development",
+        "other": [
+          "freelance machine learning developer",
+          "models for audio, text and spreadsheets",
+          "train a model on my data"
+        ]
+      }
+    },
+    "services/python-automation-integrations/": {
+      "primary": "python automation services",
+      "secondary": [
+        "python automation developer",
+        "web scraping services india",
+        "web scraping freelance work",
+        "ai automation services in india",
+        "freelance ai automation specialist"
+      ],
+      "questions": [
+        "Is web scraping legal in India?",
+        "Can Python be used for automation?",
+        "How much does a WhatsApp chatbot cost?",
+        "Can you build a WhatsApp bot for my business?",
+        "Can the bot use AI to answer?",
+        "Where does the automation run?"
+      ],
+      "anchors": {
+        "footer": "Python automation and bots",
+        "related": "Web scrapers and chat bots",
+        "hire": "Python automation",
+        "other": [
+          "automate repetitive work with Python",
+          "WhatsApp and Telegram bot development",
+          "automation service"
+        ]
+      }
+    },
+    "about/": {
+      "primary": "shaunak chorge ai engineer",
+      "secondary": [
+        "shaunak chorge claptek",
+        "shaunak chorge mumbai",
+        "ai engineer at claptek pvt ltd",
+        "shaunak chorge github",
+        "shaunak chorge background"
+      ],
+      "questions": [
+        "Who is Shaunak Chorge?"
+      ],
+      "anchors": {
+        "other": [
+          "about Shaunak",
+          "my background",
+          "more about me"
+        ]
+      }
+    },
+    "faq/": {
+      "primary": "ai developer cost in india",
+      "secondary": [
+        "how to hire a freelance ai developer",
+        "ai developer cost per hour",
+        "ai consultant hourly rate",
+        "freelance ai developer nda"
+      ],
+      "questions": [
+        "Can you fix an existing AI project?",
+        "Which tools do you use?",
+        "Can the AI run on our own servers instead of an online service?",
+        "Can a freelancer sign an NDA?",
+        "Who owns the code written by a freelancer?",
+        "What does a project look like from start to finish?",
+        "What time zone does a Mumbai freelance AI developer work in?",
+        "How much does it cost to hire an AI developer in India?",
+        "How long does a freelance AI project take?",
+        "What happens after you hand the project over?"
+      ],
+      "anchors": {
+        "other": [
+          "freelance AI developer FAQ",
+          "answers before you hire",
+          "read the FAQ"
+        ]
+      }
+    },
+    "contact/": {
+      "primary": "hire an ai developer",
+      "secondary": [
+        "hire ai engineers",
+        "hire ai developers",
+        "ai consultant for small business",
+        "freelance ai consultant",
+        "hire ai developer for my project"
+      ],
+      "questions": [
+        "What should I include in a project brief for an AI developer?",
+        "How do we start?"
+      ],
+      "anchors": {
+        "other": [
+          "hire me",
+          "send a project brief",
+          "start a project",
+          "get in touch"
+        ]
+      }
+    },
+    "resume/": {
+      "primary": "shaunak chorge resume",
+      "secondary": [
+        "shaunak chorge cv",
+        "shaunak chorge experience",
+        "shaunak chorge resume pdf",
+        "shaunak chorge osource global",
+        "shaunak chorge shivohini tech-ai"
+      ],
+      "questions": [
+        "Where can I download the Shaunak Chorge resume?"
+      ],
+      "anchors": {
+        "other": [
+          "resume",
+          "download the resume",
+          "full experience and education"
+        ]
+      }
+    }
+  },
+  "dropped": [
+    {
+      "phrase": "ai case studies for small business",
+      "page": "projects/",
+      "reason": "the case studies are bank, audit and compliance work, not small-business work; the claim would mislead"
+    },
+    {
+      "phrase": "ai development company in india",
+      "page": "services/",
+      "reason": "names a company or agency; Shaunak is a freelance engineer, so the copy must not claim it"
+    },
+    {
+      "phrase": "chatbot development company in india",
+      "page": "services/llm-rag-development/",
+      "reason": "names a company or agency; Shaunak is a freelance engineer, so the copy must not claim it"
+    },
+    {
+      "phrase": "deepfake detection companies in india",
+      "page": "services/computer-vision/",
+      "reason": "names a company or agency; Shaunak is a freelance engineer, so the copy must not claim it"
+    },
+    {
+      "phrase": "video analytics company in india",
+      "page": "services/computer-vision/",
+      "reason": "names a company or agency; Shaunak is a freelance engineer, so the copy must not claim it"
+    },
+    {
+      "phrase": "whatsapp chatbot company in india",
+      "page": "services/python-automation-integrations/",
+      "reason": "names a company or agency; Shaunak is a freelance engineer, so the copy must not claim it"
+    }
+  ]
+}

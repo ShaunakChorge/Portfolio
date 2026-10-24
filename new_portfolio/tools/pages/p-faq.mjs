@@ -1,6 +1,6 @@
 // p-faq.mjs - /faq/ : grouped accordion (native <details>) + FAQPage JSON-LD built from the SAME strings as the visible text
-import { cfg, abs, faqAll, pagesMeta, services, serviceByKey, CTA_TEXT } from './data.mjs';
-import { esc, ico, btn, pageHead, hireBand, qaList, hireHref, ctx, crumbNode, personMini, PERSON_ID, WEBSITE_ID } from './ui.mjs';
+import { cfg, abs, faqAll, pagesMeta, serviceByKey } from './data.mjs';
+import { esc, btn, pageHead, hireBand, qaList, hireHref, ctx, crumbNode, personMini, PERSON_ID, WEBSITE_ID } from './ui.mjs';
 
 /* one descriptive internal link under selected answers (internal linking, not part of the FAQPage text) */
 const MORE = b => ({
@@ -29,12 +29,8 @@ function page() {
     actions: btn('Hire me', hireHref(b), { v: 'solid', size: 'lg' }) + btn('See services', b + 'services/', { v: 'ghost', size: 'lg' }),
   });
   const more = MORE(b);
-  let first = true;
-  const groups = faqAll.map(g => {
-    const html = qaList(g.items, { idPrefix: 'faq', openFirst: false, links: more }).replace(first ? '<details class="pg-qa"' : '@@never@@', () => { first = false; return '<details class="pg-qa" open'; });
-    return `<div class="pg-qgroup"><h2 class="pg-qgroup__h" data-reveal>${esc(g.group)}</h2>${html}</div>`;
-  }).join('');
-  const body = `<section class="section pg-sec" aria-label="Questions and answers"><div class="container container--narrow">${groups}</div></section>`;
+  const groups = faqAll.map((g, i) => `<div class="pg-qgroup"><h2 class="pg-qgroup__h" data-reveal>${esc(g.group)}</h2>${qaList(g.items, { idPrefix: 'faq', openFirst: i === 0, links: more })}</div>`).join('');
+  const body = `<section class="section pg-sec" aria-label="Questions and answers"><div class="container"><div class="pg-faqcol">${groups}</div></div></section>`;
 
   const all = faqAll.flatMap(g => g.items);
   const jsonld = ctx([

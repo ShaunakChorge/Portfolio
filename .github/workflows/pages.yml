@@ -1,0 +1,60 @@
+# Serve the new site as the ROOT of https://shaunakchorge.github.io/Portfolio/ (instead of /Portfolio/new_portfolio/).
+#
+# PREPARED, NOT ACTIVE. This workflow runs only when started by hand (Actions tab > "Deploy site to GitHub Pages" > Run workflow), and its deploy
+# step fails until the repository is switched to this way of publishing:
+#     Settings > Pages > Build and deployment > Source = "GitHub Actions"
+# Switching that setting stops the branch-based publishing, so read README.md ("Serve the site at the root of /Portfolio/") first: it lists what changes.
+#
+# To deploy on every push to main afterwards, delete the "#" in front of the three lines under "on:".
+name: Deploy site to GitHub Pages
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: new_portfolio/package-lock.json
+
+      # PF_DEPLOY_ROOT=1 builds every address from content.seo.site_root_url (canonical, Open Graph, JSON-LD, sitemap.xml, robots.txt, llms files)
+      # and writes sitemap.xml and robots.txt inside new_portfolio/. The build stops here if any rule in content/keywords.json is broken.
+      - name: Build the site for the root address
+        working-directory: new_portfolio
+        env:
+          PF_DEPLOY_ROOT: '1'
+        run: |
+          npm ci
+          node build.mjs
+
+      - name: Assemble the published folder
+        run: node .github/scripts/stage-site.mjs
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,17 +1,18 @@
-// seo.mjs - sitemap.xml, robots.txt, llms.txt, llms-full.txt. Every URL comes from abs(cfg, path): the ONE base-URL value in src/site.config.json.
+// seo.mjs - sitemap.xml, robots.txt, llms.txt, llms-full.txt. Every URL comes from abs(cfg, path): the ONE base-URL value is content.seo.site_url.
 import fs from 'node:fs';
 import path from 'node:path';
-import { SITE } from '../paths.mjs';
-import { cfg, abs, ENTITY, DEGREE, EMAIL, GITHUB, LINKEDIN, LASTMOD, services, caseStudies, pagesMeta, content } from './data.mjs';
+import { SITE } from '../lib.mjs';
+import { cfg, abs, ENTITY, DEGREE, EMAIL, GITHUB, LINKEDIN, INSTAGRAM, LASTMOD, services, caseStudies, pagesMeta } from './data.mjs';
 
 /** Inside the git repo the sitemap.xml and robots.txt live ONCE, at the repo root (next to the redirect index.html); standalone they sit in the site folder. */
 export const REPO_ROOT = path.resolve(SITE, '..');
-export const IN_REPO = fs.existsSync(path.join(REPO_ROOT, 'index.html'));
+/** With seo.deploy_root (the site is served as the root of /Portfolio/ by the GitHub Actions workflow) the artifact is the new_portfolio folder itself, so both files go inside it. */
+export const IN_REPO = !cfg.deployRoot && fs.existsSync(path.join(REPO_ROOT, 'index.html'));
 export const SITEMAP_URL = IN_REPO ? cfg.url.replace(/new_portfolio\/$/, '') + 'sitemap.xml' : abs(cfg, 'sitemap.xml');
 
 const xml = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-/** llms files carry no years (D3/D4 housekeeping): drop "(May 2026)" style dates and bare 19xx/20xx tokens */
-export const noYears = s => String(s)
+/** llms files carry no years: drop "(May 2026)" style dates and bare 19xx/20xx tokens */
+const noYears = s => String(s)
   .replace(/\(graduated May 2026\)/g, '@@DEG@@')            // the one dated phrase that stays everywhere: the degree line
   .replace(/\s*\(\s*(?:[A-Za-z]{3,9}\s+)?(?:19|20)\d\d\s*\)/g, '')
   .replace(/\s*\b(?:19|20)\d\d\b/g, '')
@@ -23,10 +24,10 @@ export function sitemap(paths) {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`;
 }
 
-/** robots.txt: allow everything, explicit groups for the common AI / answer-engine crawlers, sitemap line */
+/** robots.txt: allow everything; one compact group names the AI and answer-engine crawlers as explicitly allowed (a group may list several User-agent lines); sitemap line */
 export function robots(sitemapUrl) {
   const bots = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-User', 'Claude-SearchBot', 'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'CCBot'];
-  return `User-agent: *\nAllow: /\n\n${bots.map(b => `User-agent: ${b}\nAllow: /\n`).join('\n')}\nSitemap: ${sitemapUrl}\n`;
+  return `User-agent: *\nAllow: /\n\n# AI and answer-engine crawlers are welcome\n${bots.map(b => `User-agent: ${b}`).join('\n')}\nAllow: /\n\nSitemap: ${sitemapUrl}\n`;
 }
 
 export function llmsTxt(records) {
@@ -42,7 +43,7 @@ export function llmsTxt(records) {
 
 Facts: role AI Engineer; employer ${cfg.person.employer}; location Mumbai, Maharashtra, India (IST, UTC+5:30); education ${DEGREE}, ${cfg.person.alumniOf}; works remotely; takes select freelance AI and backend projects.
 Contact: ${abs(cfg, 'contact/')} - ${EMAIL}
-Profiles: ${GITHUB} - ${LINKEDIN}
+Profiles: ${GITHUB} - ${LINKEDIN} - ${INSTAGRAM}
 
 ## Hire (freelance services)
 ${[by('services/') && line({ ...by('services/'), heading: 'All services' }), ...svc.map(line)].filter(Boolean).join('\n')}
@@ -55,7 +56,7 @@ ${[by('projects/') && line({ ...by('projects/'), heading: 'All projects' }), ...
 ${misc.map(line).join('\n')}
 
 ## Optional
-- [Full text of these pages](${abs(cfg, 'llms-full.txt')}): plain-text version of the services, case studies, about page and FAQ
+- [Full text of these pages](${abs(cfg, 'llms-full.txt')}): plain-text version of every page: services, case studies, about, FAQ, contact and resume
 - [Sitemap](${SITEMAP_URL}): every page
 `;
 }
@@ -64,5 +65,5 @@ export function llmsFull(records) {
   const order = [...services.map(s => s.path), 'services/', ...caseStudies.map(p => p.path), 'projects/', 'about/', 'faq/', 'contact/', 'resume/'];
   const sorted = [...records].sort((a, b) => order.indexOf(a.path) - order.indexOf(b.path));
   const body = sorted.map(r => `# ${r.heading}\nURL: ${r.url}\n${oneLine(r.desc)}\n\n${r.text.map(oneLine).filter(Boolean).join('\n\n')}`).join('\n\n---\n\n');
-  return `# ${cfg.name} - full text\n\n> ${ENTITY}\n\nContact: ${abs(cfg, 'contact/')} - ${EMAIL}\n\n---\n\n${body}\n`;
+  return `# ${cfg.name} - full text\n\n> ${ENTITY}\n\nNote: summary lines are written about Shaunak in the third person. Answers marked "A:" are in his own voice (first person).\n\nContact: ${abs(cfg, 'contact/')} - ${EMAIL}\n\n---\n\n${body}\n`;
 }

@@ -1,12 +1,12 @@
 // ui.mjs - small HTML fragment helpers shared by every page module. Pure string templates, no dependencies.
-import { esc, breadcrumb, abs, personNode } from '../../build.mjs';
-import { cfg, EMAIL, FREELANCE_LINE, services, projectHref, words } from './data.mjs';
+import { breadcrumb, abs } from '../../build.mjs';
+import { esc, icon } from '../lib.mjs';
+import { cfg, EMAIL, FREELANCE_LINE, LASTMOD, profile } from './data.mjs';
 
 export { esc, abs, cfg };
 
 /* ---------- atoms ---------- */
-export const ico = (name, cls = '') =>
-  `<svg class="icon${cls ? ' ' + cls : ''}" aria-hidden="true" focusable="false"><use href="#i-${name}"/></svg>`;
+export const ico = icon;
 
 /** render a list of strings as .tag chips (tone via data-tone on the wrapper or per call) */
 export function tags(list, { tone = '', cls = '', label = '', itemCls = '' } = {}) {
@@ -15,16 +15,13 @@ export function tags(list, { tone = '', cls = '', label = '', itemCls = '' } = {
   return `<ul class="tags${cls ? ' ' + cls : ''}" role="list"${label ? ` aria-label="${esc(label)}"` : ''}${t}>${list.map(x => `<li class="tag${itemCls ? ' ' + itemCls : ''}">${esc(x)}</li>`).join('')}</ul>`;
 }
 
-/** reveal attributes with a stagger index */
-export const rv = (i = 0, kind = '') => ` data-reveal${kind ? `="${kind}"` : ''}${i ? ` style="--i:${i}"` : ''}`;
-
 export function btn(label, href, { v = 'solid', size = '', icon = 'arrow-right', extra = '' } = {}) {
   const cls = ['btn', v ? `btn--${v}` : '', size ? `btn--${size}` : '', v === 'solid' ? 'btn--glow' : ''].filter(Boolean).join(' ');
   return `<a class="${cls}" href="${href}"${extra ? ' ' + extra : ''}>${esc(label)}${icon ? ' ' + ico(icon, 'icon--still') : ''}</a>`;
 }
 
 /* ---------- page head ---------- */
-export function crumbs(items, b) {
+function crumbs(items, b) {
   // items: [{ name, path }] from Home down; last one is the current page (no link)
   const lis = items.map((it, i) => {
     const last = i === items.length - 1;
@@ -60,7 +57,7 @@ export function pageHead({ crumbItems, b, eyebrow, h1, lead = '', answer = '', a
 
 /** a normal content section with the standard header */
 export function section({ id = '', title, titleId, eyebrow = '', lead = '', body, cls = '', tint = false, reveal = true }) {
-  const tid = titleId || (id ? id + '-h' : 'h-' + Math.random().toString(36).slice(2, 7));
+  const tid = titleId || id + '-h';
   return `<section${id ? ` id="${id}"` : ''} class="section pg-sec${tint ? ' section--tint' : ''}${cls ? ' ' + cls : ''}" aria-labelledby="${tid}">
   <div class="container">
     <header class="section__head"${reveal ? ' data-reveal' : ''}>
@@ -73,9 +70,17 @@ ${body}
 </section>`;
 }
 
-/* ---------- hire band: the closing block of every page (D2) ---------- */
+/** a section title: the content override (plain text, last word highlighted) when there is one, else the fallback HTML */
+export function title(override, fallbackHtml, cls = '') {
+  if (!override) return fallbackHtml;
+  const parts = String(override).trim().split(' ');
+  const last = parts.pop();
+  return (parts.length ? esc(parts.join(' ')) + ' ' : '') + `<span class="hl${cls ? ' ' + cls : ''}">${esc(last)}</span>`;
+}
+
+/* ---------- hire band: the closing block of every page ---------- */
 export function hireBand({ b, heading, text, topic = '', secondary = null }) {
-  const href = `${b}contact/${topic ? `?topic=${topic}` : ''}#hire`;
+  const href = hireHref(b, topic);
   const sec = secondary || { label: 'View work', href: `${b}projects/` };
   return `<section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
   <div class="container">
@@ -151,23 +156,122 @@ export function miniCard(p, b, i = 0) {
 export const PERSON_ID = abs(cfg, '#person');
 export const WEBSITE_ID = abs(cfg, '#website');
 export const personRef = () => ({ '@id': PERSON_ID });
-export const personMini = () => ({ '@type': 'Person', '@id': PERSON_ID, name: cfg.name, url: cfg.url });
-export const ctx = nodes => ({ '@context': 'https://schema.org', '@graph': nodes });
+export const personMini = () => ({ '@type': 'Person', '@id': PERSON_ID, name: cfg.name, url: cfg.url, jobTitle: cfg.person.jobTitle, worksFor: { '@type': 'Organization', name: cfg.person.employer } });
+// every page repeats the small WebSite node, because its WebPage points at it by @id
+const websiteMini = () => ({ '@type': 'WebSite', '@id': WEBSITE_ID, url: cfg.url, name: cfg.name });
+export const ctx = nodes => ({ '@context': 'https://schema.org', '@graph': nodes.some(n => n && n['@type'] === 'WebSite') ? nodes : [...nodes, websiteMini()] });
 export function crumbNode(pageUrl, items) {
   const node = breadcrumb(cfg, items);
   node['@id'] = pageUrl + '#breadcrumb';
   return node;
 }
 export function webPage(url, name, description, extra = {}) {
-  return { '@type': 'WebPage', '@id': url + '#webpage', url, name, description, isPartOf: { '@id': WEBSITE_ID }, breadcrumb: { '@id': url + '#breadcrumb' }, ...extra };
+  return { '@type': 'WebPage', '@id': url + '#webpage', url, name, description, isPartOf: { '@id': WEBSITE_ID }, breadcrumb: { '@id': url + '#breadcrumb' }, ...(/\/projects\//.test(url) ? {} : { dateModified: LASTMOD }), ...extra };
 }
 export function faqNode(url, items) {
   return { '@type': 'FAQPage', '@id': url + '#faq', mainEntity: items.map(it => ({ '@type': 'Question', name: it.q, acceptedAnswer: { '@type': 'Answer', text: it.a } })) };
 }
-export { personNode };
 
 /* ---------- misc ---------- */
 /** "Hire me" link carrying the topic so the contact form can preselect it */
 export const hireHref = (b, topic = '') => `${b}contact/${topic ? `?topic=${topic}` : ''}#hire`;
-export const serviceLink = (s, b) => `<a class="link" href="${b}${s.path}">${esc(s.name)}</a>`;
-export { words, services, projectHref };
+
+/* ---------- contact: ONE form and ONE channel list, used by the home page (section 08) and /contact/ ----------
+   The ids and data attributes are the contract with assets/js/sections/contact.js and contact-form.js (validation, honeypot, Formspree POST, success panel). */
+const fieldError = (id) => `<span class="field__error" id="${id}" aria-live="polite"><span class="field__error-in">${ico('circle-alert', 'icon--sm')}<span class="field__msg"></span></span></span>`;
+export function contactForm({ heading = 'h3', title, note, subject, rows, placeholder, typeOptions = '', wrapCls = '' }) {
+  return `<div class="contact__formwrap panel${wrapCls ? ' ' + wrapCls : ''}" id="contact-form-panel" data-tone="cyan" data-reveal>
+        <div class="contact__compose" data-compose>
+          <div class="contact__sub">
+            <${heading} class="contact__h" id="cf-title">${esc(title)}</${heading}>
+            <p class="contact__note">${esc(note)}</p>
+          </div>
+          <form class="contact__form" id="contact-form" action="${esc(profile.links.formspree)}" method="POST" data-email="${esc(EMAIL)}" aria-labelledby="cf-title">
+            <input type="hidden" name="_subject" value="${esc(subject)}">
+
+            <div class="contact__pair">
+              <div class="field" data-field="name">
+                <label for="cf-name">Name</label>
+                <input class="input" id="cf-name" name="name" type="text" autocomplete="name" autocapitalize="words" enterkeyhint="next" maxlength="80" required placeholder="Your name" aria-describedby="cf-name-err">
+                ${fieldError('cf-name-err')}
+              </div>
+              <div class="field" data-field="email">
+                <label for="cf-email">Email</label>
+                <input class="input" id="cf-email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" enterkeyhint="next" maxlength="120" required placeholder="you@example.com" aria-describedby="cf-email-err">
+                ${fieldError('cf-email-err')}
+              </div>
+            </div>
+${typeOptions ? `
+            <div class="field" data-field-type>
+              <label for="cf-type">Project type</label>
+              <select class="input" id="cf-type" name="project_type">
+                <option value="">Choose one (optional)</option>
+                ${typeOptions}
+                <option value="other">Something else</option>
+              </select>
+            </div>
+` : ''}
+            <div class="field" data-field="message">
+              <div class="contact__labelrow">
+                <label class="label" for="cf-message">Message</label>
+                <span class="contact__count" id="cf-count" aria-hidden="true">0 / 2000</span>
+              </div>
+              <textarea class="input" id="cf-message" name="message" rows="${rows}" maxlength="2000" required placeholder="${esc(placeholder)}" aria-describedby="cf-message-err"></textarea>
+              ${fieldError('cf-message-err')}
+            </div>
+
+            <div class="hp" aria-hidden="true" inert><label for="cf-website">Leave this field empty</label><input id="cf-website" type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>
+
+            <div class="contact__fail" id="cf-fail" role="alert" hidden>
+              ${ico('triangle-alert', 'icon--lg contact__fail-icon')}
+              <div class="contact__fail-body">
+                <p class="contact__fail-title" id="cf-fail-title">Message not sent</p>
+                <p class="contact__fail-text" id="cf-fail-text">Something went wrong on the way. Your text is still in the form, so you can try again, or email me directly.</p>
+                <a class="btn btn--sm btn--magenta" id="cf-fail-mail" href="mailto:${esc(EMAIL)}">Email me instead ${ico('mail', 'icon--still')}</a>
+              </div>
+            </div>
+
+            <div class="contact__submit">
+              <button class="btn btn--solid btn--lg" id="cf-submit" type="submit"><span class="contact__submit-label">Send message</span>${ico('send', 'icon--still')}</button>
+              <p class="form-status contact__status" id="cf-status" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+
+        <div class="contact__done" id="cf-done" role="status" tabindex="-1" hidden>
+          <span class="contact__done-icon" aria-hidden="true">${ico('check', 'icon--xl')}</span>
+          <p class="contact__h contact__h--done">Message sent</p>
+          <p class="contact__note">Thanks<span id="cf-done-name"></span>. I will reply to <strong id="cf-done-email">your address</strong> as soon as I can.</p>
+          <button class="btn btn--ghost" id="cf-again" type="button">Send another message</button>
+        </div>
+      </div>`;
+}
+
+/** the contact channels: email (with copy button), phone, LinkedIn, GitHub and, on /contact/, where I am based */
+export function contactList({ group = false, location = false } = {}) {
+  const row = (tone, ic, label, value, { go = true, cls = '' } = {}) => [
+    `          <li class="contact__row${cls}" data-tone="${tone}">`,
+    `            <span class="icon-tile contact__icon" aria-hidden="true">${ico(ic)}</span>`,
+    '            <div class="contact__meta">',
+    `              <span class="contact__label">${label}</span>`,
+    `              ${value}`,
+    '            </div>',
+    go ? `            ${ico('arrow-up-right', 'contact__go')}` : '',
+    '          </li>',
+  ].filter(Boolean).join('\n');
+  const out = (href, text) => `<a class="contact__value" href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(text)}<span class="sr-only"> (opens in a new tab)</span></a>`;
+  const L = profile.links;
+  return `<ul class="contact__list"${group ? ' data-reveal-group' : ''}>
+          <li class="contact__row contact__row--copy" data-tone="cyan">
+            <span class="icon-tile contact__icon" aria-hidden="true">${ico('mail')}</span>
+            <div class="contact__meta">
+              <span class="contact__label">Email</span>
+              <a class="contact__value" id="contact-email" href="mailto:${esc(EMAIL)}">${esc(EMAIL)}</a>
+            </div>
+            <button class="contact__copy" type="button" data-copy="${esc(EMAIL)}" aria-label="Copy email address">${ico('copy', 'icon--sm')}<span class="contact__copy-text">Copy</span></button>
+          </li>
+${row('green', 'phone', 'Phone', `<a class="contact__value" href="${esc(profile.phone_tel)}">${esc(profile.phone)}</a>`)}
+${row('blue', 'linkedin', 'LinkedIn', out(L.linkedin, L.linkedin.replace(/^https?:\/\/(www\.)?/, '')))}
+${row('purple', 'github', 'GitHub', out(L.github, L.github.replace(/^https?:\/\//, '')))}${location ? '\n' + row('cyan', 'map-pin', 'Based in', `<span class="contact__value">Mumbai, India &middot; <span data-clock="Asia/Kolkata" data-clock-label="Local time" data-clock-suffix="IST">IST</span></span>`, { go: false, cls: ' contact__row--static' }) : ''}
+        </ul>`;
+}

@@ -1,10 +1,11 @@
-// p-about.mjs - /about/  (bio, how I work, experience, 2-tier stack, education, certifications, awards). NO languages here (D4).
+// p-about.mjs - /about/  (bio, how I work, experience, 2-tier stack, education, certifications, awards). NO languages here.
+import { personNode } from '../../build.mjs';
 import {
   cfg, abs, services, skills, CTA_TEXT, experience, education, certifications, achievements, profile, aboutPage, pagesMeta, stats, ENTITY, FREELANCE_LINE,
 } from './data.mjs';
 import {
-  esc, ico, tags, btn, pageHead, section, hireBand, hireHref,
-  ctx, crumbNode, webPage, personNode, PERSON_ID, WEBSITE_ID,
+  esc, ico, tags, btn, pageHead, section, hireBand, hireHref, qaList, title as ttl,
+  ctx, crumbNode, webPage, faqNode, PERSON_ID,
 } from './ui.mjs';
 
 /* ---------- whoami terminal (same idea as the home card, WITHOUT the languages line) ---------- */
@@ -67,19 +68,19 @@ function page() {
   const statTone = { roles: 'cyan', podiums: 'magenta', projects: 'purple' };
   const statIcon = { roles: 'briefcase', podiums: 'trophy', projects: 'folder' };
   const story = section({
-    id: 'story', eyebrow: 'Background', title: `The short <span class="hl">story</span>`,
+    id: 'story', eyebrow: 'Background', title: ttl(m.h2 && m.h2.story, 'The short <span class="hl">story</span>'),
     body: `<div class="pg-story"><div class="prose pg-prose" data-reveal>${html}</div></div>
     <div class="stats pg-stats" data-reveal="scale">${stats.map(s => `<div class="stat" data-tone="${statTone[s.id]}">${ico(statIcon[s.id])}<span class="stat__num" data-count="${s.value}">${s.value}</span><span class="stat__label">${esc(s.label)}</span></div>`).join('')}</div>`,
   });
 
   const how = section({
-    id: 'how-i-work', eyebrow: 'Principles', title: `How I <span class="hl hl--purple">work</span>`, tint: true,
+    id: 'how-i-work', eyebrow: 'Principles', title: ttl(m.h2 && m.h2.how, 'How I <span class="hl hl--purple">work</span>', 'hl--purple'), tint: true,
     body: `<ul class="grid grid--c4 pg-how" role="list">${aboutPage.page.how_i_work.map((x, i) => `<li><article class="card card--flat" data-tone="${['cyan', 'purple', 'magenta', 'blue'][i % 4]}" data-reveal style="--i:${i}"><h3 class="pg-how__t">${esc(x.title)}</h3><p class="card__text">${esc(x.detail)}</p></article></li>`).join('')}</ul>`,
   });
 
   const work = experience.filter(e => e.group === 'work');
   const exp = section({
-    id: 'experience', eyebrow: 'Experience', title: `Where I have <span class="hl hl--blue">worked</span>`,
+    id: 'experience', eyebrow: 'Experience', title: ttl(m.h2 && m.h2.experience, 'Where I have <span class="hl hl--blue">worked</span>', 'hl--blue'),
     lead: 'Three industry roles. The full detail is on the resume.',
     body: `<ol class="timeline pg-timeline" data-fill>${work.map((e, i) => `<li class="timeline__item${i === 0 ? ' timeline__item--now' : ''}" data-tone="${WORK_TONE[i % 3]}" data-reveal>
         <p class="timeline__meta">${esc(e.period)}${e.location ? ` &middot; ${esc(e.location)}` : ''}</p>
@@ -91,7 +92,7 @@ function page() {
   });
 
   const stack = section({
-    id: 'stack', eyebrow: 'Stack', title: `Tools I <span class="hl">use</span>`, tint: true,
+    id: 'stack', eyebrow: 'Stack', title: ttl(m.h2 && m.h2.stack, 'Tools I <span class="hl">use</span>'), tint: true,
     lead: aboutPage.page.stack_intro,
     body: stackTiers(),
   });
@@ -109,6 +110,11 @@ function page() {
     </div>`,
   });
 
+  const faqItems = (m.faqs || []).map((f, i) => ({ id: `q${i + 1}`, q: f.q, a: f.a }));
+  const faq = faqItems.length ? section({
+    id: 'faq', eyebrow: 'FAQ', title: 'Quick <span class="hl">answer</span>', tint: true,
+    body: qaList(faqItems, { idPrefix: 'about', openFirst: true }),
+  }) : '';
   const person = {
     ...personNode(cfg), description: ENTITY,
     makesOffer: services.map(s => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', '@id': abs(cfg, s.path) + '#service', name: s.name } })),
@@ -117,14 +123,15 @@ function page() {
     webPage(url, m.title, m.description, { '@type': 'AboutPage', mainEntity: { '@id': PERSON_ID } }),
     person,
     crumbNode(url, crumbItems),
+    ...(faqItems.length ? [faqNode(url, faqItems)] : []),
   ]);
   return {
     path: m.path, current: 'about', title: m.title, description: m.description, jsonld,
-    content: head + story + how + exp + stack + cred + hireBand({ b, heading: 'Let’s talk about <span class="hl">your project</span>', text: CTA_TEXT }),
+    content: head + story + how + exp + stack + cred + faq + hireBand({ b, heading: 'Let’s talk about <span class="hl">your project</span>', text: CTA_TEXT }),
     llms: {
       heading: m.h1, url, desc: m.description,
       text: [ENTITY, 'Experience: ' + work.map(e => `${e.role} at ${e.org}`).join('; ') + '.', 'Core stack: ' + skills.core.join(', ') + '.', 'Also works with: ' + skills.also.join(', ') + '.',
-        'How I work: ' + aboutPage.page.how_i_work.map(x => `${x.title}. ${x.detail}`).join(' ')],
+        'How I work: ' + aboutPage.page.how_i_work.map(x => `${x.title}. ${x.detail}`).join(' '), ...faqItems.map(f => `Q: ${f.q} A: ${f.a}`)],
     },
   };
 }

@@ -1,8 +1,6 @@
 // p-contact.mjs - /contact/ : "Hire me" page. Form ids / data attributes match assets/js/sections/contact.js (validation, honeypot, Formspree POST, success panel).
-import {
-  cfg, abs, services, pagesMeta, faqShort, profile, EMAIL, PHONE_TEL, PHONE_TEXT, GITHUB, LINKEDIN, FREELANCE_LINE,
-} from './data.mjs';
-import { esc, ico, btn, pageHead, section, hireBand, qaList, ctx, crumbNode, personMini, webPage, PERSON_ID } from './ui.mjs';
+import { cfg, abs, services, pagesMeta, faqFor, EMAIL, FREELANCE_LINE } from './data.mjs';
+import { esc, ico, pageHead, section, qaList, title as ttl, ctx, crumbNode, personMini, webPage, faqNode, PERSON_ID, contactForm, contactList } from './ui.mjs';
 
 const STEPS = [
   { step: 'Send a brief', detail: 'What you want to build, roughly when you need it and anything I should know.' },
@@ -10,6 +8,8 @@ const STEPS = [
   { step: 'Agree the scope', detail: 'No code is written until we both agree on it.' },
   { step: 'Build and hand over', detail: 'A small working prototype on your data, then tests, notes and a walkthrough.' },
 ];
+
+// the contact page questions: the faq_all groups with page "contact" (each question lives on one page only)
 
 const TYPE_LABEL = {
   'llm-rag-development': 'AI chatbot or document assistant',
@@ -26,7 +26,7 @@ function page() {
   const url = abs(cfg, m.path);
   const crumbItems = [{ name: 'Home', path: '' }, { name: 'Contact', path: m.path }];
   const head = pageHead({
-    crumbItems, b, eyebrow: 'Hire me', h1: esc(m.h1), lead: m.lead,
+    crumbItems, b, eyebrow: 'Hire me', h1: esc(m.h1), lead: m.lead, answer: m.direct_answer,
     actions: `<p class="badge badge--accent"><span class="badge__dot" aria-hidden="true"></span>${esc(FREELANCE_LINE)}</p>`,
   });
 
@@ -35,64 +35,11 @@ function page() {
   const mailto = `mailto:${EMAIL}?subject=${encodeURIComponent('Project brief')}&body=${encodeURIComponent(template.replace('# brief.md\n\n', ''))}`;
 
   const opts = services.map(s => `<option value="${s.slug}">${esc(TYPE_LABEL[s.slug] || s.name)}</option>`).join('');
-  const form = `<div class="contact__formwrap panel pg-formwrap" id="contact-form-panel" data-tone="cyan" data-reveal>
-        <div class="contact__compose" data-compose>
-          <div class="contact__sub">
-            <h2 class="contact__h" id="cf-title">Send a short brief</h2>
-            <p class="contact__note">${esc(m.note)} Name, email and a few lines are enough. Messages are delivered through Formspree, a form service, and I only use your details to reply.</p>
-          </div>
-          <form class="contact__form" id="contact-form" action="${profile.links.formspree}" method="POST" data-email="${EMAIL}" aria-labelledby="cf-title">
-            <input type="hidden" name="_subject" value="New project brief from the portfolio">
-            <div class="contact__pair">
-              <div class="field" data-field="name">
-                <label for="cf-name">Name</label>
-                <input class="input" id="cf-name" name="name" type="text" autocomplete="name" autocapitalize="words" enterkeyhint="next" maxlength="80" required placeholder="Your name" aria-describedby="cf-name-err">
-                <span class="field__error" id="cf-name-err" aria-live="polite"><span class="field__error-in">${ico('circle-alert', 'icon--sm')}<span class="field__msg"></span></span></span>
-              </div>
-              <div class="field" data-field="email">
-                <label for="cf-email">Email</label>
-                <input class="input" id="cf-email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" enterkeyhint="next" maxlength="120" required placeholder="you@example.com" aria-describedby="cf-email-err">
-                <span class="field__error" id="cf-email-err" aria-live="polite"><span class="field__error-in">${ico('circle-alert', 'icon--sm')}<span class="field__msg"></span></span></span>
-              </div>
-            </div>
-            <div class="field" data-field-type>
-              <label for="cf-type">Project type</label>
-              <select class="input" id="cf-type" name="project_type">
-                <option value="">Choose one (optional)</option>
-                ${opts}
-                <option value="other">Something else</option>
-              </select>
-            </div>
-            <div class="field" data-field="message">
-              <div class="contact__labelrow">
-                <label class="label" for="cf-message">Message</label>
-                <span class="contact__count" id="cf-count" aria-hidden="true">0 / 2000</span>
-              </div>
-              <textarea class="input" id="cf-message" name="message" rows="6" maxlength="2000" required placeholder="What do you want to build, and when do you need it?" aria-describedby="cf-message-err"></textarea>
-              <span class="field__error" id="cf-message-err" aria-live="polite"><span class="field__error-in">${ico('circle-alert', 'icon--sm')}<span class="field__msg"></span></span></span>
-            </div>
-            <div class="hp" aria-hidden="true" inert><label for="cf-website">Leave this field empty</label><input id="cf-website" type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>
-            <div class="contact__fail" id="cf-fail" role="alert" hidden>
-              ${ico('triangle-alert', 'icon--lg contact__fail-icon')}
-              <div class="contact__fail-body">
-                <p class="contact__fail-title" id="cf-fail-title">Message not sent</p>
-                <p class="contact__fail-text" id="cf-fail-text">Something went wrong on the way. Your text is still in the form, so you can try again, or email me directly.</p>
-                <a class="btn btn--sm btn--magenta" id="cf-fail-mail" href="mailto:${EMAIL}">Email me instead ${ico('mail', 'icon--still')}</a>
-              </div>
-            </div>
-            <div class="contact__submit">
-              <button class="btn btn--solid btn--lg" id="cf-submit" type="submit"><span class="contact__submit-label">Send message</span>${ico('send', 'icon--still')}</button>
-              <p class="form-status contact__status" id="cf-status" role="status" aria-live="polite"></p>
-            </div>
-          </form>
-        </div>
-        <div class="contact__done" id="cf-done" role="status" tabindex="-1" hidden>
-          <span class="contact__done-icon" aria-hidden="true">${ico('check', 'icon--xl')}</span>
-          <h3 class="contact__h">Message sent</h3>
-          <p class="contact__note">Thanks<span id="cf-done-name"></span>. I will reply to <strong id="cf-done-email">your address</strong> as soon as I can.</p>
-          <button class="btn btn--ghost" id="cf-again" type="button">Send another message</button>
-        </div>
-      </div>`;
+  const form = contactForm({
+    heading: 'h2', title: 'Send a short brief', wrapCls: 'pg-formwrap', rows: 6, typeOptions: opts,
+    note: `${m.note} Name, email and a few lines are enough. Messages are delivered through Formspree, a form service, and I only use your details to reply.`,
+    subject: 'New project brief from the portfolio', placeholder: 'What do you want to build, and when do you need it?',
+  });
 
   const brief = `<div class="pg-brief" data-reveal>
         <div class="pg-term pg-term--brief">
@@ -109,32 +56,7 @@ function page() {
 
   const channels = `<div class="pg-channels" data-reveal>
         <h3 class="contact__h">Or reach me directly</h3>
-        <ul class="contact__list">
-          <li class="contact__row contact__row--copy" data-tone="cyan">
-            <span class="icon-tile contact__icon" aria-hidden="true">${ico('mail')}</span>
-            <div class="contact__meta"><span class="contact__label">Email</span><a class="contact__value" id="contact-email" href="mailto:${EMAIL}">${EMAIL}</a></div>
-            <button class="contact__copy" type="button" data-copy="${EMAIL}" aria-label="Copy email address">${ico('copy', 'icon--sm')}<span class="contact__copy-text">Copy</span></button>
-          </li>
-          <li class="contact__row" data-tone="green">
-            <span class="icon-tile contact__icon" aria-hidden="true">${ico('phone')}</span>
-            <div class="contact__meta"><span class="contact__label">Phone</span><a class="contact__value" href="${PHONE_TEL}">${PHONE_TEXT}</a></div>
-            ${ico('arrow-up-right', 'contact__go')}
-          </li>
-          <li class="contact__row" data-tone="blue">
-            <span class="icon-tile contact__icon" aria-hidden="true">${ico('linkedin')}</span>
-            <div class="contact__meta"><span class="contact__label">LinkedIn</span><a class="contact__value" href="${LINKEDIN}" target="_blank" rel="noopener noreferrer">linkedin.com/in/shaunak-chorge<span class="sr-only"> (opens in a new tab)</span></a></div>
-            ${ico('arrow-up-right', 'contact__go')}
-          </li>
-          <li class="contact__row" data-tone="purple">
-            <span class="icon-tile contact__icon" aria-hidden="true">${ico('github')}</span>
-            <div class="contact__meta"><span class="contact__label">GitHub</span><a class="contact__value" href="${GITHUB}" target="_blank" rel="noopener noreferrer">github.com/ShaunakChorge<span class="sr-only"> (opens in a new tab)</span></a></div>
-            ${ico('arrow-up-right', 'contact__go')}
-          </li>
-          <li class="contact__row contact__row--static" data-tone="cyan">
-            <span class="icon-tile contact__icon" aria-hidden="true">${ico('map-pin')}</span>
-            <div class="contact__meta"><span class="contact__label">Based in</span><span class="contact__value">Mumbai, India &middot; <span data-clock="Asia/Kolkata" data-clock-label="Local time" data-clock-suffix="IST">IST</span></span></div>
-          </li>
-        </ul>
+        ${contactList({ location: true })}
       </div>`;
 
   const hire = `<section id="hire" class="section pg-sec pg-hirebox" aria-label="Send a brief">
@@ -147,13 +69,14 @@ function page() {
 </section>`;
 
   const process = section({
-    id: 'process', eyebrow: 'What happens next', title: `How a project <span class="hl hl--purple">starts</span>`, tint: true,
+    id: 'process', eyebrow: 'What happens next', title: ttl(m.h2 && m.h2.process, 'How a project <span class="hl hl--purple">starts</span>', 'hl--purple'), tint: true,
     body: `<ol class="pg-steps" data-reveal-group>${STEPS.map((s, i) => `<li class="pg-step" style="--i:${i}"><span class="pg-step__n" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span><h3 class="pg-step__t">${esc(s.step)}</h3><p>${esc(s.detail)}</p></li>`).join('')}</ol>`,
   });
 
+  const faqItems = faqFor('contact');
   const faq = section({
-    id: 'faq', eyebrow: 'FAQ', title: `Quick <span class="hl">answers</span>`,
-    body: qaList(faqShort, { idPrefix: 'cq' }) + `<p class="pg-linkrow" data-reveal><a class="link-arrow" href="${b}faq/">Read all the questions ${ico('arrow-right')}</a><a class="link-arrow" href="${b}services/">See the services ${ico('arrow-right')}</a></p>`,
+    id: 'faq', eyebrow: 'FAQ', title: ttl(m.h2 && m.h2.faq, 'Quick <span class="hl">answers</span>'),
+    body: qaList(faqItems, { idPrefix: 'cq' }) + `<p class="pg-linkrow" data-reveal><a class="link-arrow" href="${b}faq/">Read all the questions ${ico('arrow-right')}</a><a class="link-arrow" href="${b}services/">See the services ${ico('arrow-right')}</a></p>`,
   });
 
   const close = `<section class="section pg-sec pg-closing" aria-label="Prefer email"><div class="container"><p class="pg-closing__p" data-reveal>Prefer to write directly? Email <a class="link" href="mailto:${EMAIL}">${EMAIL}</a> or <a class="link" href="#hire">go back to the form</a>.</p></div></section>`;
@@ -162,11 +85,12 @@ function page() {
     webPage(url, m.title, m.description, { '@type': 'ContactPage', mainEntity: { '@id': PERSON_ID } }),
     { ...personMini(), email: 'mailto:' + EMAIL },
     crumbNode(url, crumbItems),
+    faqNode(url, faqItems),
   ]);
   return {
     path: m.path, current: 'contact', title: m.title, description: m.description, jsonld,
     content: head + hire + process + faq + close,
-    llms: { heading: m.h1, url, desc: m.description, text: [m.lead, 'Send a brief: ' + checklist.join('; ') + '.', m.note, `Email: ${EMAIL}`] },
+    llms: { heading: m.h1, url, desc: m.description, text: [m.direct_answer, m.lead, 'Send a brief: ' + checklist.join('; ') + '.', m.note, `Email: ${EMAIL}`, ...faqItems.map(f => `Q: ${f.q} A: ${f.a}`)] },
   };
 }
 

@@ -1,5 +1,5 @@
 /* =====================================================================
-   NEURAL NEON - footer.css   (CONTACT engineer)   <footer class="footer">
+   NEURAL NEON - footer.css   <footer class="footer">
    Scope: .footer / .footer__*.  Un-layered, so it wins over base.css (@layer pf).
    IMPORTANT: the floating FAB (.contact-fab) lives inside this footer and is position:fixed, so the footer must NEVER get
    transform / filter / backdrop-filter / contain / content-visibility / will-change (each would trap the fixed FAB).
@@ -30,6 +30,7 @@
 .footer__cta-text { margin: 0; max-width: 62ch; font-size: var(--fs-sm); line-height: 1.55; color: var(--text-muted); }
 .footer__cta-text strong { display: block; font: 700 1rem/1.35 var(--font-display); letter-spacing: .02em; color: var(--text-strong); }
 body[data-page="contact"] .footer__cta, body[data-page="contact"] .contact-fab { display: none; }
+body:has(.pg-hire) .footer__cta { display: none; }
 
 .footer__grid { display: grid; gap: clamp(1.75rem, 1.2rem + 2.4vw, 2.75rem); padding-bottom: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem); }
 .footer__grid > * { min-width: 0; }
@@ -66,7 +67,10 @@ body[data-page="contact"] .footer__cta, body[data-page="contact"] .contact-fab {
   font-size: .875rem; color: var(--text-dim);
 }
 .footer__copy { color: var(--text-muted); }
-.footer__top { min-height: 44px; }
+.footer__top, .footer__motion { min-height: 44px; }
+.footer__acts { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem .75rem; }
+[data-motion-toggle][aria-pressed="true"] { color: #000; background: rgb(var(--accent)); border-color: rgb(var(--accent)); box-shadow: 0 0 14px rgb(var(--accent) / .5); }
+.drawer__motion { min-height: 44px; }
 /*#endregion*/
 
 /*#region 4 ghost wordmark (decorative; text lives in a pseudo-element so it is not in the DOM text)*/
@@ -95,16 +99,41 @@ body[data-page="contact"] .footer__cta, body[data-page="contact"] .contact-fab {
   .footer__cta { padding: .9rem 1rem; }
   .footer__cta .btn { width: 100%; }
   .footer__ghost { display: none; }
+  .footer__links a { min-width: 44px; }
   .footer__bar { flex-direction: column; align-items: flex-start; }
-  .footer__top { width: 100%; }
+  .footer__acts { width: 100%; flex-direction: column; align-items: stretch; }
+  .footer__top, .footer__motion { width: 100%; }
 }
+/*#endregion*/
+
+/*#region 5b floating "Let's talk" FAB (on every page; markup lives in footer.html; base.css provides .fab-wrap / .fab / .fab-tip; contact.js toggles .is-shown / .is-away)*/
+.contact-fab {
+  visibility: hidden; opacity: 0; translate: 0 18px; scale: .9;
+  transition: opacity .3s var(--ease-out), translate .4s var(--ease-expo), scale .4s var(--ease-expo), visibility 0s linear .4s;
+}
+html:not(.is-locked) .contact-fab.is-shown { visibility: visible; opacity: 1; translate: 0 0; scale: 1; transition: opacity .3s var(--ease-out), translate .4s var(--ease-expo), scale .4s var(--ease-expo), visibility 0s; }
+.contact-fab:not(.is-shown) .fab { animation-play-state: paused; }
+.contact-fab .fab { text-decoration: none; }
+/* phones / touch: out of the way while scrolling down, back as soon as the reader scrolls up (contact.js toggles .is-away) */
+html:not(.is-locked) .contact-fab.is-shown.is-away {
+  visibility: hidden; opacity: 0; translate: 0 12px; pointer-events: none;
+  transition: opacity .2s var(--ease-out), translate .3s var(--ease-expo), scale .3s var(--ease-expo), visibility 0s linear .3s;
+}
+/* below the rail breakpoint and on touch the button is a 48px target, not 64px */
+@media (max-width: 1279px), (pointer: coarse) {
+  .contact-fab .fab { width: 48px; height: 48px; }
+  .contact-fab .fab .icon { width: 1.5rem; height: 1.5rem; }
+}
+@media (pointer: coarse) { .contact-fab .fab { animation: none; } }
+@media (max-height: 520px) and (orientation: landscape) { .contact-fab { display: none; } }
 /*#endregion*/
 
 /*#region 6 reduced motion + print*/
 @media (prefers-reduced-motion: reduce) {
   .footer__links a:hover, .footer__links a:focus-visible { translate: 0 0; }
+  .contact-fab { translate: 0 0; scale: 1; }
 }
 @media print {
-  .footer__ghost, .footer__line, .footer__top, .footer__cta, .contact-fab { display: none !important; }
+  .footer__ghost, .footer__line, .footer__top, .footer__motion, .footer__cta, .contact-fab { display: none !important; }
 }
 /*#endregion*/

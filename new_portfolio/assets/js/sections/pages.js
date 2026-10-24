@@ -1,6 +1,6 @@
 /* =====================================================================
-   NEURAL NEON - pages.js   (PAGES engineer)   inner pages only; every function returns quietly when its markup is missing (home, 404...)
-     1 project filter chips on /projects/ ([data-filterbar] + [data-filterable] > [data-cat]); also answers the palette's portfolio:filter event
+   NEURAL NEON - pages.js   inner pages only; every function returns quietly when its markup is missing (home, 404...)
+     1 project filter chips on /projects/ ([data-filterbar] + [data-filterable] > [data-cat]);
      2 <details> that contain the URL hash target open themselves (projects/#more, faq/#faq-pricing)
      3 ?topic=<service-slug> preselects the project type on /contact/
      4 "Copy template" button on /contact/ ([data-copy-brief])
@@ -9,9 +9,9 @@
 (function () {
   'use strict';
   var win = window, doc = document;
+  if (!win.Portfolio || !win.Portfolio.qs) return;            // core.js not loaded: nothing to do
 
-  function qs(sel, root) { try { return (root || doc).querySelector(sel); } catch (e) { return null; } }
-  function qsa(sel, root) { try { return Array.prototype.slice.call((root || doc).querySelectorAll(sel)); } catch (e) { return []; } }
+  var qs = win.Portfolio.qs, qsa = win.Portfolio.qsa;
   function P() { return win.Portfolio || null; }
   function toast(msg, type) { var p = P(); if (p && typeof p.toast === 'function') p.toast(msg, { type: type || 'info' }); }
 
@@ -28,7 +28,7 @@
     items.forEach(function (it) { var s = it.closest('section'); if (s && sections.indexOf(s) < 0) sections.push(s); });
     bar.hidden = false;                                 // without JS the bar stays hidden and every project is visible
 
-    function apply(cat, fromEvent) {
+    function apply(cat) {
       var ok = chips.some(function (c) { return c.getAttribute('data-filter') === cat; });
       if (!ok) cat = 'all';
       var shown = 0;
@@ -44,11 +44,8 @@
       });
       chips.forEach(function (c) { c.setAttribute('aria-pressed', c.getAttribute('data-filter') === cat ? 'true' : 'false'); });
       if (count) count.innerHTML = 'Showing <strong>' + shown + '</strong> of ' + total + ' projects';
-      if (fromEvent && P() && typeof P().refresh === 'function') { /* reveal state of re-shown cards */ P().observe && P().observe(doc.getElementById('main')); }
     }
     chips.forEach(function (c) { c.addEventListener('click', function () { apply(c.getAttribute('data-filter')); }); });
-    var p = P();
-    if (p && typeof p.on === 'function') p.on('portfolio:filter', function (e) { apply(e && e.detail && e.detail.cat, true); });
   }
 
   /* ---------- 2 details + hash ---------- */
@@ -85,29 +82,13 @@
   }
 
   /* ---------- 4 copy the brief template ---------- */
-  function copyText(text) {
-    var nav = win.navigator;
-    if (nav && nav.clipboard && typeof nav.clipboard.writeText === 'function') {
-      return nav.clipboard.writeText(text).then(function () { return true; }, function () { return legacy(text); });
-    }
-    return Promise.resolve(legacy(text));
-  }
-  function legacy(text) {
-    var ok = false, prev = doc.activeElement, ta = doc.createElement('textarea');
-    ta.value = text; ta.setAttribute('readonly', ''); ta.setAttribute('aria-hidden', 'true'); ta.tabIndex = -1; ta.className = 'hp';
-    doc.body.appendChild(ta);
-    try { ta.select(); ok = doc.execCommand('copy'); } catch (e) { ok = false; }
-    doc.body.removeChild(ta);
-    if (prev && prev !== doc.body && prev.focus) { try { prev.focus({ preventScroll: true }); } catch (e) { /* ignore */ } }
-    return ok;
-  }
   function initBrief() {
     qsa('[data-copy-brief]').forEach(function (btn) {
       var src = qs(btn.getAttribute('data-copy-brief'));
       var lbl = qs('.pg-brief__lbl', btn), timer = 0, idle = lbl ? lbl.textContent : 'Copy template';
       if (!src) return;
       btn.addEventListener('click', function () {
-        copyText(btn.getAttribute('data-copy-text') || src.textContent || '').then(function (ok) {
+        P().copy(btn.getAttribute('data-copy-text') || src.textContent || '').then(function (ok) {
           clearTimeout(timer);
           if (ok) {
             if (lbl) lbl.textContent = 'Copied';

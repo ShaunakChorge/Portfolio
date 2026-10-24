@@ -19,16 +19,13 @@
         <p class="footer__blurb">AI Engineer at Claptek Pvt Ltd. {{footer_note}}.</p>
         <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India &ndash; working remotely (IST)</p>
         <ul class="footer__soc" aria-label="Profiles">
-          <li><a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a></li>
-          <li><a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a></li>
-          <li><a class="icon-btn" href="https://www.instagram.com/_shaunakkk/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-instagram"/></svg></a></li>
-          <li><a class="icon-btn" href="mailto:shaunak.chorge@gmail.com" aria-label="Email Shaunak"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a></li>
+          {{footer_social}}
         </ul>
       </div>
 
       <div class="footer__cols">
         <nav class="footer__col" aria-labelledby="footer-pages-h">
-          <h2 class="footer__h" id="footer-pages-h">Pages</h2>
+          <p class="footer__h" id="footer-pages-h">Pages</p>
           <ul class="footer__links">
             <li><a href="{{home}}">Home</a></li>
             <li><a href="{{base}}projects/">Projects</a></li>
@@ -41,14 +38,14 @@
         </nav>
 
         <nav class="footer__col footer__col--wide" aria-labelledby="footer-services-h">
-          <h2 class="footer__h" id="footer-services-h">Services</h2>
+          <p class="footer__h" id="footer-services-h">Services</p>
           <ul class="footer__links">
             {{footer_services}}
           </ul>
         </nav>
 
         <nav class="footer__col" aria-labelledby="footer-work-h">
-          <h2 class="footer__h" id="footer-work-h">Work</h2>
+          <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
             {{footer_work}}
           </ul>
@@ -59,7 +56,11 @@
 
     <div class="footer__bar">
       <p class="footer__copy">&copy; 2026 Shaunak Chorge</p>
-      <a class="btn btn--ghost btn--sm footer__top" href="#top" data-back-to-top>Back to top <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg></a>
+      <div class="footer__acts">
+        <!-- WCAG 2.2.2: a visible control to pause all moving effects, on every screen size (shown by footer.js; it drives Portfolio.motion) -->
+        <button type="button" class="btn btn--ghost btn--sm footer__motion" data-motion-toggle aria-pressed="false" hidden><svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-pause"/></svg> Pause effects</button>
+        <a class="btn btn--ghost btn--sm footer__top" href="#top" data-back-to-top>Back to top <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg></a>
+      </div>
     </div>
   </div>
 

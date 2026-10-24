@@ -369,7 +369,7 @@ const SELECTOR_DATA = /*__DATA__*/null;
       b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
     $('#presetName').textContent = cur ? PRESETS[cur].name : 'Custom';
-    var json = JSON.stringify({ show: ordered(state.show), casestudy: ordered(state.cs) }, null, 2) + '\n';
+    var json = JSON.stringify(Object.assign({ show: ordered(state.show), casestudy: ordered(state.cs) }, D.keep || {}), null, 2) + '\n';
     var out = $('#out'); out.value = json; out.rows = Math.max(6, Math.min(20, json.split('\n').length));
     save();
   }

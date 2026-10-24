@@ -4,6 +4,12 @@ node_modules/
 # generated on every build (node build.mjs --min recreates them); the deployed pages and assets/dist stay tracked
 new_portfolio/src/generated/
 
+# written by tools/selector/gen.mjs on every build (run the build once after cloning)
+new_portfolio/tools/project-selector.html
+
+# temporary print layout left behind by tools/resume/make-pdf.mjs --html
+new_portfolio/tools/resume/resume.print.html
+
 # private source material and assistant workspaces (stay on this computer)
 _private/
 .claude/

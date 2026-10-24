@@ -2,64 +2,47 @@
 /**
  * process-photo.mjs - turns a finished portrait ARTWORK into the site's animated neon portrait assets.
  *
- *   node process-photo.mjs <input-image> [--out <dir>] [--matte auto|key|rembg|threshold|alpha]
- *        [--lo 4] [--hi 12] [--rim 1] [--preview <dir>]
+ *   node tools/photo/process-photo.mjs <input-image> [--out <dir>]
  *
  * Produces (default --out = <site>/assets/img/portrait):
  *   portrait-480.webp/.avif  portrait-800.webp/.avif   the artwork with a clean transparent background
- *   rim-480.webp             rim-800.webp              glow-only rim-light layer (screen-blended on top by the page)
+ *   rim-480.avif/.webp       rim-800.avif/.webp             glow-only rim-light layer (screen-blended on top by the page)
  * Every file is kept under 120 KB (quality is lowered automatically until it fits). Master size is 3:4 (800 x 1067).
  *
  * The artwork keeps its own colours and tone EXACTLY: no grading, no duotone, no smoothing, no baked lighting. The only
  * thing computed is the alpha (so the figure blends into the page) and the separate rim-glow layer built from the alpha edge.
  * The neon frame, rim pulse and scan sweep are page layers (assets/css/sections/portrait.css), not part of the picture.
  *
- * Matte (auto): the input's own alpha if it has any; else, when the border is one flat colour (a black or white studio
- * background), a border flood fill with tight thresholds ("key": nothing inside the figure is ever removed); else rembg
- * (python) as a last resort. Source stays untouched; nothing is written next to it.
+ * Background (picked automatically): the input's own alpha if it has any; else, when the border is one flat colour (a black or white
+ * studio background), a tight border flood fill (nothing inside the figure is ever removed); else rembg (python, optional:
+ * pip install rembg onnxruntime) and, without it, a looser border flood fill. The source image is never changed.
  *
- * Needs: node + sharp (NODE_PATH may point at a folder that has it). Optional: python with rembg + onnxruntime.
+ * Needs: node + sharp (npm i --no-save sharp, or NODE_PATH pointing at a folder that has it).
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import { fileURLToPath } from 'node:url';
-import { createRequire } from 'node:module';
 import { spawnSync } from 'node:child_process';
+import { loadPackage } from '../optional.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.resolve(HERE, '..', '..');   // the new_portfolio folder
 
-function loadSharp() {
-  for (const base of [import.meta.url, 'file:///' + SITE_ROOT.replace(/\\/g, '/') + '/x.js']) {
-    try { return createRequire(base)('sharp'); } catch { /* try next */ }
-  }
-  throw new Error('sharp not found. Run: npm i --no-save sharp (in the new_portfolio folder).');
-}
-const sharp = loadSharp();
+const sharp = loadPackage('sharp');   // npm i --no-save sharp
 
 /* ------------------------------- args ------------------------------- */
 const argv = process.argv.slice(2);
-const opt = { out: path.join(SITE_ROOT, 'assets/img/portrait'), matte: 'auto', model: 'isnet-general-use', lo: 4, hi: 12, rim: 1, preview: null, matteFile: null };
-let input = null;
+let input = null, out = path.join(SITE_ROOT, 'assets/img/portrait');
 for (let i = 0; i < argv.length; i++) {
-  const a = argv[i];
-  if (a === '--out') opt.out = argv[++i];
-  else if (a === '--matte') opt.matte = argv[++i];
-  else if (a === '--model') opt.model = argv[++i];
-  else if (a === '--lo') opt.lo = parseFloat(argv[++i]);
-  else if (a === '--hi') opt.hi = parseFloat(argv[++i]);
-  else if (a === '--rim') opt.rim = parseFloat(argv[++i]);
-  else if (a === '--preview') opt.preview = argv[++i];
-  else if (a === '--matte-file') opt.matteFile = argv[++i];   // reuse an already-computed RGBA matte PNG (fast iteration)
-  else if (!a.startsWith('--')) input = a;
+  if (argv[i] === '--out') out = argv[++i];
+  else if (!argv[i].startsWith('--')) input = argv[i];
 }
 if (!input || !fs.existsSync(input)) {
-  console.error('usage: node process-photo.mjs <input-image> [--out dir] [--matte auto|rembg|threshold|alpha] [--lo 4] [--hi 12] [--preview dir]');
+  console.error('usage: node tools/photo/process-photo.mjs <input-image> [--out dir]');
   process.exit(1);
 }
-fs.mkdirSync(opt.out, { recursive: true });
-if (opt.preview) fs.mkdirSync(opt.preview, { recursive: true });
+fs.mkdirSync(out, { recursive: true });
 
 /* ------------------------------ helpers ----------------------------- */
 const W = 800, H = 1067;                    // 3:4 master size (800 wide)
@@ -115,17 +98,14 @@ function borderColour(img) {
   return ch.map((a) => { a.sort((p, q) => p - q); return a[a.length >> 1]; });
 }
 
-/** fallback matte: flood fill from the border over pixels close to the border colour, soft alpha at the edge */
-function thresholdMatte(img) {
+/** flood fill from the border over pixels close to the border colour (distance < hi), soft alpha between lo and hi. Pixels the flood cannot
+ *  reach stay fully opaque, so dark hair or a dark jacket inside the figure are never touched. Colours are not modified, only alpha. */
+function floodMatte(img, { distance, lo, hi, blurPasses, gain = 1, bias = 0 }) {
   const { data, w, h } = img; const bg = borderColour(img);
   const dist = new Float32Array(w * h);
-  for (let i = 0; i < w * h; i++) {
-    const o = i * 4; const dr = data[o] - bg[0], dg = data[o + 1] - bg[1], db = data[o + 2] - bg[2];
-    dist[i] = Math.sqrt(dr * dr + dg * dg + db * db);
-  }
-  const LO = 14, HI = 46;
+  for (let i = 0; i < w * h; i++) dist[i] = distance(data, i * 4, bg);
   const reached = new Uint8Array(w * h); const stack = [];
-  const push = (i) => { if (!reached[i] && dist[i] < HI) { reached[i] = 1; stack.push(i); } };
+  const push = (i) => { if (!reached[i] && dist[i] < hi) { reached[i] = 1; stack.push(i); } };
   for (let x = 0; x < w; x++) { push(x); push((h - 1) * w + x); }
   for (let y = 0; y < h; y++) { push(y * w); push(y * w + w - 1); }
   while (stack.length) {
@@ -133,38 +113,16 @@ function thresholdMatte(img) {
     if (x > 0) push(i - 1); if (x < w - 1) push(i + 1); if (y > 0) push(i - w); if (y < h - 1) push(i + w);
   }
   const alpha = new Float32Array(w * h);
-  for (let i = 0; i < w * h; i++) alpha[i] = reached[i] ? smooth(LO, HI, dist[i]) : 1;
-  const soft = boxBlur(alpha, w, h, 1, 2);       // soften the hard staircase
-  const out = new Uint8Array(data);
-  for (let i = 0; i < w * h; i++) out[i * 4 + 3] = Math.round(clamp(soft[i] * 1.08 - 0.04) * 255);
-  return { data: out, w, h };
+  for (let i = 0; i < w * h; i++) alpha[i] = reached[i] ? smooth(lo, hi, dist[i]) : 1;
+  const soft = boxBlur(alpha, w, h, 1, blurPasses);      // removes the hard staircase
+  const result = new Uint8Array(data);
+  for (let i = 0; i < w * h; i++) result[i * 4 + 3] = Math.round(clamp(soft[i] * gain + bias) * 255);
+  return { data: result, w, h };
 }
-
-/** key matte for a FLAT background (e.g. black studio): flood fill from the border over pixels within `lo..hi` (max channel
- *  difference) of the border colour. Pixels the flood cannot reach stay fully opaque, so dark hair, a black T-shirt or a
- *  dark jacket inside the figure are never touched. Colours are not modified, only alpha. */
-function keyMatte(img) {
-  const { data, w, h } = img; const bg = borderColour(img); const LO = opt.lo, HI = opt.hi;
-  const dist = new Float32Array(w * h);
-  for (let i = 0; i < w * h; i++) {
-    const o = i * 4;
-    dist[i] = Math.max(Math.abs(data[o] - bg[0]), Math.abs(data[o + 1] - bg[1]), Math.abs(data[o + 2] - bg[2]));
-  }
-  const reached = new Uint8Array(w * h); const stack = [];
-  const push = (i) => { if (!reached[i] && dist[i] < HI) { reached[i] = 1; stack.push(i); } };
-  for (let x = 0; x < w; x++) { push(x); push((h - 1) * w + x); }
-  for (let y = 0; y < h; y++) { push(y * w); push(y * w + w - 1); }
-  while (stack.length) {
-    const i = stack.pop(); const x = i % w, y = (i / w) | 0;
-    if (x > 0) push(i - 1); if (x < w - 1) push(i + 1); if (y > 0) push(i - w); if (y < h - 1) push(i + w);
-  }
-  const alpha = new Float32Array(w * h);
-  for (let i = 0; i < w * h; i++) alpha[i] = reached[i] ? smooth(LO, HI, dist[i]) : 1;
-  const soft = boxBlur(alpha, w, h, 1, 1);      // one light pass: removes the staircase, keeps the outline crisp
-  const out = new Uint8Array(data);
-  for (let i = 0; i < w * h; i++) out[i * 4 + 3] = Math.round(clamp(soft[i]) * 255);
-  return { data: out, w, h };
-}
+/** flat studio background (black or white): tight thresholds on the largest channel difference, crisp outline */
+const keyMatte = (img) => floodMatte(img, { distance: (d, o, bg) => Math.max(Math.abs(d[o] - bg[0]), Math.abs(d[o + 1] - bg[1]), Math.abs(d[o + 2] - bg[2])), lo: 4, hi: 12, blurPasses: 1 });
+/** any other border: looser thresholds on the colour distance */
+const looseMatte = (img) => floodMatte(img, { distance: (d, o, bg) => Math.sqrt((d[o] - bg[0]) ** 2 + (d[o + 1] - bg[1]) ** 2 + (d[o + 2] - bg[2]) ** 2), lo: 14, hi: 46, blurPasses: 2, gain: 1.08, bias: -0.04 });
 
 /** true when the border is one flat colour (so a key matte is safe) */
 function flatBorder(img) {
@@ -175,11 +133,11 @@ function flatBorder(img) {
   return Math.max(hi[0] - lo[0], hi[1] - lo[1], hi[2] - lo[2]) <= 12;
 }
 
-function rembgMatte(file, model) {
+function rembgMatte(file) {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'portrait-'));
   const dst = path.join(tmpDir, 'matte.png');
   for (const py of ['python', 'py', 'python3']) {
-    const r = spawnSync(py, [path.join(HERE, 'matte_rembg.py'), file, dst, model], { stdio: ['ignore', 'ignore', 'pipe'], encoding: 'utf8', timeout: 480000 });
+    const r = spawnSync(py, [path.join(HERE, 'matte_rembg.py'), file, dst], { stdio: ['ignore', 'ignore', 'pipe'], encoding: 'utf8', timeout: 480000 });
     if (r.status === 0 && fs.existsSync(dst)) return dst;
     if (r.status === 2) break;                 // rembg missing, other interpreters will not help
   }
@@ -187,25 +145,13 @@ function rembgMatte(file, model) {
 }
 
 async function getMatte() {
-  const mode = opt.matte;
-  if (opt.matteFile) { console.log('matte: reusing ' + opt.matteFile); return await loadRGBA(opt.matteFile, true); }
-  if (mode === 'alpha' || mode === 'auto') {
-    const probe = await loadRGBA(input, true);
-    if (hasUsefulAlpha(probe)) { console.log('matte: using the input image alpha channel'); return probe; }
-    if (mode === 'alpha') throw new Error('--matte alpha but the input has no transparency');
-  }
-  if (mode === 'key' || (mode === 'auto' && flatBorder(await loadRGBA(input, true)))) {
-    console.log(`matte: key (flat border colour, lo ${opt.lo} hi ${opt.hi})`);
-    return keyMatte(await loadRGBA(input, true));
-  }
-  if (mode === 'auto' || mode === 'rembg') {
-    const f = rembgMatte(input, opt.model);
-    if (f) { console.log(`matte: rembg (${opt.model}) + alpha matting`); return await loadRGBA(f, true); }
-    if (mode === 'rembg') throw new Error('rembg failed (pip install rembg onnxruntime platformdirs)');
-    console.log('matte: rembg unavailable, falling back to border-colour flood fill');
-  }
-  console.log('matte: border-colour flood fill with soft alpha');
-  return thresholdMatte(await loadRGBA(input, true));
+  const probe = await loadRGBA(input, true);
+  if (hasUsefulAlpha(probe)) { console.log('matte: using the input image alpha channel'); return probe; }
+  if (flatBorder(probe)) { console.log('matte: key (flat border colour)'); return keyMatte(probe); }
+  const f = rembgMatte(input);
+  if (f) { console.log('matte: rembg + alpha matting'); return await loadRGBA(f, true); }
+  console.log('matte: rembg unavailable, falling back to border-colour flood fill');
+  return looseMatte(probe);
 }
 
 /* ----------------------------- compose ------------------------------ */
@@ -246,7 +192,7 @@ function compose(matte) {
       const core = Math.pow(inner, 1.1);
       const white = 0.32 * core * core;
       const rr = mix(rc[0], 255, white), rg = mix(rc[1], 255, white), rb = mix(rc[2], 255, white);
-      const ra = clamp((core * 0.95 + halo * 0.5) * opt.rim);
+      const ra = clamp(core * 0.95 + halo * 0.5);
       rimOut[o] = rr; rimOut[o + 1] = rg; rimOut[o + 2] = rb; rimOut[o + 3] = ra * 255;
     }
   }
@@ -261,14 +207,14 @@ async function encode(buf, w, h, outW, name, kind) {
     if (outW !== w) s = s.resize(outW, Math.round(outW * h / w), { kernel: 'lanczos3' });
     return s;
   };
-  const tries = kind === 'webp' ? [92, 90, 88, 86, 82, 78, 74, 70, 64, 58] : [70, 65, 60, 55, 50, 45, 40, 34, 28];
+  const tries = kind === 'webp' ? [92, 90, 88, 86, 82, 78, 74, 70, 64, 58] : name.startsWith('rim') ? [52, 45, 38, 30] : [70, 65, 60, 55, 50, 45, 40, 34, 28];   // the rim glow is mostly transparent, so AVIF at 52 is plenty
   for (const q of tries) {
     const s = mk();
     const bufOut = kind === 'webp'
       ? await s.webp({ quality: q, alphaQuality: Math.min(100, q + 10), effort: 6, smartSubsample: true }).toBuffer()
       : await s.avif({ quality: q, effort: 6, chromaSubsampling: '4:4:4' }).toBuffer();
     if (bufOut.length <= MAX || q === tries[tries.length - 1]) {
-      const file = path.join(opt.out, `${name}.${kind}`);
+      const file = path.join(out, `${name}.${kind}`);
       fs.writeFileSync(file, bufOut);
       return { file, bytes: bufOut.length, q };
     }
@@ -277,19 +223,13 @@ async function encode(buf, w, h, outW, name, kind) {
 
 /* ------------------------------- main ------------------------------- */
 const matte = await getMatte();
-if (opt.preview) {
-  await sharp(Buffer.from(matte.data), { raw: { width: matte.w, height: matte.h, channels: 4 } }).png().toFile(path.join(opt.preview, 'matte.png'));
-}
 const { base, rim, w, h } = compose(matte);
 const report = [];
 for (const width of [480, 800]) {
   report.push(await encode(base, w, h, width, `portrait-${width}`, 'webp'));
   report.push(await encode(base, w, h, width, `portrait-${width}`, 'avif'));
   report.push(await encode(rim, w, h, width, `rim-${width}`, 'webp'));
-}
-if (opt.preview) {
-  await sharp(Buffer.from(base.buffer), { raw: { width: w, height: h, channels: 4 } }).png().toFile(path.join(opt.preview, 'base.png'));
-  await sharp(Buffer.from(rim.buffer), { raw: { width: w, height: h, channels: 4 } }).png().toFile(path.join(opt.preview, 'rim.png'));
+  report.push(await encode(rim, w, h, width, `rim-${width}`, 'avif'));
 }
 for (const r of report) console.log(`${path.basename(r.file).padEnd(20)} ${(r.bytes / 1024).toFixed(1).padStart(6)} KB  q${r.q}`);
 console.log(`master ${w}x${h} (3:4). Use width=800 height=1067 on the 800 file, 480x640 on the small one.`);

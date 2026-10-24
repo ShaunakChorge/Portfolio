@@ -13,6 +13,10 @@ body[data-page="home"] .footer__cta { display: none; }
 body[data-page="home"] #contact { content-visibility: visible; contain-intrinsic-size: none; }
 
 /* "View all ->" pill under every truncated list */
+/* phones: fewer cards and no second contact form, so the home page stays short (the Contact page has the full form) */
+@media (max-width: 639px) { .hm-xs-hide { display: none !important; } }
+@media (min-width: 640px) { .hm-xs-only { display: none !important; } }
+.hm-band__mail { margin: .85rem 0 0; font-size: var(--fs-sm); color: var(--text-muted); overflow-wrap: anywhere; }
 .hm-more { display: flex; justify-content: center; margin: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem) 0 0; }
 .hm-more--left { justify-content: flex-start; margin-top: 1.25rem; }
 .hm-more .link-arrow {
@@ -24,18 +28,18 @@ body[data-page="home"] #contact { content-visibility: visible; contain-intrinsic
 .hm-card__cat { margin: 0; font: 700 .75rem/1.2 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: rgb(var(--tone-ink)); }
 
 /* content-visibility: the below-the-fold home sections are laid out and painted only near the viewport (cheaper first render on phones).
-   contain-intrinsic-size is the CONTENT-box height measured per band (qa/home_measure.mjs); "auto" remembers the real height after the first render.
+   contain-intrinsic-size is the CONTENT-box height measured per band (content-visibility switched off, then each section measured); "auto" remembers the real height after the first render.
    All glows of these sections stay inside them (ghost numerals are clipped on purpose), so the paint containment of content-visibility costs nothing. */
 .hm-cv { content-visibility: auto; }
-#offer { contain-intrinsic-size: auto 1400px; } #selected { contain-intrinsic-size: auto 2950px; } #bio { contain-intrinsic-size: auto 950px; }
-#roles { contain-intrinsic-size: auto 770px; } #process { contain-intrinsic-size: auto 800px; } #faq { contain-intrinsic-size: auto 780px; }
+#offer { contain-intrinsic-size: auto 1400px; } #selected { contain-intrinsic-size: auto 1630px; } #bio { contain-intrinsic-size: auto 1040px; }
+#roles { contain-intrinsic-size: auto 820px; } #process { contain-intrinsic-size: auto 570px; } #faq { contain-intrinsic-size: auto 770px; } #contact { contain-intrinsic-size: auto 580px; }
 @media (min-width: 640px) {
-  #offer { contain-intrinsic-size: auto 850px; } #selected { contain-intrinsic-size: auto 1900px; } #bio { contain-intrinsic-size: auto 800px; }
-  #roles { contain-intrinsic-size: auto 750px; } #process { contain-intrinsic-size: auto 500px; } #faq { contain-intrinsic-size: auto 680px; }
+  #offer { contain-intrinsic-size: auto 1150px; } #selected { contain-intrinsic-size: auto 1920px; } #bio { contain-intrinsic-size: auto 800px; }
+  #roles { contain-intrinsic-size: auto 650px; } #process { contain-intrinsic-size: auto 500px; } #faq { contain-intrinsic-size: auto 660px; } #contact { contain-intrinsic-size: auto 1500px; }
 }
 @media (min-width: 1024px) {
-  #offer { contain-intrinsic-size: auto 700px; } #selected { contain-intrinsic-size: auto 1420px; } #bio { contain-intrinsic-size: auto 650px; }
-  #roles { contain-intrinsic-size: auto 470px; } #process { contain-intrinsic-size: auto 380px; } #faq { contain-intrinsic-size: auto 710px; }
+  #offer { contain-intrinsic-size: auto 1030px; } #selected { contain-intrinsic-size: auto 1450px; } #bio { contain-intrinsic-size: auto 670px; }
+  #roles { contain-intrinsic-size: auto 490px; } #process { contain-intrinsic-size: auto 385px; } #faq { contain-intrinsic-size: auto 680px; } #contact { contain-intrinsic-size: auto 1210px; }
 }
 @media print { .hm-cv { content-visibility: visible; } }
 /*#endregion*/
@@ -159,6 +163,12 @@ body[data-page="home"] #contact { content-visibility: visible; contain-intrinsic
 @media (min-width: 36em) { .hm-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 62em) { .hm-steps { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .hm-step { position: relative; min-width: 0; padding-top: 3.6rem; }
+@media (max-width: 35.99em) {   /* phones: number beside the text, so the text uses the full width */
+  .hm-steps { gap: 1rem; }
+  .hm-step { padding: 0 0 0 3.5rem; min-height: 2.75rem; }
+  .hm-step__n { font-size: 2.1rem; }
+  .hm-step__d { max-width: none; }
+}
 .hm-step__n {
   position: absolute; top: 0; left: 0; font: 900 2.75rem/1 var(--font-display); letter-spacing: -.02em; color: transparent;
   -webkit-text-stroke: 1.5px rgb(var(--tone)); text-shadow: 0 0 14px rgb(var(--tone) / .55);
@@ -171,7 +181,8 @@ body[data-page="home"] #contact { content-visibility: visible; contain-intrinsic
 /*#endregion*/
 
 /*#region 7 faq accordion (#faq)*/
-.hm-faq__list { display: grid; gap: .75rem; }
+.hm-faq__list { display: grid; gap: .75rem; max-width: 56rem; }
+.hm-faq .hm-more { justify-content: flex-start; max-width: 56rem; }
 .hm-qa { border: 1px solid var(--line-2); border-left: 3px solid rgb(var(--accent) / .6); border-radius: var(--radius-md); background: var(--surface); transition: border-color .25s var(--ease), box-shadow .25s var(--ease); }
 .hm-qa[open] { border-color: rgb(var(--accent) / .45); border-left-color: rgb(var(--accent)); box-shadow: 0 0 22px rgb(var(--accent) / .12); }
 @media (hover: hover) { .hm-qa:not([open]):hover { border-color: rgb(var(--accent) / .45); } }
@@ -180,7 +191,7 @@ body[data-page="home"] #contact { content-visibility: visible; contain-intrinsic
 .hm-qa__q::marker { content: ""; }
 .hm-qa__q:focus-visible { outline: 2px solid rgb(var(--accent)); outline-offset: 3px; border-radius: var(--radius-md); }
 .hm-qa__n { flex: none; font: 700 .8125rem/1 var(--font-mono); letter-spacing: .1em; color: rgb(var(--accent-ink)); }
-.hm-qa__t { flex: 1; min-width: 0; font-weight: 600; font-size: 1.0625rem; line-height: 1.4; color: var(--text-strong); }
+.hm-qa__t { flex: 1; min-width: 0; margin: 0; font-family: var(--font-body); letter-spacing: 0; text-wrap: wrap; font-weight: 600; font-size: 1.0625rem; line-height: 1.4; color: var(--text-strong); }
 .hm-qa__chev { flex: none; color: rgb(var(--accent-ink)); transition: rotate .25s var(--ease); }
 .hm-qa[open] .hm-qa__chev { rotate: 180deg; }
 .hm-qa__a { padding: 0 1.25rem 1.2rem 3.1rem; color: var(--text-body); }
@@ -195,8 +206,9 @@ body[data-page="home"] #contact { content-visibility: visible; contain-intrinsic
 /*#endregion*/
 
 /*#region 8 hire band (#contact; the rest is contact.css)*/
-.contact__band-in.hm-band { grid-template-columns: minmax(0, 1fr); }   /* one column: the quick-facts terminal of the old band is gone */
+.contact__band-in.hm-band { grid-template-columns: minmax(0, 1fr); }   /* one column */
 .hm-band .contact__lead { max-width: 58ch; }
+.panel p { color: var(--text-body); }   /* the form panel on the home page (inner pages get the same rule from pages.css, which the home page does not load) */
 .hm-band__line { display: inline-flex; align-items: center; gap: .65rem; margin: 1.1rem 0 0; font: 400 .8125rem/1.45 var(--font-mono); letter-spacing: .04em; color: var(--text-muted); }
 /*#endregion*/
 

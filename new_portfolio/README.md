@@ -1,42 +1,52 @@
 # Shaunak Chorge - portfolio and freelance site
 
-The source of <https://shaunakchorge.github.io/Portfolio/new_portfolio/>: a home page plus dedicated pages for services, projects (with case studies), about, FAQ, contact and a resume view. The pages are generated from one content file, so changing a sentence or a project is a one-file edit followed by one command.
+The source of <https://shaunakchorge.github.io/Portfolio/new_portfolio/>: a home page plus dedicated pages for services, projects (with case studies), about, FAQ, contact and a resume view. The pages are generated from one content file and one project list, so changing a sentence or a project is a one-file edit followed by one command.
 
 ## Rebuild
 
 ```bash
-npm i                    # once: installs esbuild (needed only for the minified build)
-node build.mjs --min     # the build you deploy
+npm i                    # once: installs esbuild (the minifier)
+npm run build            # = node build.mjs, the build you deploy
+npm test                 # builds a copy in a temp folder and checks it; changes nothing in the repo
 ```
 
-`node build.mjs` (without `--min`) does the same but links the readable `assets/css` and `assets/js` files, so it needs no install at all.
+`node build.mjs` minifies the styles and scripts into `assets/dist/` and links those files with a `?v=` hash. It checks that esbuild is installed before it touches anything. `node build.mjs --dev` (or `npm run build:dev`) links the readable `assets/css` and `assets/js` files instead and needs no install, but the pages it writes are the deployed pages, so run the default build again before you commit. The guard fails a default build that finds a readable-asset link.
 
 One run does, in order:
 
-1. **Generators** write the partials and script data from `content/content.json`: the hand-off files in `src/generated/` (hero, home sections, home page data), the data block inside `assets/js/sections/fx.js`, and the owner's project selector, `tools/project-selector.html`.
+1. **Generators** write the partials and script data from `content/content.json` and `projects.config.json`: the hand-off files in `src/generated/` (hero, home sections, home page data), the data block inside `assets/js/sections/fx.js`, and the owner's project selector, `tools/project-selector.html`.
 2. **Assemble** `index.html` (the home page) from `src/shell.html` and the partials.
-3. **Pages** (`tools/pages/build-pages.mjs`): `services/`, `projects/`, `about/`, `faq/`, `contact/`, `resume/`, one case study per entry in `projects.config.json`, then `llms.txt` and `llms-full.txt` here and, once, `sitemap.xml` and `robots.txt` in the repo root (next to the redirect `index.html`).
-4. **Guard** scans the output for strings that must never ship, checks that the spoken-language list appears exactly once (home page About card) and that every internal link and anchor resolves. The run exits non-zero if anything is wrong.
+3. **Pages** (`tools/pages/build-pages.mjs`, run in the same process): `services/`, `projects/`, `about/`, `faq/`, `contact/`, `resume/`, one case study per entry in `casestudy`, then `llms.txt` and `llms-full.txt` here and, once, `sitemap.xml` and `robots.txt` in the repo root (next to the redirect `index.html`).
+4. **Guard** scans the output for the words in `tools/rules.mjs`, checks that the spoken-language list appears exactly once (home page About card) and that every internal link and every `#anchor` resolves, including the `contact/?topic=...#hire` links behind the "Hire me" buttons. The run exits non-zero if anything is wrong.
 
-It prints a summary (pages, services, case studies, sitemap URLs). Other flags: `--skip-gen` reuses the existing files in `src/generated/`; `--only=hero,home-faq --out=preview-x.html` assembles one throwaway preview page (delete it afterwards).
+It prints a summary (pages, services, case studies, sitemap URLs). Other flags: `--skip-gen` reuses the existing files in `src/generated/`; `--only=hero,home-faq --out=preview-x.html` assembles one throwaway preview page with readable assets (delete it afterwards).
+
+`npm test` copies the site to a temp folder and checks that: the build passes; a second build writes byte-identical files; the files in the repo equal a clean build (if not, the deployed pages are stale: run `npm run build`); and the link guard really catches a renamed `#hire` anchor.
 
 ## Structure
 
 ```
 content/content.json     THE source of copy and facts: profile, services, projects, experience, FAQ, page titles, SEO
-projects.config.json     which projects are selected, which get a case study (see below)
+projects.config.json     THE project list: which projects show, which have a case study, which are featured (see below)
 build.mjs                the build (one command) and the shared page renderer
 package.json             esbuild (minifier) is the only dependency; package-lock.json pins its version
 src/
   shell.html             head, header, drawer, footer slot, scripts        (hand-edited)
-  footer.html            footer                                            (hand-edited)
-  site.config.json       name, e-mail, profile links, Person schema        (hand-edited)
+  footer.html            footer                                            (hand-edited; its lists and profile links are filled in by the build)
+  site.config.json       name, tagline, Person schema                      (hand-edited; e-mail and profile links come from content.profile)
   generated/             hero, home sections, home page data               (written by every build, git-ignored)
 tools/
+  lib.mjs                paths, esc, icon: the one shared helper file
+  rules.mjs              the ONE list of banned words and patterns (generators and guard)
+  selection.mjs          reads projects.config.json: the one place that decides which projects show
   hero/ home/ fx/        generators for the home page
-  pages/                 page generators and SEO files (sitemap, robots, llms)
+  pages/                 page generators and SEO files (sitemap, robots, llms); ui.mjs holds the shared contact form and channel list
   selector/              generator + template for tools/project-selector.html (owner tool, open it in a browser)
-  photo/                 one-off: turns a portrait photo into the neon portrait images
+  test.mjs               npm test
+  optional.mjs           loads Playwright and sharp, which are installed on demand and are not part of the build
+  photo/                 one-off: turns a portrait artwork into the neon portrait images
+  resume/                make-pdf.mjs: rebuilds assets/Shaunak-Chorge-Resume.pdf from the content file
+  brand/                 og-image.mjs: redraws the social share image assets/img/og-image.png
 assets/
   css/  js/              styles and scripts (hand-edited); dist/ is the minified output (generated)
   fonts/                 self-hosted fonts
@@ -50,69 +60,116 @@ Never edit a generated file by hand; the next build overwrites it. Change the co
 
 ## Edit content
 
-Open `content/content.json`, change the text, run `node build.mjs --min`. The main blocks:
+Open `content/content.json`, change the text, run `npm run build`. Every field in the file is read by a generator; there are no spare or legacy fields. The main blocks:
 
 | block | feeds |
 |---|---|
-| `seo` | home title and description, keywords, and `site_url` (the one base-URL value) |
-| `pages` | title, description, H1 and intro of every page |
-| `profile`, `hero`, `stats` | home hero, contact details, status line |
-| `services[]` | the six service pages and the home service cards |
-| `projects[]` | cards, case studies, the project lists, the resume view |
+| `seo` | `site_url` (the one base-URL value), `deploy_root` + `site_root_url` (the one-flag move to the root of `/Portfolio/`, see the root README) and `entity` (the one description sentence of Person, about lead and llms files) |
+| `pages` | title, description, H1, first paragraph (`direct_answer`), section titles (`h2`) and extra questions (`faqs`) of the home, hub and single pages |
+| `profile`, `hero`, `stats` | home hero, contact details, status line (the numbers of `stats` are computed, only the labels are typed) |
+| `services[]` | the six service pages and the home service cards (title, description, H1, `direct_answer`, `h2`, `faqs`); `tone` and `icon` set the colour and icon everywhere |
+| `projects[]` | cards, case studies (`case_study.seo` = title, description and H1 of the page; `case_study.h2` = its section titles; `faq`), the project lists, the resume view |
 | `experience`, `education`, `certifications`, `achievements` | about page, resume view, home roles |
-| `faq`, `faq_all` | home FAQ (top five), FAQ page and its schema |
+| `faq_all` | groups of questions. A group with `page: "home"` or `page: "contact"` is shown on that page only; the others make up the FAQ page and its schema |
+| `keywords.json` (own file) | the approved keyword map, see "Keywords and the SEO guard" |
 | `skills` | the two stack tiers: Core stack, Also work with |
 | `about.whoami` | the terminal card on the home page, the only place the spoken languages appear |
+| `meta.generated` | the `lastmod` date of `sitemap.xml` |
 
-Rules the guard enforces: no project years, no list of spoken languages outside the home About card, co-builders credited by plain-text name only (no links to other people's profiles), extensions I can offer on case studies listed only under "Extensions I can build for you".
+Rules the guard enforces (all in `tools/rules.mjs`): no project years, no list of spoken languages outside the home About card, co-builders credited by plain-text name only (no links to other people's profiles), no banned words. Extensions I can offer on case studies are listed only under "Extensions I can build for you".
 
-To add a project, add an object to `projects[]` (copy an existing one: `id`, `slug`, `title`, `card_blurb`, `stack`, `service_tags`, ...). A project gets a case-study page only if it has a `case_study` block and its id is in `casestudy` below.
+To add a project, add an object to `projects[]` (copy an existing one: `id`, `slug`, `title`, `card_blurb`, `stack`, `service_tags`, `role`, ...). A project gets a case-study page only if it has a `case_study` block and its id is in `casestudy` below. The project `role` is shown twice on a case study (key facts and Results), from one field.
+
+## Keywords and the SEO guard
+
+`content/keywords.json` is the approved keyword map: for every page one **primary keyword** (never shared), the secondary keywords, the FAQ questions that belong to that page, and the approved link texts (`anchors`: `footer`, `related`, `hire`, `other`). The copy itself (title, description, H1, section titles, first paragraph, FAQ answers) is in `content/content.json`; the footer, the related-service links, the previous/next case-study links and the hire-band headings read their link texts from the `anchors`.
+
+At the end of every build `tools/pages/keywords.mjs` reads the BUILT pages and **fails the build** when:
+
+- two pages share a primary keyword, a title or a meta description (or one keyword is listed on two pages);
+- a title is longer than 60 characters or a description longer than 155;
+- a page has no entry in `keywords.json`, or the file lists a page that does not exist;
+- the primary keyword is missing from the title, the H1 or the first paragraph (the answer under the H1; on the home page the hero intro);
+- the primary keyword appears more than 3 times in the page body;
+- a FAQ question is not registered for its page, appears on two pages, or its answer is not 40 to 60 words (so is the first paragraph of every inner page);
+- a link text equals a primary keyword and is used more than twice (exact-match anchor stuffing).
+
+A phrase matches loosely: small filler words (in, for, a, an, with, to) and plurals are ignored, so "hire fastapi developers" matches "Hire a FastAPI Developer". `npm test` proves each rule by breaking it on a copy of the site. To add a page, give it an entry in `keywords.json`; to change a primary keyword, change it there and in the page copy.
+
+The research behind the map is autocomplete data (a proxy for demand, not search volume). `dropped` in the file lists the phrases that were left out on purpose, with the reason.
 
 ## Choose which projects show
 
-`projects.config.json` has up to four lists of project ids:
+`projects.config.json` is the only place that decides it. Every generator reads it through `tools/selection.mjs`: the home stat and cards, the terminal and palette data, the footer, the project pages, the resume page and PDF, the sitemap and llms files.
 
 ```json
-{ "show": ["..."], "casestudy": ["..."], "more": ["..."], "omit": ["..."] }
+{ "show": [], "casestudy": [], "more": [], "home_featured": [], "footer_work": [], "resume_featured": [] }
 ```
 
 - `show`: the selected projects (cards on the projects page, counted in the home stat).
-- `casestudy`: the ones that get their own page. Must have a `case_study` block in the content file.
-- `more`: the compact "More projects" list (early and small projects).
-- `omit`: hidden everywhere.
+- `casestudy`: the ones that also get their own page. Each must be in `show` and have a `case_study` block in the content file.
+- `more`: the compact "More projects" list. A project that is also in `show` appears only in `show`.
+- `home_featured` (up to 6), `footer_work` (up to 4), `resume_featured` (up to 4): case studies shown in those places, in the order you list them.
 
-Lists you leave out fall back to `selection_default` in the content file. The build also writes `tools/project-selector.html` (tracked, harmless, opens straight from disk): open it in a browser, tick projects, copy the generated JSON into `projects.config.json` and rebuild.
+**Ordering rule for the three featured lists.** The ids you list come first, in your order. An id that is no longer a case study is skipped with a warning. If fewer than the maximum remain, the first case studies of `casestudy` (in that list's order) fill the rest. So a new selection never leaves a gap or a link to a page that does not exist, and you can leave a featured list out to get the first case studies.
+
+An unknown id, a case study missing from `show`, or a case study without a `case_study` block stops the build with a clear message.
+
+The build also writes `tools/project-selector.html` (git-ignored, opens straight from disk): open it in a browser, tick projects, download the JSON (it keeps `more` and the featured lists), save it as `projects.config.json` and rebuild.
 
 ## Deploy
 
-GitHub Pages serves the repository as-is, so commit the generated pages (`index.html`, the page folders, `assets/dist/`, `llms*.txt`, `.built-pages.json`, and the repo-root `sitemap.xml` and `robots.txt`) together with the sources and push. Settings -> Pages -> Deploy from a branch -> `main` / root. Every URL in the pages is relative, so the site works under a sub-path and from `file://`.
+GitHub Pages serves the repository as-is, so run `npm run build`, then commit the generated pages (`index.html`, the page folders, `assets/dist/`, `llms*.txt`, `.built-pages.json`, and the repo-root `sitemap.xml` and `robots.txt`) together with the sources and push. Settings -> Pages -> Deploy from a branch -> `main` / root. Every URL in the pages is relative, so the site works under a sub-path and from `file://`. `npm test` tells you if the committed pages are stale.
+
+## Serve the site at the root of /Portfolio/
+
+`.github/workflows/pages.yml` (prepared, not enabled) can publish this folder as the site root, `https://shaunakchorge.github.io/Portfolio/`. The one-flag switch is `seo.deploy_root` in `content/content.json` (base URL becomes `seo.site_root_url`; `sitemap.xml` and `robots.txt` are then written inside this folder). The exact clicks and the consequences are in the root `README.md`, section "Serve the site at the root of /Portfolio/".
 
 ## Add a custom domain
 
 1. Change `seo.site_url` in `content/content.json` to the new address (keep the trailing slash).
-2. Run `node build.mjs --min`. Canonical links, Open Graph URLs, JSON-LD, `sitemap.xml`, `robots.txt` and `llms.txt` all derive from that one value. The build writes `sitemap.xml` and `robots.txt` once, in the repo root.
+2. Run `npm run build`. Canonical links, Open Graph URLs, JSON-LD, `sitemap.xml`, `robots.txt`, `llms.txt` and the web address printed in the resume PDF all derive from that one value (the PDF only after `node tools/resume/make-pdf.mjs`). The build writes `sitemap.xml` and `robots.txt` once, in the repo root.
 3. If `new_portfolio/` becomes the site root of the new domain, add a `CNAME` file there, copy the repo-root `sitemap.xml` and `robots.txt` into it, and point DNS at Pages. The repo-root `index.html` redirect and `404.html` contain the old address; they are not needed once the domain serves this folder directly.
 4. Submit the new `sitemap.xml` in Search Console.
 
 ## Portrait photo
 
-`tools/photo/process-photo.mjs` turns the finished portrait artwork into the images in `assets/img/portrait/`. The artwork keeps its own colours and tone exactly: the tool does no grading, only adds a clean transparent background (so it blends into the page) and a separate glow-only rim layer. The neon frame, rim pulse and scan sweep are page layers in `assets/css/sections/portrait.css`. The original stays private (the owner keeps it in the git-ignored `_private/` folder of the repo):
+`tools/photo/process-photo.mjs` turns the finished portrait artwork into the images in `assets/img/portrait/`. The artwork keeps its own colours and tone exactly: the tool does no grading, only adds a clean transparent background (so it blends into the page) and a separate glow-only rim layer. The neon frame, rim pulse and scan sweep are page layers in `assets/css/sections/portrait.css`. The original stays private (the owner keeps it in the git-ignored `_private/` folder of the repo). To regenerate the portrait from a new source image, one command:
 
 ```bash
 npm i --no-save sharp
 node tools/photo/process-photo.mjs path/to/artwork.png
 ```
 
-Master size is 3:4 (800 x 1067); outputs are `portrait-480/800.webp|avif` and `rim-480/800.webp`, each under 120 KB. A flat background (black or white studio) is keyed out by a border flood fill that never touches anything inside the figure; any other background uses `rembg` through Python when available (`pip install rembg onnxruntime`). The social image and icons are static files in `assets/img/` and are not part of the build.
+Master size is 3:4 (800 x 1067); outputs are `portrait-480/800.webp|avif` and `rim-480/800.webp|avif`, each under 120 KB. The background is handled automatically: the image's own transparency if it has any; a flat background (black or white studio) is keyed out by a border flood fill that never touches anything inside the figure; any other background uses `rembg` through Python when available (`pip install rembg onnxruntime`) and otherwise a looser flood fill. The icons are static files in `assets/img/` and are not part of the build.
+
+## Resume PDF and social image
+
+Both are drawn by small scripts. They need Playwright with Chromium (`npm i --no-save playwright sharp`; sharp only makes the PNG smaller):
+
+```bash
+node tools/resume/make-pdf.mjs     # assets/Shaunak-Chorge-Resume.pdf
+node tools/brand/og-image.mjs      # assets/img/og-image.png (1200 x 630)
+```
+
+The **resume PDF** is drawn from the content file (profile, experience, skills, the `resume_featured` projects, and the web address from `seo.site_url`), so it cannot drift from the site. Run it after changing any of those.
+
+The **social image** is a design: its words (name, role, employer, the four services, city) are typed in `tools/brand/og-image.mjs` and are not read from the content file. If one of them changes, edit the text in that script and run it again.
 
 ## Single sources (so pages cannot drift)
 
+- Which projects show, are case studies or are featured: `projects.config.json` through `tools/selection.mjs`.
 - Entity sentence: `seo.entity` in `content/content.json` is the Person description in the JSON-LD of the home page and /about/, the /about/ lead and the first line of `llms.txt` / `llms-full.txt`.
-- Footer service and work lists are generated from `services[].page_slug` / `nav_label` and `selection_default.footer_work` (`footerParts` in `build.mjs`), so a footer link always points at a page that exists. The build guard also resolves every internal link.
+- Contact facts (e-mail, phone, LinkedIn, GitHub, Instagram, Formspree): `profile` in the content file. The footer links, the JSON-LD `sameAs`, the contact form and channel list (one renderer in `tools/pages/ui.mjs`, used by the home page and /contact/) and the terminal data all read them from there.
+- Service colour and icon: `services[].tone` and `services[].icon`.
+- Banned words: `tools/rules.mjs`.
+- Footer service and work lists are generated from `services[].page_slug` / `nav_label` and `footer_work` (`footerParts` in `build.mjs`), so a footer link always points at a page that exists. The build guard also resolves every internal link.
 - Project visuals: `visual_hint` (type) and optional `visual_variant` per project. `assets/js/sections/visuals.js` draws a variant only when it belongs to that project and otherwise falls back to the neutral generic visual.
 
 ## Notes
 
+- **Page bundles.** The home page loads every style and script except `pages.css` (the inner-page styles). Every other page loads one shared stylesheet (`assets/dist/site.inner.min.css`, so a visitor keeps one cached file across pages) without the home-only hero and home code, and adds the scripts for the project art (visuals), the portrait, or the contact form (`contact-form.js`: home and /contact/ only) only when the page uses them. The floating contact button (`footer.css`, `contact.js`) is on every page. File addresses carry a `?v=` content hash, so a new deploy can never mix with an old cached file.
+- **Search engines on GitHub Pages.** `robots.txt` and `llms.txt` are only read from the root of a domain, so on the `github.io/Portfolio/` project address crawlers will not find them. Submit `https://shaunakchorge.github.io/Portfolio/sitemap.xml` in Google Search Console and Bing Webmaster Tools. After a custom domain is set (`seo.site_url`), serve `robots.txt`, `sitemap.xml` and `llms.txt` from the domain root.
 - `sitemap.xml` `lastmod` comes from `meta.generated` in the content file (override with `PF_LASTMOD=2026-12-31`), so rebuilding without content changes gives identical files.
 - The contact form posts to Formspree (`profile.links.formspree`); nothing else leaves the page.
 - Font and icon licences: Orbitron, Space Grotesk and Space Mono (SIL OFL 1.1, self-hosted); Lucide icons (ISC).

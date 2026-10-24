@@ -1,5 +1,5 @@
 /* =====================================================================
-   NEURAL NEON - hero.js   (HERO engineer)   section #home
+   NEURAL NEON - hero.js   section #home
    * typed / rotating role line (one pass through every role, then rests on the first)
    * rAF-driven typing of the code window (~120 chars/s, the whole intro lands in ~4-5 s)
    * typing starts once the code window is on screen (>= 25%, phones >= 60%: it sits below the CTAs), not on load
@@ -13,14 +13,14 @@
 
   var doc = document;
   var P = window.Portfolio;
+  if (!P || !P.qs) return;                       /* core.js not loaded: nothing to do */
 
   var CPS = 120;             /* code typing speed, chars per second */
   var LINE_PAUSE = 0.04;     /* s, "Enter" between code lines */
   var START_DELAY = 0.4;     /* s: wait for the entrance sequence (counted from the moment the stage is on screen) */
   var ROLE_HOLD = 1.4, ROLE_TYPE_CPS = 28, ROLE_DEL_CPS = 60;   /* all four roles cycle in ~10 s */
 
-  function qs(sel, ctx) { return (ctx || doc).querySelector(sel); }
-  function qsa(sel, ctx) { return Array.prototype.slice.call((ctx || doc).querySelectorAll(sel)); }
+  var qs = P.qs, qsa = P.qsa;
 
   /* decorative photos start loading just after the first paint (markup holds data-src / data-srcset behind a 1px placeholder),
      so they never compete with the CSS and fonts that paint the text. Runs even when the hero animation is off. */
@@ -58,6 +58,8 @@
     }
 
     /* ------------------------------------------------------------ state */
+    root.classList.add('has-typer');              /* phones: the code window shows about 10 lines and follows the typing (see hero.css) */
+    var editor = qs('.hero__editor', root);
     var pristine = codeList.innerHTML;
     var S = { phase: 'idle', delay: 0, code: null, role: null, visible: true, running: false, armed: false };
     var lineEls = [];
@@ -96,6 +98,18 @@
     function dropCaret() { if (caret.parentNode) caret.parentNode.removeChild(caret); }
     function setCurLine(i) {
       lineEls.forEach(function (el, k) { el.classList.toggle('is-cur', k === i); });
+      followLine(i);
+    }
+    /* when the window is shorter than its text (phones), keep the line being typed in view */
+    function followLine(i) {
+      if (!editor) return;
+      if (i < 0) { editor.scrollTop = editor.scrollHeight; return; }   /* finished or skipped: show the end of the snippet */
+      if (!lineEls[i]) return;
+      var over = editor.scrollHeight - editor.clientHeight;
+      if (over <= 1) { editor.scrollTop = 0; return; }
+      var el = lineEls[i];
+      var top = el.getBoundingClientRect().top - editor.getBoundingClientRect().top + editor.scrollTop;
+      editor.scrollTop = Math.max(0, Math.min(over, top + el.offsetHeight - editor.clientHeight + 12));
     }
     function stepTyper(t, dt) {
       if (t.done) return true;
@@ -163,6 +177,7 @@
     /* ------------------------------------------------------------ setup / reset (also used by replay) */
     function prepare() {
       codeList.innerHTML = pristine;
+      if (editor) editor.scrollTop = 0;
       lineEls = qsa('.hero__line', codeList);
       var srcs = qsa('.hero__src', codeList);
       S.code = typer(buildUnits(srcs), CPS, LINE_PAUSE, setCurLine);

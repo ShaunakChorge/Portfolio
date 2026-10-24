@@ -1,43 +1,37 @@
-// Round 3 HOME generator: writes the home partials (everything except hero.html, which _hero_tools/gen.mjs writes) from
-// content/content.json (single source of truth) plus home.content.html and home.page.json.
-//   node tools/<name>/gen.mjs
-// Sections (one idea each, <= 4-6 items, "View all" links to dedicated pages, D9):
-//   01 hero (hero.html)  02 offer  03 selected  04 bio (whoami card: the ONLY place languages appear, D4)  05 roles
-//   06 process  07 faq (top 5 + FAQPage JSON-LD)  08 contact (hire CTA + channels + form)
+// Home page generator: writes the home partials (everything except hero.html, which tools/hero/gen.mjs writes) from
+// content/content.json plus the project selection (projects.config.json), and home.content.html + home.page.json.
+// Run by build.mjs, or alone:  node tools/home/gen.mjs
+// Sections (one idea each, <= 4-6 items, "View all" links to dedicated pages):
+//   01 hero (hero.html)  02 offer  03 selected  04 bio (whoami card: the ONLY place languages appear)  05 roles
+//   06 process  07 faq (top 5)  08 contact (hire CTA + channels + form)
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadConfig, abs, personNode, websiteNode, breadcrumb } from '../../build.mjs';
+import { loadConfig, abs, personNode, websiteNode } from '../../build.mjs';
+import { GENERATED, readContent, escText as esc, icon } from '../lib.mjs';
+import { findBanned, LANGUAGE_RE, LD_NEVER_RE, YEAR_RE } from '../rules.mjs';
+import { loadSelection } from '../selection.mjs';
+import { SERVICE_SLUG, faqFor } from '../pages/data.mjs';   // content slug -> published page slug (the service pages are written under the published slug)
+import { contactForm, contactList, title as ttl } from '../pages/ui.mjs';   // the same form and channel list as /contact/
 
-import { CONTENT_FILE, GEN_DIR } from '../paths.mjs';
-import { SERVICE_SLUG } from '../pages/data.mjs';   // content slug -> published page slug (the service pages are written under the published slug)
-const C = JSON.parse(fs.readFileSync(CONTENT_FILE, 'utf8'));
-const OUT = GEN_DIR;
+const C = readContent();
+const OUT = GENERATED;
 fs.mkdirSync(OUT, { recursive: true });
 const cfg = loadConfig();
+const selection = loadSelection(C);
 
-const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const escA = s => esc(s).replace(/"/g, '&quot;');
-const curly = s => String(s).replace(/(\w)'(\w)/g, '$1\u2019$2');            // apostrophes only; visible text and JSON-LD use the same string
-const icon = (n, cls = '') => `<svg class="icon${cls ? ' ' + cls : ''}" aria-hidden="true" focusable="false"><use href="#i-${n}"/></svg>`;
+const H2 = C.pages.home.h2 || {};   // section titles written for search (content.pages.home.h2); the last word is highlighted
+const curly = s => String(s).replace(/(\w)'(\w)/g, '$1\u2019$2');         // apostrophes only; visible text and JSON-LD use the same string
 const P = C.profile;
 const byId = Object.fromEntries(C.projects.map(p => [p.id, p]));
-const svcById = Object.fromEntries(C.services.map(s => [s.id, s]));
 const need = (cond, msg) => { if (!cond) { console.error('GEN ERROR:', msg); process.exit(1); } };
 
-/* ------------------------------------------------------------------ 02  OFFER (what I can build for you) */
-const OFFER = [
-  { id: 'llm-apps-rag', tone: 'cyan', icon: 'brain-circuit' },
-  { id: 'document-ai-extraction', tone: 'purple', icon: 'file-text' },
-  { id: 'python-backend-apis', tone: 'blue', icon: 'server' },
-  { id: 'computer-vision', tone: 'magenta', icon: 'scan-eye' },
-];
-need(OFFER.length <= 4, 'offer: max 4 cards');
-const offerCards = OFFER.map((o, i) => {
-  const s = svcById[o.id]; need(s, 'service missing ' + o.id);
+/* ------------------------------------------------------------------ 02  OFFER (what I can build for you; tone and icon come from content.services[]) */
+need(C.services.length === 6, 'the offer text and the services page say "six" services; update them before adding or removing one');
+const offerCards = C.services.map((s, i) => {
   const href = `{{base}}services/${SERVICE_SLUG[s.slug] || s.slug}/`;
-  return `      <article class="card hm-card hm-card--svc" data-tone="${o.tone}" data-tilt data-reveal style="--i:${i}">
+  return `      <article class="card hm-card hm-card--svc${i >= 4 ? ' hm-xs-hide' : ''}" data-tone="${s.tone}" data-tilt data-reveal style="--i:${i % 3}">
         <div class="card__head">
-          <div class="icon-tile">${icon(o.icon)}</div>
+          <div class="icon-tile">${icon(s.icon)}</div>
           <h3 class="card__title"><a class="card__link" href="${href}">${esc(s.nav_label.replace(' & ', '\u00a0& '))}<span class="sr-only"> freelance service</span></a></h3>
         </div>
         <p class="card__text">${esc(curly(s.blurb))}</p>
@@ -48,29 +42,27 @@ const offer = `<section id="offer" class="section section--alt hm-offer hm-cv" d
   <div class="container">
     <header class="section__head">
       <p class="eyebrow">Services</p>
-      <h2 id="offer-title" class="section__title" data-reveal="scan">What I can <span class="hl hl--purple">build</span> for you</h2>
+      <h2 id="offer-title" class="section__title" data-reveal="scan">${ttl(H2.offer, 'What I can <span class="hl hl--purple">build</span> for you', 'hl--purple')}</h2>
       <p class="section__lead">${esc(curly(C.pages.services.lead))}</p>
     </header>
-    <div class="grid grid--c4 hm-grid">
+    <div class="grid grid--c3 hm-grid">
 ${offerCards}
     </div>
-    <p class="hm-more" data-reveal><a class="link-arrow" href="{{base}}services/">All ${C.services.length} services ${icon('arrow-right')}</a></p>
+    <p class="hm-more" data-reveal><a class="link-arrow" href="{{base}}services/">See all ${C.services.length} services ${icon('arrow-right')}</a></p>
   </div>
 </section>
 `;
 
-/* ------------------------------------------------------------------ 03  SELECTED WORK (6 case-study cards, NO year, D3) */
-const FEATURED = C.selection_default.home_featured;
-need(FEATURED.length <= 6, 'selected: max 6');
-for (const id of FEATURED) need(C.selection_default.casestudy.includes(id), 'home_featured must be a case study: ' + id);
+/* ------------------------------------------------------------------ 03  SELECTED WORK (6 case-study cards, NO year) */
+const FEATURED = selection.homeFeatured;   // up to 6 case studies in projects.config.json order (rule: see tools/selection.mjs)
 /* the generative visual per project: type = content visual_hint, variant = content visual_variant (else the project id). visuals.js draws a variant
    only when it truly belongs to that project, and falls back to the neutral generic visual otherwise, so no card shows another project's content. */
 const workCards = FEATURED.map((id, i) => {
   const p = byId[id]; need(p, 'project missing ' + id);
   const vis = p.visual_hint, variant = p.visual_variant || p.id;
   const stack = p.stack.slice(0, 3).map(t => `<li class="tag">${esc(t)}</li>`).join('');
-  const by = (p.collaborators || []).filter(c => /^[A-Z][a-z]+ [A-Z][a-z]+$/.test(c));   // plain-text credit only, never a link (D1)
-  return `      <li class="hm-work__item" data-reveal style="--i:${i}">
+  const by = (p.collaborators || []).filter(c => /^[A-Z][a-z]+ [A-Z][a-z]+$/.test(c));   // plain-text credit only, never a link
+  return `      <li class="hm-work__item${i >= 3 ? ' hm-xs-hide' : ''}" data-reveal style="--i:${i}">
         <article class="card hm-card hm-card--work" data-tone="${p.tone}" data-tilt data-cursor="case">
           <div class="hm-card__media"><div class="pv" data-visual="${esc(vis)}" data-variant="${esc(variant)}" data-tone="${p.tone}" aria-hidden="true"></div></div>
           <div class="hm-card__body">
@@ -88,7 +80,7 @@ const selected = `<section id="selected" class="section hm-work hm-cv" data-num=
   <div class="container">
     <header class="section__head">
       <p class="eyebrow">Work</p>
-      <h2 id="selected-title" class="section__title" data-reveal="scan">Selected <span class="hl">work</span></h2>
+      <h2 id="selected-title" class="section__title" data-reveal="scan">${ttl(H2.work, 'Selected <span class="hl">work</span>')}</h2>
       <p class="section__lead">Real projects from my job and my own time. Each one explains the problem, what I built and what the results do and do not show.</p>
     </header>
     <ul class="hm-work__grid" role="list">
@@ -99,7 +91,7 @@ ${workCards}
 </section>
 `;
 
-/* ------------------------------------------------------------------ 04  ABOUT IN BRIEF (+ whoami card: the ONLY place the languages appear, D4) */
+/* ------------------------------------------------------------------ 04  ABOUT IN BRIEF (+ whoami card: the ONLY place the languages appear) */
 const W = C.about.whoami;
 need(Array.isArray(W.languages) && W.languages.length === 5, 'whoami.languages');
 const blurb = curly(C.about.home_blurb);
@@ -189,7 +181,7 @@ const process_ = `<section id="process" class="section hm-process hm-cv" data-nu
   <div class="container">
     <header class="section__head">
       <p class="eyebrow">Process</p>
-      <h2 id="process-title" class="section__title" data-reveal="scan">How a project <span class="hl hl--purple">runs</span></h2>
+      <h2 id="process-title" class="section__title" data-reveal="scan">${ttl(H2.process, 'How a project <span class="hl hl--purple">runs</span>', 'hl--purple')}</h2>
       <p class="section__lead">Four steps, with short written updates along the way. No code is written until we agree on the scope.</p>
     </header>
     <ol class="hm-steps">
@@ -199,25 +191,22 @@ ${stepItems}
 </section>
 `;
 
-/* ------------------------------------------------------------------ 07  FAQ (top 5 + FAQPage JSON-LD built from the SAME strings) */
-const FAQ_IDS = ['how-to-start', 'pricing', 'existing-code', 'nda', 'location'];
-const allFaq = C.faq_all.flatMap(g => g.items);
-const faq5 = FAQ_IDS.map(id => { const f = allFaq.find(x => x.id === id); need(f, 'faq missing ' + id); return { id, q: curly(f.q), a: curly(f.a) }; });
-need(faq5.length === 5, 'faq: 5');
+/* ------------------------------------------------------------------ 07  FAQ (the faq_all groups with page "home"; every question belongs to exactly one page, see content/keywords.json) */
+const faq5 = faqFor('home').map(f => ({ id: f.id, q: curly(f.q), a: curly(f.a) }));
+need(faq5.length >= 1, 'faq: the home page needs at least one question (content.faq_all, group page "home")');
 const qaItems = faq5.map((f, i) => `      <details class="hm-qa" name="home-faq"${i === 0 ? ' open' : ''} data-reveal style="--i:${i}">
         <summary class="hm-qa__q">
           <span class="hm-qa__n" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
-          <span class="hm-qa__t">${esc(f.q)}</span>
+          <h3 class="hm-qa__t">${esc(f.q)}</h3>
           ${icon('chevron-down', 'hm-qa__chev')}
         </summary>
         <div class="hm-qa__a"><p>${esc(f.a)}</p></div>
       </details>`).join('\n');
-const faqLd = { '@type': 'FAQPage', '@id': abs(cfg, '#faq'), mainEntity: faq5.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 const faq = `<section id="faq" class="section hm-faq hm-cv" data-num="07" data-rail="07·faq" aria-labelledby="faq-title">
-  <div class="container container--narrow">
+  <div class="container">
     <header class="section__head">
       <p class="eyebrow">FAQ</p>
-      <h2 id="faq-title" class="section__title" data-reveal="scan">Before we <span class="hl">start</span></h2>
+      <h2 id="faq-title" class="section__title" data-reveal="scan">${ttl(H2.faq, 'Before we <span class="hl">start</span>')}</h2>
     </header>
     <div class="hm-faq__list">
 ${qaItems}
@@ -228,17 +217,7 @@ ${qaItems}
 `;
 
 /* ------------------------------------------------------------------ 08  HIRE / CONTACT (CTA band + channels + form; ids kept for contact.js) */
-const L = P.links;
-const row = (tone, ic, label, valueHtml, go = true) => `          <li class="contact__row" data-tone="${tone}">
-            <span class="icon-tile contact__icon" aria-hidden="true">${icon(ic)}</span>
-            <div class="contact__meta">
-              <span class="contact__label">${label}</span>
-              ${valueHtml}
-            </div>
-            ${go ? icon('arrow-up-right', 'contact__go') : ''}
-          </li>`;
-const ext = '<span class="sr-only"> (opens in a new tab)</span>';
-const contact = `<section id="contact" class="section contact hm-contact" data-num="08" data-rail="08·contact" aria-labelledby="contact-title">
+const contact = `<section id="contact" class="section contact hm-contact hm-cv" data-num="08" data-rail="08·contact" aria-labelledby="contact-title">
   <div class="container">
 
     <div class="contact__band" id="hire" data-reveal="scale">
@@ -251,110 +230,45 @@ const contact = `<section id="contact" class="section contact hm-contact" data-n
           <h2 id="contact-title" class="contact__title">Have an AI or backend project <span class="hl">in mind?</span></h2>
           <p class="contact__lead">${esc(C.cta.text)}</p>
           <div class="contact__actions">
-            <a class="btn btn--solid btn--lg btn--glow" href="#contact-form-panel" data-magnetic>${esc(C.cta.primary.label)} ${icon('arrow-right', 'icon--still')}</a>
+            <a class="btn btn--solid btn--lg btn--glow hm-xs-hide" href="#contact-form-panel" data-magnetic>${esc(C.cta.primary.label)} ${icon('arrow-right', 'icon--still')}</a>
+            <a class="btn btn--solid btn--lg btn--glow hm-xs-only" href="{{base}}contact/#hire">${esc(C.cta.primary.label)} ${icon('arrow-right', 'icon--still')}</a>
             <a class="btn btn--ghost btn--lg" href="{{base}}${esc(C.cta.secondary.href)}" data-magnetic>${esc(C.cta.secondary.label)} ${icon('arrow-right', 'icon--still')}</a>
           </div>
           <p class="hm-band__line"><span class="hero__free-dot" aria-hidden="true"></span>${esc(C.cta.line)}</p>
+          <p class="hm-band__mail hm-xs-only">Or email <a class="link" href="mailto:${esc(P.email)}">${esc(P.email)}</a></p>
         </header>
       </div>
     </div>
 
-    <div class="contact__cols">
+    <div class="contact__cols hm-xs-hide">
       <div class="contact__channels">
         <div class="contact__sub" data-reveal>
           <h3 class="contact__h">Reach me directly</h3>
           <p class="contact__note">Based in Mumbai, India. I work remotely in Indian Standard Time (IST).</p>
         </div>
-        <ul class="contact__list" data-reveal-group>
-          <li class="contact__row contact__row--copy" data-tone="cyan">
-            <span class="icon-tile contact__icon" aria-hidden="true">${icon('mail')}</span>
-            <div class="contact__meta">
-              <span class="contact__label">Email</span>
-              <a class="contact__value" id="contact-email" href="mailto:${esc(P.email)}">${esc(P.email)}</a>
-            </div>
-            <button class="contact__copy" type="button" data-copy="${escA(P.email)}" aria-label="Copy email address">${icon('copy', 'icon--sm')}<span class="contact__copy-text">Copy</span></button>
-          </li>
-${row('green', 'phone', 'Phone', `<a class="contact__value" href="${escA(P.phone_tel)}">${esc(P.phone)}</a>`)}
-${row('blue', 'linkedin', 'LinkedIn', `<a class="contact__value" href="${escA(L.linkedin)}" target="_blank" rel="noopener noreferrer">${esc(L.linkedin.replace(/^https?:\/\/(www\.)?/, ''))}${ext}</a>`)}
-${row('purple', 'github', 'GitHub', `<a class="contact__value" href="${escA(L.github)}" target="_blank" rel="noopener noreferrer">${esc(L.github.replace(/^https?:\/\//, ''))}${ext}</a>`)}
-        </ul>
+        ${contactList({ group: true })}
         <p class="hm-more hm-more--left" data-reveal><a class="link-arrow" href="{{base}}contact/">Contact page ${icon('arrow-right')}</a></p>
       </div>
 
-      <div class="contact__formwrap panel" id="contact-form-panel" data-tone="cyan" data-reveal>
-        <div class="contact__compose" data-compose>
-          <div class="contact__sub">
-            <h3 class="contact__h" id="cf-title">Send a brief</h3>
-            <p class="contact__note">A few lines about what you want to build and when you need it are enough. All three fields are required. I only use your details to reply. Messages are delivered through Formspree, a form service.</p>
-          </div>
-          <form class="contact__form" id="contact-form" action="${escA(L.formspree)}" method="POST" data-email="${escA(P.email)}" aria-labelledby="cf-title">
-            <input type="hidden" name="_subject" value="New message from the portfolio">
-
-            <div class="contact__pair">
-              <div class="field" data-field="name">
-                <label for="cf-name">Name</label>
-                <input class="input" id="cf-name" name="name" type="text" autocomplete="name" autocapitalize="words" enterkeyhint="next" maxlength="80" required placeholder="Your name" aria-describedby="cf-name-err">
-                <span class="field__error" id="cf-name-err" aria-live="polite"><span class="field__error-in">${icon('circle-alert', 'icon--sm')}<span class="field__msg"></span></span></span>
-              </div>
-              <div class="field" data-field="email">
-                <label for="cf-email">Email</label>
-                <input class="input" id="cf-email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" enterkeyhint="next" maxlength="120" required placeholder="you@example.com" aria-describedby="cf-email-err">
-                <span class="field__error" id="cf-email-err" aria-live="polite"><span class="field__error-in">${icon('circle-alert', 'icon--sm')}<span class="field__msg"></span></span></span>
-              </div>
-            </div>
-
-            <div class="field" data-field="message">
-              <div class="contact__labelrow">
-                <label class="label" for="cf-message">Message</label>
-                <span class="contact__count" id="cf-count" aria-hidden="true">0 / 2000</span>
-              </div>
-              <textarea class="input" id="cf-message" name="message" rows="5" maxlength="2000" required placeholder="Tell me about your project." aria-describedby="cf-message-err"></textarea>
-              <span class="field__error" id="cf-message-err" aria-live="polite"><span class="field__error-in">${icon('circle-alert', 'icon--sm')}<span class="field__msg"></span></span></span>
-            </div>
-
-            <div class="hp" aria-hidden="true" inert><label for="cf-website">Leave this field empty</label><input id="cf-website" type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>
-
-            <div class="contact__fail" id="cf-fail" role="alert" hidden>
-              ${icon('triangle-alert', 'icon--lg contact__fail-icon')}
-              <div class="contact__fail-body">
-                <p class="contact__fail-title" id="cf-fail-title">Message not sent</p>
-                <p class="contact__fail-text" id="cf-fail-text">Something went wrong on the way. Your text is still in the form, so you can try again, or email me directly.</p>
-                <a class="btn btn--sm btn--magenta" id="cf-fail-mail" href="mailto:${esc(P.email)}">Email me instead ${icon('mail', 'icon--still')}</a>
-              </div>
-            </div>
-
-            <div class="contact__submit">
-              <button class="btn btn--solid btn--lg" id="cf-submit" type="submit"><span class="contact__submit-label">Send message</span>${icon('send', 'icon--still')}</button>
-              <p class="form-status contact__status" id="cf-status" role="status" aria-live="polite"></p>
-            </div>
-          </form>
-        </div>
-
-        <div class="contact__done" id="cf-done" role="status" tabindex="-1" hidden>
-          <span class="contact__done-icon" aria-hidden="true">${icon('check', 'icon--xl')}</span>
-          <h3 class="contact__h">Message sent</h3>
-          <p class="contact__note">Thanks<span id="cf-done-name"></span>. I will reply to <strong id="cf-done-email">your address</strong> as soon as I can.</p>
-          <button class="btn btn--ghost" id="cf-again" type="button">Send another message</button>
-        </div>
-      </div>
+      ${contactForm({
+        title: 'Send a brief', rows: 5, placeholder: 'Tell me about your project.', subject: 'New message from the portfolio',
+        note: 'A few lines about what you want to build and when you need it are enough. All three fields are required. I only use your details to reply. Messages are delivered through Formspree, a form service.',
+      })}
     </div>
 
   </div>
 </section>
 `;
 
-/* ------------------------------------------------------------------ write partials + guard rails (D1 D2 D3 D4 D5 D6 D7 D8 D10) */
+/* ------------------------------------------------------------------ write partials + guard rails (banned words: tools/rules.mjs) */
 const files = { 'home-offer.html': offer, 'home-work.html': selected, 'home-about.html': bio, 'home-roles.html': roles, 'home-process.html': process_, 'home-faq.html': faq, 'home-contact.html': contact };
-const BAD = /Pune|LangGraph|exploring|(?<!machine )learning|prasannapatil|prasanna4149|\bpatil\.in|systems shipped|industry-level|No frameworks|vanilla JS|LlamaIndex/i;
-const YEAR = /\b(19|20)\d\d\b/;   // D3: no project years (role periods and the degree date are not project years)
-const LANG = /English|Hindi|Marathi|German|French/;
 let langFiles = 0;
 for (const [f, html] of Object.entries(files)) {
   const visible = html.replace(/\{\{base\}\}/g, '');
-  const m = BAD.exec(visible.replace(/\+91 9920644655/g, ''));
-  if (m) { console.error(`FORBIDDEN in ${f}:`, m[0], '...', visible.slice(Math.max(0, m.index - 40), m.index + 40)); process.exit(1); }
-  if ((f === 'home-work.html' || f === 'home-offer.html') && YEAR.test(visible)) { console.error('YEAR in', f, YEAR.exec(visible)[0]); process.exit(1); }
-  if (LANG.test(visible)) { langFiles++; need(f === 'home-about.html', 'languages outside the whoami card: ' + f); }
+  const bad = findBanned(visible, { learning: true, home: true });
+  if (bad) { console.error(`FORBIDDEN in ${f}:`, bad); process.exit(1); }
+  if ((f === 'home-work.html' || f === 'home-offer.html') && YEAR_RE.test(visible)) { console.error('YEAR in', f, YEAR_RE.exec(visible)[0]); process.exit(1); }   // no project years (role periods and the degree date are not project years)
+  if (LANGUAGE_RE.test(visible)) { langFiles++; need(f === 'home-about.html', 'languages outside the whoami card: ' + f); }
   fs.writeFileSync(path.join(OUT, f), html);
 }
 need(langFiles === 1, 'languages must appear in exactly one partial');
@@ -370,19 +284,18 @@ need(pg.description.length <= 155, 'home description > 155: ' + pg.description.l
 const person = personNode(cfg);
 person.makesOffer = C.services.map(s => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', '@id': abs(cfg, `services/${SERVICE_SLUG[s.slug] || s.slug}/#service`), name: s.nav_label } }));
 person.hasOccupation = { '@type': 'Occupation', name: 'AI Engineer' };
-const site = websiteNode(cfg); delete site.inLanguage;            // spec: no inLanguage anywhere (D4)
+const site = websiteNode(cfg);
 const jsonld = {
   '@context': 'https://schema.org',
   '@graph': [
     site,
-    { '@type': 'ProfilePage', '@id': abs(cfg, '#profilepage'), url: cfg.url, name: pg.title, description: pg.description, isPartOf: { '@id': abs(cfg, '#website') }, mainEntity: { '@id': abs(cfg, '#person') }, breadcrumb: { '@id': abs(cfg, '#breadcrumb') } },
+    { '@type': 'ProfilePage', '@id': abs(cfg, '#profilepage'), url: cfg.url, name: pg.title, description: pg.description, isPartOf: { '@id': abs(cfg, '#website') }, mainEntity: { '@id': abs(cfg, '#person') } },
     person,
-    { '@id': abs(cfg, '#breadcrumb'), ...breadcrumb(cfg, [{ name: 'Home', path: '' }]) },
-    faqLd,
+    { '@type': 'FAQPage', '@id': abs(cfg, '#faq'), mainEntity: faq5.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
   ],
 };
 const pageJson = { title: pg.title, description: pg.description, jsonld };
-const LDBAD = /Pune|LangGraph|English|Hindi|Marathi|German|French|knowsLanguage|inLanguage|telephone/;
-need(!LDBAD.test(JSON.stringify(jsonld)), 'forbidden token in home JSON-LD: ' + (LDBAD.exec(JSON.stringify(jsonld)) || [])[0]);
+const ldBad = findBanned(JSON.stringify(jsonld), { languages: true }) || (LD_NEVER_RE.exec(JSON.stringify(jsonld)) || [])[0];
+need(!ldBad, 'forbidden token in home JSON-LD: ' + ldBad);
 fs.writeFileSync(path.join(OUT, 'home.page.json'), JSON.stringify(pageJson, null, 2) + '\n');
 console.log(Object.entries(files).map(([f, h]) => `${f} ${h.length}B`).join(' | '), `| title ${pg.title.length} / description ${pg.description.length} chars`);

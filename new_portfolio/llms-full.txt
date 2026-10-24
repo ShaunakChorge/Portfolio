@@ -1,16 +1,18 @@
 # Shaunak Chorge - full text
 
-> Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India, with a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026). He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job.
+> Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India. He holds a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026). He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job.
+
+Note: summary lines are written about Shaunak in the third person. Answers marked "A:" are in his own voice (first person).
 
 Contact: https://shaunakchorge.github.io/Portfolio/new_portfolio/contact/ - shaunak.chorge@gmail.com
 
 ---
 
-# Freelance AI chatbot and document assistant development
+# Freelance AI chatbot developer for document assistants
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/services/llm-rag-development/
-Hire a freelance AI developer to build chatbots that answer from your own documents, show their sources and say "I do not know" when unsure.
+Hire a freelance AI chatbot developer in Mumbai. Chatbots that answer from your own documents, show their sources and say "I do not know" when unsure.
 
-I build Artificial Intelligence (AI) chatbots that answer from your own documents. Every answer shows its source. When the documents do not contain the answer, the chatbot says so instead of guessing. The method is known as RAG, short for retrieval-augmented generation. You receive a working service, a simple chat screen, tests and clear handover notes.
+As a freelance AI chatbot developer, I build Artificial Intelligence (AI) chatbots that answer from your own documents. Every answer shows its source, and when the documents do not contain the answer, the chatbot says so instead of guessing. The method is called RAG (retrieval-augmented generation). You receive a working service, a simple chat screen, tests and handover notes.
 
 Deliverables: A working chatbot service with clear instructions for connecting to it (an API); Your documents prepared so the chatbot finds the right passage; Safety checks that block weak or off-topic answers; A source and a confidence label on every answer; A simple chat screen (Streamlit or React) for demos and review; Tests, setup notes and a handover walkthrough.
 
@@ -18,21 +20,25 @@ Good fit: Teams with policy, support or help-centre documents that need answers 
 
 Tools: Python, FastAPI, LangChain, ChromaDB, sentence-transformers, AI model APIs (Groq, OpenAI), Pydantic, Streamlit, Docker, pytest.
 
-Q: How do you stop the chatbot from making things up? A: With several layers, not one instruction. First the chatbot checks that the documents really contain the answer. Weak matches never reach the AI language model (LLM), the part that writes the reply. A fixed fallback sentence covers the rest. In my healthcare example, out-of-scope questions get a plain "not found" instead of a guess.
+Q: What is a RAG chatbot? A: A RAG chatbot looks up the right passages in your own documents first and only then writes its answer from them. RAG stands for retrieval-augmented generation. Because the answer is built from your documents, it can show its source. It can also say "not found" when the documents do not cover the question, instead of guessing.
 
-Q: Can it run on my own servers so my data stays private? A: Often, yes. At work I build on AI models hosted on the client's own servers, so no data or prompts leave the building. My personal projects use online services such as Groq. During planning we choose what fits your privacy needs, budget and answer quality.
+Q: How do you stop a chatbot from making things up? A: With several layers, not one instruction. First the chatbot checks that the documents really contain the answer. Weak matches never reach the AI language model (LLM), the part that writes the reply. A fixed fallback sentence covers the rest. In my healthcare example, out-of-scope questions get a plain "not found" instead of a guess.
+
+Q: Can a chatbot run on my own servers? A: Often, yes. At work I build on AI models hosted on the client's own servers, so no data or prompts leave the building. My personal projects use online services such as Groq. During planning we choose what fits your privacy needs, budget and answer quality.
+
+Q: How much does an AI chatbot cost for a website? A: I do not publish a price list, because chatbots vary a lot. The cost depends on how many documents you have, how they are organised, where the chatbot must run and how much testing you need. After reading your brief I suggest a fixed price or hourly billing. We agree it in writing before I start.
 
 Q: What kinds of documents can the chatbot use? A: Text-based documents such as policies, manuals, circulars and support articles. Tables and images inside documents can be harder, so we test those early. I start with a small sample of yours to check how well the chatbot finds the right passages, before we commit to the full build.
 
-Q: Can my team maintain it after you finish? A: That is the aim. Instructions and adjustable settings live in simple config files, the code has tests, and the handover includes a walkthrough of how to add documents and tune the settings. If you want ongoing help, we can agree a maintenance period in writing.
+Q: Can my team maintain it after you finish? A: That is the aim. Instructions and adjustable settings live in simple settings files, and the code has tests. The handover includes a walkthrough of how to add documents and tune the settings. If you want ongoing help, we can agree a maintenance period in writing.
 
 ---
 
-# Document AI and data extraction
+# Document data extraction with AI
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/services/ai-document-compliance-automation/
-Freelance document AI: tools that pull data from documents with source quotes, draft text with built-in checks and answer data questions.
+Freelance document AI: tools that read PDFs and forms and pull out clean data, with a quote from the source for each fact and checks on AI drafts.
 
-I build tools that read PDFs, forms and reports and turn them into clean, checkable data. Every extracted fact links back to the exact quote in your document. When AI writes a draft, code checks it against the original notes. I measure accuracy on your own files, so you see real numbers before you rely on it.
+I build document data extraction with AI: tools that read PDFs, forms and reports and turn them into clean, checkable data. Every extracted fact links back to the exact quote in your document. When AI writes a draft, code checks it against the original notes. I measure accuracy on your own files.
 
 Deliverables: A service that reads your documents and returns clean, structured data; Evidence links: each fact tied to the exact quote it came from; Automatic checks that reject AI-written text containing invented details; Bulk processing for spreadsheets or whole folders of documents; A scoring tool that measures accuracy on a sample of your own documents; A review screen or export (web page or spreadsheet), if you need one.
 
@@ -40,43 +46,49 @@ Good fit: Audit, compliance or operations teams who work through long documents 
 
 Tools: Python, FastAPI, Pydantic, PyMuPDF, Local AI models (Ollama, vLLM), RAG (answers from documents), sqlglot, React, Docker.
 
-Q: How do you check that the extracted data is correct? A: By measuring it. I build a scoring tool that compares the output with a small set of correct answers from your documents, then fix the mistakes it finds. On one database project, running the generated queries showed that simple scoring had overstated quality.
+Q: What is document AI? A: Document AI is software that reads documents such as PDFs, forms and reports. It turns what they say into structured data you can search, check and use. It can pull out names, dates, amounts and obligations. I build it so every extracted fact links back to the exact quote in the source document.
+
+Q: How much does document AI cost? A: It depends on the number and variety of your documents, the accuracy you need and where the tool must run. I do not publish a price list. After a short brief and a test on a sample of your files, I suggest a fixed price or hourly billing. We agree it in writing before I start.
+
+Q: How accurate is AI data extraction from PDFs? A: I do not promise a number before I see your files. I build a scoring tool that compares the output with a small set of correct answers from your documents, then fix the mistakes it finds. On one database project, running the generated queries showed that simple scoring had overstated quality.
 
 Q: Can my documents stay on our own servers? A: Yes, and that is a common requirement. Several systems I work on use AI models hosted on the client's own servers, so documents, prompts and usage records stay on the machine. During planning we check what hardware is available, because larger models need stronger machines.
 
 Q: How do you stop AI from adding invented details? A: With checks in code, not just instructions in a prompt. In a drafting service I built, any figure, date or owner that is not in the source note causes the draft to be rejected automatically. Reviewers can still accept, edit or reject every draft that remains.
 
-Q: Can this connect to our existing product? A: Yes. I connected an AI drafting service to a live product built with Spring Boot and React. It runs as a separate FastAPI service with a clear agreement about the data it sends and receives, so the main product and the new service can be updated separately.
+Q: Can this connect to our existing product? A: Yes. I connected an AI drafting service to a live product built with Spring Boot and React. It runs as a separate FastAPI service. There is a clear agreement about the data it sends and receives. The main product and the new service can be updated separately.
 
 ---
 
-# Python backend and API development
+# Hire a FastAPI developer for Python backends and APIs
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/services/ai-backend-fastapi-django/
-Freelance Python backend developer: FastAPI and Django APIs with PostgreSQL, Docker, automated tests and logs you can use to find problems fast.
+Hire a freelance FastAPI and Django developer in Mumbai. Python backend APIs with PostgreSQL, Docker, automated tests and logs for fast debugging.
 
-I build the behind-the-scenes software (a backend API) that lets your website, app or Artificial Intelligence (AI) feature work with your data. I write it in Python using FastAPI or Django (popular Python toolkits), store data in PostgreSQL and package it with Docker. Every service comes with automated tests and clear logs, so problems can be found quickly.
+Hire a FastAPI developer for the behind-the-scenes software (a backend API) that lets your website, app or Artificial Intelligence (AI) feature work with your data. I write it in Python with FastAPI or Django, store data in PostgreSQL and package it with Docker. I add automated tests and clear logs so problems can be found quickly.
 
-Deliverables: A backend API with documented endpoints (FastAPI or Django REST Framework); A PostgreSQL database design, with scripts to update it safely; A Docker setup so the whole system starts the same way everywhere; Automated tests for the main logic and the API (pytest); Logs, speed metrics and request traces where they help; A README, API documentation and handover notes.
+Deliverables: A backend API with documented endpoints, meaning the web addresses your app calls (FastAPI or Django REST Framework); A PostgreSQL database design, with scripts to update it safely; A Docker setup so the whole system starts the same way everywhere; Automated tests for the main logic and the API (pytest); Logs, speed metrics and request traces where they help; A README, API documentation and handover notes.
 
 Good fit: Startups that need a backend behind a website, mobile app or AI feature; Teams that need an existing service extended, tested or made easier to monitor; Projects that need background jobs, live progress updates or data sync between systems.
 
 Tools: Python, FastAPI, Django, Django REST Framework, PostgreSQL, Pydantic, Docker, pytest, OpenTelemetry, Prometheus, Redis, Celery.
 
-Q: Should we use FastAPI or Django? A: FastAPI suits services built around an API, including AI features. Django with Django REST Framework suits products that also need an admin area, user accounts and a built-in database layer. I use both and will recommend one after reading your requirements.
+Q: Is FastAPI used in production? A: Yes. Many companies use FastAPI in production for web services and AI features. It is fast, checks incoming data automatically and writes API documentation for you. At work I built an AI drafting service in FastAPI that runs next to a live product. I use it for real systems, not only for demos.
 
-Q: Can you take over or extend an existing backend? A: Yes. Much of my professional work has been inside existing systems. I read the code before changing it, keep changes covered by tests and leave a clear decision log in the repository, so your team knows what changed and why.
+Q: Which is better, FastAPI or Django? A: FastAPI suits services built around an API, including AI features. Django with Django REST Framework suits products that also need an admin area, user accounts and a built-in database layer. I use both and will recommend one after reading your requirements.
 
-Q: Can you set up background jobs and live progress updates? A: Yes. I have used Celery and Redis to move slow work away from the main API, and WebSockets to stream the progress of long-running jobs to a React web screen. Users see live status instead of waiting, and the main API stays responsive for everyone else.
+Q: Can you take over an existing Python backend? A: Yes. Much of my professional work has been inside existing systems. I read the code before changing it and keep changes covered by tests. I also leave a clear decision log in the repository, so your team knows what changed and why.
+
+Q: Can you set up background jobs and live progress updates? A: Yes. I have used Celery and Redis to move slow work away from the main API. I have also used WebSockets to stream the progress of long-running jobs to a React web screen. Users see live status instead of waiting, and the main API stays responsive for everyone else.
 
 Q: Will the API come with tests? A: Yes. My own backend projects ship with tests for the core logic and for each endpoint, and I take the same approach on client work. Tests make later changes safer and cheaper, and they show your team how each part is meant to behave.
 
 ---
 
-# Computer vision development
+# Computer vision development services
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/services/computer-vision/
-Freelance computer vision: tools that detect, count and classify things in photos and video with OpenCV, PyTorch and YOLOv8, with honest accuracy figures.
+Freelance computer vision developer in Mumbai. Tools that detect, count and classify things in photos and video with OpenCV, PyTorch and YOLOv8.
 
-I build computer vision tools: software that finds, counts or sorts things in photos and video. Examples are crowd counting, spotting events in camera footage and matching faces. I tell you plainly how accurate it is, what it was tested on and where it can fail. I also deliver a small app or report your team can use.
+I offer computer vision development services: software that finds, counts or sorts things in photos and video. Examples are crowd counting, spotting events in camera footage and matching faces. I tell you plainly how accurate it is, what it was tested on and where it can fail. I also deliver a small app or report your team can use.
 
 Deliverables: A detection or classification tool for your images or video; Code that samples video frames and cleans them up first (OpenCV); A short results note that states how the tool was tested; A small Streamlit or Flask app for uploading files and viewing results; Alerts or record-keeping, such as saving to a database or sending a WhatsApp message (Twilio); A documented repository or notebook, so results can be reproduced.
 
@@ -84,43 +96,49 @@ Good fit: Teams that need a prototype for counting, classifying or flagging even
 
 Tools: Python, OpenCV, PyTorch, TensorFlow / Keras, YOLOv8, Hugging Face Transformers, Streamlit, Flask, MongoDB, Twilio.
 
-Q: Can you train a model on my own images or video? A: Yes, for small to medium sets of images. I trained a neural network on frames from a public deepfake dataset, and I have used ready-made detectors such as Faster R-CNN, YOLOv8n and a Vision Transformer. During planning we check how much labelled data you have and whether a ready-made model is the better start.
+Q: What is YOLO object detection? A: YOLO, short for You Only Look Once, is a fast method that finds and labels many objects in an image or video frame. It works in one pass and draws a box around each. I have used the YOLOv8 version for detection. It suits live counting and alerts, though accuracy still has to be tested on your own footage.
 
-Q: How accurate will it be? A: I will not promise a number before I see your data. I measure on data the model has not seen and state exactly how it was split. My deepfake detector reports 74.16% on a random frame-level split, and says what that does not prove.
+Q: How accurate is computer vision? A: I will not promise a number before I see your data. I measure on data the model has not seen and state exactly how it was split. My deepfake detector reports 74.16% on a random frame-level split, and says what that does not prove.
 
-Q: Can it work on live camera feeds? A: My monitoring prototype checks video frames on a schedule, one every three seconds for the crime module, and raises alerts. Whether your setup needs true real-time speed is something we would test during planning rather than assume, because it depends on camera quality, the number of cameras and your hardware.
+Q: How much does a computer vision project cost? A: It depends on how much footage or how many images you have, how much labelling is needed. The accuracy you need and whether it must run live also matter. I do not publish a price list. After a short brief I suggest a fixed price or hourly billing for a clear scope and agree it in writing before I start.
+
+Q: Can you train a model on my own images or video? A: Yes, for small to medium sets of images. I trained a neural network on frames from a public deepfake dataset. I have also used ready-made detectors such as Faster R-CNN, YOLOv8n and a Vision Transformer. During planning we check how much labelled data you have and whether a ready-made model is the better start.
+
+Q: Can it work on live camera feeds? A: My monitoring prototype checks video frames on a schedule, one every three seconds for the crime module, and raises alerts. Whether your setup needs true real-time speed depends on camera quality, the number of cameras and your hardware. We would test that during planning rather than assume it.
 
 Q: What about privacy for face or surveillance projects? A: Those projects need consent, clear rules on how long data is kept and legal review on your side. I raise privacy questions during planning and can build in options such as limited data retention and restricted access to stored images. The legal decisions stay with you.
 
 ---
 
-# Speech, text and machine learning
+# Machine learning model development for speech, text and data
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/services/speech-nlp-ml/
-Freelance machine learning on audio, text and spreadsheet data: speech emotion detection, spam filters and price prediction, with honest accuracy.
+Freelance machine learning developer in Mumbai. Models that learn from audio, text or spreadsheet data, with honest accuracy figures and a small web app.
 
-I build machine learning models that learn from sound, text or spreadsheet data. Examples are detecting emotion in a voice clip, filtering spam messages and predicting prices. Each model comes with honest accuracy figures, a note on how it was tested and a small web app, so non-technical people can try it themselves.
+I offer machine learning model development: models that learn from sound, text or spreadsheet data. Examples are detecting emotion in a voice clip, filtering spam messages and predicting prices. Each model comes with honest accuracy figures and a note on how it was tested. A small web app lets non-technical people try it themselves.
 
-Deliverables: Data preparation and feature extraction (librosa, TF-IDF, pandas); Model training, with a comparison against a simple baseline; A results report that states how the data was split and what that limits; A Streamlit app: upload, record or paste, then see the result; A saved model and a script that uses it; A reproducible notebook and a README.
+Deliverables: Data preparation and feature extraction (librosa for audio, word-frequency scoring for text, pandas for tables); Model training, with a comparison against a simple baseline; A results report that states how the data was split and what that limits; A Streamlit app: upload, record or paste, then see the result; A saved model and a script that uses it; A reproducible notebook and a README.
 
 Good fit: Teams with labelled audio, text or spreadsheet data and a clear thing to predict; Projects that need a quick, honest proof of concept before investing further; Students and researchers who want a documented, reproducible workflow.
 
 Tools: Python, TensorFlow / Keras, librosa, scikit-learn, NLTK, pandas, NumPy, Streamlit, Hugging Face Transformers.
 
-Q: Can you classify my own audio or text data? A: Yes, if you have labelled examples and a clear target. I have built a neural network on audio features and a spam classifier on text (TF-IDF with Naive Bayes), each with a small app around it. Before training, we check that you have enough examples of each category.
+Q: How do you deploy a machine learning model? A: A trained model is wrapped in a small FastAPI service with tests and a Docker setup, the same way I build other backends. Your apps can then send data to it and read the result. Handover includes instructions for running it, so your team can move it to a server or cloud machine later.
+
+Q: How much data do I need to train a model? A: It depends on the task. Simple tasks with clear categories may need a few hundred labelled examples per category, while audio or images usually need thousands. I count your examples before training and tell you honestly if there are too few. A ready-made model can often reduce the amount you need.
+
+Q: Can you classify my own audio or text data? A: Yes, if you have labelled examples and a clear target. I have built a neural network on audio features. I have also built a spam classifier on text (word-frequency scoring with a Naive Bayes classifier). Each has a small app around it. Before training, we check that you have enough examples of each category.
 
 Q: How do you report accuracy? A: With the data split stated. My speech emotion model reaches 93.87% on a random 20% test split. I also say that altered copies of one clip can land on both sides, so it does not prove the model works on new speakers.
 
-Q: Do you use ready-made models? A: When they fit. Pretrained Hugging Face models are a sensible start for many text and audio tasks. I compare against a simple baseline, so you can see what the extra complexity actually buys, and I tell you if the simple option is good enough.
-
-Q: Can the model be offered as an API? A: Yes. A trained model can be wrapped in a FastAPI service with tests and a Docker setup, the same way I build other backends, so your apps can call it directly. Handover includes instructions for sending data to it and reading the results.
+Q: Do you use ready-made models? A: When they fit. Pretrained Hugging Face models are a sensible start for many text and audio tasks. I compare against a simple baseline, so you can see what the extra complexity actually buys. I tell you if the simple option is good enough.
 
 ---
 
-# Automation, bots and integrations
+# Python automation services: scrapers, bots and integrations
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/services/python-automation-integrations/
-Freelance Python automation: web scrapers, Telegram bots and WhatsApp links through the Meta Cloud API and Twilio, with background jobs and error handling.
+Freelance Python automation in Mumbai: web scrapers, Telegram and WhatsApp bots and tool-to-tool links, with background jobs, error handling and logs.
 
-I automate repetitive work with Python: web scrapers that save clean tables, Telegram and WhatsApp bots, and links between your tools. Slow jobs run in the background so replies stay quick. Every automation includes error handling and logs, so you can see what happened if something goes wrong.
+I offer Python automation services for repetitive work: web scrapers that save clean tables, Telegram and WhatsApp bots, and links between your tools. Slow jobs run in the background so replies stay quick. Every automation includes error handling and logs, so you can see what happened if something goes wrong.
 
 Deliverables: A scraper or data flow that exports to CSV, a database or an API; A Telegram or WhatsApp bot with checked, step-by-step conversations; A receiver for incoming messages (a webhook, built with FastAPI) with error handling and logs; Background jobs (Celery and Redis) for slow tasks; Alerts that hand a conversation over to a human operator; Setup notes, settings files and run instructions.
 
@@ -128,21 +146,25 @@ Good fit: Small businesses that answer the same customer questions on WhatsApp o
 
 Tools: Python, FastAPI, Requests, BeautifulSoup, pandas, Telegram Bot API, WhatsApp Cloud API (prototype), Twilio, Celery, Redis, PostgreSQL, Supabase.
 
-Q: Can you build a WhatsApp bot for my business? A: Yes. I worked on a WhatsApp automation platform that used the Meta Business API and Twilio, tracked each user's conversation and replied in the background. Account approval and message templates on Meta's side are part of the planning conversation.
+Q: Is web scraping legal in India? A: I am not a lawyer, so this is not legal advice. Whether scraping is allowed depends on the site's terms, the kind of data and how you use it, and the decision is yours. Where an official API exists I suggest using it. Any scraper I build keeps its request rate modest, so it does not overload the site.
+
+Q: Can Python be used for automation? A: Yes. Python is one of the most common languages for automation because it has ready-made tools for web scraping, spreadsheets, messaging bots and calls between services. I use it to build scrapers, Telegram and WhatsApp bots and tool-to-tool links, with error handling and logs so you can see what happened.
+
+Q: How much does a WhatsApp chatbot cost? A: It depends on how many conversation flows you need, whether AI writes the replies, and the account approval and message templates Meta requires. I do not publish a price list. After a short brief I suggest a fixed price or hourly billing. We agree it in writing before I start.
+
+Q: Can you build a WhatsApp bot for my business? A: Yes. I worked on a WhatsApp automation platform that used the Meta Business API and Twilio, tracked each user's conversation and replied in the background. Account approval and message templates on Meta's side are part of the planning conversation. Ask me early so we can plan it.
 
 Q: Can the bot use AI to answer? A: Yes. In a client platform I built, AI replies were queued through Redis and Celery (background job tools) so the incoming-message receiver stayed fast. Conversation flows based on what the customer wants kept complex bookings on track, and a human operator could be alerted when needed.
-
-Q: Is it allowed to scrape a website? A: That depends on the site's terms and the data involved, and the decision is yours. Where an official API exists I suggest using it, because it is more stable. Any scraper I build keeps its request rate modest, so it does not overload the site.
 
 Q: Where does the automation run? A: Anywhere that runs Python and Docker: your own server, a cloud machine or a managed platform. Setup instructions come with the handover, so your team can move it later. We choose the place together, based on cost, security needs and who will look after it.
 
 ---
 
-# Freelance AI and backend services
+# Freelance AI development services in Mumbai
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/services/
-Six freelance services from Shaunak Chorge: AI chatbots, document AI, Python backend APIs, computer vision, machine learning and automation.
+Six freelance AI development services in Mumbai: AI chatbots, document AI, Python backend APIs, computer vision, machine learning and automation.
 
-I offer six freelance services: Artificial Intelligence (AI) chatbots, document AI, backend APIs in Python, computer vision, machine learning for speech and text, and automation. Each page lists what you get, how the work runs and the real projects behind it. I take select projects alongside my full-time job and work remotely from Mumbai.
+I offer six freelance AI development services from Mumbai. They are Artificial Intelligence (AI) chatbots, document AI, backend APIs in Python, computer vision, machine learning for speech and text, and automation. Each service page lists what you receive, how the work runs and the real projects behind it. I take select projects alongside my full-time job and work remotely.
 
 AI chatbots and assistants: Chatbots that answer from your documents, show their sources and say so when they do not know.
 
@@ -156,33 +178,35 @@ Speech and machine learning: Models trained on audio and text, tested honestly a
 
 Automation and bots: Scrapers, bots and messaging links that take repetitive work off your team.
 
+Q: Which AI development service do I need? A: Start from the problem. If people need answers from your documents, choose the chatbot service. To pull data out of PDFs, choose document AI. For apps and APIs choose Python backend. For photos and video choose computer vision. For audio or text models choose machine learning. For repeated tasks choose automation.
+
 ---
 
-# AMS AI Finding Drafting Engine
+# AI audit finding generator and drafting engine
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/ams-ai-finding-engine/
-Case study: an AI service at Claptek that drafts audit findings with no invented facts across 27 checked drafts and about 28 times faster responses.
+Case study: an AI audit finding generator at Claptek. It drafts three versions of each finding from checklist notes, and code checks block invented facts.
 
-A standalone service at Claptek that turns short audit checklist notes into draft findings, three versions each. Code-level checks block any invented figure, date or owner.
+The AI audit finding generator is a standalone service at Claptek that turns short audit checklist notes into draft findings, three versions each. Code-level checks block any invented figure, date or owner, so the AI cannot add facts that were not in the auditor's note.
 
 Problem: Auditors spend hours turning terse checklist notes into well-formed findings. Simple AI drafting tends to invent figures and names.
 
-Approach: The service finds similar past findings to use as examples, then asks an AI language model that runs on Claptek's own servers to write the draft. Hard checks in code follow: any draft containing a detail that is not in the auditor's note is rejected.
+Approach: The service finds similar past findings to use as examples. It then asks an AI language model that runs on Claptek's own servers to write the draft. Hard checks in code follow: any draft containing a detail that is not in the auditor's note is rejected.
 
 Architecture: A settings file for each bank, so one codebase serves several banks; A search step that finds similar past findings and uses them as writing examples; An AI language model on Claptek's own servers writes the title, description, recommendation and severity; Code-level checks reject any draft with a figure, date or owner that is not in the auditor's note; Three versions of every finding: short, balanced and detailed; Bulk mode: an uploaded workbook becomes a reviewable grid where each row can be accepted, edited or rejected, plus a written summary report; Connected to the client's existing audit product, which is built with Spring Boot and React.
 
 Results: 0 invented facts across 27 checked draft versions; Time per request cut from 7.9 minutes to 16.9 seconds (about 28 times faster). I found hidden extra processing in how the system called the AI models, and accuracy stayed unchanged; 313 automated tests pass, and the code passes style and type checks; Adopted into the client's audit product the day after handover.
 
-Role: Sole engineer at Claptek. I built it end to end: the data formats, the drafting process, the safety checks, bulk mode and the connection to the client's Java and React product.
+Role: Sole engineer at Claptek. I built it end to end. That covers the data formats, the drafting process, the safety checks, bulk mode and the connection to the client's Java and React product.
 
 Extensions I can build for you (not part of this build): Draft-quality scoring; Reviewer feedback loop; Speed and cost dashboards; Better search of past findings; User roles and activity history.
 
 ---
 
-# Obligation Management System
+# Regulatory obligation extraction with AI
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/obligation-management-system/
-Case study: an AI service that lists obligations from regulatory PDFs, with 97.2% of 1,266 records linked to an exact, highlightable source passage.
+Case study: an AI service at Claptek that reads circulars, permits and regulations and returns obligations, each with a word-for-word source quote.
 
-An Artificial Intelligence (AI) service at Claptek that reads regulatory and compliance documents and returns a structured list of obligations. Each one is linked to an exact, highlightable passage in the source PDF.
+This regulatory obligation extraction AI service at Claptek reads regulatory and compliance documents and returns a structured list of obligations. Each one carries a word-for-word source quote, and 97.2% of 1,266 production records link to an exact, highlightable passage in the source PDF.
 
 Problem: Compliance teams build obligation lists by hand from long regulatory PDFs, and the page numbers an AI model gives for them cannot be trusted.
 
@@ -190,7 +214,7 @@ Approach: The document is split at page boundaries. For each piece, an AI langua
 
 Architecture: The document is split at page boundaries, and a merge step joins obligations that cross a page break; For each piece, an AI language model hosted on Claptek's own servers extracts obligations into fixed categories; A locator finds each word-for-word quote in the PDF (using PyMuPDF) and works out the page number and highlight position from the document itself; A side-by-side PDF preview (pdf.js) highlights the evidence for each obligation; Generation can be cancelled, which frees the model's memory and keeps the extracts already finished; A FastAPI backend, a React screen and Docker packaging.
 
-Results: 97.2% of 1,266 production records linked to an exact, highlightable passage. The page numbers stated by the AI model had been wrong 56% of the time; 100% of records carry a word-for-word source quote; On documents held back from tuning, a controlled comparison raised recall (the share of obligations found) from 32% to 69% for Basel III banking rules and from 69% to 82% for KYC (know-your-customer) rules; Processing time for a six-document benchmark fell from 80.4 to 60.0 minutes; The same process reads permits, circulars and regulations with no domain-specific code.
+Results: 97.2% of 1,266 production records linked to an exact, highlightable passage. The page numbers stated by the AI model had been wrong 56% of the time; 100% of records carry a word-for-word source quote; A controlled comparison used documents held back from tuning. It raised recall (the share of obligations found) from 32% to 69% for Basel III banking rules. For KYC (know-your-customer) rules it rose from 69% to 82%; Processing time for a six-document benchmark fell from 80.4 to 60.0 minutes; The same process reads permits, circulars and regulations with no domain-specific code.
 
 Role: Primary engineer at Claptek. I wrote nearly all of the code; one colleague helped scope the early intake step.
 
@@ -198,11 +222,11 @@ Extensions I can build for you (not part of this build): Versioned lists and cha
 
 ---
 
-# Core-Banking Text-to-SQL Assistant
+# Text-to-SQL LLM assistant for core banking
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/core-banking-text-to-sql/
-Case study: an on-premise assistant that turns plain questions into bank database queries, lifting the share of accounts found from 34% to 54%.
+Case study: a text-to-SQL assistant at Claptek turning plain questions into Oracle queries over a 1,628-table bank database, on the bank's own servers.
 
-An assistant at Claptek, running on the bank's own servers, that turns plain-language reporting questions into working Oracle database queries (SQL) over a large core-banking database. My part was the accuracy measurement and the self-correction loop.
+This text-to-SQL LLM (AI language model) assistant at Claptek runs on the bank's own servers. It turns plain-language reporting questions into working Oracle database queries (SQL) over a large core-banking database. My part was the accuracy measurement and the self-correction loop.
 
 Problem: Simple scoring said the query writer was about 93% good. Actually running its queries showed the honest figure was close to zero.
 
@@ -218,17 +242,17 @@ Extensions I can build for you (not part of this build): Automatic accuracy chec
 
 ---
 
-# Healthcare Policy Chatbot
+# Healthcare RAG chatbot that cites its sources
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/ai-rag-healthcare-assistant/
-Case study: a chatbot over healthcare policy documents that cites its source and refuses out-of-scope questions instead of guessing.
+Case study: a chatbot using FastAPI, ChromaDB and Groq that answers from six made-up health policies, cites its source and refuses off-topic questions.
 
-A chatbot that answers questions from six made-up healthcare policy documents. It returns its source and a confidence label, and refuses out-of-scope questions instead of guessing.
+This healthcare RAG chatbot answers questions from six made-up healthcare policy documents. RAG means it looks up the right passages first and then writes the answer from them. It returns its source and a confidence label, and refuses out-of-scope questions instead of guessing.
 
 Problem: Healthcare answers must come from the right document. A confident wrong answer is worse than no answer.
 
-Approach: Three safety layers. First, the chatbot works out what the user wants. Second, weak document matches are dropped before the AI is called. Third, a strict instruction forces an exact fallback sentence when nothing relevant remains. Settings live in config files, and a chain of backup AI models keeps the service running if one is retired.
+Approach: Three safety layers. First, the chatbot works out what the user wants. Second, weak document matches are dropped before the AI is called. Third, a strict instruction forces an exact fallback sentence when nothing relevant remains. Settings live in settings files, and a chain of backup AI models keeps the service running if one is retired.
 
-Architecture: Six made-up policy documents (appointments, discharge, health-privacy rules, insurance, refills and telehealth), cut into chunks of 500 with an overlap of 50; Meaning-based search: sentence-transformers turns text into numbers stored in ChromaDB, and the top 3 matches are used; A three-way router: booking requests go to a mock scheduling tool, small talk to a friendly persona and everything else to the document chatbot; A similarity score threshold drops weak matches before the AI is called; A strict instruction with an exact fallback sentence, returning the source passage and a confidence label; A chain of backup Groq models, prompts and settings in config files, a FastAPI backend, a Streamlit chat screen and Docker.
+Architecture: Six made-up policy documents (appointments, discharge, health-privacy rules, insurance, refills and telehealth), cut into chunks of 500 with an overlap of 50; Meaning-based search: sentence-transformers turns text into numbers stored in ChromaDB, and the top 3 matches are used; A three-way router: booking requests go to a mock scheduling tool, small talk to a friendly persona and everything else to the document chatbot; A similarity score threshold drops weak matches before the AI is called; A strict instruction with an exact fallback sentence, returning the source passage and a confidence label; A chain of backup Groq models, prompts and settings in settings files, a FastAPI backend, a Streamlit chat screen and Docker.
 
 Results: Every answer returns its source document, the passage used and a confidence percentage; Out-of-scope questions get a fixed fallback sentence instead of a guess, because weak matches never reach the AI; The service keeps running when a hosted model is retired, with no code change; 6 quick automated tests and a Docker-packaged backend.
 
@@ -238,11 +262,11 @@ Extensions I can build for you (not part of this build): Reading real document s
 
 ---
 
-# Scam-Catching AI Honey-Pot
+# AI scam honeypot that keeps scammers talking
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/agentic-honeypot/
-Case study: an AI persona that keeps scammers talking while it flags scam intent and logs payment IDs and links. Co-built with Prasanna Patil.
+Case study: an AI that plays an easily fooled target, keeps scammers talking and records the UPI payment IDs, links and phone numbers they reveal.
 
-A counter-scam system where an AI plays an easily fooled victim, keeps scammers talking and records the UPI payment IDs, links and phone numbers they reveal. Co-built with Prasanna Patil.
+This AI scam honeypot is a counter-scam system co-built with Prasanna Patil. An AI plays an easily fooled victim, keeps scammers talking and records the UPI payment IDs, links and phone numbers they reveal. A rule-based selector changes its style as scam risk grows, and a live dashboard shows what it collects.
 
 Problem: A blocked scammer simply tries the next number, and nobody learns how the scam works. Keeping scammers busy with a bot protects real people for as long as it lasts and leaves a record of exactly what they ask for.
 
@@ -252,17 +276,17 @@ Architecture: A FastAPI backend scores each message against known scam signals; 
 
 Results: The bot's style changes automatically as scam risk and collected details grow; UPI IDs, links and phone numbers are saved as structured threat information; Request limit of 1 per second per visitor, with bursts of 5; The persona sees the last 10 messages for each reply; A live dashboard shows warning signals, the current style and the details collected.
 
-Role: Co-author with Prasanna Patil. I added the filter that blocks prompt-injection attempts (tricks that try to hijack the AI) and the request limiter, moved the AI from Gemini to Groq, rewrote the persona prompts and detail-extraction patterns, and reworked parts of the dashboard. Prasanna wrote the first version, the Docker setup and the README.
+Role: Co-author with Prasanna Patil. I added the filter that blocks prompt-injection attempts (tricks that try to hijack the AI) and the request limiter. I moved the AI from Gemini to Groq. I also rewrote the persona prompts and detail-extraction patterns, and reworked parts of the dashboard. Prasanna wrote the first version, the Docker setup and the README.
 
 Extensions I can build for you (not part of this build): A learned scam detector with scoring; Memory and tools for the agent; Searchable conversation store; Attack-testing suite; Tracking and analytics dashboards.
 
 ---
 
-# CCTV Crime and Crowd Analytics
+# CCTV video analytics in Python: crowds, crime and faces
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/advanced-cctv-analytics/
-Case study: a Smart India Hackathon prototype that watches one CCTV feed for crowd limits, crime types and faces. Co-built with Prasanna Patil.
+Case study: a Smart India Hackathon team project that watches one CCTV video three ways: crowd-limit alerts, crime labels and face recognition.
 
-A Smart India Hackathon team prototype that watches one CCTV feed three ways: crowd-limit alerts, crime labels from video frames and face recognition. Co-built with Prasanna Patil.
+CCTV video analytics in Python: this Smart India Hackathon team prototype watches one CCTV feed three ways. It raises crowd-limit alerts, labels possible crime from video frames and recognises faces, and it saves evidence frames and labels to MongoDB. Co-built with Prasanna Patil.
 
 Problem: Public-safety teams cannot watch every camera at once. Overcrowding, violent incidents and known persons of interest slip past exactly when attention matters most.
 
@@ -278,19 +302,19 @@ Extensions I can build for you (not part of this build): Modern people detector 
 
 ---
 
-# Speech Emotion Recognition
+# Speech emotion recognition project
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/speech-emotion-recognition/
-Case study: a neural network that labels seven emotions in speech, 93.87% on a random test split, with live microphone input and a web app.
+Case study: a neural network that labels seven emotions in speech, trained on four public datasets. 93.87% on a random test split, with a live mic demo.
 
-A neural network (a 1-D CNN) that labels seven emotions in speech clips. It was trained on four public datasets and comes with live microphone input and a web dashboard.
+This speech emotion recognition project is a neural network (a 1-D CNN, which reads audio as a sequence) that labels seven emotions in speech clips. It was trained on four public datasets and scored 93.87% on a random 20% test split. It comes with live microphone input and a web dashboard.
 
 Problem: Emotion lives in tone, pitch and energy, not in the words, so a text-based model is the wrong tool.
 
 Approach: Four datasets are merged and each clip is altered to create more training examples. Audio features are extracted with librosa, then a five-block neural network learns from them. The result is served through notebooks and a Streamlit dashboard.
 
-Architecture: Four public datasets (RAVDESS, CREMA-D, TESS and SAVEE) merged into 12,162 clips; Each clip altered four ways with noise and pitch changes, giving 48,648 training samples; librosa audio features: zero-crossing rate, energy and MFCCs, 2,376 numbers per sample; A five-block 1-D neural network with steps to prevent overfitting, 7.19 million parameters; A notebook for live microphone input; A Streamlit dashboard: upload or record, then see class probabilities and waveform and spectrogram views.
+Architecture: Four public datasets (RAVDESS, CREMA-D, TESS and SAVEE) merged into 12,162 clips; Each clip altered four ways with noise and pitch changes, giving 48,648 training samples; librosa audio features: zero-crossing rate, energy and MFCCs (numbers that describe the sound of a voice), 2,376 numbers per sample; A five-block 1-D neural network with steps to prevent overfitting (memorising the training clips), 7.19 million parameters; A notebook for live microphone input; A Streamlit dashboard: upload or record, then see class probabilities and waveform and spectrogram views.
 
-Results: Recognises seven emotions: angry, disgust, fear, happy, neutral, sad and surprise; 93.87% accuracy and a weighted F1 score of 0.94 on a random 20% test split; Per-emotion F1 scores between 0.92 and 0.97; Caveat: altered copies of one clip can land on both sides of the split, so the result does not prove it works on new speakers; Live microphone detection in a notebook and in the Streamlit dashboard.
+Results: Recognises seven emotions: angry, disgust, fear, happy, neutral, sad and surprise; 93.87% accuracy and a weighted F1 score of 0.94 (one number that balances missed cases against false alarms) on a random 20% test split; Per-emotion F1 scores between 0.92 and 0.97; Caveat: altered copies of one clip can land on both sides of the split, so the result does not prove it works on new speakers; Live microphone detection in a notebook and in the Streamlit dashboard.
 
 Role: I adapted a public training recipe from Kaggle, retrained and tested it on four datasets, then wrote the live-input notebook and the Streamlit dashboard.
 
@@ -298,11 +322,11 @@ Extensions I can build for you (not part of this build): Testing on voices it ha
 
 ---
 
-# DeepFake Video Detection
+# Deepfake video detection project
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/deepfake-video-detection/
-Case study: a neural network that scores each video frame as real or fake, with a web app and PDF report. 74.16% on a random frame split.
+Case study: a small neural network scores each video frame as real or fake, with a Streamlit app, confidence chart and PDF report. 74.16% test accuracy.
 
-A college team project in which a small neural network scores every frame of an uploaded video as real or fake, with a web app, a confidence chart and a downloadable PDF report. Co-built with Prasanna Patil and a classmate.
+This deepfake video detection project is a college team project. A small neural network scores every frame of an uploaded video as real or fake. A Streamlit web app shows a confidence chart and exports a PDF report. It reached 74.16% test accuracy on a random frame split. Co-built with Prasanna Patil and a classmate.
 
 Problem: Face-swap videos are hard to spot by eye, so reviewers need a quick, explainable first check.
 
@@ -318,17 +342,17 @@ Extensions I can build for you (not part of this build): A stronger model that w
 
 ---
 
-# Traceable AI Backend
+# FastAPI OpenTelemetry tracing for an AI backend
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/observable-ai-backend/
-Case study: an AI-routed backend with request IDs, metrics and traces. A slow step fell from about 15 seconds to under 50 milliseconds on made-up data.
+Case study: a FastAPI service where an AI picks the right business action, with request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger.
 
-A FastAPI service where an AI picks one of three business actions for each question. A request ID follows every call through logs, metrics and traces (viewed in Jaeger), so a slow or failing call can be explained from the outside.
+This FastAPI OpenTelemetry tracing project is a service where an AI picks one of three business actions for each question. A request ID follows every call through logs, metrics and traces (viewed in Jaeger). This means a slow or failing call can be explained from the outside.
 
 Problem: An AI endpoint can return a success code and still be slow, degraded or quietly switching to another model. You only find out when users complain.
 
-Approach: One request ID is stamped on every log line and trace step of a request. Simple, hand-written metrics count requests, AI response time, tokens used and model fallbacks. Three Groq models are chained with a time limit each and a clear "degraded" flag, so a silent fallback becomes visible.
+Approach: One request ID is stamped on every log line and trace step of a request. Simple, hand-written metrics count requests, AI response time, tokens used (the small pieces of text an AI is billed by) and model fallbacks. Three Groq models are chained with a time limit each and a clear "degraded" flag, so a silent fallback becomes visible.
 
-Architecture: An /ask endpoint where an AI picks one of three business actions (look up tickets, create a ticket or run a sales report) and then summarises the result; A chain of three Groq models, each with a time limit and an explicit "degraded" flag; One request ID on every log line and trace step; Hand-written Prometheus metrics for requests, AI response time, tokens and model fallbacks; OpenTelemetry traces viewed in Jaeger; A simple keyword router, so the service runs with no API key or internet; A Docker Compose setup that starts the app, Jaeger and Prometheus together.
+Architecture: An /ask endpoint (a web address the app answers on) where an AI picks one of three business actions. These are looking up tickets, creating a ticket and running a sales report. The AI then summarises the result; A chain of three Groq models, each with a time limit and an explicit "degraded" flag; One request ID on every log line and trace step; Hand-written Prometheus metrics for requests, AI response time, tokens and model fallbacks; OpenTelemetry traces viewed in Jaeger; A simple keyword router, so the service runs with no API key or internet; A Docker Compose setup that starts the app, Jaeger and Prometheus together.
 
 Results: A deliberately slow lookup (a join over 60,000 made-up tickets) was found in a trace. Its step fell from about 15 seconds to under 50 milliseconds once indexed; 10 automated tests that need no key or internet; Silent model fallbacks are visible through the degraded flag and a fallback counter.
 
@@ -338,19 +362,21 @@ Extensions I can build for you (not part of this build): Dashboards and alerts; 
 
 ---
 
-# Projects
+# AI engineer portfolio projects and case studies
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/
-Selected AI chatbot, computer vision and Python backend projects by Shaunak Chorge, with case studies, results and the tools behind each one.
+Selected AI chatbot, computer vision, speech and Python backend projects by Shaunak Chorge, with case studies, results and the tools behind each one.
 
-Shaunak Chorge's work includes AI systems built at Claptek for audit and compliance, a chatbot that cites its sources, a backend that shows where requests slow down, speech and vision models, and automation. Nine projects have full case studies with the problem, what he built, measured results and what he can add for a client. Smaller builds are listed at the end.
+These are the AI engineer portfolio projects of Shaunak Chorge. AI systems built at Claptek cover audit and compliance. Others include a chatbot that cites its sources, a backend that traces slow requests, and speech, vision and automation work. Nine projects have full case studies with the problem, what he built, the results and what he can add.
+
+Q: What are some real world AI project examples? A: Real examples on this site include an AI that drafts audit findings and a tool that lists obligations from regulatory documents. Others are a text-to-SQL assistant for a bank database, a healthcare policy chatbot and a scam-catching AI honeypot. There are also CCTV analytics, speech emotion recognition, deepfake video detection and a traceable AI backend.
 
 ---
 
-# About Shaunak
+# About Shaunak Chorge, AI engineer
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/about/
-Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai. Read about his background, experience, tools and how he works with clients.
+Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai. Read about his background, experience, tools and how he works with freelance clients.
 
-Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India, with a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026). He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job.
+Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India. He holds a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026). He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job.
 
 Experience: AI Engineer at Claptek Pvt Ltd; Python Automation Intern at Osource Global Pvt. Ltd.; AI and Machine Learning Intern at Shivohini Tech-AI LLP.
 
@@ -360,64 +386,68 @@ Also works with: Django, Django REST Framework, Pydantic, pytest, sentence-trans
 
 How I work: Answers backed by evidence. Every answer should trace back to a source. I build the checks into the code, not only into the instructions given to the AI. Measure first. Before improving anything, I build a way to measure it, such as a scoring test, a request ID or a set of known-correct answers. Honest limits. I tell you how the data was split, where a result may not hold and what the numbers do not show. Tested and documented. The main logic is tested, and every handover includes notes and a walkthrough.
 
+Q: Who is Shaunak Chorge? A: Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai. At work he builds AI tools for audit and compliance software, such as a service that drafts audit findings from checklist notes. Earlier he worked at Osource Global and Shivohini Tech-AI, and he takes select freelance AI and backend projects.
+
 ---
 
-# Freelance AI developer FAQ
+# AI developer cost in India: freelance FAQ
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/faq/
-Answers about hiring Shaunak Chorge: cost, how to start, time zone, NDAs, ownership, fixing existing projects and support after delivery.
+Answers about the cost of hiring Shaunak Chorge as an AI developer: how pricing works, timelines, NDAs, code ownership, fixing projects and support.
 
-Shaunak Chorge takes select freelance Artificial Intelligence (AI) and backend projects alongside his full-time job as an AI Engineer at Claptek Pvt Ltd. He works remotely from Mumbai (IST), starts from a short written brief and agrees the scope before writing any code. Each project is priced individually, and you receive tested code with clear notes.
+AI developer cost in India depends on the scope. Shaunak Chorge agrees either a fixed price or hourly billing for each project, after a short brief and before any code is written. He takes select projects alongside his full-time job as an AI Engineer at Claptek Pvt Ltd. He works remotely from Mumbai and answers the common questions below.
 
-Q: Do you take on freelance projects? A: Yes. I take select freelance AI and backend projects alongside my full-time job as an AI Engineer at Claptek Pvt Ltd. I keep the number small so every client gets proper attention, and I am upfront about scope and timelines before we agree to work together.
+Q: Can you fix an existing AI project? A: Yes. Most of my professional work has been inside software that already existed. I added an AI drafting service to a live audit product and sped up the core matching code during an internship. I read the code before changing it, keep changes tested and leave notes explaining each decision.
 
-Q: What kinds of projects do you build? A: I build AI chatbots that answer from your documents, tools that read and extract data from documents, and Python backend APIs. I also build computer vision, speech and text models, and automation such as web scrapers and Telegram or WhatsApp bots. Each area has its own page under Services, with examples of real work.
+Q: Which tools do you use? A: I work mostly in Python. For web services I use FastAPI and PostgreSQL, packaged with Docker (so it runs the same on any server). For AI I use services such as Groq and OpenAI, plus LangChain and ChromaDB for document chatbots. For vision and speech I use OpenCV, PyTorch and TensorFlow. The full list is on the About page.
 
-Q: Can you fix or extend my existing project? A: Yes. Most of my professional work has been inside software that already existed. I added an AI drafting service to a live audit product and sped up the core matching code during an internship. I read the code before changing it, keep changes tested and leave notes explaining each decision.
+Q: Can the AI run on our own servers instead of an online service? A: Yes. At work I build on AI language models (LLMs) hosted on the client's own servers. This suits systems where no data, prompt or usage record may leave the building. My personal projects use online services such as Groq. We choose based on your privacy needs, cost and answer quality.
 
-Q: How do we start? A: Send a short brief through the contact form or by email: what you want to build, roughly when you need it and anything I should know. I reply with my view on feasibility and a proposed scope. We agree on both before I write any code.
+Q: Can a freelancer sign an NDA? A: Yes. I am happy to sign a reasonable mutual NDA (a confidentiality agreement) before we discuss private details. I do not reuse client data or code in other projects. I only name a client or show their work in my portfolio with written approval.
+
+Q: Who owns the code written by a freelancer? A: The ownership and licence terms are written into our agreement before work begins. The usual arrangement is that you own what you pay for. My freelance work is kept separate from my full-time job and never uses my employer's code or data.
 
 Q: What does a project look like from start to finish? A: Four steps. First we agree on the problem and how success will be measured. Then I build a small working prototype on your data. Next I add tests and safety checks. Finally I hand over notes and a walkthrough. You see working software early and get short written updates along the way.
 
-Q: How long will my project take? A: It depends on the size of the project. After reading your brief, I give a written estimate for each step. A small prototype is much quicker than a full product. I would rather give you an honest range than promise a date I cannot keep.
+Q: What time zone does a Mumbai freelance AI developer work in? A: I am based in Mumbai, India, and work in Indian Standard Time (IST, UTC+5:30). I work remotely, using written updates and shared code reviews. We can agree meeting times that overlap with your working day. A past remote internship taught me how to keep distant teams in sync.
 
-Q: Which tools do you use? A: I work mostly in Python. For web services I use FastAPI and PostgreSQL, packaged with Docker. For AI I use services such as Groq and OpenAI, plus LangChain and ChromaDB for chatbots that search your documents. For vision and speech I use OpenCV, PyTorch and TensorFlow. The full list is on the About page.
+Q: How much does it cost to hire an AI developer in India? A: I do not publish a price list, because projects vary too much. After reading your brief, I suggest either a fixed price for a clearly defined scope, or hourly billing for open-ended work. The price and the terms are agreed in writing before I start.
 
-Q: Can the AI run on our own servers instead of an online service? A: Yes. At work I build on AI language models (LLMs) hosted on the client's own servers, for systems where no data, prompt or usage record may leave the building. My personal projects use online services such as Groq. We choose based on your privacy needs, cost and answer quality.
-
-Q: What time zone do you work in? A: I am based in Mumbai, India, and work in Indian Standard Time (IST, UTC+5:30). I work remotely, using written updates and shared code reviews. We can agree meeting times that overlap with your working day. A past remote internship taught me how to keep distant teams in sync.
-
-Q: How much does it cost? A: I do not publish a price list, because projects vary too much. After reading your brief, I suggest either a fixed price for a clearly defined scope, or hourly billing for open-ended work. The price and the terms are agreed in writing before I start.
-
-Q: Do you sign an NDA? A: Yes. I am happy to sign a reasonable mutual NDA (a confidentiality agreement) before we discuss private details. I do not reuse client data or code in other projects, and I only name a client or show their work in my portfolio with written approval.
-
-Q: Who owns the code and the final work? A: The ownership and licence terms are written into our agreement before work begins. The usual arrangement is that you own what you pay for. My freelance work is kept separate from my full-time job and never uses my employer's code or data.
+Q: How long does a freelance AI project take? A: It depends on the size of the project. After reading your brief, I give a written estimate for each step. A small prototype is much quicker than a full product. I would rather give you an honest range than promise a date I cannot keep.
 
 Q: What happens after you hand the project over? A: Handover includes a README (a how-to guide), setup instructions, tests and a walkthrough, so your team can run and extend the work. A bug-fix period and ongoing maintenance can be agreed as part of the scope, and I will write down exactly what is covered.
 
 ---
 
-# Hire me for your AI or backend project
+# Hire an AI developer for your project
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/contact/
 Send a short brief to hire Shaunak Chorge, a freelance AI developer in Mumbai, for chatbots, computer vision, Python backend APIs or automation.
 
-Tell me what you want to build. A short brief is enough to start the conversation.
+To hire an AI developer, send a short brief through the form or by email. Say what you want to build, roughly when you need it and anything I should know. I reply with my view on feasibility and a proposed scope, and I write no code until we agree on it.
+
+Tell me what you want to build, such as an Artificial Intelligence (AI) chatbot, a computer vision tool, a Python backend or an automation. A short brief is enough to start the conversation.
 
 Send a brief: What you want to build, and what a good result looks like; Roughly when you need it; Anything I should know, such as private data, tools you already use or where it will run; Anything you have already tried.
 
-I write no code until we agree on the scope. If your project is not a good fit, I will tell you plainly.
+Scope comes first. If your project is not a good fit, I will tell you plainly.
 
 Email: shaunak.chorge@gmail.com
+
+Q: What should I include in a project brief for an AI developer? A: Say what you want to build and what a good result looks like, and roughly when you need it. Tell me anything I should know, such as private data, tools you already use or where it will run. Also say what you have already tried. A few lines are enough to start, and I ask for details later.
+
+Q: How do we start? A: Send a short brief through the contact form or by email, as a few lines or a longer note. I read it, then reply with my view on feasibility and a proposed scope. We agree on both before I write any code.
 
 ---
 
 # Resume
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/resume/
-Resume of Shaunak Chorge, AI Engineer: work at Claptek Pvt Ltd, Osource Global and Shivohini Tech-AI, education, certifications and awards.
+Resume of Shaunak Chorge, AI Engineer: work at Claptek Pvt Ltd, Osource Global and Shivohini Tech-AI, education, certifications and awards. PDF download.
 
-Artificial Intelligence (AI) Engineer at Claptek Pvt Ltd in Mumbai, with a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026). I build trustworthy AI tools for audit and compliance software, and take select freelance projects: chatbots, computer vision, backend APIs and automation.
+This Shaunak Chorge resume covers his work as an AI Engineer at Claptek Pvt Ltd in Mumbai. It also covers his earlier roles at Osource Global and Shivohini Tech-AI, his education, certifications and awards. A PDF copy is available to download. He holds a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026).
 
 Roles: AI Engineer at Claptek Pvt Ltd; Python Automation Intern at Osource Global Pvt. Ltd.; AI and Machine Learning Intern at Shivohini Tech-AI LLP.
 
-Certifications: Oracle Cloud Infrastructure Certified Generative AI Professional (Oracle); Generative AI Certification (GeeksforGeeks); IgniteX Program Participant (Wadhwani Foundation); Python for Data Science (Infosys Springboard); Python Django (SimpliLearn); Introduction to SQL (SimpliLearn); Getting Started with Enterprise Data Science (digital badge) (IBM (IBM SkillsBuild)).
+Certifications: Oracle Cloud Infrastructure Certified Generative AI Professional (Oracle); Generative AI Certification (GeeksforGeeks); IgniteX Program Participant (Wadhwani Foundation); Python for Data Science (Infosys Springboard); Python Django (SimpliLearn); Introduction to SQL (SimpliLearn); Getting Started with Enterprise Data Science (digital badge) (IBM SkillsBuild).
 
 Awards: First runner-up, Code Golf (INNIXO - SWASTIK); First runner-up, Code Quest Infinity; Winners, Smart India Hackathon internal round.
+
+Q: Where can I download the Shaunak Chorge resume? A: Use the Download PDF button at the top of this page. It saves a PDF copy of this resume, with the same work experience, education, certifications and awards. If the file does not open, write to me through the contact page and I will send it.

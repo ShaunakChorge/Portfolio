@@ -1,13 +1,8 @@
 {
   "name": "Shaunak Chorge",
   "tagline": "AI Engineer and freelance developer in Mumbai: AI chatbots, Python backend APIs, computer vision and automation.",
-  "email": "shaunak.chorge@gmail.com",
   "og_image": "assets/img/og-image.png",
-  "sameAs": [
-    "https://github.com/ShaunakChorge",
-    "https://www.linkedin.com/in/shaunak-chorge",
-    "https://www.instagram.com/_shaunakkk/"
-  ],
+  "portrait_image": "assets/img/portrait/portrait-800.webp",
   "person": {
     "jobTitle": "AI Engineer",
     "employer": "Claptek Pvt Ltd",

@@ -77,14 +77,14 @@
 
 /* RGB-split ghosts, cloned by portrait.js; invisible except during the glitch */
 .np__ghost { position: absolute; inset: 0; display: block; opacity: 0; pointer-events: none; mix-blend-mode: screen; }
-.np__ghost--c { filter: brightness(.9) sepia(1) hue-rotate(135deg) saturate(8); animation: np-ghost-c 7s steps(1, end) 2.6s infinite; }
-.np__ghost--m { filter: brightness(.9) sepia(1) hue-rotate(285deg) saturate(8); animation: np-ghost-m 7s steps(1, end) 2.6s infinite; }
+.np__ghost--c { filter: brightness(.8) sepia(1) hue-rotate(135deg) saturate(3.5); animation: np-ghost-c 7s steps(1, end) 2.6s infinite; }
+.np__ghost--m { filter: brightness(.8) sepia(1) hue-rotate(285deg) saturate(3.5); animation: np-ghost-m 7s steps(1, end) 2.6s infinite; }
 .np__fig.is-glitchy { animation: np-jolt 7s steps(1, end) 2.6s infinite; }
 
 /* vertical scan sweep */
 .np__scan {
   position: absolute; left: 0; right: 0; top: 0; height: 22%;
-  background: linear-gradient(to bottom, transparent, rgb(var(--np-cyan) / .08) 62%, rgb(var(--np-cyan) / .3) 98%, transparent 100%);
+  background: linear-gradient(to bottom, transparent 0%, rgb(var(--np-cyan) / .05) 34%, rgb(var(--np-cyan) / .16) 68%, rgb(var(--np-cyan) / .2) 82%, rgb(var(--np-cyan) / .07) 94%, transparent 100%);
   mix-blend-mode: screen; pointer-events: none;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
           mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
@@ -143,16 +143,16 @@
 /* glitch: active window ~5.4% of 7s = 0.38s, then 6.6s of calm */
 @keyframes np-ghost-c {
   0%, 94% { opacity: 0; transform: translate(0, 0); clip-path: inset(0 0 0 0); }
-  94.01% { opacity: .6; transform: translate(-7px, 0);  clip-path: inset(8% 0 62% 0); }
-  96%    { opacity: .6; transform: translate(-4px, 1px); clip-path: inset(46% 0 30% 0); }
-  98%    { opacity: .6; transform: translate(-8px, -1px); clip-path: inset(70% 0 6% 0); }
+  94.01% { opacity: .24; transform: translate(-5px, 0);  clip-path: inset(8% 0 62% 0); }
+  96%    { opacity: .24; transform: translate(-3px, 1px); clip-path: inset(46% 0 30% 0); }
+  98%    { opacity: .24; transform: translate(-6px, -1px); clip-path: inset(70% 0 6% 0); }
   99.4%, 100% { opacity: 0; transform: translate(0, 0); clip-path: inset(0 0 0 0); }
 }
 @keyframes np-ghost-m {
   0%, 94% { opacity: 0; transform: translate(0, 0); clip-path: inset(0 0 0 0); }
-  94.01% { opacity: .6; transform: translate(7px, 0);  clip-path: inset(30% 0 46% 0); }
-  96%    { opacity: .6; transform: translate(5px, -1px); clip-path: inset(12% 0 70% 0); }
-  98%    { opacity: .6; transform: translate(8px, 1px); clip-path: inset(58% 0 14% 0); }
+  94.01% { opacity: .24; transform: translate(5px, 0);  clip-path: inset(30% 0 46% 0); }
+  96%    { opacity: .24; transform: translate(4px, -1px); clip-path: inset(12% 0 70% 0); }
+  98%    { opacity: .24; transform: translate(6px, 1px); clip-path: inset(58% 0 14% 0); }
   99.4%, 100% { opacity: 0; transform: translate(0, 0); clip-path: inset(0 0 0 0); }
 }
 @keyframes np-jolt {

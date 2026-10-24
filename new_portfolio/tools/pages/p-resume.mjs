@@ -1,15 +1,14 @@
-// p-resume.mjs - /resume/ (HTML resume + PDF download, ProfilePage). Employment / education dates are resume facts (D3 only bans PROJECT years).
+// p-resume.mjs - /resume/ (HTML resume + PDF download, ProfilePage). Employment / education dates are resume facts (only PROJECT years are banned).
 import {
-  cfg, abs, CTA_TEXT, skills, experience, education, certifications, achievements, profile, pagesMeta, caseStudies, RESUME_PDF, EMAIL, GITHUB, LINKEDIN,
+  cfg, abs, CTA_TEXT, experience, education, certifications, achievements, profile, pagesMeta, resumeProjects, RESUME_PDF, EMAIL, GITHUB, LINKEDIN,
 } from './data.mjs';
 import {
-  esc, ico, tags, btn, pageHead, section, hireBand, hireHref,
-  ctx, crumbNode, webPage, personRef, PERSON_ID,
+  esc, ico, tags, btn, pageHead, section, hireBand, hireHref, qaList,
+  ctx, crumbNode, webPage, faqNode, PERSON_ID,
 } from './ui.mjs';
 import { certList, awardList, stackTiers } from './p-about.mjs';
 
 const WORK_TONE = ['cyan', 'blue', 'purple'];
-const FEATURED = ['ams-ai-finding-engine', 'ai-rag-healthcare-assistant', 'observable-ai-backend', 'agentic-honeypot'];
 
 function page() {
   const m = pagesMeta.resume;
@@ -18,7 +17,7 @@ function page() {
   const crumbItems = [{ name: 'Home', path: '' }, { name: 'Resume', path: m.path }];
   const head = pageHead({
     crumbItems, b, eyebrow: 'Resume', h1: esc(m.h1), lead: m.lead,
-    answer: profile.summary_short,
+    answer: m.direct_answer,
     actions: `<a class="btn btn--solid btn--lg btn--glow" href="${b}${RESUME_PDF}" download="Shaunak-Chorge-Resume.pdf">Download PDF ${ico('download', 'icon--still')}</a>` + btn('Hire me', hireHref(b), { v: 'ghost', size: 'lg' }),
   });
 
@@ -63,11 +62,17 @@ function page() {
     body: stackTiers(),
   });
 
-  const feat = FEATURED.map(id => caseStudies.find(p => p.id === id)).filter(Boolean);
+  const feat = resumeProjects;
   const proj = feat.length ? section({
     id: 'projects', eyebrow: 'Selected projects', title: `Projects <span class="hl hl--magenta">worth a read</span>`,
     body: `<ul class="pg-rel" role="list" data-reveal-group>${feat.map(p => `<li><a class="pg-rel__link" href="${b}${p.path}" data-tone="${esc(p.tone)}"><span class="icon-tile">${ico('folder')}</span><span><strong>${esc(p.title)}</strong><span class="pg-rel__t">${esc(p.card_blurb)}</span></span>${ico('arrow-right', 'pg-rel__go')}</a></li>`).join('')}</ul>
     <p class="pg-linkrow" data-reveal><a class="link-arrow" href="${b}projects/">All projects ${ico('arrow-right')}</a><a class="link-arrow" href="${b}services/">Freelance services ${ico('arrow-right')}</a></p>`,
+  }) : '';
+
+  const faqItems = (m.faqs || []).map((f, i) => ({ id: `q${i + 1}`, q: f.q, a: f.a }));
+  const faq = faqItems.length ? section({
+    id: 'faq', eyebrow: 'FAQ', title: 'Quick <span class="hl">answer</span>',
+    body: qaList(faqItems, { idPrefix: 'resume', openFirst: true }),
   }) : '';
 
   const contact = `<p class="pg-resume-contact" data-reveal><a class="link" href="mailto:${EMAIL}">${EMAIL}</a><span aria-hidden="true"> &middot; </span><a class="link" href="${LINKEDIN}" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a><span aria-hidden="true"> &middot; </span><a class="link" href="${GITHUB}" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a><span aria-hidden="true"> &middot; </span>Mumbai, India</p>`;
@@ -76,14 +81,15 @@ function page() {
     webPage(url, m.title, m.description, { '@type': 'ProfilePage', mainEntity: { '@id': PERSON_ID } }),
     { '@type': 'Person', '@id': PERSON_ID, name: cfg.name, url: cfg.url, jobTitle: cfg.person.jobTitle, email: 'mailto:' + EMAIL, worksFor: { '@type': 'Organization', name: cfg.person.employer }, sameAs: cfg.sameAs },
     crumbNode(url, crumbItems),
+    ...(faqItems.length ? [faqNode(url, faqItems)] : []),
   ]);
   return {
     path: m.path, current: 'resume', title: m.title, description: m.description, jsonld,
-    content: head + `<div class="container pg-resume-top">${contact}</div>` + exp + eduSec + cred + skillsSec + proj +
+    content: head + `<div class="container pg-resume-top">${contact}</div>` + exp + eduSec + cred + skillsSec + proj + faq +
       hireBand({ b, heading: 'Hiring, or have <span class="hl">a project?</span>', text: CTA_TEXT }),
     llms: {
       heading: 'Resume', url, desc: m.description,
-      text: [profile.summary_short, 'Roles: ' + work.map(e => `${e.role} at ${e.org}`).join('; ') + '.', 'Certifications: ' + certifications.map(c => `${c.name} (${c.issuer})`).join('; ') + '.', 'Awards: ' + achievements.map(a => a.title).join('; ') + '.'],
+      text: [m.direct_answer, 'Roles: ' + work.map(e => `${e.role} at ${e.org}`).join('; ') + '.', 'Certifications: ' + certifications.map(c => `${c.name} (${c.issuer})`).join('; ') + '.', 'Awards: ' + achievements.map(a => a.title).join('; ') + '.', ...faqItems.map(f => `Q: ${f.q} A: ${f.a}`)],
     },
   };
 }

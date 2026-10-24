@@ -3,15 +3,15 @@
    Classic script (no modules), IIFE, defer.  Exposes  window.Portfolio.
    Never throws when markup is missing.  Section scripts load AFTER this file.
 
-   API (see build/CONTRACT.md for details)
+   API
      Portfolio.ready(fn)                    run fn once DOM + core are ready
      Portfolio.qs / qsa(sel, root)          qsa returns a real Array
+     Portfolio.copy(text)                   copy to the clipboard -> Promise<boolean> (shared by contact, pages and the palette)
      Portfolio.prefersReducedMotion         live getter (boolean)
-     Portfolio.isCoarse / isMobile / isDesktop  live getters
+     Portfolio.isCoarse / isMobile          live getters
      Portfolio.on / off / emit              CustomEvent bus on document
      Portfolio.observe(root)                (re)scan [data-reveal] [data-count] [data-parallax] [data-reveal-group] .timeline[data-fill]
-     Portfolio.reveal(elOrSel) / revealAll()
-     Portfolio.countUp(el, {to, from, duration, decimals, prefix, suffix, group})
+     Portfolio.reveal(elOrSel) / revealAll()   revealAll is for QA scripts (reveals everything at once)
      Portfolio.onScroll(fn) / onResize(fn)  rAF-throttled; fn(state)
      Portfolio.scroll                       {y, max, progress, dir, vh, vw}
      Portfolio.sections / activeSection / goto(id)
@@ -30,7 +30,6 @@
   if (win.Portfolio && win.Portfolio.__core) return;
   var P = win.Portfolio = win.Portfolio || {};
   P.__core = true;
-  P.version = '1.0.0';
 
   /* ---------- helpers ---------- */
   function qs(sel, ctx) { try { return (ctx || doc).querySelector(sel); } catch (e) { return null; } }
@@ -51,6 +50,29 @@
   P.qs = qs;
   P.qsa = qsa;
 
+  /* clipboard: the async API when allowed, else a hidden textarea + execCommand. One copy of this logic for every script. */
+  function legacyCopy(text) {
+    var ok = false, prev = doc.activeElement, ta = doc.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.setAttribute('aria-hidden', 'true');
+    ta.tabIndex = -1;
+    ta.className = 'hp';
+    doc.body.appendChild(ta);
+    try { ta.select(); ta.setSelectionRange(0, text.length); ok = doc.execCommand('copy'); } catch (e) { ok = false; }
+    doc.body.removeChild(ta);
+    if (prev && prev !== doc.body && prev.focus) { try { prev.focus({ preventScroll: true }); } catch (e) { /* ignore */ } }
+    return ok;
+  }
+  P.copy = function (text) {
+    text = String(text);
+    var nav = win.navigator;
+    if (nav && nav.clipboard && typeof nav.clipboard.writeText === 'function') {
+      return nav.clipboard.writeText(text).then(function () { return true; }, function () { return legacyCopy(text); });
+    }
+    return Promise.resolve(legacyCopy(text));
+  };
+
   var mqReduce = mq('(prefers-reduced-motion: reduce)');
   var mqCoarse = mq('(pointer: coarse)');
   var mqMobile = mq('(max-width: 47.9375em)');      /* em: follows the browser's default font size, like the CSS breakpoints */
@@ -59,7 +81,6 @@
   Object.defineProperty(P, 'prefersReducedMotion', { enumerable: true, get: function () { return !!mqReduce.matches || motionPaused; } });
   Object.defineProperty(P, 'isCoarse', { enumerable: true, get: function () { return !!mqCoarse.matches; } });
   Object.defineProperty(P, 'isMobile', { enumerable: true, get: function () { return !!mqMobile.matches; } });
-  Object.defineProperty(P, 'isDesktop', { enumerable: true, get: function () { return !!mqDesktop.matches; } });
 
   /* ---------- event bus (CustomEvent on document) ---------- */
   P.on = function (name, fn, opts) { doc.addEventListener(name, fn, opts); return function () { doc.removeEventListener(name, fn, opts); }; };
@@ -160,7 +181,7 @@
   var S = P.scroll = { y: 0, max: 0, progress: 0, dir: 0, vh: 0, vw: 0 };
   var els = {};
   var scrollSubs = [], resizeSubs = [];
-  var scrollQueued = false, lastY = 0, lastScrollAt = 0;
+  var scrollQueued = false, lastY = 0;
   var parallaxEls = [], timelineEls = [];
 
   /* ---------- progress hairline (spring) ---------- */
@@ -482,7 +503,6 @@
         doc.addEventListener('keydown', onKey, true);
         var first = qs('a[href]', els.drawer);
         if (first) setTimeout(function () { try { first.focus({ preventScroll: true }); } catch (e) { /* ignore */ } }, 60);
-        P.emit('portfolio:menu', { open: true });
       },
       close: function (returnFocus) {
         if (!opened) return;
@@ -494,7 +514,6 @@
         P.lockScroll(false, 'menu');
         doc.removeEventListener('keydown', onKey, true);
         if (returnFocus && els.burger) { try { els.burger.focus(); } catch (e) { /* ignore */ } }
-        P.emit('portfolio:menu', { open: false });
       },
       toggle: function () { if (opened) api.close(true); else api.open(); }
     };
@@ -525,8 +544,6 @@
   };
   P.revealAll = function () { root.classList.add('reveal-all'); qsa('[data-reveal]').forEach(markIn); qsa('[data-count]').forEach(function (el) { if (!el.getAttribute('data-cd')) runCount(el, true); }); };
 
-  P.reveal.all = P.revealAll;
-
   /* count-up: target from data-count (not from the text); markup carries the FINAL value as no-JS fallback */
   function countConf(el) {
     var raw = String(el.getAttribute('data-count') || '').replace(/,/g, '');
@@ -542,42 +559,33 @@
       duration: parseInt(el.getAttribute('data-duration'), 10) || 1900
     };
   }
+  /* one Intl.NumberFormat per (decimals, grouping) pair: building a formatter is the slow part, so it is never rebuilt on every animation frame */
+  var nfCache = {};
   function fmtCount(n, c) {
-    var s;
-    try { s = n.toLocaleString('en-US', { minimumFractionDigits: c.decimals, maximumFractionDigits: c.decimals, useGrouping: c.group }); }
-    catch (e) { s = n.toFixed(c.decimals); }
+    var s, k = c.decimals + (c.group ? 'g' : 'n');
+    try {
+      var nf = nfCache[k] || (nfCache[k] = new Intl.NumberFormat('en-US', { minimumFractionDigits: c.decimals, maximumFractionDigits: c.decimals, useGrouping: c.group }));
+      s = nf.format(n);
+    } catch (e) { s = n.toFixed(c.decimals); }
     return c.prefix + s + c.suffix;
   }
   function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
+  function setTxt(el, s) { if (el.textContent !== s) el.textContent = s; }   /* write only when the shown number really changed */
   function runCount(el, instant) {
     if (!el || el.getAttribute('data-cd') === '1') return;
     var c = countConf(el);
     if (!c) return;
     el.setAttribute('data-cd', '1');
-    if (instant || P.prefersReducedMotion) { el.textContent = fmtCount(c.to, c); P.emit('portfolio:count-done', { el: el }); return; }
+    if (instant || P.prefersReducedMotion) { el.textContent = fmtCount(c.to, c); return; }
     var t0 = null;
     el.textContent = fmtCount(c.from, c);
     P.raf.add(function (ts) {
       if (t0 === null) t0 = ts;
       var k = clamp((ts - t0) / c.duration, 0, 1);
-      el.textContent = fmtCount(c.from + (c.to - c.from) * easeOutQuart(k), c);
-      if (k >= 1) { el.textContent = fmtCount(c.to, c); P.emit('portfolio:count-done', { el: el }); return false; }
-    });
-  }
-  P.countUp = function (el, opts) {
-    if (!el) return;
-    opts = opts || {};
-    var c = countConf(el) || { to: 0, from: 0, decimals: 0, prefix: '', suffix: '', group: false, duration: 1900 };
-    ['to', 'from', 'decimals', 'prefix', 'suffix', 'group', 'duration'].forEach(function (k) { if (opts[k] !== undefined) c[k] = opts[k]; });
-    var t0 = null;
-    if (P.prefersReducedMotion) { el.textContent = fmtCount(c.to, c); return; }
-    P.raf.add(function (ts) {
-      if (t0 === null) t0 = ts;
-      var k = clamp((ts - t0) / c.duration, 0, 1);
-      el.textContent = fmtCount(c.from + (c.to - c.from) * easeOutQuart(k), c);
+      setTxt(el, fmtCount(c.from + (c.to - c.from) * easeOutQuart(k), c));
       if (k >= 1) { el.textContent = fmtCount(c.to, c); return false; }
     });
-  };
+  }
 
   P.observe = function (ctx) {
     ctx = ctx || doc;
@@ -612,8 +620,6 @@
     if (parallaxEls.length || timelineEls.length) scheduleTick();
     return n;
   };
-  P.reveal.observe = P.observe;
-  P.countUp.observe = P.observe;
 
   /* ---------- toast ---------- */
   var toastHost = null;
@@ -685,9 +691,10 @@
 
   /* ---------- clock chips ---------- */
   var clockTimer = 0;
+  var clockFmt = {};   /* one formatter per time zone, created on first use */
   function clockText(el) {
     var tz = el.getAttribute('data-clock') || 'Asia/Kolkata', t;
-    try { t = new Intl.DateTimeFormat('en-GB', { timeZone: tz, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(new Date()); }
+    try { t = (clockFmt[tz] || (clockFmt[tz] = new Intl.DateTimeFormat('en-GB', { timeZone: tz, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }))).format(new Date()); }
     catch (e) { return null; }
     var label = el.getAttribute('data-clock-label'), suf = el.getAttribute('data-clock-suffix');
     return (label ? label.toUpperCase() + ' ' : '') + t + (suf ? ' ' + suf : '');
@@ -744,10 +751,9 @@
     listenMQ(mqDesktop, function () { if (mqDesktop.matches && menu.isOpen()) menu.close(false); });
 
     doc.addEventListener('click', onDocClick);
-    win.addEventListener('scroll', function () { lastScrollAt = now(); scheduleTick(); }, { passive: true });
+    win.addEventListener('scroll', scheduleTick, { passive: true });
     win.addEventListener('resize', onResize, { passive: true });
     win.addEventListener('orientationchange', onResize);
-    P.on('pv:refresh', function () { P.refresh(); });
 
     /* late-added markup (sections that render cards at runtime): rescan when element nodes appear */
     if ('MutationObserver' in win) {
@@ -789,7 +795,6 @@
     root.classList.add('core-ready');
     var q = readyQueue.splice(0);
     q.forEach(function (fn) { try { fn(); } catch (e) { if (win.console) console.error(e); } });
-    P.emit('portfolio:ready', { version: P.version });
 
     /* settle: fonts / images change widths and heights */
     function settle() { collectSections(); updateIndicator(); scheduleTick(); }

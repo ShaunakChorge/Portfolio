@@ -12,8 +12,7 @@
    first letters of the first two variant words.
    Every type may declare accepts(variant). A variant a type does not recognise is drawn with the neutral 'generic' visual, so a
    project never shows another project's content (no translator on an unrelated card, no insurance chart on an API project).
-   Public API: Portfolio.visuals = { refresh(), mount(el), stats(), types, list(), activeCount(), visibleCount() }.  Bus: listens to 'pv:refresh'.
-   (Generated from build/pv/parts/*.js - edit the parts, then run build/pv/build-visuals.mjs.)
+   Public API (read-only, for QA scripts): Portfolio.visuals = { types, list(), activeCount(), visibleCount() }.  Every .pv element is in the page HTML, so they are mounted once at start.
    ===================================================================== */
 (function () {
   'use strict';
@@ -2095,7 +2094,6 @@
     this.frozen = false;                    /* parked on its last frame (only MAX_ANIM visuals animate at once) */
     this.tagH = 0;                          /* height of the 'Illustration' strip, subtracted from the canvas box */
     this.near = false; this.visible = false; this.drawn = false; this.dead = false; this.noCanvas = false;
-    this.msAvg = 0; this.msMax = 0; this.frames = 0;
     this.readTone();
   }
   Visual.prototype.readTone = function () {
@@ -2133,16 +2131,12 @@
   };
   Visual.prototype.paint = function (dt) {
     if (this.dead || !this.w || !this.ctx) return;
-    var c = this.ctx, t0 = win.performance ? performance.now() : 0;
+    var c = this.ctx;
     c.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
     c.__f = c.__ls = null;
     c.clearRect(0, 0, this.w, this.h);
     c.globalAlpha = 1; c.globalCompositeOperation = 'source-over';
     try { this.def.draw(this, c, this.tt, dt || 0); } catch (e) { this.fail(e); return; }
-    var ms = (win.performance ? performance.now() : 0) - t0;
-    this.msAvg = this.frames ? this.msAvg * .94 + ms * .06 : ms;
-    if (ms > this.msMax) this.msMax = ms;
-    this.frames++;
     if (!this.drawn) { this.drawn = true; this.el.classList.add('is-ready'); }
   };
   Visual.prototype.still = function () {     /* a deliberately chosen static frame (reduced motion / offscreen first paint) */
@@ -2260,19 +2254,7 @@
     H.vs.push(v);
   }
 
-  /* ---------- mount / destroy ---------- */
-  function destroy(v) {
-    v.dead = true;
-    var i = active.indexOf(v); if (i >= 0) active.splice(i, 1);
-    i = live.indexOf(v); if (i >= 0) live.splice(i, 1);
-    if (ro) ro.unobserve(v.el);
-    if (ioVis) ioVis.unobserve(v.el);
-    if (ioNear) ioNear.unobserve(v.el);
-    if (v.host && v.host.__pvH) { var k = v.host.__pvH.vs.indexOf(v); if (k >= 0) v.host.__pvH.vs.splice(k, 1); }
-    if (v.cv) { v.cv.width = 0; v.cv.height = 0; }
-    try { delete v.el.__pv; } catch (e) { v.el.__pv = null; }
-    if (!active.length) stopLoop();
-  }
+  /* ---------- mount ---------- */
   /* every generated (non-screenshot) visual says so: a small visible 'Illustration' strip, so invented transcripts and verdicts are never mistaken for real output */
   function addTag(v) {
     var el = v.el;
@@ -2316,20 +2298,10 @@
     if (ioNear) ioNear.observe(el); else { v.near = true; }
     return v;
   }
-  function refresh() {
-    for (var i = live.length - 1; i >= 0; i--) if (!live[i].el.isConnected) destroy(live[i]);
+  function mountAll() {
     var list = doc.querySelectorAll('.pv');
     for (var j = 0; j < list.length; j++) if (!list[j].__pv) mount(list[j]);
-    return live.length;
   }
-
-  function stats() {
-    return live.map(function (v) {
-      return { type: v.type, variant: v.variant, visible: v.visible, near: v.near, running: active.indexOf(v) >= 0 && !v.frozen, frozen: v.frozen, w: v.w, h: v.h, dpr: v.dpr, lite: v.lite,
-        avg: Math.round(v.msAvg * 1000) / 1000, max: Math.round(v.msMax * 100) / 100, frames: v.frames, hot: Math.round(v.hot * 100) / 100 };
-    });
-  }
-  function resetStats() { live.forEach(function (v) { v.msMax = 0; v.msAvg = 0; v.frames = 0; }); }
 
   /* ---------- global listeners ---------- */
   function onMotionChange() {
@@ -2385,31 +2357,12 @@
       ioNear = new IntersectionObserver(function (es) { for (var i = 0; i < es.length; i++) { var v = es[i].target.__pv; if (v) setNear(v, es[i].isIntersecting); } }, { rootMargin: '900px 0px', threshold: 0 });
     }
 
-    refresh();
+    mountAll();
 
-    doc.addEventListener('pv:refresh', function () { refresh(); });
     doc.addEventListener('portfolio:motion', onMotionChange);
     doc.addEventListener('portfolio:accent', onAccent);
     win.addEventListener('resize', onWinResize, { passive: true });
     doc.addEventListener('visibilitychange', function () { if (!doc.hidden && loopOn && !(P && P.raf) && !ownId) { lastTs = 0; ownId = win.requestAnimationFrame(ownTick); } });
-
-    if ('MutationObserver' in win && doc.body) {
-      var queued = false;
-      new MutationObserver(function (muts) {
-        if (queued) return;
-        for (var i = 0; i < muts.length; i++) {
-          var lists = [muts[i].addedNodes, muts[i].removedNodes];       /* added: mount; removed: free the canvases */
-          for (var l = 0; l < 2; l++) for (var j = 0; j < lists[l].length; j++) {
-            var n = lists[l][j];
-            if (n.nodeType === 1 && ((n.classList && n.classList.contains('pv')) || (n.querySelector && n.querySelector('.pv')))) {
-              queued = true;
-              win.requestAnimationFrame(function () { queued = false; refresh(); });
-              return;
-            }
-          }
-        }
-      }).observe(doc.body, { childList: true, subtree: true });
-    }
 
     if (doc.fonts && doc.fonts.load) {
       var loads = ['700 10px "Space Mono"', '400 10px "Space Mono"', '700 14px "Orbitron"', '900 40px "Orbitron"'].map(function (f) { return doc.fonts.load(f).catch(function () { return []; }); });
@@ -2417,7 +2370,7 @@
     } else fontsOk = true;
   }
 
-  var api = { refresh: refresh, mount: mount, stats: stats, resetStats: resetStats, types: Object.keys(TYPES), list: function () { return live.slice(); }, activeCount: function () { return active.filter(function (v) { return !v.frozen && !v.dead; }).length; }, visibleCount: function () { return active.length; }, version: '1.0.0' };
+  var api = { types: Object.keys(TYPES), list: function () { return live.slice(); }, activeCount: function () { return active.filter(function (v) { return !v.frozen && !v.dead; }).length; }, visibleCount: function () { return active.length; } };
   if (P) P.visuals = api; else win.PortfolioVisuals = api;
 
   if (P && P.ready) P.ready(init);

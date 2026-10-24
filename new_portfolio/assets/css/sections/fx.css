@@ -1,5 +1,5 @@
 /* =====================================================================
-   NEURAL NEON - fx.css  (FX engineer: global effects, no partial; DOM is created at runtime by fx.js)
+   NEURAL NEON - fx.css  (global effects, no partial; DOM is created at runtime by fx.js)
    Prefix: .fx-*   (+ the [data-tilt] / [data-magnetic] hooks).  Unlayered, so it beats @layer pf.
    z-index scale (base.css): canvas = --z-bg (after .bg-fixed in the DOM), accent widget = --z-fab,
    cursor orb = --z-cursor.  Palette and terminal are <dialog>s (top layer), so no z-index is needed.
@@ -10,7 +10,6 @@
 @keyframes fx-pop { from { opacity: 0; transform: translate3d(0, -10px, 0) scale(.97); } to { opacity: 1; transform: none; } }
 @keyframes fx-pop-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: translate3d(0, -6px, 0) scale(.98); } }
 @keyframes fx-flash { 0% { opacity: 0; } 12% { opacity: 1; } 100% { opacity: 0; } }
-@keyframes fx-caret { 50% { opacity: 0; } }
 
 /*#region 1 background network canvas*/
 .fx-net {
@@ -200,6 +199,7 @@ html.fx-paused .fx-cur { display: none; }
 /*#endregion*/
 
 /*#region 7 accent switcher (desktop, bottom-left, collapsed by default)*/
+.fx-term__body:focus-visible { outline: 2px solid rgb(var(--accent)); outline-offset: -3px; }
 .fx-accent { display: none; position: fixed; left: max(1.25rem, env(safe-area-inset-left)); bottom: max(1.25rem, env(safe-area-inset-bottom)); z-index: var(--z-fab); }
 @media (min-width: 80em) and (hover: hover) and (pointer: fine) { .fx-accent { display: block; } }
 html.is-locked .fx-accent { visibility: hidden; }
