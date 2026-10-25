@@ -1936,12 +1936,17 @@
         "daily": true
       },
       {
-        "name": "AI model APIs (Groq, OpenAI)",
+        "name": "Groq",
         "tone": "cyan",
         "daily": true
       },
       {
-        "name": "RAG (answers from documents)",
+        "name": "OpenAI",
+        "tone": "cyan",
+        "daily": true
+      },
+      {
+        "name": "RAG",
         "tone": "cyan",
         "daily": true
       },
@@ -1989,7 +1994,11 @@
         "tone": "purple"
       },
       {
-        "name": "TensorFlow / Keras",
+        "name": "TensorFlow",
+        "tone": "purple"
+      },
+      {
+        "name": "Keras",
         "tone": "purple"
       },
       {
@@ -2005,7 +2014,11 @@
         "tone": "magenta"
       },
       {
-        "name": "Local AI models (Ollama, vLLM)",
+        "name": "Ollama",
+        "tone": "cyan"
+      },
+      {
+        "name": "vLLM",
         "tone": "cyan"
       }
     ]
