@@ -2329,8 +2329,7 @@
           "q": "Can it follow our own audit categories and wording?",
           "a": "Yes. Each bank has its own settings file holding its categories, example findings, pass and fail wording and required fields, so one codebase serves several banks. The search step also shows the model similar past findings, which helps drafts follow earlier house style. I would build the settings from your own past findings."
         }
-      ],
-      "origin": "Client"
+      ]
     },
     {
       "collaborators": [],
@@ -2609,8 +2608,7 @@
           "a": "In this project the AI language model runs on Claptek's own servers, not on an online AI service. For a new client, I would check what hardware you have, because larger models need stronger machines, and then run the model where your documents are allowed to stay."
         }
       ],
-      "visual_variant": "generic-obligation-management-system",
-      "origin": "Client"
+      "visual_variant": "generic-obligation-management-system"
     },
     {
       "collaborators": [
@@ -2890,8 +2888,7 @@
           "q": "Did you retrain or replace the AI model to raise accuracy?",
           "a": "No. The client allowed no larger model and no retraining, so the model stayed as it was. The gain came from the self-correction loop: when a query failed or returned nothing, the model saw the real error and real column values and tried again, up to two passes. Recall rose from 34% to 54%."
         }
-      ],
-      "origin": "Client"
+      ]
     },
     {
       "collaborators": [],
@@ -2916,7 +2913,6 @@
       "tagline": "Cited answers, or an honest \"not found\".",
       "category": "AI chatbot",
       "status": "Public repo | take-home prototype",
-      "origin": "Personal",
       "description_short": "A chatbot (FastAPI, ChromaDB, Groq) that answers from six sample healthcare policies, cites its source and confidence, and refuses out-of-scope questions.",
       "stack": [
         "Python",
@@ -3206,7 +3202,6 @@
       "tagline": "An Artificial Intelligence (AI) victim that keeps scammers talking and takes notes.",
       "category": "AI agent",
       "status": "Public repo | team hackathon build",
-      "origin": "Academic",
       "description_short": "A counter-scam system: an AI plays an easily fooled target, keeps scammers talking and records the UPI payment IDs, links and phone numbers they reveal.",
       "stack": [
         "Python",
@@ -3741,8 +3736,7 @@
           "q": "Is this prototype ready for a real control room?",
           "a": "No. It is a hackathon prototype made of desktop scripts that run on one computer and read video files or a webcam. Settings sit inside the code and there are no automated tests. A real deployment would need network camera input, accuracy tests on your footage, alert rules, privacy controls and monitoring."
         }
-      ],
-      "origin": "Academic"
+      ]
     },
     {
       "collaborators": [],
@@ -4022,8 +4016,7 @@
           "q": "How long does it take to train a speech emotion model?",
           "a": "Here, the 20 training passes took about ten hours in total, roughly half an hour each, and extracting features from all 12,162 clips took about two minutes spread over 20 processor cores. Time depends on the computer and the data, so I would size a new project on a sample first."
         }
-      ],
-      "origin": "Personal"
+      ]
     },
     {
       "collaborators": [
@@ -4296,8 +4289,7 @@
           "q": "Can I use this as proof that a video is fake?",
           "a": "No. It is a first-check tool with 74.16% accuracy on one dataset, and its score is an average of frame scores, not a calibrated probability. The team's report says the tool is meant for education and not for public accusation. Use it to decide which clips a person should examine closely."
         }
-      ],
-      "origin": "Academic"
+      ]
     },
     {
       "collaborators": [],
@@ -4322,7 +4314,6 @@
       "tagline": "An AI server you can debug from the outside, with LLM observability built in.",
       "category": "AI and backend",
       "status": "Private repo | job-application task",
-      "origin": "Personal",
       "description_short": "A FastAPI AI server where an AI picks the right business action for each question, with request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger for large language model (LLM) observability.",
       "stack": [
         "Python",
@@ -4652,7 +4643,6 @@
         "python-backend-apis",
         "llm-apps-rag"
       ],
-      "origin": "Client",
       "case_study": {
         "summary": "This WhatsApp AI agent platform is a backend I built during an internship for a client. It receives customer messages through a webhook, tracks each user and writes AI replies in the background with Redis and Celery, so the AI never blocks the web request. Conversations are saved in PostgreSQL. The repository is private.",
         "seo": {
@@ -4880,7 +4870,6 @@
       "tagline": "A spam filter with zero false alarms on its test set.",
       "category": "Natural language",
       "status": "Public repo | internship project",
-      "origin": "Academic",
       "description_short": "A spam detector using NLTK, TF-IDF and Naive Bayes: 97.1% accuracy and 100% precision on 1,034 test messages, in a Streamlit app.",
       "stack": [
         "Python",

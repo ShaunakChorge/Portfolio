@@ -12,7 +12,7 @@
 // The footer "Work" column is not configured: it lists every project of `show` in that order (a project without a case study links to its tile on /projects/).
 // Ordering rule for resume_featured: the ids you list come first, in your order. An id that is not a case study (any more) is skipped with a
 // warning. If fewer than the maximum remain, the first case studies of `casestudy` fill the rest, so a new selection never leaves a gap or a dead link.
-// The origin tag of a tile (Client, Academic or Personal) is the optional `origin` field of the project in content.json.
+// Tiles carry no Client / Academic / Personal tag; a project with an `origin` field in content.json fails the build.
 import fs from 'node:fs';
 import path from 'node:path';
 import { SITE, readContent } from './lib.mjs';
@@ -21,7 +21,6 @@ const CONFIG_FILE = path.join(SITE, 'projects.config.json');
 const FEATURED_MAX = { resume_featured: 4 };
 const KEYS = ['show', 'tile_size', 'desktop_grid', 'casestudy', 'personal', ...Object.keys(FEATURED_MAX)];
 const SIZES = { small: [1, 1], wide: [2, 1], big: [2, 2] };   // columns x rows
-const ORIGINS = ['Client', 'Academic', 'Personal'];
 const GRID_COLUMNS = 4;
 
 export function loadSelection(content = readContent()) {
@@ -45,7 +44,7 @@ export function loadSelection(content = readContent()) {
     if (!byId.get(id).case_study) fail(`"${id}" has no case_study block in content.json`);
   }
   for (const id of personal) if (show.includes(id)) fail(`"${id}" is in both "show" and "personal"`);
-  for (const p of content.projects) if (p.origin && !ORIGINS.includes(p.origin)) fail(`"${p.id}" has origin "${p.origin}" (use ${ORIGINS.join(', ')} or leave it out)`);
+  for (const p of content.projects) if ('origin' in p) fail(`"${p.id}" has an "origin" field (projects carry no Client / Academic / Personal tag; remove it)`);
 
   /* collage: a size per selected project, and a desktop grid whose cells match those sizes exactly */
   const sizeOf = cfg.tile_size ?? {};

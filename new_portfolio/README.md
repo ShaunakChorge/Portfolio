@@ -68,7 +68,7 @@ Open `content/content.json`, change the text, run `npm run build`. Every field i
 | `pages` | title, description, H1, first paragraph (`direct_answer`), section titles (`h2`) and extra questions (`faqs`) of the home, hub and single pages |
 | `profile`, `hero` | home hero, contact details, status line |
 | `services[]` | the service pages and the home service list (title, description, H1, `direct_answer`, `h2`, `faqs`); `tone` and `icon` set the colour and icon everywhere |
-| `projects[]` | collage tiles, case studies (`case_study.seo` = title, description and H1 of the page; `case_study.h2` = its section titles; `faq`), the Personal builds rows (`personal_line`), the resume view. `origin` (`Client`, `Academic` or `Personal`) is the small tag on a collage tile; leave it out when the facts do not say |
+| `projects[]` | collage tiles, case studies (`case_study.seo` = title, description and H1 of the page; `case_study.h2` = its section titles; `faq`), the Personal builds rows (`personal_line`), the resume view. Tiles carry no Client / Academic / Personal tag (an `origin` field fails the build) |
 | `experience`, `education`, `certifications`, `achievements` | about page, resume view, home roles |
 | `faq_all` | groups of questions. A group with `page: "home"` or `page: "contact"` is shown on that page only; the others make up the FAQ page and its schema |
 | `keywords.json` (own file) | the approved keyword map, see "Keywords and the SEO guard" |

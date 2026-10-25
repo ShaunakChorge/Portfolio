@@ -66,7 +66,6 @@ function model(id) {
     svc: svcKeys.map(k => serviceByKey[k]),
     primarySvc: serviceByKey[svcKeys[0]] || services[0],
     atClaptek: claptekIds.has(p.id),
-    origin: p.origin || '',                                       // Client | Academic | Personal, or '' when the facts do not say
     inShow: showSet.has(p.id),
     tone: p.tone || 'cyan',
   };

@@ -132,7 +132,7 @@ export function pv(p, extra = '') {
   return `<div class="pv${extra ? ' ' + extra : ''}" data-visual="${esc(p.visual_hint || 'generic')}" data-variant="${esc(p.visual_variant || p.id)}" data-tone="${esc(p.tone)}" aria-hidden="true"></div>`;
 }
 
-/** one collage tile: the visual, a small category + origin line, the title and (wide and big tiles only, see collage.css) the blurb.
+/** one collage tile: the visual, a small category line, the title and (wide and big tiles only, see collage.css) the blurb.
  *  A project with a case study links to it. Without one, a public repository is the link and a private one is a plain label. */
 function tile(p, b, i, filterable, lone) {
   const href = p.hasCase ? b + p.path : p.repoInfo.kind === 'public' ? p.repoInfo.href : '';
@@ -143,7 +143,7 @@ function tile(p, b, i, filterable, lone) {
       <article class="card tile__card" data-tone="${esc(p.tone)}" data-tilt${p.hasCase ? ' data-cursor="case"' : ''} data-reveal style="--i:${i % 4}" aria-labelledby="pj-${esc(p.id)}">
         <div class="tile__media">${pv(p)}</div>
         <div class="tile__body">
-          <p class="tile__meta"><span class="tile__cat">${esc(p.category)}</span>${p.origin ? `<span class="tile__origin">${esc(p.origin)}</span>` : ''}</p>
+          <p class="tile__meta"><span class="tile__cat">${esc(p.category)}</span></p>
           <h3 class="tile__title" id="pj-${esc(p.id)}">${name}</h3>
           <p class="tile__blurb">${esc(p.card_blurb)}</p>${href ? '' : `\n          <p class="tile__note">${esc(p.repoInfo.text || 'Private')}</p>`}
         </div>
@@ -369,7 +369,7 @@ export function askBox({ b, ref, about = '', topic = '', prompts = [], title = '
 /** relatedCards([{ p: projectModel, reason }], { b, heading }) -> HTML (no section wrapper) */
 export function relatedCards(items, { b }) {
   return `<ul class="pg-relcards" role="list" data-reveal-group>${items.map(({ p, reason, href, label }, i) => `<li><a class="pg-relcard" href="${href || b + p.path}" data-tone="${esc(p.tone)}" style="--i:${i}">
-      <span class="pg-relcard__cat">${esc(p.category)}${p.origin ? ` <span class="pg-relcard__origin">${esc(p.origin)}</span>` : ''}</span>
+      <span class="pg-relcard__cat">${esc(p.category)}</span>
       <strong class="pg-relcard__t">${esc(label || p.title)}</strong>
       <span class="pg-relcard__why">${esc(reason)}</span>
       <span class="pg-relcard__go">Read the case study ${ico('arrow-right', 'icon--sm')}</span>

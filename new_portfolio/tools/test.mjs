@@ -414,6 +414,15 @@ try {
     check(/tile_size/.test(loadWith(c => { c.tile_size['django-box-selection-api'] = 'big'; })), 'the selection check reports a tile size for a project that is not selected');
     check(/both/.test(loadWith(c => { c.personal.push('spam-classifier'); })), 'the selection check reports a project in both "show" and "personal"');
 
+    /* no project carries a Client / Academic / Personal tag: not in the data, not on a tile, not on a related card */
+    check(!content.projects.some(p => 'origin' in p), 'no project has an origin field');
+    check(!/tile__origin|pg-relcard__origin/.test(projectsPage + home), 'no tile shows a Client / Academic / Personal tag');
+    {
+      const withOrigin = JSON.parse(JSON.stringify(content)); withOrigin.projects[0].origin = 'Client';
+      let msg = ''; try { loadSelection(withOrigin); } catch (e) { msg = e.message; }
+      check(/origin/.test(msg), 'the selection check rejects an origin field');
+    }
+
     /* the owner's resume PDF is never regenerated */
     check(crypto.createHash('md5').update(fs.readFileSync(path.join(SITE, 'assets/Shaunak-Chorge-Resume.pdf'))).digest('hex') === 'd8c97fc56dbdfff424884c8d0e27dc7b', "the resume PDF is the owner's file, unchanged");
 
