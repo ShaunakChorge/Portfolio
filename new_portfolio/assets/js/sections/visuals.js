@@ -1523,7 +1523,7 @@
     freezeStill: true,
     still: function (v) { return v.st.def.tEnd + .3; },
     init: function (v) {
-      var vr = v.variant, src = /quiz/.test(vr) ? TERMS.quiz : (/zapvi|scrap/.test(vr) ? TERMS.scraper : (/sql|finacle/.test(vr) ? TERMS.sql : TERMS.generic));
+      var vr = v.variant, src = /quiz/.test(vr) ? TERMS.quiz : (/zapvi|scrap/.test(vr) ? TERMS.scraper : (/sql/.test(vr) ? TERMS.sql : TERMS.generic));
       v.st.def = JSON.parse(JSON.stringify(src)); termBuild(v.st.def);
     },
     layout: function (v) {

@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../assets/dist/site.inner.min.css?v=99f76e8a">
+  <link rel="stylesheet" href="../assets/dist/site.inner.min.css?v=d92fd1cd">
 
 <script type="application/ld+json">
 {
@@ -62,9 +62,25 @@
       "breadcrumb": {
         "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/contact/#breadcrumb"
       },
-      "dateModified": "2026-10-24",
+      "dateModified": "2026-10-25",
       "mainEntity": {
         "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/#person"
+      },
+      "potentialAction": {
+        "@type": "ReserveAction",
+        "name": "Book a call",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://shaunakchorge.github.io/Portfolio/new_portfolio/contact/#book",
+          "actionPlatform": [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/MobileWebPlatform"
+          ]
+        },
+        "result": {
+          "@type": "Reservation",
+          "name": "Call with Shaunak Chorge"
+        }
       }
     },
     {
@@ -163,10 +179,10 @@
         </nav>
 
         <div class="site-header__tools">
+          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
           </button>
-          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
             <span class="burger__lines" aria-hidden="true"><i></i><i></i><i></i></span>
           </button>
@@ -210,10 +226,32 @@
       
     </div>
   </div>
-</section><section id="hire" class="section pg-sec pg-hirebox" aria-label="Send a brief">
+</section><section class="section pg-sec pg-quick" aria-label="Quick ways to connect"><div class="container"><ul class="connect-strip" role="list" aria-label="Quick ways to connect"><li><a class="connect-tile" href="../contact/#book" data-tone="cyan" data-connect="book">
+      <span class="icon-tile connect-tile__icon" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg></span>
+      <span class="connect-tile__text"><strong>Book a call</strong><span>Pick a day and time</span></span>
+      <svg class="icon connect-tile__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
+    </a></li><li><a class="connect-tile" href="../contact/#hire" data-tone="purple" data-connect="brief">
+      <span class="icon-tile connect-tile__icon" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg></span>
+      <span class="connect-tile__text"><strong>Send a brief</strong><span>Tell me what you need</span></span>
+      <svg class="icon connect-tile__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
+    </a></li><li><a class="connect-tile" href="https://wa.me/919920644655?text=Hi%20Shaunak%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer" data-tone="green" data-connect="whatsapp">
+      <span class="icon-tile connect-tile__icon" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></span>
+      <span class="connect-tile__text"><strong>WhatsApp</strong><span>Message me directly</span></span>
+      <svg class="icon connect-tile__go" aria-hidden="true" focusable="false"><use href="#i-arrow-up-right"/></svg><span class="sr-only"> (opens in a new tab)</span>
+    </a></li><li><a class="connect-tile" href="mailto:shaunak.chorge@gmail.com" data-tone="magenta" data-connect="email">
+      <span class="icon-tile connect-tile__icon" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></span>
+      <span class="connect-tile__text"><strong>Email</strong><span>Write to me</span></span>
+      <svg class="icon connect-tile__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg>
+    </a></li></ul></div></section><section id="hire" class="section pg-sec pg-hirebox" aria-label="Send a brief or book a call">
   <div class="container">
     <div class="pg-contact">
-      <div class="pg-contact__form"><div class="contact__formwrap panel pg-formwrap" id="contact-form-panel" data-tone="cyan" data-reveal>
+      <div class="pg-contact__form">
+        <div class="pg-tabs pg-needs-js" role="tablist" aria-label="How would you like to start?" data-tabs>
+          <button class="pg-tab" role="tab" type="button" id="tab-brief" aria-controls="brief-panel" aria-selected="true" data-tab="brief"><svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-send"/></svg> Send a brief</button>
+          <button class="pg-tab" role="tab" type="button" id="tab-book" aria-controls="book" aria-selected="false" tabindex="-1" data-tab="book"><svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg> Book a call</button>
+        </div>
+        <div class="pg-contact__panels" data-tabpanels>
+          <div class="pg-contact__panel" id="brief-panel"><div class="contact__formwrap panel pg-formwrap" id="contact-form-panel" data-tone="cyan" data-reveal>
         <div class="contact__compose" data-compose>
           <div class="contact__sub">
             <h2 class="contact__h" id="cf-title">Send a short brief</h2>
@@ -221,6 +259,7 @@
           </div>
           <form class="contact__form" id="contact-form" action="https://formspree.io/f/xjkvyvjp" method="POST" data-email="shaunak.chorge@gmail.com" aria-labelledby="cf-title">
             <input type="hidden" name="_subject" value="New project brief from the portfolio">
+            <input type="hidden" name="page" id="cf-page" value="">
 
             <div class="contact__pair">
               <div class="field" data-field="name">
@@ -235,13 +274,25 @@
               </div>
             </div>
 
-            <div class="field" data-field-type>
-              <label for="cf-type">Project type</label>
-              <select class="input" id="cf-type" name="project_type">
-                <option value="">Choose one (optional)</option>
-                <option value="llm-rag-development">AI chatbot or document assistant</option><option value="ai-document-compliance-automation">Document AI or data extraction</option><option value="ai-backend-fastapi-django">Python backend or API</option><option value="computer-vision">Computer vision</option><option value="speech-nlp-ml">Speech, text or machine learning</option><option value="python-automation-integrations">Automation, bot or integration</option>
-                <option value="other">Something else</option>
-              </select>
+            <div class="contact__pair">
+              <div class="field" data-field-type>
+                <label for="cf-type">Project type</label>
+                <select class="input" id="cf-type" name="project_type">
+                  <option value="">Choose one (optional)</option>
+                  <option value="llm-rag-development">AI chatbot or document assistant</option><option value="ai-document-compliance-automation">Document AI or data extraction</option><option value="ai-backend-fastapi-django">Python backend or API</option><option value="computer-vision">Computer vision</option><option value="speech-nlp-ml">Speech, text or machine learning</option><option value="python-automation-integrations">Automation, bot or integration</option>
+                  <option value="other">Something else</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="cf-when">When do you need it?</label>
+                <select class="input" id="cf-when" name="timeline">
+                  <option value="">Choose one (optional)</option>
+                  <option value="As soon as possible">As soon as possible</option>
+                  <option value="Within a month">Within a month</option>
+                  <option value="In two to three months">In two to three months</option>
+                  <option value="Flexible, or not sure yet">Flexible, or not sure yet</option>
+                </select>
+              </div>
             </div>
 
             <div class="field" data-field="message">
@@ -278,6 +329,63 @@
           <button class="btn btn--ghost" id="cf-again" type="button">Send another message</button>
         </div>
       </div></div>
+          <div class="contact__formwrap panel book pg-contact__panel" id="book" data-tone="purple" data-booking="{&quot;tz&quot;:&quot;Asia/Kolkata&quot;,&quot;label&quot;:&quot;IST&quot;,&quot;lengths&quot;:[15,30,45],&quot;defaultLength&quot;:30,&quot;daysAhead&quot;:14,&quot;minNoticeHours&quot;:24,&quot;step&quot;:30,&quot;weekly&quot;:{&quot;mon&quot;:[[&quot;19:00&quot;,&quot;21:30&quot;]],&quot;tue&quot;:[[&quot;19:00&quot;,&quot;21:30&quot;]],&quot;wed&quot;:[[&quot;19:00&quot;,&quot;21:30&quot;]],&quot;thu&quot;:[[&quot;19:00&quot;,&quot;21:30&quot;]],&quot;fri&quot;:[[&quot;19:00&quot;,&quot;21:30&quot;]],&quot;sat&quot;:[[&quot;11:00&quot;,&quot;15:00&quot;]],&quot;sun&quot;:[]},&quot;subject&quot;:&quot;Call request from the portfolio&quot;,&quot;person&quot;:&quot;Shaunak Chorge&quot;}" data-reveal>
+        <div class="book__compose" data-book-compose>
+          <div class="contact__sub">
+            <h2 class="contact__h" id="book-title">Book a call</h2>
+            <p class="contact__note">Pick a day and a time that suit you. This sends me a request, and I confirm the slot by email.</p>
+          </div>
+          <form class="contact__form book__form" id="book-form" action="https://formspree.io/f/xjkvyvjp" method="POST" data-email="shaunak.chorge@gmail.com" aria-labelledby="book-title">
+            <input type="hidden" name="_subject" value="Call request from the portfolio">
+            <input type="hidden" name="slot_ist" value=""><input type="hidden" name="slot_utc" value=""><input type="hidden" name="visitor_time" value="">
+
+            <fieldset class="book__group"><legend class="label">Call length</legend><div class="book__lens"><label class="book__len"><input type="radio" name="call_length" value="15"><span>15 min</span></label><label class="book__len"><input type="radio" name="call_length" value="30" checked><span>30 min</span></label><label class="book__len"><input type="radio" name="call_length" value="45"><span>45 min</span></label></div></fieldset>
+
+            <div class="book__pick pg-needs-js">
+              <p class="label" id="book-day-l">Day <span class="book__tz">(India Standard Time)</span></p>
+              <div class="book__days" id="book-days" role="radiogroup" aria-labelledby="book-day-l"></div>
+              <p class="label" id="book-time-l">Time</p>
+              <div class="book__slots" id="book-slots" role="radiogroup" aria-labelledby="book-time-l"><p class="book__hint">Choose a day first.</p></div>
+              <p class="book__local" id="book-local" aria-live="polite"></p>
+            </div>
+            <div class="book__nojs">
+              <div class="field"><label for="bk-date">Preferred day</label><input class="input" id="bk-date" name="preferred_day" type="date"></div>
+              <div class="field"><label for="bk-time">Preferred time (India Standard Time)</label><input class="input" id="bk-time" name="preferred_time" type="time"></div>
+            </div>
+
+            <div class="contact__pair">
+              <div class="field" data-field="name"><label for="bk-name">Name</label><input class="input" id="bk-name" name="name" type="text" autocomplete="name" autocapitalize="words" maxlength="80" required placeholder="Your name" aria-describedby="bk-name-err"><span class="field__error" id="bk-name-err" aria-live="polite"><span class="field__error-in"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-circle-alert"/></svg><span class="field__msg"></span></span></span></div>
+              <div class="field" data-field="email"><label for="bk-email">Email</label><input class="input" id="bk-email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" maxlength="120" required placeholder="you@example.com" aria-describedby="bk-email-err"><span class="field__error" id="bk-email-err" aria-live="polite"><span class="field__error-in"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-circle-alert"/></svg><span class="field__msg"></span></span></span></div>
+            </div>
+            <div class="field"><label for="bk-type">What is it about?</label><select class="input" id="bk-type" name="project_type"><option value="">Choose one (optional)</option><option value="llm-rag-development">AI chatbot or document assistant</option><option value="ai-document-compliance-automation">Document AI or data extraction</option><option value="ai-backend-fastapi-django">Python backend or API</option><option value="computer-vision">Computer vision</option><option value="speech-nlp-ml">Speech, text or machine learning</option><option value="python-automation-integrations">Automation, bot or integration</option><option value="other">Something else</option></select></div>
+            <div class="field" data-field="message"><label class="label" for="bk-note">Anything I should read first? <span class="book__opt">(optional)</span></label><textarea class="input" id="bk-note" name="message" rows="3" maxlength="800" placeholder="A line or two about what you want to talk about"></textarea></div>
+            <div class="hp" aria-hidden="true" inert><label for="bk-website">Leave this field empty</label><input id="bk-website" type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>
+
+            <div class="contact__fail" id="bk-fail" role="alert" hidden>
+              <svg class="icon icon--lg contact__fail-icon" aria-hidden="true" focusable="false"><use href="#i-triangle-alert"/></svg>
+              <div class="contact__fail-body"><p class="contact__fail-title" id="bk-fail-title">Request not sent</p><p class="contact__fail-text" id="bk-fail-text">Something went wrong on the way. Please try again, or email me directly.</p><a class="btn btn--sm btn--magenta" id="bk-fail-mail" href="mailto:shaunak.chorge@gmail.com">Email me instead <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a></div>
+            </div>
+            <div class="contact__submit">
+              <button class="btn btn--solid btn--lg" id="bk-submit" type="submit"><span class="contact__submit-label">Request this slot</span><svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg></button>
+              <p class="form-status contact__status" id="bk-status" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+        <div class="contact__done book__done" id="bk-done" role="status" tabindex="-1" hidden>
+          <span class="contact__done-icon" aria-hidden="true"><svg class="icon icon--xl" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span>
+          <p class="contact__h contact__h--done">Request sent</p>
+          <p class="contact__note" id="bk-done-text">Thank you. I will confirm this slot by email.</p>
+          <p class="book__when" id="bk-done-when"></p>
+          <div class="book__cal">
+            <a class="btn btn--solid" id="bk-gcal" href="#" target="_blank" rel="noopener noreferrer">Add to Google Calendar <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-up-right"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
+            <a class="btn btn--ghost" id="bk-ics" href="#" download="call-with-shaunak-chorge.ics">Download calendar file <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-download"/></svg></a>
+          </div>
+          <p class="contact__note">The calendar entry is marked tentative until I confirm.</p>
+          <button class="btn btn--ghost" id="bk-again" type="button">Pick another time</button>
+        </div>
+      </div>
+        </div>
+      </div>
       <div class="pg-contact__side"><div class="pg-brief" data-reveal>
         <div class="pg-term pg-term--brief">
           <div class="pg-term__bar" aria-hidden="true"><i></i><i></i><i></i><span>brief.md</span></div>
@@ -326,6 +434,14 @@ tried:       Anything you have already tried"><svg class="icon icon--still" aria
             <div class="contact__meta">
               <span class="contact__label">GitHub</span>
               <a class="contact__value" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener noreferrer">github.com/ShaunakChorge<span class="sr-only"> (opens in a new tab)</span></a>
+            </div>
+            <svg class="icon contact__go" aria-hidden="true" focusable="false"><use href="#i-arrow-up-right"/></svg>
+          </li>
+          <li class="contact__row" data-tone="magenta">
+            <span class="icon-tile contact__icon" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-download"/></svg></span>
+            <div class="contact__meta">
+              <span class="contact__label">Contact card</span>
+              <a class="contact__value" href="../assets/Shaunak-Chorge.vcf" download="Shaunak-Chorge.vcf">Save my contact to your phone</a>
             </div>
             <svg class="icon contact__go" aria-hidden="true" focusable="false"><use href="#i-arrow-up-right"/></svg>
           </li>
@@ -396,21 +512,7 @@ tried:       Anything you have already tried"><svg class="icon icon--still" aria
       </div>
 
       <div class="footer__cols">
-        <nav class="footer__col" aria-labelledby="footer-pages-h">
-          <p class="footer__h" id="footer-pages-h">Pages</p>
-          <ul class="footer__links">
-            <li><a href="../">Home</a></li>
-            <li><a href="../projects/">Projects</a></li>
-            <li><a href="../services/">Services</a></li>
-            <li><a href="../about/">About</a></li>
-            <li><a href="../about/#experience">Experience</a></li>
-            <li><a href="../resume/">Resume</a></li>
-            <li><a href="../faq/">FAQ</a></li>
-            <li><a href="../contact/">Contact</a></li>
-          </ul>
-        </nav>
-
-        <nav class="footer__col footer__col--wide" aria-labelledby="footer-services-h">
+        <nav class="footer__col footer__col--services" aria-labelledby="footer-services-h">
           <p class="footer__h" id="footer-services-h">Services</p>
           <ul class="footer__links">
             <li><a href="../services/llm-rag-development/">AI chatbot development</a></li>
@@ -422,14 +524,36 @@ tried:       Anything you have already tried"><svg class="icon icon--still" aria
           </ul>
         </nav>
 
-        <nav class="footer__col" aria-labelledby="footer-work-h">
+        <nav class="footer__col footer__col--work" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
+            <li><a href="../projects/advanced-cctv-analytics/">CCTV analytics in Python</a></li>
+            <li><a href="../projects/speech-emotion-recognition/">Speech emotion recognition</a></li>
+            <li><a href="../projects/observable-ai-backend/">Traceable AI Backend</a></li>
+            <li><a href="../projects/obligation-management-system/">Regulatory obligation extraction</a></li>
+            <li><a href="../projects/ams-ai-finding-engine/">AI audit finding generator</a></li>
+            <li><a href="../projects/core-banking-text-to-sql/">Text-to-SQL for banking</a></li>
             <li><a href="../projects/agentic-honeypot/">AI scam honeypot</a></li>
+            <li><a href="../projects/whatsapp-ai-agent-platform/">WhatsApp AI agent platform</a></li>
             <li><a href="../projects/deepfake-video-detection/">Deepfake video detection</a></li>
+            <li><a href="../projects/spam-classifier/">SMS spam classifier</a></li>
             <li><a href="../projects/">All projects</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__col footer__col--pages" aria-labelledby="footer-pages-h">
+          <p class="footer__h" id="footer-pages-h">Pages</p>
+          <ul class="footer__links">
+            <li><a href="../">Home</a></li>
+            <li><a href="../projects/">Projects</a></li>
+            <li><a href="../services/">Services</a></li>
+            <li><a href="../about/">About</a></li>
+            <li><a href="../about/#experience">Experience</a></li>
+            <li><a href="../resume/">Resume</a></li>
+            <li><a href="../faq/">FAQ</a></li>
+            <li><a href="../contact/">Contact</a></li>
+            <li><a href="../contact/#book">Book a call</a></li>
           </ul>
         </nav>
       </div>
@@ -448,10 +572,20 @@ tried:       Anything you have already tried"><svg class="icon icon--still" aria
 
   <div class="footer__ghost" aria-hidden="true"></div>
 
-  <!-- floating "Hire me" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js) -->
+  <!-- floating "Let's talk" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js).
+       Without JavaScript it is a plain link to the contact form; with JavaScript it opens the small menu of ways to connect (content.connect). -->
   <div class="fab-wrap contact-fab">
-    <a class="fab" href="../contact/#hire" aria-label="Hire me"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
-    <div class="fab-tip" aria-hidden="true">Hire me</div>
+    <div class="connect" id="connect-menu" hidden>
+      <p class="connect__h" id="connect-h">Let&rsquo;s talk</p>
+      <ul class="connect__list" aria-labelledby="connect-h">
+            <li><a class="connect__item" href="../contact/#book"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><span><strong>Book a call</strong><small>Pick a day and time</small></span></a></li>
+            <li><a class="connect__item" href="../contact/#hire"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg><span><strong>Send a brief</strong><small>Tell me what you need</small></span></a></li>
+            <li><a class="connect__item" href="https://wa.me/919920644655?text=Hi%20Shaunak%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg><span><strong>WhatsApp</strong><small>Message me directly</small></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="connect__item" href="mailto:shaunak.chorge@gmail.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span><strong>Email</strong><small>Write to me</small></span></a></li>
+      </ul>
+    </div>
+    <a class="fab" href="../contact/#hire" aria-label="Hire me" data-connect-toggle><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></a>
+    <div class="fab-tip" aria-hidden="true">Let&rsquo;s talk</div>
   </div>
 </footer>
 
@@ -489,6 +623,7 @@ tried:       Anything you have already tried"><svg class="icon icon--still" aria
     <symbol id="i-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></symbol>
     <symbol id="i-scan-eye" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="1"/><path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0"/></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
     <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
     <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
@@ -504,10 +639,11 @@ tried:       Anything you have already tried"><svg class="icon icon--still" aria
   </svg>
 
   <script defer src="../assets/dist/js/core.min.js?v=d41b0d5b"></script>
+  <script defer src="../assets/dist/js/booking.min.js?v=2a8bc592"></script>
   <script defer src="../assets/dist/js/contact-form.min.js?v=1d7681bf"></script>
-  <script defer src="../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
+  <script defer src="../assets/dist/js/contact.min.js?v=e6aee63a"></script>
   <script defer src="../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
-  <script defer src="../assets/dist/js/pages.min.js?v=efc0e441"></script>
+  <script defer src="../assets/dist/js/fx.min.js?v=bb37bfa8"></script>
+  <script defer src="../assets/dist/js/pages.min.js?v=514d4156"></script>
 </body>
 </html>

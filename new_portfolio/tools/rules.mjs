@@ -12,7 +12,7 @@ const NEVER = ['Pune', 'LangGraph', 'exploring', 'prasannapatil', 'prasanna4149'
   'Ctrl K', 'Ctrl+K', 'Ctrl + K', 'Cmd K', 'Cmd+K', 'Cmd + K', 'smaller projects', 'compact project'];
 export const NEVER_RE = new RegExp('(?<![\\w.])(?:' + NEVER.map(literal).join('|') + ')(?!\\w)', 'i');
 
-/** spoken languages appear ONCE on the whole site: in the home page "whoami" card (LANGUAGE_SENTINEL is the word the guard counts) */
+/** spoken languages appear ONCE on the whole site: in the quick-facts card of the About page (LANGUAGE_SENTINEL is the word the guard counts) */
 const LANGUAGES = ['English', 'Hindi', 'Marathi', 'German', 'French'];
 export const LANGUAGE_SENTINEL = 'Marathi';
 export const LANGUAGE_RE = new RegExp('\\b(?:' + LANGUAGES.join('|') + ')\\b');

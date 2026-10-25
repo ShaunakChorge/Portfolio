@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=99f76e8a">
+  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=d92fd1cd">
 
 <script type="application/ld+json">
 {
@@ -64,14 +64,19 @@
       },
       "mainEntity": {
         "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/advanced-cctv-analytics/#project"
-      }
+      },
+      "relatedLink": [
+        "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/deepfake-video-detection/",
+        "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/agentic-honeypot/",
+        "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/observable-ai-backend/"
+      ]
     },
     {
       "@type": "SoftwareSourceCode",
       "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/advanced-cctv-analytics/#project",
       "name": "CCTV Crime and Crowd Analytics",
-      "headline": "Three watchers on one camera feed.",
-      "abstract": "CCTV video analytics in Python: this Smart India Hackathon team prototype watches one CCTV feed three ways. It raises crowd-limit alerts, labels possible crime from video frames and recognises faces, and it saves evidence frames and labels to MongoDB. Co-built with Prasanna Patil.",
+      "headline": "Three watchers for camera footage.",
+      "abstract": "CCTV video analytics in Python: this Smart India Hackathon team prototype watches camera footage three ways. A crowd counter raises a limit alert, a crime module labels sampled video frames and a face module recognises enrolled people. The crowd and crime modules save evidence frames to MongoDB and send WhatsApp alerts. Co-built with Prasanna Patil.",
       "description": "Case study: a Smart India Hackathon team project that watches one CCTV video three ways: crowd-limit alerts, crime labels and face recognition.",
       "url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/advanced-cctv-analytics/",
       "genre": "Case study",
@@ -147,7 +152,7 @@
           "name": "What is video analytics in CCTV?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Video analytics is software that watches camera footage and reports what it sees. Examples are how many people are in a place, unusual events or known faces. This prototype does it three ways on one feed: crowd counting with alerts, crime labels from frames and face recognition. Evidence is saved to a database."
+            "text": "Video analytics is software that watches camera footage and reports what it sees, such as how many people are in a place, unusual events or known faces. This prototype has three separate modules: crowd counting with an alert, crime labels from sampled frames and face recognition. The crowd and crime modules save their evidence to a database."
           }
         },
         {
@@ -155,7 +160,7 @@
           "name": "How accurate is the crime classifier?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It uses a pre-trained Vision Transformer on the 14 UCF-Crime categories. I do not quote an accuracy figure for this prototype, because I did not measure it on labelled footage. A client project would start by measuring it on footage from your own site, then tune the alert rules."
+            "text": "I do not quote an accuracy figure, because I did not measure one on labelled footage. The module uses a pre-trained Vision Transformer with 14 UCF-Crime labels and checks one frame every 3 seconds. A client project would start by measuring it on footage from your own site, then tune the alert rules."
           }
         },
         {
@@ -163,7 +168,39 @@
           "name": "Did you build all of it yourself?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. It was a team project, co-built with Prasanna Patil for the Smart India Hackathon, and I describe it that way. I was a member of the team and I do not claim sole credit for any module. It won the college's internal round of the hackathon."
+            "text": "No. It was a team project, co-built with Prasanna Patil for the Smart India Hackathon. I was a member of the team and I do not claim sole credit for any module. The code was uploaded in one batch from his account, so its history cannot show who wrote what. The team won the college's internal round."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the crowd counter decide when to raise an alert?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It removes the video background to find moving shapes, tracks each one and counts people who cross a virtual line. When the count reaches the limit, set to 12 in the code, it saves the frame to MongoDB, beeps, sends a WhatsApp text and stops. The limit counts crossings downward, not people present at once."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the face recognition part work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A small window enrols a person by saving cropped photos from a webcam. OpenCV's LBPH recogniser, a classic face-matching method, is then trained on those photos. Haar cascades find faces in the live image and the screen shows a name or \"not recognized\". It follows public tutorials, sends no alerts and keeps no evidence frames, only the enrolment photos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which crimes can the model label?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The model has 14 labels: Abuse, Arrest, Arson, Assault, Burglary, Explosion, Fighting, Road accidents, Robbery, Shooting, Shoplifting, Stealing, Vandalism and a normal-video label. It picks one label for each sampled frame, with no confidence cut-off, so a label is a hint for a person to check and not a finding."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this prototype ready for a real control room?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It is a hackathon prototype made of desktop scripts that run on one computer and read video files or a webcam. Settings sit inside the code and there are no automated tests. A real deployment would need network camera input, accuracy tests on your footage, alert rules, privacy controls and monitoring."
           }
         }
       ]
@@ -212,10 +249,10 @@
         </nav>
 
         <div class="site-header__tools">
+          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
           </button>
-          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
             <span class="burger__lines" aria-hidden="true"><i></i><i></i><i></i></span>
           </button>
@@ -252,14 +289,14 @@
       <div class="pg-head__main">
         <p class="eyebrow">Case study / Computer vision</p>
         <h1 class="pg-h1">CCTV video analytics in Python: crowds, crime and faces</h1>
-        <p class="pg-lead">Three watchers on one camera feed.</p>
-        <p class="pg-answer" data-answer>CCTV video analytics in Python: this Smart India Hackathon team prototype watches one CCTV feed three ways. It raises crowd-limit alerts, labels possible crime from video frames and recognises faces, and it saves evidence frames and labels to MongoDB. Co-built with Prasanna Patil.</p>
+        <p class="pg-lead">Three watchers for camera footage.</p>
+        <p class="pg-answer" data-answer>CCTV video analytics in Python: this Smart India Hackathon team prototype watches camera footage three ways. A crowd counter raises a limit alert, a crime module labels sampled video frames and a face module recognises enrolled people. The crowd and crime modules save evidence frames to MongoDB and send WhatsApp alerts. Co-built with Prasanna Patil.</p>
         <div class="pg-actions"><a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=computer-vision#hire">Hire me for something like this <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="btn btn--ghost btn--lg" href="../../projects/">All projects <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg></a></div>
       </div>
       <div class="pg-head__aside"><div class="pg-casevis"><div class="pv" data-visual="scan-grid" data-variant="advanced-cctv-analytics" data-tone="magenta" aria-hidden="true"></div></div></div>
     </div>
   </div>
-</section><section id="at-a-glance" class="section pg-sec section--tint" aria-labelledby="at-a-glance-h">
+</section><nav class="pg-toc" aria-label="On this page"><div class="container"><ul class="pg-toc__list" role="list"><li><a href="#at-a-glance">Key facts</a></li><li><a href="#overview">Overview</a></li><li><a href="#story">The problem</a></li><li><a href="#my-role">My role</a></li><li><a href="#how-it-works">How it works</a></li><li><a href="#decisions">Decisions</a></li><li><a href="#results">Results</a></li><li><a href="#where-it-fits">Where it fits</a></li><li><a href="#extensions">Extensions</a></li><li><a href="#faq">FAQ</a></li><li><a href="#related">Related</a></li><li><a href="#ask">Ask a question</a></li></ul></div></nav><section id="at-a-glance" class="section pg-sec section--tint" aria-labelledby="at-a-glance-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">At a glance</p>
@@ -270,10 +307,19 @@
       <dl class="panel pg-facts" data-tone="magenta" data-reveal><div class="pg-facts__row"><dt>Role</dt><dd>Member of the Smart India Hackathon team. Co-built with Prasanna Patil.</dd></div><div class="pg-facts__row"><dt>Co-built with</dt><dd>Prasanna Patil</dd></div><div class="pg-facts__row"><dt>Context</dt><dd>Team hackathon project</dd></div><div class="pg-facts__row"><dt>Repository</dt><dd><a class="link" href="https://github.com/ShaunakChorge/Advanced-CCTV-Analytics-System" target="_blank" rel="noopener noreferrer">ShaunakChorge/Advanced-CCTV-Analytics-System on GitHub<span class="sr-only"> (opens in a new tab)</span></a></dd></div>
         <div class="pg-facts__row"><dt>Stack</dt><dd><ul class="tags pg-facts__tags" role="list" aria-label="Stack used in this build" data-tone="magenta"><li class="tag">Python</li><li class="tag">OpenCV</li><li class="tag">PyTorch</li><li class="tag">Hugging Face Transformers (ViT)</li><li class="tag">Flask</li><li class="tag">MongoDB</li><li class="tag">Twilio WhatsApp API</li><li class="tag">tkinter</li></ul></dd></div>
       </dl>
-      <ul class="pg-metrics" role="list" data-reveal-group><li class="pg-metric" data-tone="magenta" style="--i:0"><span class="pg-metric__v">14</span><span class="pg-metric__l">Crime categories recognised</span></li><li class="pg-metric" data-tone="magenta" style="--i:1"><span class="pg-metric__v">Every 3 seconds</span><span class="pg-metric__l">Video frame checked for crime</span></li><li class="pg-metric" data-tone="magenta" style="--i:2"><span class="pg-metric__v">MongoDB and WhatsApp</span><span class="pg-metric__l">Evidence and alerts</span></li></ul>
+      <ul class="pg-metrics" role="list" data-reveal-group><li class="pg-metric" data-tone="magenta" style="--i:0"><span class="pg-metric__v">14</span><span class="pg-metric__l">Labels the crime model can give (13 incident types and &quot;normal&quot;)</span></li><li class="pg-metric" data-tone="magenta" style="--i:1"><span class="pg-metric__v">Every 3 seconds</span><span class="pg-metric__l">Video frame checked for crime</span></li><li class="pg-metric" data-tone="magenta" style="--i:2"><span class="pg-metric__v">MongoDB and WhatsApp</span><span class="pg-metric__l">Evidence and alerts</span></li></ul>
     </div>
   </div>
-</section><section id="story" class="section pg-sec" aria-labelledby="story-h">
+</section><section id="overview" class="section pg-sec" aria-labelledby="overview-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Overview</p>
+      <h2 id="overview-h" class="section__title">Why this <span class="hl hl--blue">matters</span></h2>
+      
+    </header>
+<div class="panel pg-context" data-tone="magenta" data-reveal><p>Shops, event venues, campuses and transport hubs often run more cameras than their security staff can watch at once. Crowds build past a safe size, fights start and people who should not be on site walk in, often while a screen goes unwatched. Software that watches the footage, sends a short alert and keeps the picture behind it is meant to help a small team spot these moments sooner.</p><p>A good result is an alert that a person can trust and check. It says what was seen, keeps the frame behind it and does not flood the team with false alarms. For a buyer, that means measuring each alert type on their own footage before relying on it, and setting privacy rules before any face data is stored.</p></div>
+  </div>
+</section><section id="story" class="section pg-sec section--tint" aria-labelledby="story-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">The story</p>
@@ -281,8 +327,22 @@
       
     </header>
 <div class="pg-two">
-      <div class="panel" data-tone="magenta" data-reveal><h3 class="pg-panel__h">The problem</h3><p>Public-safety teams cannot watch every camera at once. Overcrowding, violent incidents and known persons of interest slip past exactly when attention matters most.</p></div>
-      <div class="panel" data-tone="magenta" data-reveal style="--i:1"><h3 class="pg-panel__h">What I built</h3><p>Monitoring is split into three independent modules. One counts crowds, one labels video frames for crime types and one recognises faces. Each saves evidence frames to MongoDB and sends alerts through Twilio WhatsApp.</p></div>
+      <div class="panel" data-tone="magenta" data-reveal><h3 class="pg-panel__h">The problem</h3><p>Public-safety teams cannot watch every camera at once. Overcrowding, violent incidents and known persons of interest slip past exactly when attention matters most. The cost is a slower response, more risk to the people on site and more damage or liability for the venue, because a team that checks screens by eye can only react after someone happens to notice.</p></div>
+      <div class="panel" data-tone="magenta" data-reveal style="--i:1"><h3 class="pg-panel__h">What I built</h3><p>The prototype splits monitoring into three separate modules. The crowd module removes the video background to find moving shapes, tracks each shape and counts people crossing two virtual lines, then raises an alert at a set limit. The crime module checks one frame every 3 seconds with a pre-trained Vision Transformer (ViT, an image-classification model) that returns one of 14 labels. The face module finds faces with Haar cascades (a classic face finder) and names them with an LBPH matcher (a classic face-matching method), after a small tool enrols the people to look for. The crowd and crime modules save evidence frames to MongoDB and send alerts through Twilio WhatsApp. Flask pages show the latest saved frame.</p></div>
+    </div>
+    <h3 class="pg-subh" data-reveal>What made it hard</h3>
+      <ol class="pg-challenges" data-reveal-group><li class="pg-challenge" data-tone="magenta" style="--i:0"><span class="pg-challenge__n" aria-hidden="true">01</span><div><h4 class="pg-challenge__t">Overlapping people in a crowd</h4><p>People who walk close together merge into one moving shape. The sample crowd clip in the repository is a dense street scene, so counting by shapes is rough and every count is an estimate.</p></div></li><li class="pg-challenge" data-tone="magenta" style="--i:1"><span class="pg-challenge__n" aria-hidden="true">02</span><div><h4 class="pg-challenge__t">Judging crime from a still frame</h4><p>The classifier sees one picture every 3 seconds, with no sense of movement, so the context that makes an event a crime is often missing. Its labels are hints for a person to check.</p></div></li><li class="pg-challenge" data-tone="magenta" style="--i:2"><span class="pg-challenge__n" aria-hidden="true">03</span><div><h4 class="pg-challenge__t">Alerts that come with evidence</h4><p>A bare alarm is hard to trust or act on. Each alert needs a saved frame and, for crime, a label to check. That means storing images and reading them back for review.</p></div></li><li class="pg-challenge" data-tone="magenta" style="--i:3"><span class="pg-challenge__n" aria-hidden="true">04</span><div><h4 class="pg-challenge__t">Faces are personal data</h4><p>Recognising a person means keeping their face photos. That raises consent, retention and access questions that this prototype does not yet handle.</p></div></li></ol>
+  </div>
+</section><section id="my-role" class="section pg-sec" aria-labelledby="my-role-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">My role</p>
+      <h2 id="my-role-h" class="section__title">My role in <span class="hl hl--magenta">the build</span></h2>
+      
+    </header>
+<div class="pg-two">
+      <div class="panel" data-tone="magenta" data-reveal><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-code"/></svg> My part</h3><ul class="dot-list"><li>Worked as a member of the Smart India Hackathon team and co-built the prototype with Prasanna Patil.</li><li>Shared in the team's win of the college's internal round of the Smart India Hackathon.</li><li>Kept a copy of the team's repository on my account. It was first uploaded from my co-builder's account, my only commit is a README line, and I claim no sole credit.</li></ul></div>
+      <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-layers"/></svg> Context and credits</h3><ul class="dot-list"><li>The code was uploaded in one batch, so its history cannot show who wrote which module. I describe all three modules as shared team work.</li><li>The crime classifier is a published model loaded by name from the Hugging Face model hub. The repository holds no training code for it.</li><li>The crowd counter's tracker and line counting follow a public people-counter example, and the face tool follows public OpenCV tutorials. Some crowd page buttons and lights are placeholders.</li></ul></div>
     </div>
   </div>
 </section><section id="how-it-works" class="section pg-sec section--tint" aria-labelledby="how-it-works-h">
@@ -292,16 +352,39 @@
       <h2 id="how-it-works-h" class="section__title">Crowd alerts, crime labels and face <span class="hl hl--blue">matching</span></h2>
       
     </header>
-<ol class="pg-arch" data-reveal-group><li class="pg-arch__item" data-tone="magenta" style="--i:0"><span class="pg-arch__n" aria-hidden="true">01</span><p>Crowd module: OpenCV removes the background to find moving people and counts them as they cross virtual lines. Past a set limit it beeps and sends a WhatsApp alert</p></li><li class="pg-arch__item" data-tone="magenta" style="--i:1"><span class="pg-arch__n" aria-hidden="true">02</span><p>Crime module: a pre-trained Vision Transformer, fine-tuned on the UCF-Crime dataset (14 crime categories), labels one frame every 3 seconds</p></li><li class="pg-arch__item" data-tone="magenta" style="--i:2"><span class="pg-arch__n" aria-hidden="true">03</span><p>Face module: Haar cascades find faces and LBPH recognition matches them, with a small tool to enrol persons of interest</p></li><li class="pg-arch__item" data-tone="magenta" style="--i:3"><span class="pg-arch__n" aria-hidden="true">04</span><p>Evidence frames and labels stored in MongoDB</p></li><li class="pg-arch__item" data-tone="magenta" style="--i:4"><span class="pg-arch__n" aria-hidden="true">05</span><p>Flask pages to review the latest detections</p></li><li class="pg-arch__item" data-tone="magenta" style="--i:5"><span class="pg-arch__n" aria-hidden="true">06</span><p>Twilio WhatsApp API for alerts</p></li></ol>
+<ol class="pg-flow" data-tone="magenta" aria-label="Pipeline, step by step" data-reveal-group><li class="pg-flow__node" style="--i:0"><span class="pg-flow__n" aria-hidden="true">01</span><strong class="pg-flow__t">Video in</strong><span class="pg-flow__d">File or webcam footage</span></li><li class="pg-flow__node" style="--i:1"><span class="pg-flow__n" aria-hidden="true">02</span><strong class="pg-flow__t">Analyse</strong><span class="pg-flow__d">Crowd, crime or face; face ends here</span></li><li class="pg-flow__node" style="--i:2"><span class="pg-flow__n" aria-hidden="true">03</span><strong class="pg-flow__t">Decide</strong><span class="pg-flow__d">Limit reached or label found</span></li><li class="pg-flow__node" style="--i:3"><span class="pg-flow__n" aria-hidden="true">04</span><strong class="pg-flow__t">Save</strong><span class="pg-flow__d">Crowd and crime frames to MongoDB</span></li><li class="pg-flow__node" style="--i:4"><span class="pg-flow__n" aria-hidden="true">05</span><strong class="pg-flow__t">Alert</strong><span class="pg-flow__d">Crowd and crime texts via Twilio</span></li><li class="pg-flow__node" style="--i:5"><span class="pg-flow__n" aria-hidden="true">06</span><strong class="pg-flow__t">Review</strong><span class="pg-flow__d">Flask page shows latest frame</span></li></ol>
+    <ol class="pg-arch" data-reveal-group><li class="pg-arch__item" data-tone="magenta" style="--i:0"><span class="pg-arch__n" aria-hidden="true">01</span><p>Crowd module: OpenCV background subtraction (MOG2) finds moving shapes, and a simple tracker gives each one an ID. Two virtual lines count people crossing in each direction. At the limit of 12 it saves the frame, beeps twice, sends a WhatsApp alert and starts the review page server.</p></li><li class="pg-arch__item" data-tone="magenta" style="--i:1"><span class="pg-arch__n" aria-hidden="true">02</span><p>Crime module: a pre-trained Vision Transformer, published on the Hugging Face model hub as UCF_Crime, labels one frame every 3 seconds with one of 14 UCF-Crime labels: 13 incident types, such as Fighting or Robbery, and a normal label.</p></li><li class="pg-arch__item" data-tone="magenta" style="--i:2"><span class="pg-arch__n" aria-hidden="true">03</span><p>Face module: Haar cascades locate faces in a webcam image. A small tkinter window enrols a person by saving cropped 200 by 200 pixel photos, and an LBPH matcher then shows a name, or &quot;not recognized&quot;, on screen.</p></li><li class="pg-arch__item" data-tone="magenta" style="--i:3"><span class="pg-arch__n" aria-hidden="true">04</span><p>Evidence store: the crowd and crime modules save each evidence frame as an image in MongoDB, a database. The crime module keeps the label with the frame and skips a frame whose exact pixels were already stored.</p></li><li class="pg-arch__item" data-tone="magenta" style="--i:4"><span class="pg-arch__n" aria-hidden="true">05</span><p>Review pages: two small Flask pages show the latest saved frame from MongoDB, one for crowd alerts and one for crime labels, where the label sits above the picture.</p></li><li class="pg-arch__item" data-tone="magenta" style="--i:5"><span class="pg-arch__n" aria-hidden="true">06</span><p>Alerts: the Twilio WhatsApp API sends a short text when the crowd limit is reached, carrying the ID of the saved frame, and one text when the crime module finishes a video. Neither message includes the picture.</p></li><li class="pg-arch__item" data-tone="magenta" style="--i:5"><span class="pg-arch__n" aria-hidden="true">07</span><p>Inputs and settings: the crowd and crime modules read a video file chosen in a file dialog, and the face tool reads a webcam. The crowd limit and the crime sampling interval are plain variables in the scripts.</p></li></ol>
   </div>
-</section><section id="results" class="section pg-sec" aria-labelledby="results-h">
+</section><section id="decisions" class="section pg-sec" aria-labelledby="decisions-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Decisions</p>
+      <h2 id="decisions-h" class="section__title">Design decisions and <span class="hl hl--purple">trade-offs</span></h2>
+      
+    </header>
+<ul class="pg-decisions" role="list" data-reveal-group><li class="pg-decision" data-tone="magenta" style="--i:0"><h3 class="pg-decision__t">Three separate modules, not one pipeline</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>Crowd counting, crime labelling and face recognition are separate programs, each with its own input and settings. The crowd and crime programs each have their own review page.</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>Each can be run, tested and replaced on its own, and a fault in one does not stop the others. The cost is that they do not yet share one feed or one dashboard.</p></li><li class="pg-decision" data-tone="magenta" style="--i:1"><h3 class="pg-decision__t">A published crime model, not a new one</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>The crime module loads a Vision Transformer published on the Hugging Face model hub as UCF_Crime, with the 14 UCF-Crime labels. The repository holds no training code.</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>It gives usable labels without collecting and labelling footage first. The trade-off is that its accuracy on a buyer's own cameras is unknown until it is measured.</p></li><li class="pg-decision" data-tone="magenta" style="--i:2"><h3 class="pg-decision__t">Classic OpenCV methods for people and faces</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>The prototype finds people by background subtraction and counting lines, from a public example, and faces by Haar cascades with an LBPH matcher, rather than a trained detector.</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>These methods are light, need no training data for counting and only a few dozen photos per person for faces. The trade-off is weaker results in dense crowds, poor light and side-on faces.</p></li><li class="pg-decision" data-tone="magenta" style="--i:3"><h3 class="pg-decision__t">Evidence frames stored in MongoDB</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>Each alert keeps its frame as an image in MongoDB, and a Flask page reads back the latest one for a reviewer.</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>A reviewer sees what the system saw, not only a text alert. The trade-off is growing storage and the need for access and retention rules for stored images.</p></li></ul>
+    
+  </div>
+</section><section id="results" class="section pg-sec section--tint" aria-labelledby="results-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">Results</p>
       <h2 id="results-h" class="section__title">What the prototype shows and does not <span class="hl hl--magenta">show</span></h2>
       <p class="section__lead">Every number comes with how it was measured. The limits are part of the result.</p>
     </header>
-<div class="panel" data-tone="magenta" data-reveal><ul class="dot-list pg-results"><li>Three independent monitoring modules on one camera feed</li><li>14 crime categories labelled from frames sampled every 3 seconds</li><li>Evidence frames and labels saved to MongoDB, with Flask pages to view the latest detections</li><li>Won the internal round of the Smart India Hackathon at college</li></ul></div>
+<div class="pg-two">
+      <div class="panel" data-tone="magenta" data-reveal><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-circle-check"/></svg> Results</h3><ul class="dot-list pg-results"><li>Three separate monitoring modules: a crowd counter, a crime labeller and a face recogniser.</li><li>The crime model has 14 labels, 13 incident types and a normal label, and the code checks one frame every 3 seconds. Both are settings read from the code, not measured accuracy.</li><li>On the sample crowd clip in the repository, the counter reached its limit of 12 crossings. The saved frame and a count log with 12 entries are kept with the code.</li><li>The crowd and crime modules save evidence frames and labels to MongoDB, with Flask pages that show the latest saved frame.</li><li>The team won the college's internal round of the Smart India Hackathon.</li></ul></div>
+      <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-info"/></svg> Limits to keep in mind</h3><ul class="dot-list pg-results"><li>No accuracy was measured. Counts, crime labels and face matches were not tested against labelled footage, so the prototype shows the idea and the working parts, not a reliability figure.</li><li>The crowd limit counts people crossing downward, not people present at once. Line positions are fixed numbers, overlapping shapes are likely to be counted as one, and the program stops after its first alert.</li><li>The crime module takes the top label for each sampled frame, with no confidence cut-off, on a 3-second timer that follows the computer clock, not the video. Its one WhatsApp text goes out when the video ends, whatever was found.</li><li>It is a set of desktop scripts for one computer, reading video files or a local webcam, not network camera streams, with no automated tests. Keys, phone numbers and paths sit inside the code, and the keys are blank in the public copy.</li></ul></div>
+    </div>
+  </div>
+</section><section id="where-it-fits" class="section pg-sec" aria-labelledby="where-it-fits-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">In a business</p>
+      <h2 id="where-it-fits-h" class="section__title">Where this kind of solution <span class="hl hl--blue">fits</span></h2>
+      <p class="section__lead">Situations where a team could use the same approach. These are examples, not past clients.</p>
+    </header>
+<ul class="pg-uses" role="list" data-reveal-group><li class="pg-use" data-tone="cyan" style="--i:0"><h3 class="pg-use__who">Shopping centres and event venues</h3><p>Count people at an entrance and alert staff when a safe limit is reached, with a saved frame for the record.</p></li><li class="pg-use" data-tone="purple" style="--i:1"><h3 class="pg-use__who">Retail stores</h3><p>Flag possible shoplifting or fights for a person to review, without staff watching every screen all day. Each flag keeps its frame.</p></li><li class="pg-use" data-tone="blue" style="--i:2"><h3 class="pg-use__who">Campuses and housing societies</h3><p>Watch gates and corridors after hours and message a guard when a crowd builds, with a saved frame, and show staff when an enrolled person is matched.</p></li><li class="pg-use" data-tone="magenta" style="--i:3"><h3 class="pg-use__who">Security service providers</h3><p>Give monitoring staff a first-pass filter across many sites, so people look at flagged moments first, once each alert type is measured on site footage.</p></li></ul>
   </div>
 </section><section id="extensions" class="section pg-sec section--tint" aria-labelledby="extensions-h">
   <div class="container">
@@ -310,7 +393,7 @@
       <h2 id="extensions-h" class="section__title">What I can build for your <span class="hl">cameras</span></h2>
       <p class="section__lead">Not part of this project. These are add-ons I can build for a client.</p>
     </header>
-<ul class="grid grid--c3 pg-ext pg-ext--n5" role="list"><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="magenta"><h3 class="pg-ext__t">Modern people detector and tracker</h3><p>I can replace background removal with a detector and tracker for steadier counts in busy scenes.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">YOLOv8</li><li class="tag tag--dashed">multi-object tracking</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="magenta"><h3 class="pg-ext__t">Live camera stream input</h3><p>I can connect real camera streams with a frame queue, so processing keeps pace and drops frames gracefully.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">OpenCV</li><li class="tag tag--dashed">RTSP</li><li class="tag tag--dashed">Redis</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:2"><article class="card card--flat pg-ext__card" data-tone="magenta"><h3 class="pg-ext__t">Accuracy testing on your footage</h3><p>I can measure each module on labelled footage from your site. I report precision and recall per alert type (how many alerts are right and how many real events are caught).</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">pytest</li><li class="tag tag--dashed">labelled clips</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="magenta"><h3 class="pg-ext__t">Alert dashboard and rules</h3><p>I can add a dashboard where operators review alerts, set limits and acknowledge incidents.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">FastAPI</li><li class="tag tag--dashed">React</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="magenta"><h3 class="pg-ext__t">Privacy controls</h3><p>I can add consent-aware handling of face data, retention limits and access control for stored evidence frames.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">data retention rules</li><li class="tag tag--dashed">access control</li></ul></article></li></ul>
+<ul class="grid grid--c3 pg-ext pg-ext--n5" role="list"><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="magenta"><h3 class="pg-ext__t">Modern people detector and tracker</h3><p>I can replace background removal with a trained people detector and tracker, for steadier counts in busy scenes and fewer missed people when they overlap.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">YOLOv8</li><li class="tag tag--dashed">multi-object tracking</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="magenta"><h3 class="pg-ext__t">Live camera stream input</h3><p>I can connect real camera streams through a frame queue with background workers, so processing keeps pace, frames drop gracefully and several cameras run together.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">OpenCV</li><li class="tag tag--dashed">RTSP</li><li class="tag tag--dashed">Redis</li><li class="tag tag--dashed">Celery</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:2"><article class="card card--flat pg-ext__card" data-tone="magenta"><h3 class="pg-ext__t">Accuracy testing on your footage</h3><p>I can measure each module on labelled footage from your site. I report precision and recall per alert type (how many alerts are right and how many real events are caught).</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">pytest</li><li class="tag tag--dashed">labelled clips</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="magenta"><h3 class="pg-ext__t">Alert dashboard and rules</h3><p>I can add a dashboard where operators review alerts, set limits and acknowledge incidents, with rules that merge repeat alerts for one incident into a single message.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">FastAPI</li><li class="tag tag--dashed">React</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="magenta"><h3 class="pg-ext__t">Privacy controls</h3><p>I can add consent-aware handling of face data, retention limits and access control for stored evidence frames.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">data retention rules</li><li class="tag tag--dashed">access control</li></ul></article></li></ul>
   </div>
 </section><section id="hire-for" class="section pg-sec" aria-labelledby="hire-for-h">
   <div class="container">
@@ -331,19 +414,75 @@
     </header>
 <div class="pg-qas"><details class="pg-qa" id="advanced-cctv-analytics-q1" open data-reveal>
       <summary class="pg-qa__q"><h3 class="pg-qa__h">What is video analytics in CCTV?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>Video analytics is software that watches camera footage and reports what it sees. Examples are how many people are in a place, unusual events or known faces. This prototype does it three ways on one feed: crowd counting with alerts, crime labels from frames and face recognition. Evidence is saved to a database.</p></div>
+      <div class="pg-qa__a"><p>Video analytics is software that watches camera footage and reports what it sees, such as how many people are in a place, unusual events or known faces. This prototype has three separate modules: crowd counting with an alert, crime labels from sampled frames and face recognition. The crowd and crime modules save their evidence to a database.</p></div>
     </details><details class="pg-qa" id="advanced-cctv-analytics-q2" open data-reveal style="--i:1">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">How accurate is the crime classifier?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>It uses a pre-trained Vision Transformer on the 14 UCF-Crime categories. I do not quote an accuracy figure for this prototype, because I did not measure it on labelled footage. A client project would start by measuring it on footage from your own site, then tune the alert rules.</p></div>
+      <div class="pg-qa__a"><p>I do not quote an accuracy figure, because I did not measure one on labelled footage. The module uses a pre-trained Vision Transformer with 14 UCF-Crime labels and checks one frame every 3 seconds. A client project would start by measuring it on footage from your own site, then tune the alert rules.</p></div>
     </details><details class="pg-qa" id="advanced-cctv-analytics-q3" open data-reveal style="--i:2">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Did you build all of it yourself?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>No. It was a team project, co-built with Prasanna Patil for the Smart India Hackathon, and I describe it that way. I was a member of the team and I do not claim sole credit for any module. It won the college's internal round of the hackathon.</p></div>
+      <div class="pg-qa__a"><p>No. It was a team project, co-built with Prasanna Patil for the Smart India Hackathon. I was a member of the team and I do not claim sole credit for any module. The code was uploaded in one batch from his account, so its history cannot show who wrote what. The team won the college's internal round.</p></div>
+    </details><details class="pg-qa" id="advanced-cctv-analytics-q4" open data-reveal style="--i:3">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">How does the crowd counter decide when to raise an alert?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>It removes the video background to find moving shapes, tracks each one and counts people who cross a virtual line. When the count reaches the limit, set to 12 in the code, it saves the frame to MongoDB, beeps, sends a WhatsApp text and stops. The limit counts crossings downward, not people present at once.</p></div>
+    </details><details class="pg-qa" id="advanced-cctv-analytics-q5" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">How does the face recognition part work?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>A small window enrols a person by saving cropped photos from a webcam. OpenCV's LBPH recogniser, a classic face-matching method, is then trained on those photos. Haar cascades find faces in the live image and the screen shows a name or &quot;not recognized&quot;. It follows public tutorials, sends no alerts and keeps no evidence frames, only the enrolment photos.</p></div>
+    </details><details class="pg-qa" id="advanced-cctv-analytics-q6" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Which crimes can the model label?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>The model has 14 labels: Abuse, Arrest, Arson, Assault, Burglary, Explosion, Fighting, Road accidents, Robbery, Shooting, Shoplifting, Stealing, Vandalism and a normal-video label. It picks one label for each sampled frame, with no confidence cut-off, so a label is a hint for a person to check and not a finding.</p></div>
+    </details><details class="pg-qa" id="advanced-cctv-analytics-q7" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Is this prototype ready for a real control room?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>No. It is a hackathon prototype made of desktop scripts that run on one computer and read video files or a webcam. Settings sit inside the code and there are no automated tests. A real deployment would need network camera input, accuracy tests on your footage, alert rules, privacy controls and monitoring.</p></div>
     </details></div>
   </div>
+</section><section id="related" class="section pg-sec" aria-labelledby="related-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">More case studies</p>
+      <h2 id="related-h" class="section__title">Related case studies by <span class="hl hl--purple">business need</span></h2>
+      
+    </header>
+<ul class="pg-relcards" role="list" data-reveal-group><li><a class="pg-relcard" href="../../projects/deepfake-video-detection/" data-tone="magenta" style="--i:0">
+      <span class="pg-relcard__cat">Computer vision <span class="pg-relcard__origin">Academic</span></span>
+      <strong class="pg-relcard__t">Frame-by-frame real or fake verdicts</strong>
+      <span class="pg-relcard__why">Another video-checking tool: it scores every frame and gives a reviewer a chart and a PDF report to inspect before acting.</span>
+      <span class="pg-relcard__go">Read the case study <svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span>
+    </a></li><li><a class="pg-relcard" href="../../projects/agentic-honeypot/" data-tone="cyan" style="--i:1">
+      <span class="pg-relcard__cat">AI agent <span class="pg-relcard__origin">Academic</span></span>
+      <strong class="pg-relcard__t">An AI agent that keeps scammers talking</strong>
+      <span class="pg-relcard__why">Another safety project built with Prasanna Patil: it records evidence about bad actors and shows it on a live dashboard for review.</span>
+      <span class="pg-relcard__go">Read the case study <svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span>
+    </a></li><li><a class="pg-relcard" href="../../projects/observable-ai-backend/" data-tone="blue" style="--i:2">
+      <span class="pg-relcard__cat">AI and backend <span class="pg-relcard__origin">Personal</span></span>
+      <strong class="pg-relcard__t">An API you can debug from the outside</strong>
+      <span class="pg-relcard__why">Alerts only help if the system runs reliably: this project shows how to trace slow or failing requests with IDs, metrics and traces.</span>
+      <span class="pg-relcard__go">Read the case study <svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span>
+    </a></li></ul>
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../projects/#by-need">Browse all work by business need <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../../projects/">All projects <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+  </div>
 </section><section class="section pg-sec pg-pnsec" aria-label="More case studies"><div class="container"><nav class="pg-pn" aria-label="More case studies">
-      <a class="pg-pn__link" href="../../projects/agentic-honeypot/" rel="prev" data-reveal><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg><span><small>Previous case study</small><strong>An AI agent that keeps scammers talking</strong></span></a>
+      <a class="pg-pn__link" href="../../projects/ai-rag-healthcare-assistant/" rel="prev" data-reveal><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg><span><small>Previous case study</small><strong>A chatbot that cites its sources</strong></span></a>
       <a class="pg-pn__link pg-pn__link--next" href="../../projects/speech-emotion-recognition/" rel="next" data-reveal style="--i:1"><span><small>Next case study</small><strong>Hearing the mood in a voice clip</strong></span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
-    </nav></div></section><section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
+    </nav></div></section><section id="ask" class="section pg-sec pg-ask" aria-labelledby="ask-h">
+  <div class="container">
+    <div class="pg-ask__box panel" data-tone="cyan" data-reveal>
+      <div class="pg-ask__text">
+        <p class="eyebrow">Ask me</p>
+        <h2 id="ask-h" class="pg-ask__title">Have a question about this project, or your own idea?</h2>
+        <p class="pg-ask__lead">Type your question below. The contact form opens with your question and this page already filled in, so you only add your name and email.</p>
+      </div>
+      <form class="pg-ask__form" action="../../contact/#hire" method="get">
+        <input type="hidden" name="topic" value="computer-vision">
+        <input type="hidden" name="ref" value="projects/advanced-cctv-analytics/">
+        <input type="hidden" name="about" value="CCTV Crime and Crowd Analytics">
+        <label class="sr-only" for="ask-q">Your question</label>
+        <input class="input pg-ask__input" id="ask-q" name="q" type="text" maxlength="300" autocomplete="off" enterkeyhint="send" placeholder="Could this watch my own camera streams?">
+        <button class="btn btn--solid btn--glow" type="submit">Ask me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></button>
+      </form>
+      <ul class="pg-ask__chips" role="list" aria-label="Questions people often ask"><li><a class="pg-ask__chip" href="../../contact/?topic=computer-vision&ref=projects/advanced-cctv-analytics/&about=CCTV%20Crime%20and%20Crowd%20Analytics&q=Could%20this%20watch%20my%20own%20camera%20streams%3F#hire">Could this watch my own camera streams?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=computer-vision&ref=projects/advanced-cctv-analytics/&about=CCTV%20Crime%20and%20Crowd%20Analytics&q=How%20would%20you%20measure%20the%20alerts%20on%20my%20footage%3F#hire">How would you measure the alerts on my footage?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=computer-vision&ref=projects/advanced-cctv-analytics/&about=CCTV%20Crime%20and%20Crowd%20Analytics&q=What%20would%20a%20private%2C%20production-ready%20version%20need%3F#hire">What would a private, production-ready version need?</a></li></ul>
+    </div>
+  </div>
+</section><section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
   <div class="container">
     <div class="pg-hire__band" data-reveal="scale">
       <span class="pg-hire__line" aria-hidden="true"></span>
@@ -390,21 +529,7 @@
       </div>
 
       <div class="footer__cols">
-        <nav class="footer__col" aria-labelledby="footer-pages-h">
-          <p class="footer__h" id="footer-pages-h">Pages</p>
-          <ul class="footer__links">
-            <li><a href="../../">Home</a></li>
-            <li><a href="../../projects/">Projects</a></li>
-            <li><a href="../../services/">Services</a></li>
-            <li><a href="../../about/">About</a></li>
-            <li><a href="../../about/#experience">Experience</a></li>
-            <li><a href="../../resume/">Resume</a></li>
-            <li><a href="../../faq/">FAQ</a></li>
-            <li><a href="../../contact/">Contact</a></li>
-          </ul>
-        </nav>
-
-        <nav class="footer__col footer__col--wide" aria-labelledby="footer-services-h">
+        <nav class="footer__col footer__col--services" aria-labelledby="footer-services-h">
           <p class="footer__h" id="footer-services-h">Services</p>
           <ul class="footer__links">
             <li><a href="../../services/llm-rag-development/">AI chatbot development</a></li>
@@ -416,14 +541,36 @@
           </ul>
         </nav>
 
-        <nav class="footer__col" aria-labelledby="footer-work-h">
+        <nav class="footer__col footer__col--work" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
+            <li><a href="../../projects/advanced-cctv-analytics/">CCTV analytics in Python</a></li>
+            <li><a href="../../projects/speech-emotion-recognition/">Speech emotion recognition</a></li>
+            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
+            <li><a href="../../projects/obligation-management-system/">Regulatory obligation extraction</a></li>
+            <li><a href="../../projects/ams-ai-finding-engine/">AI audit finding generator</a></li>
+            <li><a href="../../projects/core-banking-text-to-sql/">Text-to-SQL for banking</a></li>
             <li><a href="../../projects/agentic-honeypot/">AI scam honeypot</a></li>
+            <li><a href="../../projects/whatsapp-ai-agent-platform/">WhatsApp AI agent platform</a></li>
             <li><a href="../../projects/deepfake-video-detection/">Deepfake video detection</a></li>
+            <li><a href="../../projects/spam-classifier/">SMS spam classifier</a></li>
             <li><a href="../../projects/">All projects</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__col footer__col--pages" aria-labelledby="footer-pages-h">
+          <p class="footer__h" id="footer-pages-h">Pages</p>
+          <ul class="footer__links">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../projects/">Projects</a></li>
+            <li><a href="../../services/">Services</a></li>
+            <li><a href="../../about/">About</a></li>
+            <li><a href="../../about/#experience">Experience</a></li>
+            <li><a href="../../resume/">Resume</a></li>
+            <li><a href="../../faq/">FAQ</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+            <li><a href="../../contact/#book">Book a call</a></li>
           </ul>
         </nav>
       </div>
@@ -442,10 +589,20 @@
 
   <div class="footer__ghost" aria-hidden="true"></div>
 
-  <!-- floating "Hire me" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js) -->
+  <!-- floating "Let's talk" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js).
+       Without JavaScript it is a plain link to the contact form; with JavaScript it opens the small menu of ways to connect (content.connect). -->
   <div class="fab-wrap contact-fab">
-    <a class="fab" href="../../contact/#hire" aria-label="Hire me"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
-    <div class="fab-tip" aria-hidden="true">Hire me</div>
+    <div class="connect" id="connect-menu" hidden>
+      <p class="connect__h" id="connect-h">Let&rsquo;s talk</p>
+      <ul class="connect__list" aria-labelledby="connect-h">
+            <li><a class="connect__item" href="../../contact/#book"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><span><strong>Book a call</strong><small>Pick a day and time</small></span></a></li>
+            <li><a class="connect__item" href="../../contact/#hire"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg><span><strong>Send a brief</strong><small>Tell me what you need</small></span></a></li>
+            <li><a class="connect__item" href="https://wa.me/919920644655?text=Hi%20Shaunak%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg><span><strong>WhatsApp</strong><small>Message me directly</small></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="connect__item" href="mailto:shaunak.chorge@gmail.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span><strong>Email</strong><small>Write to me</small></span></a></li>
+      </ul>
+    </div>
+    <a class="fab" href="../../contact/#hire" aria-label="Hire me" data-connect-toggle><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></a>
+    <div class="fab-tip" aria-hidden="true">Let&rsquo;s talk</div>
   </div>
 </footer>
 
@@ -482,11 +639,13 @@
     <symbol id="i-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></symbol>
     <symbol id="i-scan-eye" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="1"/><path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0"/></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
     <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
     <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
     <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
     <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
     <symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
     <symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
     <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
@@ -497,10 +656,10 @@
   </svg>
 
   <script defer src="../../assets/dist/js/core.min.js?v=d41b0d5b"></script>
-  <script defer src="../../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
+  <script defer src="../../assets/dist/js/contact.min.js?v=e6aee63a"></script>
   <script defer src="../../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
-  <script defer src="../../assets/dist/js/pages.min.js?v=efc0e441"></script>
-  <script defer src="../../assets/dist/js/visuals.min.js?v=53b137f5"></script>
+  <script defer src="../../assets/dist/js/fx.min.js?v=bb37bfa8"></script>
+  <script defer src="../../assets/dist/js/pages.min.js?v=514d4156"></script>
+  <script defer src="../../assets/dist/js/visuals.min.js?v=6bbaf295"></script>
 </body>
 </html>

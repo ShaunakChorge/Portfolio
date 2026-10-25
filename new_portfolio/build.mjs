@@ -36,6 +36,7 @@ import { SITE, SRC, GENERATED, CONTENT_FILE, read, readContent, esc, icon } from
 import { loadSelection } from './tools/selection.mjs';
 import { NEVER_RE, LANGUAGE_SENTINEL, pageProblems } from './tools/rules.mjs';
 import { loadKeywords, keywordProblems } from './tools/pages/keywords.mjs';
+import { connectMenuItems } from './tools/connect.mjs';   // the floating "Let's talk" menu (imports only lib.mjs, so no import cycle with the page generators)
 
 const list = (dir, ext) => fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => f.endsWith(ext)).sort() : [];
 const stem = f => f.replace(/\.[^.]+$/, '');
@@ -119,7 +120,7 @@ const hash8 = s => createHash('sha1').update(s).digest('hex').slice(0, 8);
 const assetCache = new Map();
 const jsMinCache = new Map();
 function assetTags({ min = false, only = null, inner = false, flags = {} } = {}) {
-  const variant = (inner ? 'inner' : 'home') + (flags.visuals ? '-visuals' : '') + (flags.portrait ? '-portrait' : '') + (flags.contact ? '-contact' : '') + (flags.collage ? '-collage' : '');   // cache key: also decides which scripts load
+  const variant = (inner ? 'inner' : 'home') + (flags.visuals ? '-visuals' : '') + (flags.portrait ? '-portrait' : '') + (flags.contact ? '-contact' : '') + (flags.collage ? '-collage' : '') + (flags.booking ? '-booking' : '');   // cache key: also decides which scripts load
   const cssVariant = [inner && 'inner', flags.portrait && 'portrait'].filter(Boolean).join('-');   // stylesheet name: the visuals, collage and contact styles are always in it
   const key = (min ? 'min' : 'src') + '|' + (only ? [...only].sort().join(',') : variant);
   if (assetCache.has(key)) return assetCache.get(key);
@@ -127,6 +128,7 @@ function assetTags({ min = false, only = null, inner = false, flags = {} } = {})
     const s = stem(f);
     if (only) return only.has(s);
     if (s === 'portrait') return !!flags.portrait;           // the neon portrait (About page): only where the markup has it
+    if (s === 'booking') return !!flags.booking;             // the "Book a call" picker (script only, /contact/): only where the markup has it
     if (!inner) return !(isCss && s === 'pages') && s !== 'contact-form';   // the home page has no pg- markup (it skips pages.css) and no form (the form is on /contact/)
     if (s === 'hero' || s === 'home' || s === 'marquee') return false;   // the home page only (the tech stack ribbon is marquee)
     if (s === 'visuals') return isCss || !!flags.visuals;       // visuals.css rides in the one shared inner stylesheet (a visitor keeps one cached file across pages); its script loads only where the markup is
@@ -184,7 +186,11 @@ function footerData() {
   return (footerCache = {
     // link texts come from the approved anchors in content/keywords.json (the footer variant), with the plain name as the fallback
     services: c.services.map(s => ({ slug: s.page_slug || s.slug, label: ((kw.pages[`services/${s.page_slug || s.slug}/`] || {}).anchors || {}).footer || s.nav_label })),
-    work: sel.footerWork.map(id => ({ slug: byId[id].slug, label: ((kw.pages[`projects/${byId[id].slug}/`] || {}).anchors || {}).footer || byId[id].title })),
+    // the Work column lists every selected project in priority order (projects.config.json "show"); a project without its own page links to its tile on /projects/
+    work: sel.show.map(id => {
+      const p = byId[id], page = `projects/${p.slug}/`;
+      return { href: sel.casestudy.includes(id) ? page : `projects/#p-${id}`, label: ((kw.pages[page] || {}).anchors || {}).footer || p.title };
+    }),
     social: [...social.map(([label, href, ic]) => `<li><a class="icon-btn" href="${esc(href)}" target="_blank" rel="noopener noreferrer" aria-label="${label} (opens in a new tab)">${icon(ic)}</a></li>`),
       `<li><a class="icon-btn" href="mailto:${esc(cfg.email)}" aria-label="Email ${esc(cfg.name.split(' ')[0])}">${icon('mail')}</a></li>`],
     note: esc(((c.site && c.site.footer && c.site.footer.note) || '').replace(/\.$/, '')),
@@ -194,9 +200,10 @@ function footerParts(base) {
   const f = footerData(), NL = '\n', ind = '            ';
   return {
     services: f.services.map(s => `<li><a href="${base}services/${s.slug}/">${esc(s.label)}</a></li>`).join(NL + ind),
-    work: f.work.map(p => `<li><a href="${base}projects/${p.slug}/">${esc(p.label)}</a></li>`).concat(`<li><a href="${base}projects/">All projects</a></li>`).join(NL + ind),
+    work: f.work.map(p => `<li><a href="${base}${p.href}">${esc(p.label)}</a></li>`).concat(`<li><a href="${base}projects/">All projects</a></li>`).join(NL + ind),
     social: f.social.join(NL + ind.slice(2)),
     note: f.note,
+    connect: connectMenuItems(base),
   };
 }
 
@@ -252,7 +259,7 @@ export function renderPage(o = {}) {
   const home = base || './';
   const only = o.only ? new Set(o.only) : null;
   // the home page (path '') gets every script and style; any other page skips the home-only ones and loads visuals / portrait only when it uses them
-  const flags = { visuals: /data-visual=/.test(o.content || ''), portrait: /class="np[ "_]/.test(o.content || ''), collage: /class="collage[ "]/.test(o.content || ''), contact: /contact__/.test(o.content || '') };
+  const flags = { visuals: /data-visual=/.test(o.content || ''), portrait: /class="np[ "_]/.test(o.content || ''), collage: /class="collage[ "]/.test(o.content || ''), contact: /contact__/.test(o.content || ''), booking: /data-booking=/.test(o.content || '') };
   const assets = assetTags({ min: !!o.min, only, inner: pagePath !== '', flags });
   const current = o.current || '';
   let missing = 0;
@@ -276,10 +283,10 @@ export function renderPage(o = {}) {
     base, home, current, site_url: cfg.url,
     title: esc(o.title || cfg.name), description: esc(o.description || cfg.tagline),
     canonical: abs(cfg, pagePath), og_image: abs(cfg, cfg.og_image), og_type: o.og_type || 'website',
-    jsonld: ld, footer_services: fp.services, footer_work: fp.work, footer_social: fp.social, footer_note: fp.note,
+    jsonld: ld, footer_services: fp.services, footer_work: fp.work, footer_social: fp.social, footer_note: fp.note, footer_connect: fp.connect,
   };
   html = html.replace(/\{\{aria:([a-z-]+)\}\}/g, (_, k) => (k === current ? ' aria-current="page"' : ''));
-  html = html.replace(/\{\{(base|home|current|site_url|title|description|canonical|og_image|og_type|jsonld|footer_services|footer_work|footer_social|footer_note)\}\}/g, (_, k) => vals[k]);
+  html = html.replace(/\{\{(base|home|current|site_url|title|description|canonical|og_image|og_type|jsonld|footer_services|footer_work|footer_social|footer_note|footer_connect)\}\}/g, (_, k) => vals[k]);
   html = pruneSprite(markAI(html));
   const left = html.match(/\{\{[^}]+\}\}/g);
   if (left) { console.error('UNRESOLVED TOKENS:', [...new Set(left)].join(' ')); missing++; }
@@ -325,10 +332,11 @@ export function guard({ dev = false } = {}) {
     if (isPage || /^llms(-full)?\.txt$/.test(r)) problems.push(...pageProblems(r, txt));
     const n = txt.split(LANGUAGE_SENTINEL).length - 1;
     if (n) {
-      if (isPage) marathi += n; else if (r !== 'src/generated/home-about.html' && r !== 'content/content.json') problems.push(`"${LANGUAGE_SENTINEL}" in ${r}`);
+      if (isPage) { if (r === 'about/index.html') marathi += n; else problems.push(`"${LANGUAGE_SENTINEL}" in ${r} (the spoken languages are shown on the About page only)`); }
+      else if (r !== 'content/content.json') problems.push(`"${LANGUAGE_SENTINEL}" in ${r}`);
     }
   }
-  if (marathi !== 1) problems.push(`"${LANGUAGE_SENTINEL}" occurs ${marathi}x across ${htmlPages} built pages (want exactly 1, in index.html)`);
+  if (marathi !== 1) problems.push(`"${LANGUAGE_SENTINEL}" occurs ${marathi}x in about/index.html (want exactly 1; the spoken languages are shown once, on the About page)`);
   return { problems, scanned: files.length, pages: htmlPages };
 }
 

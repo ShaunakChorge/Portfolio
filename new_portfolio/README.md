@@ -17,7 +17,7 @@ One run does, in order:
 1. **Generators** write the partials and script data from `content/content.json` and `projects.config.json`: the hand-off files in `src/generated/` (hero, home sections, home page data), and the data block inside `assets/js/sections/fx.js`.
 2. **Assemble** `index.html` (the home page) from `src/shell.html` and the partials.
 3. **Pages** (`tools/pages/build-pages.mjs`, run in the same process): `services/`, `projects/`, `about/`, `faq/`, `contact/`, `resume/`, one case study per entry in `casestudy`, then `llms.txt` and `llms-full.txt` here and, once, `sitemap.xml` and `robots.txt` in the repo root (next to the redirect `index.html`).
-4. **Guard** scans the output for the words in `tools/rules.mjs`, checks every built page and llms file for tallies, keyboard-shortcut hints, closed `<details>` and a Home link in the navigation, checks that the spoken-language list appears exactly once (home page About card) and that every internal link and every `#anchor` resolves, including the `contact/?topic=...#hire` links behind the "Hire me" buttons. The run exits non-zero if anything is wrong.
+4. **Guard** scans the output for the words in `tools/rules.mjs`, checks every built page and llms file for tallies, keyboard-shortcut hints, closed `<details>` and a Home link in the navigation, checks that the spoken-language list appears exactly once (the quick-facts card of the About page) and that every internal link and every `#anchor` resolves, including the `contact/?topic=...#hire` links behind the "Hire me" buttons. The run exits non-zero if anything is wrong.
 
 It prints a summary (pages, services, case studies, sitemap URLs). Other flags: `--skip-gen` reuses the existing files in `src/generated/`; `--only=hero,home-faq --out=preview-x.html` assembles one throwaway preview page with readable assets (delete it afterwards).
 
@@ -40,7 +40,8 @@ tools/
   rules.mjs              the ONE list of banned words and patterns (generators and guard)
   selection.mjs          reads and checks projects.config.json: the one place that decides which projects show and how the collage is laid out
   hero/ home/ fx/        generators for the home page
-  pages/                 page generators and SEO files (sitemap, robots, llms); ui.mjs holds the shared UI pieces, including the contact form and channel list used on /contact/
+  connect.mjs            the ways to connect (content.connect): book a call, send a brief, WhatsApp, email. Read by the contact page strip and by build.mjs (the floating menu)
+  pages/                 page generators and SEO files (sitemap, robots, llms, the contact card .vcf); ui.mjs holds the shared UI pieces: contact form, booking picker, channel list, education collage, certificate tiles, ask box, related cards, pipeline diagram
   test.mjs               npm test
   optional.mjs           loads Playwright and sharp, which are installed on demand and are not part of the build
   photo/                 one-off: turns a portrait artwork into the neon portrait images
@@ -73,10 +74,16 @@ Open `content/content.json`, change the text, run `npm run build`. Every field i
 | `keywords.json` (own file) | the approved keyword map, see "Keywords and the SEO guard" |
 | `skills` | the two stack tiers (Core stack, Also work with) on the About page, and `ribbon`, the moving tech stack strip on the home page (each name must also be in `core` or `also`; `daily` marks the core ones) |
 | `how_i_work` | the three plain sentences of the "How I work" block (Services and About pages) |
-| `about` | `whoami`: the About page card and the home About card (the only place the spoken languages appear; `education.year` is the degree year); `home_blurb` and `home_prompt`: the short home About card text; `page`: About page extras |
+| `about` | `whoami`: the About page quick-facts card (the only place the spoken languages appear; `education.year` is the degree year; `now_short`, `based_short` and `education.short` are the short forms of the home card); `home_card`: the home About card (heading, written lines, label of the profile links); `page`: About page extras |
+| `education` | one object per school: the degree tile and the two school tiles (`period` or `year` is printed in the tile footer; no subject lists) |
+| `certifications` | certificate tiles on About and Resume: `name`, `issuer`, `kind` (Certification, Internship certificate, Internship letter, Internship work sample), `year` or `period`, optional `doc` (the Google Drive preview of the document), `verify` (a public badge page), `credential_id`, `note`, `featured` (the wide tile) |
+| `achievements` | award tiles: `rank`, `event`, `year`, `detail`, `kind` (`title` is the plain-text version used by the resume, llms files and palette) |
+| `experience[].doc` | the document behind a role or programme (an internship certificate or letter): shown as a link on About and Resume; `doc_label` is the link text |
+| `booking` | the "Book a call" picker: `weekly` hours per weekday in India Standard Time, `lengths`, `days_ahead`, `min_notice_hours`, `step_minutes` |
+| `connect` | the quick ways to connect (`actions`), the opening line of the WhatsApp chat link and the path of the contact card |
 | `meta.generated` | the `lastmod` date of `sitemap.xml` |
 
-Rules the guard enforces (all in `tools/rules.mjs`): no project years, no list of spoken languages outside the home About card, co-builders credited by plain-text name only (no links to other people's profiles), no banned words, and no counts of projects, roles, services or finishes anywhere (text, filter chips, JSON-LD, llms files). Every `<details>` is open by default. Extensions I can offer on case studies are listed only under "Extensions I can build for you".
+Rules the guard enforces (all in `tools/rules.mjs`): no project years, no list of spoken languages outside the About page, co-builders credited by plain-text name only (no links to other people's profiles), no banned words, and no counts of projects, roles, services or finishes anywhere (text, filter chips, JSON-LD, llms files). Every `<details>` is open by default. Extensions I can offer on case studies are listed only under "Extensions I can build for you".
 
 To add a project, add an object to `projects[]` (copy an existing one: `id`, `slug`, `title`, `card_blurb`, `stack`, `service_tags`, `role`, ...). A project gets a case-study page only if it has a `case_study` block and its id is in `casestudy` below. The project `role` is shown twice on a case study (key facts and Results), from one field.
 
@@ -103,7 +110,7 @@ The research behind the map is autocomplete data (a proxy for demand, not search
 `projects.config.json` is the only place that decides it. Every generator reads it through `tools/selection.mjs`, which also checks it: an unknown id, a case study missing from `show`, a project in two lists or a desktop grid with a gap or a wrongly shaped tile stops the build with a clear message.
 
 ```json
-{ "show": [], "tile_size": {}, "desktop_grid": [], "casestudy": [], "personal": [], "footer_work": [], "resume_featured": [] }
+{ "show": [], "tile_size": {}, "desktop_grid": [], "casestudy": [], "personal": [], "resume_featured": [] }
 ```
 
 - `show`: the selected projects in priority order (rank 1 first). They fill the project collage on the home page and on /projects/. The collage is built for exactly the projects listed here.
@@ -111,9 +118,27 @@ The research behind the map is autocomplete data (a proxy for demand, not search
 - `desktop_grid`: the 4-column desktop layout as rows of ranks. A rank repeats across the cells its tile covers, and the number after the last rank is the plain "All projects" link tile. The grid must be a full rectangle. Tablet and phone follow the rank order.
 - `casestudy`: the selected ones that also get their own page. Each must be in `show` and have a `case_study` block in the content file.
 - `personal`: "Personal builds", the small projects listed as open rows on /projects/ only, each with its one-line `personal_line`. A project in `show` is never listed here.
-- `footer_work` (up to 4), `resume_featured` (up to 4): case studies shown in those places, in the order you list them.
+- `resume_featured` (up to 4): case studies shown on the resume page and in the PDF, in the order you list them. The footer "Work" column is not configured: it lists every project of `show`, in that order.
 
-**Ordering rule for the two featured lists.** The ids you list come first, in your order. An id that is no longer a case study is skipped with a warning. If fewer than the maximum remain, the first case studies of `casestudy` (in that list's order) fill the rest, so a new selection never leaves a gap or a link to a page that does not exist.
+**Ordering rule for the featured list.** The ids you list come first, in your order. An id that is no longer a case study is skipped with a warning. If fewer than the maximum remain, the first case studies of `casestudy` (in that list's order) fill the rest, so a new selection never leaves a gap or a link to a page that does not exist.
+
+## Long-form case studies and service pages
+
+Every selected project has a case-study page and every service has its own page. Both read optional blocks from `content/content.json` and draw a section only when its data exists, so a short entry still builds.
+
+- **Case study** (`projects[].case_study`): `summary`, `seo`, `h2` (the search-tuned part) plus `context` (why it matters), `problem`, `challenges`, `approach`, `scope` (my part and context and credits), `flow` (the pipeline diagram), `architecture`, `decisions`, `iteration` (only when a first attempt is documented), `results`, `limits`, `use_cases` (examples, never past clients), `related` (three other case studies with the business reason), `ask_prompts` (the suggested questions of the "Ask me" box). Beside it on the project: `faq`, `extensions`, `metrics`, `origin`.
+- **Service page** (`services[]`): the earlier fields plus `who`, `problems`, `inputs`, `stack_roles`, `tradeoffs`, `use_cases`, `proof_reasons` (project id to the reason it is evidence), `related_services`, `ask_prompts`.
+- **Overview pages**: `pages.projects.needs` and `reading`, `pages.services.guide`, `industries` and `engagement`.
+- Every FAQ question must be registered for its page in `content/keywords.json` and answered in 40 to 60 words (the build fails otherwise).
+
+## Ways to connect
+
+- **Book a call** (`/contact/#book`): the visitor picks a day and a time from the weekly hours in `booking` (India Standard Time, shown next to the visitor's own time), a call length and a topic. The request is posted to Formspree like the brief form, and the confirmation offers a Google Calendar link and a downloadable `.ics` file marked tentative. There is no calendar server: the owner confirms by email and two visitors can ask for the same slot. To use a live calendar instead (Cal.com, Calendly), set `profile.links.booking` to its address: "Book a call" then opens it, and the request picker stays as the fallback.
+- **Send a brief** (`/contact/#hire`): the guided form (project type, timeline, message).
+- **Floating "Let's talk" menu** on every page: Book a call, Send a brief, WhatsApp (`wa.me` with the phone number of `profile.phone_tel` and the line in `connect.whatsapp_text`) and Email. Without JavaScript the button is a plain link to the form.
+- **Ask me** box at the end of every case study and service page: a plain GET form to `/contact/?q=...&ref=...&about=...`. `pages.js` puts the question and the page name into the brief form and preselects the project type.
+- **Contact card**: `assets/Shaunak-Chorge.vcf` is written by the build from the profile data (`tools/pages/vcard.mjs`).
+- To change the call hours, edit `booking.weekly` (a list of start and end times per weekday, 24-hour, India Standard Time) and rebuild.
 
 ## Deploy
 
@@ -161,7 +186,7 @@ The **social image** is a design: its words (name, role, employer, the four serv
 - Contact facts (e-mail, phone, LinkedIn, GitHub, Instagram, Formspree): `profile` in the content file. The footer links, the JSON-LD `sameAs`, the contact form and channel list (one renderer in `tools/pages/ui.mjs`, used on /contact/ only; the home page ends with a hire call to action that links there) and the terminal data all read them from there.
 - Service colour and icon: `services[].tone` and `services[].icon`.
 - Banned words: `tools/rules.mjs`.
-- Footer service and work lists are generated from `services[].page_slug` / `nav_label` and `footer_work` (`footerParts` in `build.mjs`), so a footer link always points at a page that exists. The build guard also resolves every internal link.
+- Footer service and work lists are generated from `services[].page_slug` / `nav_label` and from `show` (`footerParts` in `build.mjs`), so a footer link always points at a page that exists. The build guard also resolves every internal link.
 - Project visuals: `visual_hint` (type) and optional `visual_variant` per project. `assets/js/sections/visuals.js` draws a variant only when it belongs to that project and otherwise falls back to the neutral generic visual.
 
 ## Notes

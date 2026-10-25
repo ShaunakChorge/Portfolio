@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SMS Spam Classifier Project | Shaunak Chorge</title>
+  <meta name="description" content="SMS spam classifier project: TF-IDF and Naive Bayes on 5,169 text messages. 97.1% accuracy and no false alarms on 1,034 test messages.">
+  <meta name="author" content="Shaunak Chorge">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/spam-classifier/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Shaunak Chorge">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:title" content="SMS Spam Classifier Project | Shaunak Chorge">
+  <meta property="og:description" content="SMS spam classifier project: TF-IDF and Naive Bayes on 5,169 text messages. 97.1% accuracy and no false alarms on 1,034 test messages.">
+  <meta property="og:url" content="https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/spam-classifier/">
+  <meta property="og:image" content="https://shaunakchorge.github.io/Portfolio/new_portfolio/assets/img/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Shaunak Chorge, freelance AI engineer in Mumbai">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SMS Spam Classifier Project | Shaunak Chorge">
+  <meta name="twitter:description" content="SMS spam classifier project: TF-IDF and Naive Bayes on 5,169 text messages. 97.1% accuracy and no false alarms on 1,034 test messages.">
+  <meta name="twitter:image" content="https://shaunakchorge.github.io/Portfolio/new_portfolio/assets/img/og-image.png">
+  <meta name="twitter:image:alt" content="Shaunak Chorge, freelance AI engineer in Mumbai">
+
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../assets/img/favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="../../site.webmanifest">
+
+  <link rel="preload" href="../../assets/fonts/orbitron-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+  <script>
+    /* progressive enhancement: content is readable without JS; [data-reveal] hides only under .js.
+       Also restores the saved accent colour before first paint (no flash). */
+    document.documentElement.classList.add('js');
+    try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
+    try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=d92fd1cd">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/spam-classifier/#webpage",
+      "url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/spam-classifier/",
+      "name": "SMS Spam Classifier Project | Shaunak Chorge",
+      "description": "SMS spam classifier project: TF-IDF and Naive Bayes on 5,169 text messages. 97.1% accuracy and no false alarms on 1,034 test messages.",
+      "isPartOf": {
+        "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/spam-classifier/#breadcrumb"
+      },
+      "mainEntity": {
+        "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/spam-classifier/#project"
+      },
+      "relatedLink": [
+        "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/agentic-honeypot/",
+        "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/speech-emotion-recognition/",
+        "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/whatsapp-ai-agent-platform/"
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/spam-classifier/#project",
+      "name": "SMS Spam Classifier",
+      "headline": "A spam filter with zero false alarms on its test set.",
+      "abstract": "This SMS spam classifier project is a small, early-stage build from an AICTE internship on AI. Using TF-IDF word scores and Naive Bayes, it labels a text message as spam or not spam. Built from 5,169 labelled messages, it scored 97.1% accuracy with no false alarms on 1,034 test messages, and a Streamlit page shows the label.",
+      "description": "SMS spam classifier project: TF-IDF and Naive Bayes on 5,169 text messages. 97.1% accuracy and no false alarms on 1,034 test messages.",
+      "url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/spam-classifier/",
+      "genre": "Case study",
+      "keywords": [
+        "Python",
+        "NLTK",
+        "scikit-learn",
+        "TF-IDF",
+        "Multinomial Naive Bayes",
+        "Streamlit",
+        "pandas",
+        "WordCloud"
+      ],
+      "author": {
+        "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/#person"
+      },
+      "isPartOf": {
+        "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/#website"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/spam-classifier/#webpage"
+      },
+      "codeRepository": "https://github.com/ShaunakChorge/Spam-Classifier",
+      "programmingLanguage": "Python"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://shaunakchorge.github.io/Portfolio/new_portfolio/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Projects",
+          "item": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "SMS Spam Classifier",
+          "item": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/spam-classifier/"
+        }
+      ],
+      "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/spam-classifier/#breadcrumb"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/#person",
+      "name": "Shaunak Chorge",
+      "url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/",
+      "jobTitle": "AI Engineer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Claptek Pvt Ltd"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/spam-classifier/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does a spam classifier for text messages work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A spam classifier turns a message into numbers and lets a trained model decide whether it looks like spam. Here the text is cleaned, each word is scored with TF-IDF, and a Naive Bayes model, trained on 4,135 of 5,169 labelled text messages, answers Spam or Not Spam."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How accurate is this spam classifier?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "On 1,034 held-out text messages it scored 97.10% accuracy, 100% precision and 78.26% recall: no genuine message was flagged and 30 of 138 spam messages were missed. It is one random split of one dataset, so new messages, other languages or email could score differently."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What do precision and recall mean for spam?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Precision is the share of flagged messages that were truly spam. Recall is the share of all spam that was found. Here, on the test set, precision is 100%, so no genuine message was flagged, and recall is 78.26%, so about one spam message in five got through. A useful filter needs both numbers, not accuracy alone."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Did you compare Naive Bayes with other models?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The notebook in the public repository trains only Multinomial Naive Bayes. A longer working notebook, kept outside the repository, scored 15 models and combinations on the same split. Only two flagged no genuine message, and I kept Naive Bayes because it was the more accurate of those two."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can this spam classifier filter my company's email?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not as it stands. It learned from text messages only, so email was never tested. For email I would collect labelled examples of your own mail, retrain the model and measure precision and recall on messages it has not seen, before any message is blocked automatically."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the spam classifier ready for production?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It is an early-stage project built for an internship programme: one dataset, one test split and a local demo page. A production filter also needs fresh data, regular retraining, monitoring, a review queue for flagged messages and automated tests. I can build those around the model."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where did the spam classifier project come from?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "I was the only author, with 20 commits. It was the project for the AICTE internship on AI delivered with TechSaksham, a Microsoft and SAP CSR initiative, under the programme's project guide. It follows a public tutorial, and it was submitted with a formal report that gives no accuracy figure."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/#website",
+      "url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/",
+      "name": "Shaunak Chorge"
+    }
+  ]
+}
+</script>
+</head>
+<body data-page="projects">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="top"></div>
+
+  <!-- page-fixed background: colour wash + 3 drifting orbs + shimmer + film grain (decorative) -->
+  <div class="bg-fixed" aria-hidden="true">
+    <div class="bg-wash"></div>
+    <div class="bg-orbs"><i class="orb orb--cyan"></i><i class="orb orb--purple"></i><i class="orb orb--magenta"></i></div>
+    <div class="bg-shimmer"></div>
+    <div class="bg-grain"></div>
+  </div>
+
+  <div class="progress" aria-hidden="true"><span class="progress__bar"></span><span class="progress__head"></span></div>
+
+  <header class="site-header">
+    <div class="site-header__bar">
+      <div class="site-header__in">
+        <a class="logo" href="../../" aria-label="Shaunak Chorge, home">
+          <!-- electric-S mark (original artwork): cyan -> purple -> magenta -->
+          <svg class="logo__mark" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false"><defs><linearGradient id="lg-mark" x1="6" y1="2" x2="58" y2="62" gradientUnits="userSpaceOnUse"><stop stop-color="#00FFFF"/><stop offset=".52" stop-color="#B553F2"/><stop offset="1" stop-color="#FF006E"/></linearGradient></defs><path d="M44.76 1L3 7.32L3 15.5L39.02 38.91L3 61.49L3 63L9.03 63L61 43L61 36.5L27.4 14.66L61 2.07L61 1Z" fill="url(#lg-mark)"/></svg>
+          <span class="logo__word">SHAUNAK</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          <ul class="nav__list">
+            <li><a class="nav__link" href="../../projects/" aria-current="page">Projects</a></li>
+            <li><a class="nav__link" href="../../services/">Services</a></li>
+            <li><a class="nav__link" href="../../about/">About</a></li>
+            <li><a class="nav__link" href="../../resume/">Resume</a></li>
+          </ul>
+          <span class="nav__ind" aria-hidden="true"></span>
+        </nav>
+
+        <div class="site-header__tools">
+          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+          <button class="cmd" type="button" data-open-palette aria-label="Search">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
+          </button>
+          <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+            <span class="burger__lines" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="drawer" id="drawer" aria-label="Mobile">
+    <ul class="drawer__list">
+      <li><a class="drawer__link" href="../../projects/" aria-current="page" style="--i:0"><small>01</small>Projects</a></li>
+      <li><a class="drawer__link" href="../../services/" style="--i:1"><small>02</small>Services</a></li>
+      <li><a class="drawer__link" href="../../about/" style="--i:2"><small>03</small>About</a></li>
+      <li><a class="drawer__link" href="../../resume/" style="--i:3"><small>04</small>Resume</a></li>
+      <li><a class="drawer__link" href="../../faq/" style="--i:4"><small>05</small>FAQ</a></li>
+      <li><a class="drawer__link" href="../../contact/" style="--i:5"><small>06</small>Contact</a></li>
+    </ul>
+    <div class="drawer__foot">
+      <a class="btn btn--solid btn--glow btn--sm drawer__hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+      <a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a>
+      <a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a>
+      <a class="icon-btn" href="mailto:shaunak.chorge@gmail.com" aria-label="Email Shaunak"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
+      <button type="button" class="btn btn--ghost btn--sm drawer__motion" data-motion-toggle aria-pressed="false" hidden><svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-pause"/></svg> Pause effects</button>
+    </div>
+  </nav>
+
+  <nav class="rail" aria-label="Page sections" hidden><ol class="rail__list"></ol></nav>
+
+  <main id="main" tabindex="-1">
+<section class="pg-head pg-head--aside" data-tone="purple">
+  <div class="container">
+    <nav class="pg-crumbs" aria-label="Breadcrumb"><ol><li><a href="../../">Home</a></li><li><a href="../../projects/">Projects</a></li><li><span aria-current="page">SMS Spam Classifier</span></li></ol></nav>
+    <div class="pg-head__grid">
+      <div class="pg-head__main">
+        <p class="eyebrow">Case study / Natural language</p>
+        <h1 class="pg-h1">SMS spam classifier project built with Naive Bayes</h1>
+        <p class="pg-lead">A spam filter with zero false alarms on its test set.</p>
+        <p class="pg-answer" data-answer>This SMS spam classifier project is a small, early-stage build from an AICTE internship on AI. Using TF-IDF word scores and Naive Bayes, it labels a text message as spam or not spam. Built from 5,169 labelled messages, it scored 97.1% accuracy with no false alarms on 1,034 test messages, and a Streamlit page shows the label.</p>
+        <div class="pg-actions"><a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=speech-nlp-ml#hire">Hire me for something like this <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="btn btn--ghost btn--lg" href="../../projects/">All projects <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg></a></div>
+      </div>
+      <div class="pg-head__aside"><div class="pg-casevis"><div class="pv" data-visual="screenshot" data-variant="spam-classifier" data-tone="purple" aria-hidden="true"></div></div></div>
+    </div>
+  </div>
+</section><nav class="pg-toc" aria-label="On this page"><div class="container"><ul class="pg-toc__list" role="list"><li><a href="#at-a-glance">Key facts</a></li><li><a href="#overview">Overview</a></li><li><a href="#story">The problem</a></li><li><a href="#my-role">My role</a></li><li><a href="#how-it-works">How it works</a></li><li><a href="#decisions">Decisions</a></li><li><a href="#results">Results</a></li><li><a href="#where-it-fits">Where it fits</a></li><li><a href="#extensions">Extensions</a></li><li><a href="#faq">FAQ</a></li><li><a href="#related">Related</a></li><li><a href="#ask">Ask a question</a></li></ul></div></nav><section id="at-a-glance" class="section pg-sec section--tint" aria-labelledby="at-a-glance-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">At a glance</p>
+      <h2 id="at-a-glance-h" class="section__title">Key <span class="hl">facts</span></h2>
+      
+    </header>
+<div class="pg-glance">
+      <dl class="panel pg-facts" data-tone="purple" data-reveal><div class="pg-facts__row"><dt>Role</dt><dd>Sole author (20 commits), following a public tutorial, under the programme's project guide.</dd></div><div class="pg-facts__row"><dt>Context</dt><dd>Internship project</dd></div><div class="pg-facts__row"><dt>Repository</dt><dd><a class="link" href="https://github.com/ShaunakChorge/Spam-Classifier" target="_blank" rel="noopener noreferrer">ShaunakChorge/Spam-Classifier on GitHub<span class="sr-only"> (opens in a new tab)</span></a></dd></div>
+        <div class="pg-facts__row"><dt>Stack</dt><dd><ul class="tags pg-facts__tags" role="list" aria-label="Stack used in this build" data-tone="purple"><li class="tag">Python</li><li class="tag">NLTK</li><li class="tag">scikit-learn</li><li class="tag">TF-IDF</li><li class="tag">Multinomial Naive Bayes</li><li class="tag">Streamlit</li><li class="tag">pandas</li><li class="tag">WordCloud</li></ul></dd></div>
+      </dl>
+      <ul class="pg-metrics" role="list" data-reveal-group><li class="pg-metric" data-tone="purple" style="--i:0"><span class="pg-metric__v">97.10% / 100% / 78.26%</span><span class="pg-metric__l">Accuracy, precision (flagged messages that were truly spam) and recall (spam found)</span></li><li class="pg-metric" data-tone="purple" style="--i:1"><span class="pg-metric__v">1,034 (30 spam missed, 0 false alarms)</span><span class="pg-metric__l">Test messages</span></li></ul>
+    </div>
+  </div>
+</section><section id="overview" class="section pg-sec" aria-labelledby="overview-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Overview</p>
+      <h2 id="overview-h" class="section__title">Why this <span class="hl hl--blue">matters</span></h2>
+      
+    </header>
+<div class="panel pg-context" data-tone="purple" data-reveal><p>Teams that handle many incoming messages, such as a support desk or a shared inbox, lose time to spam, and scam messages put customers at risk. A trained text model can screen messages before a person reads them, so staff spend their time on the genuine ones. The harder part is doing that without hiding a message someone needs.</p><p>A good result is a filter that rarely blocks a genuine message, says how many spam messages it still misses, and can be retrained on a team's own labelled messages. This project is a small first version of that: a cleaned dataset, a measured model and a page where anyone can paste a message and see the label.</p></div>
+  </div>
+</section><section id="story" class="section pg-sec section--tint" aria-labelledby="story-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">The story</p>
+      <h2 id="story-h" class="section__title">Problem and <span class="hl hl--purple">approach</span></h2>
+      
+    </header>
+<div class="pg-two">
+      <div class="panel" data-tone="purple" data-reveal><h3 class="pg-panel__h">The problem</h3><p>Spam text messages waste time and carry scams. Checking each one by hand does not scale, and a filter that wrongly blocks a genuine message does more harm than one that misses a few spam messages, because the reader never sees what was blocked. The aim was to teach a small model to tell the two apart, and to measure how often it makes each kind of mistake.</p></div>
+      <div class="panel" data-tone="purple" data-reveal style="--i:1"><h3 class="pg-panel__h">What I built</h3><p>Following a public tutorial, I started from a labelled collection of 5,572 text messages and removed 403 repeats, which left 5,169. I cleaned each message with NLTK: lowercase, split into words, keep letters and digits, drop very common words and cut words to their roots. TF-IDF then scored the 3,000 most frequent words, and a Multinomial Naive Bayes model learned from a random 80% of the messages. I tested it on the other 20%, 1,034 messages, and saved the model and word scores to files. A Streamlit page and a command-line script load those files, repeat the same cleaning and show Spam or Not Spam.</p></div>
+    </div>
+    <h3 class="pg-subh" data-reveal>What made it hard</h3>
+      <ol class="pg-challenges" data-reveal-group><li class="pg-challenge" data-tone="purple" style="--i:0"><span class="pg-challenge__n" aria-hidden="true">01</span><div><h4 class="pg-challenge__t">Few spam examples</h4><p>Only 653 of the 5,169 cleaned messages, about 13%, are spam. A model can look accurate by calling everything genuine, so accuracy alone says little.</p></div></li><li class="pg-challenge" data-tone="purple" style="--i:1"><span class="pg-challenge__n" aria-hidden="true">02</span><div><h4 class="pg-challenge__t">Messy message text</h4><p>Messages use abbreviations, numbers, symbols and odd spelling. The raw file also had 403 repeated messages and three mostly empty extra columns. All of it needed cleaning before any model could learn from it.</p></div></li><li class="pg-challenge" data-tone="purple" style="--i:2"><span class="pg-challenge__n" aria-hidden="true">03</span><div><h4 class="pg-challenge__t">Blocking a real message</h4><p>A false alarm hides a genuine message from its reader, which costs more than a missed spam. The model had to be judged on both kinds of mistake, not on one score.</p></div></li><li class="pg-challenge" data-tone="purple" style="--i:3"><span class="pg-challenge__n" aria-hidden="true">04</span><div><h4 class="pg-challenge__t">Same cleaning in the page</h4><p>The page must clean a pasted message exactly as the training messages were cleaned. Any difference would mean scoring words the model never saw, and the measured results would no longer apply.</p></div></li></ol>
+  </div>
+</section><section id="my-role" class="section pg-sec" aria-labelledby="my-role-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">My role</p>
+      <h2 id="my-role-h" class="section__title">My role in <span class="hl hl--magenta">the build</span></h2>
+      
+    </header>
+<div class="pg-two">
+      <div class="panel" data-tone="purple" data-reveal><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-code"/></svg> My part</h3><ul class="dot-list"><li>The data work: dropping the empty columns, removing 403 repeated messages, and charts of class balance, message length and common words.</li><li>Running the cleaning, TF-IDF word scoring and Naive Bayes steps on the data, with one 80/20 split to measure accuracy, precision and recall.</li><li>The saved model and word-score files, so the page and the script use exactly what was tested.</li><li>Setting up a Streamlit page taken from a public tutorial app, and writing predict.py, a command-line script, to label a pasted message as Spam or Not Spam.</li><li>The formal project report for the programme, with screenshots of the page labelling one spam and one genuine message.</li></ul></div>
+      <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-layers"/></svg> Context and credits</h3><ul class="dot-list"><li>Built for the AICTE internship on AI, delivered with TechSaksham, a Microsoft and SAP CSR initiative, under the programme's project guide. I was the only author.</li><li>The messages are the public SMS Spam Collection. The page, the cleaning, the model comparison and the Naive Bayes steps follow a widely shared public tutorial project.</li><li>It is an early-stage build and a local demo, not a production filter. The longer working notebook that compared other models is not in the public repository.</li></ul></div>
+    </div>
+  </div>
+</section><section id="how-it-works" class="section pg-sec section--tint" aria-labelledby="how-it-works-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">How it is built</p>
+      <h2 id="how-it-works-h" class="section__title">How it <span class="hl hl--blue">works</span></h2>
+      
+    </header>
+<ol class="pg-flow" data-tone="purple" aria-label="Pipeline, step by step" data-reveal-group><li class="pg-flow__node" style="--i:0"><span class="pg-flow__n" aria-hidden="true">01</span><strong class="pg-flow__t">Message</strong><span class="pg-flow__d">Pasted into the page</span></li><li class="pg-flow__node" style="--i:1"><span class="pg-flow__n" aria-hidden="true">02</span><strong class="pg-flow__t">Clean text</strong><span class="pg-flow__d">Lowercase, drop filler, cut to roots</span></li><li class="pg-flow__node" style="--i:2"><span class="pg-flow__n" aria-hidden="true">03</span><strong class="pg-flow__t">TF-IDF scores</strong><span class="pg-flow__d">3,000 words, each weighted</span></li><li class="pg-flow__node" style="--i:3"><span class="pg-flow__n" aria-hidden="true">04</span><strong class="pg-flow__t">Naive Bayes</strong><span class="pg-flow__d">Decides spam or not spam</span></li><li class="pg-flow__node" style="--i:4"><span class="pg-flow__n" aria-hidden="true">05</span><strong class="pg-flow__t">Label</strong><span class="pg-flow__d">Spam or Not Spam shown</span></li></ol>
+    <ol class="pg-arch" data-reveal-group><li class="pg-arch__item" data-tone="purple" style="--i:0"><span class="pg-arch__n" aria-hidden="true">01</span><p>A file of 5,572 labelled text messages. Three mostly empty extra columns were dropped and 403 repeated messages removed, leaving 5,169: 4,516 genuine and 653 spam.</p></li><li class="pg-arch__item" data-tone="purple" style="--i:1"><span class="pg-arch__n" aria-hidden="true">02</span><p>Each message is made lowercase and split into words with NLTK (a Python toolkit for text). Punctuation and symbols are dropped, very common words (stop words) are removed, and words are cut to their roots with the Porter stemmer, so loving becomes love.</p></li><li class="pg-arch__item" data-tone="purple" style="--i:2"><span class="pg-arch__n" aria-hidden="true">03</span><p>A TF-IDF vectoriser (scikit-learn) keeps the 3,000 most frequent words and scores each one by how often it appears in a message and how rare it is across all messages.</p></li><li class="pg-arch__item" data-tone="purple" style="--i:3"><span class="pg-arch__n" aria-hidden="true">04</span><p>A Multinomial Naive Bayes classifier, a simple method that compares how often each word appears in spam and in genuine messages, with default settings. It learns from a random 80% of the messages (4,135); the other 20% (1,034) is kept for testing, split once with a fixed seed.</p></li><li class="pg-arch__item" data-tone="purple" style="--i:4"><span class="pg-arch__n" aria-hidden="true">05</span><p>On the 1,034 test messages the confusion matrix shows all 896 genuine messages passed, 108 of 138 spam messages caught and 30 missed. That gives accuracy 97.10%, precision 100% and recall 78.26%.</p></li><li class="pg-arch__item" data-tone="purple" style="--i:5"><span class="pg-arch__n" aria-hidden="true">06</span><p>The trained word scores and model are saved as two pickle files (Python's way of storing objects), each under 100 KB, so the page and the script load exactly what was tested.</p></li><li class="pg-arch__item" data-tone="purple" style="--i:5"><span class="pg-arch__n" aria-hidden="true">07</span><p>A Streamlit page titled Email/SMS Spam Classifier, though only text messages were used, has a text box and a Predict button and shows Spam or Not Spam. A command-line script, predict.py, does the same for one message. Both repeat the cleaning steps first.</p></li></ol>
+  </div>
+</section><section id="decisions" class="section pg-sec" aria-labelledby="decisions-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Decisions</p>
+      <h2 id="decisions-h" class="section__title">Design decisions and <span class="hl hl--purple">trade-offs</span></h2>
+      
+    </header>
+<ul class="pg-decisions" role="list" data-reveal-group><li class="pg-decision" data-tone="purple" style="--i:0"><h3 class="pg-decision__t">Remove repeats before splitting</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>I removed 403 repeated messages before splitting the data, rather than leaving them in.</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>A message that appears in both the training and test sets would be recognised, not judged, and would lift the score. Removing repeats first keeps the test fairer.</p></li><li class="pg-decision" data-tone="purple" style="--i:1"><h3 class="pg-decision__t">Put precision first</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>In the model comparison I ranked models by precision and kept one that blocked no genuine message, over several with higher accuracy.</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>A blocked genuine message is lost without its reader knowing, while a missed spam is only an annoyance. Precision and recall are reported next to accuracy because accuracy alone hides this.</p></li><li class="pg-decision" data-tone="purple" style="--i:2"><h3 class="pg-decision__t">Multinomial Naive Bayes over other models</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>Following a public tutorial, I kept Multinomial Naive Bayes after a longer working notebook scored 14 other models and combinations on the same split, including Bernoulli Naive Bayes (98.4% accuracy, 1 false alarm).</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>Only it and nearest-neighbour search flagged no genuine message, and it was far more accurate than that one (97.1% against 90.5%). The saved model is also small, under 100 KB.</p></li><li class="pg-decision" data-tone="purple" style="--i:3"><h3 class="pg-decision__t">Save the model, reuse the cleaning</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>I saved the trained word scores and model to files and repeated the exact cleaning steps in the page, rather than retraining or cleaning differently when the page starts.</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>The page always uses the exact objects that were tested, and a pasted message is cleaned like the training messages, so the measured scores still apply.</p></li></ul>
+    
+  </div>
+</section><section id="results" class="section pg-sec section--tint" aria-labelledby="results-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Results</p>
+      <h2 id="results-h" class="section__title">What it <span class="hl hl--magenta">showed</span></h2>
+      <p class="section__lead">Every number comes with how it was measured. The limits are part of the result.</p>
+    </header>
+<div class="pg-two">
+      <div class="panel" data-tone="purple" data-reveal><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-circle-check"/></svg> Results</h3><ul class="dot-list pg-results"><li>97.10% accuracy on 1,034 test messages, a random 20% of the cleaned data, measured once in the notebook.</li><li>100% precision: none of the 896 genuine test messages was flagged as spam, so there were no false alarms.</li><li>78.26% recall: 108 of the 138 spam messages in the test set were caught and 30 were missed.</li><li>A filter that never flagged anything would still score 86.7% on this test set, because 896 of its 1,034 messages are genuine. That is why precision and recall are reported next to accuracy.</li><li>In the longer working notebook, 15 models and combinations were scored on the same split. Only two flagged no genuine message, and this one was the more accurate of the two.</li><li>The formal project report gives no accuracy number, so every figure on this page comes from the notebook output.</li></ul></div>
+      <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-info"/></svg> Limits to keep in mind</h3><ul class="dot-list pg-results"><li>Text messages only, in one language. No email was used for training or testing, so email accuracy is unknown. Emails are longer and carry subjects, links and attachments, so an email filter would need its own labelled data.</li><li>One dataset, one random split. The test result is a single measurement, and the word scores were learned from all messages before the split, so the figure is slightly optimistic. Newer scam wording would need fresh data.</li><li>It misses about one spam message in five (30 of 138 on the test set). A real filter would need a cut-off the owner can tune, a review folder for flagged messages and regular retraining on new messages.</li><li>It is a local demo: no automated tests, no monitoring, no link to any messaging system, and the requirements file pins older library versions than the ones that saved the model files.</li></ul></div>
+    </div>
+  </div>
+</section><section id="where-it-fits" class="section pg-sec" aria-labelledby="where-it-fits-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">In a business</p>
+      <h2 id="where-it-fits-h" class="section__title">Where this kind of solution <span class="hl hl--blue">fits</span></h2>
+      <p class="section__lead">Situations where a team could use the same approach. These are examples, not past clients.</p>
+    </header>
+<ul class="pg-uses" role="list" data-reveal-group><li class="pg-use" data-tone="cyan" style="--i:0"><h3 class="pg-use__who">Support desks and shared inboxes</h3><p>A team that reads many incoming messages could screen out likely spam first and send it to a review folder instead of deleting it, so genuine requests are not lost.</p></li><li class="pg-use" data-tone="purple" style="--i:1"><h3 class="pg-use__who">Businesses that text their customers</h3><p>A company that sends and receives customer texts could flag scam or junk messages before staff or customers act on them, once the model is retrained on its own labelled messages.</p></li><li class="pg-use" data-tone="blue" style="--i:2"><h3 class="pg-use__who">Community and marketplace moderators</h3><p>A site with user messages or comments needs a first pass that flags promotions and scams for a person to confirm. A model retrained on the site's own labelled examples can supply it.</p></li><li class="pg-use" data-tone="magenta" style="--i:3"><h3 class="pg-use__who">Telecom and messaging product teams</h3><p>The project report names messaging apps and telecom services as places a filter could sit. A team there could use this build as a starting point and test it on its own traffic.</p></li></ul>
+  </div>
+</section><section id="extensions" class="section pg-sec section--tint" aria-labelledby="extensions-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">For your project</p>
+      <h2 id="extensions-h" class="section__title">Extensions I can build <span class="hl">for you</span></h2>
+      <p class="section__lead">Not part of this project. These are add-ons I can build for a client.</p>
+    </header>
+<ul class="grid grid--c3 pg-ext pg-ext--n5" role="list"><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="purple"><h3 class="pg-ext__t">Retraining on your own messages</h3><p>I can retrain the model on your own labelled messages, in your language and style, and report precision and recall on messages it has not seen.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">scikit-learn</li><li class="tag tag--dashed">pandas</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="purple"><h3 class="pg-ext__t">Adjustable cut-off and review queue</h3><p>I can show a spam probability with each message and let you set the cut-off, with a review list for borderline cases instead of automatic blocking.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">scikit-learn</li><li class="tag tag--dashed">Streamlit</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:2"><article class="card card--flat pg-ext__card" data-tone="purple"><h3 class="pg-ext__t">Prediction API</h3><p>I can wrap the model in a tested API with a Docker setup, ready for a contact form, a support inbox or a chat tool to call.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">FastAPI</li><li class="tag tag--dashed">Docker</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="purple"><h3 class="pg-ext__t">Comparison with stronger language models</h3><p>I can compare a ready-made language model such as BERT with this model on your data and keep whichever performs better.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">BERT</li><li class="tag tag--dashed">Hugging Face Transformers</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="purple"><h3 class="pg-ext__t">Feedback from reviewers</h3><p>I can add buttons for staff to mark a message as wrongly flagged or missed, so real mistakes become new training data.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">React</li><li class="tag tag--dashed">PostgreSQL</li></ul></article></li></ul>
+  </div>
+</section><section id="hire-for" class="section pg-sec" aria-labelledby="hire-for-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Hire me</p>
+      <h2 id="hire-for-h" class="section__title">Services behind <span class="hl hl--purple">this project</span></h2>
+      
+    </header>
+<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/speech-nlp-ml/" data-tone="purple"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-audio-waveform"/></svg></span><span><strong>Hire me for machine learning model development</strong><span class="pg-rel__t">Models trained on audio and text, wrapped in small apps.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li></ul>
+    <p class="pg-author" data-reveal>Built by <a class="link" href="../../about/">Shaunak Chorge</a>, AI Engineer at Claptek Pvt Ltd in Mumbai.</p>
+  </div>
+</section><section id="faq" class="section pg-sec section--tint" aria-labelledby="faq-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">FAQ</p>
+      <h2 id="faq-h" class="section__title">Questions about <span class="hl">this project</span></h2>
+      
+    </header>
+<div class="pg-qas"><details class="pg-qa" id="spam-classifier-q1" open data-reveal>
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">How does a spam classifier for text messages work?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>A spam classifier turns a message into numbers and lets a trained model decide whether it looks like spam. Here the text is cleaned, each word is scored with TF-IDF, and a Naive Bayes model, trained on 4,135 of 5,169 labelled text messages, answers Spam or Not Spam.</p></div>
+    </details><details class="pg-qa" id="spam-classifier-q2" open data-reveal style="--i:1">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">How accurate is this spam classifier?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>On 1,034 held-out text messages it scored 97.10% accuracy, 100% precision and 78.26% recall: no genuine message was flagged and 30 of 138 spam messages were missed. It is one random split of one dataset, so new messages, other languages or email could score differently.</p></div>
+    </details><details class="pg-qa" id="spam-classifier-q3" open data-reveal style="--i:2">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">What do precision and recall mean for spam?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>Precision is the share of flagged messages that were truly spam. Recall is the share of all spam that was found. Here, on the test set, precision is 100%, so no genuine message was flagged, and recall is 78.26%, so about one spam message in five got through. A useful filter needs both numbers, not accuracy alone.</p></div>
+    </details><details class="pg-qa" id="spam-classifier-q4" open data-reveal style="--i:3">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Did you compare Naive Bayes with other models?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>The notebook in the public repository trains only Multinomial Naive Bayes. A longer working notebook, kept outside the repository, scored 15 models and combinations on the same split. Only two flagged no genuine message, and I kept Naive Bayes because it was the more accurate of those two.</p></div>
+    </details><details class="pg-qa" id="spam-classifier-q5" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Can this spam classifier filter my company's email?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>Not as it stands. It learned from text messages only, so email was never tested. For email I would collect labelled examples of your own mail, retrain the model and measure precision and recall on messages it has not seen, before any message is blocked automatically.</p></div>
+    </details><details class="pg-qa" id="spam-classifier-q6" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Is the spam classifier ready for production?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>No. It is an early-stage project built for an internship programme: one dataset, one test split and a local demo page. A production filter also needs fresh data, regular retraining, monitoring, a review queue for flagged messages and automated tests. I can build those around the model.</p></div>
+    </details><details class="pg-qa" id="spam-classifier-q7" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Where did the spam classifier project come from?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>I was the only author, with 20 commits. It was the project for the AICTE internship on AI delivered with TechSaksham, a Microsoft and SAP CSR initiative, under the programme's project guide. It follows a public tutorial, and it was submitted with a formal report that gives no accuracy figure.</p></div>
+    </details></div>
+  </div>
+</section><section id="related" class="section pg-sec" aria-labelledby="related-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">More case studies</p>
+      <h2 id="related-h" class="section__title">Related case studies by <span class="hl hl--purple">business need</span></h2>
+      
+    </header>
+<ul class="pg-relcards" role="list" data-reveal-group><li><a class="pg-relcard" href="../../projects/agentic-honeypot/" data-tone="cyan" style="--i:0">
+      <span class="pg-relcard__cat">AI agent <span class="pg-relcard__origin">Academic</span></span>
+      <strong class="pg-relcard__t">An AI agent that keeps scammers talking</strong>
+      <span class="pg-relcard__why">Same threat of scam messages: this project labels a message, while the honeypot keeps scammers talking and records their payment details.</span>
+      <span class="pg-relcard__go">Read the case study <svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span>
+    </a></li><li><a class="pg-relcard" href="../../projects/speech-emotion-recognition/" data-tone="purple" style="--i:1">
+      <span class="pg-relcard__cat">Speech and machine learning <span class="pg-relcard__origin">Personal</span></span>
+      <strong class="pg-relcard__t">Hearing the mood in a voice clip</strong>
+      <span class="pg-relcard__why">Another way to sort incoming communication automatically: it labels voice clips by emotion, with its scores and limits stated as plainly.</span>
+      <span class="pg-relcard__go">Read the case study <svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span>
+    </a></li><li><a class="pg-relcard" href="../../projects/whatsapp-ai-agent-platform/" data-tone="blue" style="--i:2">
+      <span class="pg-relcard__cat">Automation <span class="pg-relcard__origin">Client</span></span>
+      <strong class="pg-relcard__t">AI agents that reply on WhatsApp</strong>
+      <span class="pg-relcard__why">Both sit on messaging channels: a filter like this could screen incoming WhatsApp messages before an AI agent or an operator replies.</span>
+      <span class="pg-relcard__go">Read the case study <svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span>
+    </a></li></ul>
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../projects/#by-need">Browse all work by business need <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../../projects/">All projects <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+  </div>
+</section><section class="section pg-sec pg-pnsec" aria-label="More case studies"><div class="container"><nav class="pg-pn" aria-label="More case studies">
+      <a class="pg-pn__link" href="../../projects/deepfake-video-detection/" rel="prev" data-reveal><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg><span><small>Previous case study</small><strong>Frame-by-frame real or fake verdicts</strong></span></a>
+      <a class="pg-pn__link pg-pn__link--next" href="../../projects/ai-rag-healthcare-assistant/" rel="next" data-reveal style="--i:1"><span><small>Next case study</small><strong>A chatbot that cites its sources</strong></span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+    </nav></div></section><section id="ask" class="section pg-sec pg-ask" aria-labelledby="ask-h">
+  <div class="container">
+    <div class="pg-ask__box panel" data-tone="cyan" data-reveal>
+      <div class="pg-ask__text">
+        <p class="eyebrow">Ask me</p>
+        <h2 id="ask-h" class="pg-ask__title">Have a question about this project, or your own idea?</h2>
+        <p class="pg-ask__lead">Type your question below. The contact form opens with your question and this page already filled in, so you only add your name and email.</p>
+      </div>
+      <form class="pg-ask__form" action="../../contact/#hire" method="get">
+        <input type="hidden" name="topic" value="speech-nlp-ml">
+        <input type="hidden" name="ref" value="projects/spam-classifier/">
+        <input type="hidden" name="about" value="SMS Spam Classifier">
+        <label class="sr-only" for="ask-q">Your question</label>
+        <input class="input pg-ask__input" id="ask-q" name="q" type="text" maxlength="300" autocomplete="off" enterkeyhint="send" placeholder="How did you measure the accuracy of the spam filter?">
+        <button class="btn btn--solid btn--glow" type="submit">Ask me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></button>
+      </form>
+      <ul class="pg-ask__chips" role="list" aria-label="Questions people often ask"><li><a class="pg-ask__chip" href="../../contact/?topic=speech-nlp-ml&ref=projects/spam-classifier/&about=SMS%20Spam%20Classifier&q=How%20did%20you%20measure%20the%20accuracy%20of%20the%20spam%20filter%3F#hire">How did you measure the accuracy of the spam filter?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=speech-nlp-ml&ref=projects/spam-classifier/&about=SMS%20Spam%20Classifier&q=Does%20it%20work%20on%20email%2C%20or%20only%20on%20text%20messages%3F#hire">Does it work on email, or only on text messages?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=speech-nlp-ml&ref=projects/spam-classifier/&about=SMS%20Spam%20Classifier&q=What%20would%20a%20production%20spam%20filter%20need%20beyond%20this%3F#hire">What would a production spam filter need beyond this?</a></li></ul>
+    </div>
+  </div>
+</section><section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
+  <div class="container">
+    <div class="pg-hire__band" data-reveal="scale">
+      <span class="pg-hire__line" aria-hidden="true"></span>
+      <div class="pg-hire__text">
+        <p class="badge badge--accent"><span class="badge__dot" aria-hidden="true"></span>Taking select freelance AI and backend projects</p>
+        <h2 id="hire-band-h" class="pg-hire__title">Need something <span class="hl">like this built?</span></h2>
+        <p class="pg-hire__lead">Send a short brief: what you want to build, roughly when you need it and anything I should know.</p>
+      </div>
+      <div class="pg-hire__act">
+        <a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=speech-nlp-ml#hire" data-magnetic>Hire me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+        <p class="pg-hire__alt"><a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a><span aria-hidden="true"> &middot; </span><a class="link" href="../../projects/">See projects</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+  </main>
+
+<footer class="footer" id="site-footer">
+  <span class="footer__line" aria-hidden="true"></span>
+  <div class="container">
+
+    <!-- closing hire strip (hidden on /contact/, which is the form itself) -->
+    <div class="footer__cta">
+      <p class="footer__cta-text"><strong>Ready to start?</strong> Tell me what you need built.</p>
+      <a class="btn btn--solid btn--glow btn--sm" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+    </div>
+
+    <div class="footer__grid">
+
+      <div class="footer__brand">
+        <p class="footer__logo">
+          <!-- electric-S mark (same path as header, ids unique) -->
+          <svg class="footer__mark" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false"><defs><linearGradient id="ftm-g" x1="6" y1="2" x2="58" y2="62" gradientUnits="userSpaceOnUse"><stop stop-color="#00FFFF"/><stop offset=".52" stop-color="#B553F2"/><stop offset="1" stop-color="#FF006E"/></linearGradient></defs><path d="M44.76 1L3 7.32L3 15.5L39.02 38.91L3 61.49L3 63L9.03 63L61 43L61 36.5L27.4 14.66L61 2.07L61 1Z" fill="url(#ftm-g)"/></svg>
+          <span class="logo__word">SHAUNAK</span>
+        </p>
+        <p class="footer__blurb">AI Engineer at Claptek Pvt Ltd. Taking select freelance AI and backend projects.</p>
+        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India (IST)</p>
+        <ul class="footer__soc" aria-label="Profiles">
+          <li><a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a></li>
+          <li><a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a></li>
+          <li><a class="icon-btn" href="https://www.instagram.com/_shaunakkk/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-instagram"/></svg></a></li>
+          <li><a class="icon-btn" href="mailto:shaunak.chorge@gmail.com" aria-label="Email Shaunak"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a></li>
+        </ul>
+      </div>
+
+      <div class="footer__cols">
+        <nav class="footer__col footer__col--services" aria-labelledby="footer-services-h">
+          <p class="footer__h" id="footer-services-h">Services</p>
+          <ul class="footer__links">
+            <li><a href="../../services/llm-rag-development/">AI chatbot development</a></li>
+            <li><a href="../../services/ai-document-compliance-automation/">Document data extraction</a></li>
+            <li><a href="../../services/ai-backend-fastapi-django/">FastAPI backend development</a></li>
+            <li><a href="../../services/computer-vision/">Computer vision development</a></li>
+            <li><a href="../../services/speech-nlp-ml/">Machine learning development</a></li>
+            <li><a href="../../services/python-automation-integrations/">Python automation and bots</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__col footer__col--work" aria-labelledby="footer-work-h">
+          <p class="footer__h" id="footer-work-h">Work</p>
+          <ul class="footer__links">
+            <li><a href="../../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
+            <li><a href="../../projects/advanced-cctv-analytics/">CCTV analytics in Python</a></li>
+            <li><a href="../../projects/speech-emotion-recognition/">Speech emotion recognition</a></li>
+            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
+            <li><a href="../../projects/obligation-management-system/">Regulatory obligation extraction</a></li>
+            <li><a href="../../projects/ams-ai-finding-engine/">AI audit finding generator</a></li>
+            <li><a href="../../projects/core-banking-text-to-sql/">Text-to-SQL for banking</a></li>
+            <li><a href="../../projects/agentic-honeypot/">AI scam honeypot</a></li>
+            <li><a href="../../projects/whatsapp-ai-agent-platform/">WhatsApp AI agent platform</a></li>
+            <li><a href="../../projects/deepfake-video-detection/">Deepfake video detection</a></li>
+            <li><a href="../../projects/spam-classifier/">SMS spam classifier</a></li>
+            <li><a href="../../projects/">All projects</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__col footer__col--pages" aria-labelledby="footer-pages-h">
+          <p class="footer__h" id="footer-pages-h">Pages</p>
+          <ul class="footer__links">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../projects/">Projects</a></li>
+            <li><a href="../../services/">Services</a></li>
+            <li><a href="../../about/">About</a></li>
+            <li><a href="../../about/#experience">Experience</a></li>
+            <li><a href="../../resume/">Resume</a></li>
+            <li><a href="../../faq/">FAQ</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+            <li><a href="../../contact/#book">Book a call</a></li>
+          </ul>
+        </nav>
+      </div>
+
+    </div>
+
+    <div class="footer__bar">
+      <p class="footer__copy">&copy; 2026 Shaunak Chorge</p>
+      <div class="footer__acts">
+        <!-- WCAG 2.2.2: a visible control to pause all moving effects, on every screen size (shown by footer.js; it drives Portfolio.motion) -->
+        <button type="button" class="btn btn--ghost btn--sm footer__motion" data-motion-toggle aria-pressed="false" hidden><svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-pause"/></svg> Pause effects</button>
+        <a class="btn btn--ghost btn--sm footer__top" href="#top" data-back-to-top>Back to top <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer__ghost" aria-hidden="true"></div>
+
+  <!-- floating "Let's talk" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js).
+       Without JavaScript it is a plain link to the contact form; with JavaScript it opens the small menu of ways to connect (content.connect). -->
+  <div class="fab-wrap contact-fab">
+    <div class="connect" id="connect-menu" hidden>
+      <p class="connect__h" id="connect-h">Let&rsquo;s talk</p>
+      <ul class="connect__list" aria-labelledby="connect-h">
+            <li><a class="connect__item" href="../../contact/#book"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><span><strong>Book a call</strong><small>Pick a day and time</small></span></a></li>
+            <li><a class="connect__item" href="../../contact/#hire"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg><span><strong>Send a brief</strong><small>Tell me what you need</small></span></a></li>
+            <li><a class="connect__item" href="https://wa.me/919920644655?text=Hi%20Shaunak%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg><span><strong>WhatsApp</strong><small>Message me directly</small></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="connect__item" href="mailto:shaunak.chorge@gmail.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span><strong>Email</strong><small>Write to me</small></span></a></li>
+      </ul>
+    </div>
+    <a class="fab" href="../../contact/#hire" aria-label="Hire me" data-connect-toggle><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></a>
+    <div class="fab-tip" aria-hidden="true">Let&rsquo;s talk</div>
+  </div>
+</footer>
+
+  <div class="toasts" id="toasts" aria-live="polite" aria-relevant="additions"></div>
+
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></symbol>
+    <symbol id="i-workflow" viewBox="0 0 24 24"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+    <symbol id="i-audio-lines" viewBox="0 0 24 24"><path d="M2 10v3"/><path d="M6 6v11"/><path d="M10 3v18"/><path d="M14 8v7"/><path d="M18 5v13"/><path d="M22 10v3"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol>
+    <symbol id="i-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></symbol>
+    <symbol id="i-scan-eye" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="1"/><path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0"/></symbol>
+    <symbol id="i-audio-waveform" viewBox="0 0 24 24"><path d="M2 13a2 2 0 0 0 2-2V7a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0V4a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0v-4a2 2 0 0 1 2-2"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
+    <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
+    <symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol>
+    <symbol id="i-hash" viewBox="0 0 24 24"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></symbol>
+    <symbol id="i-wand-sparkles" viewBox="0 0 24 24"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/></symbol>
+    <symbol id="i-loader" viewBox="0 0 24 24"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/></symbol>
+  </svg>
+
+  <script defer src="../../assets/dist/js/core.min.js?v=d41b0d5b"></script>
+  <script defer src="../../assets/dist/js/contact.min.js?v=e6aee63a"></script>
+  <script defer src="../../assets/dist/js/footer.min.js?v=89f1750f"></script>
+  <script defer src="../../assets/dist/js/fx.min.js?v=bb37bfa8"></script>
+  <script defer src="../../assets/dist/js/pages.min.js?v=514d4156"></script>
+  <script defer src="../../assets/dist/js/visuals.min.js?v=6bbaf295"></script>
+</body>
+</html>

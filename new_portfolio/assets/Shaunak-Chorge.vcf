@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Chorge;Shaunak;;;
+FN:Shaunak Chorge
+ORG:Claptek Pvt Ltd
+TITLE:AI Engineer
+TEL;TYPE=CELL:+91 9920644655
+EMAIL;TYPE=INTERNET:shaunak.chorge@gmail.com
+URL:https://shaunakchorge.github.io/Portfolio/new_portfolio/
+ADR;TYPE=WORK:;;;Mumbai;;;India
+NOTE:AI Engineer at Claptek Pvt Ltd. Taking select freelance AI and backend projects.
+END:VCARD

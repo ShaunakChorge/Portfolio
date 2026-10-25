@@ -24,7 +24,21 @@
       </div>
 
       <div class="footer__cols">
-        <nav class="footer__col" aria-labelledby="footer-pages-h">
+        <nav class="footer__col footer__col--services" aria-labelledby="footer-services-h">
+          <p class="footer__h" id="footer-services-h">Services</p>
+          <ul class="footer__links">
+            {{footer_services}}
+          </ul>
+        </nav>
+
+        <nav class="footer__col footer__col--work" aria-labelledby="footer-work-h">
+          <p class="footer__h" id="footer-work-h">Work</p>
+          <ul class="footer__links">
+            {{footer_work}}
+          </ul>
+        </nav>
+
+        <nav class="footer__col footer__col--pages" aria-labelledby="footer-pages-h">
           <p class="footer__h" id="footer-pages-h">Pages</p>
           <ul class="footer__links">
             <li><a href="{{home}}">Home</a></li>
@@ -35,20 +49,7 @@
             <li><a href="{{base}}resume/">Resume</a></li>
             <li><a href="{{base}}faq/">FAQ</a></li>
             <li><a href="{{base}}contact/">Contact</a></li>
-          </ul>
-        </nav>
-
-        <nav class="footer__col footer__col--wide" aria-labelledby="footer-services-h">
-          <p class="footer__h" id="footer-services-h">Services</p>
-          <ul class="footer__links">
-            {{footer_services}}
-          </ul>
-        </nav>
-
-        <nav class="footer__col" aria-labelledby="footer-work-h">
-          <p class="footer__h" id="footer-work-h">Work</p>
-          <ul class="footer__links">
-            {{footer_work}}
+            <li><a href="{{base}}contact/#book">Book a call</a></li>
           </ul>
         </nav>
       </div>
@@ -67,9 +68,16 @@
 
   <div class="footer__ghost" aria-hidden="true"></div>
 
-  <!-- floating "Hire me" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js) -->
+  <!-- floating "Let's talk" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js).
+       Without JavaScript it is a plain link to the contact form; with JavaScript it opens the small menu of ways to connect (content.connect). -->
   <div class="fab-wrap contact-fab">
-    <a class="fab" href="{{base}}contact/#hire" aria-label="Hire me"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
-    <div class="fab-tip" aria-hidden="true">Hire me</div>
+    <div class="connect" id="connect-menu" hidden>
+      <p class="connect__h" id="connect-h">Let&rsquo;s talk</p>
+      <ul class="connect__list" aria-labelledby="connect-h">
+            {{footer_connect}}
+      </ul>
+    </div>
+    <a class="fab" href="{{base}}contact/#hire" aria-label="Hire me" data-connect-toggle><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></a>
+    <div class="fab-tip" aria-hidden="true">Let&rsquo;s talk</div>
   </div>
 </footer>

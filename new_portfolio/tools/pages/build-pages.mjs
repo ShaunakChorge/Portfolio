@@ -20,6 +20,7 @@ import * as pFaq from './p-faq.mjs';
 import * as pContact from './p-contact.mjs';
 import * as pResume from './p-resume.mjs';
 import { sitemap, robots, llmsTxt, llmsFull, REPO_ROOT, IN_REPO, SITEMAP_URL } from './seo.mjs';
+import { vcard, VCARD_PATH } from './vcard.mjs';
 
 const MANIFEST = path.join(SITE, '.built-pages.json');   // pages written by the last run, so pages dropped from the selection get removed
 
@@ -41,7 +42,7 @@ export function buildPages({ min = true, check = false } = {}) {
     if (r.description.length > 155) warn(r.path, `description ${r.description.length} > 155`);
     const h1s = (out.html.match(/<h1[\s>]/g) || []).length;
     if (h1s !== 1) warn(r.path, `${h1s} h1 elements`);
-    const bad = findBanned(out.html, { languages: true });   // the spoken languages appear on the home page only
+    const bad = findBanned(out.html, { languages: r.path !== 'about/' });   // the spoken languages appear on the About page only
     if (bad) warn(r.path, `banned string "${bad}"`);
     // visible text must not carry a year on project pages / hubs
     if (/^projects\//.test(r.path)) {
@@ -70,6 +71,7 @@ export function buildPages({ min = true, check = false } = {}) {
     [path.join(seoDir, 'robots.txt')]: robots(SITEMAP_URL),
     [path.join(SITE, 'llms.txt')]: llmsTxt(llmsRecs),
     [path.join(SITE, 'llms-full.txt')]: llmsFull(llmsRecs),
+    [path.join(SITE, VCARD_PATH)]: vcard(),   // the contact card the "Save my contact" link on /contact/ downloads
   };
   for (const [f, txt] of Object.entries(files)) {
     if (/llms/.test(f)) {

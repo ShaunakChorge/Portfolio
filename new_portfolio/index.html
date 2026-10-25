@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="assets/dist/site.min.css?v=7077ea09">
+  <link rel="stylesheet" href="assets/dist/site.min.css?v=f19aa7f2">
 
 <script type="application/ld+json">
 {
@@ -238,10 +238,10 @@
         </nav>
 
         <div class="site-header__tools">
+          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
           </button>
-          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
             <span class="burger__lines" aria-hidden="true"><i></i><i></i><i></i></span>
           </button>
@@ -364,19 +364,23 @@ def start_project(idea):
 </section>
 <section id="about" class="section hm-cv" data-num="03" data-rail="03·about" aria-labelledby="about-title">
   <div class="container">
-    <h2 id="about-title" class="sr-only">About me</h2>
-    <div class="hm-term" role="group" aria-label="Quick facts about Shaunak" data-reveal>
-      <div class="hm-term__bar" aria-hidden="true">
-        <span class="hm-term__dots"><i></i><i></i><i></i></span>
-        <span class="hm-term__title">shaunak@portfolio:~/about</span>
-        <span class="hm-term__tag">whoami.sh</span>
+    <div class="hm-term" role="group" aria-labelledby="about-title" data-reveal>
+      <div class="hm-term__bar">
+        <span class="hm-term__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <h2 id="about-title" class="hm-term__title">About</h2>
+        <span class="hm-term__tag" aria-hidden="true">whoami.sh</span>
       </div>
       <div class="hm-term__body">
         <p class="hm-term__prompt" aria-hidden="true"><span class="hm-term__ps">$</span> <span class="hm-term__cmd" style="--n:6">whoami</span><span class="hm-term__caret"></span></p>
+        <div class="hm-term__lead">
+          <p>By day I build AI tools for audit and compliance software: a drafting engine that cannot invent a figure, a document reader that points to its evidence and a text-to-SQL assistant that runs on a bank’s own servers.</p>
+          <p>On the side I take select freelance projects: chatbots, computer vision, speech and machine learning models, and Python backends.</p>
+        </div>
         <dl class="hm-term__facts">
-          <div class="hm-term__fact" data-tone="blue" style="--r:1"><dt>education</dt><dd>Bachelor of Technology in Artificial Intelligence and Data Science, 2026</dd></div>
-          <div class="hm-term__fact" data-tone="cyan" style="--r:2"><dt>builds</dt><dd>I work mostly in Python, building AI chatbots, computer vision tools and backend systems.</dd></div>
-          <div class="hm-term__fact" data-tone="purple" style="--r:3"><dt>languages</dt><dd><ul class="tags hm-term__tags" role="list"><li><span class="tag tag--dim">English</span></li><li><span class="tag tag--dim">Hindi</span></li><li><span class="tag tag--dim">Marathi</span></li><li><span class="tag tag--dim">German</span></li><li><span class="tag tag--dim">French</span></li></ul></dd></div>
+          <div class="hm-term__fact" data-tone="cyan" style="--r:1"><dt>based</dt><dd>Mumbai, India (IST)</dd></div>
+          <div class="hm-term__fact" data-tone="purple" style="--r:2"><dt>now</dt><dd>AI Engineer @ Claptek Pvt Ltd</dd></div>
+          <div class="hm-term__fact" data-tone="blue" style="--r:3"><dt>education</dt><dd>B.Tech AI &amp; Data Science, 2026</dd></div>
+          <div class="hm-term__fact hm-term__fact--wide" data-tone="magenta" style="--r:4"><dt>find me</dt><dd><ul class="hm-term__find" role="list"><li><a class="hm-chip" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg><span>GitHub</span><span class="sr-only"> (opens in a new tab)</span></a></li><li><a class="hm-chip" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg><span>LinkedIn</span><span class="sr-only"> (opens in a new tab)</span></a></li><li><a class="hm-chip" href="mailto:shaunak.chorge@gmail.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span>Email</span></a></li></ul></dd></div>
         </dl>
         <ul class="hm-term__links" role="list">
           <li><a class="link-arrow" href="about/" data-tone="cyan">About me <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
@@ -476,7 +480,7 @@ def start_project(idea):
         <div class="tile__body">
           <p class="tile__meta"><span class="tile__cat">Computer vision</span><span class="tile__origin">Academic</span></p>
           <h3 class="tile__title" id="pj-advanced-cctv-analytics"><a class="card__link" href="projects/advanced-cctv-analytics/">CCTV Crime and Crowd Analytics<span class="sr-only"> case study</span></a></h3>
-          <p class="tile__blurb">Smart India Hackathon team prototype: crowd-limit alerts, crime detection from video frames and face recognition on one camera feed.</p>
+          <p class="tile__blurb">Smart India Hackathon team prototype: crowd-limit alerts, crime labels from video frames and face recognition, as three separate modules.</p>
         </div>
       </article>
     </li>
@@ -520,12 +524,12 @@ def start_project(idea):
         </div>
       </article>
     </li>
-    <li class="tile" id="p-finacle-text-to-sql" data-rank="7" data-pid="finacle-text-to-sql" style="--area:p7">
-      <article class="card tile__card" data-tone="blue" data-tilt data-cursor="case" data-reveal style="--i:2" aria-labelledby="pj-finacle-text-to-sql">
-        <div class="tile__media"><div class="pv" data-visual="terminal" data-variant="finacle-text-to-sql" data-tone="blue" aria-hidden="true"></div></div>
+    <li class="tile" id="p-core-banking-text-to-sql" data-rank="7" data-pid="core-banking-text-to-sql" style="--area:p7">
+      <article class="card tile__card" data-tone="blue" data-tilt data-cursor="case" data-reveal style="--i:2" aria-labelledby="pj-core-banking-text-to-sql">
+        <div class="tile__media"><div class="pv" data-visual="terminal" data-variant="core-banking-text-to-sql" data-tone="blue" aria-hidden="true"></div></div>
         <div class="tile__body">
           <p class="tile__meta"><span class="tile__cat">AI and data</span><span class="tile__origin">Client</span></p>
-          <h3 class="tile__title" id="pj-finacle-text-to-sql"><a class="card__link" href="projects/core-banking-text-to-sql/">Core-Banking Text-to-SQL Assistant<span class="sr-only"> case study</span></a></h3>
+          <h3 class="tile__title" id="pj-core-banking-text-to-sql"><a class="card__link" href="projects/core-banking-text-to-sql/">Core-Banking Text-to-SQL Assistant<span class="sr-only"> case study</span></a></h3>
           <p class="tile__blurb">Turns plain questions into database queries for core-banking reports, on the bank's own servers, with a self-correcting loop.</p>
         </div>
       </article>
@@ -541,13 +545,12 @@ def start_project(idea):
       </article>
     </li>
     <li class="tile tile--wide" id="p-whatsapp-ai-agent-platform" data-rank="9" data-pid="whatsapp-ai-agent-platform" style="--area:p9">
-      <article class="card tile__card" data-tone="blue" data-tilt data-reveal style="--i:0" aria-labelledby="pj-whatsapp-ai-agent-platform">
+      <article class="card tile__card" data-tone="blue" data-tilt data-cursor="case" data-reveal style="--i:0" aria-labelledby="pj-whatsapp-ai-agent-platform">
         <div class="tile__media"><div class="pv" data-visual="generic" data-variant="whatsapp-ai-agent-platform" data-tone="blue" aria-hidden="true"></div></div>
         <div class="tile__body">
           <p class="tile__meta"><span class="tile__cat">Automation</span><span class="tile__origin">Client</span></p>
-          <h3 class="tile__title" id="pj-whatsapp-ai-agent-platform">WhatsApp Automation and <span class="ai">AI</span> Agent Platform</h3>
+          <h3 class="tile__title" id="pj-whatsapp-ai-agent-platform"><a class="card__link" href="projects/whatsapp-ai-agent-platform/">WhatsApp Automation and <span class="ai">AI</span> Agent Platform<span class="sr-only"> case study</span></a></h3>
           <p class="tile__blurb">AI replies run in the background, every chat is tracked and human operators get alerts.</p>
-          <p class="tile__note">Private repository</p>
         </div>
       </article>
     </li>
@@ -562,12 +565,12 @@ def start_project(idea):
       </article>
     </li>
     <li class="tile" id="p-spam-classifier" data-rank="11" data-pid="spam-classifier" style="--area:p11">
-      <article class="card tile__card" data-tone="purple" data-tilt data-reveal style="--i:2" aria-labelledby="pj-spam-classifier">
+      <article class="card tile__card" data-tone="purple" data-tilt data-cursor="case" data-reveal style="--i:2" aria-labelledby="pj-spam-classifier">
         <div class="tile__media"><div class="pv" data-visual="screenshot" data-variant="spam-classifier" data-tone="purple" aria-hidden="true"></div></div>
         <div class="tile__body">
           <p class="tile__meta"><span class="tile__cat">Natural language</span><span class="tile__origin">Academic</span></p>
-          <h3 class="tile__title" id="pj-spam-classifier"><a class="card__link" href="https://github.com/ShaunakChorge/Spam-Classifier" target="_blank" rel="noopener noreferrer">Email and SMS Spam Classifier<span class="sr-only"> on GitHub (opens in a new tab)</span></a></h3>
-          <p class="tile__blurb">Spots spam in texts and emails: 97.1% accurate on 1,034 test messages, and it never flagged a genuine message.</p>
+          <h3 class="tile__title" id="pj-spam-classifier"><a class="card__link" href="projects/spam-classifier/">SMS Spam Classifier<span class="sr-only"> case study</span></a></h3>
+          <p class="tile__blurb">Spots spam in text messages: 97.1% accurate on 1,034 test messages, with no genuine message flagged.</p>
         </div>
       </article>
     </li>
@@ -682,9 +685,10 @@ def start_project(idea):
           <p class="contact__lead">Send a short brief: what you want to build, roughly when you need it and anything I should know.</p>
           <div class="contact__actions">
             <a class="btn btn--solid btn--lg btn--glow" href="contact/#hire" data-magnetic>Hire me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
-            <a class="btn btn--ghost btn--lg" href="mailto:shaunak.chorge@gmail.com" data-magnetic>Email me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
+            <a class="btn btn--ghost btn--lg" href="contact/#book" data-magnetic>Book a call <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg></a>
           </div>
           <p class="hm-band__line"><span class="hero__free-dot" aria-hidden="true"></span>Taking select freelance AI and backend projects</p>
+          <p class="hm-band__mail">Or write to <a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a></p>
         </header>
       </div>
     </div>
@@ -721,21 +725,7 @@ def start_project(idea):
       </div>
 
       <div class="footer__cols">
-        <nav class="footer__col" aria-labelledby="footer-pages-h">
-          <p class="footer__h" id="footer-pages-h">Pages</p>
-          <ul class="footer__links">
-            <li><a href="./">Home</a></li>
-            <li><a href="projects/">Projects</a></li>
-            <li><a href="services/">Services</a></li>
-            <li><a href="about/">About</a></li>
-            <li><a href="about/#experience">Experience</a></li>
-            <li><a href="resume/">Resume</a></li>
-            <li><a href="faq/">FAQ</a></li>
-            <li><a href="contact/">Contact</a></li>
-          </ul>
-        </nav>
-
-        <nav class="footer__col footer__col--wide" aria-labelledby="footer-services-h">
+        <nav class="footer__col footer__col--services" aria-labelledby="footer-services-h">
           <p class="footer__h" id="footer-services-h">Services</p>
           <ul class="footer__links">
             <li><a href="services/llm-rag-development/">AI chatbot development</a></li>
@@ -747,14 +737,36 @@ def start_project(idea):
           </ul>
         </nav>
 
-        <nav class="footer__col" aria-labelledby="footer-work-h">
+        <nav class="footer__col footer__col--work" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
+            <li><a href="projects/advanced-cctv-analytics/">CCTV analytics in Python</a></li>
+            <li><a href="projects/speech-emotion-recognition/">Speech emotion recognition</a></li>
+            <li><a href="projects/observable-ai-backend/">Traceable AI Backend</a></li>
+            <li><a href="projects/obligation-management-system/">Regulatory obligation extraction</a></li>
+            <li><a href="projects/ams-ai-finding-engine/">AI audit finding generator</a></li>
+            <li><a href="projects/core-banking-text-to-sql/">Text-to-SQL for banking</a></li>
             <li><a href="projects/agentic-honeypot/">AI scam honeypot</a></li>
+            <li><a href="projects/whatsapp-ai-agent-platform/">WhatsApp AI agent platform</a></li>
             <li><a href="projects/deepfake-video-detection/">Deepfake video detection</a></li>
+            <li><a href="projects/spam-classifier/">SMS spam classifier</a></li>
             <li><a href="projects/">All projects</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__col footer__col--pages" aria-labelledby="footer-pages-h">
+          <p class="footer__h" id="footer-pages-h">Pages</p>
+          <ul class="footer__links">
+            <li><a href="./">Home</a></li>
+            <li><a href="projects/">Projects</a></li>
+            <li><a href="services/">Services</a></li>
+            <li><a href="about/">About</a></li>
+            <li><a href="about/#experience">Experience</a></li>
+            <li><a href="resume/">Resume</a></li>
+            <li><a href="faq/">FAQ</a></li>
+            <li><a href="contact/">Contact</a></li>
+            <li><a href="contact/#book">Book a call</a></li>
           </ul>
         </nav>
       </div>
@@ -773,10 +785,20 @@ def start_project(idea):
 
   <div class="footer__ghost" aria-hidden="true"></div>
 
-  <!-- floating "Hire me" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js) -->
+  <!-- floating "Let's talk" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js).
+       Without JavaScript it is a plain link to the contact form; with JavaScript it opens the small menu of ways to connect (content.connect). -->
   <div class="fab-wrap contact-fab">
-    <a class="fab" href="contact/#hire" aria-label="Hire me"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
-    <div class="fab-tip" aria-hidden="true">Hire me</div>
+    <div class="connect" id="connect-menu" hidden>
+      <p class="connect__h" id="connect-h">Let&rsquo;s talk</p>
+      <ul class="connect__list" aria-labelledby="connect-h">
+            <li><a class="connect__item" href="contact/#book"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><span><strong>Book a call</strong><small>Pick a day and time</small></span></a></li>
+            <li><a class="connect__item" href="contact/#hire"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg><span><strong>Send a brief</strong><small>Tell me what you need</small></span></a></li>
+            <li><a class="connect__item" href="https://wa.me/919920644655?text=Hi%20Shaunak%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg><span><strong>WhatsApp</strong><small>Message me directly</small></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="connect__item" href="mailto:shaunak.chorge@gmail.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span><strong>Email</strong><small>Write to me</small></span></a></li>
+      </ul>
+    </div>
+    <a class="fab" href="contact/#hire" aria-label="Hire me" data-connect-toggle><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></a>
+    <div class="fab-tip" aria-hidden="true">Let&rsquo;s talk</div>
   </div>
 </footer>
 
@@ -814,6 +836,7 @@ def start_project(idea):
     <symbol id="i-scan-eye" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="1"/><path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0"/></symbol>
     <symbol id="i-audio-waveform" viewBox="0 0 24 24"><path d="M2 13a2 2 0 0 0 2-2V7a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0V4a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0v-4a2 2 0 0 1 2-2"/></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
     <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
     <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
@@ -829,12 +852,12 @@ def start_project(idea):
   </svg>
 
   <script defer src="assets/dist/js/core.min.js?v=d41b0d5b"></script>
-  <script defer src="assets/dist/js/contact.min.js?v=a2cd83b8"></script>
+  <script defer src="assets/dist/js/contact.min.js?v=e6aee63a"></script>
   <script defer src="assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="assets/dist/js/fx.min.js?v=4f4a04f8"></script>
+  <script defer src="assets/dist/js/fx.min.js?v=bb37bfa8"></script>
   <script defer src="assets/dist/js/hero.min.js?v=6983d812"></script>
   <script defer src="assets/dist/js/marquee.min.js?v=af85d617"></script>
-  <script defer src="assets/dist/js/pages.min.js?v=efc0e441"></script>
-  <script defer src="assets/dist/js/visuals.min.js?v=53b137f5"></script>
+  <script defer src="assets/dist/js/pages.min.js?v=514d4156"></script>
+  <script defer src="assets/dist/js/visuals.min.js?v=6bbaf295"></script>
 </body>
 </html>

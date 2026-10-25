@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=99f76e8a">
+  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=d92fd1cd">
 
 <script type="application/ld+json">
 {
@@ -62,7 +62,7 @@
       "breadcrumb": {
         "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/services/speech-nlp-ml/#breadcrumb"
       },
-      "dateModified": "2026-10-24",
+      "dateModified": "2026-10-25",
       "mainEntity": {
         "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/services/speech-nlp-ml/#service"
       }
@@ -141,7 +141,7 @@
           "name": "How much data do I need to train a model?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It depends on the task. Simple tasks with clear categories may need a few hundred labelled examples per category, while audio or images usually need thousands. I count your examples before training and tell you early if there are too few. A ready-made model can often reduce the amount you need."
+            "text": "It depends on the task. Simple tasks with clear categories may need a few hundred labelled examples per category, while audio or images usually need thousands. My spam filter used 5,169 messages after duplicates were removed, and my speech model 12,162 clips. I count your examples first and tell you early if there are too few."
           }
         },
         {
@@ -157,7 +157,7 @@
           "name": "How do you report accuracy?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Every figure comes with the data split it was measured on. My speech emotion model reaches 93.87% on a random 20% test split. On your own recordings, accuracy is measured and reported the same way, including tests on speakers the model has not heard."
+            "text": "Every figure comes with the data split it was measured on. The speech emotion model I retrained reaches 93.87% on a random 20% test split. Because that split can put altered copies of one clip on both sides, it says little about new voices. For your recordings I test on speakers the model has not heard."
           }
         },
         {
@@ -165,7 +165,31 @@
           "name": "Do you use ready-made models?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "When they fit. Pretrained Hugging Face models are a sensible start for many text and audio tasks. I compare against a simple baseline, so you can see what the extra complexity actually buys. I tell you if the simple option is good enough."
+            "text": "When they fit. Pretrained Hugging Face models are a sensible start for many text and audio tasks. My speech model began as a public training recipe that I retrained and tested on four datasets. I compare against a simple baseline, so you see what extra complexity buys, and I say when the simple option is enough."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you build a prediction model from my spreadsheet data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, if you have past rows with the outcome you want to predict, such as a price or cost. I clean the table, fill gaps, compare a simple linear baseline with a stronger model such as a Random Forest, and report the typical error in your own units. A small app lets your team try it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you check a model has not just memorised its data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "I keep a test set the model never trains on and compare its score there with its training score. A large gap means it has memorised. The speech network I retrained also uses dropout (switching off random parts during training) to limit this. For client audio, altered copies of a clip stay on one side of the split."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you check the accuracy of a model someone else built?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. I need the saved model or code, the data it used and the figure that was claimed. I rerun it, check how the data was split, compare it with a simple baseline and report what I measure. The same habit exposed a flattering 93% score on a bank text-to-SQL assistant, where running the queries showed far less."
           }
         }
       ]
@@ -214,10 +238,10 @@
         </nav>
 
         <div class="site-header__tools">
+          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
           </button>
-          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
             <span class="burger__lines" aria-hidden="true"><i></i><i></i><i></i></span>
           </button>
@@ -261,6 +285,24 @@
       <div class="pg-head__aside"><div class="pg-svcmark" data-tone="purple" aria-hidden="true"><span class="pg-svcmark__ring"></span><span class="icon-tile pg-svcmark__tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-audio-waveform"/></svg></span></div></div>
     </div>
   </div>
+</section><nav class="pg-toc" aria-label="On this page"><div class="container"><ul class="pg-toc__list" role="list"><li><a href="#who">Who it is for</a></li><li><a href="#problems">Problems solved</a></li><li><a href="#deliverables">What you get</a></li><li><a href="#process">Process</a></li><li><a href="#tools">Technology</a></li><li><a href="#tradeoffs">Trade-offs</a></li><li><a href="#use-cases">Where it fits</a></li><li><a href="#proof">Proof</a></li><li><a href="#faq">FAQ</a></li><li><a href="#related">Related</a></li><li><a href="#ask">Ask a question</a></li></ul></div></nav><section id="who" class="section pg-sec section--tint" aria-labelledby="who-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Who it is for</p>
+      <h2 id="who-h" class="section__title">Who this <span class="hl hl--blue">is for</span></h2>
+      
+    </header>
+<ul class="pg-uses" role="list" data-reveal-group><li class="pg-use" data-tone="cyan" style="--i:0"><h3 class="pg-use__who">Teams with voice recordings</h3><p>Teams that want to flag tone or mood in recorded calls or check-ins, such as calls worth a follow-up, and need to know how far the labels can be trusted.</p></li><li class="pg-use" data-tone="purple" style="--i:1"><h3 class="pg-use__who">Support and messaging teams</h3><p>Teams that receive many emails or texts and want unwanted messages filtered out automatically, with very few genuine messages blocked by mistake.</p></li><li class="pg-use" data-tone="blue" style="--i:2"><h3 class="pg-use__who">Analysts with spreadsheet data</h3><p>People who hold tables of past results and want to predict a number, such as a price or a cost, and see how much a stronger model adds over a simple one.</p></li><li class="pg-use" data-tone="magenta" style="--i:3"><h3 class="pg-use__who">Founders testing an idea</h3><p>Product owners who need a quick proof of concept on their own labelled data, with a clear accuracy figure, before they fund a bigger build.</p></li></ul>
+  </div>
+</section><section id="problems" class="section pg-sec" aria-labelledby="problems-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Problems I solve</p>
+      <h2 id="problems-h" class="section__title">Problems I <span class="hl hl--magenta">solve</span></h2>
+      
+    </header>
+<ul class="pg-problems" role="list" data-reveal-group><li class="pg-problem" data-tone="purple" style="--i:0"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>A model's accuracy figure cannot be trusted</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>For client work I hold back a test set the model never sees, split by speaker or source where possible, and state the split. I report precision (how many flags were right) and recall (how many real cases were found), not accuracy alone.</p></li><li class="pg-problem" data-tone="purple" style="--i:1"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>It is unclear whether a complex model is needed</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>I train a simple baseline first, then the stronger model, and report both. In my house-price model a Random Forest (many decision trees averaged) reached an R-squared of 0.89 (1.0 is perfect) against 0.80 for a simple linear baseline, both on held-out houses.</p></li><li class="pg-problem" data-tone="purple" style="--i:2"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>Raw audio and text are not ready for a model</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>Audio becomes numbers for loudness (energy), how often the signal crosses zero and MFCCs (a compact description of a voice's sound), extracted with librosa. Text is cleaned and scored by word frequency (TF-IDF). Tables get gaps filled and values scaled.</p></li><li class="pg-problem" data-tone="purple" style="--i:3"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>Too few labelled examples</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>Before any training I count examples per category and report gaps early. Where audio is scarce, altering clips with noise and pitch changes adds variety: in the speech model I retrained, 12,162 clips became 48,648 samples.</p></li><li class="pg-problem" data-tone="purple" style="--i:4"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>A trained model sits unused in a notebook</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>I wrap it in a small Streamlit app where people upload, record or paste and see the result, and in a tested FastAPI service when your own software must call it.</p></li></ul>
+  </div>
 </section><section id="deliverables" class="section pg-sec section--tint" aria-labelledby="deliverables-h">
   <div class="container">
     <header class="section__head" data-reveal>
@@ -269,8 +311,8 @@
       
     </header>
 <div class="pg-two">
-      <div class="panel" data-tone="purple" data-reveal><h3 class="pg-panel__h">Deliverables</h3><ul class="dot-list"><li>Data preparation and feature extraction (librosa for audio, word-frequency scoring for text, pandas for tables)</li><li>Model training, with a comparison against a simple baseline</li><li>A results report that states how the data was split</li><li>A Streamlit app: upload, record or paste, then see the result</li><li>A saved model and a script that uses it</li><li>A reproducible notebook and a README</li></ul></div>
-      <div class="panel" data-tone="green" data-reveal style="--i:1"><h3 class="pg-panel__h">Good fit when</h3><ul class="dot-list"><li>Teams with labelled audio, text or spreadsheet data and a clear thing to predict</li><li>Projects that need a quick proof of concept before investing further</li><li>Students and researchers who want a documented, reproducible workflow</li></ul></div>
+      <div class="panel" data-tone="purple" data-reveal><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-circle-check"/></svg> Deliverables</h3><ul class="dot-list"><li>Data preparation and feature extraction (librosa for audio, word-frequency scoring for text, pandas for tables)</li><li>Model training, with a comparison against a simple baseline</li><li>A results report that states how the data was split</li><li>A Streamlit app: upload, record or paste, then see the result</li><li>A saved model and a script that uses it</li><li>A reproducible notebook and a README</li></ul></div>
+      <div class="panel" data-tone="green" data-reveal style="--i:1"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-info"/></svg> What I need from you</h3><ul class="dot-list"><li>Labelled examples: recordings, messages or table rows, each marked with the correct answer by someone who knows the subject.</li><li>A plain statement of what the model should predict, which mistakes cost most and what accuracy would make it useful.</li><li>Details of how the data was collected: speakers, devices, sources and dates, and any person or customer who appears many times.</li><li>Whether the data holds personal information, where it may be stored, and where the finished model must run.</li></ul></div>
     </div>
   </div>
 </section><section id="process" class="section pg-sec" aria-labelledby="process-h">
@@ -282,7 +324,34 @@
     </header>
 <ol class="pg-steps" data-reveal-group><li class="pg-step" style="--i:0"><span class="pg-step__n" aria-hidden="true">01</span><h3 class="pg-step__t">Scope</h3><p>We define what to predict, what data you have and which measure matters.</p></li><li class="pg-step" style="--i:1"><span class="pg-step__n" aria-hidden="true">02</span><h3 class="pg-step__t">Baseline</h3><p>A simple model first, so every improvement is measured against something real.</p></li><li class="pg-step" style="--i:2"><span class="pg-step__n" aria-hidden="true">03</span><h3 class="pg-step__t">Train and test</h3><p>The stronger model, with the data split stated.</p></li><li class="pg-step" style="--i:3"><span class="pg-step__n" aria-hidden="true">04</span><h3 class="pg-step__t">Package</h3><p>App, saved model, notebook and documentation.</p></li></ol>
   </div>
-</section><section id="proof" class="section pg-sec section--tint" aria-labelledby="proof-h">
+</section><section id="tools" class="section pg-sec section--tint" aria-labelledby="tools-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Technology</p>
+      <h2 id="tools-h" class="section__title">Technology, and <span class="hl hl--blue">where it fits</span></h2>
+      
+    </header>
+<dl class="pg-roles panel" data-tone="purple" data-reveal><div class="pg-roles__row"><dt>librosa</dt><dd>Loads audio and measures it, giving the model numbers for loudness, zero-crossing rate and MFCCs.</dd></div><div class="pg-roles__row"><dt>TensorFlow / Keras</dt><dd>Trains neural networks, such as the five-block network I retrained for speech emotion, and saves them for reuse.</dd></div><div class="pg-roles__row"><dt>scikit-learn</dt><dd>Provides TF-IDF word scoring, Naive Bayes, Random Forest and linear models, plus data splits and accuracy measures.</dd></div><div class="pg-roles__row"><dt>NLTK</dt><dd>Handles natural language processing (NLP) steps: splits text into words, drops common words and reduces each word to its stem.</dd></div><div class="pg-roles__row"><dt>pandas</dt><dd>Loads and cleans tables and datasets, and fills gaps such as missing values with the median.</dd></div><div class="pg-roles__row"><dt>Streamlit</dt><dd>Builds the small app where people upload, record or paste, then see the result with a chart.</dd></div><div class="pg-roles__row"><dt>sounddevice</dt><dd>Records short microphone clips, so a model can be tried live on a voice.</dd></div><div class="pg-roles__row"><dt>Hugging Face Transformers</dt><dd>Loads ready-made pretrained models to use as a first baseline before any training from scratch.</dd></div><div class="pg-roles__row"><dt>FastAPI</dt><dd>Serves a saved model as an API that your own software can call, with tests and a Docker setup.</dd></div></dl>
+  </div>
+</section><section id="tradeoffs" class="section pg-sec" aria-labelledby="tradeoffs-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Decide together</p>
+      <h2 id="tradeoffs-h" class="section__title">Trade-offs we <span class="hl hl--purple">decide together</span></h2>
+      
+    </header>
+<ul class="pg-sizes" role="list" data-reveal-group><li class="pg-size" data-tone="cyan" style="--i:0"><h3 class="pg-size__t">Simple baseline or neural network</h3><p>A simple model such as Naive Bayes or a linear fit is quick to build and easy to explain. A neural network may add accuracy on audio or images. I build the simple one first and keep the stronger model only if the gap justifies the extra complexity.</p></li><li class="pg-size" data-tone="purple" style="--i:1"><h3 class="pg-size__t">Test on new speakers or random samples</h3><p>A random split is quick, but it can flatter the result when one speaker or source appears on both sides. Splitting by speaker, customer or source gives a lower, fairer number. On client data I split that way where possible; my speech project used a random split.</p></li><li class="pg-size" data-tone="blue" style="--i:2"><h3 class="pg-size__t">Fewer wrong blocks or fewer misses</h3><p>A filter can be tuned to avoid blocking genuine messages or to catch more spam, but not both at once. On its 1,034 test messages my spam filter flagged no genuine message and missed 30 spam messages. We choose by what each mistake costs you.</p></li></ul>
+  </div>
+</section><section id="use-cases" class="section pg-sec section--tint" aria-labelledby="use-cases-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">In a business</p>
+      <h2 id="use-cases-h" class="section__title">Where this <span class="hl hl--magenta">fits</span></h2>
+      <p class="section__lead">Situations where a team could use this service. These are examples, not past clients.</p>
+    </header>
+<ul class="pg-uses" role="list" data-reveal-group><li class="pg-use" data-tone="cyan" style="--i:0"><h3 class="pg-use__who">Customer support centres</h3><p>Flag recorded calls where the caller sounds angry or upset, so supervisors listen to those first. Accuracy would be tested on your own recordings before any use.</p></li><li class="pg-use" data-tone="purple" style="--i:1"><h3 class="pg-use__who">Wellbeing and coaching apps</h3><p>Show the mood heard in a short voice check-in as a probability for each emotion, not one hard label, and never as a medical result.</p></li><li class="pg-use" data-tone="blue" style="--i:2"><h3 class="pg-use__who">Telecom and messaging platforms</h3><p>Filter unwanted texts with a light word-frequency model that can be tuned so genuine messages are rarely blocked, then retrained on new examples.</p></li><li class="pg-use" data-tone="magenta" style="--i:3"><h3 class="pg-use__who">Finance and property analysts</h3><p>Estimate a price or cost from a few facts about each case, compare a simple baseline with a stronger model, and see the typical error in plain units.</p></li></ul>
+  </div>
+</section><section id="proof" class="section pg-sec" aria-labelledby="proof-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">Proof from real work</p>
@@ -293,28 +362,31 @@
         <p class="pg-proj__meta">Speech and machine learning</p>
         <h3 class="pg-proj__title" id="pf-speech-emotion-recognition">Speech Emotion Recognition</h3>
         <p class="pg-proj__blurb">Detects seven emotions in a voice clip with a neural network: 93.87% on a random test split, with live microphone input.</p>
-        <p class="pg-proj__stat"><span class="pg-proj__num">93.87%</span><span class="pg-proj__statlabel">Accuracy on a random 20% test split</span></p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> A neural network on audio features that reaches 93.87% on a random 20% split, with live microphone input and a stated caveat about new speakers.</p>
         <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/speech-emotion-recognition/">Read case study<span class="sr-only">: Speech Emotion Recognition</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
       </article><article class="card pg-proof" data-tone="purple" data-tilt data-reveal style="--i:1" aria-labelledby="pf-spam-classifier">
         <p class="pg-proj__meta">Natural language</p>
-        <h3 class="pg-proj__title" id="pf-spam-classifier">Email and SMS Spam Classifier</h3>
-        <p class="pg-proj__blurb">Spots spam in texts and emails: 97.1% accurate on 1,034 test messages, and it never flagged a genuine message.</p>
-        <p class="pg-proj__stat"><span class="pg-proj__num">97.10% / 100% / 78.26%</span><span class="pg-proj__statlabel">Accuracy, precision (flagged messages that were truly spam) and recall (spam found)</span></p>
-        <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/#p-spam-classifier">See project<span class="sr-only">: Email and SMS Spam Classifier</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+        <h3 class="pg-proj__title" id="pf-spam-classifier">SMS Spam Classifier</h3>
+        <p class="pg-proj__blurb">Spots spam in text messages: 97.1% accurate on 1,034 test messages, with no genuine message flagged.</p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> A word-frequency Naive Bayes filter with 97.10% accuracy, no false alarms and 78.26% recall on 1,034 test messages, in a small app.</p>
+        <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/spam-classifier/">Read case study<span class="sr-only">: SMS Spam Classifier</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+      </article><article class="card pg-proof" data-tone="magenta" data-tilt data-reveal style="--i:2" aria-labelledby="pf-deepfake-video-detection">
+        <p class="pg-proj__meta">Computer vision</p>
+        <h3 class="pg-proj__title" id="pf-deepfake-video-detection">DeepFake Video Detection</h3>
+        <p class="pg-proj__blurb">Scores each frame of a video as real or fake, with a web app and PDF report. College team project, 74.16% accuracy.</p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> A college team project that trains a neural network on labelled video frames and states the random frame-level split behind its accuracy figure.</p>
+        <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/deepfake-video-detection/">Read case study<span class="sr-only">: DeepFake Video Detection</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+      </article><article class="card pg-proof" data-tone="blue" data-tilt data-reveal style="--i:3" aria-labelledby="pf-core-banking-text-to-sql">
+        <p class="pg-proj__meta">AI and data</p>
+        <h3 class="pg-proj__title" id="pf-core-banking-text-to-sql">Core-Banking Text-to-SQL Assistant</h3>
+        <p class="pg-proj__blurb">Turns plain questions into database queries for core-banking reports, on the bank's own servers, with a self-correcting loop.</p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> A simple score said about 93%, but the test I built, which runs the queries and tracks recall and precision, showed far less.</p>
+        <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/core-banking-text-to-sql/">Read case study<span class="sr-only">: Core-Banking Text-to-SQL Assistant</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
       </article></div>
     <p class="pg-smallrel" data-reveal>Related personal builds: <a class="link" href="../../projects/#p-house-price-predictor">House Price Predictor</a>.</p>
-    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../projects/">See all case studies <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../projects/">See all case studies <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../../projects/#by-need">Browse work by business need <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
   </div>
-</section><section id="tools" class="section pg-sec" aria-labelledby="tools-h">
-  <div class="container">
-    <header class="section__head" data-reveal>
-      <p class="eyebrow">Tools</p>
-      <h2 id="tools-h" class="section__title">Tools I use <span class="hl hl--blue">for this</span></h2>
-      
-    </header>
-<div data-reveal><ul class="tags pg-tools" role="list" aria-label="Tools used for this service" data-tone="purple"><li class="tag">Python</li><li class="tag">TensorFlow / Keras</li><li class="tag">librosa</li><li class="tag">scikit-learn</li><li class="tag">NLTK</li><li class="tag">pandas</li><li class="tag">NumPy</li><li class="tag">Streamlit</li><li class="tag">Hugging Face Transformers</li></ul></div>
-  </div>
-</section><section id="faq" class="section pg-sec" aria-labelledby="faq-h">
+</section><section id="faq" class="section pg-sec section--tint" aria-labelledby="faq-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">FAQ</p>
@@ -326,29 +398,57 @@
       <div class="pg-qa__a"><p>A trained model is wrapped in a small FastAPI service with tests and a Docker setup, the same way I build other backends. Your apps can then send data to it and read the result. Handover includes instructions for running it, so your team can move it to a server or cloud machine later.</p></div>
     </details><details class="pg-qa" id="speech-nlp-ml-q2" open data-reveal style="--i:1">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">How much data do I need to train a model?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>It depends on the task. Simple tasks with clear categories may need a few hundred labelled examples per category, while audio or images usually need thousands. I count your examples before training and tell you early if there are too few. A ready-made model can often reduce the amount you need.</p></div>
+      <div class="pg-qa__a"><p>It depends on the task. Simple tasks with clear categories may need a few hundred labelled examples per category, while audio or images usually need thousands. My spam filter used 5,169 messages after duplicates were removed, and my speech model 12,162 clips. I count your examples first and tell you early if there are too few.</p></div>
     </details><details class="pg-qa" id="speech-nlp-ml-q3" open data-reveal style="--i:2">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Can you classify my own audio or text data?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>Yes, if you have labelled examples and a clear target. I have built a neural network on audio features. I have also built a spam classifier on text (word-frequency scoring with a Naive Bayes classifier). Each has a small app around it. Before training, we check that you have enough examples of each category.</p></div>
     </details><details class="pg-qa" id="speech-nlp-ml-q4" open data-reveal style="--i:3">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">How do you report accuracy?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>Every figure comes with the data split it was measured on. My speech emotion model reaches 93.87% on a random 20% test split. On your own recordings, accuracy is measured and reported the same way, including tests on speakers the model has not heard.</p></div>
+      <div class="pg-qa__a"><p>Every figure comes with the data split it was measured on. The speech emotion model I retrained reaches 93.87% on a random 20% test split. Because that split can put altered copies of one clip on both sides, it says little about new voices. For your recordings I test on speakers the model has not heard.</p></div>
     </details><details class="pg-qa" id="speech-nlp-ml-q5" open data-reveal style="--i:4">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Do you use ready-made models?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>When they fit. Pretrained Hugging Face models are a sensible start for many text and audio tasks. I compare against a simple baseline, so you can see what the extra complexity actually buys. I tell you if the simple option is good enough.</p></div>
+      <div class="pg-qa__a"><p>When they fit. Pretrained Hugging Face models are a sensible start for many text and audio tasks. My speech model began as a public training recipe that I retrained and tested on four datasets. I compare against a simple baseline, so you see what extra complexity buys, and I say when the simple option is enough.</p></div>
+    </details><details class="pg-qa" id="speech-nlp-ml-q6" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Can you build a prediction model from my spreadsheet data?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>Yes, if you have past rows with the outcome you want to predict, such as a price or cost. I clean the table, fill gaps, compare a simple linear baseline with a stronger model such as a Random Forest, and report the typical error in your own units. A small app lets your team try it.</p></div>
+    </details><details class="pg-qa" id="speech-nlp-ml-q7" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">How do you check a model has not just memorised its data?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>I keep a test set the model never trains on and compare its score there with its training score. A large gap means it has memorised. The speech network I retrained also uses dropout (switching off random parts during training) to limit this. For client audio, altered copies of a clip stay on one side of the split.</p></div>
+    </details><details class="pg-qa" id="speech-nlp-ml-q8" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Can you check the accuracy of a model someone else built?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>Yes. I need the saved model or code, the data it used and the figure that was claimed. I rerun it, check how the data was split, compare it with a simple baseline and report what I measure. The same habit exposed a flattering 93% score on a bank text-to-SQL assistant, where running the queries showed far less.</p></div>
     </details></div>
   </div>
-</section><section id="related" class="section pg-sec section--tint" aria-labelledby="related-h">
+</section><section id="related" class="section pg-sec" aria-labelledby="related-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">Related</p>
       <h2 id="related-h" class="section__title">Related <span class="hl hl--purple">services</span></h2>
       
     </header>
-<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/computer-vision/" data-tone="magenta"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-scan-eye"/></svg></span><span><strong>Object detection and video analytics</strong><span class="pg-rel__t">Tools that detect and monitor things in photos and video.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/ai-backend-fastapi-django/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-server"/></svg></span><span><strong>Hire a FastAPI developer</strong><span class="pg-rel__t">FastAPI and Django services with automated tests and clear logs.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
+<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/computer-vision/" data-tone="magenta"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-scan-eye"/></svg></span><span><strong>Object detection and video analytics</strong><span class="pg-rel__t">When part of your data is photos or video, such as counting people or checking a video for edits, not only sound, text or tables.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/ai-backend-fastapi-django/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-server"/></svg></span><span><strong>Hire a FastAPI developer</strong><span class="pg-rel__t">When the trained model must run behind an API that your product calls, with tests, logs and a Docker setup.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
       <li><a class="pg-rel__link" href="../../faq/" data-tone="green"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></span><span><strong>Freelance FAQ</strong><span class="pg-rel__t">Cost, how to start, NDAs and ownership.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
     </ul>
-    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../services/">All services <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../services/">All services <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../../services/#which-service">Which service fits you? <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+  </div>
+</section><section id="ask" class="section pg-sec pg-ask" aria-labelledby="ask-h">
+  <div class="container">
+    <div class="pg-ask__box panel" data-tone="cyan" data-reveal>
+      <div class="pg-ask__text">
+        <p class="eyebrow">Ask me</p>
+        <h2 id="ask-h" class="pg-ask__title">Have a question about speech and machine learning, or your own idea?</h2>
+        <p class="pg-ask__lead">Type your question below. The contact form opens with your question and this page already filled in, so you only add your name and email.</p>
+      </div>
+      <form class="pg-ask__form" action="../../contact/#hire" method="get">
+        <input type="hidden" name="topic" value="speech-nlp-ml">
+        <input type="hidden" name="ref" value="services/speech-nlp-ml/">
+        <input type="hidden" name="about" value="Speech and machine learning">
+        <label class="sr-only" for="ask-q">Your question</label>
+        <input class="input pg-ask__input" id="ask-q" name="q" type="text" maxlength="300" autocomplete="off" enterkeyhint="send" placeholder="Can you build a model from my labelled audio or text?">
+        <button class="btn btn--solid btn--glow" type="submit">Ask me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></button>
+      </form>
+      <ul class="pg-ask__chips" role="list" aria-label="Questions people often ask"><li><a class="pg-ask__chip" href="../../contact/?topic=speech-nlp-ml&ref=services/speech-nlp-ml/&about=Speech%20and%20machine%20learning&q=Can%20you%20build%20a%20model%20from%20my%20labelled%20audio%20or%20text%3F#hire">Can you build a model from my labelled audio or text?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=speech-nlp-ml&ref=services/speech-nlp-ml/&about=Speech%20and%20machine%20learning&q=How%20do%20you%20measure%20accuracy%20on%20voices%20it%20has%20not%20heard%3F#hire">How do you measure accuracy on voices it has not heard?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=speech-nlp-ml&ref=services/speech-nlp-ml/&about=Speech%20and%20machine%20learning&q=Can%20you%20predict%20a%20number%20from%20my%20spreadsheet%3F#hire">Can you predict a number from my spreadsheet?</a></li></ul>
+    </div>
   </div>
 </section><section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
   <div class="container">
@@ -397,21 +497,7 @@
       </div>
 
       <div class="footer__cols">
-        <nav class="footer__col" aria-labelledby="footer-pages-h">
-          <p class="footer__h" id="footer-pages-h">Pages</p>
-          <ul class="footer__links">
-            <li><a href="../../">Home</a></li>
-            <li><a href="../../projects/">Projects</a></li>
-            <li><a href="../../services/">Services</a></li>
-            <li><a href="../../about/">About</a></li>
-            <li><a href="../../about/#experience">Experience</a></li>
-            <li><a href="../../resume/">Resume</a></li>
-            <li><a href="../../faq/">FAQ</a></li>
-            <li><a href="../../contact/">Contact</a></li>
-          </ul>
-        </nav>
-
-        <nav class="footer__col footer__col--wide" aria-labelledby="footer-services-h">
+        <nav class="footer__col footer__col--services" aria-labelledby="footer-services-h">
           <p class="footer__h" id="footer-services-h">Services</p>
           <ul class="footer__links">
             <li><a href="../../services/llm-rag-development/">AI chatbot development</a></li>
@@ -423,14 +509,36 @@
           </ul>
         </nav>
 
-        <nav class="footer__col" aria-labelledby="footer-work-h">
+        <nav class="footer__col footer__col--work" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
+            <li><a href="../../projects/advanced-cctv-analytics/">CCTV analytics in Python</a></li>
+            <li><a href="../../projects/speech-emotion-recognition/">Speech emotion recognition</a></li>
+            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
+            <li><a href="../../projects/obligation-management-system/">Regulatory obligation extraction</a></li>
+            <li><a href="../../projects/ams-ai-finding-engine/">AI audit finding generator</a></li>
+            <li><a href="../../projects/core-banking-text-to-sql/">Text-to-SQL for banking</a></li>
             <li><a href="../../projects/agentic-honeypot/">AI scam honeypot</a></li>
+            <li><a href="../../projects/whatsapp-ai-agent-platform/">WhatsApp AI agent platform</a></li>
             <li><a href="../../projects/deepfake-video-detection/">Deepfake video detection</a></li>
+            <li><a href="../../projects/spam-classifier/">SMS spam classifier</a></li>
             <li><a href="../../projects/">All projects</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__col footer__col--pages" aria-labelledby="footer-pages-h">
+          <p class="footer__h" id="footer-pages-h">Pages</p>
+          <ul class="footer__links">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../projects/">Projects</a></li>
+            <li><a href="../../services/">Services</a></li>
+            <li><a href="../../about/">About</a></li>
+            <li><a href="../../about/#experience">Experience</a></li>
+            <li><a href="../../resume/">Resume</a></li>
+            <li><a href="../../faq/">FAQ</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+            <li><a href="../../contact/#book">Book a call</a></li>
           </ul>
         </nav>
       </div>
@@ -449,10 +557,20 @@
 
   <div class="footer__ghost" aria-hidden="true"></div>
 
-  <!-- floating "Hire me" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js) -->
+  <!-- floating "Let's talk" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js).
+       Without JavaScript it is a plain link to the contact form; with JavaScript it opens the small menu of ways to connect (content.connect). -->
   <div class="fab-wrap contact-fab">
-    <a class="fab" href="../../contact/#hire" aria-label="Hire me"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
-    <div class="fab-tip" aria-hidden="true">Hire me</div>
+    <div class="connect" id="connect-menu" hidden>
+      <p class="connect__h" id="connect-h">Let&rsquo;s talk</p>
+      <ul class="connect__list" aria-labelledby="connect-h">
+            <li><a class="connect__item" href="../../contact/#book"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><span><strong>Book a call</strong><small>Pick a day and time</small></span></a></li>
+            <li><a class="connect__item" href="../../contact/#hire"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg><span><strong>Send a brief</strong><small>Tell me what you need</small></span></a></li>
+            <li><a class="connect__item" href="https://wa.me/919920644655?text=Hi%20Shaunak%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg><span><strong>WhatsApp</strong><small>Message me directly</small></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="connect__item" href="mailto:shaunak.chorge@gmail.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span><strong>Email</strong><small>Write to me</small></span></a></li>
+      </ul>
+    </div>
+    <a class="fab" href="../../contact/#hire" aria-label="Hire me" data-connect-toggle><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></a>
+    <div class="fab-tip" aria-hidden="true">Let&rsquo;s talk</div>
   </div>
 </footer>
 
@@ -490,10 +608,12 @@
     <symbol id="i-scan-eye" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="1"/><path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0"/></symbol>
     <symbol id="i-audio-waveform" viewBox="0 0 24 24"><path d="M2 13a2 2 0 0 0 2-2V7a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0V4a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0v-4a2 2 0 0 1 2-2"/></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
     <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
     <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
     <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
     <symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
     <symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
     <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
@@ -504,9 +624,9 @@
   </svg>
 
   <script defer src="../../assets/dist/js/core.min.js?v=d41b0d5b"></script>
-  <script defer src="../../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
+  <script defer src="../../assets/dist/js/contact.min.js?v=e6aee63a"></script>
   <script defer src="../../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
-  <script defer src="../../assets/dist/js/pages.min.js?v=efc0e441"></script>
+  <script defer src="../../assets/dist/js/fx.min.js?v=bb37bfa8"></script>
+  <script defer src="../../assets/dist/js/pages.min.js?v=514d4156"></script>
 </body>
 </html>

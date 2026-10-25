@@ -7,10 +7,10 @@
 //                    "All projects" link tile. Must be a full rectangle with no gaps (checked below). Tablet and phone layouts follow the rank order.
 //   casestudy        the selected ones that also get their own page (each needs a `case_study` block in content.json)
 //   personal         "Personal builds": small projects shown as open rows on /projects/ only (a project listed in `show` is never repeated there)
-//   footer_work      case studies linked in the footer "Work" column (up to 4)
 //   resume_featured  case studies on the resume page and in the PDF (up to 4)
 //
-// Ordering rule for the two featured lists: the ids you list come first, in your order. An id that is not a case study (any more) is skipped with a
+// The footer "Work" column is not configured: it lists every project of `show` in that order (a project without a case study links to its tile on /projects/).
+// Ordering rule for resume_featured: the ids you list come first, in your order. An id that is not a case study (any more) is skipped with a
 // warning. If fewer than the maximum remain, the first case studies of `casestudy` fill the rest, so a new selection never leaves a gap or a dead link.
 // The origin tag of a tile (Client, Academic or Personal) is the optional `origin` field of the project in content.json.
 import fs from 'node:fs';
@@ -18,7 +18,7 @@ import path from 'node:path';
 import { SITE, readContent } from './lib.mjs';
 
 const CONFIG_FILE = path.join(SITE, 'projects.config.json');
-const FEATURED_MAX = { footer_work: 4, resume_featured: 4 };
+const FEATURED_MAX = { resume_featured: 4 };
 const KEYS = ['show', 'tile_size', 'desktop_grid', 'casestudy', 'personal', ...Object.keys(FEATURED_MAX)];
 const SIZES = { small: [1, 1], wide: [2, 1], big: [2, 2] };   // columns x rows
 const ORIGINS = ['Client', 'Academic', 'Personal'];
@@ -83,6 +83,6 @@ export function loadSelection(content = readContent()) {
   return {
     show, casestudy, personal,
     collage: { tiles, linkRank, grid, areas: grid.map(row => row.map(rank => 'p' + rank).join(' ')) },
-    footerWork: featured('footer_work'), resumeFeatured: featured('resume_featured'), config: cfg,
+    resumeFeatured: featured('resume_featured'), config: cfg,
   };
 }

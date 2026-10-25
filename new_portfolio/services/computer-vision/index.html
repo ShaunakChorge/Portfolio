@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=99f76e8a">
+  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=d92fd1cd">
 
 <script type="application/ld+json">
 {
@@ -62,7 +62,7 @@
       "breadcrumb": {
         "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/services/computer-vision/#breadcrumb"
       },
-      "dateModified": "2026-10-24",
+      "dateModified": "2026-10-25",
       "mainEntity": {
         "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/services/computer-vision/#service"
       }
@@ -133,7 +133,7 @@
           "name": "What is YOLO object detection?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "YOLO, short for You Only Look Once, is a fast method that finds and labels many objects in an image or video frame. It works in one pass and draws a box around each. I have used the YOLOv8 version for detection. It suits live counting and alerts, though accuracy still has to be tested on your own footage."
+            "text": "YOLO, short for You Only Look Once, is a fast method that finds and labels objects in an image or video frame. It works in one pass and draws a box around each. I have used the small YOLOv8n version on video frames. It suits live counting and alerts, though accuracy has to be tested on your own footage."
           }
         },
         {
@@ -141,7 +141,7 @@
           "name": "How accurate is computer vision?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Accuracy is measured on a sample of your own footage first, using data the model has not seen. The result is reported clearly, together with the way the data was split. My deepfake detector reports 74.16% on a random frame-level split, so every figure states what it covers."
+            "text": "Accuracy is measured on a sample of your own footage first, using data the model has not seen. The result is reported clearly, together with the way the data was split. The deepfake detector from my college team reports 74.16% on a random frame-level split, so every figure states what it covers."
           }
         },
         {
@@ -149,7 +149,7 @@
           "name": "How much does a computer vision project cost?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It depends on how much footage or how many images you have, how much labelling is needed. The accuracy you need and whether it must run live also matter. I do not publish a price list. After a short brief I suggest a fixed price or hourly billing for a clear scope and agree it in writing before I start."
+            "text": "It depends on how much footage or how many images you have, how much labelling is needed, the accuracy you need and whether the tool must run live. I do not publish a price list. After a short brief I suggest a fixed price or hourly billing for a clear scope, and we agree it in writing before I start."
           }
         },
         {
@@ -157,7 +157,7 @@
           "name": "Can you train a model on my own images or video?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, for small to medium sets of images. I trained a neural network on frames from a public deepfake dataset. I have also used ready-made detectors such as Faster R-CNN, YOLOv8n and a Vision Transformer. During planning we check how much labelled data you have and whether a ready-made model is the better start."
+            "text": "Yes, for small to medium sets of images. A college team I was part of trained a neural network on frames from a public deepfake dataset, and during an internship I built one that sorts plastic-waste images. I have also used ready-made models such as Faster R-CNN, YOLOv8n and a Vision Transformer. We first check your labelled data."
           }
         },
         {
@@ -165,7 +165,7 @@
           "name": "Can it work on live camera feeds?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "My monitoring prototype checks video frames on a schedule, one every three seconds for the crime module, and raises alerts. Whether your setup needs true real-time speed depends on camera quality, the number of cameras and your hardware. We would test that during planning rather than assume it."
+            "text": "The team CCTV prototype read recorded video and checked frames on a schedule, one every three seconds for the crime labels. Live feeds are a different job: real-time speed depends on camera quality, the number of cameras and your hardware. I would connect a test stream and measure that during planning rather than assume it."
           }
         },
         {
@@ -174,6 +174,22 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Those projects need consent, clear rules on how long data is kept and legal review on your side. I raise privacy questions during planning and can build in options such as limited data retention and restricted access to stored images. The legal decisions stay with you."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can computer vision count people in a crowd?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, within limits. The CCTV prototype I worked on counted people crossing virtual lines using OpenCV background removal and raised an alert at a set limit. Dense or dark scenes are harder, so I would test on your own footage and, if needed, move to a trained detector and tracker for steadier counts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does my video have to be uploaded to an online service?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not necessarily. Detection models such as YOLOv8 run on your own computer or server, so video can stay in your building. In the CCTV prototype I worked on, the README calls for a local MongoDB database for evidence frames, and the WhatsApp alert carried only a short text. The right setup depends on your privacy rules and hardware."
           }
         }
       ]
@@ -222,10 +238,10 @@
         </nav>
 
         <div class="site-header__tools">
+          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
           </button>
-          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
             <span class="burger__lines" aria-hidden="true"><i></i><i></i><i></i></span>
           </button>
@@ -269,6 +285,24 @@
       <div class="pg-head__aside"><div class="pg-svcmark" data-tone="magenta" aria-hidden="true"><span class="pg-svcmark__ring"></span><span class="icon-tile pg-svcmark__tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-scan-eye"/></svg></span></div></div>
     </div>
   </div>
+</section><nav class="pg-toc" aria-label="On this page"><div class="container"><ul class="pg-toc__list" role="list"><li><a href="#who">Who it is for</a></li><li><a href="#problems">Problems solved</a></li><li><a href="#deliverables">What you get</a></li><li><a href="#process">Process</a></li><li><a href="#tools">Technology</a></li><li><a href="#tradeoffs">Trade-offs</a></li><li><a href="#use-cases">Where it fits</a></li><li><a href="#proof">Proof</a></li><li><a href="#faq">FAQ</a></li><li><a href="#related">Related</a></li><li><a href="#ask">Ask a question</a></li></ul></div></nav><section id="who" class="section pg-sec section--tint" aria-labelledby="who-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Who it is for</p>
+      <h2 id="who-h" class="section__title">Who this <span class="hl hl--blue">is for</span></h2>
+      
+    </header>
+<ul class="pg-uses" role="list" data-reveal-group><li class="pg-use" data-tone="cyan" style="--i:0"><h3 class="pg-use__who">Facility and safety managers</h3><p>People who must watch how busy a space gets. They need counts, an alert at a set limit and a saved frame as evidence. A team prototype I worked on counts people crossing a line in recorded video.</p></li><li class="pg-use" data-tone="purple" style="--i:1"><h3 class="pg-use__who">Product teams adding video checks</h3><p>Teams that want a first-pass screen for uploaded videos or images, such as flagging possible face-swap edits, with a clear report and an honest accuracy figure before they invest more.</p></li><li class="pg-use" data-tone="blue" style="--i:2"><h3 class="pg-use__who">Security and operations leads</h3><p>Teams with more cameras and photos than people to review them. A tool pre-sorts the material, so staff look at a short list of flagged items instead of everything.</p></li><li class="pg-use" data-tone="magenta" style="--i:3"><h3 class="pg-use__who">Research and student teams</h3><p>Groups that need a documented, repeatable detection or classification workflow, with the data split and results written down so another person can rerun it and get the same numbers.</p></li></ul>
+  </div>
+</section><section id="problems" class="section pg-sec" aria-labelledby="problems-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Problems I solve</p>
+      <h2 id="problems-h" class="section__title">Problems I <span class="hl hl--magenta">solve</span></h2>
+      
+    </header>
+<ul class="pg-problems" role="list" data-reveal-group><li class="pg-problem" data-tone="magenta" style="--i:0"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>Too much footage for people to review</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>Video analytics software samples frames, counts people or labels possible events, and saves the frame behind each result. A person then checks only the flagged moments. The team CCTV prototype works this way on recorded video.</p></li><li class="pg-problem" data-tone="magenta" style="--i:1"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>Accuracy figures that do not hold up</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>For client work I keep test footage apart from training footage, split by video, and state the split beside every figure. The team deepfake detector's 74.16% is labelled as a random frame-level split, because near-identical frames from one video can sit on both sides.</p></li><li class="pg-problem" data-tone="magenta" style="--i:2"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>Busy, dark or blurry scenes confuse the model</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>Simple background removal can undercount when people overlap. I test on your hardest footage and report where the tool fails. For crowded scenes I can switch to a trained detector with a tracker (it follows each person from frame to frame).</p></li><li class="pg-problem" data-tone="magenta" style="--i:3"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>Reviewers cannot see why something was flagged</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>Each result keeps the evidence behind it. In the deepfake app, a chart scores every frame, a note explains each confidence band and a PDF report can be downloaded. The CCTV prototype saves its evidence frames in MongoDB.</p></li><li class="pg-problem" data-tone="magenta" style="--i:4"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>Alerts do not reach the right person</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>Alerts go to a channel your staff already use. The CCTV prototype I worked on sent a WhatsApp message through Twilio when the crowd limit was reached, with a reference to the saved frame.</p></li></ul>
+  </div>
 </section><section id="deliverables" class="section pg-sec section--tint" aria-labelledby="deliverables-h">
   <div class="container">
     <header class="section__head" data-reveal>
@@ -277,8 +311,8 @@
       
     </header>
 <div class="pg-two">
-      <div class="panel" data-tone="magenta" data-reveal><h3 class="pg-panel__h">Deliverables</h3><ul class="dot-list"><li>A detection or classification tool for your images or video</li><li>Code that samples video frames and cleans them up first (OpenCV)</li><li>A short results note that states how the tool was tested</li><li>A small Streamlit or Flask app for uploading files and viewing results</li><li>Alerts or record-keeping, such as saving to a database or sending a WhatsApp message (Twilio)</li><li>A documented repository or notebook, so results can be reproduced</li></ul></div>
-      <div class="panel" data-tone="green" data-reveal style="--i:1"><h3 class="pg-panel__h">Good fit when</h3><ul class="dot-list"><li>Teams that need a prototype for counting, classifying or flagging events in video</li><li>Researchers and students who need a clean, documented vision workflow</li><li>Products that want a first-pass image or video screening tool with a clear report</li></ul></div>
+      <div class="panel" data-tone="magenta" data-reveal><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-circle-check"/></svg> Deliverables</h3><ul class="dot-list"><li>A detection or classification tool for your images or video</li><li>Code that samples video frames and cleans them up first (OpenCV)</li><li>A short results note that states how the tool was tested</li><li>A small Streamlit or Flask app for uploading files and viewing results</li><li>Alerts or record-keeping, such as saving to a database or sending a WhatsApp message (Twilio)</li><li>A documented repository or notebook, so results can be reproduced</li></ul></div>
+      <div class="panel" data-tone="green" data-reveal style="--i:1"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-info"/></svg> What I need from you</h3><ul class="dot-list"><li>Sample footage or images from the real setting, with permission to use them, covering the angles, lighting and times of day that matter.</li><li>A clear list of what must be detected or counted, and which mistake costs you more: a missed event or a false alarm.</li><li>Someone who knows your site and can mark the correct answers on a sample of footage, because accuracy is measured against those marks.</li><li>The setup: how many cameras, recorded clips or a live stream, the hardware available, and where alerts should be sent.</li></ul></div>
     </div>
   </div>
 </section><section id="process" class="section pg-sec" aria-labelledby="process-h">
@@ -290,7 +324,34 @@
     </header>
 <ol class="pg-steps" data-reveal-group><li class="pg-step" style="--i:0"><span class="pg-step__n" aria-hidden="true">01</span><h3 class="pg-step__t">Scope</h3><p>We define what must be detected, in what conditions, and how accuracy will be judged.</p></li><li class="pg-step" style="--i:1"><span class="pg-step__n" aria-hidden="true">02</span><h3 class="pg-step__t">Baseline</h3><p>A first model, or a ready-made one, tried on a sample of your data.</p></li><li class="pg-step" style="--i:2"><span class="pg-step__n" aria-hidden="true">03</span><h3 class="pg-step__t">Evaluate</h3><p>Accuracy measured on data the model has not seen, with the data split stated.</p></li><li class="pg-step" style="--i:3"><span class="pg-step__n" aria-hidden="true">04</span><h3 class="pg-step__t">Package</h3><p>A small app or API, documentation and a repository others can rerun.</p></li></ol>
   </div>
-</section><section id="proof" class="section pg-sec section--tint" aria-labelledby="proof-h">
+</section><section id="tools" class="section pg-sec section--tint" aria-labelledby="tools-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Technology</p>
+      <h2 id="tools-h" class="section__title">Technology, and <span class="hl hl--blue">where it fits</span></h2>
+      
+    </header>
+<dl class="pg-roles panel" data-tone="magenta" data-reveal><div class="pg-roles__row"><dt>OpenCV</dt><dd>Reads video, samples frames, resizes and cleans images, and handles background removal, line-crossing counts and classic face matching.</dd></div><div class="pg-roles__row"><dt>YOLOv8</dt><dd>A fast detector that draws a box around each object. I have run the small YOLOv8n model on video frames.</dd></div><div class="pg-roles__row"><dt>PyTorch</dt><dd>Runs ready-made detection and classification models, including Faster R-CNN and the Vision Transformer used for crime labels.</dd></div><div class="pg-roles__row"><dt>TensorFlow / Keras</dt><dd>Trains small image networks on labelled frames, as in the college deepfake detector, and saves them for an app to load.</dd></div><div class="pg-roles__row"><dt>Hugging Face Transformers</dt><dd>Loads a ready-made Vision Transformer for frame labels, so a first baseline needs no training.</dd></div><div class="pg-roles__row"><dt>Streamlit</dt><dd>Builds the upload-and-review app, with a confidence chart and a downloadable PDF report made with ReportLab.</dd></div><div class="pg-roles__row"><dt>Flask</dt><dd>Serves simple pages where reviewers see the latest detections and saved evidence frames.</dd></div><div class="pg-roles__row"><dt>MongoDB</dt><dd>Stores evidence frames and crime labels, so alerts can be checked later.</dd></div><div class="pg-roles__row"><dt>Twilio</dt><dd>Sends WhatsApp alerts, such as a message when a crowd limit is crossed.</dd></div></dl>
+  </div>
+</section><section id="tradeoffs" class="section pg-sec" aria-labelledby="tradeoffs-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Decide together</p>
+      <h2 id="tradeoffs-h" class="section__title">Trade-offs we <span class="hl hl--purple">decide together</span></h2>
+      
+    </header>
+<ul class="pg-sizes" role="list" data-reveal-group><li class="pg-size" data-tone="cyan" style="--i:0"><h3 class="pg-size__t">Ready-made model or custom training</h3><p>A ready-made detector is quick and often good enough for common objects such as people. Custom training pays off for unusual objects or camera views. I test a ready-made model on your footage first and train only if the numbers fall short.</p></li><li class="pg-size" data-tone="purple" style="--i:1"><h3 class="pg-size__t">Fewer false alarms or fewer misses</h3><p>A detector can be tuned to raise fewer false alarms or to miss fewer real events, but not both at once. We agree which mistake costs more for you, set the alert level to match and report both kinds of error.</p></li><li class="pg-size" data-tone="blue" style="--i:2"><h3 class="pg-size__t">Every frame or a frame every few seconds</h3><p>Checking one frame every few seconds is light on hardware and often enough to label events or count who is in view. Counting people as they cross a line needs every frame. The team CCTV prototype used both. I measure speed on your hardware before we choose.</p></li></ul>
+  </div>
+</section><section id="use-cases" class="section pg-sec section--tint" aria-labelledby="use-cases-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">In a business</p>
+      <h2 id="use-cases-h" class="section__title">Where this <span class="hl hl--magenta">fits</span></h2>
+      <p class="section__lead">Situations where a team could use this service. These are examples, not past clients.</p>
+    </header>
+<ul class="pg-uses" role="list" data-reveal-group><li class="pg-use" data-tone="cyan" style="--i:0"><h3 class="pg-use__who">Car parks and logistics yards</h3><p>Count vehicles at a gate camera, log the totals by hour and show staff how full the site is.</p></li><li class="pg-use" data-tone="purple" style="--i:1"><h3 class="pg-use__who">Shops and service counters</h3><p>Estimate how many people are waiting and tell staff when a queue passes a set length, so they open another counter in time.</p></li><li class="pg-use" data-tone="blue" style="--i:2"><h3 class="pg-use__who">Media and platform safety teams</h3><p>Run a first-pass screen on uploaded videos for possible face-swap edits and hand a reviewer a frame-by-frame report with confidence scores, with a person making the final call.</p></li><li class="pg-use" data-tone="magenta" style="--i:3"><h3 class="pg-use__who">Recycling and waste handling</h3><p>Sort photos of items into categories, so people check only the doubtful cases, as in my internship classifier for plastic-waste images.</p></li></ul>
+  </div>
+</section><section id="proof" class="section pg-sec" aria-labelledby="proof-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">Proof from real work</p>
@@ -300,29 +361,20 @@
 <div class="grid grid--c3 pg-cards"><article class="card pg-proof" data-tone="magenta" data-tilt data-reveal style="--i:0" aria-labelledby="pf-advanced-cctv-analytics">
         <p class="pg-proj__meta">Computer vision</p>
         <h3 class="pg-proj__title" id="pf-advanced-cctv-analytics">CCTV Crime and Crowd Analytics</h3>
-        <p class="pg-proj__blurb">Smart India Hackathon team prototype: crowd-limit alerts, crime detection from video frames and face recognition on one camera feed.</p>
-        <p class="pg-proj__stat"><span class="pg-proj__num">14</span><span class="pg-proj__statlabel">Crime categories recognised</span></p>
+        <p class="pg-proj__blurb">Smart India Hackathon team prototype: crowd-limit alerts, crime labels from video frames and face recognition, as three separate modules.</p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> A team hackathon prototype that counts a crowd, labels crime frames and matches faces, with evidence frames in MongoDB and WhatsApp alerts.</p>
         <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/advanced-cctv-analytics/">Read case study<span class="sr-only">: CCTV Crime and Crowd Analytics</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
       </article><article class="card pg-proof" data-tone="magenta" data-tilt data-reveal style="--i:1" aria-labelledby="pf-deepfake-video-detection">
         <p class="pg-proj__meta">Computer vision</p>
         <h3 class="pg-proj__title" id="pf-deepfake-video-detection">DeepFake Video Detection</h3>
         <p class="pg-proj__blurb">Scores each frame of a video as real or fake, with a web app and PDF report. College team project, 74.16% accuracy.</p>
-        <p class="pg-proj__stat"><span class="pg-proj__num">74.16%</span><span class="pg-proj__statlabel">Test accuracy (random frame split)</span></p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> A college team project that scores video frames with a small trained network, in a web app with a PDF report and a stated test split.</p>
         <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/deepfake-video-detection/">Read case study<span class="sr-only">: DeepFake Video Detection</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
       </article></div>
     <p class="pg-smallrel" data-reveal>Related personal builds: <a class="link" href="../../projects/#p-cv-fundamentals-yolov8">Computer Vision Basics and YOLOv8 on Video</a>.</p>
-    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../projects/">See all case studies <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../projects/">See all case studies <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../../projects/#by-need">Browse work by business need <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
   </div>
-</section><section id="tools" class="section pg-sec" aria-labelledby="tools-h">
-  <div class="container">
-    <header class="section__head" data-reveal>
-      <p class="eyebrow">Tools</p>
-      <h2 id="tools-h" class="section__title">Tools I use <span class="hl hl--blue">for this</span></h2>
-      
-    </header>
-<div data-reveal><ul class="tags pg-tools" role="list" aria-label="Tools used for this service" data-tone="magenta"><li class="tag">Python</li><li class="tag">OpenCV</li><li class="tag">PyTorch</li><li class="tag">TensorFlow / Keras</li><li class="tag">YOLOv8</li><li class="tag">Hugging Face Transformers</li><li class="tag">Streamlit</li><li class="tag">Flask</li><li class="tag">MongoDB</li><li class="tag">Twilio</li></ul></div>
-  </div>
-</section><section id="faq" class="section pg-sec" aria-labelledby="faq-h">
+</section><section id="faq" class="section pg-sec section--tint" aria-labelledby="faq-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">FAQ</p>
@@ -331,35 +383,60 @@
     </header>
 <div class="pg-qas"><details class="pg-qa" id="computer-vision-q1" open data-reveal>
       <summary class="pg-qa__q"><h3 class="pg-qa__h">What is YOLO object detection?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>YOLO, short for You Only Look Once, is a fast method that finds and labels many objects in an image or video frame. It works in one pass and draws a box around each. I have used the YOLOv8 version for detection. It suits live counting and alerts, though accuracy still has to be tested on your own footage.</p></div>
+      <div class="pg-qa__a"><p>YOLO, short for You Only Look Once, is a fast method that finds and labels objects in an image or video frame. It works in one pass and draws a box around each. I have used the small YOLOv8n version on video frames. It suits live counting and alerts, though accuracy has to be tested on your own footage.</p></div>
     </details><details class="pg-qa" id="computer-vision-q2" open data-reveal style="--i:1">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">How accurate is computer vision?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>Accuracy is measured on a sample of your own footage first, using data the model has not seen. The result is reported clearly, together with the way the data was split. My deepfake detector reports 74.16% on a random frame-level split, so every figure states what it covers.</p></div>
+      <div class="pg-qa__a"><p>Accuracy is measured on a sample of your own footage first, using data the model has not seen. The result is reported clearly, together with the way the data was split. The deepfake detector from my college team reports 74.16% on a random frame-level split, so every figure states what it covers.</p></div>
     </details><details class="pg-qa" id="computer-vision-q3" open data-reveal style="--i:2">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">How much does a computer vision project cost?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>It depends on how much footage or how many images you have, how much labelling is needed. The accuracy you need and whether it must run live also matter. I do not publish a price list. After a short brief I suggest a fixed price or hourly billing for a clear scope and agree it in writing before I start.</p></div>
+      <div class="pg-qa__a"><p>It depends on how much footage or how many images you have, how much labelling is needed, the accuracy you need and whether the tool must run live. I do not publish a price list. After a short brief I suggest a fixed price or hourly billing for a clear scope, and we agree it in writing before I start.</p></div>
     </details><details class="pg-qa" id="computer-vision-q4" open data-reveal style="--i:3">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Can you train a model on my own images or video?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>Yes, for small to medium sets of images. I trained a neural network on frames from a public deepfake dataset. I have also used ready-made detectors such as Faster R-CNN, YOLOv8n and a Vision Transformer. During planning we check how much labelled data you have and whether a ready-made model is the better start.</p></div>
+      <div class="pg-qa__a"><p>Yes, for small to medium sets of images. A college team I was part of trained a neural network on frames from a public deepfake dataset, and during an internship I built one that sorts plastic-waste images. I have also used ready-made models such as Faster R-CNN, YOLOv8n and a Vision Transformer. We first check your labelled data.</p></div>
     </details><details class="pg-qa" id="computer-vision-q5" open data-reveal style="--i:4">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Can it work on live camera feeds?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>My monitoring prototype checks video frames on a schedule, one every three seconds for the crime module, and raises alerts. Whether your setup needs true real-time speed depends on camera quality, the number of cameras and your hardware. We would test that during planning rather than assume it.</p></div>
+      <div class="pg-qa__a"><p>The team CCTV prototype read recorded video and checked frames on a schedule, one every three seconds for the crime labels. Live feeds are a different job: real-time speed depends on camera quality, the number of cameras and your hardware. I would connect a test stream and measure that during planning rather than assume it.</p></div>
     </details><details class="pg-qa" id="computer-vision-q6" open data-reveal style="--i:4">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">What about privacy for face or surveillance projects?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>Those projects need consent, clear rules on how long data is kept and legal review on your side. I raise privacy questions during planning and can build in options such as limited data retention and restricted access to stored images. The legal decisions stay with you.</p></div>
+    </details><details class="pg-qa" id="computer-vision-q7" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Can computer vision count people in a crowd?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>Yes, within limits. The CCTV prototype I worked on counted people crossing virtual lines using OpenCV background removal and raised an alert at a set limit. Dense or dark scenes are harder, so I would test on your own footage and, if needed, move to a trained detector and tracker for steadier counts.</p></div>
+    </details><details class="pg-qa" id="computer-vision-q8" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Does my video have to be uploaded to an online service?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>Not necessarily. Detection models such as YOLOv8 run on your own computer or server, so video can stay in your building. In the CCTV prototype I worked on, the README calls for a local MongoDB database for evidence frames, and the WhatsApp alert carried only a short text. The right setup depends on your privacy rules and hardware.</p></div>
     </details></div>
   </div>
-</section><section id="related" class="section pg-sec section--tint" aria-labelledby="related-h">
+</section><section id="related" class="section pg-sec" aria-labelledby="related-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">Related</p>
       <h2 id="related-h" class="section__title">Related <span class="hl hl--purple">services</span></h2>
       
     </header>
-<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/speech-nlp-ml/" data-tone="purple"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-audio-waveform"/></svg></span><span><strong>Speech and text machine learning</strong><span class="pg-rel__t">Models trained on audio and text, wrapped in small apps.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/ai-backend-fastapi-django/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-server"/></svg></span><span><strong>Hire a FastAPI developer</strong><span class="pg-rel__t">FastAPI and Django services with automated tests and clear logs.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
+<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/speech-nlp-ml/" data-tone="purple"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-audio-waveform"/></svg></span><span><strong>Speech and text machine learning</strong><span class="pg-rel__t">When you also want models for voice recordings, messages or spreadsheet data, such as predicting busy periods from the counts a camera tool saves.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/ai-backend-fastapi-django/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-server"/></svg></span><span><strong>Hire a FastAPI developer</strong><span class="pg-rel__t">When detections must feed your product through an API, with a database, automated tests and logs around the model.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
       <li><a class="pg-rel__link" href="../../faq/" data-tone="green"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></span><span><strong>Freelance FAQ</strong><span class="pg-rel__t">Cost, how to start, NDAs and ownership.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
     </ul>
-    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../services/">All services <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../services/">All services <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../../services/#which-service">Which service fits you? <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+  </div>
+</section><section id="ask" class="section pg-sec pg-ask" aria-labelledby="ask-h">
+  <div class="container">
+    <div class="pg-ask__box panel" data-tone="cyan" data-reveal>
+      <div class="pg-ask__text">
+        <p class="eyebrow">Ask me</p>
+        <h2 id="ask-h" class="pg-ask__title">Have a question about computer vision, or your own idea?</h2>
+        <p class="pg-ask__lead">Type your question below. The contact form opens with your question and this page already filled in, so you only add your name and email.</p>
+      </div>
+      <form class="pg-ask__form" action="../../contact/#hire" method="get">
+        <input type="hidden" name="topic" value="computer-vision">
+        <input type="hidden" name="ref" value="services/computer-vision/">
+        <input type="hidden" name="about" value="Computer vision">
+        <label class="sr-only" for="ask-q">Your question</label>
+        <input class="input pg-ask__input" id="ask-q" name="q" type="text" maxlength="300" autocomplete="off" enterkeyhint="send" placeholder="Can you count people from my existing CCTV footage?">
+        <button class="btn btn--solid btn--glow" type="submit">Ask me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></button>
+      </form>
+      <ul class="pg-ask__chips" role="list" aria-label="Questions people often ask"><li><a class="pg-ask__chip" href="../../contact/?topic=computer-vision&ref=services/computer-vision/&about=Computer%20vision&q=Can%20you%20count%20people%20from%20my%20existing%20CCTV%20footage%3F#hire">Can you count people from my existing CCTV footage?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=computer-vision&ref=services/computer-vision/&about=Computer%20vision&q=How%20do%20you%20test%20accuracy%20on%20footage%20from%20my%20site%3F#hire">How do you test accuracy on footage from my site?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=computer-vision&ref=services/computer-vision/&about=Computer%20vision&q=Can%20it%20run%20on%20live%20camera%20streams%3F#hire">Can it run on live camera streams?</a></li></ul>
+    </div>
   </div>
 </section><section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
   <div class="container">
@@ -408,21 +485,7 @@
       </div>
 
       <div class="footer__cols">
-        <nav class="footer__col" aria-labelledby="footer-pages-h">
-          <p class="footer__h" id="footer-pages-h">Pages</p>
-          <ul class="footer__links">
-            <li><a href="../../">Home</a></li>
-            <li><a href="../../projects/">Projects</a></li>
-            <li><a href="../../services/">Services</a></li>
-            <li><a href="../../about/">About</a></li>
-            <li><a href="../../about/#experience">Experience</a></li>
-            <li><a href="../../resume/">Resume</a></li>
-            <li><a href="../../faq/">FAQ</a></li>
-            <li><a href="../../contact/">Contact</a></li>
-          </ul>
-        </nav>
-
-        <nav class="footer__col footer__col--wide" aria-labelledby="footer-services-h">
+        <nav class="footer__col footer__col--services" aria-labelledby="footer-services-h">
           <p class="footer__h" id="footer-services-h">Services</p>
           <ul class="footer__links">
             <li><a href="../../services/llm-rag-development/">AI chatbot development</a></li>
@@ -434,14 +497,36 @@
           </ul>
         </nav>
 
-        <nav class="footer__col" aria-labelledby="footer-work-h">
+        <nav class="footer__col footer__col--work" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
+            <li><a href="../../projects/advanced-cctv-analytics/">CCTV analytics in Python</a></li>
+            <li><a href="../../projects/speech-emotion-recognition/">Speech emotion recognition</a></li>
+            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
+            <li><a href="../../projects/obligation-management-system/">Regulatory obligation extraction</a></li>
+            <li><a href="../../projects/ams-ai-finding-engine/">AI audit finding generator</a></li>
+            <li><a href="../../projects/core-banking-text-to-sql/">Text-to-SQL for banking</a></li>
             <li><a href="../../projects/agentic-honeypot/">AI scam honeypot</a></li>
+            <li><a href="../../projects/whatsapp-ai-agent-platform/">WhatsApp AI agent platform</a></li>
             <li><a href="../../projects/deepfake-video-detection/">Deepfake video detection</a></li>
+            <li><a href="../../projects/spam-classifier/">SMS spam classifier</a></li>
             <li><a href="../../projects/">All projects</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__col footer__col--pages" aria-labelledby="footer-pages-h">
+          <p class="footer__h" id="footer-pages-h">Pages</p>
+          <ul class="footer__links">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../projects/">Projects</a></li>
+            <li><a href="../../services/">Services</a></li>
+            <li><a href="../../about/">About</a></li>
+            <li><a href="../../about/#experience">Experience</a></li>
+            <li><a href="../../resume/">Resume</a></li>
+            <li><a href="../../faq/">FAQ</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+            <li><a href="../../contact/#book">Book a call</a></li>
           </ul>
         </nav>
       </div>
@@ -460,10 +545,20 @@
 
   <div class="footer__ghost" aria-hidden="true"></div>
 
-  <!-- floating "Hire me" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js) -->
+  <!-- floating "Let's talk" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js).
+       Without JavaScript it is a plain link to the contact form; with JavaScript it opens the small menu of ways to connect (content.connect). -->
   <div class="fab-wrap contact-fab">
-    <a class="fab" href="../../contact/#hire" aria-label="Hire me"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
-    <div class="fab-tip" aria-hidden="true">Hire me</div>
+    <div class="connect" id="connect-menu" hidden>
+      <p class="connect__h" id="connect-h">Let&rsquo;s talk</p>
+      <ul class="connect__list" aria-labelledby="connect-h">
+            <li><a class="connect__item" href="../../contact/#book"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><span><strong>Book a call</strong><small>Pick a day and time</small></span></a></li>
+            <li><a class="connect__item" href="../../contact/#hire"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg><span><strong>Send a brief</strong><small>Tell me what you need</small></span></a></li>
+            <li><a class="connect__item" href="https://wa.me/919920644655?text=Hi%20Shaunak%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg><span><strong>WhatsApp</strong><small>Message me directly</small></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="connect__item" href="mailto:shaunak.chorge@gmail.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span><strong>Email</strong><small>Write to me</small></span></a></li>
+      </ul>
+    </div>
+    <a class="fab" href="../../contact/#hire" aria-label="Hire me" data-connect-toggle><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></a>
+    <div class="fab-tip" aria-hidden="true">Let&rsquo;s talk</div>
   </div>
 </footer>
 
@@ -501,10 +596,12 @@
     <symbol id="i-scan-eye" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="1"/><path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0"/></symbol>
     <symbol id="i-audio-waveform" viewBox="0 0 24 24"><path d="M2 13a2 2 0 0 0 2-2V7a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0V4a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0v-4a2 2 0 0 1 2-2"/></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
     <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
     <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
     <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
     <symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
     <symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
     <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
@@ -515,9 +612,9 @@
   </svg>
 
   <script defer src="../../assets/dist/js/core.min.js?v=d41b0d5b"></script>
-  <script defer src="../../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
+  <script defer src="../../assets/dist/js/contact.min.js?v=e6aee63a"></script>
   <script defer src="../../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
-  <script defer src="../../assets/dist/js/pages.min.js?v=efc0e441"></script>
+  <script defer src="../../assets/dist/js/fx.min.js?v=bb37bfa8"></script>
+  <script defer src="../../assets/dist/js/pages.min.js?v=514d4156"></script>
 </body>
 </html>

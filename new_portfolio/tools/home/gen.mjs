@@ -2,7 +2,7 @@
 // content/content.json plus the project selection (projects.config.json), and home.content.html + home.page.json.
 // Run by build.mjs, or alone:  node tools/home/gen.mjs
 // A minimal page: one idea per section, few words, plenty of room. Sections in order:
-//   01 hero (hero.html)  02 stack (the moving tool ribbon)  03 about (whoami card: the ONLY place languages appear)  04 offer (services)
+//   01 hero (hero.html)  02 stack (the moving tool ribbon)  03 about (whoami card: lead lines, location, role, profiles; no languages)  04 offer (services)
 //   05 selected (the collage)  06 roles  07 process  08 faq (open)  09 contact (hire call to action)
 import fs from 'node:fs';
 import path from 'node:path';
@@ -46,26 +46,34 @@ const stack = `<section id="stack" class="mq section--alt" data-num="02" data-ra
 </section>
 `;
 
-/* ------------------------------------------------------------------ 03  ABOUT CARD (whoami terminal: the ONLY place the spoken languages appear) */
-const W = C.about.whoami;
-need(Array.isArray(W.languages) && W.languages.length === 5, 'whoami.languages');
-const langTags = `<ul class="tags hm-term__tags" role="list">${W.languages.map(t => `<li><span class="tag tag--dim">${esc(t)}</span></li>`).join('')}</ul>`;
+/* ------------------------------------------------------------------ 03  ABOUT CARD (whoami terminal: a few written lines, where I am, what I do now, my profiles; the spoken languages are on /about/ only) */
+const W = C.about.whoami, HC = C.about.home_card;
+need(HC && Array.isArray(HC.lead) && HC.lead.length >= 1 && HC.title, 'about.home_card: title and lead paragraphs');
+need(W.now_short && W.based_short && W.education.short, 'about.whoami: now_short, based_short and education.short (short forms for the home card)');
 const aboutLinks = [['About me', 'about/'], ['Resume', 'resume/'], ['Experience', 'about/#experience'], ['FAQ', 'faq/']];
+const profiles = [['GitHub', P.links.github, 'github'], ['LinkedIn', P.links.linkedin, 'linkedin'], ['Email', 'mailto:' + P.email, 'mail']];
+const profileChips = `<ul class="hm-term__find" role="list">${profiles.map(([label, href, ic]) => {
+  const out = !href.startsWith('mailto:');
+  return `<li><a class="hm-chip" href="${esc(href)}"${out ? ' target="_blank" rel="noopener noreferrer"' : ''}>${icon(ic)}<span>${label}</span>${out ? '<span class="sr-only"> (opens in a new tab)</span>' : ''}</a></li>`;
+}).join('')}</ul>`;
 const about = `<section id="about" class="section hm-cv" data-num="03" data-rail="03·about" aria-labelledby="about-title">
   <div class="container">
-    <h2 id="about-title" class="sr-only">${esc(H2.about || 'About me')}</h2>
-    <div class="hm-term" role="group" aria-label="Quick facts about Shaunak" data-reveal>
-      <div class="hm-term__bar" aria-hidden="true">
-        <span class="hm-term__dots"><i></i><i></i><i></i></span>
-        <span class="hm-term__title">${esc(C.about.home_prompt)}</span>
-        <span class="hm-term__tag">${esc(W.script)}</span>
+    <div class="hm-term" role="group" aria-labelledby="about-title" data-reveal>
+      <div class="hm-term__bar">
+        <span class="hm-term__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <h2 id="about-title" class="hm-term__title">${esc(HC.title)}</h2>
+        <span class="hm-term__tag" aria-hidden="true">${esc(W.script)}</span>
       </div>
       <div class="hm-term__body">
         <p class="hm-term__prompt" aria-hidden="true"><span class="hm-term__ps">$</span> <span class="hm-term__cmd" style="--n:${W.command.length}">${esc(W.command)}</span><span class="hm-term__caret"></span></p>
+        <div class="hm-term__lead">
+${HC.lead.map(t => `          <p>${esc(curly(t))}</p>`).join('\n')}
+        </div>
         <dl class="hm-term__facts">
-          <div class="hm-term__fact" data-tone="blue" style="--r:1"><dt>education</dt><dd>${esc(W.education.degree)}, ${esc(W.education.year)}</dd></div>
-          <div class="hm-term__fact" data-tone="cyan" style="--r:2"><dt>builds</dt><dd>${esc(curly(C.about.home_blurb))}</dd></div>
-          <div class="hm-term__fact" data-tone="purple" style="--r:3"><dt>languages</dt><dd>${langTags}</dd></div>
+          <div class="hm-term__fact" data-tone="cyan" style="--r:1"><dt>based</dt><dd>${esc(W.based_short)}</dd></div>
+          <div class="hm-term__fact" data-tone="purple" style="--r:2"><dt>now</dt><dd>${esc(W.now_short)}</dd></div>
+          <div class="hm-term__fact" data-tone="blue" style="--r:3"><dt>education</dt><dd>${esc(W.education.short)}, ${esc(W.education.year)}</dd></div>
+          <div class="hm-term__fact hm-term__fact--wide" data-tone="magenta" style="--r:4"><dt>${esc(HC.links_label || 'find me')}</dt><dd>${profileChips}</dd></div>
         </dl>
         <ul class="hm-term__links" role="list">
 ${aboutLinks.map(([label, href], i) => `          <li><a class="link-arrow" href="{{base}}${href}" data-tone="${['cyan', 'purple', 'blue', 'magenta'][i]}">${label} ${icon('arrow-right')}</a></li>`).join('\n')}
@@ -207,9 +215,10 @@ const contact = `<section id="contact" class="section contact hm-cv" data-num="0
           <p class="contact__lead">${esc(C.cta.text)}</p>
           <div class="contact__actions">
             <a class="btn btn--solid btn--lg btn--glow" href="{{base}}contact/#hire" data-magnetic>${esc(C.cta.primary.label)} ${icon('arrow-right', 'icon--still')}</a>
-            <a class="btn btn--ghost btn--lg" href="mailto:${esc(P.email)}" data-magnetic>Email me ${icon('mail', 'icon--still')}</a>
+            <a class="btn btn--ghost btn--lg" href="{{base}}contact/#book" data-magnetic>Book a call ${icon('calendar', 'icon--still')}</a>
           </div>
           <p class="hm-band__line"><span class="hero__free-dot" aria-hidden="true"></span>${esc(C.cta.line)}</p>
+          <p class="hm-band__mail">Or write to <a class="link" href="mailto:${esc(P.email)}">${esc(P.email)}</a></p>
         </header>
       </div>
     </div>
@@ -219,17 +228,14 @@ const contact = `<section id="contact" class="section contact hm-cv" data-num="0
 
 /* ------------------------------------------------------------------ write partials + guard rails (banned words: tools/rules.mjs) */
 const files = { 'home-stack.html': stack, 'home-about.html': about, 'home-offer.html': offer, 'home-work.html': selected, 'home-roles.html': roles, 'home-process.html': process_, 'home-faq.html': faq, 'home-contact.html': contact };
-let langFiles = 0;
 for (const [f, html] of Object.entries(files)) {
   const visible = html.replace(/\{\{base\}\}/g, '');
   const bad = findBanned(visible, { learning: true, home: true });
   if (bad) { console.error(`FORBIDDEN in ${f}:`, bad); process.exit(1); }
   if ((f === 'home-work.html' || f === 'home-offer.html') && YEAR_RE.test(visible)) { console.error('YEAR in', f, YEAR_RE.exec(visible)[0]); process.exit(1); }   // no project years (role periods and the degree date are not project years)
-  if (LANGUAGE_RE.test(visible)) { langFiles++; need(f === 'home-about.html', 'languages outside the whoami card: ' + f); }
+  need(!LANGUAGE_RE.test(visible), 'the spoken languages belong on /about/ only, not in ' + f);
   fs.writeFileSync(path.join(OUT, f), html);
 }
-need(langFiles === 1, 'languages must appear in exactly one partial');
-need((files['home-about.html'].match(/English/g) || []).length === 1, 'languages rendered once');
 
 const content = ['hero', ...Object.keys(files).map(f => f.replace('.html', ''))].map(n => `<!-- @section:${n} -->`).join('\n') + '\n';
 fs.writeFileSync(path.join(OUT, 'home.content.html'), content);

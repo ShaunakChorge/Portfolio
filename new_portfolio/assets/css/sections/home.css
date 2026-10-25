@@ -36,7 +36,7 @@ body[data-page="home"] .footer__cta { display: none; }
 @media print { .hm-cv { content-visibility: visible; } }
 /*#endregion*/
 
-/*#region 2 about card + whoami terminal (#about): the ONLY place the languages are shown*/
+/*#region 2 about card + whoami terminal (#about): lead lines, where I am, what I do now, profile links (the spoken languages are on /about/)*/
 .hm-term {
   position: relative; min-width: 0; overflow: hidden;
   border: 2px solid rgb(var(--purple) / .34); border-radius: var(--radius-md); background: rgb(5 6 11 / .88);
@@ -52,7 +52,7 @@ body[data-page="home"] .footer__cta { display: none; }
 .hm-term__dots i:nth-child(1) { color: rgb(var(--magenta)); background: currentColor; }
 .hm-term__dots i:nth-child(2) { color: rgb(var(--purple)); background: currentColor; }
 .hm-term__dots i:nth-child(3) { color: rgb(var(--cyan)); background: currentColor; }
-.hm-term__title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hm-term .hm-term__title { min-width: 0; margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 700 .9375rem/1.2 var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: rgb(var(--accent-ink)); text-shadow: 0 0 12px rgb(var(--accent) / .35); }
 .hm-term__tag { margin-left: auto; padding: .1rem .5rem; border: 1px solid var(--line-2); border-radius: 4px; font-size: .75rem; letter-spacing: .06em; }
 @media (max-width: 479px) { .hm-term__tag { display: none; } }
 .hm-term__body { padding: clamp(1.25rem, .9rem + 1.4vw, 2rem); }
@@ -60,13 +60,22 @@ body[data-page="home"] .footer__cta { display: none; }
 .hm-term__ps { color: rgb(var(--green-ink)); font-weight: 700; }
 .hm-term__cmd { display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom; width: max-content; max-width: calc(var(--n, 6) * 1ch + 1.5ch); color: rgb(var(--accent-ink)); }
 .hm-term__caret { display: inline-block; width: .6em; height: 1.1em; margin-left: .1ch; background: rgb(var(--accent)); box-shadow: 0 0 8px rgb(var(--accent) / .8); }
-.hm-term__facts { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem 2rem; margin: 1.25rem 0 0; padding: 0; }
-@media (min-width: 56em) { .hm-term__facts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }   /* wide: the three facts sit side by side, so the card stays short */
+.hm-term__lead { display: grid; gap: .8rem; max-width: 76ch; margin: 1.1rem 0 0; }
+.hm-term__lead p { margin: 0; font-size: 1.0625rem; line-height: 1.7; color: var(--text); }
+.hm-term__facts { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem 2rem; margin: 1.5rem 0 0; padding: 0; }
+@media (min-width: 56em) { .hm-term__facts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }   /* wide: the three facts sit side by side, the profile links get their own full row */
 .hm-term__fact { min-width: 0; padding-left: .95rem; border-left: 2px solid rgb(var(--tone) / .55); }
+.hm-term__fact--wide { grid-column: 1 / -1; }
 .hm-term__fact dt { font: 700 .75rem/1.2 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: rgb(var(--tone-ink)); }
 .hm-term__fact dd { margin: .4rem 0 0; font-size: 1.0625rem; line-height: 1.5; color: var(--text); }
-.hm-term__tags { display: flex; flex-wrap: wrap; gap: .45rem; margin: 0; padding: 0; list-style: none; }
-.hm-term__tags .tag { font-size: .8125rem; padding: .22rem .65rem; }
+.hm-term__find { display: flex; flex-wrap: wrap; gap: .5rem .65rem; margin: .1rem 0 0; padding: 0; list-style: none; }
+.hm-chip {
+  display: inline-flex; align-items: center; gap: .55rem; min-height: 44px; padding: 0 1rem; border-radius: 999px; text-decoration: none;
+  border: 1px solid rgb(var(--tone, var(--accent)) / .5); background: rgb(var(--tone, var(--accent)) / .07); color: var(--text-strong);
+  font: 600 .9375rem/1 var(--font-body); transition: box-shadow .25s var(--ease), background-color .25s var(--ease), translate .25s var(--ease);
+}
+.hm-chip .icon { width: 1.05rem; height: 1.05rem; color: rgb(var(--tone-ink, var(--accent-ink))); }
+.hm-chip:hover, .hm-chip:focus-visible { background: rgb(var(--tone, var(--accent)) / .14); box-shadow: 0 0 18px rgb(var(--tone, var(--accent)) / .35); translate: 0 -1px; text-decoration: none; }
 .hm-term__links { display: flex; flex-wrap: wrap; gap: 0 1.75rem; margin: 1.5rem 0 0; padding: 1rem 0 0; border-top: 1px solid var(--line); list-style: none; }
 
 /* entrance: runs once when the card scrolls into view (core adds .is-in to [data-reveal]) */
@@ -171,6 +180,7 @@ body[data-page="home"] .footer__cta { display: none; }
 .contact__band-in.hm-band { grid-template-columns: minmax(0, 1fr); }   /* one column */
 .hm-band .contact__lead { max-width: 58ch; }
 .hm-band__line { display: inline-flex; align-items: center; gap: .65rem; margin: 1.1rem 0 0; font: 400 .8125rem/1.45 var(--font-mono); letter-spacing: .04em; color: var(--text-muted); }
+.hm-band__mail { margin: .6rem 0 0; font-size: var(--fs-sm); color: var(--text-muted); overflow-wrap: anywhere; }
 /*#endregion*/
 
 /*#region 8 reduced motion*/

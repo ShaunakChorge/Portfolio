@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=99f76e8a">
+  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=d92fd1cd">
 
 <script type="application/ld+json">
 {
@@ -62,7 +62,7 @@
       "breadcrumb": {
         "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/services/llm-rag-development/#breadcrumb"
       },
-      "dateModified": "2026-10-24",
+      "dateModified": "2026-10-25",
       "mainEntity": {
         "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/services/llm-rag-development/#service"
       }
@@ -175,6 +175,22 @@
             "@type": "Answer",
             "text": "That is the aim. Instructions and adjustable settings live in simple settings files, and the code has tests. The handover includes a walkthrough of how to add documents and tune the settings. If you want ongoing help, we can agree a maintenance period in writing."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens when our documents change?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The search index is rebuilt from the updated files. In my healthcare example, an ingest step can wipe and rebuild the index, and identical passages are not stored twice. It does not yet watch for file changes or keep old versions apart. For a client I would add both, so outdated wording cannot answer a new question."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the chatbot need training on our documents?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No training run is needed. When a question arrives, the chatbot searches your documents for the best passages, so updating it means changing the files and refreshing the search index, not retraining a model. In my language model projects, quality came from retrieval, checks and prompts, not from training a model."
+          }
         }
       ]
     },
@@ -222,10 +238,10 @@
         </nav>
 
         <div class="site-header__tools">
+          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
           </button>
-          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
             <span class="burger__lines" aria-hidden="true"><i></i><i></i><i></i></span>
           </button>
@@ -269,6 +285,24 @@
       <div class="pg-head__aside"><div class="pg-svcmark" data-tone="cyan" aria-hidden="true"><span class="pg-svcmark__ring"></span><span class="icon-tile pg-svcmark__tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-brain-circuit"/></svg></span></div></div>
     </div>
   </div>
+</section><nav class="pg-toc" aria-label="On this page"><div class="container"><ul class="pg-toc__list" role="list"><li><a href="#who">Who it is for</a></li><li><a href="#problems">Problems solved</a></li><li><a href="#deliverables">What you get</a></li><li><a href="#process">Process</a></li><li><a href="#tools">Technology</a></li><li><a href="#tradeoffs">Trade-offs</a></li><li><a href="#use-cases">Where it fits</a></li><li><a href="#proof">Proof</a></li><li><a href="#faq">FAQ</a></li><li><a href="#related">Related</a></li><li><a href="#ask">Ask a question</a></li></ul></div></nav><section id="who" class="section pg-sec section--tint" aria-labelledby="who-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Who it is for</p>
+      <h2 id="who-h" class="section__title">Who this <span class="hl hl--blue">is for</span></h2>
+      
+    </header>
+<ul class="pg-uses" role="list" data-reveal-group><li class="pg-use" data-tone="cyan" style="--i:0"><h3 class="pg-use__who">Support and operations leads</h3><p>Staff and customers keep asking questions whose answers already sit in manuals and policy files. A chatbot that answers from those files and shows its source spares people the search, and anyone can check the answer.</p></li><li class="pg-use" data-tone="purple" style="--i:1"><h3 class="pg-use__who">Founders adding an <span class="ai">AI</span> feature</h3><p>You want a chatbot or assistant inside a product or website. A working prototype on your own content shows real answer quality early, before you decide how much to build.</p></li><li class="pg-use" data-tone="blue" style="--i:2"><h3 class="pg-use__who">Compliance and HR teams</h3><p>Policies change and exact wording matters. You need each answer tied to the document it came from, and a plain &quot;not found&quot; when the policy says nothing on the question.</p></li><li class="pg-use" data-tone="magenta" style="--i:3"><h3 class="pg-use__who">Teams with a customer chat channel</h3><p>Customers already write to you on WhatsApp or in an app. You need AI replies that do not keep them waiting, a saved history of each conversation and alerts for human operators.</p></li></ul>
+  </div>
+</section><section id="problems" class="section pg-sec" aria-labelledby="problems-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Problems I solve</p>
+      <h2 id="problems-h" class="section__title">Problems I <span class="hl hl--magenta">solve</span></h2>
+      
+    </header>
+<ul class="pg-problems" role="list" data-reveal-group><li class="pg-problem" data-tone="cyan" style="--i:0"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>Nobody can tell where an answer came from</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>Each reply names the source document, shows the passage it relied on and carries a confidence label. A reviewer checks the claim against that passage instead of trusting the chatbot's wording.</p></li><li class="pg-problem" data-tone="cyan" style="--i:1"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>The bot misreads what the user is asking for</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>I design flows around what the user wants. A simple router sends document questions, booking requests and small talk to different handlers, and chat history lives in a database. In client chatbot work this reduced failures during complex bookings.</p></li><li class="pg-problem" data-tone="cyan" style="--i:2"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>A hosted AI model is retired or slows down</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>Model names and fallback order live in settings, so the service switches to a backup model without a code change, and each reply states which model answered. Request IDs plus metrics and traces, as built in my Traceable AI Backend, make a silent switch visible.</p></li><li class="pg-problem" data-tone="cyan" style="--i:3"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>You cannot tell if a change made answers better or worse</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>I keep a list of questions with the expected answers, including ones the documents should not answer. My healthcare example has such a list, checked by hand; for a client I add automatic scoring on every change.</p></li><li class="pg-problem" data-tone="cyan" style="--i:4"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>Visitors try to trick or flood the chatbot</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>On the scam honeypot I added a filter for prompt-injection attempts (messages that try to override the AI's instructions) and a request limit of 1 per second per visitor, with bursts of 5. For a client I would add a test set of attacks.</p></li></ul>
+  </div>
 </section><section id="deliverables" class="section pg-sec section--tint" aria-labelledby="deliverables-h">
   <div class="container">
     <header class="section__head" data-reveal>
@@ -277,8 +311,8 @@
       
     </header>
 <div class="pg-two">
-      <div class="panel" data-tone="cyan" data-reveal><h3 class="pg-panel__h">Deliverables</h3><ul class="dot-list"><li>A working chatbot service with clear instructions for connecting to it (an API)</li><li>Your documents prepared so the chatbot finds the right passage</li><li>Safety checks that block weak or off-topic answers</li><li>A source and a confidence label on every answer</li><li>A simple chat screen (Streamlit or React) for demos and review</li><li>Tests, setup notes and a handover walkthrough</li></ul></div>
-      <div class="panel" data-tone="green" data-reveal style="--i:1"><h3 class="pg-panel__h">Good fit when</h3><ul class="dot-list"><li>Teams with policy, support or help-centre documents that need answers with sources</li><li>Founders who want to try an AI feature before hiring a full team</li><li>Products that need a chatbot or AI feature added to an existing system</li></ul></div>
+      <div class="panel" data-tone="cyan" data-reveal><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-circle-check"/></svg> Deliverables</h3><ul class="dot-list"><li>A working chatbot service with clear instructions for connecting to it (an API)</li><li>Your documents prepared so the chatbot finds the right passage</li><li>Safety checks that block weak or off-topic answers</li><li>A source and a confidence label on every answer</li><li>A simple chat screen (Streamlit or React) for demos and review</li><li>Tests, setup notes and a handover walkthrough</li></ul></div>
+      <div class="panel" data-tone="green" data-reveal style="--i:1"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-info"/></svg> What I need from you</h3><ul class="dot-list"><li>Some of your real documents, awkward ones with tables or images included, so passage search can be tested on real material.</li><li>A list of real questions your users ask, the answers you would accept, and a few questions the documents should not be able to answer.</li><li>Who may see which documents, and where text may go: an online AI service, your cloud account or your own servers.</li><li>Where the chatbot will live, such as a website, an app, WhatsApp or an internal tool, and a technical contact for that system.</li></ul></div>
     </div>
   </div>
 </section><section id="process" class="section pg-sec" aria-labelledby="process-h">
@@ -290,7 +324,34 @@
     </header>
 <ol class="pg-steps" data-reveal-group><li class="pg-step" style="--i:0"><span class="pg-step__n" aria-hidden="true">01</span><h3 class="pg-step__t">Scope</h3><p>We agree what a good answer looks like, using a sample of your documents and real questions.</p></li><li class="pg-step" style="--i:1"><span class="pg-step__n" aria-hidden="true">02</span><h3 class="pg-step__t">Prototype</h3><p>A small working version on your content, so you see answer quality early.</p></li><li class="pg-step" style="--i:2"><span class="pg-step__n" aria-hidden="true">03</span><h3 class="pg-step__t">Harden</h3><p>Safety checks and tests, including questions the documents should and should not answer.</p></li><li class="pg-step" style="--i:3"><span class="pg-step__n" aria-hidden="true">04</span><h3 class="pg-step__t">Hand over</h3><p>Notes and a walkthrough so your team can run it and add new documents.</p></li></ol>
   </div>
-</section><section id="proof" class="section pg-sec section--tint" aria-labelledby="proof-h">
+</section><section id="tools" class="section pg-sec section--tint" aria-labelledby="tools-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Technology</p>
+      <h2 id="tools-h" class="section__title">Technology, and <span class="hl hl--blue">where it fits</span></h2>
+      
+    </header>
+<dl class="pg-roles panel" data-tone="cyan" data-reveal><div class="pg-roles__row"><dt>FastAPI and Pydantic</dt><dd>Serve the chatbot through an API, check every request, and keep thresholds and model names in settings files.</dd></div><div class="pg-roles__row"><dt>sentence-transformers</dt><dd>Turns passages and questions into numbers that capture meaning, so the closest passages can be found. Runs on a standard processor (CPU).</dd></div><div class="pg-roles__row"><dt>ChromaDB</dt><dd>Stores those numbers on disk and returns the closest passages for each question.</dd></div><div class="pg-roles__row"><dt>AI model APIs (Groq, OpenAI)</dt><dd>The language model that writes each answer from the passages it is given, with backup models if one fails.</dd></div><div class="pg-roles__row"><dt>Local AI models (Ollama, vLLM)</dt><dd>Used instead of an online service when documents and prompts must stay on your own servers.</dd></div><div class="pg-roles__row"><dt>PostgreSQL and Supabase</dt><dd>Keep chat history and user profiles, so a bot can remember each conversation.</dd></div><div class="pg-roles__row"><dt>Redis and Celery</dt><dd>Run slow AI replies in the background, so a chat channel such as WhatsApp is not blocked while the AI works.</dd></div><div class="pg-roles__row"><dt>Streamlit or React</dt><dd>Provide the simple chat screen where reviewers see the answer, its source passage and the confidence label.</dd></div><div class="pg-roles__row"><dt>Docker and pytest</dt><dd>Docker packages the service so it runs the same anywhere. pytest runs the automatic checks after each change.</dd></div></dl>
+  </div>
+</section><section id="tradeoffs" class="section pg-sec" aria-labelledby="tradeoffs-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Decide together</p>
+      <h2 id="tradeoffs-h" class="section__title">Trade-offs we <span class="hl hl--purple">decide together</span></h2>
+      
+    </header>
+<ul class="pg-sizes" role="list" data-reveal-group><li class="pg-size" data-tone="cyan" style="--i:0"><h3 class="pg-size__t">Online <span class="ai">AI</span> service or your own servers</h3><p>Online services such as Groq or OpenAI are quick to start. Hosting the model on your own servers keeps every document and prompt in-house but needs a stronger machine. I usually prototype on non-sensitive samples, then decide with you.</p></li><li class="pg-size" data-tone="purple" style="--i:1"><h3 class="pg-size__t">Strict answers or more answers</h3><p>A high match score gives more &quot;not found&quot; replies and fewer wrong answers. A low score answers more questions but risks mistakes. For policy, health or finance content I suggest starting strict and loosening only after testing real questions.</p></li><li class="pg-size" data-tone="blue" style="--i:2"><h3 class="pg-size__t">Remember the conversation or not</h3><p>Memory lets a user ask a follow-up, but it needs stored history, privacy rules and more testing. My healthcare example answers each question on its own. For customer chat I store history in a database. I add memory only when the use case needs it.</p></li></ul>
+  </div>
+</section><section id="use-cases" class="section pg-sec section--tint" aria-labelledby="use-cases-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">In a business</p>
+      <h2 id="use-cases-h" class="section__title">Where this <span class="hl hl--magenta">fits</span></h2>
+      <p class="section__lead">Situations where a team could use this service. These are examples, not past clients.</p>
+    </header>
+<ul class="pg-uses" role="list" data-reveal-group><li class="pg-use" data-tone="cyan" style="--i:0"><h3 class="pg-use__who">Clinic and hospital administration</h3><p>Front-desk and billing staff ask about discharge, refills, insurance and visit rules. A chatbot over the facility's own policies answers with the source and declines to guess on medical questions.</p></li><li class="pg-use" data-tone="purple" style="--i:1"><h3 class="pg-use__who">HR and internal help desks</h3><p>Employees ask the same questions about leave, expenses and onboarding. An assistant that answers from the current policy files and names the file keeps HR in control of what it says.</p></li><li class="pg-use" data-tone="blue" style="--i:2"><h3 class="pg-use__who">Software companies with a help centre</h3><p>Customers search long help articles. An assistant inside the product answers from those articles, shows which article it used and says so when the help centre has no answer.</p></li><li class="pg-use" data-tone="magenta" style="--i:3"><h3 class="pg-use__who">Service businesses that sell on WhatsApp</h3><p>Customers ask about bookings, orders and returns at any hour. AI replies sent in the background, a saved conversation history and alerts for a human operator keep the chat moving.</p></li></ul>
+  </div>
+</section><section id="proof" class="section pg-sec" aria-labelledby="proof-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">Proof from real work</p>
@@ -301,34 +362,37 @@
         <p class="pg-proj__meta">AI chatbot</p>
         <h3 class="pg-proj__title" id="pf-ai-rag-healthcare-assistant">Healthcare Policy Chatbot</h3>
         <p class="pg-proj__blurb">A chatbot over healthcare policy documents that cites its source, or says it does not know.</p>
-        <p class="pg-proj__stat"><span class="pg-proj__num">6</span><span class="pg-proj__statlabel">Sample policy documents (made up, no real patient data)</span></p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> Each reply carries its source passage and a confidence label; questions outside the six sample policy documents get &quot;not found&quot; instead of a guess.</p>
         <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/ai-rag-healthcare-assistant/">Read case study<span class="sr-only">: Healthcare Policy Chatbot</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
       </article><article class="card pg-proof" data-tone="cyan" data-tilt data-reveal style="--i:1" aria-labelledby="pf-ams-ai-finding-engine">
         <p class="pg-proj__meta">AI and backend</p>
         <h3 class="pg-proj__title" id="pf-ams-ai-finding-engine"><span class="ai">AI</span> Audit Finding Drafting Engine</h3>
         <p class="pg-proj__blurb">Turns short audit notes into three draft findings, with code that blocks any invented fact. Drafts whole spreadsheets in bulk.</p>
-        <p class="pg-proj__stat"><span class="pg-proj__num">7.9 minutes to 16.9 seconds</span><span class="pg-proj__statlabel">Time per request (about 28 times faster)</span></p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> Retrieves similar past findings as examples for the AI, then rejects any draft with an invented figure, date or owner: retrieval plus code-level checks.</p>
         <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/ams-ai-finding-engine/">Read case study<span class="sr-only">: AI Audit Finding Drafting Engine</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
       </article><article class="card pg-proof" data-tone="cyan" data-tilt data-reveal style="--i:2" aria-labelledby="pf-agentic-honeypot">
         <p class="pg-proj__meta">AI agent</p>
         <h3 class="pg-proj__title" id="pf-agentic-honeypot">Scam-Catching <span class="ai">AI</span> Honeypot</h3>
         <p class="pg-proj__blurb">An AI plays an easily fooled victim, keeps scammers chatting and logs the payment IDs, links and phone numbers they reveal.</p>
-        <p class="pg-proj__stat"><span class="pg-proj__num">4 written, 4 merged</span><span class="pg-proj__statlabel">My contributions (19 changes in total)</span></p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> A co-built chat persona that sees the last 10 messages and changes style by rule; I added its injection filter and request limiter.</p>
         <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/agentic-honeypot/">Read case study<span class="sr-only">: Scam-Catching AI Honeypot</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+      </article><article class="card pg-proof" data-tone="blue" data-tilt data-reveal style="--i:3" aria-labelledby="pf-whatsapp-ai-agent-platform">
+        <p class="pg-proj__meta">Automation</p>
+        <h3 class="pg-proj__title" id="pf-whatsapp-ai-agent-platform">WhatsApp Automation and <span class="ai">AI</span> Agent Platform</h3>
+        <p class="pg-proj__blurb">AI replies run in the background, every chat is tracked and human operators get alerts.</p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> Takes in WhatsApp messages, keeps a history of each conversation and sends AI replies in the background: a chatbot design built around a messaging channel.</p>
+        <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/whatsapp-ai-agent-platform/">Read case study<span class="sr-only">: WhatsApp Automation and AI Agent Platform</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+      </article><article class="card pg-proof" data-tone="blue" data-tilt data-reveal style="--i:4" aria-labelledby="pf-observable-ai-backend">
+        <p class="pg-proj__meta">AI and backend</p>
+        <h3 class="pg-proj__title" id="pf-observable-ai-backend">Traceable <span class="ai">AI</span> Backend</h3>
+        <p class="pg-proj__blurb">An AI server that shows exactly where each request goes and where it slows down, with request IDs, metrics and traces for LLM observability.</p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> An AI server that chains three models with time limits and a degraded flag, and gives every request an ID so trouble can be traced.</p>
+        <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/observable-ai-backend/">Read case study<span class="sr-only">: Traceable AI Backend</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
       </article></div>
     
-    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../projects/">See all case studies <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../projects/">See all case studies <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../../projects/#by-need">Browse work by business need <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
   </div>
-</section><section id="tools" class="section pg-sec" aria-labelledby="tools-h">
-  <div class="container">
-    <header class="section__head" data-reveal>
-      <p class="eyebrow">Tools</p>
-      <h2 id="tools-h" class="section__title">Tools I use <span class="hl hl--blue">for this</span></h2>
-      
-    </header>
-<div data-reveal><ul class="tags pg-tools" role="list" aria-label="Tools used for this service" data-tone="cyan"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">ChromaDB</li><li class="tag">sentence-transformers</li><li class="tag">AI model APIs (Groq, OpenAI)</li><li class="tag">Pydantic</li><li class="tag">Streamlit</li><li class="tag">Docker</li><li class="tag">pytest</li></ul></div>
-  </div>
-</section><section id="faq" class="section pg-sec" aria-labelledby="faq-h">
+</section><section id="faq" class="section pg-sec section--tint" aria-labelledby="faq-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">FAQ</p>
@@ -353,19 +417,44 @@
     </details><details class="pg-qa" id="llm-rag-development-q6" open data-reveal style="--i:4">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Can my team maintain it after you finish?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>That is the aim. Instructions and adjustable settings live in simple settings files, and the code has tests. The handover includes a walkthrough of how to add documents and tune the settings. If you want ongoing help, we can agree a maintenance period in writing.</p></div>
+    </details><details class="pg-qa" id="llm-rag-development-q7" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">What happens when our documents change?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>The search index is rebuilt from the updated files. In my healthcare example, an ingest step can wipe and rebuild the index, and identical passages are not stored twice. It does not yet watch for file changes or keep old versions apart. For a client I would add both, so outdated wording cannot answer a new question.</p></div>
+    </details><details class="pg-qa" id="llm-rag-development-q8" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Does the chatbot need training on our documents?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>No training run is needed. When a question arrives, the chatbot searches your documents for the best passages, so updating it means changing the files and refreshing the search index, not retraining a model. In my language model projects, quality came from retrieval, checks and prompts, not from training a model.</p></div>
     </details></div>
   </div>
-</section><section id="related" class="section pg-sec section--tint" aria-labelledby="related-h">
+</section><section id="related" class="section pg-sec" aria-labelledby="related-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">Related</p>
       <h2 id="related-h" class="section__title">Related <span class="hl hl--purple">services</span></h2>
       
     </header>
-<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/ai-document-compliance-automation/" data-tone="purple"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-file-text"/></svg></span><span><strong>Pull data out of PDFs with AI</strong><span class="pg-rel__t">Tools that read documents and turn them into checked data.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/ai-backend-fastapi-django/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-server"/></svg></span><span><strong>Hire a FastAPI developer</strong><span class="pg-rel__t">FastAPI and Django services with automated tests and clear logs.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
+<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/ai-document-compliance-automation/" data-tone="purple"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-file-text"/></svg></span><span><strong>Pull data out of PDFs with AI</strong><span class="pg-rel__t">When your documents must also become structured data or drafts, with every result linked to its source passage.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/ai-backend-fastapi-django/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-server"/></svg></span><span><strong>Hire a FastAPI developer</strong><span class="pg-rel__t">When the chatbot must sit inside a product you already run, with sign-in, background jobs, tests and a clear contract between systems.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
       <li><a class="pg-rel__link" href="../../faq/" data-tone="green"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></span><span><strong>Freelance FAQ</strong><span class="pg-rel__t">Cost, how to start, NDAs and ownership.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
     </ul>
-    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../services/">All services <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../services/">All services <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../../services/#which-service">Which service fits you? <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+  </div>
+</section><section id="ask" class="section pg-sec pg-ask" aria-labelledby="ask-h">
+  <div class="container">
+    <div class="pg-ask__box panel" data-tone="cyan" data-reveal>
+      <div class="pg-ask__text">
+        <p class="eyebrow">Ask me</p>
+        <h2 id="ask-h" class="pg-ask__title">Have a question about ai chatbots and assistants, or your own idea?</h2>
+        <p class="pg-ask__lead">Type your question below. The contact form opens with your question and this page already filled in, so you only add your name and email.</p>
+      </div>
+      <form class="pg-ask__form" action="../../contact/#hire" method="get">
+        <input type="hidden" name="topic" value="llm-rag-development">
+        <input type="hidden" name="ref" value="services/llm-rag-development/">
+        <input type="hidden" name="about" value="AI chatbots and assistants">
+        <label class="sr-only" for="ask-q">Your question</label>
+        <input class="input pg-ask__input" id="ask-q" name="q" type="text" maxlength="300" autocomplete="off" enterkeyhint="send" placeholder="Can you build a chatbot that answers from our policy files?">
+        <button class="btn btn--solid btn--glow" type="submit">Ask me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></button>
+      </form>
+      <ul class="pg-ask__chips" role="list" aria-label="Questions people often ask"><li><a class="pg-ask__chip" href="../../contact/?topic=llm-rag-development&ref=services/llm-rag-development/&about=AI%20chatbots%20and%20assistants&q=Can%20you%20build%20a%20chatbot%20that%20answers%20from%20our%20policy%20files%3F#hire">Can you build a chatbot that answers from our policy files?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=llm-rag-development&ref=services/llm-rag-development/&about=AI%20chatbots%20and%20assistants&q=How%20does%20the%20chatbot%20show%20where%20an%20answer%20came%20from%3F#hire">How does the chatbot show where an answer came from?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=llm-rag-development&ref=services/llm-rag-development/&about=AI%20chatbots%20and%20assistants&q=What%20do%20you%20need%20from%20us%20to%20start%20a%20chatbot%20build%3F#hire">What do you need from us to start a chatbot build?</a></li></ul>
+    </div>
   </div>
 </section><section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
   <div class="container">
@@ -414,21 +503,7 @@
       </div>
 
       <div class="footer__cols">
-        <nav class="footer__col" aria-labelledby="footer-pages-h">
-          <p class="footer__h" id="footer-pages-h">Pages</p>
-          <ul class="footer__links">
-            <li><a href="../../">Home</a></li>
-            <li><a href="../../projects/">Projects</a></li>
-            <li><a href="../../services/">Services</a></li>
-            <li><a href="../../about/">About</a></li>
-            <li><a href="../../about/#experience">Experience</a></li>
-            <li><a href="../../resume/">Resume</a></li>
-            <li><a href="../../faq/">FAQ</a></li>
-            <li><a href="../../contact/">Contact</a></li>
-          </ul>
-        </nav>
-
-        <nav class="footer__col footer__col--wide" aria-labelledby="footer-services-h">
+        <nav class="footer__col footer__col--services" aria-labelledby="footer-services-h">
           <p class="footer__h" id="footer-services-h">Services</p>
           <ul class="footer__links">
             <li><a href="../../services/llm-rag-development/">AI chatbot development</a></li>
@@ -440,14 +515,36 @@
           </ul>
         </nav>
 
-        <nav class="footer__col" aria-labelledby="footer-work-h">
+        <nav class="footer__col footer__col--work" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
+            <li><a href="../../projects/advanced-cctv-analytics/">CCTV analytics in Python</a></li>
+            <li><a href="../../projects/speech-emotion-recognition/">Speech emotion recognition</a></li>
+            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
+            <li><a href="../../projects/obligation-management-system/">Regulatory obligation extraction</a></li>
+            <li><a href="../../projects/ams-ai-finding-engine/">AI audit finding generator</a></li>
+            <li><a href="../../projects/core-banking-text-to-sql/">Text-to-SQL for banking</a></li>
             <li><a href="../../projects/agentic-honeypot/">AI scam honeypot</a></li>
+            <li><a href="../../projects/whatsapp-ai-agent-platform/">WhatsApp AI agent platform</a></li>
             <li><a href="../../projects/deepfake-video-detection/">Deepfake video detection</a></li>
+            <li><a href="../../projects/spam-classifier/">SMS spam classifier</a></li>
             <li><a href="../../projects/">All projects</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__col footer__col--pages" aria-labelledby="footer-pages-h">
+          <p class="footer__h" id="footer-pages-h">Pages</p>
+          <ul class="footer__links">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../projects/">Projects</a></li>
+            <li><a href="../../services/">Services</a></li>
+            <li><a href="../../about/">About</a></li>
+            <li><a href="../../about/#experience">Experience</a></li>
+            <li><a href="../../resume/">Resume</a></li>
+            <li><a href="../../faq/">FAQ</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+            <li><a href="../../contact/#book">Book a call</a></li>
           </ul>
         </nav>
       </div>
@@ -466,10 +563,20 @@
 
   <div class="footer__ghost" aria-hidden="true"></div>
 
-  <!-- floating "Hire me" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js) -->
+  <!-- floating "Let's talk" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js).
+       Without JavaScript it is a plain link to the contact form; with JavaScript it opens the small menu of ways to connect (content.connect). -->
   <div class="fab-wrap contact-fab">
-    <a class="fab" href="../../contact/#hire" aria-label="Hire me"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
-    <div class="fab-tip" aria-hidden="true">Hire me</div>
+    <div class="connect" id="connect-menu" hidden>
+      <p class="connect__h" id="connect-h">Let&rsquo;s talk</p>
+      <ul class="connect__list" aria-labelledby="connect-h">
+            <li><a class="connect__item" href="../../contact/#book"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><span><strong>Book a call</strong><small>Pick a day and time</small></span></a></li>
+            <li><a class="connect__item" href="../../contact/#hire"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg><span><strong>Send a brief</strong><small>Tell me what you need</small></span></a></li>
+            <li><a class="connect__item" href="https://wa.me/919920644655?text=Hi%20Shaunak%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg><span><strong>WhatsApp</strong><small>Message me directly</small></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="connect__item" href="mailto:shaunak.chorge@gmail.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span><strong>Email</strong><small>Write to me</small></span></a></li>
+      </ul>
+    </div>
+    <a class="fab" href="../../contact/#hire" aria-label="Hire me" data-connect-toggle><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></a>
+    <div class="fab-tip" aria-hidden="true">Let&rsquo;s talk</div>
   </div>
 </footer>
 
@@ -506,10 +613,12 @@
     <symbol id="i-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></symbol>
     <symbol id="i-scan-eye" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="1"/><path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0"/></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
     <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
     <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
     <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
     <symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
     <symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
     <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
@@ -520,9 +629,9 @@
   </svg>
 
   <script defer src="../../assets/dist/js/core.min.js?v=d41b0d5b"></script>
-  <script defer src="../../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
+  <script defer src="../../assets/dist/js/contact.min.js?v=e6aee63a"></script>
   <script defer src="../../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
-  <script defer src="../../assets/dist/js/pages.min.js?v=efc0e441"></script>
+  <script defer src="../../assets/dist/js/fx.min.js?v=bb37bfa8"></script>
+  <script defer src="../../assets/dist/js/pages.min.js?v=514d4156"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 //   2. building again gives byte-identical files (the build is deterministic)
 //   3. the files the build wrote equal the files in the repo (run `npm run build` if they do not: the deployed pages are stale)
 //   4. the link guard really catches a broken "Hire me" anchor (contact/?topic=...#hire)
-//   5. the owner's rules: the 11 selected projects in priority order (never printed as a count), no tallies, no shortcut hints, no Home tab, nothing collapsed,
+//   5. the owner's rules (round 7 adds: header order, footer order, languages on About only, education and certificate tiles with their documents, contact tabs and booking picker, long-form pages): the 11 selected projects in priority order (never printed as a count), no tallies, no shortcut hints, no Home tab, nothing collapsed,
 //      no retired wording, Personal builds on /projects/ only, one Traceable AI Backend, the three "How I work" sentences, the resume PDF unchanged
 //   node tools/test.mjs --keep     leave the temp copy in place and print its path
 import fs from 'node:fs';
@@ -56,9 +56,10 @@ try {
     const html = fs.readFileSync(path.join(copy, page), 'utf8');
     check(/href="[^"#]*contact\/\?topic=[^"#]*#hire"/.test(html), 'a service page has a "Hire me" link with ?topic=... and #hire');
     check(checkLinks([page]).problems.length === 0, 'the link guard accepts the real pages');
-    const contact = path.join(copy, 'contact/index.html');
-    fs.writeFileSync(contact, fs.readFileSync(contact, 'utf8').replace(/id="hire"/g, 'id="hire-renamed"'));
+    const contact = path.join(copy, 'contact/index.html'), contactBefore = fs.readFileSync(contact, 'utf8');
+    fs.writeFileSync(contact, contactBefore.replace(/id="hire"/g, 'id="hire-renamed"'));
     check(checkLinks([page]).problems.some(p => p.includes('#hire')), 'the link guard reports a renamed #hire anchor behind ?topic=');
+    fs.writeFileSync(contact, contactBefore);   // later checks read the real contact page
     const dev = path.join(copy, 'about/index.html');
     fs.writeFileSync(dev, fs.readFileSync(dev, 'utf8').replace('</body>', '<script defer src="../assets/js/core.js"></script></body>'));
     check(guard().problems.some(p => p.includes('readable assets')), 'the guard reports a page that links the readable assets/js files');
@@ -121,7 +122,7 @@ try {
     check(/class="np[ "_]/.test(about), 'the portrait is on the About page');
 
     /* the project collage: tiles 1 to 11 in the owner's order on the home page and on /projects/, the "All projects" tile on the home page, Box Selection API not in it */
-    const OWNER_ORDER = ['ai-rag-healthcare-assistant', 'advanced-cctv-analytics', 'speech-emotion-recognition', 'observable-ai-backend', 'obligation-management-system', 'ams-ai-finding-engine', 'finacle-text-to-sql', 'agentic-honeypot', 'whatsapp-ai-agent-platform', 'deepfake-video-detection', 'spam-classifier'];
+    const OWNER_ORDER = ['ai-rag-healthcare-assistant', 'advanced-cctv-analytics', 'speech-emotion-recognition', 'observable-ai-backend', 'obligation-management-system', 'ams-ai-finding-engine', 'core-banking-text-to-sql', 'agentic-honeypot', 'whatsapp-ai-agent-platform', 'deepfake-video-detection', 'spam-classifier'];
     const OWNER_SIZES = ['wide', 'big', 'big', 'small', 'small', 'small', 'small', 'small', 'wide', 'small', 'small'];
     const sel = loadSelection(content);
     check(JSON.stringify(sel.show) === JSON.stringify(OWNER_ORDER) && JSON.stringify(sel.collage.tiles.map(t => t.size)) === JSON.stringify(OWNER_SIZES), "projects.config.json holds the selected projects in the owner's priority order with their tile sizes");
@@ -147,11 +148,50 @@ try {
     const how = content.how_i_work;
     check(how && how.title === 'How I work' && how.lines.length === 3 && how.lines.every(l => pageHtml('services/index.html').includes(l) && about.includes(l)), 'the Services and About pages carry the three "How I work" sentences');
 
-    /* the home About card: degree and year, no college, no place, no greeting */
+    /* the home About card: a few written lines, short forms, where I am and what I do now, profile links; no languages, no college, no greeting */
     const cardFile = path.join(copy, 'src/generated/home-about.html');
-    const card = fs.existsSync(cardFile) ? fs.readFileSync(cardFile, 'utf8').replace(/<[^>]+>/g, ' ') : '';
-    check(card.includes(content.about.whoami.education.degree) && card.includes(content.about.whoami.education.year), 'the home About card shows the degree and the year');
-    check(card.length > 0 && !/college|School of|Mumbai|\bIST\b|Patil|Hi,? I/i.test(card), 'the home About card names no college, no Mumbai or IST, and has no "Hi, I am" greeting');
+    const cardHtml = fs.existsSync(cardFile) ? fs.readFileSync(cardFile, 'utf8') : '';
+    const card = cardHtml.replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&');
+    const W = content.about.whoami;
+    check(card.includes(W.education.short) && card.includes(W.education.year), 'the home About card shows the degree in its short form and the year');
+    check(card.includes(W.based_short) && card.includes(W.now_short) && /github\.com/.test(cardHtml) && /linkedin\.com/.test(cardHtml), 'the home About card shows Mumbai (IST), the current role and the GitHub and LinkedIn links');
+    check(/<h2[^>]*>\s*About\s*<\/h2>/.test(cardHtml) && !/shaunak@/i.test(cardHtml) && !/class="hm-term__tags"/.test(cardHtml), 'the home About card has a plain "About" heading and no "shaunak@portfolio" prompt');
+    check(card.length > 0 && !/college|School of|Patil|Hi,? I/i.test(card) && !rules.LANGUAGE_RE.test(card), 'the home About card names no college, lists no spoken languages and has no "Hi, I am" greeting');
+
+    /* round 7: header, footer, credentials, contact, long-form pages */
+    const headerTools = (home.match(/<div class="site-header__tools">[\s\S]*?<\/div>/) || [''])[0];
+    check(headerTools.indexOf('hdr-hire') > -1 && headerTools.indexOf('hdr-hire') < headerTools.indexOf('data-open-palette'), 'the header shows Hire me first and the search button after it');
+    const footerCols = [...home.matchAll(/<nav class="footer__col[^"]*" aria-labelledby="footer-([a-z]+)-h">/g)].map(m => m[1]);
+    check(JSON.stringify(footerCols) === JSON.stringify(['services', 'work', 'pages']), 'the footer columns run Services, Work, Pages (Pages at the right edge)', footerCols.join(' '));
+    const footerWork = (home.match(/aria-labelledby="footer-work-h">[\s\S]*?<\/nav>/) || [''])[0];
+    const workHrefs = [...footerWork.matchAll(/href="(?:\.\.\/)*projects\/([^"\/]*)\/?"/g)].map(m => m[1]).filter(Boolean);
+    const expectSlugs = OWNER_ORDER.map(id => content.projects.find(p => p.id === id).slug);
+    check(JSON.stringify(workHrefs) === JSON.stringify(expectSlugs), 'the footer Work column lists the selected projects in the owner priority order', workHrefs.join(' '));
+    const langWords = ['English', 'Hindi', 'Marathi', 'German', 'French'];
+    const pagesWithLang = builtPages.filter(rel => langWords.some(w => new RegExp('\\b' + w + '\\b').test(pageHtml(rel).replace(/<script[\s\S]*?<\/script>/g, ''))));
+    check(JSON.stringify(pagesWithLang) === JSON.stringify(['about/index.html']), 'the spoken languages appear on the About page only', pagesWithLang.join(' '));
+    const resume = pageHtml('resume/index.html');
+    for (const [label, html] of [['About', about], ['Resume', resume]]) {
+      check(/class="edu"/.test(html) && /2022 - 2026/.test(html) && /class="edu__years">2022</.test(html) && /class="edu__years">2020</.test(html), label + ': the education tiles show the years in their footers');
+      check(!/Machine Learning<\/li>|Software Engineering|Database Systems|Web Development|System Design/.test(html), label + ': the degree tile no longer lists subjects');
+      const docs = new Set([...html.matchAll(/href="https:\/\/drive\.google\.com\/file\/d\/([\w-]+)\/view\?usp=sharing"/g)].map(m => m[1]));
+      check(docs.size === 10, label + ': all ten shared certificate documents are linked (Google Drive previews)', String(docs.size));
+      check((html.match(/class="cert__card"/g) || []).length >= 17 && /certs--awards/.test(html), label + ': certificates and awards are certificate-style tiles');
+    }
+    const contactHtml = pageHtml('contact/index.html');
+    check(/id="book"[^>]*data-booking=/.test(contactHtml) && /id="hire"/.test(contactHtml) && /data-tabs/.test(contactHtml) && (contactHtml.match(/class="connect-tile"/g) || []).length === 4, 'the contact page has the four quick-connect tiles, the Send a brief and Book a call tabs, and the booking picker');
+    const vcf = path.join(copy, content.connect.vcard);
+    check(fs.existsSync(vcf) && /BEGIN:VCARD[\s\S]*FN:Shaunak Chorge[\s\S]*END:VCARD/.test(fs.readFileSync(vcf, 'utf8')) && contactHtml.includes(content.connect.vcard), 'the contact card (.vcf) is built and linked from the contact page');
+    check(/wa\.me\/\d+\?text=/.test(home) && /data-connect-toggle/.test(home) && /id="connect-menu"/.test(home), 'every page has the floating "Let\'s talk" menu (Book a call, Send a brief, WhatsApp, Email)');
+    const longForm = sel.casestudy.map(id => 'projects/' + content.projects.find(p => p.id === id).slug + '/').concat(content.services.map(sv => 'services/' + (sv.page_slug || sv.slug) + '/'));
+    const thin = longForm.filter(rel => { const h = pageHtml(rel + 'index.html'); return !(/id="ask"/.test(h) && /class="pg-ask__form"/.test(h) && /id="faq"/.test(h) && /class="pg-toc"/.test(h)); });
+    check(!thin.length, 'every case study and service page has the jump list, FAQs and the "Ask me" box', thin.join(' '));
+    const noRelated = sel.casestudy.map(id => 'projects/' + content.projects.find(p => p.id === id).slug + '/').filter(rel => (pageHtml(rel + 'index.html').match(/class="pg-relcard"/g) || []).length !== 3 || !/class="pg-flow"/.test(pageHtml(rel + 'index.html')));
+    check(!noRelated.length, 'every case study has three related case studies and a pipeline diagram', noRelated.join(' '));
+    check(sel.casestudy.length === OWNER_ORDER.length && paths.includes('projects/whatsapp-ai-agent-platform/') && paths.includes('projects/spam-classifier/'), 'every selected project has its own case study page, in the sitemap');
+    const dupIds = builtPages.filter(rel => { const ids = [...pageHtml(rel).replace(/<script[\s\S]*?<\/script>/g, '').matchAll(/\sid="([^"]+)"/g)].map(m => m[1]); return new Set(ids).size !== ids.length; });
+    check(!dupIds.length, 'no built page repeats an id attribute', dupIds.join(' '));
+    check(!/finacle/i.test(builtPages.map(pageHtml).join('\n') + fs.readFileSync(path.join(copy, 'assets/js/sections/fx.js'), 'utf8')), 'the core-banking product name appears in no page, id or script');
 
     /* the selection file is checked: a gap or a wrong tile shape in the desktop grid, or a project in two lists, stops the build */
     const cfgFile = path.join(copy, 'projects.config.json'), cfgText = fs.readFileSync(cfgFile, 'utf8');

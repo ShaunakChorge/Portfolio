@@ -1,14 +1,14 @@
-// p-about.mjs - /about/  (bio beside the portrait, how I work, experience, 2-tier stack, education, certifications, awards). NO languages here.
+// p-about.mjs - /about/  (bio beside the portrait, how I work, experience, 2-tier stack, education collage, certificate tiles, award tiles). The spoken languages are shown here, once.
 import { personNode } from '../../build.mjs';
 import {
   cfg, abs, content, services, skills, CTA_TEXT, experience, education, certifications, achievements, profile, aboutPage, pagesMeta, ENTITY,
 } from './data.mjs';
 import {
-  esc, ico, tags, btn, pageHead, section, hireBand, hireHref, qaList, title as ttl,
+  esc, ico, tags, btn, pageHead, section, hireBand, hireHref, qaList, title as ttl, eduCollage, certTiles, awardTiles,
   ctx, crumbNode, webPage, faqNode, PERSON_ID,
 } from './ui.mjs';
 
-/* ---------- whoami terminal: plain facts only (education, focus). The hero and the story say the rest once, so nothing is repeated here ---------- */
+/* ---------- whoami terminal: plain facts only (education, focus, the spoken languages). The hero and the story say the rest once, so nothing is repeated here ---------- */
 function terminal() {
   const w = aboutPage.whoami;
   return `<div class="pg-term" role="group" aria-label="Quick facts about Shaunak">
@@ -18,6 +18,7 @@ function terminal() {
           <dl class="pg-term__kv">
             <div><dt>education</dt><dd>${esc(w.education.degree)}, ${esc(w.education.year)}<br><span class="pg-term__sub">${esc(w.education.institution)}</span></dd></div>
             <div><dt>focus</dt><dd>${w.focus.map(esc).join(', ')}</dd></div>
+            <div><dt>${esc((aboutPage.page.languages_label || 'languages').toLowerCase())}</dt><dd>${w.languages.map(esc).join(', ')}</dd></div>
           </dl>
           <p class="pg-term__prompt" aria-hidden="true"><span class="pg-term__user">${esc(w.prompt)}</span><span class="pg-term__sym">$</span><span class="pg-term__cursor"></span></p>
         </div>
@@ -78,16 +79,26 @@ export function howIWork({ extra = '' } = {}) {
     body: `<div class="panel pg-hiw" data-tone="purple" data-reveal><ul class="dot-list">${h.lines.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>${extra}`,
   });
 }
-export function certList(cls = '') {
-  return `<ul class="pg-plain${cls ? ' ' + cls : ''}" role="list">${certifications.map(c => {
-    const name = c.url
-      ? `<a class="link" href="${c.url}" target="_blank" rel="noopener noreferrer">${esc(c.name)}<span class="sr-only"> (opens in a new tab)</span></a>`
-      : esc(c.name);
-    return `<li><span class="pg-plain__t">${name}</span><span class="pg-plain__s">${esc(c.issuer)}</span></li>`;
-  }).join('')}</ul>`;
-}
-export function awardList(cls = '') {
-  return `<ul class="pg-plain${cls ? ' ' + cls : ''}" role="list">${achievements.map(a => `<li><span class="pg-plain__t">${esc(a.title)}</span><span class="pg-plain__s">${esc(a.detail)}</span></li>`).join('')}</ul>`;
+/** education collage + certificate tiles + award tiles as three sections (About and Resume share them; `idPrefix` keeps the section ids unique per page) */
+export function credentialSections({ tintAlt = false } = {}) {
+  const certs = certifications.filter(c => c.kind === 'Certification');
+  const interns = certifications.filter(c => c.kind !== 'Certification');
+  const edu = section({
+    id: 'education', eyebrow: 'Education', title: `Where I <span class="hl hl--purple">studied</span>`, tint: tintAlt,
+    body: eduCollage(education),
+  });
+  const cert = section({
+    id: 'certifications', eyebrow: 'Certificates', title: `Certifications and <span class="hl hl--blue">internship certificates</span>`,
+    lead: 'Each certificate opens as a preview of the original document.',
+    body: `<div class="pg-credgroup">${certTiles(certs, { group: 'c' })}</div>
+    <div class="pg-credgroup"><h3 class="pg-credgroup__h">${ico('briefcase')} Internship certificates and letters</h3>${certTiles(interns, { group: 'i' })}</div>`,
+  });
+  const award = section({
+    id: 'awards', eyebrow: 'Awards', title: `Contests and <span class="hl hl--magenta">hackathons</span>`, tint: !tintAlt,
+    lead: aboutPage.page.recognition,
+    body: awardTiles(achievements),
+  });
+  return { edu, cert, award };
 }
 /** the full stack: both tiers are plain panels, nothing is collapsed */
 export function stackTiers() {
@@ -120,7 +131,7 @@ function page() {
   const story = section({
     id: 'story', eyebrow: 'Background', title: ttl(m.h2 && m.h2.story, 'Who I am and <span class="hl">what I do</span>'),
     body: `<div class="pg-story"><div class="prose pg-prose" data-reveal>${html}</div>${portrait(b)}</div>
-    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="${b}resume/">Resume ${ico('arrow-right')}</a><a class="link-arrow" href="${b}projects/">Projects ${ico('arrow-right')}</a><a class="link-arrow" href="${b}faq/">FAQ ${ico('arrow-right')}</a><a class="link-arrow" href="${b}contact/#hire">Contact ${ico('arrow-right')}</a></p>`,
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="${b}resume/">Resume ${ico('arrow-right')}</a><a class="link-arrow" href="${b}projects/">Projects ${ico('arrow-right')}</a><a class="link-arrow" href="#certifications">Certificates ${ico('arrow-right')}</a><a class="link-arrow" href="${b}faq/">FAQ ${ico('arrow-right')}</a><a class="link-arrow" href="${b}contact/#hire">Contact ${ico('arrow-right')}</a></p>`,
   });
 
   const work = experience.filter(e => e.group === 'work');
@@ -132,7 +143,8 @@ function page() {
         <h3 class="timeline__title">${esc(e.role)} <span class="pg-at">at ${esc(e.org)}</span></h3>${e.location ? `
         <p class="timeline__loc">${esc(e.location)}</p>` : ''}
         <ul class="dot-list pg-tl__list" data-tone="${WORK_TONE[i % 3]}">${e.bullets.slice(0, 3).map(x => `<li>${esc(x)}</li>`).join('')}</ul>
-        ${tags(e.tags, { tone: WORK_TONE[i % 3], cls: 'pg-tl__tags', label: 'Tools' })}
+        ${tags(e.tags, { tone: WORK_TONE[i % 3], cls: 'pg-tl__tags', label: 'Tools' })}${e.doc ? `
+        <p class="pg-tl__doc"><a class="link" href="${esc(e.doc)}" target="_blank" rel="noopener noreferrer">${esc(e.doc_label || 'View certificate')}<span class="sr-only"> for ${esc(e.role)}, ${esc(e.org)} (opens in a new tab)</span></a></p>` : ''}
       </li>`).join('')}</ol>
     <p class="pg-linkrow" data-reveal><a class="link-arrow" href="${b}resume/">Full experience on the resume ${ico('arrow-right')}</a></p>`,
   });
@@ -143,20 +155,7 @@ function page() {
     body: stackTiers(),
   });
 
-  const edu = education.find(e => !e.minor);
-  const school = education.filter(e => e.minor);
-  const cred = section({
-    id: 'credentials', eyebrow: 'Credentials', title: `Education, <span class="hl hl--magenta">certifications</span> and awards`,
-    body: `<div class="grid grid--c3 pg-cred">
-      <div class="panel" data-tone="cyan" data-reveal><h3 class="pg-panel__h">${ico('graduation-cap', 'icon--sm')} Education</h3>
-        <p class="pg-plain__t">${esc(edu.degree)}, ${esc(edu.year)}</p><p class="pg-plain__s">${esc(edu.institution)}</p><p class="pg-plain__s">${esc(edu.period)}</p>
-        ${tags(edu.coursework, { tone: 'cyan', cls: 'pg-cred__tags', label: 'Coursework' })}
-        ${edu.activities && edu.activities.length ? `<p class="pg-plain__s">Activities: ${esc(edu.activities.join(', '))}</p>` : ''}
-        <ul class="pg-plain pg-cred__school" role="list">${school.map(e => `<li><span class="pg-plain__t">${esc(e.institution)}</span><span class="pg-plain__s">${esc(e.degree)}, ${esc(e.period.toLowerCase())}</span></li>`).join('')}</ul></div>
-      <div class="panel" data-tone="purple" data-reveal style="--i:1"><h3 class="pg-panel__h">${ico('award', 'icon--sm')} Certifications</h3>${certList()}</div>
-      <div class="panel" data-tone="magenta" data-reveal style="--i:2"><h3 class="pg-panel__h">${ico('trophy', 'icon--sm')} Awards</h3><p class="pg-panel__cap">${esc(aboutPage.page.recognition)}</p>${awardList()}</div>
-    </div>`,
-  });
+  const { edu, cert, award } = credentialSections({ tintAlt: true });
 
   const faqItems = (m.faqs || []).map((f, i) => ({ id: `q${i + 1}`, q: f.q, a: f.a }));
   const faq = faqItems.length ? section({
@@ -166,6 +165,7 @@ function page() {
   const person = {
     ...personNode(cfg), description: ENTITY,
     makesOffer: services.map(s => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', '@id': abs(cfg, s.path) + '#service', name: s.name } })),
+    hasCredential: certifications.filter(c => c.kind === 'Certification').map(c => ({ '@type': 'EducationalOccupationalCredential', name: c.name, credentialCategory: 'certificate', recognizedBy: { '@type': 'Organization', name: c.issuer } })),
   };
   const jsonld = ctx([
     webPage(url, m.title, m.description, { '@type': 'AboutPage', mainEntity: { '@id': PERSON_ID } }),
@@ -175,7 +175,7 @@ function page() {
   ]);
   return {
     path: m.path, current: 'about', title: m.title, description: m.description, jsonld,
-    content: head + story + howIWork() + exp + stack + cred + faq + hireBand({ b, heading: 'Let’s talk about <span class="hl">your project</span>', text: CTA_TEXT }),
+    content: head + story + howIWork() + exp + stack + edu + cert + award + faq + hireBand({ b, heading: 'Let’s talk about <span class="hl">your project</span>', text: CTA_TEXT }),
     llms: {
       heading: m.h1, url, desc: m.description,
       text: [ENTITY, `${aboutPage.whoami.now_full}. ${aboutPage.whoami.based}.`, 'Experience: ' + work.map(e => `${e.role} at ${e.org}`).join('; ') + '.', 'Core stack: ' + skills.core.join(', ') + '.', 'Also works with: ' + skills.also.join(', ') + '.',

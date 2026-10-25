@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=99f76e8a">
+  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=d92fd1cd">
 
 <script type="application/ld+json">
 {
@@ -64,7 +64,12 @@
       },
       "mainEntity": {
         "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/observable-ai-backend/#project"
-      }
+      },
+      "relatedLink": [
+        "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/ams-ai-finding-engine/",
+        "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/whatsapp-ai-agent-platform/",
+        "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/ai-rag-healthcare-assistant/"
+      ]
     },
     {
       "@type": "CreativeWork",
@@ -149,7 +154,7 @@
           "name": "Is this a production system?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. It is a job-application task, not a production system. The slow lookup was planted on purpose to show how tracing finds it, and the timings come from made-up data. A real system would need your own traffic, security and hosting decisions."
+            "text": "No. The traceable AI server is a job-application task, not a production system. The slow lookup was planted on purpose and the timings come from made-up data. The monitoring I added at work was for real company servers, but it is confidential and not shown here. A real system for you would need your own traffic, security and hosting decisions."
           }
         },
         {
@@ -157,7 +162,39 @@
           "name": "Can it run without an AI key?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. With no key set it falls back to a simple keyword router, which is how the 10 offline tests run. That also means anyone can run the project and its tests on a laptop without an account or internet."
+            "text": "Yes. With no key set, the server falls back to a simple keyword router and templated answers, and marks every response as degraded. Five of the 10 tests run in that mode. The others use a stand-in for the AI client or check its settings, so none needs a key, an account or internet."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which part is a personal build and which is company work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The traceable AI server is my own job-application build, written alone and kept in a private repository. The company work is separate: I added resource use, service status and alerts to the LLM observability of the company's AI servers. That work is confidential, so I describe it here but show none of its code, screens or figures."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if an AI model fails or hangs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A model that is unavailable, rate limited or silent for 10 seconds passes the request to the next of three Groq models. The fallback counter and the log line record each failure, and the response stays normal. If all three fail, simple keyword logic answers and the response is marked \"degraded\", so the caller knows no AI model wrote it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do the logs store customer questions or answers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The question and the model's answer are deliberately kept out of the logs; only short error details are logged. Each line holds the request ID, the chosen action, row counts and durations. That protects privacy and keeps log volume down. Timing detail for one request lives in its trace."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does AI server monitoring add to request tracing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tracing explains one request: which step ran and how long it took. Server monitoring watches what sits behind all requests. Resource use shows how much capacity the AI servers are using, service status shows whether each one is running, and alerts tell people when something needs attention. At work I added these to the company's LLM observability."
           }
         }
       ]
@@ -206,10 +243,10 @@
         </nav>
 
         <div class="site-header__tools">
+          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
           </button>
-          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
             <span class="burger__lines" aria-hidden="true"><i></i><i></i><i></i></span>
           </button>
@@ -253,7 +290,7 @@
       <div class="pg-head__aside"><div class="pg-casevis"><div class="pv" data-visual="network" data-variant="observable-ai-backend" data-tone="blue" aria-hidden="true"></div></div></div>
     </div>
   </div>
-</section><section id="at-a-glance" class="section pg-sec section--tint" aria-labelledby="at-a-glance-h">
+</section><nav class="pg-toc" aria-label="On this page"><div class="container"><ul class="pg-toc__list" role="list"><li><a href="#at-a-glance">Key facts</a></li><li><a href="#overview">Overview</a></li><li><a href="#story">The problem</a></li><li><a href="#my-role">My role</a></li><li><a href="#how-it-works">How it works</a></li><li><a href="#decisions">Decisions</a></li><li><a href="#results">Results</a></li><li><a href="#where-it-fits">Where it fits</a></li><li><a href="#extensions">Extensions</a></li><li><a href="#faq">FAQ</a></li><li><a href="#related">Related</a></li><li><a href="#ask">Ask a question</a></li></ul></div></nav><section id="at-a-glance" class="section pg-sec section--tint" aria-labelledby="at-a-glance-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">At a glance</p>
@@ -267,7 +304,16 @@
       <ul class="pg-metrics" role="list" data-reveal-group><li class="pg-metric" data-tone="blue" style="--i:0"><span class="pg-metric__v">15 seconds to under 50 milliseconds</span><span class="pg-metric__l">Slow lookup, before and after the fix (made-up data)</span></li><li class="pg-metric" data-tone="blue" style="--i:1"><span class="pg-metric__v">10</span><span class="pg-metric__l">Tests that run offline, with no key or internet</span></li><li class="pg-metric" data-tone="blue" style="--i:2"><span class="pg-metric__v">60,000 tickets, 25,000 users</span><span class="pg-metric__l">Made-up sample data</span></li></ul>
     </div>
   </div>
-</section><section id="story" class="section pg-sec" aria-labelledby="story-h">
+</section><section id="overview" class="section pg-sec" aria-labelledby="overview-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Overview</p>
+      <h2 id="overview-h" class="section__title">Why this <span class="hl hl--blue">matters</span></h2>
+      
+    </header>
+<div class="panel pg-context" data-tone="blue" data-reveal><p>A business that puts an AI model behind a support tool, a report or a customer chat needs to know when that feature is slow, failing or quietly using a backup. If the team cannot see inside a request, every complaint turns into guessing: was it the model, the data or its own code? Visibility turns that guessing into a short search.</p><p>A good result lets anyone on the team take one complaint, find that exact request, see which step took the time and read the log lines for it. It also shows how heavily the AI servers are used, whether each service is running, and alerts people when something needs attention. This case study covers the request level and the server level, and says which part is which.</p></div>
+  </div>
+</section><section id="story" class="section pg-sec section--tint" aria-labelledby="story-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">The story</p>
@@ -275,8 +321,22 @@
       
     </header>
 <div class="pg-two">
-      <div class="panel" data-tone="blue" data-reveal><h3 class="pg-panel__h">The problem</h3><p>An AI server can return a success code and still be slow, degraded or quietly switching to another model. You only find out when users complain.</p></div>
-      <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h">What I built</h3><p>One request ID is stamped on every log line and trace step of a request. Simple, hand-written metrics count requests, AI response time, tokens used (the small pieces of text an AI is billed by) and model fallbacks. Three Groq models are chained with a time limit each and a clear &quot;degraded&quot; flag, so a silent fallback becomes visible.</p></div>
+      <div class="panel" data-tone="blue" data-reveal><h3 class="pg-panel__h">The problem</h3><p>An AI server can return a success code and still be slow, degraded or quietly answering from a different model. Nobody finds out until users complain. By then the cost is already paid: lost trust, a busy support queue and engineers searching logs with no way to tie a complaint to one request. Without counters, nobody can say how often it happens.</p></div>
+      <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h">What I built</h3><p>I built a small AI server in FastAPI. For each question, an AI model picks one of three business actions, the action runs, and the model writes a short answer. Every log line and trace step of a request carries the same request ID, and the caller gets it back in the response. A few hand-written metrics count requests, AI response time, tokens (the small pieces of text an AI is billed by) and model fallbacks. Three Groq models are chained, each with its own time limit, and the response carries a &quot;degraded&quot; flag, so a silent fallback becomes visible. At work, I added resource use, service status and alerts to the LLM observability of the company's AI servers.</p></div>
+    </div>
+    <h3 class="pg-subh" data-reveal>What made it hard</h3>
+      <ol class="pg-challenges" data-reveal-group><li class="pg-challenge" data-tone="blue" style="--i:0"><span class="pg-challenge__n" aria-hidden="true">01</span><div><h4 class="pg-challenge__t">Failures that look like success</h4><p>A missing or slow model can still end in a success code, because a backup path answers. That happened to me during testing, and my first logs and metrics gave no clear sign of it.</p></div></li><li class="pg-challenge" data-tone="blue" style="--i:1"><span class="pg-challenge__n" aria-hidden="true">02</span><div><h4 class="pg-challenge__t">Finding the slow step</h4><p>One request passes through a model call, a business action and a second model call. Total time alone does not say which step is slow. Only a step-by-step view does.</p></div></li><li class="pg-challenge" data-tone="blue" style="--i:2"><span class="pg-challenge__n" aria-hidden="true">03</span><div><h4 class="pg-challenge__t">Telemetry that stays safe and small</h4><p>Logs can leak customer text and grow fast. Metrics can multiply into thousands of series if a label holds free text. I kept questions and answers out of logs and used a short, fixed set of labels.</p></div></li><li class="pg-challenge" data-tone="blue" style="--i:3"><span class="pg-challenge__n" aria-hidden="true">04</span><div><h4 class="pg-challenge__t">Seeing the servers, not only requests</h4><p>A trace explains one call. It does not show whether the machine behind it is short of capacity or a service has stopped. That needs resource use, service status and alerts as well.</p></div></li></ol>
+  </div>
+</section><section id="my-role" class="section pg-sec" aria-labelledby="my-role-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">My role</p>
+      <h2 id="my-role-h" class="section__title">My role in <span class="hl hl--magenta">the build</span></h2>
+      
+    </header>
+<div class="pg-two">
+      <div class="panel" data-tone="blue" data-reveal><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-code"/></svg> My part</h3><ul class="dot-list"><li>The whole personal build as sole author: the AI server, its logs, metrics and traces, the Docker Compose setup and the 10 tests.</li><li>Finding the slow step in a trace, fixing it, and recording the before and after timings.</li><li>The model chain and fallback counter, added after a real model failure, and the 10-second limit for each model.</li><li>A written decision log in the repository, including the options I rejected and why.</li><li>At the company, I added resource use, service status and alerts to the LLM observability of its AI servers, as part of its in-house work.</li></ul></div>
+      <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-layers"/></svg> Context and credits</h3><ul class="dot-list"><li>The personal build is a job-application task on made-up data. It is kept in a private repository and is not a production system.</li><li>The company work is confidential and sits inside its own systems, so this page shows none of its code, screens or figures.</li><li>The brief for the personal build asked for an AI backend that can be diagnosed from the outside, with one engineering improvement of my choice.</li></ul></div>
     </div>
   </div>
 </section><section id="how-it-works" class="section pg-sec section--tint" aria-labelledby="how-it-works-h">
@@ -286,16 +346,39 @@
       <h2 id="how-it-works-h" class="section__title">Request IDs, metrics and <span class="hl hl--blue">traces</span></h2>
       
     </header>
-<ol class="pg-arch" data-reveal-group><li class="pg-arch__item" data-tone="blue" style="--i:0"><span class="pg-arch__n" aria-hidden="true">01</span><p>An AI server with an /ask endpoint (a web address the app answers on) where an AI picks one of three business actions. These are looking up tickets, creating a ticket and running a sales report. The AI then summarises the result</p></li><li class="pg-arch__item" data-tone="blue" style="--i:1"><span class="pg-arch__n" aria-hidden="true">02</span><p>A chain of three Groq models, each with a time limit and an explicit &quot;degraded&quot; flag</p></li><li class="pg-arch__item" data-tone="blue" style="--i:2"><span class="pg-arch__n" aria-hidden="true">03</span><p>One request ID on every log line and trace step</p></li><li class="pg-arch__item" data-tone="blue" style="--i:3"><span class="pg-arch__n" aria-hidden="true">04</span><p>Hand-written Prometheus metrics for requests, AI response time, tokens and model fallbacks</p></li><li class="pg-arch__item" data-tone="blue" style="--i:4"><span class="pg-arch__n" aria-hidden="true">05</span><p>OpenTelemetry traces viewed in Jaeger</p></li><li class="pg-arch__item" data-tone="blue" style="--i:5"><span class="pg-arch__n" aria-hidden="true">06</span><p>A simple keyword router, so the service runs with no API key or internet</p></li><li class="pg-arch__item" data-tone="blue" style="--i:5"><span class="pg-arch__n" aria-hidden="true">07</span><p>A Docker Compose setup that starts the app, Jaeger and Prometheus together</p></li></ol>
+<ol class="pg-flow" data-tone="blue" aria-label="Pipeline, step by step" data-reveal-group><li class="pg-flow__node" style="--i:0"><span class="pg-flow__n" aria-hidden="true">01</span><strong class="pg-flow__t">Question</strong><span class="pg-flow__d">request ID created</span></li><li class="pg-flow__node" style="--i:1"><span class="pg-flow__n" aria-hidden="true">02</span><strong class="pg-flow__t">AI routes</strong><span class="pg-flow__d">model picks one action</span></li><li class="pg-flow__node" style="--i:2"><span class="pg-flow__n" aria-hidden="true">03</span><strong class="pg-flow__t">Action runs</strong><span class="pg-flow__d">runs on made-up data</span></li><li class="pg-flow__node" style="--i:3"><span class="pg-flow__n" aria-hidden="true">04</span><strong class="pg-flow__t">AI answers</strong><span class="pg-flow__d">short answer, flagged if no AI answered</span></li><li class="pg-flow__node" style="--i:4"><span class="pg-flow__n" aria-hidden="true">05</span><strong class="pg-flow__t">Signals</strong><span class="pg-flow__d">logs, metrics and traces recorded</span></li><li class="pg-flow__node" style="--i:5"><span class="pg-flow__n" aria-hidden="true">06</span><strong class="pg-flow__t">Server watch</strong><span class="pg-flow__d">separate company work: usage, status, alerts</span></li></ol>
+    <ol class="pg-arch" data-reveal-group><li class="pg-arch__item" data-tone="blue" style="--i:0"><span class="pg-arch__n" aria-hidden="true">01</span><p>An AI server with an /ask endpoint (a web address the app answers on). An AI model picks one of three business actions: looking up tickets, creating a ticket or running a sales report. The action runs on made-up data, and the model then summarises the result.</p></li><li class="pg-arch__item" data-tone="blue" style="--i:1"><span class="pg-arch__n" aria-hidden="true">02</span><p>A chain of three Groq models, each with a 10-second limit and the library's own retries switched off. If all fail, or no API key is set, a simple keyword router answers and the response is marked &quot;degraded&quot;. The service therefore runs with no API key or internet.</p></li><li class="pg-arch__item" data-tone="blue" style="--i:2"><span class="pg-arch__n" aria-hidden="true">03</span><p>One request ID, which is also the trace ID, appears on every JSON log line written during a request, on every trace step and in every /ask response, including errors. The question and the model's answer are deliberately kept out of the logs; only short error details are logged.</p></li><li class="pg-arch__item" data-tone="blue" style="--i:3"><span class="pg-arch__n" aria-hidden="true">04</span><p>Hand-written Prometheus metrics: requests by status code, request time, errors by type, AI call time, tokens, model fallbacks and requests in progress. Labels are never free text, so the stored data stays small.</p></li><li class="pg-arch__item" data-tone="blue" style="--i:4"><span class="pg-arch__n" aria-hidden="true">05</span><p>OpenTelemetry traces are pushed to Jaeger. The web request and the outgoing AI call are traced automatically, and I added spans for routing, the action, the summary and each model call. Health and metrics calls are left out.</p></li><li class="pg-arch__item" data-tone="blue" style="--i:5"><span class="pg-arch__n" aria-hidden="true">06</span><p>A Docker Compose setup starts the app, Jaeger and Prometheus together. Configuration is baked into the images and every host port is a setting, so the stack can be copied to another machine and started the same way.</p></li><li class="pg-arch__item" data-tone="blue" style="--i:5"><span class="pg-arch__n" aria-hidden="true">07</span><p>At the company, resource use, service status and alerts were added to the LLM observability of its AI servers. This part is confidential and is not part of the personal repository.</p></li></ol>
   </div>
-</section><section id="results" class="section pg-sec" aria-labelledby="results-h">
+</section><section id="decisions" class="section pg-sec" aria-labelledby="decisions-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Decisions</p>
+      <h2 id="decisions-h" class="section__title">Design decisions and <span class="hl hl--purple">trade-offs</span></h2>
+      
+    </header>
+<ul class="pg-decisions" role="list" data-reveal-group><li class="pg-decision" data-tone="blue" style="--i:0"><h3 class="pg-decision__t">Tracing as the one big improvement</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>Of seven options in the brief, I chose OpenTelemetry tracing, and I used the trace ID as the request ID on its log lines and responses.</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>Metrics show that a request was slow and logs show what the code did, but only a trace shows where the time went. One shared ID then links all three.</p></li><li class="pg-decision" data-tone="blue" style="--i:1"><h3 class="pg-decision__t">Hand-written logs and metrics</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>I wrote a short log formatter and picked the metrics myself, instead of using ready-made helper libraries that choose them for you.</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>What to measure should be my decision and easy to explain. A helper library would have hidden the key idea, which is how the trace ID reaches each log line.</p></li><li class="pg-decision" data-tone="blue" style="--i:2"><h3 class="pg-decision__t">Fail fast, then try another model</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>Each model gets a 10-second limit and the provider's own retries are off, so a failing model hands the request to the next one in the chain.</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>The provider's defaults could hold one hung model for up to 180 seconds. With my limit the worst case for one AI call is about 30 seconds across three models.</p></li><li class="pg-decision" data-tone="blue" style="--i:3"><h3 class="pg-decision__t">Leave out the large monitoring stack</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>I declined Grafana, Loki, Tempo and Kubernetes, and used Jaeger and Prometheus on their own screens.</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>The task needed metrics, logs and traces that could be used, not a dashboard product. The extra tools would have added setup time and more containers without adding anything the task needed.</p></li></ul>
+    <div class="panel pg-iteration" data-tone="magenta" data-reveal><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-git-branch"/></svg> What I tried first, and what changed</h3><p><strong>First attempt.</strong> I first set a single model, picked from the provider's public model list. On my key that model was not available, yet every request still returned a success code, because the keyword fallback quietly answered. The only sign was a flag in the response, and the log gave just an error class name.</p><p><strong>What changed.</strong> I replaced it with a chain of three models, ordered by the routing speed I measured (121, 492 and 545 milliseconds). I added the provider's error message to the log line and a fallback counter, so a failing first model shows up in monitoring even when users notice nothing.</p></div>
+  </div>
+</section><section id="results" class="section pg-sec section--tint" aria-labelledby="results-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">Results</p>
       <h2 id="results-h" class="section__title">A slow step found in a <span class="hl hl--magenta">trace</span></h2>
       <p class="section__lead">Every number comes with how it was measured. The limits are part of the result.</p>
     </header>
-<div class="panel" data-tone="blue" data-reveal><ul class="dot-list pg-results"><li>A deliberately slow lookup (a join over 60,000 made-up tickets) was found in a trace. Its step fell from about 15 seconds to under 50 milliseconds once indexed</li><li>10 automated tests that need no key or internet</li><li>Silent model fallbacks are visible through the degraded flag and a fallback counter</li></ul></div>
+<div class="pg-two">
+      <div class="panel" data-tone="blue" data-reveal><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-circle-check"/></svg> Results</h3><ul class="dot-list pg-results"><li>A deliberately slow lookup (a join over 60,000 made-up tickets) was the largest step in a trace. Once indexed, that step fell from about 15 seconds to under 50 milliseconds, and the whole request from about 16 seconds to under 1 second (captured traces).</li><li>10 automated tests that need no key or internet. They cover the health check, bad input, the unknown-region error, the metrics page, the AI path with a stand-in client, the model chain, the time limit and a provider failure.</li><li>A failing first model no longer hides. The fallback counter and the log line record it, and the trace shows a second attempt. When every model fails, the response is flagged &quot;degraded&quot;.</li><li>A request that took about 12 seconds in testing was explained afterwards from the logs alone: the summary model hung, the 10-second limit fired and the second model answered in under half a second.</li><li>At the company, resource use, service status and alerts were added to the LLM observability of the AI servers. The details are confidential and are not published here.</li></ul></div>
+      <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-info"/></svg> Limits to keep in mind</h3><ul class="dot-list pg-results"><li>This is a job-application task, not a production system. The data is made up and held in memory, the slow lookup was planted on purpose, and the timings come from a single test setup, not real traffic.</li><li>Timings move with machine load: three repeat runs of the slow path took between 17.5 and 27.1 seconds. I report the captured pair as an example, not as an average.</li><li>The personal build records every trace, defines no alert rules and has no sign-in. A real service would sample traces, add alerts and secure access. The time limit covers AI calls only, not a slow business action.</li><li>The company work is confidential, so this page shows none of its code, screens or figures. What I can say is limited to what I added: resource use, service status and alerts.</li></ul></div>
+    </div>
+  </div>
+</section><section id="where-it-fits" class="section pg-sec" aria-labelledby="where-it-fits-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">In a business</p>
+      <h2 id="where-it-fits-h" class="section__title">Where this kind of solution <span class="hl hl--blue">fits</span></h2>
+      <p class="section__lead">Situations where a team could use the same approach. These are examples, not past clients.</p>
+    </header>
+<ul class="pg-uses" role="list" data-reveal-group><li class="pg-use" data-tone="cyan" style="--i:0"><h3 class="pg-use__who">A team running its own <span class="ai">AI</span> servers</h3><p>It wants to see how heavily each model server is used, whether each service is running, and to get an alert before users notice a problem.</p></li><li class="pg-use" data-tone="purple" style="--i:1"><h3 class="pg-use__who">A product team with an <span class="ai">AI</span> feature</h3><p>Users report slow or odd answers. The team needs to find the exact request and see whether the model, the data or its own code caused the delay.</p></li><li class="pg-use" data-tone="blue" style="--i:2"><h3 class="pg-use__who">Support and operations leads</h3><p>They need a request ID that ties one customer complaint to one trace, so they can answer with facts instead of guesses.</p></li><li class="pg-use" data-tone="magenta" style="--i:3"><h3 class="pg-use__who">Teams watching <span class="ai">AI</span> cost</h3><p>Token counts per model and per step show where the spend goes, and whether a backup model is quietly doing most of the work.</p></li></ul>
   </div>
 </section><section id="extensions" class="section pg-sec section--tint" aria-labelledby="extensions-h">
   <div class="container">
@@ -328,16 +411,72 @@
       <div class="pg-qa__a"><p>Observability means you can tell what a running app is doing from the outside, using logs, metrics and traces. For an AI server this is called LLM observability. A request ID is stamped on every log line and trace step. Prometheus metrics count requests, AI response time and tokens. OpenTelemetry traces in Jaeger show where each request spent its time.</p></div>
     </details><details class="pg-qa" id="observable-ai-backend-q2" open data-reveal style="--i:1">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Is this a production system?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>No. It is a job-application task, not a production system. The slow lookup was planted on purpose to show how tracing finds it, and the timings come from made-up data. A real system would need your own traffic, security and hosting decisions.</p></div>
+      <div class="pg-qa__a"><p>No. The traceable AI server is a job-application task, not a production system. The slow lookup was planted on purpose and the timings come from made-up data. The monitoring I added at work was for real company servers, but it is confidential and not shown here. A real system for you would need your own traffic, security and hosting decisions.</p></div>
     </details><details class="pg-qa" id="observable-ai-backend-q3" open data-reveal style="--i:2">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Can it run without an <span class="ai">AI</span> key?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>Yes. With no key set it falls back to a simple keyword router, which is how the 10 offline tests run. That also means anyone can run the project and its tests on a laptop without an account or internet.</p></div>
+      <div class="pg-qa__a"><p>Yes. With no key set, the server falls back to a simple keyword router and templated answers, and marks every response as degraded. Five of the 10 tests run in that mode. The others use a stand-in for the AI client or check its settings, so none needs a key, an account or internet.</p></div>
+    </details><details class="pg-qa" id="observable-ai-backend-q4" open data-reveal style="--i:3">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Which part is a personal build and which is company work?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>The traceable AI server is my own job-application build, written alone and kept in a private repository. The company work is separate: I added resource use, service status and alerts to the LLM observability of the company's AI servers. That work is confidential, so I describe it here but show none of its code, screens or figures.</p></div>
+    </details><details class="pg-qa" id="observable-ai-backend-q5" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">What happens if an <span class="ai">AI</span> model fails or hangs?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>A model that is unavailable, rate limited or silent for 10 seconds passes the request to the next of three Groq models. The fallback counter and the log line record each failure, and the response stays normal. If all three fail, simple keyword logic answers and the response is marked &quot;degraded&quot;, so the caller knows no AI model wrote it.</p></div>
+    </details><details class="pg-qa" id="observable-ai-backend-q6" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Do the logs store customer questions or answers?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>No. The question and the model's answer are deliberately kept out of the logs; only short error details are logged. Each line holds the request ID, the chosen action, row counts and durations. That protects privacy and keeps log volume down. Timing detail for one request lives in its trace.</p></div>
+    </details><details class="pg-qa" id="observable-ai-backend-q7" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">What does <span class="ai">AI</span> server monitoring add to request tracing?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>Tracing explains one request: which step ran and how long it took. Server monitoring watches what sits behind all requests. Resource use shows how much capacity the AI servers are using, service status shows whether each one is running, and alerts tell people when something needs attention. At work I added these to the company's LLM observability.</p></div>
     </details></div>
   </div>
+</section><section id="related" class="section pg-sec" aria-labelledby="related-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">More case studies</p>
+      <h2 id="related-h" class="section__title">Related case studies by <span class="hl hl--purple">business need</span></h2>
+      
+    </header>
+<ul class="pg-relcards" role="list" data-reveal-group><li><a class="pg-relcard" href="../../projects/ams-ai-finding-engine/" data-tone="cyan" style="--i:0">
+      <span class="pg-relcard__cat">AI and backend <span class="pg-relcard__origin">Client</span></span>
+      <strong class="pg-relcard__t">AI that drafts audit findings</strong>
+      <span class="pg-relcard__why">Both put an AI model inside a business workflow, where its output must be checked and its failures must be visible.</span>
+      <span class="pg-relcard__go">Read the case study <svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span>
+    </a></li><li><a class="pg-relcard" href="../../projects/whatsapp-ai-agent-platform/" data-tone="blue" style="--i:1">
+      <span class="pg-relcard__cat">Automation <span class="pg-relcard__origin">Client</span></span>
+      <strong class="pg-relcard__t">AI agents that reply on WhatsApp</strong>
+      <span class="pg-relcard__why">Both are AI backends that answer users in the background, so a slow or missing reply needs a quick, factual explanation.</span>
+      <span class="pg-relcard__go">Read the case study <svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span>
+    </a></li><li><a class="pg-relcard" href="../../projects/ai-rag-healthcare-assistant/" data-tone="cyan" style="--i:2">
+      <span class="pg-relcard__cat">AI chatbot <span class="pg-relcard__origin">Personal</span></span>
+      <strong class="pg-relcard__t">A chatbot that cites its sources</strong>
+      <span class="pg-relcard__why">Both make AI answers easier to trust: a source or &quot;not found&quot; there, a trace and a degraded flag here.</span>
+      <span class="pg-relcard__go">Read the case study <svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span>
+    </a></li></ul>
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../projects/#by-need">Browse all work by business need <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../../projects/">All projects <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+  </div>
 </section><section class="section pg-sec pg-pnsec" aria-label="More case studies"><div class="container"><nav class="pg-pn" aria-label="More case studies">
-      <a class="pg-pn__link" href="../../projects/deepfake-video-detection/" rel="prev" data-reveal><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg><span><small>Previous case study</small><strong>Frame-by-frame real or fake verdicts</strong></span></a>
-      <a class="pg-pn__link pg-pn__link--next" href="../../projects/ams-ai-finding-engine/" rel="next" data-reveal style="--i:1"><span><small>Next case study</small><strong>AI that drafts audit findings</strong></span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
-    </nav></div></section><section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
+      <a class="pg-pn__link" href="../../projects/speech-emotion-recognition/" rel="prev" data-reveal><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg><span><small>Previous case study</small><strong>Hearing the mood in a voice clip</strong></span></a>
+      <a class="pg-pn__link pg-pn__link--next" href="../../projects/obligation-management-system/" rel="next" data-reveal style="--i:1"><span><small>Next case study</small><strong>AI that reads circulars and permits</strong></span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+    </nav></div></section><section id="ask" class="section pg-sec pg-ask" aria-labelledby="ask-h">
+  <div class="container">
+    <div class="pg-ask__box panel" data-tone="cyan" data-reveal>
+      <div class="pg-ask__text">
+        <p class="eyebrow">Ask me</p>
+        <h2 id="ask-h" class="pg-ask__title">Have a question about this project, or your own idea?</h2>
+        <p class="pg-ask__lead">Type your question below. The contact form opens with your question and this page already filled in, so you only add your name and email.</p>
+      </div>
+      <form class="pg-ask__form" action="../../contact/#hire" method="get">
+        <input type="hidden" name="topic" value="ai-backend-fastapi-django">
+        <input type="hidden" name="ref" value="projects/observable-ai-backend/">
+        <input type="hidden" name="about" value="Traceable AI Backend">
+        <label class="sr-only" for="ask-q">Your question</label>
+        <input class="input pg-ask__input" id="ask-q" name="q" type="text" maxlength="300" autocomplete="off" enterkeyhint="send" placeholder="How do you find why one AI request was slow?">
+        <button class="btn btn--solid btn--glow" type="submit">Ask me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></button>
+      </form>
+      <ul class="pg-ask__chips" role="list" aria-label="Questions people often ask"><li><a class="pg-ask__chip" href="../../contact/?topic=ai-backend-fastapi-django&ref=projects/observable-ai-backend/&about=Traceable%20AI%20Backend&q=How%20do%20you%20find%20why%20one%20AI%20request%20was%20slow%3F#hire">How do you find why one AI request was slow?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=ai-backend-fastapi-django&ref=projects/observable-ai-backend/&about=Traceable%20AI%20Backend&q=What%20did%20you%20add%20to%20the%20company's%20AI%20server%20monitoring%3F#hire">What did you add to the company's AI server monitoring?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=ai-backend-fastapi-django&ref=projects/observable-ai-backend/&about=Traceable%20AI%20Backend&q=What%20can%20you%20show%20me%2C%20and%20what%20is%20confidential%3F#hire">What can you show me, and what is confidential?</a></li></ul>
+    </div>
+  </div>
+</section><section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
   <div class="container">
     <div class="pg-hire__band" data-reveal="scale">
       <span class="pg-hire__line" aria-hidden="true"></span>
@@ -384,21 +523,7 @@
       </div>
 
       <div class="footer__cols">
-        <nav class="footer__col" aria-labelledby="footer-pages-h">
-          <p class="footer__h" id="footer-pages-h">Pages</p>
-          <ul class="footer__links">
-            <li><a href="../../">Home</a></li>
-            <li><a href="../../projects/">Projects</a></li>
-            <li><a href="../../services/">Services</a></li>
-            <li><a href="../../about/">About</a></li>
-            <li><a href="../../about/#experience">Experience</a></li>
-            <li><a href="../../resume/">Resume</a></li>
-            <li><a href="../../faq/">FAQ</a></li>
-            <li><a href="../../contact/">Contact</a></li>
-          </ul>
-        </nav>
-
-        <nav class="footer__col footer__col--wide" aria-labelledby="footer-services-h">
+        <nav class="footer__col footer__col--services" aria-labelledby="footer-services-h">
           <p class="footer__h" id="footer-services-h">Services</p>
           <ul class="footer__links">
             <li><a href="../../services/llm-rag-development/">AI chatbot development</a></li>
@@ -410,14 +535,36 @@
           </ul>
         </nav>
 
-        <nav class="footer__col" aria-labelledby="footer-work-h">
+        <nav class="footer__col footer__col--work" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
+            <li><a href="../../projects/advanced-cctv-analytics/">CCTV analytics in Python</a></li>
+            <li><a href="../../projects/speech-emotion-recognition/">Speech emotion recognition</a></li>
+            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
+            <li><a href="../../projects/obligation-management-system/">Regulatory obligation extraction</a></li>
+            <li><a href="../../projects/ams-ai-finding-engine/">AI audit finding generator</a></li>
+            <li><a href="../../projects/core-banking-text-to-sql/">Text-to-SQL for banking</a></li>
             <li><a href="../../projects/agentic-honeypot/">AI scam honeypot</a></li>
+            <li><a href="../../projects/whatsapp-ai-agent-platform/">WhatsApp AI agent platform</a></li>
             <li><a href="../../projects/deepfake-video-detection/">Deepfake video detection</a></li>
+            <li><a href="../../projects/spam-classifier/">SMS spam classifier</a></li>
             <li><a href="../../projects/">All projects</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__col footer__col--pages" aria-labelledby="footer-pages-h">
+          <p class="footer__h" id="footer-pages-h">Pages</p>
+          <ul class="footer__links">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../projects/">Projects</a></li>
+            <li><a href="../../services/">Services</a></li>
+            <li><a href="../../about/">About</a></li>
+            <li><a href="../../about/#experience">Experience</a></li>
+            <li><a href="../../resume/">Resume</a></li>
+            <li><a href="../../faq/">FAQ</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+            <li><a href="../../contact/#book">Book a call</a></li>
           </ul>
         </nav>
       </div>
@@ -436,10 +583,20 @@
 
   <div class="footer__ghost" aria-hidden="true"></div>
 
-  <!-- floating "Hire me" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js) -->
+  <!-- floating "Let's talk" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js).
+       Without JavaScript it is a plain link to the contact form; with JavaScript it opens the small menu of ways to connect (content.connect). -->
   <div class="fab-wrap contact-fab">
-    <a class="fab" href="../../contact/#hire" aria-label="Hire me"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
-    <div class="fab-tip" aria-hidden="true">Hire me</div>
+    <div class="connect" id="connect-menu" hidden>
+      <p class="connect__h" id="connect-h">Let&rsquo;s talk</p>
+      <ul class="connect__list" aria-labelledby="connect-h">
+            <li><a class="connect__item" href="../../contact/#book"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><span><strong>Book a call</strong><small>Pick a day and time</small></span></a></li>
+            <li><a class="connect__item" href="../../contact/#hire"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg><span><strong>Send a brief</strong><small>Tell me what you need</small></span></a></li>
+            <li><a class="connect__item" href="https://wa.me/919920644655?text=Hi%20Shaunak%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg><span><strong>WhatsApp</strong><small>Message me directly</small></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="connect__item" href="mailto:shaunak.chorge@gmail.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span><strong>Email</strong><small>Write to me</small></span></a></li>
+      </ul>
+    </div>
+    <a class="fab" href="../../contact/#hire" aria-label="Hire me" data-connect-toggle><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></a>
+    <div class="fab-tip" aria-hidden="true">Let&rsquo;s talk</div>
   </div>
 </footer>
 
@@ -469,6 +626,7 @@
     <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
     <symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/></symbol>
     <symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+    <symbol id="i-git-branch" viewBox="0 0 24 24"><line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></symbol>
     <symbol id="i-folder" viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
     <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
     <symbol id="i-audio-lines" viewBox="0 0 24 24"><path d="M2 10v3"/><path d="M6 6v11"/><path d="M10 3v18"/><path d="M14 8v7"/><path d="M18 5v13"/><path d="M22 10v3"/></symbol>
@@ -476,11 +634,13 @@
     <symbol id="i-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></symbol>
     <symbol id="i-scan-eye" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="1"/><path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0"/></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
     <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
     <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
     <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
     <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
     <symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
     <symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
     <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
@@ -491,10 +651,10 @@
   </svg>
 
   <script defer src="../../assets/dist/js/core.min.js?v=d41b0d5b"></script>
-  <script defer src="../../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
+  <script defer src="../../assets/dist/js/contact.min.js?v=e6aee63a"></script>
   <script defer src="../../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
-  <script defer src="../../assets/dist/js/pages.min.js?v=efc0e441"></script>
-  <script defer src="../../assets/dist/js/visuals.min.js?v=53b137f5"></script>
+  <script defer src="../../assets/dist/js/fx.min.js?v=bb37bfa8"></script>
+  <script defer src="../../assets/dist/js/pages.min.js?v=514d4156"></script>
+  <script defer src="../../assets/dist/js/visuals.min.js?v=6bbaf295"></script>
 </body>
 </html>

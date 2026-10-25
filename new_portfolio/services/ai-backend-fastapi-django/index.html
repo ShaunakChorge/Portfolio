@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=99f76e8a">
+  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=d92fd1cd">
 
 <script type="application/ld+json">
 {
@@ -62,7 +62,7 @@
       "breadcrumb": {
         "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/services/ai-backend-fastapi-django/#breadcrumb"
       },
-      "dateModified": "2026-10-24",
+      "dateModified": "2026-10-25",
       "mainEntity": {
         "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/services/ai-backend-fastapi-django/#service"
       }
@@ -165,7 +165,31 @@
           "name": "Will the API come with tests?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. My own backend projects ship with tests for the core logic and for each endpoint, and I take the same approach on client work. Tests make later changes safer and cheaper, and they show your team how each part is meant to behave."
+            "text": "Yes. My own backend projects ship with tests on the core logic and on each endpoint. The box-selection API, a job-application task, has 27 passing tests, and the traceable AI backend has 10 that run offline. I take the same approach on client work. Tests make later changes safer and show your team how each part should behave."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does API development cost in India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Price depends on the number of endpoints, the systems the API must connect to, the state of your data, and how much testing and documentation you want. A clearly defined scope can be quoted at a fixed price. Open-ended work is usually fairer by the hour. I quote after reading a short brief, with terms agreed in writing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you keep a FastAPI backend secure?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every request is checked, and wrong input is rejected with a clear message. I add request limits, such as 1 per second with bursts of 5 on an AI chat service I co-built, and can add sign-in with per-key usage quotas. For sensitive data the AI model can run on your own servers. Plan a security review before launch."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What API documentation will I receive?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "FastAPI builds interactive documentation from the code itself, so it stays in step with what the API does. Alongside it you receive a README with setup steps and example requests, and handover notes on how the parts fit. A web or mobile developer can start from the same written description."
           }
         }
       ]
@@ -214,10 +238,10 @@
         </nav>
 
         <div class="site-header__tools">
+          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
           </button>
-          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
             <span class="burger__lines" aria-hidden="true"><i></i><i></i><i></i></span>
           </button>
@@ -261,6 +285,24 @@
       <div class="pg-head__aside"><div class="pg-svcmark" data-tone="blue" aria-hidden="true"><span class="pg-svcmark__ring"></span><span class="icon-tile pg-svcmark__tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-server"/></svg></span></div></div>
     </div>
   </div>
+</section><nav class="pg-toc" aria-label="On this page"><div class="container"><ul class="pg-toc__list" role="list"><li><a href="#who">Who it is for</a></li><li><a href="#problems">Problems solved</a></li><li><a href="#deliverables">What you get</a></li><li><a href="#process">Process</a></li><li><a href="#tools">Technology</a></li><li><a href="#tradeoffs">Trade-offs</a></li><li><a href="#use-cases">Where it fits</a></li><li><a href="#proof">Proof</a></li><li><a href="#faq">FAQ</a></li><li><a href="#related">Related</a></li><li><a href="#ask">Ask a question</a></li></ul></div></nav><section id="who" class="section pg-sec section--tint" aria-labelledby="who-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Who it is for</p>
+      <h2 id="who-h" class="section__title">Who this <span class="hl hl--blue">is for</span></h2>
+      
+    </header>
+<ul class="pg-uses" role="list" data-reveal-group><li class="pg-use" data-tone="cyan" style="--i:0"><h3 class="pg-use__who">Founders adding an <span class="ai">AI</span> feature to a product</h3><p>The AI feature works in a demo but is slow or unpredictable in real use. A service with time limits, fallbacks and logs between the app and the model lets a slow or failing answer be traced to its cause.</p></li><li class="pg-use" data-tone="purple" style="--i:1"><h3 class="pg-use__who">Startups building a first backend</h3><p>A small team needs a documented API, a database and tests behind a website or mobile app. I keep the core logic as plain tested code, so the product is easier to extend later.</p></li><li class="pg-use" data-tone="blue" style="--i:2"><h3 class="pg-use__who">Teams with a backend nobody dares to touch</h3><p>Every change risks breaking something, and the original author may have moved on. I read the code, add tests around what must not change, fix the slow parts and make failures visible.</p></li><li class="pg-use" data-tone="magenta" style="--i:3"><h3 class="pg-use__who">Operations teams linking internal systems</h3><p>Two tools hold related data, and people retype it or wait for slow jobs. I build the link as an API with background workers and live progress on a web screen, so nobody watches a frozen page.</p></li></ul>
+  </div>
+</section><section id="problems" class="section pg-sec" aria-labelledby="problems-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Problems I solve</p>
+      <h2 id="problems-h" class="section__title">Problems I <span class="hl hl--magenta">solve</span></h2>
+      
+    </header>
+<ul class="pg-problems" role="list" data-reveal-group><li class="pg-problem" data-tone="blue" style="--i:0"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>A slow or failing request cannot be explained</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>I add a request ID (a label that follows one request through the logs), metrics and traces. In my traceable AI backend, a trace exposed a deliberately slow lookup on made-up data, and indexing cut it from about 15 seconds to under 50 milliseconds.</p></li><li class="pg-problem" data-tone="blue" style="--i:1"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>An AI step takes minutes for every request</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>I measure where the time goes. On a drafting service at work, I found hidden extra processing in how the AI models were called and compared four candidate models. Time per request fell from 7.9 minutes to 16.9 seconds, with accuracy unchanged.</p></li><li class="pg-problem" data-tone="blue" style="--i:2"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>Slow jobs freeze the app for everyone</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>Heavy work goes to background workers (Celery and Redis), and progress is pushed to the screen over WebSockets. At an internship I set up both: workers so heavy jobs did not slow the main API, and live progress for long data-matching jobs.</p></li><li class="pg-problem" data-tone="blue" style="--i:3"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>Wrong or missing input breaks the service</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>Every request is checked at the door, with Pydantic in FastAPI or serializers in Django REST Framework, and each wrong input gets a clear error message. The box-selection API I submitted for a job application has a test for each rejected case.</p></li><li class="pg-problem" data-tone="blue" style="--i:4"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>Two systems hold the same data and drift apart</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>I build the sync as a documented API on PostgreSQL, check each record on the way in and log every run. At an internship I built backend APIs that sync data between internal company systems.</p></li></ul>
+  </div>
 </section><section id="deliverables" class="section pg-sec section--tint" aria-labelledby="deliverables-h">
   <div class="container">
     <header class="section__head" data-reveal>
@@ -269,8 +311,8 @@
       
     </header>
 <div class="pg-two">
-      <div class="panel" data-tone="blue" data-reveal><h3 class="pg-panel__h">Deliverables</h3><ul class="dot-list"><li>A backend API with documented endpoints, meaning the web addresses your app calls (FastAPI or Django REST Framework)</li><li>A PostgreSQL database design, with scripts to update it safely</li><li>A Docker setup so the whole system starts the same way everywhere</li><li>Automated tests for the main logic and the API (pytest)</li><li>Logs, speed metrics and request traces where they help</li><li>A README, API documentation and handover notes</li></ul></div>
-      <div class="panel" data-tone="green" data-reveal style="--i:1"><h3 class="pg-panel__h">Good fit when</h3><ul class="dot-list"><li>Startups that need a backend behind a website, mobile app or AI feature</li><li>Teams that need an existing service extended, tested or made easier to monitor</li><li>Projects that need background jobs, live progress updates or data sync between systems</li></ul></div>
+      <div class="panel" data-tone="blue" data-reveal><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-circle-check"/></svg> Deliverables</h3><ul class="dot-list"><li>A backend API with documented endpoints, meaning the web addresses your app calls (FastAPI or Django REST Framework)</li><li>A PostgreSQL database design, with scripts to update it safely</li><li>A Docker setup so the whole system starts the same way everywhere</li><li>Automated tests for the main logic and the API (pytest)</li><li>Logs, speed metrics and request traces where they help</li><li>A README, API documentation and handover notes</li></ul></div>
+      <div class="panel" data-tone="green" data-reveal style="--i:1"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-info"/></svg> What I need from you</h3><ul class="dot-list"><li>A list of the apps, screens or other systems that will call the API, and what each one needs back.</li><li>Access to the existing code, database layout and any notes, if a service already exists, so I can read it before changing anything.</li><li>Sample data that includes the messy cases, and a rough idea of how many users or requests to expect.</li><li>Where the system will run, who will look after it, and any rules on security, data location or monitoring.</li></ul></div>
     </div>
   </div>
 </section><section id="process" class="section pg-sec" aria-labelledby="process-h">
@@ -282,7 +324,34 @@
     </header>
 <ol class="pg-steps" data-reveal-group><li class="pg-step" style="--i:0"><span class="pg-step__n" aria-hidden="true">01</span><h3 class="pg-step__t">Scope</h3><p>We define the endpoints, the data and how errors are reported before building starts.</p></li><li class="pg-step" style="--i:1"><span class="pg-step__n" aria-hidden="true">02</span><h3 class="pg-step__t">Build</h3><p>The core logic first, as plain tested code, then the API layer on top.</p></li><li class="pg-step" style="--i:2"><span class="pg-step__n" aria-hidden="true">03</span><h3 class="pg-step__t">Verify</h3><p>Automated tests, realistic sample data and edge cases, with logging switched on.</p></li><li class="pg-step" style="--i:3"><span class="pg-step__n" aria-hidden="true">04</span><h3 class="pg-step__t">Hand over</h3><p>Documentation, a ready-to-run Docker setup and a walkthrough.</p></li></ol>
   </div>
-</section><section id="proof" class="section pg-sec section--tint" aria-labelledby="proof-h">
+</section><section id="tools" class="section pg-sec section--tint" aria-labelledby="tools-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Technology</p>
+      <h2 id="tools-h" class="section__title">Technology, and <span class="hl hl--blue">where it fits</span></h2>
+      
+    </header>
+<dl class="pg-roles panel" data-tone="blue" data-reveal><div class="pg-roles__row"><dt>FastAPI</dt><dd>Serves the API, checks every incoming request and writes interactive API documentation from the code.</dd></div><div class="pg-roles__row"><dt>Django and Django REST Framework</dt><dd>Suit products that also need an admin area and user accounts. The box-selection API I submitted uses them with an admin screen.</dd></div><div class="pg-roles__row"><dt>Pydantic</dt><dd>Describes the shape of each request and response, and rejects wrong input with a clear message.</dd></div><div class="pg-roles__row"><dt>PostgreSQL</dt><dd>Stores the application data. The table design and the scripts that update it safely are part of the handover.</dd></div><div class="pg-roles__row"><dt>Celery and Redis</dt><dd>Run slow work in background workers. Redis holds the queue of waiting jobs, so the main API stays quick.</dd></div><div class="pg-roles__row"><dt>WebSockets</dt><dd>Keep a live connection to the browser, so the progress of a long job appears on a React screen as it happens.</dd></div><div class="pg-roles__row"><dt>pytest</dt><dd>Runs automated tests on the core logic and on each endpoint, including the inputs that must be rejected.</dd></div><div class="pg-roles__row"><dt>Docker and Docker Compose</dt><dd>Package the system so it starts the same way on any machine. Compose starts the API and its helpers together.</dd></div><div class="pg-roles__row"><dt>OpenTelemetry, Prometheus, Jaeger</dt><dd>Metrics count requests and timings, and traces show each step of one request, so slow calls can be explained.</dd></div></dl>
+  </div>
+</section><section id="tradeoffs" class="section pg-sec" aria-labelledby="tradeoffs-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Decide together</p>
+      <h2 id="tradeoffs-h" class="section__title">Trade-offs we <span class="hl hl--purple">decide together</span></h2>
+      
+    </header>
+<ul class="pg-sizes" role="list" data-reveal-group><li class="pg-size" data-tone="cyan" style="--i:0"><h3 class="pg-size__t">FastAPI or Django</h3><p>An API-first service, especially one with AI calls, fits FastAPI. A product that needs staff admin screens and user accounts fits Django. If your team already knows one of them, that often decides it, because someone has to maintain the code.</p></li><li class="pg-size" data-tone="purple" style="--i:1"><h3 class="pg-size__t">Background queue or direct call</h3><p>A job that finishes in a second or two can run inside the request. One that takes minutes needs a queue, background workers and a progress channel. A queue adds parts to run and watch, so I measure real job times first.</p></li><li class="pg-size" data-tone="blue" style="--i:2"><h3 class="pg-size__t">How much monitoring to add</h3><p>Full tracing, dashboards and alerts take time to build and to read. For a first version I add request IDs in the logs and tests on the core logic. Metrics and traces follow when traffic, cost or risk justify them.</p></li></ul>
+  </div>
+</section><section id="use-cases" class="section pg-sec section--tint" aria-labelledby="use-cases-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">In a business</p>
+      <h2 id="use-cases-h" class="section__title">Where this <span class="hl hl--magenta">fits</span></h2>
+      <p class="section__lead">Situations where a team could use this service. These are examples, not past clients.</p>
+    </header>
+<ul class="pg-uses" role="list" data-reveal-group><li class="pg-use" data-tone="cyan" style="--i:0"><h3 class="pg-use__who">Shipping and e-commerce teams</h3><p>A service that takes an order and returns a recommendation, such as the fewest and cheapest shipping boxes, with strict input checks and tests that cover every rejected case.</p></li><li class="pg-use" data-tone="purple" style="--i:1"><h3 class="pg-use__who">Audit and compliance teams</h3><p>A service that connects an AI drafting or document-reading tool to an existing product, with bulk upload, review screens and checks that block invented data.</p></li><li class="pg-use" data-tone="blue" style="--i:2"><h3 class="pg-use__who">Data and operations teams</h3><p>A matching service that compares two large lists of records in stages, shows live progress while it runs and replaces slow compare-everything loops with sorted searches.</p></li><li class="pg-use" data-tone="magenta" style="--i:3"><h3 class="pg-use__who">Product teams with an <span class="ai">AI</span> feature</h3><p>An API in front of language models (LLMs) with request limits, model fallbacks, logs and traces, so slow or failing answers can be explained and costs stay visible.</p></li></ul>
+  </div>
+</section><section id="proof" class="section pg-sec" aria-labelledby="proof-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">Proof from real work</p>
@@ -293,28 +362,37 @@
         <p class="pg-proj__meta">AI and backend</p>
         <h3 class="pg-proj__title" id="pf-observable-ai-backend">Traceable <span class="ai">AI</span> Backend</h3>
         <p class="pg-proj__blurb">An AI server that shows exactly where each request goes and where it slows down, with request IDs, metrics and traces for LLM observability.</p>
-        <p class="pg-proj__stat"><span class="pg-proj__num">15 seconds to under 50 milliseconds</span><span class="pg-proj__statlabel">Slow lookup, before and after the fix (made-up data)</span></p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> A FastAPI server with request IDs, Prometheus metrics, OpenTelemetry traces in Jaeger, a Docker Compose setup and 10 tests that run offline.</p>
         <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/observable-ai-backend/">Read case study<span class="sr-only">: Traceable AI Backend</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
       </article><article class="card pg-proof" data-tone="blue" data-tilt data-reveal style="--i:1" aria-labelledby="pf-whatsapp-ai-agent-platform">
         <p class="pg-proj__meta">Automation</p>
         <h3 class="pg-proj__title" id="pf-whatsapp-ai-agent-platform">WhatsApp Automation and <span class="ai">AI</span> Agent Platform</h3>
         <p class="pg-proj__blurb">AI replies run in the background, every chat is tracked and human operators get alerts.</p>
-        
-        <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/#p-whatsapp-ai-agent-platform">See project<span class="sr-only">: WhatsApp Automation and AI Agent Platform</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> A client backend on FastAPI, PostgreSQL, Redis and Celery that receives messages, tracks each user and sends AI replies from background workers.</p>
+        <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/whatsapp-ai-agent-platform/">Read case study<span class="sr-only">: WhatsApp Automation and AI Agent Platform</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+      </article><article class="card pg-proof" data-tone="cyan" data-tilt data-reveal style="--i:2" aria-labelledby="pf-ams-ai-finding-engine">
+        <p class="pg-proj__meta">AI and backend</p>
+        <h3 class="pg-proj__title" id="pf-ams-ai-finding-engine"><span class="ai">AI</span> Audit Finding Drafting Engine</h3>
+        <p class="pg-proj__blurb">Turns short audit notes into three draft findings, with code that blocks any invented fact. Drafts whole spreadsheets in bulk.</p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> A FastAPI service that runs next to a live product, with 313 automated tests and a request time cut from 7.9 minutes to 16.9 seconds.</p>
+        <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/ams-ai-finding-engine/">Read case study<span class="sr-only">: AI Audit Finding Drafting Engine</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+      </article><article class="card pg-proof" data-tone="cyan" data-tilt data-reveal style="--i:3" aria-labelledby="pf-obligation-management-system">
+        <p class="pg-proj__meta">AI and documents</p>
+        <h3 class="pg-proj__title" id="pf-obligation-management-system">Obligation Management System</h3>
+        <p class="pg-proj__blurb">Reads regulatory PDFs and lists every obligation, each linked to the exact highlighted passage. 97.2% of 1,266 records located.</p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> A FastAPI backend with a React screen and Docker packaging, where long document jobs can be cancelled while finished work is kept.</p>
+        <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/obligation-management-system/">Read case study<span class="sr-only">: Obligation Management System</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+      </article><article class="card pg-proof" data-tone="cyan" data-tilt data-reveal style="--i:4" aria-labelledby="pf-agentic-honeypot">
+        <p class="pg-proj__meta">AI agent</p>
+        <h3 class="pg-proj__title" id="pf-agentic-honeypot">Scam-Catching <span class="ai">AI</span> Honeypot</h3>
+        <p class="pg-proj__blurb">An AI plays an easily fooled victim, keeps scammers chatting and logs the payment IDs, links and phone numbers they reveal.</p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> A FastAPI chat backend where I added the per-visitor request limit (1 per second, bursts of 5) and a filter for prompt-injection attempts.</p>
+        <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/agentic-honeypot/">Read case study<span class="sr-only">: Scam-Catching AI Honeypot</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
       </article></div>
     <p class="pg-smallrel" data-reveal>Related personal builds: <a class="link" href="../../projects/#p-django-box-selection-api">Box Selection API</a>.</p>
-    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../projects/">See all case studies <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../projects/">See all case studies <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../../projects/#by-need">Browse work by business need <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
   </div>
-</section><section id="tools" class="section pg-sec" aria-labelledby="tools-h">
-  <div class="container">
-    <header class="section__head" data-reveal>
-      <p class="eyebrow">Tools</p>
-      <h2 id="tools-h" class="section__title">Tools I use <span class="hl hl--blue">for this</span></h2>
-      
-    </header>
-<div data-reveal><ul class="tags pg-tools" role="list" aria-label="Tools used for this service" data-tone="blue"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Django</li><li class="tag">Django REST Framework</li><li class="tag">PostgreSQL</li><li class="tag">Pydantic</li><li class="tag">Docker</li><li class="tag">pytest</li><li class="tag">OpenTelemetry</li><li class="tag">Prometheus</li><li class="tag">Redis</li><li class="tag">Celery</li></ul></div>
-  </div>
-</section><section id="faq" class="section pg-sec" aria-labelledby="faq-h">
+</section><section id="faq" class="section pg-sec section--tint" aria-labelledby="faq-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">FAQ</p>
@@ -335,20 +413,48 @@
       <div class="pg-qa__a"><p>Yes. I have used Celery and Redis to move slow work away from the main API. I have also used WebSockets to stream the progress of long-running jobs to a React web screen. Users see live status instead of waiting, and the main API stays responsive for everyone else.</p></div>
     </details><details class="pg-qa" id="ai-backend-fastapi-django-q5" open data-reveal style="--i:4">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Will the API come with tests?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>Yes. My own backend projects ship with tests for the core logic and for each endpoint, and I take the same approach on client work. Tests make later changes safer and cheaper, and they show your team how each part is meant to behave.</p></div>
+      <div class="pg-qa__a"><p>Yes. My own backend projects ship with tests on the core logic and on each endpoint. The box-selection API, a job-application task, has 27 passing tests, and the traceable AI backend has 10 that run offline. I take the same approach on client work. Tests make later changes safer and show your team how each part should behave.</p></div>
+    </details><details class="pg-qa" id="ai-backend-fastapi-django-q6" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">How much does API development cost in India?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>Price depends on the number of endpoints, the systems the API must connect to, the state of your data, and how much testing and documentation you want. A clearly defined scope can be quoted at a fixed price. Open-ended work is usually fairer by the hour. I quote after reading a short brief, with terms agreed in writing.</p></div>
+    </details><details class="pg-qa" id="ai-backend-fastapi-django-q7" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">How do you keep a FastAPI backend secure?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>Every request is checked, and wrong input is rejected with a clear message. I add request limits, such as 1 per second with bursts of 5 on an AI chat service I co-built, and can add sign-in with per-key usage quotas. For sensitive data the AI model can run on your own servers. Plan a security review before launch.</p></div>
+    </details><details class="pg-qa" id="ai-backend-fastapi-django-q8" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">What API documentation will I receive?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>FastAPI builds interactive documentation from the code itself, so it stays in step with what the API does. Alongside it you receive a README with setup steps and example requests, and handover notes on how the parts fit. A web or mobile developer can start from the same written description.</p></div>
     </details></div>
   </div>
-</section><section id="related" class="section pg-sec section--tint" aria-labelledby="related-h">
+</section><section id="related" class="section pg-sec" aria-labelledby="related-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">Related</p>
       <h2 id="related-h" class="section__title">Related <span class="hl hl--purple">services</span></h2>
       
     </header>
-<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/llm-rag-development/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-brain-circuit"/></svg></span><span><strong>Freelance chatbot developer</strong><span class="pg-rel__t">Chatbots that answer from your documents and show their sources.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/python-automation-integrations/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-workflow"/></svg></span><span><strong>Web scrapers and chat bots</strong><span class="pg-rel__t">Scrapers and bots that take repetitive work off your team.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
+<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/llm-rag-development/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-brain-circuit"/></svg></span><span><strong>Freelance chatbot developer</strong><span class="pg-rel__t">When the API must also answer questions from your documents, the AI chatbot service covers finding the right passages and checking the answers.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/python-automation-integrations/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-workflow"/></svg></span><span><strong>Web scrapers and chat bots</strong><span class="pg-rel__t">When the backend must also receive WhatsApp or Telegram messages, collect data from websites or link your other tools.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
       <li><a class="pg-rel__link" href="../../faq/" data-tone="green"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></span><span><strong>Freelance FAQ</strong><span class="pg-rel__t">Cost, how to start, NDAs and ownership.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
     </ul>
-    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../services/">All services <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../services/">All services <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../../services/#which-service">Which service fits you? <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+  </div>
+</section><section id="ask" class="section pg-sec pg-ask" aria-labelledby="ask-h">
+  <div class="container">
+    <div class="pg-ask__box panel" data-tone="cyan" data-reveal>
+      <div class="pg-ask__text">
+        <p class="eyebrow">Ask me</p>
+        <h2 id="ask-h" class="pg-ask__title">Have a question about backend and apis, or your own idea?</h2>
+        <p class="pg-ask__lead">Type your question below. The contact form opens with your question and this page already filled in, so you only add your name and email.</p>
+      </div>
+      <form class="pg-ask__form" action="../../contact/#hire" method="get">
+        <input type="hidden" name="topic" value="ai-backend-fastapi-django">
+        <input type="hidden" name="ref" value="services/ai-backend-fastapi-django/">
+        <input type="hidden" name="about" value="Backend and APIs">
+        <label class="sr-only" for="ask-q">Your question</label>
+        <input class="input pg-ask__input" id="ask-q" name="q" type="text" maxlength="300" autocomplete="off" enterkeyhint="send" placeholder="What do you need from me to scope a FastAPI backend?">
+        <button class="btn btn--solid btn--glow" type="submit">Ask me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></button>
+      </form>
+      <ul class="pg-ask__chips" role="list" aria-label="Questions people often ask"><li><a class="pg-ask__chip" href="../../contact/?topic=ai-backend-fastapi-django&ref=services/ai-backend-fastapi-django/&about=Backend%20and%20APIs&q=What%20do%20you%20need%20from%20me%20to%20scope%20a%20FastAPI%20backend%3F#hire">What do you need from me to scope a FastAPI backend?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=ai-backend-fastapi-django&ref=services/ai-backend-fastapi-django/&about=Backend%20and%20APIs&q=How%20do%20you%20stop%20slow%20AI%20jobs%20from%20freezing%20my%20app%3F#hire">How do you stop slow AI jobs from freezing my app?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=ai-backend-fastapi-django&ref=services/ai-backend-fastapi-django/&about=Backend%20and%20APIs&q=Can%20you%20add%20tests%20to%20a%20backend%20that%20has%20none%3F#hire">Can you add tests to a backend that has none?</a></li></ul>
+    </div>
   </div>
 </section><section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
   <div class="container">
@@ -397,21 +503,7 @@
       </div>
 
       <div class="footer__cols">
-        <nav class="footer__col" aria-labelledby="footer-pages-h">
-          <p class="footer__h" id="footer-pages-h">Pages</p>
-          <ul class="footer__links">
-            <li><a href="../../">Home</a></li>
-            <li><a href="../../projects/">Projects</a></li>
-            <li><a href="../../services/">Services</a></li>
-            <li><a href="../../about/">About</a></li>
-            <li><a href="../../about/#experience">Experience</a></li>
-            <li><a href="../../resume/">Resume</a></li>
-            <li><a href="../../faq/">FAQ</a></li>
-            <li><a href="../../contact/">Contact</a></li>
-          </ul>
-        </nav>
-
-        <nav class="footer__col footer__col--wide" aria-labelledby="footer-services-h">
+        <nav class="footer__col footer__col--services" aria-labelledby="footer-services-h">
           <p class="footer__h" id="footer-services-h">Services</p>
           <ul class="footer__links">
             <li><a href="../../services/llm-rag-development/">AI chatbot development</a></li>
@@ -423,14 +515,36 @@
           </ul>
         </nav>
 
-        <nav class="footer__col" aria-labelledby="footer-work-h">
+        <nav class="footer__col footer__col--work" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
+            <li><a href="../../projects/advanced-cctv-analytics/">CCTV analytics in Python</a></li>
+            <li><a href="../../projects/speech-emotion-recognition/">Speech emotion recognition</a></li>
+            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
+            <li><a href="../../projects/obligation-management-system/">Regulatory obligation extraction</a></li>
+            <li><a href="../../projects/ams-ai-finding-engine/">AI audit finding generator</a></li>
+            <li><a href="../../projects/core-banking-text-to-sql/">Text-to-SQL for banking</a></li>
             <li><a href="../../projects/agentic-honeypot/">AI scam honeypot</a></li>
+            <li><a href="../../projects/whatsapp-ai-agent-platform/">WhatsApp AI agent platform</a></li>
             <li><a href="../../projects/deepfake-video-detection/">Deepfake video detection</a></li>
+            <li><a href="../../projects/spam-classifier/">SMS spam classifier</a></li>
             <li><a href="../../projects/">All projects</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__col footer__col--pages" aria-labelledby="footer-pages-h">
+          <p class="footer__h" id="footer-pages-h">Pages</p>
+          <ul class="footer__links">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../projects/">Projects</a></li>
+            <li><a href="../../services/">Services</a></li>
+            <li><a href="../../about/">About</a></li>
+            <li><a href="../../about/#experience">Experience</a></li>
+            <li><a href="../../resume/">Resume</a></li>
+            <li><a href="../../faq/">FAQ</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+            <li><a href="../../contact/#book">Book a call</a></li>
           </ul>
         </nav>
       </div>
@@ -449,10 +563,20 @@
 
   <div class="footer__ghost" aria-hidden="true"></div>
 
-  <!-- floating "Hire me" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js) -->
+  <!-- floating "Let's talk" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js).
+       Without JavaScript it is a plain link to the contact form; with JavaScript it opens the small menu of ways to connect (content.connect). -->
   <div class="fab-wrap contact-fab">
-    <a class="fab" href="../../contact/#hire" aria-label="Hire me"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
-    <div class="fab-tip" aria-hidden="true">Hire me</div>
+    <div class="connect" id="connect-menu" hidden>
+      <p class="connect__h" id="connect-h">Let&rsquo;s talk</p>
+      <ul class="connect__list" aria-labelledby="connect-h">
+            <li><a class="connect__item" href="../../contact/#book"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><span><strong>Book a call</strong><small>Pick a day and time</small></span></a></li>
+            <li><a class="connect__item" href="../../contact/#hire"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg><span><strong>Send a brief</strong><small>Tell me what you need</small></span></a></li>
+            <li><a class="connect__item" href="https://wa.me/919920644655?text=Hi%20Shaunak%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg><span><strong>WhatsApp</strong><small>Message me directly</small></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="connect__item" href="mailto:shaunak.chorge@gmail.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span><strong>Email</strong><small>Write to me</small></span></a></li>
+      </ul>
+    </div>
+    <a class="fab" href="../../contact/#hire" aria-label="Hire me" data-connect-toggle><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></a>
+    <div class="fab-tip" aria-hidden="true">Let&rsquo;s talk</div>
   </div>
 </footer>
 
@@ -489,10 +613,12 @@
     <symbol id="i-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></symbol>
     <symbol id="i-scan-eye" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="1"/><path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0"/></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
     <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
     <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
     <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
     <symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
     <symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
     <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
@@ -503,9 +629,9 @@
   </svg>
 
   <script defer src="../../assets/dist/js/core.min.js?v=d41b0d5b"></script>
-  <script defer src="../../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
+  <script defer src="../../assets/dist/js/contact.min.js?v=e6aee63a"></script>
   <script defer src="../../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
-  <script defer src="../../assets/dist/js/pages.min.js?v=efc0e441"></script>
+  <script defer src="../../assets/dist/js/fx.min.js?v=bb37bfa8"></script>
+  <script defer src="../../assets/dist/js/pages.min.js?v=514d4156"></script>
 </body>
 </html>

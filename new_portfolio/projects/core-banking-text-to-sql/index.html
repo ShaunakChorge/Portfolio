@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=99f76e8a">
+  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=d92fd1cd">
 
 <script type="application/ld+json">
 {
@@ -64,7 +64,12 @@
       },
       "mainEntity": {
         "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/core-banking-text-to-sql/#project"
-      }
+      },
+      "relatedLink": [
+        "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/ams-ai-finding-engine/",
+        "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/obligation-management-system/",
+        "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/ai-rag-healthcare-assistant/"
+      ]
     },
     {
       "@type": "CreativeWork",
@@ -153,7 +158,7 @@
           "name": "How do you measure whether the generated query is right?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "By running it. The accuracy test executes the generated query on a real database and compares the rows with a known-correct query. This replaced simple scores that had overstated quality, which is why recall and precision are reported from real query results."
+            "text": "By running it. The accuracy test executes the generated query on a real database and compares the rows with a known-correct query. Recall is the share of the right accounts the query returns; precision is the share of returned accounts that are right. These replaced simple scores that had overstated quality."
           }
         },
         {
@@ -161,7 +166,31 @@
           "name": "Does any data leave the machine?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. The assistant runs fully on the bank's own servers, so no data, prompt or usage record leaves the machine. The AI model is hosted there too, so no online AI service is involved. For a new client, we would first check that your servers are strong enough to run the model."
+            "text": "No. The assistant runs fully on the bank's own servers, so no data, prompt or usage record leaves the machine. The AI model is hosted there too, so no online AI service is involved. For a new client, the first step is to check that your servers are strong enough to run the model."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why did the first accuracy score say 93% when real accuracy was far lower?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The first scores checked stand-ins: whether the right tables were found and whether the expected code values appeared in the query text. A query can pass both checks and still return wrong or empty results. Running the queries on a real database showed that exact row matches were close to zero, so I replaced the stand-ins."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which parts of the text-to-SQL assistant did you build yourself?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "I built the accuracy test and the self-correction loop, plus the code-value glossary in the prompt. A Claptek teammate built the table search, the query safety guard and the test data. It was a focused part of a two-person effort."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Did you retrain or replace the AI model to raise accuracy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The client allowed no larger model and no retraining, so the model stayed as it was. The gain came from the self-correction loop: when a query failed or returned nothing, the model saw the real error and real column values and tried again, up to two passes. Recall rose from 34% to 54%."
           }
         }
       ]
@@ -210,10 +239,10 @@
         </nav>
 
         <div class="site-header__tools">
+          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
           </button>
-          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
             <span class="burger__lines" aria-hidden="true"><i></i><i></i><i></i></span>
           </button>
@@ -254,10 +283,10 @@
         <p class="pg-answer" data-answer>This text-to-SQL LLM (AI language model) assistant at Claptek runs on the bank's own servers. It turns plain-language reporting questions into working Oracle database queries (SQL) over a large core-banking database. My part was the accuracy measurement and the self-correction loop.</p>
         <div class="pg-actions"><a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=ai-document-compliance-automation#hire">Hire me for something like this <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="btn btn--ghost btn--lg" href="../../projects/">All projects <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg></a></div>
       </div>
-      <div class="pg-head__aside"><div class="pg-casevis"><div class="pv" data-visual="terminal" data-variant="finacle-text-to-sql" data-tone="blue" aria-hidden="true"></div></div></div>
+      <div class="pg-head__aside"><div class="pg-casevis"><div class="pv" data-visual="terminal" data-variant="core-banking-text-to-sql" data-tone="blue" aria-hidden="true"></div></div></div>
     </div>
   </div>
-</section><section id="at-a-glance" class="section pg-sec section--tint" aria-labelledby="at-a-glance-h">
+</section><nav class="pg-toc" aria-label="On this page"><div class="container"><ul class="pg-toc__list" role="list"><li><a href="#at-a-glance">Key facts</a></li><li><a href="#overview">Overview</a></li><li><a href="#story">The problem</a></li><li><a href="#my-role">My role</a></li><li><a href="#how-it-works">How it works</a></li><li><a href="#decisions">Decisions</a></li><li><a href="#results">Results</a></li><li><a href="#where-it-fits">Where it fits</a></li><li><a href="#extensions">Extensions</a></li><li><a href="#faq">FAQ</a></li><li><a href="#related">Related</a></li><li><a href="#ask">Ask a question</a></li></ul></div></nav><section id="at-a-glance" class="section pg-sec section--tint" aria-labelledby="at-a-glance-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">At a glance</p>
@@ -271,7 +300,16 @@
       <ul class="pg-metrics" role="list" data-reveal-group><li class="pg-metric" data-tone="blue" style="--i:0"><span class="pg-metric__v">34% to 54%</span><span class="pg-metric__l">Accounts found (recall)</span></li><li class="pg-metric" data-tone="blue" style="--i:1"><span class="pg-metric__v">19% to 27%</span><span class="pg-metric__l">Correct share of results (precision)</span></li><li class="pg-metric" data-tone="blue" style="--i:2"><span class="pg-metric__v">100% of 40</span><span class="pg-metric__l">Test queries valid on the live database</span></li></ul>
     </div>
   </div>
-</section><section id="story" class="section pg-sec" aria-labelledby="story-h">
+</section><section id="overview" class="section pg-sec" aria-labelledby="overview-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Overview</p>
+      <h2 id="overview-h" class="section__title">Why this <span class="hl hl--blue">matters</span></h2>
+      
+    </header>
+<div class="panel pg-context" data-tone="blue" data-reveal><p>Banks and other large organisations keep their records in databases that can hold more than a thousand tables. In some of them only a few specialists can write SQL, the language used to read those tables, so each new report waits in a queue. A tool that turns a plain question into a correct query removes that wait, but only if people can trust what it returns.</p><p>A good result is an on-premise text-to-SQL assistant: it runs on the bank's own servers, so the bank's data stays inside the bank. It finds the right tables, writes a query that runs and returns the right accounts. Its quality is measured by running its queries on a real database, so a manager can see how often it is right before relying on it.</p></div>
+  </div>
+</section><section id="story" class="section pg-sec section--tint" aria-labelledby="story-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">The story</p>
@@ -279,8 +317,22 @@
       
     </header>
 <div class="pg-two">
-      <div class="panel" data-tone="blue" data-reveal><h3 class="pg-panel__h">The problem</h3><p>Simple scoring said the query writer was about 93% good. Actually running its queries showed the true figure was close to zero.</p></div>
-      <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h">What I built</h3><p>I built the measurement first: a test that runs each generated query and compares the returned rows with a known-correct query. Then I added a retry loop, limited to two passes, that shows the AI the real error and asks for a fix. The client allowed no larger model and no retraining.</p></div>
+      <div class="panel" data-tone="blue" data-reveal><h3 class="pg-panel__h">The problem</h3><p>The project's simple scoring rated the query writer at about 93% good. Actually running its queries showed that the share returning exactly the right rows was close to zero. Those scores checked whether the right tables were found and whether expected code values appeared in the query text, not whether the query returned the right rows. A team that trusts such a number ships wrong or empty reports and fixes the wrong things.</p></div>
+      <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h">What I built</h3><p>I built the measurement first: a test that runs each generated query on a real database and compares the returned rows with a known-correct query. It scores strict row matches and also the recall and precision of the accounts returned. Then I added a retry loop, limited to two passes. When a query fails or returns no rows, the model is shown the real error and real values from the database, and asked to fix it. A glossary of real code values in the prompt makes filters use values that exist. The client ruled out a larger model and any retraining, so the gains had to come from the pipeline itself.</p></div>
+    </div>
+    <h3 class="pg-subh" data-reveal>What made it hard</h3>
+      <ol class="pg-challenges" data-reveal-group><li class="pg-challenge" data-tone="blue" style="--i:0"><span class="pg-challenge__n" aria-hidden="true">01</span><div><h4 class="pg-challenge__t">A very large database</h4><p>A layout of 1,628 tables is too large to show a model in full for every question, so the few tables a question needs must be found first.</p></div></li><li class="pg-challenge" data-tone="blue" style="--i:1"><span class="pg-challenge__n" aria-hidden="true">02</span><div><h4 class="pg-challenge__t">Scores that flatter</h4><p>A query can look right and still return the wrong rows, or none. Only running it and comparing its rows with those of a query known to be correct shows the truth.</p></div></li><li class="pg-challenge" data-tone="blue" style="--i:2"><span class="pg-challenge__n" aria-hidden="true">03</span><div><h4 class="pg-challenge__t">Invented code values</h4><p>Many columns hold fixed codes, not words. A model that guesses a code writes a filter that looks right but matches nothing.</p></div></li><li class="pg-challenge" data-tone="blue" style="--i:3"><span class="pg-challenge__n" aria-hidden="true">04</span><div><h4 class="pg-challenge__t">Strict client limits</h4><p>The model had to run on the bank's own servers. A larger model and retraining were not allowed, so any gain had to come from how the system uses the model it had.</p></div></li></ol>
+  </div>
+</section><section id="my-role" class="section pg-sec" aria-labelledby="my-role-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">My role</p>
+      <h2 id="my-role-h" class="section__title">My role in <span class="hl hl--magenta">the build</span></h2>
+      
+    </header>
+<div class="pg-two">
+      <div class="panel" data-tone="blue" data-reveal><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-code"/></svg> My part</h3><ul class="dot-list"><li>The accuracy test that scores every generated query by running it and checking the rows it returns against the known-correct answer.</li><li>The scoring: strict row matching, plus recall and precision on the accounts a query returns, so partial success is visible.</li><li>The self-correction loop, limited to two passes, that shows the model the real error and real column values and asks for a fix.</li><li>The glossary of real code values added to the prompt, so filters use values that exist in the database.</li><li>Repeatable test runs: generation fixed at zero randomness, plus setup notes and a launcher so the pipeline could be run and measured on an ordinary developer machine.</li></ul></div>
+      <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-layers"/></svg> Context and credits</h3><ul class="dot-list"><li>A Claptek teammate built the table search over 1,628 tables, the query safety guard and the test data. I worked on the accuracy and correction side of a two-person effort.</li><li>No model was trained or tuned, and none was swapped. The client ruled out a larger model and retraining.</li><li>This is confidential client work. The database layout, the bank's data and the code stay private, so this page describes the design and the measured results only.</li></ul></div>
     </div>
   </div>
 </section><section id="how-it-works" class="section pg-sec section--tint" aria-labelledby="how-it-works-h">
@@ -290,16 +342,39 @@
       <h2 id="how-it-works-h" class="section__title">How a question becomes a checked SQL <span class="hl hl--blue">query</span></h2>
       
     </header>
-<ol class="pg-arch" data-reveal-group><li class="pg-arch__item" data-tone="blue" style="--i:0"><span class="pg-arch__n" aria-hidden="true">01</span><p>Search over a 1,628-table core-banking database to find the right tables (built by my teammate)</p></li><li class="pg-arch__item" data-tone="blue" style="--i:1"><span class="pg-arch__n" aria-hidden="true">02</span><p>An AI language model hosted on the bank's own servers writes the Oracle query. The query safety guard and test data were also built by my teammate</p></li><li class="pg-arch__item" data-tone="blue" style="--i:2"><span class="pg-arch__n" aria-hidden="true">03</span><p>An accuracy test that runs each generated query on a real database and compares the rows with a known-correct query</p></li><li class="pg-arch__item" data-tone="blue" style="--i:3"><span class="pg-arch__n" aria-hidden="true">04</span><p>A self-correction loop, limited to two passes, that feeds real query errors back to the AI</p></li><li class="pg-arch__item" data-tone="blue" style="--i:4"><span class="pg-arch__n" aria-hidden="true">05</span><p>A glossary of real code values added to the prompt, so filters use values that actually exist</p></li><li class="pg-arch__item" data-tone="blue" style="--i:5"><span class="pg-arch__n" aria-hidden="true">06</span><p>Fully on the bank's own servers: no data, prompt or usage record leaves the machine</p></li></ol>
+<ol class="pg-flow" data-tone="blue" aria-label="Pipeline, step by step" data-reveal-group><li class="pg-flow__node" style="--i:0"><span class="pg-flow__n" aria-hidden="true">01</span><strong class="pg-flow__t">Plain question</strong><span class="pg-flow__d">Asked in everyday words</span></li><li class="pg-flow__node" style="--i:1"><span class="pg-flow__n" aria-hidden="true">02</span><strong class="pg-flow__t">Table search</strong><span class="pg-flow__d">Shortlists tables from 1,628</span></li><li class="pg-flow__node" style="--i:2"><span class="pg-flow__n" aria-hidden="true">03</span><strong class="pg-flow__t">Query writer</strong><span class="pg-flow__d">Model on the bank's servers</span></li><li class="pg-flow__node" style="--i:3"><span class="pg-flow__n" aria-hidden="true">04</span><strong class="pg-flow__t">Safety guard</strong><span class="pg-flow__d">Checked before it runs</span></li><li class="pg-flow__node" style="--i:4"><span class="pg-flow__n" aria-hidden="true">05</span><strong class="pg-flow__t">Run and retry</strong><span class="pg-flow__d">Real errors fed back, two passes</span></li><li class="pg-flow__node" style="--i:5"><span class="pg-flow__n" aria-hidden="true">06</span><strong class="pg-flow__t">Accuracy test</strong><span class="pg-flow__d">Run offline on test questions</span></li></ol>
+    <ol class="pg-arch" data-reveal-group><li class="pg-arch__item" data-tone="blue" style="--i:0"><span class="pg-arch__n" aria-hidden="true">01</span><p>Table search, built by my teammate: it finds the right tables for each question in a core-banking database of 1,628 tables, using methods that include keyword search (BM25).</p></li><li class="pg-arch__item" data-tone="blue" style="--i:1"><span class="pg-arch__n" aria-hidden="true">02</span><p>A language model (LLM) hosted on the bank's own servers with vLLM, a model-serving program, writes the Oracle query from the question and the chosen tables.</p></li><li class="pg-arch__item" data-tone="blue" style="--i:2"><span class="pg-arch__n" aria-hidden="true">03</span><p>The query safety guard, built by my teammate with a SQL parser (sqlglot), checks each generated query before it runs. The test data was also my teammate's work.</p></li><li class="pg-arch__item" data-tone="blue" style="--i:3"><span class="pg-arch__n" aria-hidden="true">04</span><p>The accuracy test, built by me, executes every generated query against a live database and compares its rows with those of a known-correct query. It reports strict row matches, accounts found (recall) and the correct share of results (precision).</p></li><li class="pg-arch__item" data-tone="blue" style="--i:4"><span class="pg-arch__n" aria-hidden="true">05</span><p>The self-correction loop, built by me and limited to two passes: when a query errors or returns no rows, the model sees the real error and real column values, then revises the query.</p></li><li class="pg-arch__item" data-tone="blue" style="--i:5"><span class="pg-arch__n" aria-hidden="true">06</span><p>A glossary of real code values from the database is added to the prompt, so filters use values that actually exist.</p></li><li class="pg-arch__item" data-tone="blue" style="--i:5"><span class="pg-arch__n" aria-hidden="true">07</span><p>Hosted entirely on the bank's own servers, model included, so no outside AI service is involved. Generation is fixed at zero randomness to keep test runs repeatable.</p></li></ol>
   </div>
-</section><section id="results" class="section pg-sec" aria-labelledby="results-h">
+</section><section id="decisions" class="section pg-sec" aria-labelledby="decisions-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Decisions</p>
+      <h2 id="decisions-h" class="section__title">Design decisions and <span class="hl hl--purple">trade-offs</span></h2>
+      
+    </header>
+<ul class="pg-decisions" role="list" data-reveal-group><li class="pg-decision" data-tone="blue" style="--i:0"><h3 class="pg-decision__t">Score by running the queries</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>I chose to judge quality by running each generated query on a real database, over scoring table matches and code strings in the query text.</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>Stand-in scores read about 93% while the share of queries returning exactly the right rows was close to zero. Only the rows a query returns show whether it does its job.</p></li><li class="pg-decision" data-tone="blue" style="--i:1"><h3 class="pg-decision__t">Fix the loop, not the model</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>I chose a self-correction loop, limited to two passes, over asking for a larger model or retraining, which the client had ruled out.</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>The database itself tells the model what went wrong: a real error, or no rows. The loop is capped at two passes, so a hopeless query cannot retry forever.</p></li><li class="pg-decision" data-tone="blue" style="--i:2"><h3 class="pg-decision__t">Show the model real code values</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>I chose to add a glossary of real code values to the prompt, over letting the model guess which codes a column holds.</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>Guessed codes look plausible but match nothing. With real values in front of it, the model writes filters that can find accounts.</p></li><li class="pg-decision" data-tone="blue" style="--i:3"><h3 class="pg-decision__t">Fix randomness for repeatable scores</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>I chose to set the model's generation to zero randomness, over leaving it free, so test runs stay repeatable.</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>With random variation, a gain of a few points cannot be told from noise. Repeatable runs let each change be judged on its own.</p></li></ul>
+    
+  </div>
+</section><section id="results" class="section pg-sec section--tint" aria-labelledby="results-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">Results</p>
       <h2 id="results-h" class="section__title">Results from running the <span class="hl hl--magenta">queries</span></h2>
       <p class="section__lead">Every number comes with how it was measured. The limits are part of the result.</p>
     </header>
-<div class="panel" data-tone="blue" data-reveal><ul class="dot-list pg-results"><li>Accounts found rose from 34% to 54%, and the correct share of results from 19% to 27%, with no model change and no retraining</li><li>100% of 40 held-out test queries were valid against the live database layout</li><li>Simple scoring had suggested about 93% quality. Running the queries showed the true number was far lower, which is why the accuracy test came first</li></ul></div>
+<div class="pg-two">
+      <div class="panel" data-tone="blue" data-reveal><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-circle-check"/></svg> Results</h3><ul class="dot-list pg-results"><li>After the self-correction loop was added, accounts found (recall) rose from 34% to 54% and the correct share of results (precision) from 19% to 27%, with no model change and no retraining. Both come from running the queries on a real database.</li><li>100% of 40 held-out test queries (kept apart from the ones used while building) were valid against the live database layout.</li><li>Stand-in scoring had put quality at about 93%. Running the queries put the exact-match rate close to zero, so every later gain is measured against a realistic baseline.</li><li>Generation is fixed at zero randomness to keep test runs repeatable, so a change in score points to a change in the system rather than to chance.</li><li>The whole pipeline, including the model, runs on the bank's own servers, so no data, prompt or usage record leaves the machine.</li></ul></div>
+      <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-info"/></svg> Limits to keep in mind</h3><ul class="dot-list pg-results"><li>At 54% accounts found and 27% correct share of results, the output is a draft to review, not a finished report. A person should check a generated query before relying on its numbers.</li><li>Valid means a query fits the live database layout (100% of 40 held-out queries). It does not prove the rows are right. Recall and precision are the measures of that.</li><li>The figures come from one database with a core-banking layout, loaded with test data, and a prepared set of test questions. Another database or kind of question would need its own accuracy test before the numbers are trusted.</li><li>The gains came from how the system uses the model, inside the client's limits of no larger model and no retraining. I cannot say how far a bigger or tuned model would go.</li></ul></div>
+    </div>
+  </div>
+</section><section id="where-it-fits" class="section pg-sec" aria-labelledby="where-it-fits-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">In a business</p>
+      <h2 id="where-it-fits-h" class="section__title">Where this kind of solution <span class="hl hl--blue">fits</span></h2>
+      <p class="section__lead">Situations where a team could use the same approach. These are examples, not past clients.</p>
+    </header>
+<ul class="pg-uses" role="list" data-reveal-group><li class="pg-use" data-tone="cyan" style="--i:0"><h3 class="pg-use__who">Bank reporting teams</h3><p>Analysts wait for a data team to write each query. Text-to-SQL for banking may shorten that wait, if the queries are checked and the assistant runs on the bank's own servers.</p></li><li class="pg-use" data-tone="purple" style="--i:1"><h3 class="pg-use__who">Audit and compliance teams</h3><p>Reviewers want quick answers, such as which accounts meet a condition, drawn from live data, with the query shown so the answer can be checked and repeated.</p></li><li class="pg-use" data-tone="blue" style="--i:2"><h3 class="pg-use__who">Companies with a very large old database</h3><p>Hundreds or thousands of tables and few people who know them. Table search plus query writing can help, and an accuracy test shows whether it is good enough to use.</p></li><li class="pg-use" data-tone="magenta" style="--i:3"><h3 class="pg-use__who">Teams with a text-to-SQL prototype</h3><p>A demo looks good on simple scores, but nobody has run the queries. An accuracy test on real rows shows the true quality, and a correction loop may lift it without a new model.</p></li></ul>
   </div>
 </section><section id="extensions" class="section pg-sec section--tint" aria-labelledby="extensions-h">
   <div class="container">
@@ -308,7 +383,7 @@
       <h2 id="extensions-h" class="section__title">What carries over to your <span class="hl">database</span></h2>
       <p class="section__lead">Not part of this project. These are add-ons I can build for a client.</p>
     </header>
-<ul class="grid grid--c3 pg-ext pg-ext--n5" role="list"><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="blue"><h3 class="pg-ext__t">Automatic accuracy checks on every change</h3><p>I can run the accuracy test on every code change, so quality drops are caught before release.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">pytest</li><li class="tag tag--dashed">GitHub Actions</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="blue"><h3 class="pg-ext__t">Table search by meaning</h3><p>I can add table and column search that understands meaning, alongside keyword search.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">embeddings</li><li class="tag tag--dashed">vector database</li><li class="tag tag--dashed">reranking (re-orders search results)</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:2"><article class="card card--flat pg-ext__card" data-tone="blue"><h3 class="pg-ext__t">Explained results with charts</h3><p>I can show each answer with the query, a plain explanation and a chart, so non-technical users can check it.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">React</li><li class="tag tag--dashed">Plotly</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="blue"><h3 class="pg-ext__t">Feedback that builds the answer key</h3><p>I can add thumbs up and down on results, turning real usage into a growing set of correct answers.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">FastAPI</li><li class="tag tag--dashed">PostgreSQL</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="blue"><h3 class="pg-ext__t">Speed and failure tracking</h3><p>I can add tracking and dashboards that show where each query spends its time and which retries help.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">OpenTelemetry</li><li class="tag tag--dashed">Prometheus</li></ul></article></li></ul>
+<ul class="grid grid--c3 pg-ext pg-ext--n5" role="list"><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="blue"><h3 class="pg-ext__t">Automatic accuracy checks on every change</h3><p>I can build a check that runs the accuracy test on every code change, so a drop in quality is caught before release.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">pytest</li><li class="tag tag--dashed">GitHub Actions</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="blue"><h3 class="pg-ext__t">Table search by meaning</h3><p>I can add table and column search that understands meaning, alongside keyword search, so differently worded questions still reach the right tables.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">embeddings</li><li class="tag tag--dashed">vector database</li><li class="tag tag--dashed">reranking (re-orders search results)</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:2"><article class="card card--flat pg-ext__card" data-tone="blue"><h3 class="pg-ext__t">Explained results with charts</h3><p>I can build a screen that shows each answer with the query, a plain explanation and a chart, so non-technical users can check it.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">React</li><li class="tag tag--dashed">Plotly</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="blue"><h3 class="pg-ext__t">Feedback that builds the answer key</h3><p>I can add thumbs up and down on results, turning real usage into a growing set of correct answers for the accuracy test.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">FastAPI</li><li class="tag tag--dashed">PostgreSQL</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="blue"><h3 class="pg-ext__t">Speed and failure tracking</h3><p>I can add tracking and dashboards showing where each query spends its time and which retries pay off.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">OpenTelemetry</li><li class="tag tag--dashed">Prometheus</li></ul></article></li></ul>
   </div>
 </section><section id="hire-for" class="section pg-sec" aria-labelledby="hire-for-h">
   <div class="container">
@@ -327,24 +402,77 @@
       <h2 id="faq-h" class="section__title">Questions about text to <span class="hl">SQL</span></h2>
       
     </header>
-<div class="pg-qas"><details class="pg-qa" id="finacle-text-to-sql-q1" open data-reveal>
+<div class="pg-qas"><details class="pg-qa" id="core-banking-text-to-sql-q1" open data-reveal>
       <summary class="pg-qa__q"><h3 class="pg-qa__h">What is text to SQL?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>Text to SQL means asking a database a question in everyday words and having an AI language model write the SQL query that answers it. The query is then run against the database. The hard parts are choosing the right tables and checking that the query is correct, which is why this project measures results by running queries.</p></div>
-    </details><details class="pg-qa" id="finacle-text-to-sql-q2" open data-reveal style="--i:1">
+    </details><details class="pg-qa" id="core-banking-text-to-sql-q2" open data-reveal style="--i:1">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Is text to SQL safe for a bank database?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>It can be, with controls. Here the AI model runs on the bank's own servers, so no data, prompt or usage record leaves the machine. A query safety guard also checks queries before they run. My teammate built that guard; I built the accuracy test that compares returned rows with a correct query.</p></div>
-    </details><details class="pg-qa" id="finacle-text-to-sql-q3" open data-reveal style="--i:2">
+    </details><details class="pg-qa" id="core-banking-text-to-sql-q3" open data-reveal style="--i:2">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">How do you measure whether the generated query is right?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>By running it. The accuracy test executes the generated query on a real database and compares the rows with a known-correct query. This replaced simple scores that had overstated quality, which is why recall and precision are reported from real query results.</p></div>
-    </details><details class="pg-qa" id="finacle-text-to-sql-q4" open data-reveal style="--i:3">
+      <div class="pg-qa__a"><p>By running it. The accuracy test executes the generated query on a real database and compares the rows with a known-correct query. Recall is the share of the right accounts the query returns; precision is the share of returned accounts that are right. These replaced simple scores that had overstated quality.</p></div>
+    </details><details class="pg-qa" id="core-banking-text-to-sql-q4" open data-reveal style="--i:3">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Does any data leave the machine?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>No. The assistant runs fully on the bank's own servers, so no data, prompt or usage record leaves the machine. The AI model is hosted there too, so no online AI service is involved. For a new client, we would first check that your servers are strong enough to run the model.</p></div>
+      <div class="pg-qa__a"><p>No. The assistant runs fully on the bank's own servers, so no data, prompt or usage record leaves the machine. The AI model is hosted there too, so no online AI service is involved. For a new client, the first step is to check that your servers are strong enough to run the model.</p></div>
+    </details><details class="pg-qa" id="core-banking-text-to-sql-q5" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Why did the first accuracy score say 93% when real accuracy was far lower?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>The first scores checked stand-ins: whether the right tables were found and whether the expected code values appeared in the query text. A query can pass both checks and still return wrong or empty results. Running the queries on a real database showed that exact row matches were close to zero, so I replaced the stand-ins.</p></div>
+    </details><details class="pg-qa" id="core-banking-text-to-sql-q6" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Which parts of the text-to-SQL assistant did you build yourself?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>I built the accuracy test and the self-correction loop, plus the code-value glossary in the prompt. A Claptek teammate built the table search, the query safety guard and the test data. It was a focused part of a two-person effort.</p></div>
+    </details><details class="pg-qa" id="core-banking-text-to-sql-q7" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Did you retrain or replace the <span class="ai">AI</span> model to raise accuracy?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>No. The client allowed no larger model and no retraining, so the model stayed as it was. The gain came from the self-correction loop: when a query failed or returned nothing, the model saw the real error and real column values and tried again, up to two passes. Recall rose from 34% to 54%.</p></div>
     </details></div>
   </div>
+</section><section id="related" class="section pg-sec" aria-labelledby="related-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">More case studies</p>
+      <h2 id="related-h" class="section__title">Related case studies by <span class="hl hl--purple">business need</span></h2>
+      
+    </header>
+<ul class="pg-relcards" role="list" data-reveal-group><li><a class="pg-relcard" href="../../projects/ams-ai-finding-engine/" data-tone="cyan" style="--i:0">
+      <span class="pg-relcard__cat">AI and backend <span class="pg-relcard__origin">Client</span></span>
+      <strong class="pg-relcard__t">AI that drafts audit findings</strong>
+      <span class="pg-relcard__why">Another build for regulated teams where AI output must be checked by code and measured on real data before anyone relies on it.</span>
+      <span class="pg-relcard__go">Read the case study <svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span>
+    </a></li><li><a class="pg-relcard" href="../../projects/obligation-management-system/" data-tone="cyan" style="--i:1">
+      <span class="pg-relcard__cat">AI and documents <span class="pg-relcard__origin">Client</span></span>
+      <strong class="pg-relcard__t">AI that reads circulars and permits</strong>
+      <span class="pg-relcard__why">Another compliance tool that turns hard-to-read material into checkable results, with accuracy measured against known-correct answers.</span>
+      <span class="pg-relcard__go">Read the case study <svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span>
+    </a></li><li><a class="pg-relcard" href="../../projects/ai-rag-healthcare-assistant/" data-tone="cyan" style="--i:2">
+      <span class="pg-relcard__cat">AI chatbot <span class="pg-relcard__origin">Personal</span></span>
+      <strong class="pg-relcard__t">A chatbot that cites its sources</strong>
+      <span class="pg-relcard__why">Same need: people ask in plain language and get answers drawn only from the organisation's own information, with safeguards against guessing.</span>
+      <span class="pg-relcard__go">Read the case study <svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span>
+    </a></li></ul>
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../projects/#by-need">Browse all work by business need <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../../projects/">All projects <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+  </div>
 </section><section class="section pg-sec pg-pnsec" aria-label="More case studies"><div class="container"><nav class="pg-pn" aria-label="More case studies">
-      <a class="pg-pn__link" href="../../projects/obligation-management-system/" rel="prev" data-reveal><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg><span><small>Previous case study</small><strong>AI that reads circulars and permits</strong></span></a>
-      <a class="pg-pn__link pg-pn__link--next" href="../../projects/ai-rag-healthcare-assistant/" rel="next" data-reveal style="--i:1"><span><small>Next case study</small><strong>A chatbot that cites its sources</strong></span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
-    </nav></div></section><section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
+      <a class="pg-pn__link" href="../../projects/ams-ai-finding-engine/" rel="prev" data-reveal><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg><span><small>Previous case study</small><strong>AI that drafts audit findings</strong></span></a>
+      <a class="pg-pn__link pg-pn__link--next" href="../../projects/agentic-honeypot/" rel="next" data-reveal style="--i:1"><span><small>Next case study</small><strong>An AI agent that keeps scammers talking</strong></span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+    </nav></div></section><section id="ask" class="section pg-sec pg-ask" aria-labelledby="ask-h">
+  <div class="container">
+    <div class="pg-ask__box panel" data-tone="cyan" data-reveal>
+      <div class="pg-ask__text">
+        <p class="eyebrow">Ask me</p>
+        <h2 id="ask-h" class="pg-ask__title">Have a question about this project, or your own idea?</h2>
+        <p class="pg-ask__lead">Type your question below. The contact form opens with your question and this page already filled in, so you only add your name and email.</p>
+      </div>
+      <form class="pg-ask__form" action="../../contact/#hire" method="get">
+        <input type="hidden" name="topic" value="ai-document-compliance-automation">
+        <input type="hidden" name="ref" value="projects/core-banking-text-to-sql/">
+        <input type="hidden" name="about" value="Core-Banking Text-to-SQL Assistant">
+        <label class="sr-only" for="ask-q">Your question</label>
+        <input class="input pg-ask__input" id="ask-q" name="q" type="text" maxlength="300" autocomplete="off" enterkeyhint="send" placeholder="How did you measure the accuracy of the generated queries?">
+        <button class="btn btn--solid btn--glow" type="submit">Ask me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></button>
+      </form>
+      <ul class="pg-ask__chips" role="list" aria-label="Questions people often ask"><li><a class="pg-ask__chip" href="../../contact/?topic=ai-document-compliance-automation&ref=projects/core-banking-text-to-sql/&about=Core-Banking%20Text-to-SQL%20Assistant&q=How%20did%20you%20measure%20the%20accuracy%20of%20the%20generated%20queries%3F#hire">How did you measure the accuracy of the generated queries?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=ai-document-compliance-automation&ref=projects/core-banking-text-to-sql/&about=Core-Banking%20Text-to-SQL%20Assistant&q=Which%20parts%20did%20your%20teammate%20build%20and%20which%20did%20you%3F#hire">Which parts did your teammate build and which did you?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=ai-document-compliance-automation&ref=projects/core-banking-text-to-sql/&about=Core-Banking%20Text-to-SQL%20Assistant&q=Could%20this%20work%20on%20our%20own%20database%3F#hire">Could this work on our own database?</a></li></ul>
+    </div>
+  </div>
+</section><section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
   <div class="container">
     <div class="pg-hire__band" data-reveal="scale">
       <span class="pg-hire__line" aria-hidden="true"></span>
@@ -391,21 +519,7 @@
       </div>
 
       <div class="footer__cols">
-        <nav class="footer__col" aria-labelledby="footer-pages-h">
-          <p class="footer__h" id="footer-pages-h">Pages</p>
-          <ul class="footer__links">
-            <li><a href="../../">Home</a></li>
-            <li><a href="../../projects/">Projects</a></li>
-            <li><a href="../../services/">Services</a></li>
-            <li><a href="../../about/">About</a></li>
-            <li><a href="../../about/#experience">Experience</a></li>
-            <li><a href="../../resume/">Resume</a></li>
-            <li><a href="../../faq/">FAQ</a></li>
-            <li><a href="../../contact/">Contact</a></li>
-          </ul>
-        </nav>
-
-        <nav class="footer__col footer__col--wide" aria-labelledby="footer-services-h">
+        <nav class="footer__col footer__col--services" aria-labelledby="footer-services-h">
           <p class="footer__h" id="footer-services-h">Services</p>
           <ul class="footer__links">
             <li><a href="../../services/llm-rag-development/">AI chatbot development</a></li>
@@ -417,14 +531,36 @@
           </ul>
         </nav>
 
-        <nav class="footer__col" aria-labelledby="footer-work-h">
+        <nav class="footer__col footer__col--work" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
+            <li><a href="../../projects/advanced-cctv-analytics/">CCTV analytics in Python</a></li>
+            <li><a href="../../projects/speech-emotion-recognition/">Speech emotion recognition</a></li>
+            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
+            <li><a href="../../projects/obligation-management-system/">Regulatory obligation extraction</a></li>
+            <li><a href="../../projects/ams-ai-finding-engine/">AI audit finding generator</a></li>
+            <li><a href="../../projects/core-banking-text-to-sql/">Text-to-SQL for banking</a></li>
             <li><a href="../../projects/agentic-honeypot/">AI scam honeypot</a></li>
+            <li><a href="../../projects/whatsapp-ai-agent-platform/">WhatsApp AI agent platform</a></li>
             <li><a href="../../projects/deepfake-video-detection/">Deepfake video detection</a></li>
+            <li><a href="../../projects/spam-classifier/">SMS spam classifier</a></li>
             <li><a href="../../projects/">All projects</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__col footer__col--pages" aria-labelledby="footer-pages-h">
+          <p class="footer__h" id="footer-pages-h">Pages</p>
+          <ul class="footer__links">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../projects/">Projects</a></li>
+            <li><a href="../../services/">Services</a></li>
+            <li><a href="../../about/">About</a></li>
+            <li><a href="../../about/#experience">Experience</a></li>
+            <li><a href="../../resume/">Resume</a></li>
+            <li><a href="../../faq/">FAQ</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+            <li><a href="../../contact/#book">Book a call</a></li>
           </ul>
         </nav>
       </div>
@@ -443,10 +579,20 @@
 
   <div class="footer__ghost" aria-hidden="true"></div>
 
-  <!-- floating "Hire me" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js) -->
+  <!-- floating "Let's talk" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js).
+       Without JavaScript it is a plain link to the contact form; with JavaScript it opens the small menu of ways to connect (content.connect). -->
   <div class="fab-wrap contact-fab">
-    <a class="fab" href="../../contact/#hire" aria-label="Hire me"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
-    <div class="fab-tip" aria-hidden="true">Hire me</div>
+    <div class="connect" id="connect-menu" hidden>
+      <p class="connect__h" id="connect-h">Let&rsquo;s talk</p>
+      <ul class="connect__list" aria-labelledby="connect-h">
+            <li><a class="connect__item" href="../../contact/#book"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><span><strong>Book a call</strong><small>Pick a day and time</small></span></a></li>
+            <li><a class="connect__item" href="../../contact/#hire"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg><span><strong>Send a brief</strong><small>Tell me what you need</small></span></a></li>
+            <li><a class="connect__item" href="https://wa.me/919920644655?text=Hi%20Shaunak%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg><span><strong>WhatsApp</strong><small>Message me directly</small></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="connect__item" href="mailto:shaunak.chorge@gmail.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span><strong>Email</strong><small>Write to me</small></span></a></li>
+      </ul>
+    </div>
+    <a class="fab" href="../../contact/#hire" aria-label="Hire me" data-connect-toggle><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></a>
+    <div class="fab-tip" aria-hidden="true">Let&rsquo;s talk</div>
   </div>
 </footer>
 
@@ -483,11 +629,13 @@
     <symbol id="i-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></symbol>
     <symbol id="i-scan-eye" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="1"/><path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0"/></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
     <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
     <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
     <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
     <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
     <symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
     <symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
     <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
@@ -498,10 +646,10 @@
   </svg>
 
   <script defer src="../../assets/dist/js/core.min.js?v=d41b0d5b"></script>
-  <script defer src="../../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
+  <script defer src="../../assets/dist/js/contact.min.js?v=e6aee63a"></script>
   <script defer src="../../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
-  <script defer src="../../assets/dist/js/pages.min.js?v=efc0e441"></script>
-  <script defer src="../../assets/dist/js/visuals.min.js?v=53b137f5"></script>
+  <script defer src="../../assets/dist/js/fx.min.js?v=bb37bfa8"></script>
+  <script defer src="../../assets/dist/js/pages.min.js?v=514d4156"></script>
+  <script defer src="../../assets/dist/js/visuals.min.js?v=6bbaf295"></script>
 </body>
 </html>

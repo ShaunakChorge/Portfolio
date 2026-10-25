@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=99f76e8a">
+  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=d92fd1cd">
 
 <script type="application/ld+json">
 {
@@ -62,7 +62,7 @@
       "breadcrumb": {
         "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/services/python-automation-integrations/#breadcrumb"
       },
-      "dateModified": "2026-10-24",
+      "dateModified": "2026-10-25",
       "mainEntity": {
         "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/services/python-automation-integrations/#service"
       }
@@ -165,7 +165,7 @@
           "name": "Can the bot use AI to answer?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. In a client platform I built, AI replies were queued through Redis and Celery (background job tools) so the incoming-message receiver stayed fast. Conversation flows based on what the customer wants kept complex bookings on track, and a human operator could be alerted when needed."
+            "text": "Yes. In a client platform I built, AI replies were queued through Redis and Celery (background job tools) so the incoming-message receiver stayed fast. Conversation flows based on what the customer wants kept complex bookings on track, and human operators could be alerted."
           }
         },
         {
@@ -174,6 +174,22 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Anywhere that runs Python and Docker: your own server, a cloud machine or a managed platform. Setup instructions come with the handover, so your team can move it later. We choose the place together, based on cost, security needs and who will look after it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens when a website changes and the scraper breaks?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Any scraper can break when a page layout changes. I build in checks that skip failed pages, flag empty fields and write a log, so a break shows in the log instead of appearing later as bad data. The handover notes say which parts to update, and ongoing fixes can be agreed in the scope."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you connect two tools my team already uses?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Often yes, if both tools offer an API, a webhook (a call the tool sends your system when something happens) or a file export. I check that first, because without one there may be no clean link. I have built backend APIs that sync data between internal systems, and linked WhatsApp and Twilio for customer messages and operator alerts."
           }
         }
       ]
@@ -222,10 +238,10 @@
         </nav>
 
         <div class="site-header__tools">
+          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
           </button>
-          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
             <span class="burger__lines" aria-hidden="true"><i></i><i></i><i></i></span>
           </button>
@@ -269,6 +285,24 @@
       <div class="pg-head__aside"><div class="pg-svcmark" data-tone="blue" aria-hidden="true"><span class="pg-svcmark__ring"></span><span class="icon-tile pg-svcmark__tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-workflow"/></svg></span></div></div>
     </div>
   </div>
+</section><nav class="pg-toc" aria-label="On this page"><div class="container"><ul class="pg-toc__list" role="list"><li><a href="#who">Who it is for</a></li><li><a href="#problems">Problems solved</a></li><li><a href="#deliverables">What you get</a></li><li><a href="#process">Process</a></li><li><a href="#tools">Technology</a></li><li><a href="#tradeoffs">Trade-offs</a></li><li><a href="#use-cases">Where it fits</a></li><li><a href="#proof">Proof</a></li><li><a href="#faq">FAQ</a></li><li><a href="#related">Related</a></li><li><a href="#ask">Ask a question</a></li></ul></div></nav><section id="who" class="section pg-sec section--tint" aria-labelledby="who-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Who it is for</p>
+      <h2 id="who-h" class="section__title">Who this <span class="hl hl--blue">is for</span></h2>
+      
+    </header>
+<ul class="pg-uses" role="list" data-reveal-group><li class="pg-use" data-tone="cyan" style="--i:0"><h3 class="pg-use__who">Small businesses answering the same questions daily</h3><p>Staff spend hours on the same questions. A WhatsApp or Telegram bot can handle repeated questions and step-by-step bookings, remember each customer and alert a person for cases you define.</p></li><li class="pg-use" data-tone="purple" style="--i:1"><h3 class="pg-use__who">Teams copying data from websites by hand</h3><p>Someone copies names, prices or listings from web pages into a spreadsheet by hand. A scraper reads the pages, skips the ones that fail, removes repeats and saves one clean table to CSV, a database or an API.</p></li><li class="pg-use" data-tone="blue" style="--i:2"><h3 class="pg-use__who">Product teams with slow <span class="ai">AI</span> steps</h3><p>An AI step takes seconds or minutes, and the app waits for it. Moving AI replies, report drafting or file processing to background workers keeps the app responsive, and the result arrives when it is ready.</p></li><li class="pg-use" data-tone="magenta" style="--i:3"><h3 class="pg-use__who">Operations teams linking several tools</h3><p>Records move between forms, spreadsheets, databases and chat accounts by hand. An automation can move them with a check on each record and a log that shows what happened when something fails.</p></li></ul>
+  </div>
+</section><section id="problems" class="section pg-sec" aria-labelledby="problems-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Problems I solve</p>
+      <h2 id="problems-h" class="section__title">Problems I <span class="hl hl--magenta">solve</span></h2>
+      
+    </header>
+<ul class="pg-problems" role="list" data-reveal-group><li class="pg-problem" data-tone="blue" style="--i:0"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>Staff answer the same customer questions all day</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>I build a bot with step-by-step conversations, a check on every answer and an alert to a person for cases you define. On the WhatsApp platform I worked on, each user's conversation was tracked so replies stayed in context.</p></li><li class="pg-problem" data-tone="blue" style="--i:1"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>Replies are slow because the AI takes time</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>The receiver (a webhook, an address that WhatsApp calls with each new message) answers at once and queues the AI work in Celery and Redis. Replies are then written in the background, so the receiver stays fast.</p></li><li class="pg-problem" data-tone="blue" style="--i:2"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>Someone copies web data into spreadsheets by hand</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>I write the scraper with Requests and BeautifulSoup, skip pages that fail with a clear message, drop repeated items and save a clean table. My product-listing scraper collects names, prices and links into pandas and a CSV file.</p></li><li class="pg-problem" data-tone="blue" style="--i:3"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>The bot breaks when users type something unexpected</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>Every step checks its input and answers with a plain message. My Telegram bot checks the date format and range, explains what went wrong, and tells the user when the outside service returns no answer.</p></li><li class="pg-problem" data-tone="blue" style="--i:4"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>Nobody notices when an automation stops working</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>Each run writes a log of what it did and what failed, and errors are caught instead of crashing the job. In my traceable AI backend, request IDs, metrics and traces make a failing call easy to follow.</p></li></ul>
+  </div>
 </section><section id="deliverables" class="section pg-sec section--tint" aria-labelledby="deliverables-h">
   <div class="container">
     <header class="section__head" data-reveal>
@@ -277,8 +311,8 @@
       
     </header>
 <div class="pg-two">
-      <div class="panel" data-tone="blue" data-reveal><h3 class="pg-panel__h">Deliverables</h3><ul class="dot-list"><li>A scraper or data flow that exports to CSV, a database or an API</li><li>A Telegram or WhatsApp bot with checked, step-by-step conversations</li><li>A receiver for incoming messages (a webhook, built with FastAPI) with error handling and logs</li><li>Background jobs (Celery and Redis) for slow tasks</li><li>Alerts that hand a conversation over to a human operator</li><li>Setup notes, settings files and run instructions</li></ul></div>
-      <div class="panel" data-tone="green" data-reveal style="--i:1"><h3 class="pg-panel__h">Good fit when</h3><ul class="dot-list"><li>Small businesses that answer the same customer questions on WhatsApp or Telegram</li><li>Teams that collect data from websites or exports by hand</li><li>Products that need slow AI work handled in the background without making users wait</li></ul></div>
+      <div class="panel" data-tone="blue" data-reveal><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-circle-check"/></svg> Deliverables</h3><ul class="dot-list"><li>A scraper or data flow that exports to CSV, a database or an API</li><li>A Telegram or WhatsApp bot with checked, step-by-step conversations</li><li>A receiver for incoming messages (a webhook, built with FastAPI) with error handling and logs</li><li>Background jobs (Celery and Redis) for slow tasks</li><li>Alerts that hand a conversation over to a human operator</li><li>Setup notes, settings files and run instructions</li></ul></div>
+      <div class="panel" data-tone="green" data-reveal style="--i:1"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-info"/></svg> What I need from you</h3><ul class="dot-list"><li>The manual steps you follow today, in order, with sample files or screenshots, and the result you want at the end.</li><li>Access to the accounts and sources involved, such as a messaging account, a website or a file export, plus any approval a platform needs, requested early.</li><li>Real examples of messages, pages or files, including the odd ones, so the checks and error messages match real use.</li><li>What must never go wrong, who should hear about a failure, how often it should run, and where it will run.</li></ul></div>
     </div>
   </div>
 </section><section id="process" class="section pg-sec" aria-labelledby="process-h">
@@ -290,7 +324,34 @@
     </header>
 <ol class="pg-steps" data-reveal-group><li class="pg-step" style="--i:0"><span class="pg-step__n" aria-hidden="true">01</span><h3 class="pg-step__t">Scope</h3><p>We map the manual workflow, its inputs and outputs, and what must never go wrong.</p></li><li class="pg-step" style="--i:1"><span class="pg-step__n" aria-hidden="true">02</span><h3 class="pg-step__t">Build</h3><p>The smallest working version, with input checks and logging from the start.</p></li><li class="pg-step" style="--i:2"><span class="pg-step__n" aria-hidden="true">03</span><h3 class="pg-step__t">Test</h3><p>Edge cases, bad input and failures of other services, using realistic data.</p></li><li class="pg-step" style="--i:3"><span class="pg-step__n" aria-hidden="true">04</span><h3 class="pg-step__t">Hand over</h3><p>Settings, run instructions and a short walkthrough.</p></li></ol>
   </div>
-</section><section id="proof" class="section pg-sec section--tint" aria-labelledby="proof-h">
+</section><section id="tools" class="section pg-sec section--tint" aria-labelledby="tools-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Technology</p>
+      <h2 id="tools-h" class="section__title">Technology, and <span class="hl hl--blue">where it fits</span></h2>
+      
+    </header>
+<dl class="pg-roles panel" data-tone="blue" data-reveal><div class="pg-roles__row"><dt>Python</dt><dd>One language for the scripts, bots, message receivers and background jobs, so the whole automation stays in a single codebase.</dd></div><div class="pg-roles__row"><dt>Requests and BeautifulSoup</dt><dd>Fetch web pages and pick out the names, prices and links, skipping pages that fail.</dd></div><div class="pg-roles__row"><dt>pandas</dt><dd>Cleans the collected data into one table and exports it to a CSV file.</dd></div><div class="pg-roles__row"><dt>FastAPI</dt><dd>Receives incoming messages (the webhook), checks them, logs errors and passes slow work to the background queue.</dd></div><div class="pg-roles__row"><dt>Celery and Redis</dt><dd>Run slow tasks, such as AI replies, in background workers. Redis keeps the waiting jobs in order.</dd></div><div class="pg-roles__row"><dt>Telegram Bot API</dt><dd>Delivers messages and keyboard buttons to Telegram users. My bot uses the pyTelegramBotAPI library for step-by-step menus.</dd></div><div class="pg-roles__row"><dt>Twilio</dt><dd>Sends automatic customer messages and operator alerts.</dd></div><div class="pg-roles__row"><dt>WhatsApp Cloud API (prototype)</dt><dd>Meta's route for WhatsApp messages. Account approval and message templates are planned with you at the start.</dd></div><div class="pg-roles__row"><dt>PostgreSQL and Supabase</dt><dd>Store each user's chat history and profile, so a bot can remember earlier messages.</dd></div></dl>
+  </div>
+</section><section id="tradeoffs" class="section pg-sec" aria-labelledby="tradeoffs-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Decide together</p>
+      <h2 id="tradeoffs-h" class="section__title">Trade-offs we <span class="hl hl--purple">decide together</span></h2>
+      
+    </header>
+<ul class="pg-sizes" role="list" data-reveal-group><li class="pg-size" data-tone="cyan" style="--i:0"><h3 class="pg-size__t">Polling or a webhook</h3><p>Polling (the bot keeps asking for new messages) is the simplest way to run a small bot, even from a laptop, but works only while the program runs. A webhook receiver on a server is always listening, but needs hosting. I choose by what a missed message would cost.</p></li><li class="pg-size" data-tone="purple" style="--i:1"><h3 class="pg-size__t">Fixed steps or <span class="ai">AI</span> replies</h3><p>Fixed menus and step-by-step flows are predictable, cheap to run and easy to test. AI replies handle free text but can be wrong, slow or costly per message. I often mix them: fixed steps for bookings, AI for open questions, a person for exceptions.</p></li><li class="pg-size" data-tone="blue" style="--i:2"><h3 class="pg-size__t">Quick script or monitored service</h3><p>A script you run by hand is cheapest, but it fails quietly. A service with a queue, logs and alerts costs more to build and run. I decide by asking what happens if the job stops for a day.</p></li></ul>
+  </div>
+</section><section id="use-cases" class="section pg-sec section--tint" aria-labelledby="use-cases-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">In a business</p>
+      <h2 id="use-cases-h" class="section__title">Where this <span class="hl hl--magenta">fits</span></h2>
+      <p class="section__lead">Situations where a team could use this service. These are examples, not past clients.</p>
+    </header>
+<ul class="pg-uses" role="list" data-reveal-group><li class="pg-use" data-tone="cyan" style="--i:0"><h3 class="pg-use__who">Clinics, salons and other appointment businesses</h3><p>A WhatsApp bot that takes appointment requests step by step and sends automatic confirmations. A staff member is alerted for cases you define.</p></li><li class="pg-use" data-tone="purple" style="--i:1"><h3 class="pg-use__who">Online shops and price-tracking teams</h3><p>A scraper that collects product names, prices and links from listing pages you are allowed to read into one table, so price checks stop depending on copy and paste.</p></li><li class="pg-use" data-tone="blue" style="--i:2"><h3 class="pg-use__who">Audit and compliance teams</h3><p>Bulk processing of a whole spreadsheet in one go, ending in a review grid where each row can be accepted, edited or rejected, instead of retyping by hand.</p></li><li class="pg-use" data-tone="magenta" style="--i:3"><h3 class="pg-use__who">Fraud and trust teams</h3><p>A chatbot that keeps suspicious senders talking and saves the payment IDs, links and phone numbers they reveal as structured records for investigators.</p></li></ul>
+  </div>
+</section><section id="proof" class="section pg-sec" aria-labelledby="proof-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">Proof from real work</p>
@@ -301,22 +362,37 @@
         <p class="pg-proj__meta">Automation</p>
         <h3 class="pg-proj__title" id="pf-whatsapp-ai-agent-platform">WhatsApp Automation and <span class="ai">AI</span> Agent Platform</h3>
         <p class="pg-proj__blurb">AI replies run in the background, every chat is tracked and human operators get alerts.</p>
-        
-        <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/#p-whatsapp-ai-agent-platform">See project<span class="sr-only">: WhatsApp Automation and AI Agent Platform</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> A client platform that receives WhatsApp messages, tracks each conversation and sends AI replies from background workers, with operator alerts through Meta's API and Twilio.</p>
+        <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/whatsapp-ai-agent-platform/">Read case study<span class="sr-only">: WhatsApp Automation and AI Agent Platform</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+      </article><article class="card pg-proof" data-tone="cyan" data-tilt data-reveal style="--i:1" aria-labelledby="pf-agentic-honeypot">
+        <p class="pg-proj__meta">AI agent</p>
+        <h3 class="pg-proj__title" id="pf-agentic-honeypot">Scam-Catching <span class="ai">AI</span> Honeypot</h3>
+        <p class="pg-proj__blurb">An AI plays an easily fooled victim, keeps scammers chatting and logs the payment IDs, links and phone numbers they reveal.</p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> A chatbot that scores each message, switches style by rules, replies through an AI model and saves payment IDs, links and phone numbers it finds.</p>
+        <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/agentic-honeypot/">Read case study<span class="sr-only">: Scam-Catching AI Honeypot</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+      </article><article class="card pg-proof" data-tone="cyan" data-tilt data-reveal style="--i:2" aria-labelledby="pf-ams-ai-finding-engine">
+        <p class="pg-proj__meta">AI and backend</p>
+        <h3 class="pg-proj__title" id="pf-ams-ai-finding-engine"><span class="ai">AI</span> Audit Finding Drafting Engine</h3>
+        <p class="pg-proj__blurb">Turns short audit notes into three draft findings, with code that blocks any invented fact. Drafts whole spreadsheets in bulk.</p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> Bulk mode turns an uploaded spreadsheet into a reviewable grid of drafts, and the service plugs into the client's existing audit product.</p>
+        <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/ams-ai-finding-engine/">Read case study<span class="sr-only">: AI Audit Finding Drafting Engine</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+      </article><article class="card pg-proof" data-tone="blue" data-tilt data-reveal style="--i:3" aria-labelledby="pf-observable-ai-backend">
+        <p class="pg-proj__meta">AI and backend</p>
+        <h3 class="pg-proj__title" id="pf-observable-ai-backend">Traceable <span class="ai">AI</span> Backend</h3>
+        <p class="pg-proj__blurb">An AI server that shows exactly where each request goes and where it slows down, with request IDs, metrics and traces for LLM observability.</p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> An AI picks one of three business actions, such as looking up or creating a ticket, and every step is logged, counted and traced.</p>
+        <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/observable-ai-backend/">Read case study<span class="sr-only">: Traceable AI Backend</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+      </article><article class="card pg-proof" data-tone="cyan" data-tilt data-reveal style="--i:4" aria-labelledby="pf-obligation-management-system">
+        <p class="pg-proj__meta">AI and documents</p>
+        <h3 class="pg-proj__title" id="pf-obligation-management-system">Obligation Management System</h3>
+        <p class="pg-proj__blurb">Reads regulatory PDFs and lists every obligation, each linked to the exact highlighted passage. 97.2% of 1,266 records located.</p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> Replaces hand-built obligation lists with an automatic pass over regulatory PDFs, each obligation carrying a word-for-word source quote for a reviewer to check.</p>
+        <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/obligation-management-system/">Read case study<span class="sr-only">: Obligation Management System</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
       </article></div>
     <p class="pg-smallrel" data-reveal>Related personal builds: <a class="link" href="../../projects/#p-astra-telegram-bot">ASTRA Telegram Bot</a>, <a class="link" href="../../projects/#p-zapvi-web-scraper">Zapvi Web Scraper</a>.</p>
-    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../projects/">See all case studies <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../projects/">See all case studies <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../../projects/#by-need">Browse work by business need <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
   </div>
-</section><section id="tools" class="section pg-sec" aria-labelledby="tools-h">
-  <div class="container">
-    <header class="section__head" data-reveal>
-      <p class="eyebrow">Tools</p>
-      <h2 id="tools-h" class="section__title">Tools I use <span class="hl hl--blue">for this</span></h2>
-      
-    </header>
-<div data-reveal><ul class="tags pg-tools" role="list" aria-label="Tools used for this service" data-tone="blue"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Requests</li><li class="tag">BeautifulSoup</li><li class="tag">pandas</li><li class="tag">Telegram Bot API</li><li class="tag">WhatsApp Cloud API (prototype)</li><li class="tag">Twilio</li><li class="tag">Celery</li><li class="tag">Redis</li><li class="tag">PostgreSQL</li><li class="tag">Supabase</li></ul></div>
-  </div>
-</section><section id="faq" class="section pg-sec" aria-labelledby="faq-h">
+</section><section id="faq" class="section pg-sec section--tint" aria-labelledby="faq-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">FAQ</p>
@@ -337,23 +413,48 @@
       <div class="pg-qa__a"><p>Yes. I worked on a WhatsApp automation platform that used the Meta Business API and Twilio, tracked each user's conversation and replied in the background. Account approval and message templates on Meta's side are part of the planning conversation. Ask me early so we can plan it.</p></div>
     </details><details class="pg-qa" id="python-automation-integrations-q5" open data-reveal style="--i:4">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Can the bot use <span class="ai">AI</span> to answer?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>Yes. In a client platform I built, AI replies were queued through Redis and Celery (background job tools) so the incoming-message receiver stayed fast. Conversation flows based on what the customer wants kept complex bookings on track, and a human operator could be alerted when needed.</p></div>
+      <div class="pg-qa__a"><p>Yes. In a client platform I built, AI replies were queued through Redis and Celery (background job tools) so the incoming-message receiver stayed fast. Conversation flows based on what the customer wants kept complex bookings on track, and human operators could be alerted.</p></div>
     </details><details class="pg-qa" id="python-automation-integrations-q6" open data-reveal style="--i:4">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Where does the automation run?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>Anywhere that runs Python and Docker: your own server, a cloud machine or a managed platform. Setup instructions come with the handover, so your team can move it later. We choose the place together, based on cost, security needs and who will look after it.</p></div>
+    </details><details class="pg-qa" id="python-automation-integrations-q7" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">What happens when a website changes and the scraper breaks?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>Any scraper can break when a page layout changes. I build in checks that skip failed pages, flag empty fields and write a log, so a break shows in the log instead of appearing later as bad data. The handover notes say which parts to update, and ongoing fixes can be agreed in the scope.</p></div>
+    </details><details class="pg-qa" id="python-automation-integrations-q8" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Can you connect two tools my team already uses?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>Often yes, if both tools offer an API, a webhook (a call the tool sends your system when something happens) or a file export. I check that first, because without one there may be no clean link. I have built backend APIs that sync data between internal systems, and linked WhatsApp and Twilio for customer messages and operator alerts.</p></div>
     </details></div>
   </div>
-</section><section id="related" class="section pg-sec section--tint" aria-labelledby="related-h">
+</section><section id="related" class="section pg-sec" aria-labelledby="related-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">Related</p>
       <h2 id="related-h" class="section__title">Related <span class="hl hl--purple">services</span></h2>
       
     </header>
-<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/ai-backend-fastapi-django/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-server"/></svg></span><span><strong>Hire a FastAPI developer</strong><span class="pg-rel__t">FastAPI and Django services with automated tests and clear logs.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/llm-rag-development/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-brain-circuit"/></svg></span><span><strong>Freelance chatbot developer</strong><span class="pg-rel__t">Chatbots that answer from your documents and show their sources.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
+<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/ai-backend-fastapi-django/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-server"/></svg></span><span><strong>Hire a FastAPI developer</strong><span class="pg-rel__t">When the automation needs a database, documented endpoints and tests, or must run as a long-lived service rather than a one-off script.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/llm-rag-development/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-brain-circuit"/></svg></span><span><strong>Freelance chatbot developer</strong><span class="pg-rel__t">When the bot should answer from your own documents instead of fixed replies, citing sources and saying so when an answer is missing.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
       <li><a class="pg-rel__link" href="../../faq/" data-tone="green"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></span><span><strong>Freelance FAQ</strong><span class="pg-rel__t">Cost, how to start, NDAs and ownership.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
     </ul>
-    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../services/">All services <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../services/">All services <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../../services/#which-service">Which service fits you? <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+  </div>
+</section><section id="ask" class="section pg-sec pg-ask" aria-labelledby="ask-h">
+  <div class="container">
+    <div class="pg-ask__box panel" data-tone="cyan" data-reveal>
+      <div class="pg-ask__text">
+        <p class="eyebrow">Ask me</p>
+        <h2 id="ask-h" class="pg-ask__title">Have a question about automation and bots, or your own idea?</h2>
+        <p class="pg-ask__lead">Type your question below. The contact form opens with your question and this page already filled in, so you only add your name and email.</p>
+      </div>
+      <form class="pg-ask__form" action="../../contact/#hire" method="get">
+        <input type="hidden" name="topic" value="python-automation-integrations">
+        <input type="hidden" name="ref" value="services/python-automation-integrations/">
+        <input type="hidden" name="about" value="Automation and bots">
+        <label class="sr-only" for="ask-q">Your question</label>
+        <input class="input pg-ask__input" id="ask-q" name="q" type="text" maxlength="300" autocomplete="off" enterkeyhint="send" placeholder="Can you build a bot that hands tricky chats to a person?">
+        <button class="btn btn--solid btn--glow" type="submit">Ask me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></button>
+      </form>
+      <ul class="pg-ask__chips" role="list" aria-label="Questions people often ask"><li><a class="pg-ask__chip" href="../../contact/?topic=python-automation-integrations&ref=services/python-automation-integrations/&about=Automation%20and%20bots&q=Can%20you%20build%20a%20bot%20that%20hands%20tricky%20chats%20to%20a%20person%3F#hire">Can you build a bot that hands tricky chats to a person?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=python-automation-integrations&ref=services/python-automation-integrations/&about=Automation%20and%20bots&q=How%20do%20you%20stop%20a%20scraper%20breaking%20when%20a%20page%20changes%3F#hire">How do you stop a scraper breaking when a page changes?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=python-automation-integrations&ref=services/python-automation-integrations/&about=Automation%20and%20bots&q=What%20do%20you%20need%20from%20me%20before%20you%20start%20an%20automation%3F#hire">What do you need from me before you start an automation?</a></li></ul>
+    </div>
   </div>
 </section><section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
   <div class="container">
@@ -402,21 +503,7 @@
       </div>
 
       <div class="footer__cols">
-        <nav class="footer__col" aria-labelledby="footer-pages-h">
-          <p class="footer__h" id="footer-pages-h">Pages</p>
-          <ul class="footer__links">
-            <li><a href="../../">Home</a></li>
-            <li><a href="../../projects/">Projects</a></li>
-            <li><a href="../../services/">Services</a></li>
-            <li><a href="../../about/">About</a></li>
-            <li><a href="../../about/#experience">Experience</a></li>
-            <li><a href="../../resume/">Resume</a></li>
-            <li><a href="../../faq/">FAQ</a></li>
-            <li><a href="../../contact/">Contact</a></li>
-          </ul>
-        </nav>
-
-        <nav class="footer__col footer__col--wide" aria-labelledby="footer-services-h">
+        <nav class="footer__col footer__col--services" aria-labelledby="footer-services-h">
           <p class="footer__h" id="footer-services-h">Services</p>
           <ul class="footer__links">
             <li><a href="../../services/llm-rag-development/">AI chatbot development</a></li>
@@ -428,14 +515,36 @@
           </ul>
         </nav>
 
-        <nav class="footer__col" aria-labelledby="footer-work-h">
+        <nav class="footer__col footer__col--work" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
+            <li><a href="../../projects/advanced-cctv-analytics/">CCTV analytics in Python</a></li>
+            <li><a href="../../projects/speech-emotion-recognition/">Speech emotion recognition</a></li>
+            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
+            <li><a href="../../projects/obligation-management-system/">Regulatory obligation extraction</a></li>
+            <li><a href="../../projects/ams-ai-finding-engine/">AI audit finding generator</a></li>
+            <li><a href="../../projects/core-banking-text-to-sql/">Text-to-SQL for banking</a></li>
             <li><a href="../../projects/agentic-honeypot/">AI scam honeypot</a></li>
+            <li><a href="../../projects/whatsapp-ai-agent-platform/">WhatsApp AI agent platform</a></li>
             <li><a href="../../projects/deepfake-video-detection/">Deepfake video detection</a></li>
+            <li><a href="../../projects/spam-classifier/">SMS spam classifier</a></li>
             <li><a href="../../projects/">All projects</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__col footer__col--pages" aria-labelledby="footer-pages-h">
+          <p class="footer__h" id="footer-pages-h">Pages</p>
+          <ul class="footer__links">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../projects/">Projects</a></li>
+            <li><a href="../../services/">Services</a></li>
+            <li><a href="../../about/">About</a></li>
+            <li><a href="../../about/#experience">Experience</a></li>
+            <li><a href="../../resume/">Resume</a></li>
+            <li><a href="../../faq/">FAQ</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+            <li><a href="../../contact/#book">Book a call</a></li>
           </ul>
         </nav>
       </div>
@@ -454,10 +563,20 @@
 
   <div class="footer__ghost" aria-hidden="true"></div>
 
-  <!-- floating "Hire me" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js) -->
+  <!-- floating "Let's talk" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js).
+       Without JavaScript it is a plain link to the contact form; with JavaScript it opens the small menu of ways to connect (content.connect). -->
   <div class="fab-wrap contact-fab">
-    <a class="fab" href="../../contact/#hire" aria-label="Hire me"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
-    <div class="fab-tip" aria-hidden="true">Hire me</div>
+    <div class="connect" id="connect-menu" hidden>
+      <p class="connect__h" id="connect-h">Let&rsquo;s talk</p>
+      <ul class="connect__list" aria-labelledby="connect-h">
+            <li><a class="connect__item" href="../../contact/#book"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><span><strong>Book a call</strong><small>Pick a day and time</small></span></a></li>
+            <li><a class="connect__item" href="../../contact/#hire"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg><span><strong>Send a brief</strong><small>Tell me what you need</small></span></a></li>
+            <li><a class="connect__item" href="https://wa.me/919920644655?text=Hi%20Shaunak%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg><span><strong>WhatsApp</strong><small>Message me directly</small></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="connect__item" href="mailto:shaunak.chorge@gmail.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span><strong>Email</strong><small>Write to me</small></span></a></li>
+      </ul>
+    </div>
+    <a class="fab" href="../../contact/#hire" aria-label="Hire me" data-connect-toggle><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></a>
+    <div class="fab-tip" aria-hidden="true">Let&rsquo;s talk</div>
   </div>
 </footer>
 
@@ -494,10 +613,12 @@
     <symbol id="i-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></symbol>
     <symbol id="i-scan-eye" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="1"/><path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0"/></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
     <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
     <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
     <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
     <symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
     <symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
     <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
@@ -508,9 +629,9 @@
   </svg>
 
   <script defer src="../../assets/dist/js/core.min.js?v=d41b0d5b"></script>
-  <script defer src="../../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
+  <script defer src="../../assets/dist/js/contact.min.js?v=e6aee63a"></script>
   <script defer src="../../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
-  <script defer src="../../assets/dist/js/pages.min.js?v=efc0e441"></script>
+  <script defer src="../../assets/dist/js/fx.min.js?v=bb37bfa8"></script>
+  <script defer src="../../assets/dist/js/pages.min.js?v=514d4156"></script>
 </body>
 </html>

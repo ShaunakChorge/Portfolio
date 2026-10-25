@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=99f76e8a">
+  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=d92fd1cd">
 
 <script type="application/ld+json">
 {
@@ -62,7 +62,7 @@
       "breadcrumb": {
         "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/services/ai-document-compliance-automation/#breadcrumb"
       },
-      "dateModified": "2026-10-24",
+      "dateModified": "2026-10-25",
       "mainEntity": {
         "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/services/ai-document-compliance-automation/#service"
       }
@@ -149,7 +149,7 @@
           "name": "How accurate is AI data extraction from PDFs?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Accuracy is measured on your own files and reported clearly. I build a scoring tool that compares the output with a small set of correct answers from your documents, then fix the mistakes it finds. On one database project, running the generated queries gave the true quality figure."
+            "text": "Accuracy is measured on your own files and reported plainly. I build a scoring tool that compares the output with a small set of correct answers from your documents, then fix the mistakes it finds. On a regulatory project, 97.2% of 1,266 production records link to an exact passage; that measures traceability, not completeness."
           }
         },
         {
@@ -165,7 +165,7 @@
           "name": "How do you stop AI from adding invented details?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "With checks in code, not just instructions in a prompt. In a drafting service I built, any figure, date or owner that is not in the source note causes the draft to be rejected automatically. Reviewers can still accept, edit or reject every draft that remains."
+            "text": "With checks in code, not just instructions in a prompt. In the audit drafting service I built, any figure, date or owner that is not in the source note causes the draft to be rejected automatically. In 27 checked draft versions, a small sample, I found no invented facts. A reviewer still accepts, edits or rejects every draft."
           }
         },
         {
@@ -174,6 +174,22 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Yes. I connected an AI drafting service to a live product built with Spring Boot and React. It runs as a separate FastAPI service. There is a clear agreement about the data it sends and receives. The main product and the new service can be updated separately."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will the AI find every item in a long document?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. In a controlled comparison on documents held back from tuning, recall (how many of the real obligations were found) rose from 32% to 69% on Basel III rules and from 69% to 82% on KYC (know-your-customer) rules. Some are still missed, so every result links to its source and a person reviews the list."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can it read scanned pages and invoices?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "PDFs that already contain typed text are the easiest. Scanned pages and photos first need text recognition (OCR), and results depend on scan quality, so I test a sample of your scans before agreeing a plan. My case studies here cover regulatory PDFs, audit notes and a database, not invoices."
           }
         }
       ]
@@ -222,10 +238,10 @@
         </nav>
 
         <div class="site-header__tools">
+          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
           </button>
-          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
             <span class="burger__lines" aria-hidden="true"><i></i><i></i><i></i></span>
           </button>
@@ -269,6 +285,24 @@
       <div class="pg-head__aside"><div class="pg-svcmark" data-tone="purple" aria-hidden="true"><span class="pg-svcmark__ring"></span><span class="icon-tile pg-svcmark__tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-file-text"/></svg></span></div></div>
     </div>
   </div>
+</section><nav class="pg-toc" aria-label="On this page"><div class="container"><ul class="pg-toc__list" role="list"><li><a href="#who">Who it is for</a></li><li><a href="#problems">Problems solved</a></li><li><a href="#deliverables">What you get</a></li><li><a href="#process">Process</a></li><li><a href="#tools">Technology</a></li><li><a href="#tradeoffs">Trade-offs</a></li><li><a href="#use-cases">Where it fits</a></li><li><a href="#proof">Proof</a></li><li><a href="#faq">FAQ</a></li><li><a href="#related">Related</a></li><li><a href="#ask">Ask a question</a></li></ul></div></nav><section id="who" class="section pg-sec section--tint" aria-labelledby="who-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Who it is for</p>
+      <h2 id="who-h" class="section__title">Who this <span class="hl hl--blue">is for</span></h2>
+      
+    </header>
+<ul class="pg-uses" role="list" data-reveal-group><li class="pg-use" data-tone="cyan" style="--i:0"><h3 class="pg-use__who">Compliance and risk teams</h3><p>You read long circulars, permits and regulations to list the duties in them. You need a list where every duty links to the exact passage, so a reviewer can verify each one quickly.</p></li><li class="pg-use" data-tone="purple" style="--i:1"><h3 class="pg-use__who">Internal audit teams</h3><p>Findings start as short checklist notes. You want clear first drafts, in bulk when needed, with checks in code that block any figure, date or owner the auditor did not write.</p></li><li class="pg-use" data-tone="blue" style="--i:2"><h3 class="pg-use__who">Reporting and data teams</h3><p>Answers sit in a very large database that few people can query. You want plain questions turned into queries, plus an accuracy test that runs them, so you know how far to trust the results.</p></li><li class="pg-use" data-tone="magenta" style="--i:3"><h3 class="pg-use__who">Product teams adding <span class="ai">AI</span> to an app</h3><p>You run a live product and want drafting or extraction added without rebuilding it. A separate service with a clear data agreement can be updated on its own.</p></li></ul>
+  </div>
+</section><section id="problems" class="section pg-sec" aria-labelledby="problems-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Problems I solve</p>
+      <h2 id="problems-h" class="section__title">Problems I <span class="hl hl--magenta">solve</span></h2>
+      
+    </header>
+<ul class="pg-problems" role="list" data-reveal-group><li class="pg-problem" data-tone="purple" style="--i:0"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>AI page numbers and citations cannot be trusted</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>The AI copies out the sentence it relied on; code finds it in the PDF and reads the page from the document. The AI's own page numbers were wrong 56% of the time; now 97.2% of 1,266 production records link to an exact passage.</p></li><li class="pg-problem" data-tone="purple" style="--i:1"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>AI drafts include figures, dates or names nobody wrote</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>Code compares each draft with the source note and rejects it if it adds a figure, date or owner. On the audit drafting service, 0 invented facts were found across 27 checked draft versions.</p></li><li class="pg-problem" data-tone="purple" style="--i:2"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>Nobody knows how accurate the output really is</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>I build the scoring step first and run it on a sample of your documents. On the database project, simple scoring suggested about 93% quality, but running the queries showed a far lower true figure.</p></li><li class="pg-problem" data-tone="purple" style="--i:3"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>Long documents are too big to read in one go</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>I split the document at page boundaries, extract from each piece and rejoin duties that cross a break. I also measure where processing time goes: the changes that helped cut a six-document benchmark from 80.4 to 60.0 minutes.</p></li><li class="pg-problem" data-tone="purple" style="--i:4"><p class="pg-problem__p"><span class="pg-problem__k">Problem</span>A new AI tool must fit the product you already run</p><p class="pg-problem__a"><span class="pg-problem__k">How I approach it</span>I build it as a separate FastAPI service with a clear data contract: an agreed shape for what it sends and receives. The audit service was connected to an existing Spring Boot and React product, and the client adopted it the day after handover.</p></li></ul>
+  </div>
 </section><section id="deliverables" class="section pg-sec section--tint" aria-labelledby="deliverables-h">
   <div class="container">
     <header class="section__head" data-reveal>
@@ -277,8 +311,8 @@
       
     </header>
 <div class="pg-two">
-      <div class="panel" data-tone="purple" data-reveal><h3 class="pg-panel__h">Deliverables</h3><ul class="dot-list"><li>A service that reads your documents and returns clean, structured data</li><li>Evidence links: each fact tied to the exact quote it came from</li><li>Automatic checks that reject AI-written text containing invented details</li><li>Bulk processing for spreadsheets or whole folders of documents</li><li>A scoring tool that measures accuracy on a sample of your own documents</li><li>A review screen or export (web page or spreadsheet), if you need one</li></ul></div>
-      <div class="panel" data-tone="green" data-reveal style="--i:1"><h3 class="pg-panel__h">Good fit when</h3><ul class="dot-list"><li>Audit, compliance or operations teams who work through long documents by hand</li><li>Products that need AI-written text with firm limits on what it may contain</li><li>Teams that want to ask plain-language questions of a large database</li></ul></div>
+      <div class="panel" data-tone="purple" data-reveal><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-circle-check"/></svg> Deliverables</h3><ul class="dot-list"><li>A service that reads your documents and returns clean, structured data</li><li>Evidence links: each fact tied to the exact quote it came from</li><li>Automatic checks that reject AI-written text containing invented details</li><li>Bulk processing for spreadsheets or whole folders of documents</li><li>A scoring tool that measures accuracy on a sample of your own documents</li><li>A review screen or export (web page or spreadsheet), if you need one</li></ul></div>
+      <div class="panel" data-tone="green" data-reveal style="--i:1"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-info"/></svg> What I need from you</h3><ul class="dot-list"><li>Examples of the documents you handle, awkward ones included, and a list of the facts you want pulled from each.</li><li>A small set of correct answers: documents your team has already read and marked up by hand, which I use to score accuracy.</li><li>Where documents may be processed (your servers, your cloud account or an online AI service) and any privacy rules that apply.</li><li>How reviewers work today, such as spreadsheets or an existing product, so the output fits their routine and approval steps.</li></ul></div>
     </div>
   </div>
 </section><section id="process" class="section pg-sec" aria-labelledby="process-h">
@@ -290,7 +324,34 @@
     </header>
 <ol class="pg-steps" data-reveal-group><li class="pg-step" style="--i:0"><span class="pg-step__n" aria-hidden="true">01</span><h3 class="pg-step__t">Scope</h3><p>We pick the facts that matter and collect a small set of correct answers from your documents.</p></li><li class="pg-step" style="--i:1"><span class="pg-step__n" aria-hidden="true">02</span><h3 class="pg-step__t">Baseline</h3><p>A first working version plus a scoring tool, so every later change is judged on numbers.</p></li><li class="pg-step" style="--i:2"><span class="pg-step__n" aria-hidden="true">03</span><h3 class="pg-step__t">Improve</h3><p>Fixes aimed at the mistakes the scoring tool finds, not at guesses.</p></li><li class="pg-step" style="--i:3"><span class="pg-step__n" aria-hidden="true">04</span><h3 class="pg-step__t">Hand over</h3><p>The service, tests, scoring scripts and notes your team can rerun.</p></li></ol>
   </div>
-</section><section id="proof" class="section pg-sec section--tint" aria-labelledby="proof-h">
+</section><section id="tools" class="section pg-sec section--tint" aria-labelledby="tools-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Technology</p>
+      <h2 id="tools-h" class="section__title">Technology, and <span class="hl hl--blue">where it fits</span></h2>
+      
+    </header>
+<dl class="pg-roles panel" data-tone="purple" data-reveal><div class="pg-roles__row"><dt>FastAPI and Pydantic</dt><dd>Serve the extraction service as an API and check every result against an agreed shape, such as allowed categories.</dd></div><div class="pg-roles__row"><dt>PyMuPDF</dt><dd>Opens PDFs and finds where a quoted passage sits, so the page number and highlight come from the document, not the AI.</dd></div><div class="pg-roles__row"><dt>Local AI models (Ollama, vLLM)</dt><dd>Read the text and return structured fields, hosted on your own servers so documents and prompts stay in-house.</dd></div><div class="pg-roles__row"><dt>TF-IDF similarity search</dt><dd>A word-weighting method that finds similar past examples, such as earlier findings, to show the AI how your team writes.</dd></div><div class="pg-roles__row"><dt>React and pdf.js</dt><dd>Show the PDF beside the extracted list with the evidence highlighted, so a reviewer can check each item against its source.</dd></div><div class="pg-roles__row"><dt>SQL databases (Oracle)</dt><dd>Used by the accuracy test: each generated query is run for real, and its rows are checked against a known-correct query.</dd></div><div class="pg-roles__row"><dt>pytest and scoring scripts</dt><dd>Run automatic tests, and score the output against correct answers from your documents after every change.</dd></div><div class="pg-roles__row"><dt>Docker</dt><dd>Packages the service with its settings, so your team can run it on its own machines the same way I do.</dd></div></dl>
+  </div>
+</section><section id="tradeoffs" class="section pg-sec" aria-labelledby="tradeoffs-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Decide together</p>
+      <h2 id="tradeoffs-h" class="section__title">Trade-offs we <span class="hl hl--purple">decide together</span></h2>
+      
+    </header>
+<ul class="pg-sizes" role="list" data-reveal-group><li class="pg-size" data-tone="cyan" style="--i:0"><h3 class="pg-size__t">Find every item or only sure ones</h3><p>Tuning to catch every item raises recall (the share of items found) but adds wrong extras. Tuning for certainty raises precision (the share of found items that are correct) but misses items. I ask which mistake costs you more, then report both on your documents.</p></li><li class="pg-size" data-tone="purple" style="--i:1"><h3 class="pg-size__t">Bigger <span class="ai">AI</span> model or faster answers</h3><p>A larger model may read more carefully but is slower and needs a stronger machine. I compare candidate models on your documents against a time limit you set, as I did with four models on the audit drafting service.</p></li><li class="pg-size" data-tone="blue" style="--i:2"><h3 class="pg-size__t">Fully automatic or reviewed by a person</h3><p>For compliance and audit work I keep a person in charge. Each item links to its source, and a reviewer can accept, edit or reject it. Full automation only suits low-risk fields where accuracy has been measured.</p></li></ul>
+  </div>
+</section><section id="use-cases" class="section pg-sec section--tint" aria-labelledby="use-cases-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">In a business</p>
+      <h2 id="use-cases-h" class="section__title">Where this <span class="hl hl--magenta">fits</span></h2>
+      <p class="section__lead">Situations where a team could use this service. These are examples, not past clients.</p>
+    </header>
+<ul class="pg-uses" role="list" data-reveal-group><li class="pg-use" data-tone="cyan" style="--i:0"><h3 class="pg-use__who">Bank compliance teams</h3><p>A new regulator circular arrives. The team needs the duties in it listed and sorted into fixed categories, each tied to the exact passage for review.</p></li><li class="pg-use" data-tone="purple" style="--i:1"><h3 class="pg-use__who">Site and plant compliance managers</h3><p>Environmental permits and licences set conditions a site must meet. A tool can list each condition with its clause, so reviewers can check every one against the source.</p></li><li class="pg-use" data-tone="blue" style="--i:2"><h3 class="pg-use__who">Internal audit and risk teams</h3><p>A long checklist workbook needs a first-draft finding for every row. Bulk drafting with invented-detail checks gives reviewers one grid to approve, change or reject row by row.</p></li><li class="pg-use" data-tone="magenta" style="--i:3"><h3 class="pg-use__who">Finance and operations reporting teams</h3><p>Business users wait on analysts for database reports. Plain questions turned into queries, with an accuracy test that runs them, show the team how far to trust the results.</p></li></ul>
+  </div>
+</section><section id="proof" class="section pg-sec" aria-labelledby="proof-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">Proof from real work</p>
@@ -301,34 +362,31 @@
         <p class="pg-proj__meta">AI and documents</p>
         <h3 class="pg-proj__title" id="pf-obligation-management-system">Obligation Management System</h3>
         <p class="pg-proj__blurb">Reads regulatory PDFs and lists every obligation, each linked to the exact highlighted passage. 97.2% of 1,266 records located.</p>
-        <p class="pg-proj__stat"><span class="pg-proj__num">97.2% of 1,266</span><span class="pg-proj__statlabel">Records linked to an exact passage</span></p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> Lists the duties in regulatory PDFs, each with a word-for-word quote. Of 1,266 production records, 97.2% link to an exact passage.</p>
         <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/obligation-management-system/">Read case study<span class="sr-only">: Obligation Management System</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
       </article><article class="card pg-proof" data-tone="cyan" data-tilt data-reveal style="--i:1" aria-labelledby="pf-ams-ai-finding-engine">
         <p class="pg-proj__meta">AI and backend</p>
         <h3 class="pg-proj__title" id="pf-ams-ai-finding-engine"><span class="ai">AI</span> Audit Finding Drafting Engine</h3>
         <p class="pg-proj__blurb">Turns short audit notes into three draft findings, with code that blocks any invented fact. Drafts whole spreadsheets in bulk.</p>
-        <p class="pg-proj__stat"><span class="pg-proj__num">7.9 minutes to 16.9 seconds</span><span class="pg-proj__statlabel">Time per request (about 28 times faster)</span></p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> Drafts three versions of each audit finding from short notes, and code rejects invented figures, dates and owners: 0 invented facts across 27 checked draft versions.</p>
         <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/ams-ai-finding-engine/">Read case study<span class="sr-only">: AI Audit Finding Drafting Engine</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
-      </article><article class="card pg-proof" data-tone="blue" data-tilt data-reveal style="--i:2" aria-labelledby="pf-finacle-text-to-sql">
+      </article><article class="card pg-proof" data-tone="blue" data-tilt data-reveal style="--i:2" aria-labelledby="pf-core-banking-text-to-sql">
         <p class="pg-proj__meta">AI and data</p>
-        <h3 class="pg-proj__title" id="pf-finacle-text-to-sql">Core-Banking Text-to-SQL Assistant</h3>
+        <h3 class="pg-proj__title" id="pf-core-banking-text-to-sql">Core-Banking Text-to-SQL Assistant</h3>
         <p class="pg-proj__blurb">Turns plain questions into database queries for core-banking reports, on the bank's own servers, with a self-correcting loop.</p>
-        <p class="pg-proj__stat"><span class="pg-proj__num">34% to 54%</span><span class="pg-proj__statlabel">Accounts found (recall)</span></p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> Plain questions become queries for a bank's database. I built the accuracy test and self-correction loop behind accounts found rising from 34% to 54%.</p>
         <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/core-banking-text-to-sql/">Read case study<span class="sr-only">: Core-Banking Text-to-SQL Assistant</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
+      </article><article class="card pg-proof" data-tone="cyan" data-tilt data-reveal style="--i:3" aria-labelledby="pf-ai-rag-healthcare-assistant">
+        <p class="pg-proj__meta">AI chatbot</p>
+        <h3 class="pg-proj__title" id="pf-ai-rag-healthcare-assistant">Healthcare Policy Chatbot</h3>
+        <p class="pg-proj__blurb">A chatbot over healthcare policy documents that cites its source, or says it does not know.</p>
+        <p class="pg-proj__why"><strong>Why it is evidence:</strong> Answers questions from six sample policy documents, with the source passage on every answer and &quot;not found&quot; when the documents are silent.</p>
+        <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/ai-rag-healthcare-assistant/">Read case study<span class="sr-only">: Healthcare Policy Chatbot</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
       </article></div>
     
-    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../projects/">See all case studies <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../projects/">See all case studies <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../../projects/#by-need">Browse work by business need <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
   </div>
-</section><section id="tools" class="section pg-sec" aria-labelledby="tools-h">
-  <div class="container">
-    <header class="section__head" data-reveal>
-      <p class="eyebrow">Tools</p>
-      <h2 id="tools-h" class="section__title">Tools I use <span class="hl hl--blue">for this</span></h2>
-      
-    </header>
-<div data-reveal><ul class="tags pg-tools" role="list" aria-label="Tools used for this service" data-tone="purple"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Pydantic</li><li class="tag">PyMuPDF</li><li class="tag">Local AI models (Ollama, vLLM)</li><li class="tag">RAG (answers from documents)</li><li class="tag">sqlglot</li><li class="tag">React</li><li class="tag">Docker</li></ul></div>
-  </div>
-</section><section id="faq" class="section pg-sec" aria-labelledby="faq-h">
+</section><section id="faq" class="section pg-sec section--tint" aria-labelledby="faq-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">FAQ</p>
@@ -343,29 +401,54 @@
       <div class="pg-qa__a"><p>It depends on the number and variety of your documents, the accuracy you need and where the tool must run. I do not publish a price list. After a short brief and a test on a sample of your files, I suggest a fixed price or hourly billing. We agree it in writing before I start.</p></div>
     </details><details class="pg-qa" id="ai-document-compliance-automation-q3" open data-reveal style="--i:2">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">How accurate is <span class="ai">AI</span> data extraction from PDFs?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>Accuracy is measured on your own files and reported clearly. I build a scoring tool that compares the output with a small set of correct answers from your documents, then fix the mistakes it finds. On one database project, running the generated queries gave the true quality figure.</p></div>
+      <div class="pg-qa__a"><p>Accuracy is measured on your own files and reported plainly. I build a scoring tool that compares the output with a small set of correct answers from your documents, then fix the mistakes it finds. On a regulatory project, 97.2% of 1,266 production records link to an exact passage; that measures traceability, not completeness.</p></div>
     </details><details class="pg-qa" id="ai-document-compliance-automation-q4" open data-reveal style="--i:3">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Can my documents stay on our own servers?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>Yes, and that is a common requirement. Several systems I work on use AI models hosted on the client's own servers, so documents, prompts and usage records stay on the machine. During planning we check what hardware is available, because larger models need stronger machines.</p></div>
     </details><details class="pg-qa" id="ai-document-compliance-automation-q5" open data-reveal style="--i:4">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">How do you stop <span class="ai">AI</span> from adding invented details?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>With checks in code, not just instructions in a prompt. In a drafting service I built, any figure, date or owner that is not in the source note causes the draft to be rejected automatically. Reviewers can still accept, edit or reject every draft that remains.</p></div>
+      <div class="pg-qa__a"><p>With checks in code, not just instructions in a prompt. In the audit drafting service I built, any figure, date or owner that is not in the source note causes the draft to be rejected automatically. In 27 checked draft versions, a small sample, I found no invented facts. A reviewer still accepts, edits or rejects every draft.</p></div>
     </details><details class="pg-qa" id="ai-document-compliance-automation-q6" open data-reveal style="--i:4">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Can this connect to our existing product?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>Yes. I connected an AI drafting service to a live product built with Spring Boot and React. It runs as a separate FastAPI service. There is a clear agreement about the data it sends and receives. The main product and the new service can be updated separately.</p></div>
+    </details><details class="pg-qa" id="ai-document-compliance-automation-q7" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Will the <span class="ai">AI</span> find every item in a long document?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>No. In a controlled comparison on documents held back from tuning, recall (how many of the real obligations were found) rose from 32% to 69% on Basel III rules and from 69% to 82% on KYC (know-your-customer) rules. Some are still missed, so every result links to its source and a person reviews the list.</p></div>
+    </details><details class="pg-qa" id="ai-document-compliance-automation-q8" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Can it read scanned pages and invoices?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>PDFs that already contain typed text are the easiest. Scanned pages and photos first need text recognition (OCR), and results depend on scan quality, so I test a sample of your scans before agreeing a plan. My case studies here cover regulatory PDFs, audit notes and a database, not invoices.</p></div>
     </details></div>
   </div>
-</section><section id="related" class="section pg-sec section--tint" aria-labelledby="related-h">
+</section><section id="related" class="section pg-sec" aria-labelledby="related-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">Related</p>
       <h2 id="related-h" class="section__title">Related <span class="hl hl--purple">services</span></h2>
       
     </header>
-<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/llm-rag-development/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-brain-circuit"/></svg></span><span><strong>Freelance chatbot developer</strong><span class="pg-rel__t">Chatbots that answer from your documents and show their sources.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/ai-backend-fastapi-django/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-server"/></svg></span><span><strong>Hire a FastAPI developer</strong><span class="pg-rel__t">FastAPI and Django services with automated tests and clear logs.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
+<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/llm-rag-development/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-brain-circuit"/></svg></span><span><strong>Freelance chatbot developer</strong><span class="pg-rel__t">When your team also wants to ask questions of the same documents in a chat and see the source of each answer.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/ai-backend-fastapi-django/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-server"/></svg></span><span><strong>Hire a FastAPI developer</strong><span class="pg-rel__t">When the extraction service must run as a secure API with background jobs and connect to a product you already run.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
       <li><a class="pg-rel__link" href="../../faq/" data-tone="green"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></span><span><strong>Freelance FAQ</strong><span class="pg-rel__t">Cost, how to start, NDAs and ownership.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
     </ul>
-    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../services/">All services <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../services/">All services <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../../services/#which-service">Which service fits you? <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+  </div>
+</section><section id="ask" class="section pg-sec pg-ask" aria-labelledby="ask-h">
+  <div class="container">
+    <div class="pg-ask__box panel" data-tone="cyan" data-reveal>
+      <div class="pg-ask__text">
+        <p class="eyebrow">Ask me</p>
+        <h2 id="ask-h" class="pg-ask__title">Have a question about document ai, or your own idea?</h2>
+        <p class="pg-ask__lead">Type your question below. The contact form opens with your question and this page already filled in, so you only add your name and email.</p>
+      </div>
+      <form class="pg-ask__form" action="../../contact/#hire" method="get">
+        <input type="hidden" name="topic" value="ai-document-compliance-automation">
+        <input type="hidden" name="ref" value="services/ai-document-compliance-automation/">
+        <input type="hidden" name="about" value="Document AI">
+        <label class="sr-only" for="ask-q">Your question</label>
+        <input class="input pg-ask__input" id="ask-q" name="q" type="text" maxlength="300" autocomplete="off" enterkeyhint="send" placeholder="Can you list the obligations in our regulatory PDFs?">
+        <button class="btn btn--solid btn--glow" type="submit">Ask me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></button>
+      </form>
+      <ul class="pg-ask__chips" role="list" aria-label="Questions people often ask"><li><a class="pg-ask__chip" href="../../contact/?topic=ai-document-compliance-automation&ref=services/ai-document-compliance-automation/&about=Document%20AI&q=Can%20you%20list%20the%20obligations%20in%20our%20regulatory%20PDFs%3F#hire">Can you list the obligations in our regulatory PDFs?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=ai-document-compliance-automation&ref=services/ai-document-compliance-automation/&about=Document%20AI&q=How%20do%20you%20check%20an%20AI%20result%20against%20the%20source%3F#hire">How do you check an AI result against the source?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=ai-document-compliance-automation&ref=services/ai-document-compliance-automation/&about=Document%20AI&q=How%20would%20you%20measure%20accuracy%20on%20our%20own%20documents%3F#hire">How would you measure accuracy on our own documents?</a></li></ul>
+    </div>
   </div>
 </section><section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
   <div class="container">
@@ -414,21 +497,7 @@
       </div>
 
       <div class="footer__cols">
-        <nav class="footer__col" aria-labelledby="footer-pages-h">
-          <p class="footer__h" id="footer-pages-h">Pages</p>
-          <ul class="footer__links">
-            <li><a href="../../">Home</a></li>
-            <li><a href="../../projects/">Projects</a></li>
-            <li><a href="../../services/">Services</a></li>
-            <li><a href="../../about/">About</a></li>
-            <li><a href="../../about/#experience">Experience</a></li>
-            <li><a href="../../resume/">Resume</a></li>
-            <li><a href="../../faq/">FAQ</a></li>
-            <li><a href="../../contact/">Contact</a></li>
-          </ul>
-        </nav>
-
-        <nav class="footer__col footer__col--wide" aria-labelledby="footer-services-h">
+        <nav class="footer__col footer__col--services" aria-labelledby="footer-services-h">
           <p class="footer__h" id="footer-services-h">Services</p>
           <ul class="footer__links">
             <li><a href="../../services/llm-rag-development/">AI chatbot development</a></li>
@@ -440,14 +509,36 @@
           </ul>
         </nav>
 
-        <nav class="footer__col" aria-labelledby="footer-work-h">
+        <nav class="footer__col footer__col--work" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
+            <li><a href="../../projects/advanced-cctv-analytics/">CCTV analytics in Python</a></li>
+            <li><a href="../../projects/speech-emotion-recognition/">Speech emotion recognition</a></li>
+            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
+            <li><a href="../../projects/obligation-management-system/">Regulatory obligation extraction</a></li>
+            <li><a href="../../projects/ams-ai-finding-engine/">AI audit finding generator</a></li>
+            <li><a href="../../projects/core-banking-text-to-sql/">Text-to-SQL for banking</a></li>
             <li><a href="../../projects/agentic-honeypot/">AI scam honeypot</a></li>
+            <li><a href="../../projects/whatsapp-ai-agent-platform/">WhatsApp AI agent platform</a></li>
             <li><a href="../../projects/deepfake-video-detection/">Deepfake video detection</a></li>
+            <li><a href="../../projects/spam-classifier/">SMS spam classifier</a></li>
             <li><a href="../../projects/">All projects</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__col footer__col--pages" aria-labelledby="footer-pages-h">
+          <p class="footer__h" id="footer-pages-h">Pages</p>
+          <ul class="footer__links">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../projects/">Projects</a></li>
+            <li><a href="../../services/">Services</a></li>
+            <li><a href="../../about/">About</a></li>
+            <li><a href="../../about/#experience">Experience</a></li>
+            <li><a href="../../resume/">Resume</a></li>
+            <li><a href="../../faq/">FAQ</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+            <li><a href="../../contact/#book">Book a call</a></li>
           </ul>
         </nav>
       </div>
@@ -466,10 +557,20 @@
 
   <div class="footer__ghost" aria-hidden="true"></div>
 
-  <!-- floating "Hire me" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js) -->
+  <!-- floating "Let's talk" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js).
+       Without JavaScript it is a plain link to the contact form; with JavaScript it opens the small menu of ways to connect (content.connect). -->
   <div class="fab-wrap contact-fab">
-    <a class="fab" href="../../contact/#hire" aria-label="Hire me"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
-    <div class="fab-tip" aria-hidden="true">Hire me</div>
+    <div class="connect" id="connect-menu" hidden>
+      <p class="connect__h" id="connect-h">Let&rsquo;s talk</p>
+      <ul class="connect__list" aria-labelledby="connect-h">
+            <li><a class="connect__item" href="../../contact/#book"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><span><strong>Book a call</strong><small>Pick a day and time</small></span></a></li>
+            <li><a class="connect__item" href="../../contact/#hire"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg><span><strong>Send a brief</strong><small>Tell me what you need</small></span></a></li>
+            <li><a class="connect__item" href="https://wa.me/919920644655?text=Hi%20Shaunak%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg><span><strong>WhatsApp</strong><small>Message me directly</small></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="connect__item" href="mailto:shaunak.chorge@gmail.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span><strong>Email</strong><small>Write to me</small></span></a></li>
+      </ul>
+    </div>
+    <a class="fab" href="../../contact/#hire" aria-label="Hire me" data-connect-toggle><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></a>
+    <div class="fab-tip" aria-hidden="true">Let&rsquo;s talk</div>
   </div>
 </footer>
 
@@ -506,10 +607,12 @@
     <symbol id="i-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></symbol>
     <symbol id="i-scan-eye" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="1"/><path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0"/></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
     <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
     <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
     <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
     <symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
     <symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
     <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
@@ -520,9 +623,9 @@
   </svg>
 
   <script defer src="../../assets/dist/js/core.min.js?v=d41b0d5b"></script>
-  <script defer src="../../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
+  <script defer src="../../assets/dist/js/contact.min.js?v=e6aee63a"></script>
   <script defer src="../../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
-  <script defer src="../../assets/dist/js/pages.min.js?v=efc0e441"></script>
+  <script defer src="../../assets/dist/js/fx.min.js?v=bb37bfa8"></script>
+  <script defer src="../../assets/dist/js/pages.min.js?v=514d4156"></script>
 </body>
 </html>

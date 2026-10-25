@@ -87,7 +87,7 @@ ${feat.map(p => `<p class="pj"><b>${E(p.title)}.</b> ${E(p.card_blurb)}</p>`).jo
     <h2>Education</h2>
     <p><b>${E(edu.degree)}, ${E(edu.year)}</b></p>
     <p>${E(edu.institution)}</p>
-    <p class="muted">Subjects: ${E(edu.coursework.join(', '))}</p>
+    ${edu.activities && edu.activities.length ? `<p class="muted">${E(edu.activities.join(', '))}</p>` : ''}
   </div>
   <div>
     <h2>Awards</h2>

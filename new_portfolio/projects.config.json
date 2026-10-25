@@ -6,7 +6,7 @@
     "observable-ai-backend",
     "obligation-management-system",
     "ams-ai-finding-engine",
-    "finacle-text-to-sql",
+    "core-banking-text-to-sql",
     "agentic-honeypot",
     "whatsapp-ai-agent-platform",
     "deepfake-video-detection",
@@ -26,15 +26,17 @@
     [9, 9, 11, 12]
   ],
   "casestudy": [
-    "ams-ai-finding-engine",
-    "obligation-management-system",
-    "finacle-text-to-sql",
     "ai-rag-healthcare-assistant",
-    "agentic-honeypot",
     "advanced-cctv-analytics",
     "speech-emotion-recognition",
+    "observable-ai-backend",
+    "obligation-management-system",
+    "ams-ai-finding-engine",
+    "core-banking-text-to-sql",
+    "agentic-honeypot",
+    "whatsapp-ai-agent-platform",
     "deepfake-video-detection",
-    "observable-ai-backend"
+    "spam-classifier"
   ],
   "personal": [
     "house-price-predictor",
@@ -48,12 +50,6 @@
     "tetris-raylib-cpp",
     "password-generator",
     "django-box-selection-api"
-  ],
-  "footer_work": [
-    "observable-ai-backend",
-    "ai-rag-healthcare-assistant",
-    "agentic-honeypot",
-    "deepfake-video-detection"
   ],
   "resume_featured": [
     "ams-ai-finding-engine",

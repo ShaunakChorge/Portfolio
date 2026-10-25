@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=99f76e8a">
+  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=d92fd1cd">
 
 <script type="application/ld+json">
 {
@@ -64,7 +64,12 @@
       },
       "mainEntity": {
         "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/agentic-honeypot/#project"
-      }
+      },
+      "relatedLink": [
+        "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/spam-classifier/",
+        "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/whatsapp-ai-agent-platform/",
+        "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/deepfake-video-detection/"
+      ]
     },
     {
       "@type": "SoftwareSourceCode",
@@ -148,7 +153,7 @@
           "name": "What is an AI honeypot?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "An AI honeypot is a decoy that looks like an easy target, so attackers waste their time on it and reveal how they work. Here an AI persona plays a victim in a chat and keeps a scammer talking. It saves the payment IDs, links and phone numbers the scammer shares for later study."
+            "text": "An AI honeypot is a decoy that looks like an easy target, so attackers waste their time on it and reveal how they work. Here an AI persona plays a victim in a chat and keeps a scammer talking. It records the payment IDs, links and phone numbers the scammer shares, ready for study."
           }
         },
         {
@@ -164,7 +169,7 @@
           "name": "Who built which part?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It was co-built with Prasanna Patil. My side was hardening (making it safe against misuse) and the AI layer. That included the filter for injection attempts, the request limiter, the move from Gemini to Groq and the persona prompts. Prasanna wrote the first version, the Docker setup and the README."
+            "text": "It was co-built with Prasanna Patil. Prasanna wrote the first version, the Docker setup and the README. I added the injection filter and the request limiter, moved the AI from Gemini to Groq, and rewrote the persona prompts and the link and phone patterns. Of the 19 changes in the shared history, I wrote 4 and merged 4."
           }
         },
         {
@@ -172,7 +177,31 @@
           "name": "How well does it resist prompt injection?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It has a keyword filter and a request limiter. That is a first line of defence, not a complete solution, because a determined attacker can word a trick in ways a keyword list misses. A client project would add a proper test suite of attack attempts."
+            "text": "It has a keyword filter for five phrases, such as \"ignore previous instructions\", and a request limiter. On a match, the bot sends a canned reply and the text never reaches the model. That is a first line of defence, not a complete solution, because a determined attacker can reword a trick. A client project would add attack tests."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What details does the honeypot record from a scammer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It records UPI IDs, links and phone numbers found in the scammer's messages. Each record keeps its type, the value, a fixed confidence level and the turn where it appeared. It does not look for bank account numbers or card numbers. Records stay in server memory until the server restarts, and the dashboard shows them as they arrive."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the bot remember a conversation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Each conversation is stored in server memory under its ID, with every message, the scam score, the current style and the details found. For each reply the AI model sees the last 10 messages. Because the store is in memory, a restart clears everything. A client version would use a database."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the honeypot report scammers anywhere?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Apart from the request to the AI model, it makes no outgoing calls. The collected details stay in the reply it returns, in server memory and on the dashboard. Sending them to a fraud team, a block list or a case system would be an addition I can build for a client."
           }
         }
       ]
@@ -221,10 +250,10 @@
         </nav>
 
         <div class="site-header__tools">
+          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
           </button>
-          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
             <span class="burger__lines" aria-hidden="true"><i></i><i></i><i></i></span>
           </button>
@@ -268,7 +297,7 @@
       <div class="pg-head__aside"><div class="pg-casevis"><div class="pv" data-visual="chat" data-variant="agentic-honeypot" data-tone="cyan" aria-hidden="true"></div></div></div>
     </div>
   </div>
-</section><section id="at-a-glance" class="section pg-sec section--tint" aria-labelledby="at-a-glance-h">
+</section><nav class="pg-toc" aria-label="On this page"><div class="container"><ul class="pg-toc__list" role="list"><li><a href="#at-a-glance">Key facts</a></li><li><a href="#overview">Overview</a></li><li><a href="#story">The problem</a></li><li><a href="#my-role">My role</a></li><li><a href="#how-it-works">How it works</a></li><li><a href="#decisions">Decisions</a></li><li><a href="#results">Results</a></li><li><a href="#where-it-fits">Where it fits</a></li><li><a href="#extensions">Extensions</a></li><li><a href="#faq">FAQ</a></li><li><a href="#related">Related</a></li><li><a href="#ask">Ask a question</a></li></ul></div></nav><section id="at-a-glance" class="section pg-sec section--tint" aria-labelledby="at-a-glance-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">At a glance</p>
@@ -282,7 +311,16 @@
       <ul class="pg-metrics" role="list" data-reveal-group><li class="pg-metric" data-tone="cyan" style="--i:0"><span class="pg-metric__v">4 written, 4 merged</span><span class="pg-metric__l">My contributions (19 changes in total)</span></li><li class="pg-metric" data-tone="cyan" style="--i:1"><span class="pg-metric__v">1 per second, bursts of 5</span><span class="pg-metric__l">Request limit per visitor</span></li><li class="pg-metric" data-tone="cyan" style="--i:2"><span class="pg-metric__v">Last 10 messages</span><span class="pg-metric__l">Conversation memory per reply</span></li></ul>
     </div>
   </div>
-</section><section id="story" class="section pg-sec" aria-labelledby="story-h">
+</section><section id="overview" class="section pg-sec" aria-labelledby="overview-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Overview</p>
+      <h2 id="overview-h" class="section__title">Why this <span class="hl hl--blue">matters</span></h2>
+      
+    </header>
+<div class="panel pg-context" data-tone="cyan" data-reveal><p>Banks, payment apps, telecom firms and messaging platforms face the same pattern. Scammers message many people at once, and each reply, click or payment costs a real person money and costs the business support time and trust. Blocking one number changes little, because the scammer moves to the next. What is usually missing is a record of how the scam works.</p><p>A good result is a safe place where a scammer can be kept talking for as long as possible, while the business collects the payment IDs, links and phone numbers the scammer shares. That record can feed block lists and investigations. This case study covers a hackathon prototype of that idea, built with a co-builder, and says clearly who built which part.</p></div>
+  </div>
+</section><section id="story" class="section pg-sec section--tint" aria-labelledby="story-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">The story</p>
@@ -290,8 +328,22 @@
       
     </header>
 <div class="pg-two">
-      <div class="panel" data-tone="cyan" data-reveal><h3 class="pg-panel__h">The problem</h3><p>A blocked scammer simply tries the next number, and nobody learns how the scam works. Keeping scammers busy with a bot protects real people for as long as it lasts and leaves a record of exactly what they ask for.</p></div>
-      <div class="panel" data-tone="cyan" data-reveal style="--i:1"><h3 class="pg-panel__h">What I built</h3><p>Each incoming message is scored for scam signals. A rule-based selector then changes the bot's style: passive at first, vulnerable when scam risk climbs, stalling once enough details are collected. An AI persona served by Groq writes the replies. Payment and contact details are pulled out with pattern matching and shown on a live dashboard.</p></div>
+      <div class="panel" data-tone="cyan" data-reveal><h3 class="pg-panel__h">The problem</h3><p>A blocked scammer just tries the next number, and nobody learns how the scam works. A bot that keeps scammers busy protects real people for as long as the chat lasts and leaves a record of exactly what the scammers ask for. Without that record, a fraud team may learn about a scam only after someone reports a loss.</p></div>
+      <div class="panel" data-tone="cyan" data-reveal style="--i:1"><h3 class="pg-panel__h">What I built</h3><p>The system is a FastAPI service with a React dashboard. It scores every incoming message for scam signals. Separately, a rule-based selector sets the bot's style: passive at first, vulnerable once a risk level (raised by shouting or very short messages) passes a limit, and stalling once enough details are collected. A persona prompt drives an AI model on Groq, which writes each reply from the last 10 messages. Pattern matching pulls out payment and contact details, and the live dashboard shows them. Prasanna Patil wrote the first version. I added the safety layer, moved the AI to Groq and rewrote the persona prompts and the link and phone patterns.</p></div>
+    </div>
+    <h3 class="pg-subh" data-reveal>What made it hard</h3>
+      <ol class="pg-challenges" data-reveal-group><li class="pg-challenge" data-tone="cyan" style="--i:0"><span class="pg-challenge__n" aria-hidden="true">01</span><div><h4 class="pg-challenge__t">Staying believable</h4><p>A scammer may test whether a bot is on the other end. The persona must reply in short, casual messages, stay in character for many turns and never admit to being an AI.</p></div></li><li class="pg-challenge" data-tone="cyan" style="--i:1"><span class="pg-challenge__n" aria-hidden="true">02</span><div><h4 class="pg-challenge__t">Hostile and abusive input</h4><p>The other side is a scammer, so messages may try to hijack the AI, for example with &quot;ignore previous instructions&quot;, or flood the server. A cheap first line of defence must act before any message reaches the model.</p></div></li><li class="pg-challenge" data-tone="cyan" style="--i:2"><span class="pg-challenge__n" aria-hidden="true">03</span><div><h4 class="pg-challenge__t">Messy payment details</h4><p>UPI IDs, links and phone numbers can be written in many forms, such as a link with no &quot;http&quot; or a number with spaces. A pattern wide enough to catch them will also catch some look-alikes.</p></div></li><li class="pg-challenge" data-tone="cyan" style="--i:3"><span class="pg-challenge__n" aria-hidden="true">04</span><div><h4 class="pg-challenge__t">Two builders, one codebase</h4><p>The 18 build commits in the shared history fall on two days. Two people worked on one codebase, so I used separate branches that were merged back through pull requests.</p></div></li></ol>
+  </div>
+</section><section id="my-role" class="section pg-sec" aria-labelledby="my-role-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">My role</p>
+      <h2 id="my-role-h" class="section__title">My role in <span class="hl hl--magenta">the build</span></h2>
+      
+    </header>
+<div class="pg-two">
+      <div class="panel" data-tone="cyan" data-reveal><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-code"/></svg> My part</h3><ul class="dot-list"><li>A filter for prompt-injection phrases that answers with a canned confused reply, and a request limiter of 1 per second per visitor with bursts of 5.</li><li>Moving the reply model from Gemini to Groq, including how the last 10 messages are passed to it.</li><li>Rewriting the persona prompts, and the patterns that pick out phone numbers and web addresses.</li><li>Small dashboard changes: it now sends the access key and no longer names a model, and its build tools moved to Vite 6.</li></ul></div>
+      <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-layers"/></svg> Context and credits</h3><ul class="dot-list"><li>Prasanna Patil wrote the first version: scam scoring, the style selector, conversation memory, the detail extractor, the API and the first dashboard, plus the Docker setup and the README.</li><li>It is a hackathon prototype. In the shared commit history, 18 of the 19 changes fall on two days; the last, a licence file, came months later.</li></ul></div>
     </div>
   </div>
 </section><section id="how-it-works" class="section pg-sec section--tint" aria-labelledby="how-it-works-h">
@@ -301,16 +353,39 @@
       <h2 id="how-it-works-h" class="section__title">How the <span class="ai">AI</span> plays the <span class="hl hl--blue">victim</span></h2>
       
     </header>
-<ol class="pg-arch" data-reveal-group><li class="pg-arch__item" data-tone="cyan" style="--i:0"><span class="pg-arch__n" aria-hidden="true">01</span><p>A FastAPI backend scores each message against known scam signals</p></li><li class="pg-arch__item" data-tone="cyan" style="--i:1"><span class="pg-arch__n" aria-hidden="true">02</span><p>A rule-based selector moves the bot through four styles: passive, engaged, vulnerable and stalling</p></li><li class="pg-arch__item" data-tone="cyan" style="--i:2"><span class="pg-arch__n" aria-hidden="true">03</span><p>A persona written by an AI model on Groq replies, and sees the last 10 messages</p></li><li class="pg-arch__item" data-tone="cyan" style="--i:3"><span class="pg-arch__n" aria-hidden="true">04</span><p>Pattern matching pulls out UPI IDs, links and phone numbers, each with a fixed confidence level per pattern type</p></li><li class="pg-arch__item" data-tone="cyan" style="--i:4"><span class="pg-arch__n" aria-hidden="true">05</span><p>A filter for prompt-injection attempts and a per-visitor request limiter</p></li><li class="pg-arch__item" data-tone="cyan" style="--i:5"><span class="pg-arch__n" aria-hidden="true">06</span><p>A live React dashboard, interactive API documentation (Scalar) and a Docker setup</p></li></ol>
+<ol class="pg-flow" data-tone="cyan" aria-label="Pipeline, step by step" data-reveal-group><li class="pg-flow__node" style="--i:0"><span class="pg-flow__n" aria-hidden="true">01</span><strong class="pg-flow__t">Message in</strong><span class="pg-flow__d">scammer text and conversation ID</span></li><li class="pg-flow__node" style="--i:1"><span class="pg-flow__n" aria-hidden="true">02</span><strong class="pg-flow__t">Safety checks</strong><span class="pg-flow__d">injection filter and request limit</span></li><li class="pg-flow__node" style="--i:2"><span class="pg-flow__n" aria-hidden="true">03</span><strong class="pg-flow__t">Score and style</strong><span class="pg-flow__d">signals, risk, one of four styles</span></li><li class="pg-flow__node" style="--i:3"><span class="pg-flow__n" aria-hidden="true">04</span><strong class="pg-flow__t">Persona reply</strong><span class="pg-flow__d">Groq model, last 10 messages</span></li><li class="pg-flow__node" style="--i:4"><span class="pg-flow__n" aria-hidden="true">05</span><strong class="pg-flow__t">Details saved</strong><span class="pg-flow__d">UPI IDs, links, phone numbers</span></li><li class="pg-flow__node" style="--i:5"><span class="pg-flow__n" aria-hidden="true">06</span><strong class="pg-flow__t">Dashboard</strong><span class="pg-flow__d">live view of chat and details</span></li></ol>
+    <ol class="pg-arch" data-reveal-group><li class="pg-arch__item" data-tone="cyan" style="--i:0"><span class="pg-arch__n" aria-hidden="true">01</span><p>Intake, from Prasanna's first version. A FastAPI endpoint takes a conversation ID and a message, as text or a small JSON object, and needs an access key in a request header. Interactive API documentation (Scalar) is served alongside it.</p></li><li class="pg-arch__item" data-tone="cyan" style="--i:1"><span class="pg-arch__n" aria-hidden="true">02</span><p>Safety layer, added by me. A filter checks for five known injection phrases and, on a match, sends a canned confused reply and does not store the message. A limiter gives each visitor address 1 request per second, with bursts of 5, and refuses the rest with HTTP 429.</p></li><li class="pg-arch__item" data-tone="cyan" style="--i:2"><span class="pg-arch__n" aria-hidden="true">03</span><p>Scam scoring, from Prasanna's first version. 21 keyword patterns, such as lottery, tax, UPI and arrest, each add 0.2 to a message's score. At 0.7 or more the conversation is flagged, and the flag stays. The bot replies either way.</p></li><li class="pg-arch__item" data-tone="cyan" style="--i:3"><span class="pg-arch__n" aria-hidden="true">04</span><p>Style selection, from Prasanna's first version. A rule-based selector picks one of four styles: passive on the first message, engaged after that, vulnerable once a running risk level passes 0.6, and stalling once more than three details are collected. Shouting or very short messages raise the risk level.</p></li><li class="pg-arch__item" data-tone="cyan" style="--i:4"><span class="pg-arch__n" aria-hidden="true">05</span><p>Persona, memory and model, shared. Each conversation is kept in server memory under its ID. A persona prompt that I rewrote, plus the current style, goes to a model hosted on Groq with the last 10 messages. I moved this step from Gemini to Groq.</p></li><li class="pg-arch__item" data-tone="cyan" style="--i:5"><span class="pg-arch__n" aria-hidden="true">06</span><p>Detail extraction, first version by Prasanna, link and phone patterns widened by me. Patterns pick UPI IDs, links and phone numbers out of each incoming message. Each record keeps its type, value, a fixed confidence (0.9, 0.95 and 0.8) and the turn it appeared in.</p></li><li class="pg-arch__item" data-tone="cyan" style="--i:5"><span class="pg-arch__n" aria-hidden="true">07</span><p>Dashboard and delivery. Prasanna built the React dashboard, the Docker setup and the README. The dashboard shows the chat, the status, the current style, the collected details and the matched signals. I made small changes to it.</p></li></ol>
   </div>
-</section><section id="results" class="section pg-sec" aria-labelledby="results-h">
+</section><section id="decisions" class="section pg-sec" aria-labelledby="decisions-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">Decisions</p>
+      <h2 id="decisions-h" class="section__title">Design decisions and <span class="hl hl--purple">trade-offs</span></h2>
+      
+    </header>
+<ul class="pg-decisions" role="list" data-reveal-group><li class="pg-decision" data-tone="cyan" style="--i:0"><h3 class="pg-decision__t">Answer injection attempts with a canned reply</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>When a message contains an injection phrase, the bot sends one of four canned confused replies and skips the AI model, instead of returning an error.</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>The injected text never reaches the model, and the other side still gets an ordinary reply, not an error. A keyword list is only a first line of defence, as the limits section says.</p></li><li class="pg-decision" data-tone="cyan" style="--i:1"><h3 class="pg-decision__t">A token bucket for the request limit</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>I used a token bucket (an allowance that refills over time) for each visitor address: 1 request per second, with bursts of 5.</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>A quick burst of messages passes, but a sustained flood does not. The limiter is small, needs no extra service, and refused requests get the standard HTTP 429 answer.</p></li><li class="pg-decision" data-tone="cyan" style="--i:2"><h3 class="pg-decision__t">A short, casual, slightly lazy persona</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>I rewrote the persona prompt so the bot plays a human, replies in one or two casual sentences, never admits to being an AI and is not too eager.</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>The active persona is a student short of cash and keen on quick money; an elderly persona is defined but not used. The prompt aims for a believable young person, sceptical by default, which suits keeping a scammer talking.</p></li><li class="pg-decision" data-tone="cyan" style="--i:3"><h3 class="pg-decision__t">Wider patterns for links and numbers</h3><p class="pg-decision__row"><span class="pg-decision__k">Choice</span>I widened the link pattern to catch web addresses without &quot;http&quot;, and added capture of 10-digit and country-code phone numbers.</p><p class="pg-decision__row"><span class="pg-decision__k">Why</span>A strict pattern misses bare addresses and plain numbers. The cost is false matches, such as an email's domain read as a link or any ten-digit number read as a phone number, so the details are leads for a person to check, not verified facts.</p></li></ul>
+    
+  </div>
+</section><section id="results" class="section pg-sec section--tint" aria-labelledby="results-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">Results</p>
       <h2 id="results-h" class="section__title">What it records for <span class="hl hl--magenta">investigators</span></h2>
       <p class="section__lead">Every number comes with how it was measured. The limits are part of the result.</p>
     </header>
-<div class="panel" data-tone="cyan" data-reveal><ul class="dot-list pg-results"><li>The bot's style changes automatically as scam risk and collected details grow</li><li>UPI IDs, links and phone numbers are saved as structured threat information</li><li>Request limit of 1 per second per visitor, with bursts of 5</li><li>The persona sees the last 10 messages for each reply</li><li>A live dashboard shows warning signals, the current style and the details collected</li></ul></div>
+<div class="pg-two">
+      <div class="panel" data-tone="cyan" data-reveal><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-circle-check"/></svg> Results</h3><ul class="dot-list pg-results"><li>The bot's style changes automatically: passive on the first message, engaged from the second, vulnerable once the risk level passes 0.6, and stalling once more than three details are collected.</li><li>UPI IDs, links and phone numbers are stored as structured threat records: type, value, a fixed confidence (0.9, 0.95 and 0.8) and the turn found. These confidence values are set in the code, not measured accuracy.</li><li>Each visitor address is limited to 1 request per second, with bursts of 5. A request over the limit gets HTTP 429.</li><li>The persona sees the last 10 messages for each reply, while the server keeps the whole conversation in memory under its ID.</li><li>A live dashboard shows warning signals, the current style and the details collected, next to the chat window where the tester plays the scammer.</li><li>Contribution record: of 19 changes in the shared history, I wrote 4 and merged 4 pull requests. The other 11 are Prasanna's, counted from the commit log.</li></ul></div>
+      <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-info"/></svg> Limits to keep in mind</h3><ul class="dot-list pg-results"><li>Detection is keyword based, not semantic. A message needs at least four of the 21 patterns to be flagged, so honest messages can be flagged and new tricks missed. It has not been measured on labelled conversations.</li><li>The injection filter is a keyword list, so it is a first line of defence, not a full defence. The limiter and the conversation memory live in server memory, so they reset on restart and do not work across several servers.</li><li>Patterns can misread: an email address can be recorded as a UPI ID, and a repeated detail is stored again each time. The collected details are not sent anywhere, so there is no report to a bank or an authority.</li><li>This is a hackathon prototype. The repository has no automated test suite, the sample access key and server address are written into the demo code, and if the AI provider fails the reply is an error message.</li></ul></div>
+    </div>
+  </div>
+</section><section id="where-it-fits" class="section pg-sec" aria-labelledby="where-it-fits-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">In a business</p>
+      <h2 id="where-it-fits-h" class="section__title">Where this kind of solution <span class="hl hl--blue">fits</span></h2>
+      <p class="section__lead">Situations where a team could use the same approach. These are examples, not past clients.</p>
+    </header>
+<ul class="pg-uses" role="list" data-reveal-group><li class="pg-use" data-tone="cyan" style="--i:0"><h3 class="pg-use__who">A bank or payments fraud team</h3><p>It wants a safe decoy that scammers can be steered to, so it can collect the payment IDs, links and numbers they use as leads for block lists and investigations.</p></li><li class="pg-use" data-tone="purple" style="--i:1"><h3 class="pg-use__who">A messaging or telecom trust team</h3><p>It wants to study how scam scripts unfold, what scammers ask for and how long they stay engaged, without putting a real customer in the conversation.</p></li><li class="pg-use" data-tone="blue" style="--i:2"><h3 class="pg-use__who">A university or security research lab</h3><p>It needs a controlled decoy to study scammer behaviour, with each message, the bot's style and the collected details visible on one dashboard.</p></li><li class="pg-use" data-tone="magenta" style="--i:3"><h3 class="pg-use__who">A consumer awareness team</h3><p>It wants real examples of how current scams escalate, to train staff and warn customers. That would need conversations saved to a database, which this prototype does not do.</p></li></ul>
   </div>
 </section><section id="extensions" class="section pg-sec section--tint" aria-labelledby="extensions-h">
   <div class="container">
@@ -319,7 +394,7 @@
       <h2 id="extensions-h" class="section__title">What I can add for your <span class="hl">project</span></h2>
       <p class="section__lead">Not part of this project. These are add-ons I can build for a client.</p>
     </header>
-<ul class="grid grid--c3 pg-ext pg-ext--n5" role="list"><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">A learned scam detector with scoring</h3><p>I can add a trained detector alongside the pattern rules and measure it on a labelled set of conversations.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">embeddings</li><li class="tag tag--dashed">scikit-learn</li><li class="tag tag--dashed">labelled test set</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">Memory and tools for the agent</h3><p>I can give the persona longer memory and tools, such as looking up earlier chats with the same sender.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">LangChain agents</li><li class="tag tag--dashed">vector database</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:2"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">Searchable conversation store</h3><p>I can save every conversation and collected detail so analysts can search and export them.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">PostgreSQL</li><li class="tag tag--dashed">full-text search</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">Attack-testing suite</h3><p>I can build automated tests of injection attempts and stronger output checks, going beyond the keyword filter.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">pytest</li><li class="tag tag--dashed">output checks</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">Tracking and analytics dashboards</h3><p>I can add dashboards for chat length, detail-collection rate and AI response time.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">OpenTelemetry</li><li class="tag tag--dashed">Prometheus</li></ul></article></li></ul>
+<ul class="grid grid--c3 pg-ext pg-ext--n5" role="list"><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">A learned scam detector with scoring</h3><p>I can add a trained detector alongside the pattern rules and measure it on a labelled set of conversations.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">embeddings</li><li class="tag tag--dashed">scikit-learn</li><li class="tag tag--dashed">labelled test set</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">Memory and tools for the agent</h3><p>I can give the persona longer memory and tools, such as looking up earlier chats with the same sender.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">LangChain agents</li><li class="tag tag--dashed">vector database</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:2"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">Searchable conversation store</h3><p>I can save every conversation and collected detail so analysts can search and export them, or send them to a fraud team's system.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">PostgreSQL</li><li class="tag tag--dashed">full-text search</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">Attack-testing suite</h3><p>I can build automated tests of injection attempts and stronger output checks, going beyond the keyword filter.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">pytest</li><li class="tag tag--dashed">output checks</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">Tracking and analytics dashboards</h3><p>I can add dashboards for chat length, detail-collection rate and AI response time.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">OpenTelemetry</li><li class="tag tag--dashed">Prometheus</li></ul></article></li></ul>
   </div>
 </section><section id="hire-for" class="section pg-sec" aria-labelledby="hire-for-h">
   <div class="container">
@@ -340,22 +415,75 @@
     </header>
 <div class="pg-qas"><details class="pg-qa" id="agentic-honeypot-q1" open data-reveal>
       <summary class="pg-qa__q"><h3 class="pg-qa__h">What is an <span class="ai">AI</span> honeypot?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>An AI honeypot is a decoy that looks like an easy target, so attackers waste their time on it and reveal how they work. Here an AI persona plays a victim in a chat and keeps a scammer talking. It saves the payment IDs, links and phone numbers the scammer shares for later study.</p></div>
+      <div class="pg-qa__a"><p>An AI honeypot is a decoy that looks like an easy target, so attackers waste their time on it and reveal how they work. Here an AI persona plays a victim in a chat and keeps a scammer talking. It records the payment IDs, links and phone numbers the scammer shares, ready for study.</p></div>
     </details><details class="pg-qa" id="agentic-honeypot-q2" open data-reveal style="--i:1">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">How do you create an <span class="ai">AI</span> agent?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>Give the AI a clear job, a way to read the situation and rules for what it may do. In this project each message is scored for scam signals. A rule-based selector picks one of four styles, and an AI persona on Groq writes the reply. Pattern matching then saves the details it collects.</p></div>
     </details><details class="pg-qa" id="agentic-honeypot-q3" open data-reveal style="--i:2">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Who built which part?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>It was co-built with Prasanna Patil. My side was hardening (making it safe against misuse) and the AI layer. That included the filter for injection attempts, the request limiter, the move from Gemini to Groq and the persona prompts. Prasanna wrote the first version, the Docker setup and the README.</p></div>
+      <div class="pg-qa__a"><p>It was co-built with Prasanna Patil. Prasanna wrote the first version, the Docker setup and the README. I added the injection filter and the request limiter, moved the AI from Gemini to Groq, and rewrote the persona prompts and the link and phone patterns. Of the 19 changes in the shared history, I wrote 4 and merged 4.</p></div>
     </details><details class="pg-qa" id="agentic-honeypot-q4" open data-reveal style="--i:3">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">How well does it resist prompt injection?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>It has a keyword filter and a request limiter. That is a first line of defence, not a complete solution, because a determined attacker can word a trick in ways a keyword list misses. A client project would add a proper test suite of attack attempts.</p></div>
+      <div class="pg-qa__a"><p>It has a keyword filter for five phrases, such as &quot;ignore previous instructions&quot;, and a request limiter. On a match, the bot sends a canned reply and the text never reaches the model. That is a first line of defence, not a complete solution, because a determined attacker can reword a trick. A client project would add attack tests.</p></div>
+    </details><details class="pg-qa" id="agentic-honeypot-q5" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">What details does the honeypot record from a scammer?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>It records UPI IDs, links and phone numbers found in the scammer's messages. Each record keeps its type, the value, a fixed confidence level and the turn where it appeared. It does not look for bank account numbers or card numbers. Records stay in server memory until the server restarts, and the dashboard shows them as they arrive.</p></div>
+    </details><details class="pg-qa" id="agentic-honeypot-q6" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">How does the bot remember a conversation?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>Each conversation is stored in server memory under its ID, with every message, the scam score, the current style and the details found. For each reply the AI model sees the last 10 messages. Because the store is in memory, a restart clears everything. A client version would use a database.</p></div>
+    </details><details class="pg-qa" id="agentic-honeypot-q7" open data-reveal style="--i:4">
+      <summary class="pg-qa__q"><h3 class="pg-qa__h">Does the honeypot report scammers anywhere?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
+      <div class="pg-qa__a"><p>No. Apart from the request to the AI model, it makes no outgoing calls. The collected details stay in the reply it returns, in server memory and on the dashboard. Sending them to a fraud team, a block list or a case system would be an addition I can build for a client.</p></div>
     </details></div>
   </div>
+</section><section id="related" class="section pg-sec" aria-labelledby="related-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">More case studies</p>
+      <h2 id="related-h" class="section__title">Related case studies by <span class="hl hl--purple">business need</span></h2>
+      
+    </header>
+<ul class="pg-relcards" role="list" data-reveal-group><li><a class="pg-relcard" href="../../projects/spam-classifier/" data-tone="purple" style="--i:0">
+      <span class="pg-relcard__cat">Natural language <span class="pg-relcard__origin">Academic</span></span>
+      <strong class="pg-relcard__t">A trained filter for spam messages</strong>
+      <span class="pg-relcard__why">Both fight unwanted and fraudulent messages: the classifier filters them out, while the honeypot keeps scammers busy and records what they reveal.</span>
+      <span class="pg-relcard__go">Read the case study <svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span>
+    </a></li><li><a class="pg-relcard" href="../../projects/whatsapp-ai-agent-platform/" data-tone="blue" style="--i:1">
+      <span class="pg-relcard__cat">Automation <span class="pg-relcard__origin">Client</span></span>
+      <strong class="pg-relcard__t">AI agents that reply on WhatsApp</strong>
+      <span class="pg-relcard__why">Both run automated chat conversations with AI replies and keep a history for each user or session.</span>
+      <span class="pg-relcard__go">Read the case study <svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span>
+    </a></li><li><a class="pg-relcard" href="../../projects/deepfake-video-detection/" data-tone="magenta" style="--i:2">
+      <span class="pg-relcard__cat">Computer vision <span class="pg-relcard__origin">Academic</span></span>
+      <strong class="pg-relcard__t">Frame-by-frame real or fake verdicts</strong>
+      <span class="pg-relcard__why">Both help organisations spot and counter digital deception before it harms real people.</span>
+      <span class="pg-relcard__go">Read the case study <svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span>
+    </a></li></ul>
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../projects/#by-need">Browse all work by business need <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../../projects/">All projects <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
+  </div>
 </section><section class="section pg-sec pg-pnsec" aria-label="More case studies"><div class="container"><nav class="pg-pn" aria-label="More case studies">
-      <a class="pg-pn__link" href="../../projects/ai-rag-healthcare-assistant/" rel="prev" data-reveal><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg><span><small>Previous case study</small><strong>A chatbot that cites its sources</strong></span></a>
-      <a class="pg-pn__link pg-pn__link--next" href="../../projects/advanced-cctv-analytics/" rel="next" data-reveal style="--i:1"><span><small>Next case study</small><strong>Three watchers on one camera feed</strong></span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
-    </nav></div></section><section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
+      <a class="pg-pn__link" href="../../projects/core-banking-text-to-sql/" rel="prev" data-reveal><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg><span><small>Previous case study</small><strong>Turning plain questions into database queries</strong></span></a>
+      <a class="pg-pn__link pg-pn__link--next" href="../../projects/whatsapp-ai-agent-platform/" rel="next" data-reveal style="--i:1"><span><small>Next case study</small><strong>AI agents that reply on WhatsApp</strong></span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+    </nav></div></section><section id="ask" class="section pg-sec pg-ask" aria-labelledby="ask-h">
+  <div class="container">
+    <div class="pg-ask__box panel" data-tone="cyan" data-reveal>
+      <div class="pg-ask__text">
+        <p class="eyebrow">Ask me</p>
+        <h2 id="ask-h" class="pg-ask__title">Have a question about this project, or your own idea?</h2>
+        <p class="pg-ask__lead">Type your question below. The contact form opens with your question and this page already filled in, so you only add your name and email.</p>
+      </div>
+      <form class="pg-ask__form" action="../../contact/#hire" method="get">
+        <input type="hidden" name="topic" value="llm-rag-development">
+        <input type="hidden" name="ref" value="projects/agentic-honeypot/">
+        <input type="hidden" name="about" value="Scam-Catching AI Honeypot">
+        <label class="sr-only" for="ask-q">Your question</label>
+        <input class="input pg-ask__input" id="ask-q" name="q" type="text" maxlength="300" autocomplete="off" enterkeyhint="send" placeholder="Which parts did you build and which did Prasanna build?">
+        <button class="btn btn--solid btn--glow" type="submit">Ask me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></button>
+      </form>
+      <ul class="pg-ask__chips" role="list" aria-label="Questions people often ask"><li><a class="pg-ask__chip" href="../../contact/?topic=llm-rag-development&ref=projects/agentic-honeypot/&about=Scam-Catching%20AI%20Honeypot&q=Which%20parts%20did%20you%20build%20and%20which%20did%20Prasanna%20build%3F#hire">Which parts did you build and which did Prasanna build?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=llm-rag-development&ref=projects/agentic-honeypot/&about=Scam-Catching%20AI%20Honeypot&q=How%20does%20the%20bot%20decide%20what%20to%20say%20next%3F#hire">How does the bot decide what to say next?</a></li><li><a class="pg-ask__chip" href="../../contact/?topic=llm-rag-development&ref=projects/agentic-honeypot/&about=Scam-Catching%20AI%20Honeypot&q=What%20does%20it%20record%2C%20and%20does%20it%20report%20scammers%3F#hire">What does it record, and does it report scammers?</a></li></ul>
+    </div>
+  </div>
+</section><section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
   <div class="container">
     <div class="pg-hire__band" data-reveal="scale">
       <span class="pg-hire__line" aria-hidden="true"></span>
@@ -402,21 +530,7 @@
       </div>
 
       <div class="footer__cols">
-        <nav class="footer__col" aria-labelledby="footer-pages-h">
-          <p class="footer__h" id="footer-pages-h">Pages</p>
-          <ul class="footer__links">
-            <li><a href="../../">Home</a></li>
-            <li><a href="../../projects/">Projects</a></li>
-            <li><a href="../../services/">Services</a></li>
-            <li><a href="../../about/">About</a></li>
-            <li><a href="../../about/#experience">Experience</a></li>
-            <li><a href="../../resume/">Resume</a></li>
-            <li><a href="../../faq/">FAQ</a></li>
-            <li><a href="../../contact/">Contact</a></li>
-          </ul>
-        </nav>
-
-        <nav class="footer__col footer__col--wide" aria-labelledby="footer-services-h">
+        <nav class="footer__col footer__col--services" aria-labelledby="footer-services-h">
           <p class="footer__h" id="footer-services-h">Services</p>
           <ul class="footer__links">
             <li><a href="../../services/llm-rag-development/">AI chatbot development</a></li>
@@ -428,14 +542,36 @@
           </ul>
         </nav>
 
-        <nav class="footer__col" aria-labelledby="footer-work-h">
+        <nav class="footer__col footer__col--work" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
+            <li><a href="../../projects/advanced-cctv-analytics/">CCTV analytics in Python</a></li>
+            <li><a href="../../projects/speech-emotion-recognition/">Speech emotion recognition</a></li>
+            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
+            <li><a href="../../projects/obligation-management-system/">Regulatory obligation extraction</a></li>
+            <li><a href="../../projects/ams-ai-finding-engine/">AI audit finding generator</a></li>
+            <li><a href="../../projects/core-banking-text-to-sql/">Text-to-SQL for banking</a></li>
             <li><a href="../../projects/agentic-honeypot/">AI scam honeypot</a></li>
+            <li><a href="../../projects/whatsapp-ai-agent-platform/">WhatsApp AI agent platform</a></li>
             <li><a href="../../projects/deepfake-video-detection/">Deepfake video detection</a></li>
+            <li><a href="../../projects/spam-classifier/">SMS spam classifier</a></li>
             <li><a href="../../projects/">All projects</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__col footer__col--pages" aria-labelledby="footer-pages-h">
+          <p class="footer__h" id="footer-pages-h">Pages</p>
+          <ul class="footer__links">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../projects/">Projects</a></li>
+            <li><a href="../../services/">Services</a></li>
+            <li><a href="../../about/">About</a></li>
+            <li><a href="../../about/#experience">Experience</a></li>
+            <li><a href="../../resume/">Resume</a></li>
+            <li><a href="../../faq/">FAQ</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+            <li><a href="../../contact/#book">Book a call</a></li>
           </ul>
         </nav>
       </div>
@@ -454,10 +590,20 @@
 
   <div class="footer__ghost" aria-hidden="true"></div>
 
-  <!-- floating "Hire me" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js) -->
+  <!-- floating "Let's talk" button: shown once the first screen has scrolled by, hidden near #contact / this footer and on /contact/ (logic in contact.js).
+       Without JavaScript it is a plain link to the contact form; with JavaScript it opens the small menu of ways to connect (content.connect). -->
   <div class="fab-wrap contact-fab">
-    <a class="fab" href="../../contact/#hire" aria-label="Hire me"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
-    <div class="fab-tip" aria-hidden="true">Hire me</div>
+    <div class="connect" id="connect-menu" hidden>
+      <p class="connect__h" id="connect-h">Let&rsquo;s talk</p>
+      <ul class="connect__list" aria-labelledby="connect-h">
+            <li><a class="connect__item" href="../../contact/#book"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><span><strong>Book a call</strong><small>Pick a day and time</small></span></a></li>
+            <li><a class="connect__item" href="../../contact/#hire"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg><span><strong>Send a brief</strong><small>Tell me what you need</small></span></a></li>
+            <li><a class="connect__item" href="https://wa.me/919920644655?text=Hi%20Shaunak%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg><span><strong>WhatsApp</strong><small>Message me directly</small></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="connect__item" href="mailto:shaunak.chorge@gmail.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span><strong>Email</strong><small>Write to me</small></span></a></li>
+      </ul>
+    </div>
+    <a class="fab" href="../../contact/#hire" aria-label="Hire me" data-connect-toggle><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></a>
+    <div class="fab-tip" aria-hidden="true">Let&rsquo;s talk</div>
   </div>
 </footer>
 
@@ -494,11 +640,13 @@
     <symbol id="i-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></symbol>
     <symbol id="i-scan-eye" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="1"/><path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0"/></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
     <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
     <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
     <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
     <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
     <symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
     <symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
     <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
@@ -509,10 +657,10 @@
   </svg>
 
   <script defer src="../../assets/dist/js/core.min.js?v=d41b0d5b"></script>
-  <script defer src="../../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
+  <script defer src="../../assets/dist/js/contact.min.js?v=e6aee63a"></script>
   <script defer src="../../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
-  <script defer src="../../assets/dist/js/pages.min.js?v=efc0e441"></script>
-  <script defer src="../../assets/dist/js/visuals.min.js?v=53b137f5"></script>
+  <script defer src="../../assets/dist/js/fx.min.js?v=bb37bfa8"></script>
+  <script defer src="../../assets/dist/js/pages.min.js?v=514d4156"></script>
+  <script defer src="../../assets/dist/js/visuals.min.js?v=6bbaf295"></script>
 </body>
 </html>

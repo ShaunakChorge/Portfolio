@@ -3,6 +3,8 @@
      1 project filter chips on /projects/ ([data-filterbar] + [data-filterable] > [data-cat]); a filtered collage flows its tiles into the free cells
      2 ?topic=<service-slug> preselects the project type on /contact/
      3 "Copy template" button on /contact/ ([data-copy-brief])
+     4 the "Send a brief" / "Book a call" tabs on /contact/ ([data-tabs]), opened by #hire or #book
+     5 ?q= ?ref= ?about= : a question asked on a case study or service page is put into the brief form on /contact/
    Classic IIFE, registers through window.Portfolio, no globals.
    ===================================================================== */
 (function () {
@@ -66,7 +68,49 @@
     });
   }
 
-  function init() { initFilter(); initTopic(); initBrief(); }
+  /* ---------- 4 /contact/: the "Send a brief" and "Book a call" tabs (without JavaScript both panels are shown one after the other) ---------- */
+  function initTabs() {
+    var list = qs('[data-tabs]');
+    if (!list) return;
+    var tabs = qsa('[data-tab]', list), panels = { brief: qs('#brief-panel'), book: qs('#book') };
+    if (!tabs.length || !panels.brief || !panels.book) return;
+    Object.keys(panels).forEach(function (k) { panels[k].setAttribute('role', 'tabpanel'); panels[k].setAttribute('aria-labelledby', 'tab-' + k); });
+    function show(name, focus) {
+      tabs.forEach(function (t) { var on = t.getAttribute('data-tab') === name; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; t.classList.toggle('is-on', on); if (on && focus) t.focus(); });
+      Object.keys(panels).forEach(function (k) { panels[k].hidden = k !== name; });
+    }
+    function fromHash(scroll) {
+      var h = win.location.hash;
+      if (h === '#book') { show('book'); if (scroll) panels.book.scrollIntoView({ block: 'start', behavior: P() && P().prefersReducedMotion ? 'auto' : 'smooth' }); }
+      else if (h === '#hire' || h === '#brief-panel') { show('brief'); }
+    }
+    show('brief');
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { show(t.getAttribute('data-tab')); });
+      t.addEventListener('keydown', function (e) {
+        var n = -1;
+        if (e.key === 'ArrowRight') n = (i + 1) % tabs.length; else if (e.key === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length; else if (e.key === 'Home') n = 0; else if (e.key === 'End') n = tabs.length - 1; else return;
+        e.preventDefault(); show(tabs[n].getAttribute('data-tab'), true);
+      });
+    });
+    win.addEventListener('hashchange', function () { fromHash(true); });
+    fromHash(true);
+  }
+
+  /* ---------- 5 /contact/?q=...&ref=...&about=...: a question asked on a case study or service page arrives in the brief form ---------- */
+  function initPrefill() {
+    var msg = qs('#cf-message');
+    if (!msg) return;
+    function param(k) { var m = new RegExp('[?&]' + k + '=([^&#]*)').exec(win.location.search || ''); if (!m) return ''; try { return decodeURIComponent(m[1].replace(/\+/g, ' ')).trim().slice(0, 300); } catch (e) { return ''; } }
+    var q = param('q'), ref = param('ref'), about = param('about');
+    if (!q && !ref) return;
+    if (!msg.value) msg.value = (about ? 'About: ' + about + '\n\n' : '') + (q ? 'My question: ' + q + '\n\n' : '');
+    var page = qs('#cf-page');
+    if (page && ref && !/[^a-z0-9\/_-]/i.test(ref)) { try { page.value = new win.URL('../' + ref, win.location.href).href; } catch (e) { /* ignore */ } }
+    msg.dispatchEvent(new win.Event('input', { bubbles: true }));
+  }
+
+  function init() { initFilter(); initTopic(); initBrief(); initTabs(); initPrefill(); }
   var p = P();
   if (p && typeof p.ready === 'function') p.ready(init);
   else if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', init);

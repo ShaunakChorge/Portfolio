@@ -2,7 +2,7 @@
    NEURAL NEON - contact.js   copy-to-clipboard buttons, the floating "Let's talk" FAB (every page) and the CTA band
    Classic IIFE, registers through window.Portfolio, never throws when markup is missing.
      1 copy-to-clipboard buttons ([data-copy])        -> toast + button state (the copy itself is Portfolio.copy in core.js)
-     2 FAB (.contact-fab, markup in footer.html)      -> shown after the hero, hidden while #contact or the footer is in view
+     2 FAB (.contact-fab, markup in footer.html)      -> shown after the hero, hidden while #contact or the footer is in view; opens the "Let's talk" menu (2b)
      3 CTA band                                       -> rotating border only runs while on screen
    The contact form is in contact-form.js (loaded only on pages that have the form).
    ===================================================================== */
@@ -68,7 +68,7 @@
     var mq = win.matchMedia ? win.matchMedia('(max-width: 767px), (pointer: coarse)') : null;
     var lastY = 0, acc = 0, away = false;
     function setAway(on) {
-      if (on && wrap.contains(doc.activeElement)) return;              /* never hide the control the keyboard user is on */
+      if (on && (wrap.contains(doc.activeElement) || wrap.classList.contains('is-open'))) return;   /* never hide the control the keyboard user is on, or an open menu */
       if (away === on) return;
       away = on;
       wrap.classList.toggle('is-away', on);
@@ -116,6 +116,44 @@
   }
 
   /* =====================================================================
+     2b  the "Let's talk" menu on the FAB: book a call, send a brief, WhatsApp, email (the links are in footer.html; this only opens and closes the box)
+         Without JavaScript the button is a plain link to the contact form.
+     ===================================================================== */
+  function initConnect() {
+    var wrap = qs('.contact-fab'), btn = wrap ? qs('[data-connect-toggle]', wrap) : null, menu = wrap ? qs('#connect-menu', wrap) : null;
+    if (!btn || !menu) return;
+    btn.setAttribute('role', 'button');
+    btn.setAttribute('aria-haspopup', 'true');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', 'connect-menu');
+    btn.setAttribute('aria-label', 'Let’s talk: ways to connect');
+
+    function isOpen() { return !menu.hidden; }
+    function open(byKeyboard) {
+      menu.hidden = false;
+      wrap.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      if (byKeyboard) { var first = qs('a', menu); if (first) first.focus(); }
+    }
+    function close(returnFocus) {
+      if (!isOpen()) return;
+      menu.hidden = true;
+      wrap.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      if (returnFocus) btn.focus();
+    }
+    btn.addEventListener('click', function (e) {
+      if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;   /* a modified click still follows the link */
+      e.preventDefault();
+      if (isOpen()) close(false); else open(e.detail === 0);                              /* detail 0 = opened with the keyboard: move into the menu */
+    });
+    doc.addEventListener('keydown', function (e) { if (e.key === 'Escape' && isOpen()) { e.preventDefault(); close(true); } });
+    doc.addEventListener('pointerdown', function (e) { if (isOpen() && !wrap.contains(e.target)) close(false); });
+    wrap.addEventListener('focusout', function (e) { if (isOpen() && e.relatedTarget && !wrap.contains(e.relatedTarget)) close(false); });
+    menu.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a')) close(false); });
+  }
+
+  /* =====================================================================
      3  CTA band: run the rotating border only while it is on screen
      ===================================================================== */
   function initBand() {
@@ -129,6 +167,7 @@
   function init() {
     initCopy();
     initFab();
+    initConnect();
     initBand();
   }
 

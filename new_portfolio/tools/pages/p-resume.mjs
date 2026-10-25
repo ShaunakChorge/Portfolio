@@ -6,9 +6,11 @@ import {
   esc, ico, tags, btn, pageHead, section, hireBand, hireHref, qaList,
   ctx, crumbNode, webPage, faqNode, PERSON_ID,
 } from './ui.mjs';
-import { certList, awardList, stackTiers } from './p-about.mjs';
+import { credentialSections, stackTiers } from './p-about.mjs';
 
 const WORK_TONE = ['cyan', 'blue', 'purple'];
+/** the link to the document behind a role (an internship certificate or letter), when the owner shared one */
+const docLink = (e, cls) => e.doc ? `<p class="${cls}"><a class="link" href="${esc(e.doc)}" target="_blank" rel="noopener noreferrer">${esc(e.doc_label || 'View certificate')}<span class="sr-only"> for ${esc(e.role)}, ${esc(e.org)} (opens in a new tab)</span></a></p>` : '';
 
 function page() {
   const m = pagesMeta.resume;
@@ -27,33 +29,17 @@ function page() {
         <header class="pg-job__head"><h3 class="pg-job__t">${esc(e.role)}</h3><p class="pg-job__org">${esc(e.org)}</p><p class="pg-job__meta">${esc(e.period)}${e.location ? ` &middot; ${esc(e.location)}` : ''}</p></header>
         <ul class="dot-list pg-job__list" data-tone="${WORK_TONE[i % 3]}">${e.bullets.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
         ${tags(e.tags, { tone: WORK_TONE[i % 3], cls: 'pg-job__tags', label: 'Tools' })}
+        ${docLink(e, 'pg-job__doc')}
       </article>`;
   const exp = section({
     id: 'experience', eyebrow: 'Experience', title: `Work <span class="hl">experience</span>`,
     body: `<div class="pg-jobs">${work.map(job).join('')}</div>
     <h3 class="pg-earlier" data-reveal>Earlier internships and programmes</h3>
-    <ul class="pg-builds" role="list" data-reveal>${prog.map(e => `<li class="pg-builds__row"><p class="pg-builds__t">${esc(e.role)}, ${esc(e.org)}</p><p class="pg-builds__d">${esc(e.period)}${e.bullets.length ? ' &middot; ' + esc(e.bullets.join(' ')) : ''}</p></li>`).join('')}</ul>`,
+    <ul class="pg-builds" role="list" data-reveal>${prog.map(e => `<li class="pg-builds__row"><p class="pg-builds__t">${esc(e.role)}, ${esc(e.org)}</p><p class="pg-builds__d">${esc(e.period)}${e.bullets.length ? ' &middot; ' + esc(e.bullets.join(' ')) : ''}</p>${docLink(e, 'pg-builds__links')}</li>`).join('')}</ul>`,
   });
 
-  const edu = education.filter(e => !e.minor)[0];
-  const minor = education.filter(e => e.minor);
-  const eduSec = section({
-    id: 'education', eyebrow: 'Education', title: `<span class="hl hl--purple">Education</span>`, tint: true,
-    body: `<div class="pg-two">
-      <div class="panel" data-tone="cyan" data-reveal><h3 class="pg-panel__h">${esc(edu.degree)}, ${esc(edu.year)}</h3><p class="pg-plain__t">${esc(edu.institution)}</p><p class="pg-plain__s">${esc(edu.period)}</p>
-        ${tags(edu.coursework, { tone: 'cyan', cls: 'pg-cred__tags', label: 'Coursework' })}</div>
-      <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h">Earlier schooling</h3>
-        <ul class="pg-plain" role="list">${minor.map(e => `<li><span class="pg-plain__t">${esc(e.institution)}</span><span class="pg-plain__s">${esc(e.degree)}, ${esc(e.period)}</span></li>`).join('')}</ul></div>
-    </div>`,
-  });
-
-  const cred = section({
-    id: 'credentials', eyebrow: 'Credentials', title: `Certifications and <span class="hl hl--magenta">awards</span>`,
-    body: `<div class="pg-two">
-      <div class="panel" data-tone="purple" data-reveal><h3 class="pg-panel__h">${ico('award', 'icon--sm')} Certifications</h3>${certList()}</div>
-      <div class="panel" data-tone="magenta" data-reveal style="--i:1"><h3 class="pg-panel__h">${ico('trophy', 'icon--sm')} Awards</h3>${awardList()}</div>
-    </div>`,
-  });
+  const { edu: eduSec, cert, award } = credentialSections({ tintAlt: true });
+  const cred = eduSec + cert + award;
 
   const skillsSec = section({
     id: 'skills', eyebrow: 'Skills', title: `Skills and <span class="hl hl--blue">tools</span>`, tint: true,
@@ -83,7 +69,7 @@ function page() {
   ]);
   return {
     path: m.path, current: 'resume', title: m.title, description: m.description, jsonld,
-    content: head + `<div class="container pg-resume-top">${contact}</div>` + exp + eduSec + cred + skillsSec + proj + faq +
+    content: head + `<div class="container pg-resume-top">${contact}</div>` + exp + cred + skillsSec + proj + faq +
       hireBand({ b, heading: 'Hiring, or have <span class="hl">a project?</span>', text: CTA_TEXT }),
     llms: {
       heading: 'Resume', url, desc: m.description,

@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import { SITE, readContent } from '../lib.mjs';
 import { findBanned } from '../rules.mjs';
 import { loadSelection } from '../selection.mjs';
+import { whatsappHref } from '../connect.mjs';
 
 const c = readContent();
 const p = c.profile;
@@ -27,6 +28,7 @@ const data = {
   name: p.name, role: p.title, tagline: p.tagline,
   loc: p.location, email: p.email, status: p.status_badge.text.replace('@', 'at'), avail: p.availability,
   gh: p.links.github, li: p.links.linkedin, ig: p.links.instagram, resume: p.links.resume_pdf_relative,
+  wa: whatsappHref(), vcard: c.connect.vcard,   // the "Book a call", WhatsApp and contact card actions of the command palette
   bio: p.summary_long.split(/\n+/),
   freelance: p.freelance.line_short,
   degree: `${whoami.education.degree}, ${whoami.education.year}`, school: whoami.education.institution,

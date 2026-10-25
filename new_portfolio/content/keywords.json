@@ -51,7 +51,12 @@
         "computer vision portfolio projects"
       ],
       "questions": [
-        "What are some real world AI project examples?"
+        "What are some real world AI project examples?",
+        "Which projects are client work and which are personal builds?",
+        "Why are the client projects described without names?",
+        "Can I see the code behind these projects?",
+        "How do you separate what you built from what you adapted?",
+        "Are the accuracy numbers on these pages from real tests?"
       ],
       "anchors": {
         "other": [
@@ -73,7 +78,12 @@
       ],
       "questions": [
         "Can AI write audit findings without making things up?",
-        "Could the same approach work on my reports or tickets?"
+        "Could the same approach work on my reports or tickets?",
+        "Why did drafting get faster, from 7.9 minutes to 16.9 seconds?",
+        "What happens when the auditor's note is too short?",
+        "Can it draft a whole audit checklist spreadsheet at once?",
+        "How does it fit into an existing audit product?",
+        "Can it follow our own audit categories and wording?"
       ],
       "anchors": {
         "footer": "AI audit finding generator",
@@ -92,7 +102,11 @@
       "questions": [
         "How do you extract obligations from regulatory documents?",
         "How do you keep the citations accurate?",
-        "Does it only work for one kind of regulation?"
+        "Does it only work for one kind of regulation?",
+        "What counts as an obligation in a regulatory document?",
+        "What does the 97.2% figure actually measure?",
+        "Does it replace the compliance reviewer?",
+        "Where does the AI model run when it reads my documents?"
       ],
       "anchors": {
         "footer": "Regulatory obligation extraction",
@@ -112,7 +126,10 @@
         "What is text to SQL?",
         "Is text to SQL safe for a bank database?",
         "How do you measure whether the generated query is right?",
-        "Does any data leave the machine?"
+        "Does any data leave the machine?",
+        "Why did the first accuracy score say 93% when real accuracy was far lower?",
+        "Which parts of the text-to-SQL assistant did you build yourself?",
+        "Did you retrain or replace the AI model to raise accuracy?"
       ],
       "anchors": {
         "footer": "Text-to-SQL for banking",
@@ -132,7 +149,10 @@
         "How do you build a RAG chatbot?",
         "How do you evaluate a RAG chatbot?",
         "What happens when the answer is not in the documents?",
-        "Does it use real patient data?"
+        "Does it use real patient data?",
+        "Can this chatbot book real appointments?",
+        "Does the chatbot remember earlier questions in a chat?",
+        "What does the chatbot send to the hosted AI service?"
       ],
       "anchors": {
         "footer": "Healthcare policy chatbot",
@@ -152,7 +172,10 @@
         "What is an AI honeypot?",
         "How do you create an AI agent?",
         "Who built which part?",
-        "How well does it resist prompt injection?"
+        "How well does it resist prompt injection?",
+        "What details does the honeypot record from a scammer?",
+        "How does the bot remember a conversation?",
+        "Does the honeypot report scammers anywhere?"
       ],
       "anchors": {
         "footer": "AI scam honeypot",
@@ -171,11 +194,15 @@
       "questions": [
         "What is video analytics in CCTV?",
         "How accurate is the crime classifier?",
-        "Did you build all of it yourself?"
+        "Did you build all of it yourself?",
+        "How does the crowd counter decide when to raise an alert?",
+        "How does the face recognition part work?",
+        "Which crimes can the model label?",
+        "Is this prototype ready for a real control room?"
       ],
       "anchors": {
         "footer": "CCTV analytics in Python",
-        "related": "Three watchers on one camera feed"
+        "related": "Three watchers for camera footage"
       }
     },
     "projects/speech-emotion-recognition/": {
@@ -190,7 +217,11 @@
       "questions": [
         "What is speech emotion recognition?",
         "How accurate is speech emotion recognition?",
-        "Can it work with my own recordings?"
+        "Can it work with my own recordings?",
+        "How much of the speech emotion model did you design yourself?",
+        "Why does the repository quote 97.25% when this page says 93.87%?",
+        "Does it work in real time from a microphone?",
+        "How long does it take to train a speech emotion model?"
       ],
       "anchors": {
         "footer": "Speech emotion recognition",
@@ -210,7 +241,10 @@
         "What is deepfake detection?",
         "How can you detect a deepfake video?",
         "How accurate is the detector?",
-        "Who worked on it?"
+        "Who worked on it?",
+        "Does the detector find and crop faces first?",
+        "What data was the model trained on?",
+        "Can I use this as proof that a video is fake?"
       ],
       "anchors": {
         "footer": "Deepfake video detection",
@@ -231,7 +265,11 @@
       "questions": [
         "What is observability in a FastAPI app?",
         "Is this a production system?",
-        "Can it run without an AI key?"
+        "Can it run without an AI key?",
+        "Which part is a personal build and which is company work?",
+        "What happens if an AI model fails or hangs?",
+        "Do the logs store customer questions or answers?",
+        "What does AI server monitoring add to request tracing?"
       ],
       "anchors": {
         "footer": "Traceable AI Backend",
@@ -247,7 +285,12 @@
         "python developer in mumbai"
       ],
       "questions": [
-        "Which AI development service do I need?"
+        "Which AI development service do I need?",
+        "Can a single build combine several of these services?",
+        "What if my idea does not fit any of these services?",
+        "Do I need clean, labelled data before an AI project can start?",
+        "Can I start with a small test before a full build?",
+        "Is my idea suited to AI, or would simple software do?"
       ],
       "anchors": {
         "other": [
@@ -273,7 +316,9 @@
         "Can a chatbot run on my own servers?",
         "How much does an AI chatbot cost for a website?",
         "What kinds of documents can the chatbot use?",
-        "Can my team maintain it after you finish?"
+        "Can my team maintain it after you finish?",
+        "What happens when our documents change?",
+        "Does the chatbot need training on our documents?"
       ],
       "anchors": {
         "footer": "AI chatbot development",
@@ -301,7 +346,9 @@
         "How accurate is AI data extraction from PDFs?",
         "Can my documents stay on our own servers?",
         "How do you stop AI from adding invented details?",
-        "Can this connect to our existing product?"
+        "Can this connect to our existing product?",
+        "Will the AI find every item in a long document?",
+        "Can it read scanned pages and invoices?"
       ],
       "anchors": {
         "footer": "Document data extraction",
@@ -329,7 +376,10 @@
         "Which is better, FastAPI or Django?",
         "Can you take over an existing Python backend?",
         "Can you set up background jobs and live progress updates?",
-        "Will the API come with tests?"
+        "Will the API come with tests?",
+        "How much does API development cost in India?",
+        "How do you keep a FastAPI backend secure?",
+        "What API documentation will I receive?"
       ],
       "anchors": {
         "footer": "FastAPI backend development",
@@ -355,7 +405,9 @@
         "How much does a computer vision project cost?",
         "Can you train a model on my own images or video?",
         "Can it work on live camera feeds?",
-        "What about privacy for face or surveillance projects?"
+        "What about privacy for face or surveillance projects?",
+        "Can computer vision count people in a crowd?",
+        "Does my video have to be uploaded to an online service?"
       ],
       "anchors": {
         "footer": "Computer vision development",
@@ -383,7 +435,10 @@
         "How much data do I need to train a model?",
         "Can you classify my own audio or text data?",
         "How do you report accuracy?",
-        "Do you use ready-made models?"
+        "Do you use ready-made models?",
+        "Can you build a prediction model from my spreadsheet data?",
+        "How do you check a model has not just memorised its data?",
+        "Can you check the accuracy of a model someone else built?"
       ],
       "anchors": {
         "footer": "Machine learning development",
@@ -411,7 +466,9 @@
         "How much does a WhatsApp chatbot cost?",
         "Can you build a WhatsApp bot for my business?",
         "Can the bot use AI to answer?",
-        "Where does the automation run?"
+        "Where does the automation run?",
+        "What happens when a website changes and the scraper breaks?",
+        "Can you connect two tools my team already uses?"
       ],
       "anchors": {
         "footer": "Python automation and bots",
@@ -512,6 +569,49 @@
           "download the resume",
           "full experience and education"
         ]
+      }
+    },
+    "projects/whatsapp-ai-agent-platform/": {
+      "primary": "whatsapp ai agent",
+      "secondary": [
+        "whatsapp ai agent for business",
+        "whatsapp ai chatbot",
+        "whatsapp business api chatbot",
+        "ai agent whatsapp automation"
+      ],
+      "questions": [
+        "How does the platform reply on WhatsApp without making customers wait?",
+        "What is a webhook in a WhatsApp automation?",
+        "How does the platform remember each customer's conversation?",
+        "Do human operators get alerts from the platform?",
+        "Can I see the code for this WhatsApp project?",
+        "What should I prepare before building a WhatsApp AI agent?"
+      ],
+      "anchors": {
+        "footer": "WhatsApp AI agent platform",
+        "related": "AI agents that reply on WhatsApp"
+      }
+    },
+    "projects/spam-classifier/": {
+      "primary": "sms spam classifier project",
+      "secondary": [
+        "email spam classifier project",
+        "sms spam detection project",
+        "spam email classifier ml project",
+        "email spam filter project"
+      ],
+      "questions": [
+        "How does a spam classifier for text messages work?",
+        "How accurate is this spam classifier?",
+        "What do precision and recall mean for spam?",
+        "Did you compare Naive Bayes with other models?",
+        "Can this spam classifier filter my company's email?",
+        "Is the spam classifier ready for production?",
+        "Where did the spam classifier project come from?"
+      ],
+      "anchors": {
+        "footer": "SMS spam classifier",
+        "related": "A trained filter for spam messages"
       }
     }
   },
