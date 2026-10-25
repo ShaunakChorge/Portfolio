@@ -65,8 +65,13 @@ html:not(.js) .pg-needs-js { display: none; }
 /* the scroll-margin must follow this section's own padding (base.css assumes the taller home padding), so an anchor jump lands the label ~84px down, clear of the sticky header */
 .pg-sec { --pg-y: clamp(2.5rem, 1.7rem + 3.2vw, 4.75rem); padding-block: var(--pg-y); scroll-margin-top: calc(.5rem - var(--pg-y)); }
 .pg-sec .section__head { margin-bottom: clamp(1.5rem, 1rem + 2vw, 2.75rem); }
-/* the long pages (case studies, service pages) draw a section only when it is near the screen; the browser remembers each real height after the first draw */
+/* the long pages (case studies, service pages) draw a section only when it is near the screen; the browser remembers each real height after the first draw.
+   A section that has not been drawn is counted at a guessed height, so a jump worked out from that layout lands far from its section: before any jump every section is drawn once
+   (core.js drawAll() puts html.pg-all), and a page opened at a #section draws them all from the start (:target). Two separate rules: a selector list with :has() is dropped whole by a
+   browser without :has. */
 .pg-sec { content-visibility: auto; contain-intrinsic-size: auto 640px; }
+.pg-all .pg-sec { content-visibility: visible; }
+html:has(:target) .pg-sec { content-visibility: visible; }
 @media print { .pg-sec { content-visibility: visible; } }
 .pg-linkrow { display: flex; flex-wrap: wrap; gap: .25rem 2rem; margin-top: clamp(1rem, .8rem + 1vw, 1.75rem); }
 .pg-two { display: grid; gap: clamp(1rem, .6rem + 1.4vw, 1.75rem); grid-template-columns: minmax(0, 1fr); }
@@ -77,9 +82,12 @@ html:not(.js) .pg-needs-js { display: none; }
 .pg-panel__cap { margin: -.5rem 0 1rem; font-size: var(--fs-sm); color: var(--text-muted); }
 .panel p { color: var(--text-body); }
 .pg-prose { max-width: 68ch; }
-/* About: the story text with the portrait beside it at the same height (portrait.css .np--side); stacked on phones, portrait after the text */
-.pg-story { display: grid; gap: clamp(1.5rem, 1rem + 2vw, 3rem); grid-template-columns: minmax(0, 1fr); }
-@media (min-width: 56em) { .pg-story { grid-template-columns: minmax(0, 1fr) minmax(16rem, 26rem); align-items: stretch; } }
+/* a section with an aside (About: the portrait). From 80em the aside stands on the right and runs the whole height of the section content, from the eyebrow to the last
+   link (portrait.css .np--side fills it); below that it follows the content, centred. */
+.pg-split { display: grid; gap: clamp(1.5rem, 1rem + 2vw, 3rem); grid-template-columns: minmax(0, 1fr); }
+.pg-split__main { min-width: 0; }
+.pg-split__aside { min-width: 0; }
+@media (min-width: 80em) { .pg-split { grid-template-columns: minmax(0, 1fr) 26rem; align-items: stretch; } }
 .pg-hiw { padding: clamp(1.25rem, 1rem + 1.4vw, 2rem); }
 .pg-hiw .dot-list { gap: .9rem; }
 .pg-hiw .dot-list li { font-size: var(--fs-body); line-height: 1.6; }
@@ -338,10 +346,25 @@ html:not(.js) .pg-needs-js { display: none; }
 .edu__tile--main .edu__years { font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.4rem); }
 .edu__label { font: 700 .75rem/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); }
 
-/* certificate and award tiles: a framed card with corner marks, a "security paper" texture and a seal; the featured one is wider */
+/* certificate and award tiles: a framed card with corner marks, a "security paper" texture and a seal; the featured one is wider.
+   The grid is drawn on twice the columns (every tile spans 2) so that a short last row can stand in the middle: ui.mjs lastRowClasses() puts cert--lastNofM on the first tile
+   of that row (N cells used of M columns) and only the start column is set here, so a featured tile keeps its own width.
+   The tiles fill the grid row by row, in the order of the list. There is no grid-auto-flow: dense on purpose: it lets a later tile jump back into a hole, so the centring
+   lands on the wrong tile and the Tab order differs from what is shown. A featured tile that does not fit after the tiles before it starts a new row (keep it first). */
 .certs { display: grid; gap: clamp(.9rem, .6rem + 1vw, 1.4rem); margin: 0; padding: 0; list-style: none; grid-template-columns: minmax(0, 1fr); }
-@media (min-width: 40em) { .certs { grid-template-columns: repeat(2, minmax(0, 1fr)); } .cert--wide { grid-column: 1 / -1; } }
-@media (min-width: 64em) { .certs { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-flow: dense; } .cert--wide { grid-column: span 2; } .certs--awards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 40em) {
+  .certs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .cert { grid-column: auto / span 2; }
+  .cert--wide { grid-column: 1 / -1; }
+  .cert--last1of2 { grid-column-start: 2; }
+}
+@media (min-width: 64em) {
+  .certs { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .cert--wide { grid-column: auto / span 4; }
+  .cert--last1of2 { grid-column-start: auto; }
+  .cert--last1of3 { grid-column-start: 3; }
+  .cert--last2of3 { grid-column-start: 2; }
+}
 .cert { display: flex; min-width: 0; }
 .cert__card {
   position: relative; isolation: isolate; display: flex; flex-direction: column; gap: .5rem; width: 100%; min-width: 0; padding: 1.4rem 1.35rem 1.15rem; overflow: hidden;
@@ -585,7 +608,6 @@ html.js .book__nojs { display: none; }
   .pg-qa__chev, .pg-rel__link, .pg-rel__go { transition: none; }
   .cert__card { transition: none; }
 }
-html.fx-paused .pg-svcmark__ring, html.fx-paused .pg-term__cursor { animation: none; }
 @media (forced-colors: active) {
   .pg-qa, .pg-step, .pg-metric, .pg-arch__item, .pg-rel__link, .pg-pn__link, .pg-term, .pg-hire__band, .edu__tile, .cert__card { border: 1px solid CanvasText; }
   .pg-answer { border-left-color: Highlight; }

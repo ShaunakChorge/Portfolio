@@ -147,6 +147,7 @@
       e.preventDefault();
       if (isOpen()) close(false); else open(e.detail === 0);                              /* detail 0 = opened with the keyboard: move into the menu */
     });
+    btn.addEventListener('keydown', function (e) { if (e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); btn.click(); } });   /* role="button" promises Space as well as Enter: a link only answers to Enter */
     doc.addEventListener('keydown', function (e) { if (e.key === 'Escape' && isOpen()) { e.preventDefault(); close(true); } });
     doc.addEventListener('pointerdown', function (e) { if (isOpen() && !wrap.contains(e.target)) close(false); });
     wrap.addEventListener('focusout', function (e) { if (isOpen() && e.relatedTarget && !wrap.contains(e.relatedTarget)) close(false); });

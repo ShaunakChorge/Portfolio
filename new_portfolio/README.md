@@ -21,7 +21,7 @@ One run does, in order:
 
 It prints a summary (pages, services, case studies, sitemap URLs). Other flags: `--skip-gen` reuses the existing files in `src/generated/`; `--only=hero,home-faq --out=preview-x.html` assembles one throwaway preview page with readable assets (delete it afterwards).
 
-`npm test` copies the site to a temp folder and checks that: the build passes; a second build writes byte-identical files; the files in the repo equal a clean build (if not, the deployed pages are stale: run `npm run build`); the link guard really catches a renamed `#hire` anchor; the keyword guard catches each rule it states; and the owner's rules hold on the real pages (the selected projects in priority order, no tallies or shortcut hints, nothing collapsed, Personal builds on /projects/ only, one Traceable AI Backend, the three "How I work" sentences, the resume PDF unchanged) and are caught when broken.
+`npm test` copies the site to a temp folder and checks that: the build passes; a second build writes byte-identical files; the files in the repo equal a clean build (if not, the deployed pages are stale: run `npm run build`); the link guard really catches a renamed `#hire` anchor; the keyword guard catches each rule it states; and the owner's rules hold on the real pages (the selected projects in priority order, no tallies or shortcut hints, nothing collapsed, Personal builds on /projects/ only, one Traceable AI Backend, the three "How I work" sentences, the resume PDF unchanged) and are caught when broken. It also reads the CSS of the About portrait and works out its two polygons for several frame shapes (eight corners, four true 45-degree cuts, an even 2px outline). It works out where the browser puts the certificate tiles for every list of up to eight tiles (list order kept, a short last row centred) and checks the ribbon (room for a lifted chip, a hit strip as tall as the lift), the background network (its loop ends for reduced motion only), that no button anywhere pauses, stops or restarts the effects or changes the accent colour or theme (judged by what each button says: a verb with what it acts on, a toggle that is not a filter, and a short known list of the buttons the scripts build), that no script or inline script changes the tab title (the usual spellings are tried, comments are ignored), and that the deploy staging script (`.github/scripts/stage-site.mjs`) passes on a clean build, leaves a one-line Search Console verification file alone and stops on a page with another title.
 
 ## Structure
 
@@ -64,7 +64,7 @@ Open `content/content.json`, change the text, run `npm run build`. Every field i
 
 | block | feeds |
 |---|---|
-| `seo` | `site_url` (the one base-URL value), `deploy_root` + `site_root_url` (the one-flag move to the root of `/Portfolio/`, see the root README) and `entity` (the one description sentence of Person, about lead and llms files) |
+| `seo` | `tab_title` (the ONE browser-tab title, shown on every page: the build writes it into every `<title>`, and the repo-root `index.html` and `404.html` must carry the same text; plain text, the build escapes `&`. **To change it:** edit this value, edit the `<title>` of those two root files by hand (write `&amp;` for `&`), and update the literal in `tools/test.mjs`; the build and `npm test` name anything that was missed. No script may set `document.title`; the guard fails the build if a file in `assets/js/` or an inline script in `src/` does, in the usual spellings: `document.title =`, `doc.title =` (or a local alias such as `var d = document; d.title =`), `document['title'] =`, an appended or combined assignment (`+=`, `||=`), or any look-up of the `<title>` element; comments are ignored, and a document handed to a function under another name is not seen), `site_url` (the one base-URL value), `deploy_root` + `site_root_url` (the one-flag move to the root of `/Portfolio/`, see the root README) and `entity` (the one description sentence of Person, about lead and llms files) |
 | `pages` | title, description, H1, first paragraph (`direct_answer`), section titles (`h2`) and extra questions (`faqs`) of the home, hub and single pages |
 | `profile`, `hero` | home hero, contact details, status line |
 | `services[]` | the service pages and the home service list (title, description, H1, `direct_answer`, `h2`, `faqs`); `tone` and `icon` set the colour and icon everywhere |
@@ -76,7 +76,7 @@ Open `content/content.json`, change the text, run `npm run build`. Every field i
 | `how_i_work` | the three plain sentences of the "How I work" block (Services and About pages) |
 | `about` | `whoami`: the About page quick-facts card (the only place the spoken languages appear; `education.year` is the degree year; `now_short`, `based_short` and `education.short` are the short forms of the home card); `home_card`: the home About card (heading, written lines, label of the profile links); `page`: About page extras |
 | `education` | one object per school: the degree tile and the two school tiles (`period` or `year` is printed in the tile footer; no subject lists) |
-| `certifications` | certificate tiles on About and Resume: `name`, `issuer`, `kind` (Certification, Internship certificate, Internship letter, Internship work sample), `year` or `period`, optional `doc` (the Google Drive preview of the document), `verify` (a public badge page), `credential_id`, `note`, `featured` (the wide tile) |
+| `certifications` | certificate tiles on About and Resume: `name`, `issuer`, `kind` (Certification, Internship certificate, Internship letter), `year` or `period`, optional `doc` (the Google Drive preview of the document), `verify` (a public badge page), `credential_id`, `note`, `featured` (the wide tile: keep it first, because the tiles fill the grid row by row in list order, and a wide tile that does not fit after the tiles before it starts a new row and leaves the row above it short). A last row that is not full is centred under the rest |
 | `achievements` | award tiles: `rank`, `event`, `year`, `detail`, `kind` (`title` is the plain-text version used by the resume, llms files and palette) |
 | `experience[].doc` | the document behind a role or programme (an internship certificate or letter): shown as a link on About and Resume; `doc_label` is the link text |
 | `booking` | the "Book a call" picker: `weekly` hours per weekday in India Standard Time, `lengths`, `days_ahead`, `min_notice_hours`, `step_minutes` |
@@ -93,13 +93,16 @@ To add a project, add an object to `projects[]` (copy an existing one: `id`, `sl
 
 At the end of every build `tools/pages/keywords.mjs` reads the BUILT pages and **fails the build** when:
 
-- two pages share a primary keyword, a title or a meta description (or one keyword is listed on two pages);
-- a title is longer than 60 characters or a description longer than 155;
+- the browser-tab title (`<title>`) of any page differs from `seo.tab_title`, or is longer than 60 characters (every page shows the same tab title), or a page has no `og:title` or more than one `<title>`;
+- two pages share a primary keyword, a page title or a meta description (or one keyword is listed on two pages);
+- a page title is longer than 60 characters or a description longer than 155;
 - a page has no entry in `keywords.json`, or the file lists a page that does not exist;
-- the primary keyword is missing from the title, the H1 or the first paragraph (the answer under the H1; on the home page the hero intro);
+- the primary keyword is missing from the page title, the H1 or the first paragraph (the answer under the H1; on the home page the hero intro);
 - the primary keyword appears more than 3 times in the page body;
 - a FAQ question is not registered for its page, appears on two pages, or its answer is not 40 to 60 words (so is the first paragraph of every inner page);
 - a link text equals a primary keyword and is used more than twice (exact-match anchor stuffing).
+
+"Page title" means the per-page title (`pages.*.title`, `case_study.seo.title`, ...): it is written to `og:title` and `twitter:title`, which is what a shared link shows, and it carries the primary keyword. The browser tab never shows it; the tab always shows `seo.tab_title`.
 
 A phrase matches loosely: small filler words (in, for, a, an, with, to) and plurals are ignored, so "hire fastapi developers" matches "Hire a FastAPI Developer". `npm test` proves each rule by breaking it on a copy of the site. To add a page, give it an entry in `keywords.json`; to change a primary keyword, change it there and in the page copy.
 

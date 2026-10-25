@@ -5,6 +5,7 @@
   "research": "Autocomplete suggestions from Google, Bing and DuckDuckGo (1,608 requests, English, India). Autocomplete frequency is a proxy for demand, not search volume; the primary keywords are chosen for intent fit and low competition, not for traffic.",
   "rules": {
     "title_max": 60,
+    "title_note": "'title' in these rules is the per-page page title (og:title and twitter:title). The browser-tab title (<title>) is one constant string on every page: content.json seo.tab_title.",
     "description_max": 155,
     "faq_answer_words": [
       40,

@@ -38,10 +38,6 @@ const stack = `<section id="stack" class="mq section--alt" data-num="02" data-ra
         ${sets}
       </div>
     </div>
-    <button class="mq__toggle" type="button" aria-pressed="false" aria-label="Pause the tools animation">
-      <svg class="icon mq__ico mq__ico--pause" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
-      <svg class="icon mq__ico mq__ico--play" aria-hidden="true" focusable="false"><use href="#i-play"/></svg>
-    </button>
   </div>
 </section>
 `;

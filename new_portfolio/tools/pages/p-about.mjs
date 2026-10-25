@@ -26,7 +26,7 @@ function terminal() {
 }
 
 /* ---------- the neon portrait (portrait.css and portrait.js load on this page because the markup has class="np") ---------- */
-const SIZES = '(min-width: 56em) 22rem, 17rem';
+const SIZES = '(min-width: 80em) 25rem, 21rem';
 const ALT = 'Illustrated portrait of Shaunak Chorge, a freelance AI engineer in Mumbai, smiling and wearing glasses and a dark jacket with arms crossed';
 const pic = (b, name, cls, { alt = '', attrs = '' } = {}) => `<picture class="${cls}"${attrs}>
                       <source type="image/avif" srcset="${b}assets/img/portrait/${name}-480.avif 480w, ${b}assets/img/portrait/${name}-800.avif 800w" sizes="${SIZES}">
@@ -38,34 +38,37 @@ const DUST = [   // x (%), size (px), duration (s), delay (s), colour
   [72, 2, 9.5, -4, 'cyan'], [84, 4, 14, -10, 'purple'], [92, 2, 11.5, -2, 'cyan'], [18, 2, 12.5, -7, 'purple'], [66, 3, 10.5, -5, 'magenta'],
 ];
 const RGB = { cyan: '0 255 255', magenta: '255 0 110', purple: '181 83 242' };
+/* The portrait sits in a cut-corner (polygon) frame, as in the first version of the site. Layers, back to front:
+   np__glow + np__edge   the gradient outline (an outer polygon filled with the neon gradient, glowing)
+   np__fill              the inner polygon: backdrop, grid, spinning rings, light, scan sweep and rising dust, all clipped to the frame
+   np__tilt > np__fig    the WHOLE picture (never cropped, not clipped by the frame), anchored to the bottom edge, with the rim light and the glitch ghosts
+   np__hud               two corner ticks outside the frame */
 function portrait(b) {
   return `<figure class="np np--side" data-neon-portrait data-reveal="scale">
             <div class="np__stage">
-              <div class="np__back" aria-hidden="true">
-                <span class="np__grid"></span>
-                <span class="np__ring np__ring--a"></span>
-                <span class="np__ring np__ring--b"></span>
-                <span class="np__light"></span>
-              </div>
-              <div class="np__tilt">
-                <div class="np__float">
-                  <div class="np__fig">
-                    ${pic(b, 'portrait', 'np__pic', { alt: ALT })}
-                    ${pic(b, 'rim', 'np__rim', { attrs: ' aria-hidden="true"' })}
-                    <span class="np__scan"></span>
-                  </div>
+              <span class="np__glow" aria-hidden="true"><span class="np__edge"></span></span>
+              <div class="np__fill" aria-hidden="true">
+                <div class="np__back">
+                  <span class="np__grid"></span>
+                  <span class="np__ring np__ring--a"></span>
+                  <span class="np__ring np__ring--b"></span>
+                  <span class="np__light"></span>
+                </div>
+                <span class="np__scan"></span>
+                <div class="np__dust">
+                  ${DUST.map(([x, s, d, t, c]) => `<i style="--x:${x}%;--s:${s}px;--d:${d}s;--t:${t}s;--c:var(--${c},${RGB[c]})"></i>`).join('\n                  ')}
                 </div>
               </div>
-              <div class="np__dust" aria-hidden="true">
-                ${DUST.map(([x, s, d, t, c]) => `<i style="--x:${x}%;--s:${s}px;--d:${d}s;--t:${t}s;--c:var(--${c},${RGB[c]})"></i>`).join('\n                ')}
+              <div class="np__tilt">
+                <div class="np__fig">
+                  ${pic(b, 'portrait', 'np__pic', { alt: ALT })}
+                  ${pic(b, 'rim', 'np__rim', { attrs: ' aria-hidden="true"' })}
+                </div>
               </div>
               <div class="np__hud" aria-hidden="true">
-                <span class="np__corner np__corner--tl"></span>
-                <span class="np__corner np__corner--tr"></span>
-                <span class="np__corner np__corner--bl"></span>
-                <span class="np__corner np__corner--br"></span>
+                <span class="np__tick np__tick--tl"></span>
+                <span class="np__tick np__tick--br"></span>
               </div>
-              <span class="np__tag"><span class="np__dot" aria-hidden="true"></span>Mumbai, India &middot; IST</span>
             </div>
           </figure>`;
 }
@@ -121,7 +124,8 @@ function page() {
     actions: btn('Hire me', hireHref(b), { v: 'solid', size: 'lg' }) + btn('Read the resume', b + 'resume/', { v: 'ghost', size: 'lg', icon: 'file-text' }),
   });
 
-  // story: profile.summary_long, three paragraphs (the last one links to the contact page), with the portrait on the right at the same height
+  // story: profile.summary_long, three paragraphs (the last one links to the contact page). From 80em the portrait frame stands on the right and runs the whole
+  // height of the block, from the "Background" label down to the Contact link; below that it follows the links, centred
   const paras = profile.summary_long.split(/\n\s*\n/).map(x => x.trim()).filter(Boolean);
   const html = paras.map(p => {
     let t = esc(p);
@@ -130,7 +134,8 @@ function page() {
   }).join('');
   const story = section({
     id: 'story', eyebrow: 'Background', title: ttl(m.h2 && m.h2.story, 'Who I am and <span class="hl">what I do</span>'),
-    body: `<div class="pg-story"><div class="prose pg-prose" data-reveal>${html}</div>${portrait(b)}</div>
+    aside: portrait(b),
+    body: `<div class="prose pg-prose" data-reveal>${html}</div>
     <p class="pg-linkrow" data-reveal><a class="link-arrow" href="${b}resume/">Resume ${ico('arrow-right')}</a><a class="link-arrow" href="${b}projects/">Projects ${ico('arrow-right')}</a><a class="link-arrow" href="#certifications">Certificates ${ico('arrow-right')}</a><a class="link-arrow" href="${b}faq/">FAQ ${ico('arrow-right')}</a><a class="link-arrow" href="${b}contact/#hire">Contact ${ico('arrow-right')}</a></p>`,
   });
 

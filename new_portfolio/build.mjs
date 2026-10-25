@@ -19,7 +19,7 @@
 //   <!-- @css -->            -> <link> for assets/css/base.css + assets/css/sections/*.css (or the minified bundle)
 //   <!-- @js -->             -> <script defer> for assets/js/core.js + sections/*.js (or the minified files)
 //   <!-- @section:NAME -->   -> contents of src/generated/NAME.html (or src/NAME.html for the hand-written footer) (also expanded inside the {{content}} you pass)
-//   {{base}} {{home}} {{title}} {{description}} {{canonical}} {{og_image}} {{og_type}} {{jsonld}} {{content}} {{current}} {{aria:NAME}} {{site_url}} {{footer_*}}
+//   {{base}} {{home}} {{tab_title}} {{title}} {{description}} {{canonical}} {{og_image}} {{og_type}} {{jsonld}} {{content}} {{current}} {{aria:NAME}} {{site_url}} {{footer_*}}
 // Home page = src/generated/home.content.html (the section markers) + src/generated/home.page.json (title / description / JSON-LD), both written by tools/home/gen.mjs.
 // Hand-written source in src/: shell.html, footer.html, site.config.json. Everything in src/generated/ is rebuilt on every run.
 // Site-wide facts live in src/site.config.json and content/content.json; the ONE base-URL value is content.seo.site_url (change it, rebuild, done).
@@ -59,6 +59,13 @@ export function loadConfig() {
   const entity = content.seo && content.seo.entity;
   if (!entity) throw new Error('content/content.json has no seo.entity (the one entity sentence)');
   cfg.person = { ...cfg.person, description: entity };
+  // the browser-tab title (<title>) is ONE constant string on every page: content.seo.tab_title. The per-page title (page.title) is the share title: og:title and twitter:title
+  const tab = content.seo && content.seo.tab_title;
+  if (!tab) throw new Error('content/content.json has no seo.tab_title (the one constant browser-tab title)');
+  if (typeof tab !== 'string' || tab !== tab.trim() || /\s{2,}/.test(tab) || /&[#a-z0-9]+;/i.test(tab)) {
+    throw new Error('content/content.json seo.tab_title must be plain text: no leading, trailing or double spaces and no HTML entities (write & as it is, the build escapes it)');
+  }
+  cfg.tab_title = tab;
   // contact facts come from content.profile only (footer, JSON-LD, contact page and the scripts all read them from here)
   const { email, links } = content.profile;
   cfg.email = email;
@@ -281,12 +288,12 @@ export function renderPage(o = {}) {
   const fp = footerParts(base);
   const vals = {
     base, home, current, site_url: cfg.url,
-    title: esc(o.title || cfg.name), description: esc(o.description || cfg.tagline),
+    tab_title: esc(cfg.tab_title), title: esc(o.title || cfg.name), description: esc(o.description || cfg.tagline),
     canonical: abs(cfg, pagePath), og_image: abs(cfg, cfg.og_image), og_type: o.og_type || 'website',
     jsonld: ld, footer_services: fp.services, footer_work: fp.work, footer_social: fp.social, footer_note: fp.note, footer_connect: fp.connect,
   };
   html = html.replace(/\{\{aria:([a-z-]+)\}\}/g, (_, k) => (k === current ? ' aria-current="page"' : ''));
-  html = html.replace(/\{\{(base|home|current|site_url|title|description|canonical|og_image|og_type|jsonld|footer_services|footer_work|footer_social|footer_note|footer_connect)\}\}/g, (_, k) => vals[k]);
+  html = html.replace(/\{\{(base|home|current|site_url|tab_title|title|description|canonical|og_image|og_type|jsonld|footer_services|footer_work|footer_social|footer_note|footer_connect)\}\}/g, (_, k) => vals[k]);
   html = pruneSprite(markAI(html));
   const left = html.match(/\{\{[^}]+\}\}/g);
   if (left) { console.error('UNRESOLVED TOKENS:', [...new Set(left)].join(' ')); missing++; }
@@ -313,8 +320,24 @@ function walk(dir, out = []) {
   return out;
 }
 
+/** does a script change the tab title? Comments are ignored. An assignment to the title of `document`, `window.document`, `doc` (the alias most scripts use) or a local alias of
+ *  document (`var d = document`) counts: `.title`, `['title']` or a template-literal key, with `=` or a compound operator (`+=`, `||=`, `??=` ...). So does any look-up of the <title>
+ *  element (querySelector, querySelectorAll, getElementsByTagName, "head > title"). Reading document.title, or setting the title attribute of an element, does not. */
+const stripJsComments = s => s.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/(^|[^:\\'"`])\/\/[^\n]*/g, '$1');
+const ASSIGN_OP = '(?:[-+*/%&|^]|\\*\\*|<<|>>>?|&&|\\|\\||\\?\\?)?';
+export function writesTabTitle(src) {
+  const code = stripJsComments(src);
+  const names = new Set(['document', 'doc']);
+  for (const m of code.matchAll(/\b(?:var|let|const)\s+(\w+)\s*=\s*(?:window\.|self\.|top\.)?document\b(?!\s*\.)/g)) names.add(m[1]);
+  for (const m of code.matchAll(/\b(\w+)\s*=\s*(?:window\.|self\.|top\.)?document\s*[;,)]/g)) names.add(m[1]);
+  const assign = new RegExp('\\b(?:' + [...names].join('|') + ')\\s*(?:\\.\\s*title|\\[\\s*[\'"`]title[\'"`]\\s*\\])\\s*' + ASSIGN_OP + '=(?!=)');
+  return assign.test(code) || /\.\s*(?:querySelector(?:All)?|getElementsByTagName)\(\s*['"`](?:head\s*>\s*)?title['"`]/i.test(code);
+}
+/** the text of the inline scripts of an HTML file (not the JSON-LD blocks, not scripts with a src) */
+const inlineScripts = html => [...html.matchAll(/<script\b(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>([\s\S]*?)<\/script>/gi)].map(m => m[1]).join('\n');
+
 /** forbidden strings (tools/rules.mjs) in every text file; in every built page and llms file also no tallies, shortcut hints or closed <details>;
- *  the spoken languages exactly once (home page); no readable-asset links unless --dev */
+ *  the spoken languages exactly once (home page); no readable-asset links unless --dev; no script that sets the tab title */
 export function guard({ dev = false } = {}) {
   const problems = [];
   const files = walk(SITE);
@@ -330,6 +353,9 @@ export function guard({ dev = false } = {}) {
       if (!dev && /(?:href|src)="[^"]*assets\/(?:css|js)\//.test(txt)) problems.push(`${r} links the readable assets/css or assets/js files (run the default build, not --dev, before you deploy)`);
     }
     if (isPage || /^llms(-full)?\.txt$/.test(r)) problems.push(...pageProblems(r, txt));
+    // the browser-tab title is one constant string (seo.tab_title): no script may change it while a page is open (the files in assets/js and any inline script)
+    const scriptText = /^assets\/js\/.+\.js$/.test(r) ? txt : /\.html$/.test(r) ? inlineScripts(txt) : '';
+    if (scriptText && writesTabTitle(scriptText)) problems.push(`${r} sets document.title (the tab title is one constant string: content.json seo.tab_title)`);
     const n = txt.split(LANGUAGE_SENTINEL).length - 1;
     if (n) {
       if (isPage) { if (r === 'about/index.html') marathi += n; else problems.push(`"${LANGUAGE_SENTINEL}" in ${r} (the spoken languages are shown on the About page only)`); }

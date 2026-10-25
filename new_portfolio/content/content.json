@@ -8,6 +8,7 @@
     }
   },
   "seo": {
+    "tab_title": "Shaunak Chorge | AI Engineer & Freelance Developer",
     "site_url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/",
     "deploy_root": false,
     "site_root_url": "https://shaunakchorge.github.io/Portfolio/",
@@ -5592,8 +5593,8 @@
       ],
       "project_ids": [],
       "group": "programme",
-      "doc": "https://drive.google.com/file/d/1eG8TM14UCRHXRz0Ic4UOmfReLon5VqC_/view?usp=sharing",
-      "doc_label": "View work sample"
+      "doc": "https://drive.google.com/file/d/1K6HfqyUz_L3-IehnhPYmGURVjjBa2nRW/view?usp=sharing",
+      "doc_label": "View certificate"
     }
   ],
   "education": [
@@ -5660,14 +5661,6 @@
       "doc": "https://drive.google.com/file/d/1VojTc2GZNvYx-2__bildbD4d8GU1DQNh/view?usp=sharing"
     },
     {
-      "name": "Python for Beginners",
-      "issuer": "SimpliLearn",
-      "kind": "Certification",
-      "year": "2023",
-      "credential_id": "4666547",
-      "doc": "https://drive.google.com/file/d/1oMt4-HIl93TXut27jKeAgzoK83F-X8Zo/view?usp=sharing"
-    },
-    {
       "name": "Getting Started with Enterprise Data Science",
       "issuer": "IBM SkillsBuild",
       "kind": "Certification",
@@ -5678,17 +5671,8 @@
     {
       "name": "IgniteX Program Participant",
       "issuer": "Wadhwani Foundation",
-      "kind": "Certification"
-    },
-    {
-      "name": "Introduction to SQL",
-      "issuer": "SimpliLearn",
-      "kind": "Certification"
-    },
-    {
-      "name": "Python Django",
-      "issuer": "SimpliLearn",
-      "kind": "Certification"
+      "kind": "Certification",
+      "doc": "https://drive.google.com/file/d/1DjSSoA8T4T8eKO4fFfhCbD1m9ZzV6HVU/view?usp=sharing"
     },
     {
       "name": "AI and Data Analytics Virtual Internship, Green Skills",
@@ -5722,10 +5706,9 @@
     {
       "name": "AI and Python Internship",
       "issuer": "Academor",
-      "kind": "Internship work sample",
+      "kind": "Internship certificate",
       "period": "Jan 2023",
-      "note": "A Python task sheet from the internship",
-      "doc": "https://drive.google.com/file/d/1eG8TM14UCRHXRz0Ic4UOmfReLon5VqC_/view?usp=sharing"
+      "doc": "https://drive.google.com/file/d/1K6HfqyUz_L3-IehnhPYmGURVjjBa2nRW/view?usp=sharing"
     }
   ],
   "achievements": [

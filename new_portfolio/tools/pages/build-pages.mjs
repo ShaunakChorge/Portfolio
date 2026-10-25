@@ -10,7 +10,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { renderPage } from '../../build.mjs';
-import { SITE } from '../lib.mjs';
+import { SITE, esc } from '../lib.mjs';
 import { findBanned, YEAR_RE } from '../rules.mjs';
 import { cfg, abs, selection, caseStudies, words } from './data.mjs';
 import * as pServices from './p-services.mjs';
@@ -38,7 +38,8 @@ export function buildPages({ min = true, check = false } = {}) {
     r.html = out.html;
     r.url = abs(cfg, r.path);
     if (out.missing) warn(r.path, 'renderPage reported missing partials/tokens');
-    if (r.title.length > 60) warn(r.path, `title ${r.title.length} > 60`);
+    if (r.title.length > 60) warn(r.path, `page title (og:title) ${r.title.length} > 60`);
+    if (!out.html.includes(`<title>${esc(cfg.tab_title)}</title>`)) warn(r.path, 'the <title> is not the constant seo.tab_title');
     if (r.description.length > 155) warn(r.path, `description ${r.description.length} > 155`);
     const h1s = (out.html.match(/<h1[\s>]/g) || []).length;
     if (h1s !== 1) warn(r.path, `${h1s} h1 elements`);
@@ -60,6 +61,15 @@ export function buildPages({ min = true, check = false } = {}) {
   const seen = new Map();
   for (const r of records) for (const [k, v] of [['title', r.title], ['description', r.description]]) {
     const key = k + '|' + v; if (seen.has(key)) warn(r.path, `duplicate ${k} with ${seen.get(key)}`); else seen.set(key, r.path);
+  }
+
+  /* ---------- the browser-tab title: one constant string (content.seo.tab_title) on every page, the repo-root redirect and 404 pages included ---------- */
+  if (cfg.tab_title.length > 60) warn('(site)', `seo.tab_title is ${cfg.tab_title.length} characters (max 60)`);
+  for (const f of ['index.html', '404.html']) {   // a file that is not there is skipped; the root 404.html is also what .github/scripts/stage-site.mjs publishes in deploy-root mode
+    const file = path.join(REPO_ROOT, f);
+    if (!fs.existsSync(file)) continue;
+    const m = fs.readFileSync(file, 'utf8').match(/<title>([\s\S]*?)<\/title>/);
+    if (!m || m[1] !== esc(cfg.tab_title)) warn(f, `the <title> of the repo-root ${f} is ${m ? `"${m[1]}"` : 'missing'} but must be "${esc(cfg.tab_title)}" (content.json seo.tab_title)`);
   }
 
   /* ---------- seo files ---------- */

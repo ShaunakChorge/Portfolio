@@ -190,8 +190,6 @@ body[data-page="home"] .footer__cta { display: none; }
   .js .hm-term .hm-term__fact { opacity: 1 !important; translate: none !important; }
   .js .hm-term .hm-term__cmd { max-width: none !important; }
 }
-html.fx-paused.js .hm-term .hm-term__fact { opacity: 1 !important; translate: none !important; }   /* "Pause effects" shows the final state at once */
-html.fx-paused.js .hm-term .hm-term__cmd { max-width: none !important; }
 @media (forced-colors: active) {
   .hm-qa, .hm-role, .hm-term { border-color: CanvasText; }
 }

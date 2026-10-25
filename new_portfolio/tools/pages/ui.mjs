@@ -56,17 +56,30 @@ export function pageHead({ crumbItems, b, eyebrow, h1, lead = '', answer = '', a
 </section>`;
 }
 
-/** a normal content section with the standard header */
-export function section({ id = '', title, titleId, eyebrow = '', lead = '', body, cls = '', tint = false, reveal = true }) {
+/** a normal content section with the standard header.
+    `aside` (optional) is a block that stands beside the whole section content (heading, lead and body) from 80em and follows it below that: the About portrait */
+export function section({ id = '', title, titleId, eyebrow = '', lead = '', body, cls = '', tint = false, reveal = true, aside = '' }) {
   const tid = titleId || id + '-h';
-  return `<section${id ? ` id="${id}"` : ''} class="section pg-sec${tint ? ' section--tint' : ''}${cls ? ' ' + cls : ''}" aria-labelledby="${tid}">
-  <div class="container">
-    <header class="section__head"${reveal ? ' data-reveal' : ''}>
+  const head = `<header class="section__head"${reveal ? ' data-reveal' : ''}>
       ${eyebrow ? `<p class="eyebrow">${esc(eyebrow)}</p>` : ''}
       <h2 id="${tid}" class="section__title">${title}</h2>
       ${lead ? `<p class="section__lead">${esc(lead)}</p>` : ''}
-    </header>
+    </header>`;
+  const inner = aside
+    ? `<div class="pg-split">
+    <div class="pg-split__main">
+    ${head}
 ${body}
+    </div>
+    <div class="pg-split__aside">
+          ${aside}
+    </div>
+  </div>`
+    : `${head}
+${body}`;
+  return `<section${id ? ` id="${id}"` : ''} class="section pg-sec${tint ? ' section--tint' : ''}${cls ? ' ' + cls : ''}" aria-labelledby="${tid}">
+  <div class="container">
+    ${inner}
   </div>
 </section>`;
 }
@@ -227,7 +240,7 @@ export function bookingPanel() {
         </div>
         <div class="contact__done book__done" id="bk-done" role="status" tabindex="-1" hidden>
           <span class="contact__done-icon" aria-hidden="true">${ico('check', 'icon--xl')}</span>
-          <p class="contact__h contact__h--done">Request sent</p>
+          <h2 class="contact__h contact__h--done">Request sent</h2>
           <p class="contact__note" id="bk-done-text">Thank you. I will confirm this slot by email.</p>
           <p class="book__when" id="bk-done-when"></p>
           <div class="book__cal">
@@ -268,18 +281,19 @@ export function eduCollage(education, { short = false } = {}) {
   </div>`;
 }
 
-/** one certificate tile. A certificate with a document links to its Google Drive preview; a digital badge links to its public page */
-function certTile(c, i, { award = false, group = 'c' } = {}) {
+/** one certificate tile. A certificate with a document links to its Google Drive preview; a digital badge links to its public page.
+    `lastRow` is the class from lastRowClasses() (empty for every tile but the first one on a short last row) */
+function certTile(c, i, { award = false, group = 'c', lastRow = '' } = {}) {
   const tone = award ? (i % 2 ? 'magenta' : 'purple') : TONES[i % 3];
   const when = award ? c.year : (c.year || c.period || '');
   const label = award ? `Award${c.kind ? ' / ' + c.kind : ''}` : c.kind || 'Certificate';
   const href = c.doc || c.verify || '';
-  const cta = c.doc ? (c.kind === 'Internship letter' ? 'View letter' : c.kind === 'Internship work sample' ? 'View work sample' : 'View certificate') : c.verify ? 'Verify badge' : '';
+  const cta = c.doc ? (c.kind === 'Internship letter' ? 'View letter' : 'View certificate') : c.verify ? 'Verify badge' : '';
   const seal = award ? (c.rank && /^Winner/i.test(c.rank) ? 'trophy' : 'medal') : (c.kind && /^Internship/.test(c.kind) ? 'briefcase' : 'award');
   const title = award ? c.event : c.name;
   const sub = award ? c.rank : c.issuer;
   const noteText = award ? c.detail : c.note;
-  return `<li class="cert${c.featured ? ' cert--wide' : ''}${award ? ' cert--award' : ''}" data-tone="${tone}" data-reveal style="--i:${i % 4}">
+  return `<li class="cert${c.featured ? ' cert--wide' : ''}${award ? ' cert--award' : ''}${lastRow}" data-tone="${tone}" data-reveal style="--i:${i % 4}">
       <article class="cert__card" aria-labelledby="ct-${award ? 'a' : group}${i}">
         <span class="cert__corner cert__corner--tl" aria-hidden="true"></span><span class="cert__corner cert__corner--tr" aria-hidden="true"></span><span class="cert__corner cert__corner--bl" aria-hidden="true"></span><span class="cert__corner cert__corner--br" aria-hidden="true"></span>
         <header class="cert__head"><p class="cert__kind">${esc(label)}</p>${when ? `<p class="cert__when">${esc(when)}</p>` : ''}</header>
@@ -294,13 +308,35 @@ function certTile(c, i, { award = false, group = 'c' } = {}) {
       </article>
     </li>`;
 }
+/** The tiles grid has 3 columns from 64em and 2 from 40em (pages.css). When the last row is not full, its tiles stand in the middle instead of leaving empty cells on the
+    right: this returns, for every tile, the class that tells the stylesheet where the short last row starts (`cert--last1of3`: the row holds one cell; `cert--last2of3`; `cert--last1of2`).
+    A featured tile is two cells wide at 3 columns and fills a whole row at 2. Only the first tile of the short row gets a class; the rest follow it.
+    This models a grid that fills row by row in the order of the list, which is how pages.css lays it out (no grid-auto-flow: dense): a featured tile that does not fit
+    after the tiles before it starts the next row and leaves the row before it short, so keep the featured tile first. */
+export function lastRowClasses(items) {
+  const cls = items.map(() => '');
+  for (const cols of [3, 2]) {
+    let used = 0, first = 0;
+    items.forEach((c, i) => {
+      const span = Math.min(c.featured ? 2 : 1, cols);
+      if (used + span > cols) used = 0;
+      if (used === 0) first = i;
+      used += span;
+      if (used === cols) used = 0;
+    });
+    if (used) cls[first] += ` cert--last${used}of${cols}`;
+  }
+  return cls;
+}
 /** certificate tiles in a collage grid (the featured ones are wider); kinds = which kinds of certificate to show */
 export function certTiles(list, { kinds = null, group = 'c' } = {}) {
   const items = kinds ? list.filter(c => kinds.includes(c.kind)) : list;
-  return `<ul class="certs" role="list">${items.map((c, i) => certTile(c, i, { group })).join('\n    ')}</ul>`;
+  const last = lastRowClasses(items);
+  return `<ul class="certs" role="list">${items.map((c, i) => certTile(c, i, { group, lastRow: last[i] })).join('\n    ')}</ul>`;
 }
 export function awardTiles(list) {
-  return `<ul class="certs certs--awards" role="list">${list.map((a, i) => certTile(a, i, { award: true })).join('\n    ')}</ul>`;
+  const last = lastRowClasses(list);
+  return `<ul class="certs certs--awards" role="list">${list.map((a, i) => certTile(a, i, { award: true, lastRow: last[i] })).join('\n    ')}</ul>`;
 }
 
 /* ---------- "ask a question": a plain GET form that opens the contact page with the question and this page already filled in ---------- */
@@ -446,7 +482,7 @@ ${typeOptions ? `
 
         <div class="contact__done" id="cf-done" role="status" tabindex="-1" hidden>
           <span class="contact__done-icon" aria-hidden="true">${ico('check', 'icon--xl')}</span>
-          <p class="contact__h contact__h--done">Message sent</p>
+          <${heading} class="contact__h contact__h--done">Message sent</${heading}>
           <p class="contact__note">Thanks<span id="cf-done-name"></span>. I will reply to <strong id="cf-done-email">your address</strong> as soon as I can.</p>
           <button class="btn btn--ghost" id="cf-again" type="button">Send another message</button>
         </div>

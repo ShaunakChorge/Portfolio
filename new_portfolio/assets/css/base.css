@@ -117,7 +117,7 @@
   --magenta: 255 0 110;          /* #FF006E  computer vision / media */
   --purple: 181 83 242;          /* #B553F2  ML / data / speech */
   --blue: 0 128 255;             /* #0080FF  backend / web / tooling */
-  --green: 52 255 140;           /* #34FF8C  status / success / 4th accent option */
+  --green: 52 255 140;           /* #34FF8C  status / success */
   --red: 255 90 100;             /* #FF5A64  errors */
   /* text-safe tints for SMALL text (>= 5.5:1 on #0A0A0F). Use the pure neon for borders, glows, >= 24px display text. */
   --cyan-ink: 0 255 255;
@@ -126,7 +126,7 @@
   --blue-ink: 95 178 255;        /* #5FB2FF  lifted for the same reason */
   --green-ink: 52 255 140;
 
-  /* ---- accent (user switchable via Portfolio.accent(); persisted) ---- */
+  /* ---- accent (fixed: cyan) ---- */
   --accent: var(--cyan);
   --accent-ink: var(--cyan-ink);
   /* ---- tone (per-element: [data-tone="cyan|magenta|purple|blue|green"]); defaults to the accent ---- */
@@ -209,10 +209,6 @@
 [data-tone="purple"]  { --tone: var(--purple);  --tone-ink: var(--purple-ink); }
 [data-tone="blue"]    { --tone: var(--blue);    --tone-ink: var(--blue-ink); }
 [data-tone="green"]   { --tone: var(--green);   --tone-ink: var(--green-ink); }
-/* accent switcher: Portfolio.accent('magenta') sets <html data-accent="magenta"> */
-:root[data-accent="magenta"] { --accent: var(--magenta); --accent-ink: var(--magenta-ink); }
-:root[data-accent="purple"]  { --accent: var(--purple);  --accent-ink: var(--purple-ink); }
-:root[data-accent="green"]   { --accent: var(--green);   --accent-ink: var(--green-ink); }
 /*#endregion*/
 
 /*#region 2 reset + a11y primitives*/
@@ -781,15 +777,6 @@ main > section.is-offscreen dialog[open], main > section.is-offscreen dialog[ope
   .btn::after { display: none; }
   .card:hover, .card:focus-within, .icon-btn:hover { translate: 0 0; }
 }
-/* "Pause effects" (WCAG 2.2.2): the same rules, switched on by the visitor (html.fx-paused, see core.js Portfolio.motion) */
-html.fx-paused { scroll-behavior: auto; }
-html.fx-paused *, html.fx-paused *::before, html.fx-paused *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; animation-delay: 0s !important; transition-duration: .01ms !important; transition-delay: 0s !important; scroll-behavior: auto !important; }
-html.fx-paused.js [data-reveal]:not(.is-in) { opacity: 1; }
-html.fx-paused .bg-orbs .orb, html.fx-paused .bg-wash::after, html.fx-paused .bg-shimmer::before, html.fx-paused .bg-rails > i, html.fx-paused .bg-blobs > i, html.fx-paused .bg-grid, html.fx-paused .fab::after, html.fx-paused .timeline__item--now::before, html.fx-paused .badge__dot::after, html.fx-paused .clock::before { animation: none !important; }
-html.fx-paused .bg-wash::after { opacity: .5; }
-html.fx-paused .bg-shimmer { display: none; }
-html.fx-paused .btn::after { display: none; }
-html.fx-paused .card:hover, html.fx-paused .card:focus-within, html.fx-paused .icon-btn:hover { translate: 0 0; }
 @media (prefers-contrast: more) {
   :root { --line: rgb(255 255 255 / .22); --line-2: rgb(255 255 255 / .4); --text-body: #e6edf3; --text-muted: #cfd7e6; --text-dim: #b4bdd0; }
   .card { border-color: rgb(var(--tone) / .6); }

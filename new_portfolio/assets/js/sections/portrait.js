@@ -57,14 +57,13 @@
     if (this.ghosts || !this.fig) return;
     var base = this.fig.querySelector('.np__pic');
     if (!base) return;
-    var scan = this.fig.querySelector('.np__scan');
     ['c', 'm'].forEach(function (k) {
       var g = base.cloneNode(true);
       g.className = 'np__ghost np__ghost--' + k;
       g.setAttribute('aria-hidden', 'true');
       var img = g.querySelector('img');
       if (img) { img.alt = ''; img.removeAttribute('id'); img.className = ''; img.loading = 'lazy'; }
-      this.fig.insertBefore(g, scan);
+      this.fig.appendChild(g);
     }, this);
     this.fig.classList.add('is-glitchy');
     this.ghosts = true;

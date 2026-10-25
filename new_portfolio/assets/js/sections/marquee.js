@@ -2,9 +2,8 @@
    NEURAL NEON - marquee.js   section #stack: the moving tools ribbon
    The loop itself is CSS (two identical sets, translateX 0 -> -50%, see marquee.css). This file only
    * sets a constant px/s speed (--mq-dur from the measured track width, re-measured when fonts load and on resize)
-   * pauses the animation while the strip is off-screen (.is-off)
-   * wires the pause / play button (aria-pressed) -> .is-paused / .is-forced
-   Never throws when the markup is missing.
+   * pauses the animation while the strip is off-screen (.is-off); while the pointer is over the strip the CSS pauses it too
+   The loop runs continuously, there is no pause button. Never throws when the markup is missing.
    ===================================================================== */
 (function () {
   'use strict';
@@ -17,7 +16,6 @@
     var root = doc.getElementById('stack');
     var track = root && root.querySelector('.mq__track');
     if (!track) return;
-    var btn = root.querySelector('.mq__toggle');
 
     function measure() {
       var animated = window.getComputedStyle(track).animationName !== 'none';
@@ -35,16 +33,6 @@
       new IntersectionObserver(function (entries) {
         entries.forEach(function (en) { root.classList.toggle('is-off', !en.isIntersecting); });
       }, { threshold: 0 }).observe(root);
-    }
-
-    if (btn) {
-      btn.addEventListener('click', function () {
-        var pause = btn.getAttribute('aria-pressed') !== 'true';
-        btn.setAttribute('aria-pressed', pause ? 'true' : 'false');
-        btn.setAttribute('aria-label', pause ? 'Play the tools animation' : 'Pause the tools animation');
-        root.classList.toggle('is-paused', pause);
-        root.classList.toggle('is-forced', !pause);     /* an explicit Play beats the hover pause (see marquee.css) */
-      });
     }
   }
 

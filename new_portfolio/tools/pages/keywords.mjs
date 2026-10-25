@@ -3,11 +3,16 @@
 // content/keywords.json lists, per page: one PRIMARY keyword, the secondary keywords, the FAQ questions that belong to that page and the approved
 // anchor texts for links to it. The copy itself (title, description, H1, H2s, first paragraph, FAQ answers) lives in content/content.json.
 //
+// Two titles per page: the BROWSER-TAB title (<title>) is one constant string on every page (content.json seo.tab_title), and the PAGE title
+// (og:title, which twitter:title repeats) is the per-page one that carries the primary keyword. The rules below say "page title" for the second.
+//
 // keywordProblems() reads the BUILT pages and fails the build when:
-//   - two pages share a primary keyword, a title or a meta description (or one phrase appears on two pages)
-//   - a title is longer than 60 characters or a description longer than 155
+//   - the browser-tab title of any page differs from seo.tab_title (compared as exact markup), or is longer than 60 characters, or the head holds more than one <title>
+//   - a page has no og:title (the page title is read from it)
+//   - two pages share a primary keyword, a page title or a meta description (or one phrase appears on two pages)
+//   - a page title is longer than 60 characters or a description longer than 155
 //   - a page has no keywords.json entry, or keywords.json lists a page that does not exist
-//   - the primary keyword is missing from the title, the H1 or the first paragraph (the answer under the H1; on the home page the hero lede)
+//   - the primary keyword is missing from the page title, the H1 or the first paragraph (the answer under the H1; on the home page the hero lede)
 //   - the primary keyword appears more than 3 times in the page body (keyword stuffing)
 //   - a FAQ question is not registered for its page, is registered for another page, or appears on two pages
 //   - a FAQ answer or a first-paragraph answer is not 40 to 60 words
@@ -16,10 +21,12 @@
 // and with plurals ignored: "hire fastapi developers" matches "Hire a FastAPI Developer"; "text to sql llm" matches "Text-to-SQL with an LLM".
 import fs from 'node:fs';
 import path from 'node:path';
-import { SITE, read } from '../lib.mjs';
+import { SITE, read, readContent, esc } from '../lib.mjs';
 
 export const KEYWORDS_FILE = path.join(SITE, 'content', 'keywords.json');
 export const loadKeywords = () => JSON.parse(read(KEYWORDS_FILE));
+/** the one constant browser-tab title (content.json seo.tab_title) */
+export const loadTabTitle = () => ((readContent().seo || {}).tab_title || '');
 /** keywords.json is keyed by page path; the home page is "/" */
 export const pageKey = p => (p === '' ? '/' : p);
 
@@ -52,13 +59,19 @@ const between = (html, re) => { const m = re.exec(html); return m ? m[1] : ''; }
 /** what the guard reads from one built page */
 export function readPage(file) {
   const html = fs.readFileSync(file, 'utf8');
+  const headEnd = html.search(/<\/head>/i);
+  const head = html.slice(0, headEnd >= 0 ? headEnd : html.length).replace(/<!--[\s\S]*?-->/g, '');   // comments do not count
+  const tabRaw = between(head, /<title>([\s\S]*?)<\/title>/);
   const main = between(html, /<main id="main"[^>]*>([\s\S]*?)<\/main>/);
   const answer = between(main, /<p class="pg-answer" data-answer>([\s\S]*?)<\/p>/) || between(main, /<p class="hero__lede"[^>]*>([\s\S]*?)<\/p>/);
   const qas = [];
   for (const m of main.matchAll(/<h3 class="(?:pg-qa__h|hm-qa__t)">([\s\S]*?)<\/h3>[\s\S]*?<div class="(?:pg-qa__a|hm-qa__a)"><p>([\s\S]*?)<\/p>/g)) qas.push({ q: textOf(m[1]), a: textOf(m[2]) });
   const links = [...main.matchAll(/<a [^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/g)].map(m => ({ href: m[1], text: textOf(m[2]) }));
   return {
-    title: textOf(between(html, /<title>([\s\S]*?)<\/title>/)),
+    tabTitleRaw: tabRaw,                                                                 // the exact markup between <title> and </title> in the head
+    tabTitleCount: (head.match(/<title[\s>]/gi) || []).length,                           // must be exactly one
+    tabTitle: textOf(tabRaw),                                                            // what the browser tab shows: the same on every page
+    title: textOf(between(html, /<meta property="og:title" content="([^"]*)"/)),        // the page title (shared links; twitter:title repeats it): one per page, with the primary keyword
     description: textOf(between(html, /<meta name="description" content="([^"]*)"/)),
     h1: textOf(between(main, /<h1[^>]*>([\s\S]*?)<\/h1>/)),
     answer: textOf(answer),
@@ -68,9 +81,10 @@ export function readPage(file) {
 }
 
 /** all problems, as strings. `paths` = page paths without the home page, as the build writes them ('services/', 'projects/x/' ...) */
-export function keywordProblems({ site = SITE, paths, keywords = loadKeywords() } = {}) {
+export function keywordProblems({ site = SITE, paths, keywords = loadKeywords(), tabTitle = loadTabTitle() } = {}) {
   const problems = [];
   const bad = (page, msg) => problems.push(`keywords: ${page}: ${msg}`);
+  if (!tabTitle) problems.push('keywords: content/content.json has no seo.tab_title (the one constant browser-tab title)');
   const all = ['', ...paths];
   const entries = keywords.pages || {};
   const pages = {};
@@ -92,13 +106,18 @@ export function keywordProblems({ site = SITE, paths, keywords = loadKeywords() 
       const n = norm(ph);
       if (phraseOwner.has(n) && phraseOwner.get(n) !== key) bad(key, `keyword "${ph}" is also listed on ${phraseOwner.get(n)}`); else phraseOwner.set(n, key);
     }
-    // title, description
-    if (pg.title.length > 60) bad(key, `title is ${pg.title.length} characters (max 60)`);
+    // browser-tab title: the same constant on every page
+    if (tabTitle && pg.tabTitleRaw !== esc(tabTitle)) bad(key, `browser-tab title is "${pg.tabTitleRaw}" but every page must use "${esc(tabTitle)}" (content.json seo.tab_title)`);
+    if (pg.tabTitleCount !== 1) bad(key, `the head has ${pg.tabTitleCount} <title> elements (want exactly 1)`);
+    if (pg.tabTitle.length > 60) bad(key, `browser-tab title is ${pg.tabTitle.length} characters (max 60)`);
+    // page title (og:title), description
+    if (!pg.title) bad(key, 'no og:title (the page title shown when the link is shared)');
+    if (pg.title.length > 60) bad(key, `page title (og:title) is ${pg.title.length} characters (max 60)`);
     if (pg.description.length > 155) bad(key, `description is ${pg.description.length} characters (max 155)`);
-    if (titles.has(pg.title)) bad(key, `same title as ${titles.get(pg.title)}`); else titles.set(pg.title, key);
+    if (titles.has(pg.title)) bad(key, `same page title (og:title) as ${titles.get(pg.title)}`); else titles.set(pg.title, key);
     if (descs.has(pg.description)) bad(key, `same meta description as ${descs.get(pg.description)}`); else descs.set(pg.description, key);
     // primary keyword placement
-    if (!hasPhrase(pg.title, e.primary)) bad(key, `primary keyword "${e.primary}" is not in the title "${pg.title}"`);
+    if (!hasPhrase(pg.title, e.primary)) bad(key, `primary keyword "${e.primary}" is not in the page title (og:title) "${pg.title}"`);
     if (!hasPhrase(pg.h1, e.primary)) bad(key, `primary keyword "${e.primary}" is not in the H1 "${pg.h1}"`);
     if (!hasPhrase(pg.answer, e.primary)) bad(key, `primary keyword "${e.primary}" is not in the first paragraph`);
     const n = countPhrase(pg.body, e.primary);
@@ -127,7 +146,7 @@ export function keywordProblems({ site = SITE, paths, keywords = loadKeywords() 
   return problems;
 }
 
-/** the table the final report prints: page -> primary, title, lengths */
+/** the table the final report prints: page -> primary, page title (og:title), lengths */
 export function keywordTable({ site = SITE, paths, keywords = loadKeywords() } = {}) {
   return ['', ...paths].map(p => {
     const key = pageKey(p), e = keywords.pages[key] || {};

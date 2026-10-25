@@ -3,14 +3,14 @@
    Scope: .mq / .mq__*.  Un-layered, so it wins over base.css (@layer pf).
    Base state = a static, wrapped list of chips (no JavaScript, reduced motion). The seamless loop is an enhancement:
    html.js + prefers-reduced-motion: no-preference. Two identical sets in the track, translateX(0 -> -50%), with margin-right (not gap) on the chips
-   so -50% lands exactly on one set. marquee.js sets the speed, pauses the strip off-screen and wires the pause button.
+   so -50% lands exactly on one set. marquee.js sets the speed and pauses the strip off-screen; the pointer pauses it too. There is no pause button: it runs continuously.
    ===================================================================== */
 
 @keyframes pv-marquee { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
 
 /*#region base: static list*/
 .mq { position: relative; padding-block: clamp(1rem, .8rem + .8vw, 1.5rem); }
-.mq__bar { display: flex; align-items: center; gap: .75rem; }
+.mq__bar { display: flex; align-items: center; }
 .mq__stage { flex: 1 1 auto; min-width: 0; }
 .mq__track { display: flex; justify-content: center; }
 .mq__set { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem .6rem; margin: 0; padding: 0; list-style: none; }
@@ -25,39 +25,34 @@
 .mq__chip[data-tier="daily"] { border-color: rgb(var(--tone) / .72); color: var(--text-strong); box-shadow: 0 0 16px rgb(var(--tone) / .24), inset 0 0 14px rgb(var(--tone) / .05); }
 .mq__dot { flex: none; display: inline-block; width: .5rem; height: .5rem; border-radius: 50%; background: rgb(var(--tone)); box-shadow: 0 0 8px rgb(var(--tone) / .95); }
 
-.mq__toggle {
-  display: none; place-items: center; flex: none; width: 44px; height: 44px; border: 1px solid var(--line-2); border-radius: .625rem;
-  background: rgb(255 255 255 / .03); color: var(--text-muted);
-  transition: color .25s var(--ease), border-color .25s var(--ease), background-color .25s var(--ease), box-shadow .25s var(--ease);
-}
-.mq__toggle:hover, .mq__toggle[aria-pressed="true"] { color: rgb(var(--accent)); border-color: rgb(var(--accent) / .6); background: rgb(var(--accent) / .08); box-shadow: 0 0 14px rgb(var(--accent) / .25); }
-.mq__ico { width: 1.15rem; height: 1.15rem; }
-.mq__ico--play, .mq__toggle[aria-pressed="true"] .mq__ico--pause { display: none; }
-.mq__toggle[aria-pressed="true"] .mq__ico--play { display: block; }
 /*#endregion*/
 
 /*#region enhancement: seamless loop*/
 @media (prefers-reduced-motion: no-preference) {
-  .js .mq__toggle { display: inline-grid; }
-  .js .mq__stage { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+  .js .mq__bar { min-height: 44px; }   /* the moving band keeps the height it always had (the chip row is 40px) */
+  /* the stage clips the sliding track, so it must leave room above and below the chips: a hovered chip lifts 2px and glows 18px, and without this room the clip
+     cut off its top border and the glow. The padding is cancelled by the negative margin, so the ribbon keeps its height. */
+  .js .mq__stage { overflow: hidden; padding-block: 22px; margin-block: -22px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
   .js .mq__track { width: max-content; justify-content: flex-start; animation: pv-marquee var(--mq-dur, 80s) linear infinite; will-change: transform; }
   .js .mq__set { flex: none; flex-wrap: nowrap; justify-content: flex-start; gap: 0; }
   .js .mq__set[data-clone] { display: flex; }
   .js .mq__chip { margin-right: .75rem; transition: border-color .3s var(--ease), box-shadow .3s var(--ease), translate .3s var(--ease); }
 
-  /* pause: while the pointer is over the strip, while the pause button has keyboard focus, via the button, and while off-screen.
-     An explicit "Play" (.is-forced) beats the hover and focus pause; off-screen pausing always wins. */
-  .js .mq.is-paused .mq__track, .js .mq.is-off .mq__track, .js .mq:has(.mq__toggle:focus-visible) .mq__track { animation-play-state: paused; }
-  .js .mq.is-forced:not(.is-off) .mq__track { animation-play-state: running !important; }
+  /* pause: while the pointer is over the chips (below) and while the strip is off-screen */
+  .js .mq.is-off .mq__track { animation-play-state: paused; }
 }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .js .mq__stage:hover .mq__track { animation-play-state: paused; }
+  .js .mq__track:hover { animation-play-state: paused; }
+  .js .mq__chip { position: relative; }
   .js .mq__chip:hover { translate: 0 -2px; border-color: rgb(var(--tone) / .85); box-shadow: 0 0 18px rgb(var(--tone) / .35); }
+  /* the lift moves the chip 2px away from a pointer resting on its lowest 2px, which would drop :hover and make the chip shake: this strip under it keeps the pointer on the chip */
+  .js .mq__chip:hover::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 3px; }
 }
 /* reduced motion on phones: the static list becomes one swipeable strip instead of a wall of chips */
 @media (prefers-reduced-motion: reduce) and (max-width: 767px) {
   .mq__stage { overflow-x: auto; scrollbar-width: none; }
   .mq__stage::-webkit-scrollbar { display: none; }
+  .mq__track { justify-content: flex-start; }   /* a centred row wider than the screen would push its first chips out of reach on the left */
   .mq__set { flex-wrap: nowrap; justify-content: flex-start; }
   .mq__chip { scroll-snap-align: start; }
 }

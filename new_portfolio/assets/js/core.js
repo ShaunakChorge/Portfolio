@@ -17,7 +17,6 @@
      Portfolio.sections / activeSection / goto(id)
      Portfolio.menu.open/close/toggle/isOpen
      Portfolio.toast(msg, {type, duration, title})
-     Portfolio.accent(name?)                'cyan' | 'magenta' | 'purple' | 'green'
      Portfolio.lockScroll(bool, key?)
      Portfolio.store.get/set/remove         safe localStorage ('pf:' prefix)
      Portfolio.raf.add(fn) / remove(fn) / once(fn)   shared rAF loop, paused when the tab is hidden
@@ -77,8 +76,8 @@
   var mqCoarse = mq('(pointer: coarse)');
   var mqMobile = mq('(max-width: 47.9375em)');      /* em: follows the browser's default font size, like the CSS breakpoints */
   var mqDesktop = mq('(min-width: 48em)');
-  var motionPaused = root.classList.contains('fx-paused');   /* "Pause effects" (WCAG 2.2.2): the head script restores it before first paint */
-  Object.defineProperty(P, 'prefersReducedMotion', { enumerable: true, get: function () { return !!mqReduce.matches || motionPaused; } });
+  /* effects run continuously; the only thing that switches them off is the visitor's own system setting (prefers-reduced-motion) */
+  Object.defineProperty(P, 'prefersReducedMotion', { enumerable: true, get: function () { return !!mqReduce.matches; } });
   Object.defineProperty(P, 'isCoarse', { enumerable: true, get: function () { return !!mqCoarse.matches; } });
   Object.defineProperty(P, 'isMobile', { enumerable: true, get: function () { return !!mqMobile.matches; } });
 
@@ -113,22 +112,6 @@
       try { win.localStorage.setItem('pf:' + key, typeof val === 'string' ? val : 'j:' + JSON.stringify(val)); return true; } catch (e) { return false; }
     },
     remove: function (key) { delete mem[key]; try { win.localStorage.removeItem('pf:' + key); } catch (e) { /* ignore */ } }
-  };
-
-  /* ---------- "Pause effects": user control over ambient animation (html.fx-paused reuses the reduced-motion CSS) ---------- */
-  P.motion = {
-    paused: function () { return motionPaused; },
-    set: function (on, opts) {
-      on = !!on;
-      if (on === motionPaused) return on;
-      motionPaused = on;
-      root.classList.toggle('fx-paused', on);
-      if (!opts || opts.persist !== false) { if (on) P.store.set('motion', 'paused'); else P.store.remove('motion'); }
-      if (P.prefersReducedMotion) { prog.v = prog.target; writeProgress(); }
-      P.emit('portfolio:motion', { reduced: P.prefersReducedMotion, paused: on });
-      return on;
-    },
-    toggle: function () { return P.motion.set(!motionPaused); }
   };
 
   /* ---------- shared rAF scheduler (pauses while the tab is hidden) ---------- */
@@ -374,8 +357,19 @@
   }
 
   /* ---------- smooth anchors with header offset ---------- */
+  /* The long pages draw a section only when it is near the screen (content-visibility, pages.css) and count the others at a guessed height, so a jump worked out from that layout
+     lands far from its section. Before any jump every section is drawn once: the real heights are then known (and the browser remembers them), and the jump lands on its target. */
+  var drawnAll = false;
+  function drawAll() {
+    if (drawnAll) return;
+    drawnAll = true;
+    if (!doc.querySelector('.pg-sec')) return;
+    root.classList.add('pg-all');
+    void root.offsetHeight;                                 /* lay everything out now, before the jump is measured */
+  }
   function scrollToEl(target, id) {
     if (!target) return;
+    drawAll();
     if (spy.items.indexOf(target) >= 0) { lockSpy(id); setActive(id); }
     var reduce = P.prefersReducedMotion;
     if (id === 'top') { try { win.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); } catch (e0) { win.scrollTo(0, 0); } return; }   /* #top = very top of the page (the sticky header must not be the scroll target) */
@@ -419,6 +413,7 @@
     var beh = P.prefersReducedMotion ? 'auto' : 'smooth';
     var el = id ? doc.getElementById(id) : null;
     if (el) {
+      drawAll();
       if (spy.items.indexOf(el) >= 0) { lockSpy(id); setActive(id); }
       try { el.scrollIntoView({ block: 'start', behavior: beh }); } catch (e) { el.scrollIntoView(true); }
     } else if (!id) {
@@ -432,7 +427,7 @@
     try { var n = performance.getEntriesByType('navigation')[0]; type = n ? n.type : ''; } catch (e) { /* ignore */ }
     try { saved = win.sessionStorage.getItem('pf:scroll:' + location.pathname); } catch (e) { saved = null; }
     y = saved === null ? NaN : parseInt(saved, 10);
-    if ((type === 'reload' || type === 'back_forward') && !isNaN(y)) { jumpTo(y); return y; }
+    if ((type === 'reload' || type === 'back_forward') && !isNaN(y)) { if (y > 0) drawAll(); jumpTo(y); return y; }
     return null;
   }
   function onDocClick(e) {
@@ -442,9 +437,6 @@
 
     var trig = t.closest('[data-open-palette]');
     if (trig) { if (menu.isOpen()) menu.close(false); P.emit('portfolio:open-palette', { source: trig }); return; }
-
-    var accentBtn = t.closest('[data-accent-set]');
-    if (accentBtn) { P.accent(accentBtn.getAttribute('data-accent-set')); return; }
 
     var btn = t.closest('.btn');
     if (btn && !P.prefersReducedMotion) {
@@ -513,7 +505,7 @@
         setInert(false);
         P.lockScroll(false, 'menu');
         doc.removeEventListener('keydown', onKey, true);
-        if (returnFocus && els.burger) { try { els.burger.focus(); } catch (e) { /* ignore */ } }
+        if (returnFocus && els.burger) { try { els.burger.focus({ preventScroll: true }); } catch (e) { /* ignore */ } }   /* preventScroll: the header is sticky, and a plain focus() scrolled the page up when the menu was closed with Escape */
       },
       toggle: function () { if (opened) api.close(true); else api.open(); }
     };
@@ -612,23 +604,6 @@
     return el;
   };
   P.toast.clear = function () { qsa('.toast', toastHost || doc).forEach(dismissToast); };
-  /* ---------- accent colour ---------- */
-  var ACCENTS = ['cyan', 'magenta', 'purple', 'green'];
-  var accentCur = 'cyan';
-  function syncAccentButtons() {
-    qsa('[data-accent-set]').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-accent-set') === accentCur ? 'true' : 'false'); });
-  }
-  P.accent = function (name, opts) {
-    if (name === undefined) return accentCur;
-    if (ACCENTS.indexOf(name) < 0) return accentCur;
-    accentCur = name;
-    root.setAttribute('data-accent', name);
-    if (!opts || opts.persist !== false) P.store.set('accent', name);
-    syncAccentButtons();
-    P.emit('portfolio:accent', { name: name });
-    return name;
-  };
-  P.accent.list = ACCENTS.slice();
 
   /* ---------- clock chips ---------- */
   var clockTimer = 0;
@@ -674,11 +649,9 @@
     els.burger = qs('.burger');
     els.drawer = qs('.drawer');
 
-    /* accent (the inline head script has already applied data-accent before first paint) */
-    var a = root.getAttribute('data-accent') || P.store.get('accent', 'cyan');
-    accentCur = ACCENTS.indexOf(a) >= 0 ? a : 'cyan';
-    root.setAttribute('data-accent', accentCur);
-    syncAccentButtons();
+    /* the accent switch and the pause switch are gone: forget what an earlier visit saved */
+    P.store.remove('accent');
+    P.store.remove('motion');
 
     initObservers();
     collectSections();
@@ -725,8 +698,6 @@
     win.addEventListener('pagehide', saveScroll);
     doc.addEventListener('visibilitychange', function () { if (doc.hidden) saveScroll(); });
 
-    if (!motionPaused && P.store.get('motion', '') === 'paused') P.motion.set(true, { persist: false });
-
     tickClock();
     scheduleTick();                                        /* first tick inside the first animation frame, not synchronously (avoids a forced layout during init) */
     root.classList.add('core-ready');
@@ -766,6 +737,7 @@
         if (restored) { jumpTo(ry); return; }
         var t = hashTarget();
         if (!t) return;
+        drawAll();
         var prev = root.style.scrollBehavior;
         root.style.scrollBehavior = 'auto';
         try { t.scrollIntoView({ block: 'start', behavior: 'auto' }); } catch (e2) { /* ignore */ }

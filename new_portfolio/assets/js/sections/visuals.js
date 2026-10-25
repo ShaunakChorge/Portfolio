@@ -2193,7 +2193,7 @@
   Visual.prototype.readTone = function () {
     var el = this.el, name = el.getAttribute('data-tone');
     if (!name) { var h = el.closest ? el.closest('[data-tone]') : null; name = h ? h.getAttribute('data-tone') : ''; }
-    if (!PAL[name] || name === 'white' || name === 'ink' || name === 'red' || name === 'amber') name = doc.documentElement.getAttribute('data-accent') || 'cyan';
+    if (!PAL[name] || name === 'white' || name === 'ink' || name === 'red' || name === 'amber') name = 'cyan';   /* no tone given: the site accent, which is always cyan */
     if (!PAL[name]) name = 'cyan';
     this.toneName = name;
     this.tone = PAL[name];
@@ -2424,12 +2424,6 @@
     fontsOk = true;
     live.forEach(function (v) { v.relayout(); if (v.w && !(active.indexOf(v) >= 0 && !reduced())) v.refreshFrame(); });
   }
-  function onAccent() {
-    live.forEach(function (v) {
-      if (v.el.getAttribute('data-tone') || (v.el.closest && v.el.closest('[data-tone]'))) return;
-      v.readTone(); v.relayout(); if (v.w && !(active.indexOf(v) >= 0 && !reduced())) v.refreshFrame();
-    });
-  }
   var lastDpr = win.devicePixelRatio || 1;
   function onWinResize() {
     var d = win.devicePixelRatio || 1;
@@ -2463,7 +2457,6 @@
     mountAll();
 
     doc.addEventListener('portfolio:motion', onMotionChange);
-    doc.addEventListener('portfolio:accent', onAccent);
     win.addEventListener('resize', onWinResize, { passive: true });
     doc.addEventListener('visibilitychange', function () { if (!doc.hidden && loopOn && !(P && P.raf) && !ownId) { lastTs = 0; ownId = win.requestAnimationFrame(ownTick); } });
 

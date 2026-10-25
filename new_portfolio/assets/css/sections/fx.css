@@ -1,8 +1,8 @@
 /* =====================================================================
    NEURAL NEON - fx.css  (global effects, no partial; DOM is created at runtime by fx.js)
    Prefix: .fx-*   (+ the [data-tilt] / [data-magnetic] hooks).  Unlayered, so it beats @layer pf.
-   z-index scale (base.css): canvas = --z-bg (after .bg-fixed in the DOM), accent widget = --z-fab,
-   cursor orb = --z-cursor.  Palette and terminal are <dialog>s (top layer), so no z-index is needed.
+   z-index scale (base.css): canvas = --z-bg (after .bg-fixed in the DOM), cursor orb = --z-cursor.
+   Palette and terminal are <dialog>s (top layer), so no z-index is needed.
    ===================================================================== */
 
 @keyframes fx-fade { from { opacity: 0; } to { opacity: 1; } }
@@ -39,7 +39,6 @@ html[data-sec="selected"] .fx-net.is-on, html[data-sec="roles"] .fx-net.is-on { 
 }
 .fx-cur.is-on { opacity: 1; scale: 1; }
 @media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce), print { .fx-cur { display: none; } }
-html.fx-paused .fx-cur { display: none; }
 /*#endregion*/
 
 /*#region 3 tilt + glare, 4 magnetic*/
@@ -101,7 +100,6 @@ html.fx-paused .fx-cur { display: none; }
 .fx-opt__ico { flex: none; display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 9px; background: var(--surface-2); border: 1px solid rgb(var(--tone) / .32); color: rgb(var(--tone-ink)); transition: box-shadow .15s ease, border-color .15s ease; }
 .fx-opt[aria-selected="true"] .fx-opt__ico { border-color: rgb(var(--tone) / .8); box-shadow: 0 0 14px rgb(var(--tone) / .45); }
 .fx-opt__ico .icon { width: 1.125rem; height: 1.125rem; }
-.fx-opt__dot { display: block; width: 14px; height: 14px; border-radius: 50%; background: rgb(var(--sw)); box-shadow: 0 0 10px rgb(var(--sw) / .8); }
 .fx-opt__txt { flex: 1; min-width: 0; display: grid; gap: 1px; }
 .fx-opt__label { font: 500 1rem/1.35 var(--font-body); color: inherit; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .fx-opt__hint { font-size: .8125rem; line-height: 1.35; color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -189,29 +187,7 @@ html.fx-paused .fx-cur { display: none; }
   .fx-term__prj { grid-template-columns: 2.5ch minmax(0, 1fr) auto; }
   .fx-term__prj > :nth-child(2) { display: none; }
 }
-/*#endregion*/
-
-/*#region 7 accent switcher (desktop, bottom-left, collapsed by default)*/
 .fx-term__body:focus-visible { outline: 2px solid rgb(var(--accent)); outline-offset: -3px; }
-.fx-accent { display: none; position: fixed; left: max(1.25rem, env(safe-area-inset-left)); bottom: max(1.25rem, env(safe-area-inset-bottom)); z-index: var(--z-fab); }
-@media (min-width: 80em) and (hover: hover) and (pointer: fine) { .fx-accent { display: block; } }
-html.is-locked .fx-accent { visibility: hidden; }
-.fx-accent__in { display: flex; align-items: center; padding: 3px; border: 1px solid rgb(var(--accent) / .38); border-radius: 999px; background: rgb(6 7 12 / .9); box-shadow: 0 0 18px rgb(var(--accent) / .18); transition: border-color .25s var(--ease), box-shadow .25s var(--ease); }
-.fx-accent.is-open .fx-accent__in, .fx-accent__in:hover { border-color: rgb(var(--accent) / .75); box-shadow: 0 0 22px rgb(var(--accent) / .35); }
-.fx-accent__sws { display: flex; }
-.fx-accent__toggle, .fx-accent__sw, .fx-accent__mo { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; }
-.fx-accent__sep { flex: none; width: 1px; height: 22px; margin-inline: .25rem; background: var(--line-2); }
-.fx-accent__mo { color: var(--text-muted); transition: color .2s var(--ease), background-color .2s var(--ease), box-shadow .2s var(--ease); }
-.fx-accent__mo .icon { width: 1.125rem; height: 1.125rem; }
-.fx-accent__mo:hover { color: rgb(var(--accent-ink)); background: rgb(var(--accent) / .1); }
-.fx-accent__mo[aria-pressed="true"] { color: #000; background: rgb(var(--accent)); box-shadow: 0 0 12px rgb(var(--accent) / .6); }
-.fx-accent__ring { width: 22px; height: 22px; border-radius: 50%; background: conic-gradient(from 210deg, rgb(var(--cyan)), rgb(var(--blue)), rgb(var(--purple)), rgb(var(--magenta)), rgb(var(--green)), rgb(var(--cyan))); box-shadow: 0 0 12px rgb(var(--accent) / .65); transition: transform .5s var(--ease-expo); }
-.fx-accent__toggle:hover .fx-accent__ring { transform: rotate(120deg) scale(1.08); }
-.fx-accent__list { display: flex; align-items: center; max-width: 0; opacity: 0; overflow: hidden; visibility: hidden; transition: max-width .32s var(--ease-expo), opacity .2s ease, visibility 0s linear .32s; }
-.fx-accent.is-open .fx-accent__list { max-width: 16rem; opacity: 1; visibility: visible; transition: max-width .32s var(--ease-expo), opacity .2s ease; }
-.fx-accent__sw i { display: block; width: 20px; height: 20px; border: 2px solid transparent; border-radius: 50%; background: rgb(var(--sw)); box-shadow: 0 0 10px rgb(var(--sw) / .6); transition: transform .2s var(--ease), box-shadow .2s var(--ease), border-color .2s var(--ease); }
-.fx-accent__sw:hover i { transform: scale(1.15); box-shadow: 0 0 16px rgb(var(--sw) / .95); }
-.fx-accent__sw[aria-pressed="true"] i { border-color: #fff; box-shadow: 0 0 14px rgb(var(--sw)); }
 /*#endregion*/
 
 /*#region section numbers (un-layered: wins over @layer pf). A section opts in with data-num="02": "02 // SERVICES" and the outlined ghost numeral*/
@@ -246,4 +222,4 @@ html.fx-overdrive .logo__mark { filter: drop-shadow(0 0 12px rgb(var(--cyan) / .
   .fx-pal__box, .fx-term__box { border-color: CanvasText; background: Canvas; }
   .fx-opt[aria-selected="true"] { outline: 2px solid Highlight; }
 }
-@media print { .fx-net, .fx-orb, .fx-accent, .fx-dialog, .fx-flash { display: none !important; } }
+@media print { .fx-net, .fx-orb, .fx-dialog, .fx-flash { display: none !important; } }
