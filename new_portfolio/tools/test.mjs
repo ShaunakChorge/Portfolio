@@ -219,7 +219,7 @@ try {
     const segDist = (p, a, b) => { const dx = b[0] - a[0], dy = b[1] - a[1], t = Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / (dx * dx + dy * dy))); return Math.hypot(p[0] - a[0] - t * dx, p[1] - a[1] - t * dy); };
     const shapeProblems = [];
     try {
-      for (const [W, H] of [[416, 953], [416, 710], [416, 619], [352, 440], [304, 380], [288, 360]]) {
+      for (const [W, H] of [[416, 364], [352, 308], [304, 266], [288, 252], [416, 520], [416, 953]]) {
         const out = vertices('--np-poly', W, H), inn = vertices('--np-poly-in', W, H);
         if (out.length !== 8 || inn.length !== 8) { shapeProblems.push(`${W}x${H}: ${out.length} and ${inn.length} corners (want 8 and 8)`); continue; }
         const bw = evalLen(cssVar['--np-bw'], 'x', W, H);
@@ -229,7 +229,7 @@ try {
       }
     } catch (e) { shapeProblems.push(String(e.message || e)); }
     check(!shapeProblems.length, 'the portrait polygons are an eight-corner cut-corner shape with four true 45-degree cuts and an even 2px outline, for wide, tall and 4:5 frames', shapeProblems.slice(0, 6).join('\n'));
-    check(/@supports \(width: 1cqw\) \{\s*\.np__stage \{[^}]*container-type: size/.test(pcss) && /@media \(min-width: 80em\) \{\s*\.np--side \{[^}]*height: 100%/.test(pcss) && /@media \(min-width: 80em\) \{ \.pg-split \{ grid-template-columns: minmax\(0, 1fr\) 26rem/.test(fs.readFileSync(path.join(copy, 'assets/css/sections/pages.css'), 'utf8')), 'the frame measures itself (container units) and runs the whole story block from 80em');
+    check(/@supports \(width: 1cqw\) \{\s*\.np__stage \{[^}]*container-type: size/.test(pcss) && /@media \(min-width: 80em\) \{\s*\.np--side \{[^}]*--np-w: 26rem/.test(pcss) && /\.np \{[^}]*--np-over: \.46;[^}]*padding-top: calc\(var\(--np-w\) \* var\(--np-over\)\)/.test(pcss) && /\.np__stage \{[^}]*aspect-ratio: 8 \/ 7/.test(pcss) && /--np-fw: 100cqw/.test(pcss) && /@media \(min-width: 80em\) \{ \.pg-split \{ grid-template-columns: minmax\(0, 1fr\) 26rem/.test(fs.readFileSync(path.join(copy, 'assets/css/sections/pages.css'), 'utf8')), 'the frame is a short 8:7 box that measures itself (container units); the picture is as wide as the box, so the head rises above its top line, and the box keeps headroom for it (from 80em beside the text, 26rem wide)');
     const tiltRule = (pcss.match(/\.np__tilt \{[^}]*\}/) || [''])[0];
     check(/transform: perspective\(900px\) rotateY\(var\(--np-ry\)\) rotateX\(var\(--np-rx\)\)/.test(tiltRule) && /transform-origin: 50% 100%/.test(tiltRule), 'the portrait tilt turns about the bottom edge of the picture, X axis first, so the picture never lifts off the bottom edge of the frame');
     check(!/\.np(?:__(?:stage|hud|fig|tilt|pic))? \{[^}]*(?:overflow:\s*(?:hidden|clip)|contain:\s*(?:paint|strict|content))/.test(pcss) && !/\.np__pic img[^{]*\{[^}]*height:\s*1[1-9]\d%/.test(pcss), 'nothing in the portrait crops the picture or the frame glow (no overflow clip or paint containment on the frame, the figure or the picture, no oversized image)');

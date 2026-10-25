@@ -5,14 +5,17 @@
    The frame is drawn in CSS only. --np-poly is the outer polygon: the gradient outline is that shape filled with the neon gradient. --np-poly-in is the same
    polygon moved in by the outline width: it clips everything inside the frame. Both axes use the same container unit (cqw), so the cuts are true 45-degree cuts
    whatever shape the frame has (a tall one beside the About text, 4:5 when stacked).
-   The picture is never cropped: its width is min(94% of the frame width, 73.5% of the frame height), it stands on the bottom edge and the frame does not clip it.
+   The frame is a short box (8:7). The picture is as wide as the frame, so it is taller than the box: it stands on the bottom edge and the head and shoulders rise above the
+   top line of the polygon (the frame does not clip the picture; .np reserves that headroom above the box with padding-top, --np-over of the width).
    A browser without container units (before Chrome 105, Safari 16, Firefox 110) gets the percentage fallback: the same polygon, but its cuts are 45 degrees only in a
-   square frame (a little steeper in the 4:5 and tall ones), the picture is 90% wide and the head rings sit at 35% of the height. */
+   square frame (a little flatter in this one), and the rings sit at 42% of the height. */
 .np {
   --np-cyan: var(--cyan, 0 255 255);
   --np-magenta: var(--magenta, 255 0 110);
   --np-purple: var(--purple, 181 83 242);
   --np-w: 22rem;
+  --np-over: .46;                        /* headroom above the box for the head: the picture (3:4, as wide as the box) is taller than the 8:7 box by this share of the width */
+  padding-top: calc(var(--np-w) * var(--np-over));
   --np-rx: 0deg; --np-ry: 0deg;          /* tilt, written by portrait.js */
   --np-px: 0; --np-py: 0;                /* pointer -1..1, written by portrait.js */
   position: relative;
@@ -27,21 +30,21 @@
   --np-s: 6.25%;                                             /* small cut: top left and bottom right */
   --np-b: 17.5%;                                             /* big cut: top right and bottom left */
   --np-k: calc(var(--np-bw) * .4142);                        /* a 45-degree edge moved in by bw shifts its corner points along the straight edges by bw * (sqrt 2 - 1) */
-  --np-fw: 90%;                                              /* picture width */
-  --np-hy: 35%;                                              /* where the head is, from the top of the frame: the rings and the light centre on it */
+  --np-fw: 100%;                                             /* picture width: as wide as the frame */
+  --np-rw: 78%;                                              /* width of the rings and the light */
+  --np-hy: 42%;                                              /* where the rings and the light centre, from the top of the frame (behind the shoulders) */
   --np-poly: polygon(var(--np-s) 0, calc(100% - var(--np-b)) 0, 100% var(--np-b), 100% calc(100% - var(--np-s)), calc(100% - var(--np-s)) 100%, var(--np-b) 100%, 0 calc(100% - var(--np-b)), 0 var(--np-s));
   --np-poly-in: polygon(calc(var(--np-s) + var(--np-k)) var(--np-bw), calc(100% - var(--np-b) - var(--np-k)) var(--np-bw), calc(100% - var(--np-bw)) calc(var(--np-b) + var(--np-k)), calc(100% - var(--np-bw)) calc(100% - var(--np-s) - var(--np-k)), calc(100% - var(--np-s) - var(--np-k)) calc(100% - var(--np-bw)), calc(var(--np-b) + var(--np-k)) calc(100% - var(--np-bw)), var(--np-bw) calc(100% - var(--np-b) - var(--np-k)), var(--np-bw) calc(var(--np-s) + var(--np-k)));
   position: relative;
-  aspect-ratio: 4 / 5;                    /* reserves the box: no layout shift */
+  aspect-ratio: 8 / 7;                    /* reserves the box: no layout shift */
   touch-action: pan-y;
 }
 @supports (width: 1cqw) {
   .np__stage {
     container-type: size;                 /* cqw / cqh below measure the frame itself */
     --np-s: 6.25cqw; --np-b: 17.5cqw;
-    --np-fw: min(94cqw, 73.5cqh);
-    --np-fh: calc(var(--np-fw) * 4 / 3);  /* the artwork is 3:4 */
-    --np-hy: calc(100cqh - var(--np-fh) * .72);
+    --np-fw: 100cqw;
+    --np-rw: 78cqw;
   }
 }
 
@@ -79,11 +82,11 @@
           mask-image: radial-gradient(ellipse 80% 75% at 50% var(--np-hy), #000 20%, transparent 78%);
 }
 .np__ring { position: absolute; left: 50%; top: var(--np-hy); aspect-ratio: 1; border-radius: 50%; translate: -50% -50%; }
-.np__ring--a { width: var(--np-fw); border: 1px dashed rgb(var(--np-cyan) / .36); }
-.np__ring--b { width: calc(var(--np-fw) * .72); border: 2px solid transparent; border-top-color: rgb(var(--np-magenta) / .6); border-left-color: rgb(var(--np-purple) / .5); }
+.np__ring--a { width: var(--np-rw); border: 1px dashed rgb(var(--np-cyan) / .36); }
+.np__ring--b { width: calc(var(--np-rw) * .72); border: 2px solid transparent; border-top-color: rgb(var(--np-magenta) / .6); border-left-color: rgb(var(--np-purple) / .5); }
 .np__light {
   position: absolute; left: 50%; top: var(--np-hy);
-  width: calc(var(--np-fw) * 1.1); aspect-ratio: 1; margin: calc(var(--np-fw) * -.55) 0 0 calc(var(--np-fw) * -.55);
+  width: calc(var(--np-rw) * 1.1); aspect-ratio: 1; margin: calc(var(--np-rw) * -.55) 0 0 calc(var(--np-rw) * -.55);
   border-radius: 50%;
   background: radial-gradient(closest-side, rgb(var(--np-cyan) / .20), rgb(var(--np-purple) / .10) 55%, transparent 100%);
   translate: calc(var(--np-px) * 18px) calc(var(--np-py) * 14px);
@@ -147,11 +150,10 @@
 .np__tick--tl { top: -5px; left: -5px; border-right: 0; border-bottom: 0; border-top-left-radius: 5px; }
 .np__tick--br { bottom: -5px; right: -5px; border-left: 0; border-top: 0; border-bottom-right-radius: 5px; border-color: rgb(var(--np-magenta) / .95); filter: drop-shadow(0 0 6px rgb(var(--np-magenta) / .8)); animation-delay: -2s; }
 
-/* beside the About text (from 80em): the frame runs the whole height of the block it shares with the text, from the "Background" label to the last link;
-   below that it is a 4:5 frame after the text */
+/* beside the About text (from 80em): the box is as wide as its column (26rem) and the head rises above its top line; the column centres it against the text.
+   Below that the portrait follows the text, centred, at 22rem (19rem on phones) */
 @media (min-width: 80em) {
-  .np--side { --np-w: 100%; height: 100%; margin: 0; }
-  .np--side .np__stage { height: 100%; min-height: 26rem; aspect-ratio: auto; }
+  .np--side { --np-w: 26rem; margin: 0; }
 }
 
 /* mobile / coarse pointer: lighter dust */

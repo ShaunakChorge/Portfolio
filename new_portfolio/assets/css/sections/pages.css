@@ -87,7 +87,7 @@ html:has(:target) .pg-sec { content-visibility: visible; }
 .pg-split { display: grid; gap: clamp(1.5rem, 1rem + 2vw, 3rem); grid-template-columns: minmax(0, 1fr); }
 .pg-split__main { min-width: 0; }
 .pg-split__aside { min-width: 0; }
-@media (min-width: 80em) { .pg-split { grid-template-columns: minmax(0, 1fr) 26rem; align-items: stretch; } }
+@media (min-width: 80em) { .pg-split { grid-template-columns: minmax(0, 1fr) 26rem; align-items: center; } }
 .pg-hiw { padding: clamp(1.25rem, 1rem + 1.4vw, 2rem); }
 .pg-hiw .dot-list { gap: .9rem; }
 .pg-hiw .dot-list li { font-size: var(--fs-body); line-height: 1.6; }
