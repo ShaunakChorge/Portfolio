@@ -1,22 +1,16 @@
 /* =====================================================================
-   NEURAL NEON - home.css   (HOME engineer, round 3)   the minimal home page
-   Sections after the hero: #offer (02) #selected (03) #bio (04) #roles (05) #process (06) #faq (07) #contact (08, reuses contact.css).
-   Rules of the page: one idea per section, <= 4-6 items, a "View all" pill to the dedicated page.
-   Prefix .hm-* (own classes, no dependence on the old about / services / projects / journey CSS). Un-layered, so it wins over base.css (@layer pf).
-   Contents: 1 shared  2 service cards  3 work cards  4 about + whoami terminal  5 roles  6 process  7 faq  8 contact band  9 reduced motion
+   NEURAL NEON - home.css   the minimal home page
+   Sections after the hero: #stack (marquee.css) #about #offer #selected (the collage, collage.css) #roles #process #faq #contact (reuses contact.css).
+   Rules of the page: one idea per section, few words, plenty of room, a "View all" pill to the dedicated page, every answer open.
+   Prefix .hm-* (own classes, no dependence on the inner-page CSS). Un-layered, so it wins over base.css (@layer pf).
+   Contents: 1 shared  2 about card  3 services  4 roles  5 process  6 faq  7 hire band  8 reduced motion
    ===================================================================== */
 
 /*#region 1 shared*/
 /* the home page ends with its own hire section: the global footer strip would repeat it */
 body[data-page="home"] .footer__cta { display: none; }
-/* base.css measured content-visibility sizes for the old, taller contact section; the home sections are short and measured by the browser */
-body[data-page="home"] #contact { content-visibility: visible; contain-intrinsic-size: none; }
 
-/* "View all ->" pill under every truncated list */
-/* phones: fewer cards and no second contact form, so the home page stays short (the Contact page has the full form) */
-@media (max-width: 639px) { .hm-xs-hide { display: none !important; } }
-@media (min-width: 640px) { .hm-xs-only { display: none !important; } }
-.hm-band__mail { margin: .85rem 0 0; font-size: var(--fs-sm); color: var(--text-muted); overflow-wrap: anywhere; }
+/* "View all ->" pill under every list that links to a dedicated page */
 .hm-more { display: flex; justify-content: center; margin: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem) 0 0; }
 .hm-more--left { justify-content: flex-start; margin-top: 1.25rem; }
 .hm-more .link-arrow {
@@ -25,73 +19,24 @@ body[data-page="home"] #contact { content-visibility: visible; contain-intrinsic
 }
 .hm-more .link-arrow:is(:hover, :focus-visible) { background: rgb(var(--tone) / .13); border-color: rgb(var(--tone) / .8); box-shadow: 0 0 18px rgb(var(--tone) / .3); }
 
-.hm-card__cat { margin: 0; font: 700 .75rem/1.2 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: rgb(var(--tone-ink)); }
-
-/* content-visibility: the below-the-fold home sections are laid out and painted only near the viewport (cheaper first render on phones).
-   contain-intrinsic-size is the CONTENT-box height measured per band (content-visibility switched off, then each section measured); "auto" remembers the real height after the first render.
-   All glows of these sections stay inside them (ghost numerals are clipped on purpose), so the paint containment of content-visibility costs nothing. */
+/* content-visibility: the sections below the ribbon are laid out and painted only near the viewport (a cheaper first render on phones).
+   contain-intrinsic-size is the content-box height of each section; "auto" remembers the real height after the first render. */
 .hm-cv { content-visibility: auto; }
-#offer { contain-intrinsic-size: auto 1400px; } #selected { contain-intrinsic-size: auto 1630px; } #bio { contain-intrinsic-size: auto 1040px; }
-#roles { contain-intrinsic-size: auto 820px; } #process { contain-intrinsic-size: auto 570px; } #faq { contain-intrinsic-size: auto 770px; } #contact { contain-intrinsic-size: auto 580px; }
+#about { contain-intrinsic-size: auto 545px; } #offer { contain-intrinsic-size: auto 960px; } #selected { contain-intrinsic-size: auto 3300px; } #roles { contain-intrinsic-size: auto 455px; }
+#process { contain-intrinsic-size: auto 500px; } #faq { contain-intrinsic-size: auto 1095px; } #contact { contain-intrinsic-size: auto 530px; }
 @media (min-width: 640px) {
-  #offer { contain-intrinsic-size: auto 1150px; } #selected { contain-intrinsic-size: auto 1920px; } #bio { contain-intrinsic-size: auto 800px; }
-  #roles { contain-intrinsic-size: auto 650px; } #process { contain-intrinsic-size: auto 500px; } #faq { contain-intrinsic-size: auto 660px; } #contact { contain-intrinsic-size: auto 1500px; }
+  #about { contain-intrinsic-size: auto 430px; } #offer { contain-intrinsic-size: auto 660px; } #selected { contain-intrinsic-size: auto 2760px; } #roles { contain-intrinsic-size: auto 355px; }
+  #process { contain-intrinsic-size: auto 430px; } #faq { contain-intrinsic-size: auto 770px; } #contact { contain-intrinsic-size: auto 450px; }
 }
 @media (min-width: 1024px) {
-  #offer { contain-intrinsic-size: auto 1030px; } #selected { contain-intrinsic-size: auto 1450px; } #bio { contain-intrinsic-size: auto 670px; }
-  #roles { contain-intrinsic-size: auto 490px; } #process { contain-intrinsic-size: auto 385px; } #faq { contain-intrinsic-size: auto 680px; } #contact { contain-intrinsic-size: auto 1210px; }
+  #about { contain-intrinsic-size: auto 335px; } #offer { contain-intrinsic-size: auto 575px; } #roles { contain-intrinsic-size: auto 355px; }
+  #process { contain-intrinsic-size: auto 315px; } #faq { contain-intrinsic-size: auto 810px; } #contact { contain-intrinsic-size: auto 520px; }
 }
+@media (min-width: 1120px) { #selected { contain-intrinsic-size: auto 1450px; } }
 @media print { .hm-cv { content-visibility: visible; } }
 /*#endregion*/
 
-/*#region 2 service cards (#offer)*/
-#offer { background-image: linear-gradient(rgb(var(--accent) / .04) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--accent) / .04) 1px, transparent 1px); background-size: 30px 30px; background-position: center top; }
-.hm-grid { --gap: clamp(1rem, .6rem + 1.4vw, 1.75rem); }
-.hm-card--svc { gap: 1rem; }
-.hm-card--svc .card__head { align-items: center; }
-.hm-card--svc .card__title { text-wrap: balance; font-size: clamp(1.1rem, 1rem + .4vw, 1.35rem); }
-.hm-card--svc .card__text { color: var(--text-body); font-size: var(--fs-sm); line-height: 1.6; }
-@media (min-width: 1100px) { .hm-card--svc .card__head { flex-direction: column; align-items: flex-start; gap: .9rem; } }
-.hm-card--svc .icon-tile .icon { transition: scale .35s var(--ease-expo), rotate .35s var(--ease-expo), filter .35s var(--ease); }
-@media (hover: hover) { .hm-card--svc:hover .icon-tile .icon { scale: 1.12; rotate: -5deg; filter: drop-shadow(0 0 6px rgb(var(--tone) / .8)); } }
-.hm-card--svc:focus-within .icon-tile .icon { scale: 1.12; filter: drop-shadow(0 0 6px rgb(var(--tone) / .8)); }
-/* keyboard focus: a ring around the whole card (the stretched link is its only focus stop); browsers without :has() keep the ring on the title */
-@supports selector(:has(a)) {
-  .hm-card:has(.card__link:focus-visible) { outline: 2px solid rgb(var(--tone)); outline-offset: 4px; }
-  .hm-card .card__link:focus-visible { outline: none; }
-}
-/*#endregion*/
-
-/*#region 3 selected work (#selected)*/
-.hm-work__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1rem, .6rem + 1.4vw, 1.75rem); margin: 0; padding: 0; list-style: none; }
-@media (min-width: 40em) { .hm-work__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (min-width: 64em) { .hm-work__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.hm-work__item { display: flex; min-width: 0; }
-.hm-card--work { flex: 1; min-width: 0; padding: 0; gap: 0; overflow: hidden; }
-.hm-card__media { position: relative; flex: none; overflow: hidden; background: #05060a; border-bottom: 1px solid rgb(var(--tone) / .3); isolation: isolate; }
-.hm-card__media .pv { --pv-radius: 0; }
-.hm-card__media::after {   /* neon scanlines */
-  content: ""; position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: .5;
-  background: repeating-linear-gradient(to bottom, transparent 0 3px, rgb(0 0 0 / .18) 3px 4px);
-}
-.hm-card__body { display: flex; flex: 1; flex-direction: column; gap: .7rem; padding: clamp(1.1rem, .9rem + .8vw, 1.5rem); }
-.hm-card--work .card__title { font-size: clamp(1.1rem, 1rem + .35vw, 1.3rem); text-wrap: balance; }
-.hm-card--work .card__text { color: var(--text-body); font-size: var(--fs-sm); line-height: 1.6; }
-@media (hover: hover) { .hm-card--work:hover .card__title { color: rgb(var(--tone-ink)); } }
-.hm-card__tags { display: flex; flex-wrap: wrap; gap: .4rem; margin: .1rem 0 0; padding: 0; list-style: none; }
-.hm-card__by { margin: 0; font: 400 .8125rem/1.4 var(--font-mono); letter-spacing: .02em; color: var(--text-muted); }
-@media (max-width: 639px) {   /* phones: six stacked cards stay compact (wide visual strip, tight foot) */
-  .hm-card__media .pv { aspect-ratio: 21 / 9; }
-  .hm-card--work .card__foot { padding-top: .5rem; }
-  .hm-card__body { gap: .55rem; }
-}
-/*#endregion*/
-
-/*#region 4 about in brief + whoami terminal (#bio): the ONLY place the languages are shown*/
-.hm-about__split { --cols: minmax(0, 1fr) minmax(0, 1.25fr); --gap: clamp(1.75rem, 1rem + 3vw, 3.5rem); --align: start; }
-.hm-about__lead { max-width: 46ch; margin: 0; font-size: clamp(1.1875rem, 1.05rem + .6vw, 1.5rem); line-height: 1.55; color: var(--text); text-wrap: pretty; }
-.hm-about__links { display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; margin: 1.1rem 0 0; padding: 0; list-style: none; }
-
+/*#region 2 about card + whoami terminal (#about): the ONLY place the languages are shown*/
 .hm-term {
   position: relative; min-width: 0; overflow: hidden;
   border: 2px solid rgb(var(--purple) / .34); border-radius: var(--radius-md); background: rgb(5 6 11 / .88);
@@ -110,65 +55,75 @@ body[data-page="home"] #contact { content-visibility: visible; contain-intrinsic
 .hm-term__title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .hm-term__tag { margin-left: auto; padding: .1rem .5rem; border: 1px solid var(--line-2); border-radius: 4px; font-size: .75rem; letter-spacing: .06em; }
 @media (max-width: 479px) { .hm-term__tag { display: none; } }
-.hm-term__body { padding: clamp(1.15rem, .8rem + 1.4vw, 2rem); }
+.hm-term__body { padding: clamp(1.25rem, .9rem + 1.4vw, 2rem); }
 .hm-term__prompt { display: flex; align-items: center; gap: .6ch; margin: 0; font: 400 .9375rem/1.4 var(--font-mono); color: var(--text); }
 .hm-term__ps { color: rgb(var(--green-ink)); font-weight: 700; }
 .hm-term__cmd { display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom; width: max-content; max-width: calc(var(--n, 6) * 1ch + 1.5ch); color: rgb(var(--accent-ink)); }
 .hm-term__caret { display: inline-block; width: .6em; height: 1.1em; margin-left: .1ch; background: rgb(var(--accent)); box-shadow: 0 0 8px rgb(var(--accent) / .8); }
-.hm-term__prompt--end { margin-top: 1.25rem; }
-.hm-term__facts { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem; margin: 1.25rem 0 0; padding: 0; }
+.hm-term__facts { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem 2rem; margin: 1.25rem 0 0; padding: 0; }
+@media (min-width: 56em) { .hm-term__facts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }   /* wide: the three facts sit side by side, so the card stays short */
 .hm-term__fact { min-width: 0; padding-left: .95rem; border-left: 2px solid rgb(var(--tone) / .55); }
 .hm-term__fact dt { font: 700 .75rem/1.2 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: rgb(var(--tone-ink)); }
-.hm-term__fact dd { margin: .4rem 0 0; font-size: 1.0625rem; line-height: 1.45; color: var(--text); }
-.hm-term__sub { display: block; margin-top: .25rem; font-size: var(--fs-sm); line-height: 1.5; color: var(--text-muted); }
+.hm-term__fact dd { margin: .4rem 0 0; font-size: 1.0625rem; line-height: 1.5; color: var(--text); }
 .hm-term__tags { display: flex; flex-wrap: wrap; gap: .45rem; margin: 0; padding: 0; list-style: none; }
 .hm-term__tags .tag { font-size: .8125rem; padding: .22rem .65rem; }
+.hm-term__links { display: flex; flex-wrap: wrap; gap: 0 1.75rem; margin: 1.5rem 0 0; padding: 1rem 0 0; border-top: 1px solid var(--line); list-style: none; }
 
 /* entrance: runs once when the card scrolls into view (core adds .is-in to [data-reveal]) */
-.js .hm-term:not(.is-in) .hm-term__fact, .js .hm-term:not(.is-in) .hm-term__prompt--end { opacity: 0; }
+.js .hm-term:not(.is-in) .hm-term__fact { opacity: 0; }
 .js .hm-term.is-in .hm-term__cmd { max-width: 0; animation: hm-type .35s steps(var(--n, 6), end) .1s forwards; }
 .js .hm-term.is-in .hm-term__fact { animation: hm-line .35s var(--ease-out) both; animation-delay: calc(.45s + var(--r, 0) * 80ms); }
-.js .hm-term.is-in .hm-term__prompt--end { animation: hm-line .3s var(--ease-out) 1s both; }
-.js .hm-term.is-in .hm-term__prompt:not(.hm-term__prompt--end) .hm-term__caret { animation: pv-caret .5s steps(1, end) 3 .1s; }
-.hm-term__caret--idle { animation: pv-caret 1s steps(1, end) 12; }          /* blinks ~12 s, then rests (WCAG 2.2.2) */
-.js .hm-term:not(.is-in) .hm-term__caret--idle { animation: none; }
+.js .hm-term.is-in .hm-term__caret { animation: pv-caret .5s steps(1, end) 3 .1s; }
 @keyframes hm-type { from { max-width: 0; } to { max-width: calc(var(--n, 6) * 1ch + 1.5ch); } }
 @keyframes hm-line { from { opacity: 0; translate: -8px 0; } to { opacity: 1; translate: 0 0; } }
 /*#endregion*/
 
-/*#region 5 experience in brief (#roles)*/
-.hm-roles { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1rem, .6rem + 1.4vw, 1.5rem); margin: 0; padding: 0; list-style: none; }
-@media (min-width: 56em) { .hm-roles { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.hm-role {
-  position: relative; display: flex; flex-direction: column; gap: .45rem; min-width: 0; padding: clamp(1.15rem, .9rem + .9vw, 1.6rem) clamp(1.15rem, .9rem + .9vw, 1.6rem) clamp(1.15rem, .9rem + .9vw, 1.6rem) clamp(1.5rem, 1.2rem + 1vw, 1.9rem);
-  border: 1px solid rgb(var(--tone) / .3); border-radius: var(--radius-md);
-  background: linear-gradient(145deg, rgb(var(--tone) / .06), transparent 50%), var(--surface);
-  transition: border-color .3s var(--ease), box-shadow .3s var(--ease);
+/*#region 3 services (#offer): six light cards, an icon and two lines each*/
+.hm-offer { background-image: linear-gradient(rgb(var(--accent) / .04) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--accent) / .04) 1px, transparent 1px); background-size: 30px 30px; background-position: center top; }
+.hm-svcs { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(.75rem, .5rem + 1vw, 1.25rem); margin: 0; padding: 0; list-style: none; }
+@media (min-width: 40em) { .hm-svcs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 64em) { .hm-svcs { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.hm-svc__item { display: flex; min-width: 0; }
+.hm-svc { flex: 1; flex-direction: row; align-items: flex-start; gap: 1.1rem; min-width: 0; padding: clamp(1rem, .8rem + .8vw, 1.4rem); }
+.hm-svc__text { min-width: 0; }
+.hm-svc__title { margin: 0; font-size: clamp(1.05rem, 1rem + .3vw, 1.2rem); line-height: 1.25; text-wrap: balance; }
+@media (min-width: 40em) { .hm-svc__title { min-height: 2.5em; } }   /* two lines are reserved, so every blurb in a row starts at the same height */
+.hm-svc__blurb { margin: .35rem 0 0; font-size: var(--fs-sm); line-height: 1.55; color: var(--text-body); }
+.hm-svc .icon-tile .icon { transition: scale .35s var(--ease-expo), rotate .35s var(--ease-expo), filter .35s var(--ease); }
+@media (hover: hover) { .hm-svc:hover .icon-tile .icon { scale: 1.12; rotate: -5deg; filter: drop-shadow(0 0 6px rgb(var(--tone) / .8)); } }
+.hm-svc:focus-within .icon-tile .icon { scale: 1.12; filter: drop-shadow(0 0 6px rgb(var(--tone) / .8)); }
+/* keyboard focus: a ring around the whole card (the stretched link is its only focus stop); browsers without :has() keep the ring on the title */
+@supports selector(:has(a)) {
+  .hm-svc:has(.card__link:focus-visible) { outline: 2px solid rgb(var(--tone)); outline-offset: 4px; }
+  .hm-svc .card__link:focus-visible { outline: none; }
 }
-.hm-role::before {   /* neon node on the left edge */
-  content: ""; position: absolute; left: -7px; top: 1.45rem; width: 12px; height: 12px; border-radius: 50%;
+/*#endregion*/
+
+/*#region 4 roles (#roles): a quiet timeline, period / title / company*/
+.hm-roles { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1.5rem, 1rem + 1.4vw, 2rem); margin: 0; padding: 0; list-style: none; }
+@media (min-width: 48em) { .hm-roles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, .5rem + 3vw, 3rem); } }
+.hm-role { position: relative; display: flex; flex-direction: column; gap: .4rem; min-width: 0; padding: 0 0 0 1.6rem; border-left: 1px solid rgb(var(--tone) / .4); }
+.hm-role::before {   /* neon node on the line */
+  content: ""; position: absolute; left: -7px; top: .15rem; width: 12px; height: 12px; border-radius: 50%;
   background: var(--bg, #000); border: 2px solid rgb(var(--tone)); box-shadow: 0 0 10px rgb(var(--tone) / .7);
 }
 .hm-role--now::before { background: rgb(var(--tone)); animation: orb-pulse 2.4s ease-in-out infinite; }
-@media (hover: hover) { .hm-role:hover { border-color: rgb(var(--tone) / .6); box-shadow: 0 0 24px rgb(var(--tone) / .22); } }
+@media (min-width: 48em) {   /* wide: the line runs along the top of each role */
+  .hm-role { padding: 1.6rem 0 0; border-left: 0; border-top: 1px solid rgb(var(--tone) / .4); }
+  .hm-role::before { left: 0; top: -7px; }
+}
 .hm-role__period { margin: 0; font: 700 .75rem/1.3 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: rgb(var(--tone-ink)); }
 .hm-role__title { margin: 0; font-size: clamp(1.1rem, 1rem + .35vw, 1.3rem); line-height: 1.3; color: var(--text-strong); }
 .hm-role__org { margin: 0; font-weight: 600; color: var(--text); }
-.hm-role__loc { font-weight: 400; color: var(--text-muted); }
-.hm-role__text { margin: .35rem 0 0; font-size: var(--fs-sm); line-height: 1.6; color: var(--text-body); }
+.hm-role__loc { margin: -.15rem 0 0; font-size: .9375rem; color: var(--text-muted); }
 /*#endregion*/
 
-/*#region 6 how I work (#process)*/
-.hm-steps { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1.25rem, 1rem + 1.4vw, 2rem); margin: 0; padding: 0; list-style: none; counter-reset: none; }
+/*#region 5 process (#process)*/
+.hm-process { padding-bottom: clamp(2rem, 1.4rem + 2.4vw, 3.5rem); }   /* the FAQ below belongs to it: one block, two headings */
+.hm-steps { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1.25rem, 1rem + 1.4vw, 2rem); margin: 0; padding: 0; list-style: none; }
 @media (min-width: 36em) { .hm-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 62em) { .hm-steps { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .hm-step { position: relative; min-width: 0; padding-top: 3.6rem; }
-@media (max-width: 35.99em) {   /* phones: number beside the text, so the text uses the full width */
-  .hm-steps { gap: 1rem; }
-  .hm-step { padding: 0 0 0 3.5rem; min-height: 2.75rem; }
-  .hm-step__n { font-size: 2.1rem; }
-  .hm-step__d { max-width: none; }
-}
 .hm-step__n {
   position: absolute; top: 0; left: 0; font: 900 2.75rem/1 var(--font-display); letter-spacing: -.02em; color: transparent;
   -webkit-text-stroke: 1.5px rgb(var(--tone)); text-shadow: 0 0 14px rgb(var(--tone) / .55);
@@ -178,11 +133,18 @@ body[data-page="home"] #contact { content-visibility: visible; contain-intrinsic
 }
 .hm-step__t { margin: 0 0 .4rem; font-size: clamp(1.15rem, 1.05rem + .4vw, 1.4rem); color: var(--text-strong); }
 .hm-step__d { margin: 0; max-width: 32ch; font-size: var(--fs-sm); line-height: 1.6; color: var(--text-body); }
+@media (max-width: 35.99em) {   /* phones: the number sits beside the text in a column wide enough for the widest digits, so the titles line up and never touch it */
+  .hm-steps { gap: 1rem; }
+  .hm-step { display: grid; grid-template-columns: 4.4rem minmax(0, 1fr); column-gap: .6rem; align-items: start; padding: 0; }
+  .hm-step__n { position: static; grid-area: 1 / 1 / span 2; font-size: 2.1rem; }
+  .hm-step__t, .hm-step__d { grid-column: 2; }
+  .hm-step__d { max-width: none; }
+}
 /*#endregion*/
 
-/*#region 7 faq accordion (#faq)*/
+/*#region 6 faq accordion (#faq): every answer is open on load*/
+.hm-faq { padding-top: 0; }
 .hm-faq__list { display: grid; gap: .75rem; max-width: 56rem; }
-.hm-faq .hm-more { justify-content: flex-start; max-width: 56rem; }
 .hm-qa { border: 1px solid var(--line-2); border-left: 3px solid rgb(var(--accent) / .6); border-radius: var(--radius-md); background: var(--surface); transition: border-color .25s var(--ease), box-shadow .25s var(--ease); }
 .hm-qa[open] { border-color: rgb(var(--accent) / .45); border-left-color: rgb(var(--accent)); box-shadow: 0 0 22px rgb(var(--accent) / .12); }
 @media (hover: hover) { .hm-qa:not([open]):hover { border-color: rgb(var(--accent) / .45); } }
@@ -196,7 +158,7 @@ body[data-page="home"] #contact { content-visibility: visible; contain-intrinsic
 .hm-qa[open] .hm-qa__chev { rotate: 180deg; }
 .hm-qa__a { padding: 0 1.25rem 1.2rem 3.1rem; color: var(--text-body); }
 .hm-qa__a p { max-width: 62ch; margin: 0; line-height: 1.7; }
-/* smooth open / close where the browser supports it (Chrome 131+); elsewhere the panel simply switches. No animation runs at load, so an open item never starts hidden. */
+/* smooth close / open where the browser supports it (Chrome 131+); elsewhere the panel simply switches. No animation runs at load, so an open item never starts hidden. */
 @supports selector(::details-content) {
   .hm-qa { interpolate-size: allow-keywords; }
   .hm-qa::details-content { block-size: 0; overflow: clip; opacity: 0; transition: block-size .32s var(--ease), opacity .25s var(--ease), content-visibility .32s allow-discrete; }
@@ -205,21 +167,20 @@ body[data-page="home"] #contact { content-visibility: visible; contain-intrinsic
 @media (max-width: 479px) { .hm-qa__a { padding-left: 1.1rem; } .hm-qa__q { gap: .75rem; } }
 /*#endregion*/
 
-/*#region 8 hire band (#contact; the rest is contact.css)*/
+/*#region 7 hire band (#contact; the rest is contact.css)*/
 .contact__band-in.hm-band { grid-template-columns: minmax(0, 1fr); }   /* one column */
 .hm-band .contact__lead { max-width: 58ch; }
-.panel p { color: var(--text-body); }   /* the form panel on the home page (inner pages get the same rule from pages.css, which the home page does not load) */
 .hm-band__line { display: inline-flex; align-items: center; gap: .65rem; margin: 1.1rem 0 0; font: 400 .8125rem/1.45 var(--font-mono); letter-spacing: .04em; color: var(--text-muted); }
 /*#endregion*/
 
-/*#region 9 reduced motion*/
+/*#region 8 reduced motion*/
 @media (prefers-reduced-motion: reduce) {
-  .hm-term .hm-term__cmd, .hm-term .hm-term__fact, .hm-term .hm-term__prompt--end, .hm-term .hm-term__caret, .hm-role--now::before { animation: none !important; }
+  .hm-term .hm-term__cmd, .hm-term .hm-term__fact, .hm-term .hm-term__caret, .hm-role--now::before { animation: none !important; }
   .hm-qa::details-content { transition: none !important; }
-  .js .hm-term .hm-term__fact, .js .hm-term .hm-term__prompt--end { opacity: 1 !important; translate: none !important; }
+  .js .hm-term .hm-term__fact { opacity: 1 !important; translate: none !important; }
   .js .hm-term .hm-term__cmd { max-width: none !important; }
 }
-html.fx-paused.js .hm-term .hm-term__fact, html.fx-paused.js .hm-term .hm-term__prompt--end { opacity: 1 !important; translate: none !important; }   /* "Pause effects" shows the final state at once */
+html.fx-paused.js .hm-term .hm-term__fact { opacity: 1 !important; translate: none !important; }   /* "Pause effects" shows the final state at once */
 html.fx-paused.js .hm-term .hm-term__cmd { max-width: none !important; }
 @media (forced-colors: active) {
   .hm-qa, .hm-role, .hm-term { border-color: CanvasText; }

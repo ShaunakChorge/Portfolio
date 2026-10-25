@@ -6,7 +6,7 @@ Live: <https://shaunakchorge.github.io/Portfolio/new_portfolio/> - Code: <https:
 
 ## Repository layout
 
-- `new_portfolio/` - the current site. It builds itself from one content file; see [`new_portfolio/README.md`](new_portfolio/README.md) for the structure, how to edit content, how to choose which projects show, how to rebuild and how to move to a custom domain.
+- `new_portfolio/` - the current site. It builds itself from one content file; see [`new_portfolio/README.md`](new_portfolio/README.md) for the structure, how to edit content, how to rebuild and how to move to a custom domain.
 - `old_portfolio/` - the previous site, kept for reference and still served at `/Portfolio/old_portfolio/`. It is not in the sitemap and its home page carries a `noindex` tag, so search engines list only the new site. Its "Download CV" button points to the current resume PDF. Delete the folder to remove it completely.
 - `.github/` - `workflows/pages.yml` and `scripts/stage-site.mjs`: the prepared, NOT enabled way to serve the new site at the root of `/Portfolio/` (see below).
 - Repo root - `index.html` (redirect to `new_portfolio/`), `404.html`, `robots.txt`, `sitemap.xml` (both written by the build), `.nojekyll`, this README.
@@ -20,7 +20,7 @@ npm i                    # once
 node build.mjs --min     # regenerates every page, the root sitemap.xml and robots.txt, and llms.txt
 ```
 
-Then commit the result. `new_portfolio/tools/project-selector.html` (a small owner tool for picking which projects show) is written by the same command and is not committed; run the build once after cloning to get it.
+Then commit the result.
 
 ## Deploy on GitHub Pages
 

@@ -5,7 +5,7 @@
           data-variant="project-id" data-tone="cyan|magenta|purple|blue" aria-hidden="true">
    The canvases themselves are drawn by assets/js/sections/visuals.js.
    Sizing is deliberately zero-specificity (:where) so a card can set its own height / aspect-ratio / radius:
-       .projects__card .pv { aspect-ratio: 21 / 9; --pv-radius: 12px 12px 0 0; }
+       .tile__media .pv { aspect-ratio: 21 / 9; --pv-radius: 12px 12px 0 0; }
    Prefix: .pv / .pv-*   Keyframes: pvx-*
    ===================================================================== */
 
@@ -46,7 +46,7 @@
 }
 
 /* generated (non-screenshot) visuals carry a visible 'Illustration' strip (added by visuals.js); the canvas stops above it */
-.pv.has-tag { --pv-tag-h: 22px; }
+.pv.has-tag { --pv-tag-h: 18px; }
 .pv > .pv-canvas {
   position: absolute; inset: 0 0 var(--pv-tag-h, 0px) 0; z-index: 1; display: block; width: 100%; height: calc(100% - var(--pv-tag-h, 0px));
   opacity: 0; transition: opacity .6s var(--ease, ease);
@@ -54,12 +54,12 @@
 }
 .pv.is-ready > .pv-canvas { opacity: 1; }
 .pv-tag {
-  position: absolute; z-index: 4; left: 0; right: 0; bottom: 0; height: var(--pv-tag-h, 22px);
-  display: flex; align-items: center; gap: .5rem; padding-inline: .7rem; pointer-events: none;
-  font: 700 .75rem/1 var(--font-mono, ui-monospace, monospace); letter-spacing: .1em; text-transform: uppercase;
-  color: var(--text-muted, #a3adc2); background: rgb(0 0 0 / .5); border-top: 1px solid rgb(var(--pv-tone) / .22);
+  position: absolute; z-index: 4; left: 0; right: 0; bottom: 0; height: var(--pv-tag-h, 18px);
+  display: flex; align-items: center; gap: .4rem; padding-inline: .6rem; pointer-events: none;
+  font: 600 .6875rem/1 var(--font-mono, ui-monospace, monospace); letter-spacing: .08em; text-transform: uppercase;
+  color: var(--text-muted, #a3adc2); background: rgb(0 0 0 / .35); border-top: 1px solid rgb(var(--pv-tone) / .16);
 }
-.pv-tag::before { content: ""; flex: none; width: 6px; height: 6px; rotate: 45deg; border: 1.5px solid rgb(var(--pv-tone)); }
+.pv-tag::before { content: ""; flex: none; width: 5px; height: 5px; rotate: 45deg; border: 1.5px solid rgb(var(--pv-tone)); }
 .pv.pv--failed > .pv-canvas { opacity: 0; }
 
 /* ---------------------------------------------------------------------

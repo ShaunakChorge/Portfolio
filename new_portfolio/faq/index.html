@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../assets/dist/site.inner.min.css?v=fcec523d">
+  <link rel="stylesheet" href="../assets/dist/site.inner.min.css?v=99f76e8a">
 
 <script type="application/ld+json">
 {
@@ -79,7 +79,7 @@
           "name": "Which tools do you use?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "I work mostly in Python. For web services I use FastAPI and PostgreSQL, packaged with Docker (so it runs the same on any server). For AI I use services such as Groq and OpenAI, plus LangChain and ChromaDB for document chatbots. For vision and speech I use OpenCV, PyTorch and TensorFlow. The full list is on the About page."
+            "text": "I work mostly in Python. For web services I use FastAPI and PostgreSQL, packaged with Docker (so it runs the same on any server). For AI I use services such as Groq and OpenAI, plus ChromaDB for document chatbots. For vision and speech I use OpenCV, PyTorch and TensorFlow. The full list is on the About page."
           }
         },
         {
@@ -111,7 +111,7 @@
           "name": "What does a project look like from start to finish?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Four steps. First we agree on the problem and how success will be measured. Then I build a small working prototype on your data. Next I add tests and safety checks. Finally I hand over notes and a walkthrough. You see working software early and get short written updates along the way."
+            "text": "First we agree on the problem and how success will be measured. Then I build a small working prototype on your data. Next I add tests and safety checks. Finally I hand over notes and a walkthrough. You see working software early and get short written updates along the way."
           }
         },
         {
@@ -119,7 +119,7 @@
           "name": "What time zone does a Mumbai freelance AI developer work in?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "I am based in Mumbai, India, and work in Indian Standard Time (IST, UTC+5:30). I work remotely, using written updates and shared code reviews. We can agree meeting times that overlap with your working day. A past remote internship taught me how to keep distant teams in sync."
+            "text": "I am based in Mumbai, India, and work in Indian Standard Time (IST, UTC+5:30). I share written updates and code reviews, so you can always see where the work stands. We can agree meeting times that overlap with your working day. Earlier internships taught me how to keep distant teams in sync."
           }
         },
         {
@@ -135,7 +135,7 @@
           "name": "How long does a freelance AI project take?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It depends on the size of the project. After reading your brief, I give a written estimate for each step. A small prototype is much quicker than a full product. I would rather give you an honest range than promise a date I cannot keep."
+            "text": "It depends on the size of the project. After reading your brief, I give a written estimate for each step. A small prototype is much quicker than a full product. I give you a clear range, and we agree dates in writing before work begins."
           }
         },
         {
@@ -212,22 +212,17 @@
 
         <nav class="nav" aria-label="Primary">
           <ul class="nav__list">
-            <li><a class="nav__link" href="../">Home</a></li>
             <li><a class="nav__link" href="../projects/">Projects</a></li>
             <li><a class="nav__link" href="../services/">Services</a></li>
             <li><a class="nav__link" href="../about/">About</a></li>
-            <li><a class="nav__link" href="../faq/" aria-current="page">FAQ</a></li>
-            <li><a class="nav__link" href="../contact/">Contact</a></li>
+            <li><a class="nav__link" href="../resume/">Resume</a></li>
           </ul>
           <span class="nav__ind" aria-hidden="true"></span>
         </nav>
 
         <div class="site-header__tools">
-          <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST" title="Local time in Mumbai">MUMBAI</span>
-          <button class="cmd" type="button" data-open-palette aria-label="Search, open command palette" aria-keyshortcuts="Control+K Meta+K">
+          <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
-            <span class="cmd__text">Search</span>
-            <kbd class="kbd" data-kbd aria-hidden="true">Ctrl K</kbd>
           </button>
           <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
@@ -240,10 +235,10 @@
 
   <nav class="drawer" id="drawer" aria-label="Mobile">
     <ul class="drawer__list">
-      <li><a class="drawer__link" href="../" style="--i:0"><small>01</small>Home</a></li>
-      <li><a class="drawer__link" href="../projects/" style="--i:1"><small>02</small>Projects</a></li>
-      <li><a class="drawer__link" href="../services/" style="--i:2"><small>03</small>Services</a></li>
-      <li><a class="drawer__link" href="../about/" style="--i:3"><small>04</small>About</a></li>
+      <li><a class="drawer__link" href="../projects/" style="--i:0"><small>01</small>Projects</a></li>
+      <li><a class="drawer__link" href="../services/" style="--i:1"><small>02</small>Services</a></li>
+      <li><a class="drawer__link" href="../about/" style="--i:2"><small>03</small>About</a></li>
+      <li><a class="drawer__link" href="../resume/" style="--i:3"><small>04</small>Resume</a></li>
       <li><a class="drawer__link" href="../faq/" aria-current="page" style="--i:4"><small>05</small>FAQ</a></li>
       <li><a class="drawer__link" href="../contact/" style="--i:5"><small>06</small>Contact</a></li>
     </ul>
@@ -253,7 +248,6 @@
       <a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a>
       <a class="icon-btn" href="mailto:shaunak.chorge@gmail.com" aria-label="Email Shaunak"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
       <button type="button" class="btn btn--ghost btn--sm drawer__motion" data-motion-toggle aria-pressed="false" hidden><svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-pause"/></svg> Pause effects</button>
-      <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST">MUMBAI</span>
     </div>
   </nav>
 
@@ -267,8 +261,8 @@
       <div class="pg-head__main">
         <p class="eyebrow">FAQ</p>
         <h1 class="pg-h1"><span class="ai">AI</span> developer cost in India: freelance FAQ</h1>
-        <p class="pg-lead">Straight answers to the questions people ask before we work together.</p>
-        <p class="pg-answer" data-answer>AI developer cost in India depends on the scope. Shaunak Chorge agrees either a fixed price or hourly billing for each project, after a short brief and before any code is written. He takes select projects alongside his full-time job as an AI Engineer at Claptek Pvt Ltd. He works remotely from Mumbai and answers the common questions below.</p>
+        
+        <p class="pg-answer" data-answer>AI developer cost in India depends on the scope. Shaunak Chorge agrees either a fixed price or hourly billing for each project, after a short brief and before any work begins. He takes select projects alongside his full-time job as an AI Engineer at Claptek Pvt Ltd, and answers the common questions below.</p>
         <div class="pg-actions"><a class="btn btn--solid btn--lg btn--glow" href="../contact/#hire">Hire me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="btn btn--ghost btn--lg" href="../services/">See services <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
       </div>
       
@@ -277,31 +271,31 @@
 </section><section class="section pg-sec" aria-label="Questions and answers"><div class="container"><div class="pg-faqcol"><div class="pg-qgroup"><h2 class="pg-qgroup__h" data-reveal>Working together</h2><div class="pg-qas"><details class="pg-qa" id="faq-existing-code" open data-reveal>
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Can you fix an existing <span class="ai">AI</span> project?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>Yes. Most of my professional work has been inside software that already existed. I added an AI drafting service to a live audit product and sped up the core matching code during an internship. I read the code before changing it, keep changes tested and leave notes explaining each decision.</p><p class="pg-qa__more"><a class="link-arrow" href="../services/ai-backend-fastapi-django/">Python backend and API work <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p></div>
-    </details><details class="pg-qa" id="faq-stack" data-reveal style="--i:1">
+    </details><details class="pg-qa" id="faq-stack" open data-reveal style="--i:1">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Which tools do you use?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>I work mostly in Python. For web services I use FastAPI and PostgreSQL, packaged with Docker (so it runs the same on any server). For AI I use services such as Groq and OpenAI, plus LangChain and ChromaDB for document chatbots. For vision and speech I use OpenCV, PyTorch and TensorFlow. The full list is on the About page.</p><p class="pg-qa__more"><a class="link-arrow" href="../about/#stack">The full list of tools on the About page <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p></div>
-    </details><details class="pg-qa" id="faq-local-models" data-reveal style="--i:2">
+      <div class="pg-qa__a"><p>I work mostly in Python. For web services I use FastAPI and PostgreSQL, packaged with Docker (so it runs the same on any server). For AI I use services such as Groq and OpenAI, plus ChromaDB for document chatbots. For vision and speech I use OpenCV, PyTorch and TensorFlow. The full list is on the About page.</p><p class="pg-qa__more"><a class="link-arrow" href="../about/#stack">The full list of tools on the About page <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p></div>
+    </details><details class="pg-qa" id="faq-local-models" open data-reveal style="--i:2">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Can the <span class="ai">AI</span> run on our own servers instead of an online service?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>Yes. At work I build on AI language models (LLMs) hosted on the client's own servers. This suits systems where no data, prompt or usage record may leave the building. My personal projects use online services such as Groq. We choose based on your privacy needs, cost and answer quality.</p><p class="pg-qa__more"><a class="link-arrow" href="../services/llm-rag-development/">AI chatbot and document assistant work <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p></div>
-    </details><details class="pg-qa" id="faq-nda" data-reveal style="--i:3">
+    </details><details class="pg-qa" id="faq-nda" open data-reveal style="--i:3">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Can a freelancer sign an NDA?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>Yes. I am happy to sign a reasonable mutual NDA (a confidentiality agreement) before we discuss private details. I do not reuse client data or code in other projects. I only name a client or show their work in my portfolio with written approval.</p><p class="pg-qa__more"><a class="link-arrow" href="../contact/#hire">Get in touch <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p></div>
-    </details><details class="pg-qa" id="faq-ownership" data-reveal style="--i:4">
+    </details><details class="pg-qa" id="faq-ownership" open data-reveal style="--i:4">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Who owns the code written by a freelancer?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>The ownership and licence terms are written into our agreement before work begins. The usual arrangement is that you own what you pay for. My freelance work is kept separate from my full-time job and never uses my employer's code or data.</p><p class="pg-qa__more"><a class="link-arrow" href="../contact/#hire">Get in touch <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p></div>
-    </details></div></div><div class="pg-qgroup"><h2 class="pg-qgroup__h" data-reveal>Getting started</h2><div class="pg-qas"><details class="pg-qa" id="faq-process" data-reveal>
+    </details></div></div><div class="pg-qgroup"><h2 class="pg-qgroup__h" data-reveal>Getting started</h2><div class="pg-qas"><details class="pg-qa" id="faq-process" open data-reveal>
       <summary class="pg-qa__q"><h3 class="pg-qa__h">What does a project look like from start to finish?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>Four steps. First we agree on the problem and how success will be measured. Then I build a small working prototype on your data. Next I add tests and safety checks. Finally I hand over notes and a walkthrough. You see working software early and get short written updates along the way.</p><p class="pg-qa__more"><a class="link-arrow" href="../services/#process">How an engagement runs <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p></div>
-    </details><details class="pg-qa" id="faq-location" data-reveal style="--i:1">
+      <div class="pg-qa__a"><p>First we agree on the problem and how success will be measured. Then I build a small working prototype on your data. Next I add tests and safety checks. Finally I hand over notes and a walkthrough. You see working software early and get short written updates along the way.</p><p class="pg-qa__more"><a class="link-arrow" href="../services/#process">How an engagement runs <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p></div>
+    </details><details class="pg-qa" id="faq-location" open data-reveal style="--i:1">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">What time zone does a Mumbai freelance <span class="ai">AI</span> developer work in?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>I am based in Mumbai, India, and work in Indian Standard Time (IST, UTC+5:30). I work remotely, using written updates and shared code reviews. We can agree meeting times that overlap with your working day. A past remote internship taught me how to keep distant teams in sync.</p><p class="pg-qa__more"><a class="link-arrow" href="../contact/">Contact and local time <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p></div>
-    </details></div></div><div class="pg-qgroup"><h2 class="pg-qgroup__h" data-reveal>Cost and timelines</h2><div class="pg-qas"><details class="pg-qa" id="faq-pricing" data-reveal>
+      <div class="pg-qa__a"><p>I am based in Mumbai, India, and work in Indian Standard Time (IST, UTC+5:30). I share written updates and code reviews, so you can always see where the work stands. We can agree meeting times that overlap with your working day. Earlier internships taught me how to keep distant teams in sync.</p><p class="pg-qa__more"><a class="link-arrow" href="../contact/">Contact and local time <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p></div>
+    </details></div></div><div class="pg-qgroup"><h2 class="pg-qgroup__h" data-reveal>Cost and timelines</h2><div class="pg-qas"><details class="pg-qa" id="faq-pricing" open data-reveal>
       <summary class="pg-qa__q"><h3 class="pg-qa__h">How much does it cost to hire an <span class="ai">AI</span> developer in India?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>I do not publish a price list, because projects vary too much. After reading your brief, I suggest either a fixed price for a clearly defined scope, or hourly billing for open-ended work. The price and the terms are agreed in writing before I start.</p><p class="pg-qa__more"><a class="link-arrow" href="../contact/#hire">Ask for a proposal <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p></div>
-    </details><details class="pg-qa" id="faq-timeline" data-reveal style="--i:1">
+    </details><details class="pg-qa" id="faq-timeline" open data-reveal style="--i:1">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">How long does a freelance <span class="ai">AI</span> project take?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>It depends on the size of the project. After reading your brief, I give a written estimate for each step. A small prototype is much quicker than a full product. I would rather give you an honest range than promise a date I cannot keep.</p><p class="pg-qa__more"><a class="link-arrow" href="../contact/#hire">Send a brief for an estimate <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p></div>
-    </details></div></div><div class="pg-qgroup"><h2 class="pg-qgroup__h" data-reveal>After delivery</h2><div class="pg-qas"><details class="pg-qa" id="faq-support" data-reveal>
+      <div class="pg-qa__a"><p>It depends on the size of the project. After reading your brief, I give a written estimate for each step. A small prototype is much quicker than a full product. I give you a clear range, and we agree dates in writing before work begins.</p><p class="pg-qa__more"><a class="link-arrow" href="../contact/#hire">Send a brief for an estimate <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p></div>
+    </details></div></div><div class="pg-qgroup"><h2 class="pg-qgroup__h" data-reveal>After delivery</h2><div class="pg-qas"><details class="pg-qa" id="faq-support" open data-reveal>
       <summary class="pg-qa__q"><h3 class="pg-qa__h">What happens after you hand the project over?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>Handover includes a README (a how-to guide), setup instructions, tests and a walkthrough, so your team can run and extend the work. A bug-fix period and ongoing maintenance can be agreed as part of the scope, and I will write down exactly what is covered.</p><p class="pg-qa__more"><a class="link-arrow" href="../services/#process">See how a project runs <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p></div>
     </details></div></div></div></div></section><section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
@@ -341,7 +335,7 @@
           <span class="logo__word">SHAUNAK</span>
         </p>
         <p class="footer__blurb">AI Engineer at Claptek Pvt Ltd. Taking select freelance AI and backend projects.</p>
-        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India &ndash; working remotely (IST)</p>
+        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India (IST)</p>
         <ul class="footer__soc" aria-label="Profiles">
           <li><a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a></li>
           <li><a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a></li>
@@ -358,9 +352,10 @@
             <li><a href="../projects/">Projects</a></li>
             <li><a href="../services/">Services</a></li>
             <li><a href="../about/">About</a></li>
+            <li><a href="../about/#experience">Experience</a></li>
+            <li><a href="../resume/">Resume</a></li>
             <li><a href="../faq/">FAQ</a></li>
             <li><a href="../contact/">Contact</a></li>
-            <li><a href="../resume/">Resume</a></li>
           </ul>
         </nav>
 
@@ -379,7 +374,7 @@
         <nav class="footer__col" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../projects/observable-ai-backend/">FastAPI tracing with OpenTelemetry</a></li>
+            <li><a href="../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
             <li><a href="../projects/agentic-honeypot/">AI scam honeypot</a></li>
             <li><a href="../projects/deepfake-video-detection/">Deepfake video detection</a></li>
@@ -455,10 +450,10 @@
     <symbol id="i-loader" viewBox="0 0 24 24"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/></symbol>
   </svg>
 
-  <script defer src="../assets/dist/js/core.min.js?v=53badac3"></script>
+  <script defer src="../assets/dist/js/core.min.js?v=d41b0d5b"></script>
   <script defer src="../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
   <script defer src="../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../assets/dist/js/fx.min.js?v=2e06fef0"></script>
-  <script defer src="../assets/dist/js/pages.min.js?v=794591ab"></script>
+  <script defer src="../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
+  <script defer src="../assets/dist/js/pages.min.js?v=efc0e441"></script>
 </body>
 </html>

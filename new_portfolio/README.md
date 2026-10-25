@@ -14,20 +14,20 @@ npm test                 # builds a copy in a temp folder and checks it; changes
 
 One run does, in order:
 
-1. **Generators** write the partials and script data from `content/content.json` and `projects.config.json`: the hand-off files in `src/generated/` (hero, home sections, home page data), the data block inside `assets/js/sections/fx.js`, and the owner's project selector, `tools/project-selector.html`.
+1. **Generators** write the partials and script data from `content/content.json` and `projects.config.json`: the hand-off files in `src/generated/` (hero, home sections, home page data), and the data block inside `assets/js/sections/fx.js`.
 2. **Assemble** `index.html` (the home page) from `src/shell.html` and the partials.
 3. **Pages** (`tools/pages/build-pages.mjs`, run in the same process): `services/`, `projects/`, `about/`, `faq/`, `contact/`, `resume/`, one case study per entry in `casestudy`, then `llms.txt` and `llms-full.txt` here and, once, `sitemap.xml` and `robots.txt` in the repo root (next to the redirect `index.html`).
-4. **Guard** scans the output for the words in `tools/rules.mjs`, checks that the spoken-language list appears exactly once (home page About card) and that every internal link and every `#anchor` resolves, including the `contact/?topic=...#hire` links behind the "Hire me" buttons. The run exits non-zero if anything is wrong.
+4. **Guard** scans the output for the words in `tools/rules.mjs`, checks every built page and llms file for tallies, keyboard-shortcut hints, closed `<details>` and a Home link in the navigation, checks that the spoken-language list appears exactly once (home page About card) and that every internal link and every `#anchor` resolves, including the `contact/?topic=...#hire` links behind the "Hire me" buttons. The run exits non-zero if anything is wrong.
 
 It prints a summary (pages, services, case studies, sitemap URLs). Other flags: `--skip-gen` reuses the existing files in `src/generated/`; `--only=hero,home-faq --out=preview-x.html` assembles one throwaway preview page with readable assets (delete it afterwards).
 
-`npm test` copies the site to a temp folder and checks that: the build passes; a second build writes byte-identical files; the files in the repo equal a clean build (if not, the deployed pages are stale: run `npm run build`); and the link guard really catches a renamed `#hire` anchor.
+`npm test` copies the site to a temp folder and checks that: the build passes; a second build writes byte-identical files; the files in the repo equal a clean build (if not, the deployed pages are stale: run `npm run build`); the link guard really catches a renamed `#hire` anchor; the keyword guard catches each rule it states; and the owner's rules hold on the real pages (the selected projects in priority order, no tallies or shortcut hints, nothing collapsed, Personal builds on /projects/ only, one Traceable AI Backend, the three "How I work" sentences, the resume PDF unchanged) and are caught when broken.
 
 ## Structure
 
 ```
 content/content.json     THE source of copy and facts: profile, services, projects, experience, FAQ, page titles, SEO
-projects.config.json     THE project list: which projects show, which have a case study, which are featured (see below)
+projects.config.json     THE project list: which projects show (in priority order), their collage tile sizes, which have a case study (see below)
 build.mjs                the build (one command) and the shared page renderer
 package.json             esbuild (minifier) is the only dependency; package-lock.json pins its version
 src/
@@ -38,10 +38,9 @@ src/
 tools/
   lib.mjs                paths, esc, icon: the one shared helper file
   rules.mjs              the ONE list of banned words and patterns (generators and guard)
-  selection.mjs          reads projects.config.json: the one place that decides which projects show
+  selection.mjs          reads and checks projects.config.json: the one place that decides which projects show and how the collage is laid out
   hero/ home/ fx/        generators for the home page
-  pages/                 page generators and SEO files (sitemap, robots, llms); ui.mjs holds the shared contact form and channel list
-  selector/              generator + template for tools/project-selector.html (owner tool, open it in a browser)
+  pages/                 page generators and SEO files (sitemap, robots, llms); ui.mjs holds the shared UI pieces, including the contact form and channel list used on /contact/
   test.mjs               npm test
   optional.mjs           loads Playwright and sharp, which are installed on demand and are not part of the build
   photo/                 one-off: turns a portrait artwork into the neon portrait images
@@ -66,17 +65,18 @@ Open `content/content.json`, change the text, run `npm run build`. Every field i
 |---|---|
 | `seo` | `site_url` (the one base-URL value), `deploy_root` + `site_root_url` (the one-flag move to the root of `/Portfolio/`, see the root README) and `entity` (the one description sentence of Person, about lead and llms files) |
 | `pages` | title, description, H1, first paragraph (`direct_answer`), section titles (`h2`) and extra questions (`faqs`) of the home, hub and single pages |
-| `profile`, `hero`, `stats` | home hero, contact details, status line (the numbers of `stats` are computed, only the labels are typed) |
-| `services[]` | the six service pages and the home service cards (title, description, H1, `direct_answer`, `h2`, `faqs`); `tone` and `icon` set the colour and icon everywhere |
-| `projects[]` | cards, case studies (`case_study.seo` = title, description and H1 of the page; `case_study.h2` = its section titles; `faq`), the project lists, the resume view |
+| `profile`, `hero` | home hero, contact details, status line |
+| `services[]` | the service pages and the home service list (title, description, H1, `direct_answer`, `h2`, `faqs`); `tone` and `icon` set the colour and icon everywhere |
+| `projects[]` | collage tiles, case studies (`case_study.seo` = title, description and H1 of the page; `case_study.h2` = its section titles; `faq`), the Personal builds rows (`personal_line`), the resume view. `origin` (`Client`, `Academic` or `Personal`) is the small tag on a collage tile; leave it out when the facts do not say |
 | `experience`, `education`, `certifications`, `achievements` | about page, resume view, home roles |
 | `faq_all` | groups of questions. A group with `page: "home"` or `page: "contact"` is shown on that page only; the others make up the FAQ page and its schema |
 | `keywords.json` (own file) | the approved keyword map, see "Keywords and the SEO guard" |
-| `skills` | the two stack tiers: Core stack, Also work with |
-| `about.whoami` | the terminal card on the home page, the only place the spoken languages appear |
+| `skills` | the two stack tiers (Core stack, Also work with) on the About page, and `ribbon`, the moving tech stack strip on the home page (each name must also be in `core` or `also`; `daily` marks the core ones) |
+| `how_i_work` | the three plain sentences of the "How I work" block (Services and About pages) |
+| `about` | `whoami`: the About page card and the home About card (the only place the spoken languages appear; `education.year` is the degree year); `home_blurb` and `home_prompt`: the short home About card text; `page`: About page extras |
 | `meta.generated` | the `lastmod` date of `sitemap.xml` |
 
-Rules the guard enforces (all in `tools/rules.mjs`): no project years, no list of spoken languages outside the home About card, co-builders credited by plain-text name only (no links to other people's profiles), no banned words. Extensions I can offer on case studies are listed only under "Extensions I can build for you".
+Rules the guard enforces (all in `tools/rules.mjs`): no project years, no list of spoken languages outside the home About card, co-builders credited by plain-text name only (no links to other people's profiles), no banned words, and no counts of projects, roles, services or finishes anywhere (text, filter chips, JSON-LD, llms files). Every `<details>` is open by default. Extensions I can offer on case studies are listed only under "Extensions I can build for you".
 
 To add a project, add an object to `projects[]` (copy an existing one: `id`, `slug`, `title`, `card_blurb`, `stack`, `service_tags`, `role`, ...). A project gets a case-study page only if it has a `case_study` block and its id is in `casestudy` below. The project `role` is shown twice on a case study (key facts and Results), from one field.
 
@@ -100,22 +100,20 @@ The research behind the map is autocomplete data (a proxy for demand, not search
 
 ## Choose which projects show
 
-`projects.config.json` is the only place that decides it. Every generator reads it through `tools/selection.mjs`: the home stat and cards, the terminal and palette data, the footer, the project pages, the resume page and PDF, the sitemap and llms files.
+`projects.config.json` is the only place that decides it. Every generator reads it through `tools/selection.mjs`, which also checks it: an unknown id, a case study missing from `show`, a project in two lists or a desktop grid with a gap or a wrongly shaped tile stops the build with a clear message.
 
 ```json
-{ "show": [], "casestudy": [], "more": [], "home_featured": [], "footer_work": [], "resume_featured": [] }
+{ "show": [], "tile_size": {}, "desktop_grid": [], "casestudy": [], "personal": [], "footer_work": [], "resume_featured": [] }
 ```
 
-- `show`: the selected projects (cards on the projects page, counted in the home stat).
-- `casestudy`: the ones that also get their own page. Each must be in `show` and have a `case_study` block in the content file.
-- `more`: the compact "More projects" list. A project that is also in `show` appears only in `show`.
-- `home_featured` (up to 6), `footer_work` (up to 4), `resume_featured` (up to 4): case studies shown in those places, in the order you list them.
+- `show`: the selected projects in priority order (rank 1 first). They fill the project collage on the home page and on /projects/. The collage is built for exactly the projects listed here.
+- `tile_size`: `"wide"` (2 columns x 1 row) or `"big"` (2 x 2) for the ids that are larger than one cell. Every other selected project is a small 1 x 1 tile.
+- `desktop_grid`: the 4-column desktop layout as rows of ranks. A rank repeats across the cells its tile covers, and the number after the last rank is the plain "All projects" link tile. The grid must be a full rectangle. Tablet and phone follow the rank order.
+- `casestudy`: the selected ones that also get their own page. Each must be in `show` and have a `case_study` block in the content file.
+- `personal`: "Personal builds", the small projects listed as open rows on /projects/ only, each with its one-line `personal_line`. A project in `show` is never listed here.
+- `footer_work` (up to 4), `resume_featured` (up to 4): case studies shown in those places, in the order you list them.
 
-**Ordering rule for the three featured lists.** The ids you list come first, in your order. An id that is no longer a case study is skipped with a warning. If fewer than the maximum remain, the first case studies of `casestudy` (in that list's order) fill the rest. So a new selection never leaves a gap or a link to a page that does not exist, and you can leave a featured list out to get the first case studies.
-
-An unknown id, a case study missing from `show`, or a case study without a `case_study` block stops the build with a clear message.
-
-The build also writes `tools/project-selector.html` (git-ignored, opens straight from disk): open it in a browser, tick projects, download the JSON (it keeps `more` and the featured lists), save it as `projects.config.json` and rebuild.
+**Ordering rule for the two featured lists.** The ids you list come first, in your order. An id that is no longer a case study is skipped with a warning. If fewer than the maximum remain, the first case studies of `casestudy` (in that list's order) fill the rest, so a new selection never leaves a gap or a link to a page that does not exist.
 
 ## Deploy
 
@@ -158,9 +156,9 @@ The **social image** is a design: its words (name, role, employer, the four serv
 
 ## Single sources (so pages cannot drift)
 
-- Which projects show, are case studies or are featured: `projects.config.json` through `tools/selection.mjs`.
+- Which projects show, in which order and tile size, which are case studies or featured: `projects.config.json` through `tools/selection.mjs`.
 - Entity sentence: `seo.entity` in `content/content.json` is the Person description in the JSON-LD of the home page and /about/, the /about/ lead and the first line of `llms.txt` / `llms-full.txt`.
-- Contact facts (e-mail, phone, LinkedIn, GitHub, Instagram, Formspree): `profile` in the content file. The footer links, the JSON-LD `sameAs`, the contact form and channel list (one renderer in `tools/pages/ui.mjs`, used by the home page and /contact/) and the terminal data all read them from there.
+- Contact facts (e-mail, phone, LinkedIn, GitHub, Instagram, Formspree): `profile` in the content file. The footer links, the JSON-LD `sameAs`, the contact form and channel list (one renderer in `tools/pages/ui.mjs`, used on /contact/ only; the home page ends with a hire call to action that links there) and the terminal data all read them from there.
 - Service colour and icon: `services[].tone` and `services[].icon`.
 - Banned words: `tools/rules.mjs`.
 - Footer service and work lists are generated from `services[].page_slug` / `nav_label` and `footer_work` (`footerParts` in `build.mjs`), so a footer link always points at a page that exists. The build guard also resolves every internal link.
@@ -168,7 +166,7 @@ The **social image** is a design: its words (name, role, employer, the four serv
 
 ## Notes
 
-- **Page bundles.** The home page loads every style and script except `pages.css` (the inner-page styles). Every other page loads one shared stylesheet (`assets/dist/site.inner.min.css`, so a visitor keeps one cached file across pages) without the home-only hero and home code, and adds the scripts for the project art (visuals), the portrait, or the contact form (`contact-form.js`: home and /contact/ only) only when the page uses them. The floating contact button (`footer.css`, `contact.js`) is on every page. File addresses carry a `?v=` content hash, so a new deploy can never mix with an old cached file.
+- **Page bundles.** The home page loads every style and script except `pages.css` (the inner-page styles). Every other page loads one shared stylesheet (`assets/dist/site.inner.min.css`, so a visitor keeps one cached file across pages) without the home-only hero and home code, and adds the scripts for the project art (visuals), the project collage, the portrait, or the contact form (`contact-form.js`: /contact/ only, the home page has no form) only when the page uses them. The floating contact button (`footer.css`, `contact.js`) is on every page. File addresses carry a `?v=` content hash, so a new deploy can never mix with an old cached file.
 - **Search engines on GitHub Pages.** `robots.txt` and `llms.txt` are only read from the root of a domain, so on the `github.io/Portfolio/` project address crawlers will not find them. Submit `https://shaunakchorge.github.io/Portfolio/sitemap.xml` in Google Search Console and Bing Webmaster Tools. After a custom domain is set (`seo.site_url`), serve `robots.txt`, `sitemap.xml` and `llms.txt` from the domain root.
 - `sitemap.xml` `lastmod` comes from `meta.generated` in the content file (override with `PF_LASTMOD=2026-12-31`), so rebuilding without content changes gives identical files.
 - The contact form posts to Formspree (`profile.links.formspree`); nothing else leaves the page.

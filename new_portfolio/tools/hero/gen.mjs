@@ -1,10 +1,9 @@
-// Generates src/generated/hero.html (HOME hero: neon portrait + compact typed shaunak.py window + 3 modest stats)
-// from content/content.json (hero, profile, stats) and the project selection (the "projects" stat). Run by build.mjs, or alone:  node tools/hero/gen.mjs
+// Generates src/generated/hero.html (HOME hero: name, role line, one sentence, two buttons, the freelance line and the typed shaunak.py window)
+// from content/content.json (hero, profile). Run by build.mjs, or alone:  node tools/hero/gen.mjs
 import fs from 'node:fs';
 import path from 'node:path';
-import { GENERATED, readContent, statValues, esc, escText, icon } from '../lib.mjs';
+import { GENERATED, readContent, esc, escText, icon } from '../lib.mjs';
 import { findBanned } from '../rules.mjs';
-import { loadSelection } from '../selection.mjs';
 
 const C = readContent();
 const OUT = GENERATED;
@@ -129,74 +128,7 @@ const codeHtml = codeLines.map((raw, idx) => {
 }).join('\n');
 const codePlain = codeLines.join('\n');
 
-/* stats: modest, honest. projects = size of the active selection (projects.config.json, computed, never typed) */
-const STAT_UI = { roles: { icon: 'briefcase', tone: 'magenta' }, podiums: { icon: 'trophy', tone: 'purple' }, projects: { icon: 'layers', tone: 'blue' } };
-const values = statValues(C, loadSelection(C));
-const stats = C.stats.map(s => ({ ...s, value: values[s.id] }));
-if (stats.length !== 3) { console.error('exactly 3 stats expected'); process.exit(1); }
-const statsHtml = stats.map(s => {
-  const u = STAT_UI[s.id] || { icon: 'star', tone: 'cyan' };
-  return `        <li class="stat hero__stat" data-tone="${u.tone}">
-          ${icon(u.icon)}
-          <div class="hero__statbody">
-            <span class="stat__num" data-count="${s.value}">${s.value}</span>
-            <span class="stat__label">${esc(s.label)}</span>
-          </div>
-        </li>`;
-}).join('\n');
-
 const H1_SUFFIX = C.pages.home.h1_sr_suffix;                      // ", AI Engineer taking select freelance AI and backend projects"
-/* the photos start after the first paint (hero.js swaps data-src / data-srcset in): they never compete with the CSS and fonts that paint the text */
-const PIXEL = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-const SIZES = '(min-width: 1280px) 21rem, (min-width: 1024px) 19rem, (min-width: 640px) 17rem, 13rem';
-const portrait = `<figure class="np" data-neon-portrait data-reveal="scale">
-            <div class="np__stage">
-              <div class="np__back" aria-hidden="true">
-                <span class="np__grid"></span>
-                <span class="np__ring np__ring--a"></span>
-                <span class="np__ring np__ring--b"></span>
-                <span class="np__light"></span>
-              </div>
-              <div class="np__tilt">
-                <div class="np__float">
-                  <div class="np__fig">
-                    <picture class="np__pic" data-late>
-                      <source type="image/avif" data-srcset="{{base}}assets/img/portrait/portrait-480.avif 480w, {{base}}assets/img/portrait/portrait-800.avif 800w" sizes="${SIZES}">
-                      <source type="image/webp" data-srcset="{{base}}assets/img/portrait/portrait-480.webp 480w, {{base}}assets/img/portrait/portrait-800.webp 800w" sizes="${SIZES}">
-                      <img class="np__img" src="${PIXEL}" data-src="{{base}}assets/img/portrait/portrait-800.webp" width="800" height="1067" decoding="async" alt="Illustrated portrait of Shaunak Chorge, a freelance AI engineer in Mumbai, smiling and wearing glasses and a dark jacket with arms crossed">
-                    </picture>
-                    <noscript><img class="np__img np__img--ns" src="{{base}}assets/img/portrait/portrait-800.webp" width="800" height="1067" alt="Illustrated portrait of Shaunak Chorge, a freelance AI engineer in Mumbai, smiling and wearing glasses and a dark jacket with arms crossed"></noscript>
-                    <picture class="np__rim" aria-hidden="true" data-late>
-                      <source type="image/avif" data-srcset="{{base}}assets/img/portrait/rim-480.avif 480w, {{base}}assets/img/portrait/rim-800.avif 800w" sizes="${SIZES}">
-                      <source type="image/webp" data-srcset="{{base}}assets/img/portrait/rim-480.webp 480w, {{base}}assets/img/portrait/rim-800.webp 800w" sizes="${SIZES}">
-                      <img src="${PIXEL}" data-src="{{base}}assets/img/portrait/rim-800.webp" width="800" height="1067" decoding="async" alt="">
-                    </picture>
-                    <span class="np__scan"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="np__dust" aria-hidden="true">
-                <i style="--x:12%;--s:3px;--d:9s;--t:0s;--c:var(--cyan,0 255 255)"></i>
-                <i style="--x:24%;--s:2px;--d:11s;--t:-3s;--c:var(--magenta,255 0 110)"></i>
-                <i style="--x:36%;--s:4px;--d:13s;--t:-6s;--c:var(--purple,181 83 242)"></i>
-                <i style="--x:48%;--s:2px;--d:10s;--t:-1s;--c:var(--cyan,0 255 255)"></i>
-                <i style="--x:60%;--s:3px;--d:12s;--t:-8s;--c:var(--magenta,255 0 110)"></i>
-                <i style="--x:72%;--s:2px;--d:9.5s;--t:-4s;--c:var(--cyan,0 255 255)"></i>
-                <i style="--x:84%;--s:4px;--d:14s;--t:-10s;--c:var(--purple,181 83 242)"></i>
-                <i style="--x:92%;--s:2px;--d:11.5s;--t:-2s;--c:var(--cyan,0 255 255)"></i>
-                <i style="--x:18%;--s:2px;--d:12.5s;--t:-7s;--c:var(--purple,181 83 242)"></i>
-                <i style="--x:66%;--s:3px;--d:10.5s;--t:-5s;--c:var(--magenta,255 0 110)"></i>
-              </div>
-              <div class="np__hud" aria-hidden="true">
-                <span class="np__corner np__corner--tl"></span>
-                <span class="np__corner np__corner--tr"></span>
-                <span class="np__corner np__corner--bl"></span>
-                <span class="np__corner np__corner--br"></span>
-              </div>
-              <span class="np__tag"><span class="np__dot" aria-hidden="true"></span>Mumbai, India &middot; IST</span>
-            </div>
-          </figure>`;
-
 const hero = `<section id="home" class="hero" data-rail="01·intro" aria-labelledby="hero-title" data-roles="${esc(roles.join('|'))}">
   <div class="hero__bg" aria-hidden="true">
     <div class="bg-grid bg-grid--fade" data-parallax="0.3"></div>
@@ -209,18 +141,8 @@ const hero = `<section id="home" class="hero" data-rail="01·intro" aria-labelle
   <div class="container hero__wrap">
     <div class="hero__grid">
 
-      <div class="hero__photo">
-          ${portrait}
-      </div>
-
       <div class="hero__copy">
-        <p class="badge hero__status" data-hero-in="rise" style="--d:0">
-          <span class="hero__status-main"><span class="badge__dot" aria-hidden="true"></span><span class="hero__status-txt">${esc(P.status_badge.text.replace('@', 'at'))}</span></span>
-          <span class="sr-only">, </span>
-          <span class="hero__loc">${icon('map-pin', 'icon--sm')}${esc(P.location)}</span>
-        </p>
-
-        <h1 id="hero-title" class="hero__title" data-hero-in="rise" style="--d:70"><span class="hero__name hero__name--1 glow-cyan">${esc(H.headline_first)}</span> <span class="hero__name hero__name--2 glow-magenta">${esc(H.headline_second)}</span><span class="sr-only">${esc(H1_SUFFIX)}</span></h1>
+        <h1 id="hero-title" class="hero__title" data-hero-in="rise" style="--d:0"><span class="hero__name hero__name--1 glow-cyan">${esc(H.headline_first)}</span> <span class="hero__name hero__name--2 glow-magenta">${esc(H.headline_second)}</span><span class="sr-only">${esc(H1_SUFFIX)}</span></h1>
 
         <p class="hero__roles" data-hero-in style="--d:220">
           <span class="sr-only">Roles: ${esc(roles.join(', '))}.</span>
@@ -230,42 +152,36 @@ const hero = `<section id="home" class="hero" data-rail="01·intro" aria-labelle
         <p class="hero__lede" data-hero-in style="--d:320">${esc(H.lede)}</p>
 
         <div class="hero__cta" data-hero-in style="--d:420">
-          <a class="btn btn--solid btn--glow" href="{{base}}${esc(H.cta_primary.href)}#hire" data-magnetic>${esc(H.cta_primary.label)} ${icon('arrow-right')}</a>
-          <a class="btn btn--purple" href="{{base}}${esc(H.cta_secondary.href)}" data-magnetic>${esc(H.cta_secondary.label)} ${icon('arrow-right')}</a>
+          <a class="btn btn--solid btn--glow" href="{{base}}${esc(H.cta_secondary.href)}" data-magnetic>${esc(H.cta_secondary.label)} ${icon('arrow-right')}</a>
+          <a class="btn btn--purple" href="{{base}}${esc(H.cta_primary.href)}#hire" data-magnetic>${esc(H.cta_primary.label)} ${icon('arrow-right')}</a>
           <p class="hero__free"><span class="hero__free-dot" aria-hidden="true"></span>${esc(H.freelance_line)}</p>
         </div>
       </div>
 
-      <div class="hero__stage">
-        <figure class="hero__code" data-hero-in="right" style="--d:380" aria-labelledby="hero-code-cap">
-          <figcaption id="hero-code-cap" class="sr-only">${esc(H.code_snippet_file)}, a short Python sketch of how a project runs from idea to working product.</figcaption>
-          <div class="sr-only">
-            <pre><code>${escText(codePlain)}</code></pre>
-          </div>
+      <figure class="hero__code" data-hero-in="right" style="--d:380" aria-labelledby="hero-code-cap">
+        <figcaption id="hero-code-cap" class="sr-only">${esc(H.code_snippet_file)}, a short Python sketch of how a project runs from idea to working product.</figcaption>
+        <div class="sr-only">
+          <pre><code>${escText(codePlain)}</code></pre>
+        </div>
 
-          <div class="hero__window">
-            <div class="hero__bar">
-              <span class="hero__dots" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="hero__tab" aria-hidden="true">${icon('file-code', 'icon--sm')}${esc(H.code_snippet_file)}</span>
-              <button class="hero__ctrl" type="button" data-hero-ctrl data-state="skip" aria-label="Skip the typing animation" hidden>
-                <span class="hero__ctrl-skip">Skip ${icon('arrow-right', 'icon--sm icon--still')}</span><span class="hero__ctrl-replay">${icon('play', 'icon--sm icon--still')} Replay</span>
-              </button>
-            </div>
-            <div class="hero__editor" aria-hidden="true">
-              <div class="bg-scan hero__scan"></div>
-              <ol class="hero__lines">
-${codeHtml}
-              </ol>
-            </div>
+        <div class="hero__window">
+          <div class="hero__bar">
+            <span class="hero__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="hero__tab" aria-hidden="true">${icon('file-code', 'icon--sm')}${esc(H.code_snippet_file)}</span>
+            <button class="hero__ctrl" type="button" data-hero-ctrl data-state="skip" aria-label="Skip the typing animation" hidden>
+              <span class="hero__ctrl-skip">Skip ${icon('arrow-right', 'icon--sm icon--still')}</span><span class="hero__ctrl-replay">${icon('play', 'icon--sm icon--still')} Replay</span>
+            </button>
           </div>
-        </figure>
-      </div>
+          <div class="hero__editor" aria-hidden="true">
+            <div class="bg-scan hero__scan"></div>
+            <ol class="hero__lines">
+${codeHtml}
+            </ol>
+          </div>
+        </div>
+      </figure>
 
     </div>
-
-    <ul class="stats hero__stats" data-hero-in style="--d:560" aria-label="At a glance">
-${statsHtml}
-    </ul>
   </div>
 </section>
 `;
@@ -276,4 +192,4 @@ if (hit) { console.error('FORBIDDEN text in hero:', hit); process.exit(1); }
 
 fs.mkdirSync(OUT, { recursive: true });
 fs.writeFileSync(path.join(OUT, 'hero.html'), hero);
-console.log(`hero.html ${hero.length}B | code lines: ${codeLines.length} | stats: ${stats.map(s => s.value).join('/')}`);
+console.log(`hero.html ${hero.length}B | code lines: ${codeLines.length}`);

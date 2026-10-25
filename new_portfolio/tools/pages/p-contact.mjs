@@ -5,7 +5,7 @@ import { esc, ico, pageHead, section, qaList, title as ttl, ctx, crumbNode, pers
 const STEPS = [
   { step: 'Send a brief', detail: 'What you want to build, roughly when you need it and anything I should know.' },
   { step: 'I reply', detail: 'With my view on feasibility and a proposed scope.' },
-  { step: 'Agree the scope', detail: 'No code is written until we both agree on it.' },
+  { step: 'Agree the plan', detail: 'We settle the plan and a suitable deadline together before any work begins.' },
   { step: 'Build and hand over', detail: 'A small working prototype on your data, then tests, notes and a walkthrough.' },
 ];
 
@@ -26,7 +26,7 @@ function page() {
   const url = abs(cfg, m.path);
   const crumbItems = [{ name: 'Home', path: '' }, { name: 'Contact', path: m.path }];
   const head = pageHead({
-    crumbItems, b, eyebrow: 'Hire me', h1: esc(m.h1), lead: m.lead, answer: m.direct_answer,
+    crumbItems, b, eyebrow: 'Hire me', h1: esc(m.h1), answer: m.direct_answer,
     actions: `<p class="badge badge--accent"><span class="badge__dot" aria-hidden="true"></span>${esc(FREELANCE_LINE)}</p>`,
   });
 

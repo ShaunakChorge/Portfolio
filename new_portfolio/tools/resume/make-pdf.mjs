@@ -58,7 +58,7 @@ li { margin: 1.2pt 0; padding-left: 1pt; }
 <header>
   <h1>${esc(cfg.name)}</h1>
   <p class="role">AI Engineer at ${esc(cfg.person.employer)}, Mumbai | Freelance AI and Python developer</p>
-  <p class="contact"><span>${esc(EMAIL)}</span><span>${esc(LINKEDIN.replace(/^https:\/\/(www\.)?/, ''))}</span><span>${esc(GITHUB.replace(/^https:\/\//, ''))}</span><span>Mumbai, India (remote work)</span></p>
+  <p class="contact"><span>${esc(EMAIL)}</span><span>${esc(LINKEDIN.replace(/^https:\/\/(www\.)?/, ''))}</span><span>${esc(GITHUB.replace(/^https:\/\//, ''))}</span><span>Mumbai, India (IST)</span></p>
 </header>
 
 <h2>Summary</h2>
@@ -85,7 +85,7 @@ ${feat.map(p => `<p class="pj"><b>${E(p.title)}.</b> ${E(p.card_blurb)}</p>`).jo
 <div class="two">
   <div>
     <h2>Education</h2>
-    <p><b>${E(edu.degree)}</b></p>
+    <p><b>${E(edu.degree)}, ${E(edu.year)}</b></p>
     <p>${E(edu.institution)}</p>
     <p class="muted">Subjects: ${E(edu.coursework.join(', '))}</p>
   </div>

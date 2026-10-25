@@ -10,7 +10,7 @@
      Portfolio.prefersReducedMotion         live getter (boolean)
      Portfolio.isCoarse / isMobile          live getters
      Portfolio.on / off / emit              CustomEvent bus on document
-     Portfolio.observe(root)                (re)scan [data-reveal] [data-count] [data-parallax] [data-reveal-group] .timeline[data-fill]
+     Portfolio.observe(root)                (re)scan [data-reveal] [data-parallax] [data-reveal-group] .timeline[data-fill]
      Portfolio.reveal(elOrSel) / revealAll()   revealAll is for QA scripts (reveals everything at once)
      Portfolio.onScroll(fn) / onResize(fn)  rAF-throttled; fn(state)
      Portfolio.scroll                       {y, max, progress, dir, vh, vw}
@@ -76,7 +76,7 @@
   var mqReduce = mq('(prefers-reduced-motion: reduce)');
   var mqCoarse = mq('(pointer: coarse)');
   var mqMobile = mq('(max-width: 47.9375em)');      /* em: follows the browser's default font size, like the CSS breakpoints */
-  var mqDesktop = mq('(min-width: 64em)');
+  var mqDesktop = mq('(min-width: 48em)');
   var motionPaused = root.classList.contains('fx-paused');   /* "Pause effects" (WCAG 2.2.2): the head script restores it before first paint */
   Object.defineProperty(P, 'prefersReducedMotion', { enumerable: true, get: function () { return !!mqReduce.matches || motionPaused; } });
   Object.defineProperty(P, 'isCoarse', { enumerable: true, get: function () { return !!mqCoarse.matches; } });
@@ -522,70 +522,20 @@
   P.menu = menu;
 
   /* ---------- reveal ---------- */
-  var revealIO = null, countIO = null;
+  var revealIO = null;
   function markIn(el) { el.classList.add('is-in'); }
   function initObservers() {
     if (!('IntersectionObserver' in win)) return;
     revealIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) { if (en.isIntersecting) { markIn(en.target); revealIO.unobserve(en.target); } });
     }, { rootMargin: '0px 0px -6% 0px', threshold: 0.02 });
-    countIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        countIO.unobserve(en.target);
-        runCount(en.target);
-      });
-    }, { threshold: 0.3, rootMargin: '0px 0px -10% 0px' });
   }
 
   P.reveal = function (target) {
     var list = typeof target === 'string' ? qsa(target) : (target && target.length !== undefined && !target.nodeType ? Array.prototype.slice.call(target) : [target]);
     list.forEach(function (el) { if (el && el.classList) markIn(el); });
   };
-  P.revealAll = function () { root.classList.add('reveal-all'); qsa('[data-reveal]').forEach(markIn); qsa('[data-count]').forEach(function (el) { if (!el.getAttribute('data-cd')) runCount(el, true); }); };
-
-  /* count-up: target from data-count (not from the text); markup carries the FINAL value as no-JS fallback */
-  function countConf(el) {
-    var raw = String(el.getAttribute('data-count') || '').replace(/,/g, '');
-    var to = parseFloat(raw);
-    if (isNaN(to)) return null;
-    var dec = el.getAttribute('data-decimals');
-    var decimals = dec !== null && dec !== '' ? parseInt(dec, 10) : ((raw.split('.')[1] || '').length);
-    var grp = el.getAttribute('data-group');
-    return {
-      to: to, from: parseFloat(el.getAttribute('data-from')) || 0, decimals: isNaN(decimals) ? 0 : decimals,
-      prefix: el.getAttribute('data-prefix') || '', suffix: el.getAttribute('data-suffix') || '',
-      group: grp === null ? Math.abs(to) >= 1000 : grp !== 'false',
-      duration: parseInt(el.getAttribute('data-duration'), 10) || 1900
-    };
-  }
-  /* one Intl.NumberFormat per (decimals, grouping) pair: building a formatter is the slow part, so it is never rebuilt on every animation frame */
-  var nfCache = {};
-  function fmtCount(n, c) {
-    var s, k = c.decimals + (c.group ? 'g' : 'n');
-    try {
-      var nf = nfCache[k] || (nfCache[k] = new Intl.NumberFormat('en-US', { minimumFractionDigits: c.decimals, maximumFractionDigits: c.decimals, useGrouping: c.group }));
-      s = nf.format(n);
-    } catch (e) { s = n.toFixed(c.decimals); }
-    return c.prefix + s + c.suffix;
-  }
-  function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
-  function setTxt(el, s) { if (el.textContent !== s) el.textContent = s; }   /* write only when the shown number really changed */
-  function runCount(el, instant) {
-    if (!el || el.getAttribute('data-cd') === '1') return;
-    var c = countConf(el);
-    if (!c) return;
-    el.setAttribute('data-cd', '1');
-    if (instant || P.prefersReducedMotion) { el.textContent = fmtCount(c.to, c); return; }
-    var t0 = null;
-    el.textContent = fmtCount(c.from, c);
-    P.raf.add(function (ts) {
-      if (t0 === null) t0 = ts;
-      var k = clamp((ts - t0) / c.duration, 0, 1);
-      setTxt(el, fmtCount(c.from + (c.to - c.from) * easeOutQuart(k), c));
-      if (k >= 1) { el.textContent = fmtCount(c.to, c); return false; }
-    });
-  }
+  P.revealAll = function () { root.classList.add('reveal-all'); qsa('[data-reveal]').forEach(markIn); };
 
   P.observe = function (ctx) {
     ctx = ctx || doc;
@@ -604,15 +554,6 @@
       var d = parseInt(el.getAttribute('data-reveal-delay'), 10);
       if (d) el.style.setProperty('--rd', d + 'ms');
       if (revealIO) revealIO.observe(el); else markIn(el);
-      n++;
-    });
-    scan(ctx, '[data-count]').forEach(function (el) {
-      if (el.hasAttribute('data-cv')) return;
-      el.setAttribute('data-cv', '1');
-      var c = countConf(el);
-      if (!c) return;
-      el.setAttribute('data-final', fmtCount(c.to, c));
-      if (!P.prefersReducedMotion && countIO) { el.textContent = fmtCount(c.from, c); countIO.observe(el); }
       n++;
     });
     scan(ctx, '[data-parallax]').forEach(function (el) { if (parallaxEls.indexOf(el) < 0) parallaxEls.push(el); });
@@ -710,10 +651,10 @@
   }
 
   /* ---------- init ---------- */
-  var readyQueue = [], isReady = false;
+  var readyQueue = [], sectionsStarted = false;
   P.ready = function (fn) {
     if (typeof fn !== 'function') return;
-    if (isReady) { try { fn(); } catch (e) { if (win.console) console.error(e); } }
+    if (sectionsStarted) { try { fn(); } catch (e) { if (win.console) console.error(e); } }
     else readyQueue.push(fn);
   };
   P.refresh = function () {
@@ -739,9 +680,6 @@
     root.setAttribute('data-accent', accentCur);
     syncAccentButtons();
 
-    /* platform-specific shortcut hint: Ctrl K -> Cmd K on Apple devices */
-    try { if (/Mac|iPhone|iPad/i.test(navigator.platform || navigator.userAgent || '')) qsa('[data-kbd]').forEach(function (k) { k.textContent = k.textContent.replace('Ctrl', 'Cmd'); }); } catch (e) { /* ignore */ }
-
     initObservers();
     collectSections();
     buildRail();
@@ -763,7 +701,7 @@
           var add = muts[i].addedNodes;
           for (var j = 0; j < add.length; j++) {
             var n = add[j];
-            if (n.nodeType === 1 && (matchesSel(n, '[data-reveal],[data-reveal-group],[data-count],[data-parallax],.timeline[data-fill],section[data-rail]') || (n.querySelector && n.querySelector('[data-reveal],[data-reveal-group],[data-count],[data-parallax],.timeline[data-fill],section[data-rail]')))) { hit = true; break; }
+            if (n.nodeType === 1 && (matchesSel(n, '[data-reveal],[data-reveal-group],[data-parallax],.timeline[data-fill],section[data-rail]') || (n.querySelector && n.querySelector('[data-reveal],[data-reveal-group],[data-parallax],.timeline[data-fill],section[data-rail]')))) { hit = true; break; }
           }
         }
         if (hit) raf(function () { P.refresh(); });
@@ -791,10 +729,20 @@
 
     tickClock();
     scheduleTick();                                        /* first tick inside the first animation frame, not synchronously (avoids a forced layout during init) */
-    isReady = true;
     root.classList.add('core-ready');
-    var q = readyQueue.splice(0);
-    q.forEach(function (fn) { try { fn(); } catch (e) { if (win.console) console.error(e); } });
+
+    /* the section scripts start after the first frame has been painted (their first layout read would otherwise force the page's first layout inside
+       the start-up task), one per task and in order, so their start-up work never adds up to one long task. A hidden tab never paints, hence the timer fallback. */
+    var started = false;
+    function runNext() {
+      var fn = readyQueue.shift();
+      if (!fn) { sectionsStarted = true; return; }
+      try { fn(); } catch (e) { if (win.console) console.error(e); }
+      setTimeout(runNext, 0);
+    }
+    function startSections() { if (started) return; started = true; runNext(); }
+    if (win.requestAnimationFrame) win.requestAnimationFrame(function () { setTimeout(startSections, 0); });
+    setTimeout(startSections, 1500);
 
     /* settle: fonts / images change widths and heights */
     function settle() { collectSections(); updateIndicator(); scheduleTick(); }

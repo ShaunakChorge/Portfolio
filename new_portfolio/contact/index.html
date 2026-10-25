@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../assets/dist/site.inner.min.css?v=fcec523d">
+  <link rel="stylesheet" href="../assets/dist/site.inner.min.css?v=99f76e8a">
 
 <script type="application/ld+json">
 {
@@ -114,7 +114,7 @@
           "name": "How do we start?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Send a short brief through the contact form or by email, as a few lines or a longer note. I read it, then reply with my view on feasibility and a proposed scope. We agree on both before I write any code."
+            "text": "Send a short brief through the contact form or by email, as a few lines or a longer note. I read it, then reply with my view on feasibility and a proposed scope. We agree on both, and on a suitable deadline, before work begins."
           }
         }
       ]
@@ -154,22 +154,17 @@
 
         <nav class="nav" aria-label="Primary">
           <ul class="nav__list">
-            <li><a class="nav__link" href="../">Home</a></li>
             <li><a class="nav__link" href="../projects/">Projects</a></li>
             <li><a class="nav__link" href="../services/">Services</a></li>
             <li><a class="nav__link" href="../about/">About</a></li>
-            <li><a class="nav__link" href="../faq/">FAQ</a></li>
-            <li><a class="nav__link" href="../contact/" aria-current="page">Contact</a></li>
+            <li><a class="nav__link" href="../resume/">Resume</a></li>
           </ul>
           <span class="nav__ind" aria-hidden="true"></span>
         </nav>
 
         <div class="site-header__tools">
-          <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST" title="Local time in Mumbai">MUMBAI</span>
-          <button class="cmd" type="button" data-open-palette aria-label="Search, open command palette" aria-keyshortcuts="Control+K Meta+K">
+          <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
-            <span class="cmd__text">Search</span>
-            <kbd class="kbd" data-kbd aria-hidden="true">Ctrl K</kbd>
           </button>
           <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
@@ -182,10 +177,10 @@
 
   <nav class="drawer" id="drawer" aria-label="Mobile">
     <ul class="drawer__list">
-      <li><a class="drawer__link" href="../" style="--i:0"><small>01</small>Home</a></li>
-      <li><a class="drawer__link" href="../projects/" style="--i:1"><small>02</small>Projects</a></li>
-      <li><a class="drawer__link" href="../services/" style="--i:2"><small>03</small>Services</a></li>
-      <li><a class="drawer__link" href="../about/" style="--i:3"><small>04</small>About</a></li>
+      <li><a class="drawer__link" href="../projects/" style="--i:0"><small>01</small>Projects</a></li>
+      <li><a class="drawer__link" href="../services/" style="--i:1"><small>02</small>Services</a></li>
+      <li><a class="drawer__link" href="../about/" style="--i:2"><small>03</small>About</a></li>
+      <li><a class="drawer__link" href="../resume/" style="--i:3"><small>04</small>Resume</a></li>
       <li><a class="drawer__link" href="../faq/" style="--i:4"><small>05</small>FAQ</a></li>
       <li><a class="drawer__link" href="../contact/" aria-current="page" style="--i:5"><small>06</small>Contact</a></li>
     </ul>
@@ -195,7 +190,6 @@
       <a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a>
       <a class="icon-btn" href="mailto:shaunak.chorge@gmail.com" aria-label="Email Shaunak"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
       <button type="button" class="btn btn--ghost btn--sm drawer__motion" data-motion-toggle aria-pressed="false" hidden><svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-pause"/></svg> Pause effects</button>
-      <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST">MUMBAI</span>
     </div>
   </nav>
 
@@ -209,8 +203,8 @@
       <div class="pg-head__main">
         <p class="eyebrow">Hire me</p>
         <h1 class="pg-h1">Hire an <span class="ai">AI</span> developer for your project</h1>
-        <p class="pg-lead">Tell me what you want to build, such as an Artificial Intelligence (AI) chatbot, a computer vision tool, a Python backend or an automation. A short brief is enough to start the conversation.</p>
-        <p class="pg-answer" data-answer>To hire an AI developer, send a short brief through the form or by email. Say what you want to build, roughly when you need it and anything I should know. I reply with my view on feasibility and a proposed scope, and I write no code until we agree on it.</p>
+        
+        <p class="pg-answer" data-answer>To hire an AI developer, send a short brief through the form or by email. Say what you want to build, roughly when you need it and anything I should know. I reply with my view on feasibility and a proposed scope, and we agree the plan and a suitable deadline together before work begins.</p>
         <div class="pg-actions"><p class="badge badge--accent"><span class="badge__dot" aria-hidden="true"></span>Taking select freelance AI and backend projects</p></div>
       </div>
       
@@ -223,7 +217,7 @@
         <div class="contact__compose" data-compose>
           <div class="contact__sub">
             <h2 class="contact__h" id="cf-title">Send a short brief</h2>
-            <p class="contact__note">Scope comes first. If your project is not a good fit, I will tell you plainly. Name, email and a few lines are enough. Messages are delivered through Formspree, a form service, and I only use your details to reply.</p>
+            <p class="contact__note">I read every message and reply with my view on how to approach it. Name, email and a few lines are enough. Messages are delivered through Formspree, a form service, and I only use your details to reply.</p>
           </div>
           <form class="contact__form" id="contact-form" action="https://formspree.io/f/xjkvyvjp" method="POST" data-email="shaunak.chorge@gmail.com" aria-labelledby="cf-title">
             <input type="hidden" name="_subject" value="New project brief from the portfolio">
@@ -353,7 +347,7 @@ tried:       Anything you have already tried"><svg class="icon icon--still" aria
       <h2 id="process-h" class="section__title">What happens after you <span class="hl hl--purple">write</span></h2>
       
     </header>
-<ol class="pg-steps" data-reveal-group><li class="pg-step" style="--i:0"><span class="pg-step__n" aria-hidden="true">01</span><h3 class="pg-step__t">Send a brief</h3><p>What you want to build, roughly when you need it and anything I should know.</p></li><li class="pg-step" style="--i:1"><span class="pg-step__n" aria-hidden="true">02</span><h3 class="pg-step__t">I reply</h3><p>With my view on feasibility and a proposed scope.</p></li><li class="pg-step" style="--i:2"><span class="pg-step__n" aria-hidden="true">03</span><h3 class="pg-step__t">Agree the scope</h3><p>No code is written until we both agree on it.</p></li><li class="pg-step" style="--i:3"><span class="pg-step__n" aria-hidden="true">04</span><h3 class="pg-step__t">Build and hand over</h3><p>A small working prototype on your data, then tests, notes and a walkthrough.</p></li></ol>
+<ol class="pg-steps" data-reveal-group><li class="pg-step" style="--i:0"><span class="pg-step__n" aria-hidden="true">01</span><h3 class="pg-step__t">Send a brief</h3><p>What you want to build, roughly when you need it and anything I should know.</p></li><li class="pg-step" style="--i:1"><span class="pg-step__n" aria-hidden="true">02</span><h3 class="pg-step__t">I reply</h3><p>With my view on feasibility and a proposed scope.</p></li><li class="pg-step" style="--i:2"><span class="pg-step__n" aria-hidden="true">03</span><h3 class="pg-step__t">Agree the plan</h3><p>We settle the plan and a suitable deadline together before any work begins.</p></li><li class="pg-step" style="--i:3"><span class="pg-step__n" aria-hidden="true">04</span><h3 class="pg-step__t">Build and hand over</h3><p>A small working prototype on your data, then tests, notes and a walkthrough.</p></li></ol>
   </div>
 </section><section id="faq" class="section pg-sec" aria-labelledby="faq-h">
   <div class="container">
@@ -362,12 +356,12 @@ tried:       Anything you have already tried"><svg class="icon icon--still" aria
       <h2 id="faq-h" class="section__title">Questions before you <span class="hl">write</span></h2>
       
     </header>
-<div class="pg-qas"><details class="pg-qa" id="cq-brief" data-reveal>
+<div class="pg-qas"><details class="pg-qa" id="cq-brief" open data-reveal>
       <summary class="pg-qa__q"><h3 class="pg-qa__h">What should I include in a project brief for an <span class="ai">AI</span> developer?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>Say what you want to build and what a good result looks like, and roughly when you need it. Tell me anything I should know, such as private data, tools you already use or where it will run. Also say what you have already tried. A few lines are enough to start, and I ask for details later.</p></div>
-    </details><details class="pg-qa" id="cq-how-to-start" data-reveal style="--i:1">
+    </details><details class="pg-qa" id="cq-how-to-start" open data-reveal style="--i:1">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">How do we start?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>Send a short brief through the contact form or by email, as a few lines or a longer note. I read it, then reply with my view on feasibility and a proposed scope. We agree on both before I write any code.</p></div>
+      <div class="pg-qa__a"><p>Send a short brief through the contact form or by email, as a few lines or a longer note. I read it, then reply with my view on feasibility and a proposed scope. We agree on both, and on a suitable deadline, before work begins.</p></div>
     </details></div><p class="pg-linkrow" data-reveal><a class="link-arrow" href="../faq/">Read all the questions <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../services/">See the services <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
   </div>
 </section><section class="section pg-sec pg-closing" aria-label="Prefer email"><div class="container"><p class="pg-closing__p" data-reveal>Prefer to write directly? Email <a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a> or <a class="link" href="#hire">go back to the form</a>.</p></div></section>
@@ -392,7 +386,7 @@ tried:       Anything you have already tried"><svg class="icon icon--still" aria
           <span class="logo__word">SHAUNAK</span>
         </p>
         <p class="footer__blurb">AI Engineer at Claptek Pvt Ltd. Taking select freelance AI and backend projects.</p>
-        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India &ndash; working remotely (IST)</p>
+        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India (IST)</p>
         <ul class="footer__soc" aria-label="Profiles">
           <li><a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a></li>
           <li><a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a></li>
@@ -409,9 +403,10 @@ tried:       Anything you have already tried"><svg class="icon icon--still" aria
             <li><a href="../projects/">Projects</a></li>
             <li><a href="../services/">Services</a></li>
             <li><a href="../about/">About</a></li>
+            <li><a href="../about/#experience">Experience</a></li>
+            <li><a href="../resume/">Resume</a></li>
             <li><a href="../faq/">FAQ</a></li>
             <li><a href="../contact/">Contact</a></li>
-            <li><a href="../resume/">Resume</a></li>
           </ul>
         </nav>
 
@@ -430,7 +425,7 @@ tried:       Anything you have already tried"><svg class="icon icon--still" aria
         <nav class="footer__col" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../projects/observable-ai-backend/">FastAPI tracing with OpenTelemetry</a></li>
+            <li><a href="../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
             <li><a href="../projects/agentic-honeypot/">AI scam honeypot</a></li>
             <li><a href="../projects/deepfake-video-detection/">Deepfake video detection</a></li>
@@ -508,11 +503,11 @@ tried:       Anything you have already tried"><svg class="icon icon--still" aria
     <symbol id="i-loader" viewBox="0 0 24 24"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/></symbol>
   </svg>
 
-  <script defer src="../assets/dist/js/core.min.js?v=53badac3"></script>
+  <script defer src="../assets/dist/js/core.min.js?v=d41b0d5b"></script>
   <script defer src="../assets/dist/js/contact-form.min.js?v=1d7681bf"></script>
   <script defer src="../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
   <script defer src="../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../assets/dist/js/fx.min.js?v=2e06fef0"></script>
-  <script defer src="../assets/dist/js/pages.min.js?v=794591ab"></script>
+  <script defer src="../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
+  <script defer src="../assets/dist/js/pages.min.js?v=efc0e441"></script>
 </body>
 </html>

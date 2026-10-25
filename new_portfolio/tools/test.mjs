@@ -3,6 +3,8 @@
 //   2. building again gives byte-identical files (the build is deterministic)
 //   3. the files the build wrote equal the files in the repo (run `npm run build` if they do not: the deployed pages are stale)
 //   4. the link guard really catches a broken "Hire me" anchor (contact/?topic=...#hire)
+//   5. the owner's rules: the 11 selected projects in priority order (never printed as a count), no tallies, no shortcut hints, no Home tab, nothing collapsed,
+//      no retired wording, Personal builds on /projects/ only, one Traceable AI Backend, the three "How I work" sentences, the resume PDF unchanged
 //   node tools/test.mjs --keep     leave the temp copy in place and print its path
 import fs from 'node:fs';
 import os from 'node:os';
@@ -28,7 +30,7 @@ const walk = (dir, out = []) => { for (const e of fs.readdirSync(dir, { withFile
 const BINARY = /\.(woff2|png|webp|avif|ico|pdf|jpg)$/;
 const digest = f => crypto.createHash('sha1').update(BINARY.test(f) ? fs.readFileSync(f) : fs.readFileSync(f, 'utf8').replace(/\r\n/g, '\n')).digest('hex');
 /* the files a build writes: pages, llms, sitemap, robots, minified assets, generated partials and script data */
-const OUTPUT = /^(index\.html|llms(-full)?\.txt|\.built-pages\.json|assets\/dist\/|assets\/js\/sections\/fx\.js|src\/generated\/|tools\/project-selector\.html|(about|contact|faq|projects|resume|services)\/)/;
+const OUTPUT = /^(index\.html|llms(-full)?\.txt|\.built-pages\.json|assets\/dist\/|assets\/js\/sections\/fx\.js|src\/generated\/|(about|contact|faq|projects|resume|services)\/)/;
 const outputs = (base) => Object.fromEntries(walk(base).map(f => [path.relative(base, f).split(path.sep).join('/'), f]).filter(([r]) => OUTPUT.test(r) || r === '../sitemap.xml'));
 const snapshot = (site) => { const o = outputs(site); const m = Object.fromEntries(Object.entries(o).map(([r, f]) => [r, digest(f)])); for (const n of ['sitemap.xml', 'robots.txt']) { const f = path.join(site, '..', n); if (fs.existsSync(f)) m['../' + n] = digest(f); } return m; };
 
@@ -84,6 +86,83 @@ try {
     const dupQ = qOf('faq/index.html');
     check(edit('contact/index.html', h => h.replace(/(<h3 class="pg-qa__h">)[^<]*/, '$1' + dupQ)).some(p => /is also on faq\//.test(p) || /not registered for this page/.test(p)), 'the keyword guard reports a FAQ question that appears on two pages');
     check(edit('faq/index.html', h => h.replace(/(<div class="pg-qa__a"><p>)[^<]*/, '$1Too short.')).some(p => /answer to .* is \d+ words/.test(p)), 'the keyword guard reports a FAQ answer outside 40-60 words');
+
+    /* the owner's rules for this round: clean on the real pages, and the guard must catch each one */
+    const rules = await import(pathToFileURL(path.join(copy, 'tools/rules.mjs')).href);
+    const { loadSelection } = await import(pathToFileURL(path.join(copy, 'tools/selection.mjs')).href);
+    const content = JSON.parse(fs.readFileSync(path.join(copy, 'content/content.json'), 'utf8'));
+    const pageHtml = rel => fs.readFileSync(path.join(copy, rel), 'utf8');
+    const builtPages = ['index.html', ...paths.map(p => p + 'index.html')];
+    const caught = (rel, text) => rules.pageProblems(rel, text).length > 0 || !!rules.findBanned(text);
+
+    const ruleProblems = [...builtPages, 'llms.txt', 'llms-full.txt'].flatMap(rel => rules.pageProblems(rel, pageHtml(rel)));
+    check(!ruleProblems.length, 'no page or llms file has a tally, a shortcut hint, a stats counter, a closed <details> or a Home link in the navigation', ruleProblems.slice(0, 8).join('\n'));
+    const retired = [...builtPages, 'llms.txt', 'llms-full.txt', 'README.md'].map(rel => [rel, rules.findBanned(pageHtml(rel))]).filter(([, w]) => w);
+    check(!retired.length, 'no page, llms file or README uses retired wording (remote-work line, capacity promise, "graduated", shortcut hint, GPA)', retired.slice(0, 6).map(([r, w]) => `"${w}" in ${r}`).join('\n'));
+    const scripts = walk(path.join(copy, 'assets/js')).filter(f => f.endsWith('.js')).map(f => fs.readFileSync(f, 'utf8')).join('\n');
+    check(!/\.length\s*\+\s*' (?:projects|industry roles|programmes)/.test(scripts), 'no script prints a project or role tally (the terminal included)');
+    check(caught('x.html', '<button class="cmd"><kbd class="kbd" data-kbd>Ctrl K</kbd></button>') && caught('x.txt', 'Press Ctrl+K to search') && caught('x.html', '<button aria-keyshortcuts="Control+K">'), 'the rules catch a keyboard-shortcut hint');
+    check(['<p>12 Selected projects</p>', '<span>3 Industry roles</span>', '<span>All (12 projects)</span>', '<p>Showing 3 of 12 projects</p>', '<p>Nine projects have case studies</p>', '<p>I offer six freelance AI development services</p>', '<p>3 Contest and hackathon podium finishes</p>'].every(t => caught('x.html', t)), 'the rules catch a tally of projects, roles, services or finishes');
+    check(!['<p>27 passing tests</p>', '<small>02</small>Projects', '<p>93.87% accuracy on 1,266 records</p>'].some(t => caught('x.html', t)), 'the rules leave results (27 passing tests) and the numbered drawer alone');
+    check(caught('x.html', '<details><summary>Q</summary><p>A</p></details>') && caught('x.html', '<details open name="g"><summary>Q</summary></details>') && !caught('x.html', '<details class="hm-qa" open><summary>Q</summary></details>'), 'the rules catch a closed <details> and an exclusive <details name="..."> group');
+    check(caught('x.html', '<a class="nav__link" href="./">Home</a>') && caught('x.html', '<a class="drawer__link" href="./"><small>01</small>Home</a>') && !caught('x.html', '<a class="nav__link" href="projects/">Projects</a>'), 'the rules catch a Home link in the navigation');
+    check(['working remotely (IST)', 'I work remotely from Mumbai', 'Straight talk', 'Honest limits', 'Select projects only, so each one gets my full attention', 'I write no code until we agree', 'a small number at a time', 'graduated May 2026', 'Show the 10 smaller projects', 'a no-code tool'].every(t => !!rules.findBanned(t)), 'the rules catch the retired wording');
+
+    const home = pageHtml('index.html'), projectsPage = pageHtml('projects/index.html'), about = pageHtml('about/index.html');
+    const navOf = html => (html.match(/<nav class="nav"[\s\S]*?<\/nav>/) || [''])[0];
+    const hrefs = html => [...html.matchAll(/href="([^"]*)"/g)].map(m => m[1].replace(/^(\.\.\/)+|^\.\//, ''));
+    check(JSON.stringify(hrefs(navOf(home))) === JSON.stringify(['projects/', 'services/', 'about/', 'resume/']), 'the navigation ribbon links Projects, Services, About and Resume only (no Home, FAQ or Contact)', hrefs(navOf(home)).join(' '));
+    const drawer = (home.match(/<nav class="drawer"[\s\S]*?<\/ul>/) || [''])[0];
+    check(JSON.stringify(hrefs(drawer)) === JSON.stringify(['projects/', 'services/', 'about/', 'resume/', 'faq/', 'contact/']), 'the mobile menu lists Projects, Services, About, Resume, FAQ and Contact', hrefs(drawer).join(' '));
+    const cmd = (home.match(/<button class="cmd"[\s\S]*?<\/button>/) || [''])[0];
+    check(/aria-label="Search"/.test(cmd) && /data-open-palette/.test(cmd) && !/>\s*[A-Za-z]/.test(cmd.replace(/<svg[\s\S]*?<\/svg>/, '').replace(/^<button[^>]*>/, '')), 'the search button is an icon with aria-label="Search" and no text or hint');
+    check(!/class="np[ "_]|hero__photo/.test(home), 'the home page has no portrait photo');
+    check(/shaunak\.py/.test(home) && /See projects/.test(home) && /Hire me/.test(home), 'the home hero keeps the shaunak.py window and the See projects and Hire me buttons');
+    check(/class="np[ "_]/.test(about), 'the portrait is on the About page');
+
+    /* the project collage: tiles 1 to 11 in the owner's order on the home page and on /projects/, the "All projects" tile on the home page, Box Selection API not in it */
+    const OWNER_ORDER = ['ai-rag-healthcare-assistant', 'advanced-cctv-analytics', 'speech-emotion-recognition', 'observable-ai-backend', 'obligation-management-system', 'ams-ai-finding-engine', 'finacle-text-to-sql', 'agentic-honeypot', 'whatsapp-ai-agent-platform', 'deepfake-video-detection', 'spam-classifier'];
+    const OWNER_SIZES = ['wide', 'big', 'big', 'small', 'small', 'small', 'small', 'small', 'wide', 'small', 'small'];
+    const sel = loadSelection(content);
+    check(JSON.stringify(sel.show) === JSON.stringify(OWNER_ORDER) && JSON.stringify(sel.collage.tiles.map(t => t.size)) === JSON.stringify(OWNER_SIZES), "projects.config.json holds the selected projects in the owner's priority order with their tile sizes");
+    check(sel.personal.includes('django-box-selection-api') && !sel.show.includes('django-box-selection-api'), 'Box Selection API is a personal build, not a selected project');
+    const tiles = html => [...html.matchAll(/<li\b[^>]*\bdata-rank="(\d+)"[^>]*>/g)].map(m => ({ rank: +m[1], pid: (m[0].match(/data-pid="([^"]*)"/) || [])[1] }));
+    const homeTiles = tiles(home), projTiles = tiles(projectsPage);
+    const projectTiles = list => list.filter(t => t.rank <= OWNER_ORDER.length).map(t => t.pid);
+    check(JSON.stringify(projectTiles(homeTiles)) === JSON.stringify(OWNER_ORDER) && JSON.stringify(projectTiles(projTiles)) === JSON.stringify(OWNER_ORDER), 'the home page and /projects/ show the collage tiles in rank order (li data-rank, data-pid)', `${homeTiles.map(t => t.rank)} | ${projTiles.map(t => t.rank)}`);
+    check(homeTiles.filter(t => t.rank === sel.collage.linkRank).length === 1, 'the home collage ends with one "All projects" link tile');
+    check(!homeTiles.concat(projTiles).some(t => t.pid === 'django-box-selection-api'), 'Box Selection API is not a collage tile');
+    check(!/id="personal-builds"/.test(home) && /id="personal-builds"/.test(projectsPage) && !/Personal builds/.test(home), 'Personal builds appear on /projects/ only');
+    const personalMissing = sel.personal.filter(id => { const p = content.projects.find(x => x.id === id); return !p.personal_line || !projectsPage.includes(`id="p-${id}"`) || !projectsPage.includes(p.personal_line); });
+    check(!personalMissing.length, 'every personal build is an open row with its one-line description on /projects/', personalMissing.join(', '));
+
+    /* Traceable AI Backend: one project, one case study, covering the AI server and LLM observability */
+    const traceable = paths.filter(p => /observab|traceab/.test(p));
+    check(JSON.stringify(traceable) === JSON.stringify(['projects/observable-ai-backend/']), 'Traceable AI Backend has exactly one case study page', traceable.join(' '));
+    const tr = pageHtml('projects/observable-ai-backend/index.html');
+    check(/AI server/.test(tr) && /LLM observability/.test(tr), 'the Traceable AI Backend case study covers the AI server and LLM observability');
+    check(content.projects.filter(p => /observab|traceab/i.test(p.id + p.title)).length === 1, 'content.json has one project for the AI server, LLM observability and the traceable backend');
+
+    /* "How I work": the three sentences on the Services and About pages, in place of the old block */
+    const how = content.how_i_work;
+    check(how && how.title === 'How I work' && how.lines.length === 3 && how.lines.every(l => pageHtml('services/index.html').includes(l) && about.includes(l)), 'the Services and About pages carry the three "How I work" sentences');
+
+    /* the home About card: degree and year, no college, no place, no greeting */
+    const cardFile = path.join(copy, 'src/generated/home-about.html');
+    const card = fs.existsSync(cardFile) ? fs.readFileSync(cardFile, 'utf8').replace(/<[^>]+>/g, ' ') : '';
+    check(card.includes(content.about.whoami.education.degree) && card.includes(content.about.whoami.education.year), 'the home About card shows the degree and the year');
+    check(card.length > 0 && !/college|School of|Mumbai|\bIST\b|Patil|Hi,? I/i.test(card), 'the home About card names no college, no Mumbai or IST, and has no "Hi, I am" greeting');
+
+    /* the selection file is checked: a gap or a wrong tile shape in the desktop grid, or a project in two lists, stops the build */
+    const cfgFile = path.join(copy, 'projects.config.json'), cfgText = fs.readFileSync(cfgFile, 'utf8');
+    const loadWith = edit => { const c = JSON.parse(cfgText); edit(c); fs.writeFileSync(cfgFile, JSON.stringify(c)); try { loadSelection(content); return ''; } catch (e) { return e.message; } finally { fs.writeFileSync(cfgFile, cfgText); } };
+    check(/desktop_grid/.test(loadWith(c => { c.desktop_grid[4][3] = 0; })), 'the selection check reports a gap in the desktop grid');
+    check(/desktop_grid/.test(loadWith(c => { c.desktop_grid[0] = [1, 1, 1, 2]; })), 'the selection check reports a tile that does not fill its block');
+    check(/tile_size/.test(loadWith(c => { c.tile_size['django-box-selection-api'] = 'big'; })), 'the selection check reports a tile size for a project that is not selected');
+    check(/both/.test(loadWith(c => { c.personal.push('spam-classifier'); })), 'the selection check reports a project in both "show" and "personal"');
+
+    /* the owner's resume PDF is never regenerated */
+    check(crypto.createHash('md5').update(fs.readFileSync(path.join(SITE, 'assets/Shaunak-Chorge-Resume.pdf'))).digest('hex') === 'd8c97fc56dbdfff424884c8d0e27dc7b', "the resume PDF is the owner's file, unchanged");
 
     /* deploy_root: PF_DEPLOY_ROOT=1 (or seo.deploy_root) moves every URL to the root of /Portfolio/ and writes sitemap.xml + robots.txt inside the site folder */
     const root = spawnSync(process.execPath, [path.join(copy, 'build.mjs')], { cwd: copy, encoding: 'utf8', env: { ...process.env, PF_SITE: copy, PF_DEPLOY_ROOT: '1' } });

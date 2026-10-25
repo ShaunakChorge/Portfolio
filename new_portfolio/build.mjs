@@ -1,7 +1,7 @@
 // Build script for the whole site. ONE file, two uses:
 //
 //   node build.mjs           the production build (what you deploy; same as --min). Needs esbuild (npm i); it stops before touching anything if esbuild is missing.
-//                            1. generators  tools/hero, tools/home, tools/fx (partials + script data from content/content.json), tools/selector (writes tools/project-selector.html)
+//                            1. generators  tools/hero, tools/home, tools/fx (partials + script data from content/content.json)
 //                            2. assemble    index.html (the HOME page) from src/shell.html + src/generated/home.content.html + the partials
 //                            3. pages       tools/pages/build-pages.mjs: services/, projects/, about/, faq/, contact/, resume/ + sitemap.xml, robots.txt, llms.txt, llms-full.txt
 //                            4. guard       scans the output for forbidden strings, checks every link and anchor, enforces the keyword map (content/keywords.json, tools/pages/keywords.mjs), prints a summary
@@ -34,7 +34,7 @@ import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { SITE, SRC, GENERATED, CONTENT_FILE, read, readContent, esc, icon } from './tools/lib.mjs';
 import { loadSelection } from './tools/selection.mjs';
-import { NEVER_RE, LANGUAGE_SENTINEL } from './tools/rules.mjs';
+import { NEVER_RE, LANGUAGE_SENTINEL, pageProblems } from './tools/rules.mjs';
 import { loadKeywords, keywordProblems } from './tools/pages/keywords.mjs';
 
 const list = (dir, ext) => fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => f.endsWith(ext)).sort() : [];
@@ -111,26 +111,27 @@ function rebaseUrls(css, fromDir, toDir) {
 }
 
 /* ---------- asset tags (hrefs carry {{base}}; computed once per process, so the in-process page build reuses the home build's minified files) ----------
-   Page-aware bundles: the home page loads everything except pages.css (the inner-pages styles, prefix pg-). Every other page ("inner") skips the
-   home-only hero + home styles and scripts, and loads visuals (the generative project art, 81 KB of script), portrait and the contact styles + form
-   script (contact.css, contact-form.js) only when its own markup has them. The floating "Let's talk" button is in footer.css and contact.js on every page.
+   Page-aware bundles: the home page loads everything except pages.css (the inner-pages styles, prefix pg-) and the portrait unless its markup is there. Every other page ("inner") skips the
+   home-only hero + home styles and scripts, and loads visuals (the generative project art, 81 KB of script), the project collage script and the contact styles + form
+   script (contact.css, contact-form.js) only when its own markup has them. The neon portrait (portrait.css, portrait.js) loads on any page whose markup has it (the About page). The floating "Let's talk" button is in footer.css and contact.js on every page.
    The minified build writes one CSS bundle per variant (site.min.css for home, site.inner[-portrait].min.css for every other page) and one minified script per file. */
 const hash8 = s => createHash('sha1').update(s).digest('hex').slice(0, 8);
 const assetCache = new Map();
 const jsMinCache = new Map();
 function assetTags({ min = false, only = null, inner = false, flags = {} } = {}) {
-  const variant = inner ? 'inner' + (flags.visuals ? '-visuals' : '') + (flags.portrait ? '-portrait' : '') + (flags.contact ? '-contact' : '') : '';   // cache key: also decides which scripts load
-  const cssVariant = inner ? 'inner' + (flags.portrait ? '-portrait' : '') : '';                                                                            // stylesheet name: visuals + contact styles are always in it
-  const key = (min ? 'min' : 'src') + '|' + (only ? [...only].sort().join(',') : variant || '*');
+  const variant = (inner ? 'inner' : 'home') + (flags.visuals ? '-visuals' : '') + (flags.portrait ? '-portrait' : '') + (flags.contact ? '-contact' : '') + (flags.collage ? '-collage' : '');   // cache key: also decides which scripts load
+  const cssVariant = [inner && 'inner', flags.portrait && 'portrait'].filter(Boolean).join('-');   // stylesheet name: the visuals, collage and contact styles are always in it
+  const key = (min ? 'min' : 'src') + '|' + (only ? [...only].sort().join(',') : variant);
   if (assetCache.has(key)) return assetCache.get(key);
   const wanted = (f, isCss) => {
     const s = stem(f);
     if (only) return only.has(s);
-    if (!inner) return !(isCss && s === 'pages');           // the home page has no pg- markup, so it skips pages.css (pages.js stays: the FAQ opens its hash target)
-    if (s === 'hero' || s === 'home') return false;          // the home page only
+    if (s === 'portrait') return !!flags.portrait;           // the neon portrait (About page): only where the markup has it
+    if (!inner) return !(isCss && s === 'pages') && s !== 'contact-form';   // the home page has no pg- markup (it skips pages.css) and no form (the form is on /contact/)
+    if (s === 'hero' || s === 'home' || s === 'marquee') return false;   // the home page only (the tech stack ribbon is marquee)
     if (s === 'visuals') return isCss || !!flags.visuals;       // visuals.css rides in the one shared inner stylesheet (a visitor keeps one cached file across pages); its script loads only where the markup is
-    if (s === 'portrait') return !!flags.portrait;
-    if (isCss ? s === 'contact' : s === 'contact-form') return isCss || !!flags.contact;   // contact.css (channel rows, CTA band, form) is in the shared inner stylesheet too; contact-form.js: home and /contact/ only; contact.js (copy buttons, floating button) is everywhere
+    if (s === 'collage') return isCss || !!flags.collage;       // collage.css (the project tiles, home and /projects/) is in the shared inner stylesheet too; a script, if there is one, loads only where the markup is
+    if (isCss ? s === 'contact' : s === 'contact-form') return isCss || !!flags.contact;   // contact.css (channel rows, CTA band, form) is in the shared inner stylesheet too; contact-form.js: /contact/ only; contact.js (copy buttons, floating button) is everywhere
     return true;
   };
   const cssFiles = [path.join(SITE, 'assets/css/base.css')], jsFiles = [path.join(SITE, 'assets/js/core.js')];
@@ -166,7 +167,7 @@ function assetTags({ min = false, only = null, inner = false, flags = {} } = {})
       js.push(`<script defer src="{{base}}assets/dist/js/${name}.min.js?v=${jsMinCache.get(f).v}"></script>`);
       jsBytes += jsMinCache.get(f).len; jsRaw += src.length;
     }
-    info = ` | min ${variant || 'home'}: css ${(cssAll.length / 1024).toFixed(0)}->${(cssOut.code.length / 1024).toFixed(0)} KB, js ${(jsRaw / 1024).toFixed(0)}->${(jsBytes / 1024).toFixed(0)} KB`;
+    info = ` | min ${variant}: css ${(cssAll.length / 1024).toFixed(0)}->${(cssOut.code.length / 1024).toFixed(0)} KB, js ${(jsRaw / 1024).toFixed(0)}->${(jsBytes / 1024).toFixed(0)} KB`;
   }
   const r = { css, js, info };
   assetCache.set(key, r);
@@ -242,7 +243,7 @@ function pruneSprite(html) {
  *   path         page path relative to the site root ('' home, 'projects/', 'projects/observable-ai-backend/'); {{base}} is '../' once per folder, canonical = url + path
  *   jsonld       an object, an array of objects, or ready-made <script> markup; objects are emitted as <script type="application/ld+json">
  *   content      the inner HTML of <main id="main">; may contain <!-- @section:name --> markers and {{base}}
- *   current      nav key: home | projects | services | about | faq | contact (anything else lights no nav item)
+ *   current      nav key: projects | services | about | resume | faq | contact (home and anything else light no nav item)
  */
 export function renderPage(o = {}) {
   const cfg = o.cfg || loadConfig();
@@ -251,7 +252,7 @@ export function renderPage(o = {}) {
   const home = base || './';
   const only = o.only ? new Set(o.only) : null;
   // the home page (path '') gets every script and style; any other page skips the home-only ones and loads visuals / portrait only when it uses them
-  const flags = { visuals: /data-visual=/.test(o.content || ''), portrait: /class="np[ "_]/.test(o.content || ''), contact: /contact__/.test(o.content || '') };
+  const flags = { visuals: /data-visual=/.test(o.content || ''), portrait: /class="np[ "_]/.test(o.content || ''), collage: /class="collage[ "]/.test(o.content || ''), contact: /contact__/.test(o.content || '') };
   const assets = assetTags({ min: !!o.min, only, inner: pagePath !== '', flags });
   const current = o.current || '';
   let missing = 0;
@@ -305,7 +306,8 @@ function walk(dir, out = []) {
   return out;
 }
 
-/** forbidden strings (tools/rules.mjs) in every text file, the spoken languages exactly once (home page), and no readable-asset links unless --dev */
+/** forbidden strings (tools/rules.mjs) in every text file; in every built page and llms file also no tallies, shortcut hints or closed <details>;
+ *  the spoken languages exactly once (home page); no readable-asset links unless --dev */
 export function guard({ dev = false } = {}) {
   const problems = [];
   const files = walk(SITE);
@@ -320,6 +322,7 @@ export function guard({ dev = false } = {}) {
       htmlPages++;
       if (!dev && /(?:href|src)="[^"]*assets\/(?:css|js)\//.test(txt)) problems.push(`${r} links the readable assets/css or assets/js files (run the default build, not --dev, before you deploy)`);
     }
+    if (isPage || /^llms(-full)?\.txt$/.test(r)) problems.push(...pageProblems(r, txt));
     const n = txt.split(LANGUAGE_SENTINEL).length - 1;
     if (n) {
       if (isPage) marathi += n; else if (r !== 'src/generated/home-about.html' && r !== 'content/content.json') problems.push(`"${LANGUAGE_SENTINEL}" in ${r}`);
@@ -383,7 +386,6 @@ async function pipeline(args) {
     runTool('hero partial         tools/hero/gen.mjs', 'hero/gen.mjs');
     runTool('home partials        tools/home/gen.mjs', 'home/gen.mjs');
     runTool('script data (fx.js)  tools/fx/gen.mjs', 'fx/gen.mjs');
-    runTool('project selector     tools/selector/gen.mjs', 'selector/gen.mjs');
   } else console.log('1/4 generators skipped (--skip-gen)');
 
   console.log('2/4 assemble index.html');

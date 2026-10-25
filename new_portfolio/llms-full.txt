@@ -1,6 +1,6 @@
 # Shaunak Chorge - full text
 
-> Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India. He holds a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026). He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job.
+> Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India. He holds a Bachelor of Technology in Artificial Intelligence and Data Science. He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job.
 
 Note: summary lines are written about Shaunak in the third person. Answers marked "A:" are in his own voice (first person).
 
@@ -18,7 +18,7 @@ Deliverables: A working chatbot service with clear instructions for connecting t
 
 Good fit: Teams with policy, support or help-centre documents that need answers with sources; Founders who want to try an AI feature before hiring a full team; Products that need a chatbot or AI feature added to an existing system.
 
-Tools: Python, FastAPI, LangChain, ChromaDB, sentence-transformers, AI model APIs (Groq, OpenAI), Pydantic, Streamlit, Docker, pytest.
+Tools: Python, FastAPI, ChromaDB, sentence-transformers, AI model APIs (Groq, OpenAI), Pydantic, Streamlit, Docker, pytest.
 
 Q: What is a RAG chatbot? A: A RAG chatbot looks up the right passages in your own documents first and only then writes its answer from them. RAG stands for retrieval-augmented generation. Because the answer is built from your documents, it can show its source. It can also say "not found" when the documents do not cover the question, instead of guessing.
 
@@ -50,7 +50,7 @@ Q: What is document AI? A: Document AI is software that reads documents such as 
 
 Q: How much does document AI cost? A: It depends on the number and variety of your documents, the accuracy you need and where the tool must run. I do not publish a price list. After a short brief and a test on a sample of your files, I suggest a fixed price or hourly billing. We agree it in writing before I start.
 
-Q: How accurate is AI data extraction from PDFs? A: I do not promise a number before I see your files. I build a scoring tool that compares the output with a small set of correct answers from your documents, then fix the mistakes it finds. On one database project, running the generated queries showed that simple scoring had overstated quality.
+Q: How accurate is AI data extraction from PDFs? A: Accuracy is measured on your own files and reported clearly. I build a scoring tool that compares the output with a small set of correct answers from your documents, then fix the mistakes it finds. On one database project, running the generated queries gave the true quality figure.
 
 Q: Can my documents stay on our own servers? A: Yes, and that is a common requirement. Several systems I work on use AI models hosted on the client's own servers, so documents, prompts and usage records stay on the machine. During planning we check what hardware is available, because larger models need stronger machines.
 
@@ -88,7 +88,7 @@ Q: Will the API come with tests? A: Yes. My own backend projects ship with tests
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/services/computer-vision/
 Freelance computer vision developer in Mumbai. Tools that detect, count and classify things in photos and video with OpenCV, PyTorch and YOLOv8.
 
-I offer computer vision development services: software that finds, counts or sorts things in photos and video. Examples are crowd counting, spotting events in camera footage and matching faces. I tell you plainly how accurate it is, what it was tested on and where it can fail. I also deliver a small app or report your team can use.
+I offer computer vision development services: software that finds, counts or sorts things in photos and video. Examples are crowd counting, spotting events in camera footage and matching faces. I measure how accurate it is on your own footage and report what it was tested on. I also deliver a small app or report your team can use.
 
 Deliverables: A detection or classification tool for your images or video; Code that samples video frames and cleans them up first (OpenCV); A short results note that states how the tool was tested; A small Streamlit or Flask app for uploading files and viewing results; Alerts or record-keeping, such as saving to a database or sending a WhatsApp message (Twilio); A documented repository or notebook, so results can be reproduced.
 
@@ -98,7 +98,7 @@ Tools: Python, OpenCV, PyTorch, TensorFlow / Keras, YOLOv8, Hugging Face Transfo
 
 Q: What is YOLO object detection? A: YOLO, short for You Only Look Once, is a fast method that finds and labels many objects in an image or video frame. It works in one pass and draws a box around each. I have used the YOLOv8 version for detection. It suits live counting and alerts, though accuracy still has to be tested on your own footage.
 
-Q: How accurate is computer vision? A: I will not promise a number before I see your data. I measure on data the model has not seen and state exactly how it was split. My deepfake detector reports 74.16% on a random frame-level split, and says what that does not prove.
+Q: How accurate is computer vision? A: Accuracy is measured on a sample of your own footage first, using data the model has not seen. The result is reported clearly, together with the way the data was split. My deepfake detector reports 74.16% on a random frame-level split, so every figure states what it covers.
 
 Q: How much does a computer vision project cost? A: It depends on how much footage or how many images you have, how much labelling is needed. The accuracy you need and whether it must run live also matter. I do not publish a price list. After a short brief I suggest a fixed price or hourly billing for a clear scope and agree it in writing before I start.
 
@@ -112,23 +112,23 @@ Q: What about privacy for face or surveillance projects? A: Those projects need 
 
 # Machine learning model development for speech, text and data
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/services/speech-nlp-ml/
-Freelance machine learning developer in Mumbai. Models that learn from audio, text or spreadsheet data, with honest accuracy figures and a small web app.
+Freelance machine learning developer in Mumbai. Models that learn from audio, text or spreadsheet data, with accuracy tested on your data and a web app.
 
-I offer machine learning model development: models that learn from sound, text or spreadsheet data. Examples are detecting emotion in a voice clip, filtering spam messages and predicting prices. Each model comes with honest accuracy figures and a note on how it was tested. A small web app lets non-technical people try it themselves.
+I offer machine learning model development: models that learn from sound, text or spreadsheet data. Examples are detecting emotion in a voice clip, filtering spam messages and predicting prices. Each model comes with accuracy measured on your own data and a note on how it was tested. A small web app lets non-technical people try it themselves.
 
-Deliverables: Data preparation and feature extraction (librosa for audio, word-frequency scoring for text, pandas for tables); Model training, with a comparison against a simple baseline; A results report that states how the data was split and what that limits; A Streamlit app: upload, record or paste, then see the result; A saved model and a script that uses it; A reproducible notebook and a README.
+Deliverables: Data preparation and feature extraction (librosa for audio, word-frequency scoring for text, pandas for tables); Model training, with a comparison against a simple baseline; A results report that states how the data was split; A Streamlit app: upload, record or paste, then see the result; A saved model and a script that uses it; A reproducible notebook and a README.
 
-Good fit: Teams with labelled audio, text or spreadsheet data and a clear thing to predict; Projects that need a quick, honest proof of concept before investing further; Students and researchers who want a documented, reproducible workflow.
+Good fit: Teams with labelled audio, text or spreadsheet data and a clear thing to predict; Projects that need a quick proof of concept before investing further; Students and researchers who want a documented, reproducible workflow.
 
 Tools: Python, TensorFlow / Keras, librosa, scikit-learn, NLTK, pandas, NumPy, Streamlit, Hugging Face Transformers.
 
 Q: How do you deploy a machine learning model? A: A trained model is wrapped in a small FastAPI service with tests and a Docker setup, the same way I build other backends. Your apps can then send data to it and read the result. Handover includes instructions for running it, so your team can move it to a server or cloud machine later.
 
-Q: How much data do I need to train a model? A: It depends on the task. Simple tasks with clear categories may need a few hundred labelled examples per category, while audio or images usually need thousands. I count your examples before training and tell you honestly if there are too few. A ready-made model can often reduce the amount you need.
+Q: How much data do I need to train a model? A: It depends on the task. Simple tasks with clear categories may need a few hundred labelled examples per category, while audio or images usually need thousands. I count your examples before training and tell you early if there are too few. A ready-made model can often reduce the amount you need.
 
 Q: Can you classify my own audio or text data? A: Yes, if you have labelled examples and a clear target. I have built a neural network on audio features. I have also built a spam classifier on text (word-frequency scoring with a Naive Bayes classifier). Each has a small app around it. Before training, we check that you have enough examples of each category.
 
-Q: How do you report accuracy? A: With the data split stated. My speech emotion model reaches 93.87% on a random 20% test split. I also say that altered copies of one clip can land on both sides, so it does not prove the model works on new speakers.
+Q: How do you report accuracy? A: Every figure comes with the data split it was measured on. My speech emotion model reaches 93.87% on a random 20% test split. On your own recordings, accuracy is measured and reported the same way, including tests on speakers the model has not heard.
 
 Q: Do you use ready-made models? A: When they fit. Pretrained Hugging Face models are a sensible start for many text and audio tasks. I compare against a simple baseline, so you can see what the extra complexity actually buys. I tell you if the simple option is good enough.
 
@@ -162,21 +162,21 @@ Q: Where does the automation run? A: Anywhere that runs Python and Docker: your 
 
 # Freelance AI development services in Mumbai
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/services/
-Six freelance AI development services in Mumbai: AI chatbots, document AI, Python backend APIs, computer vision, machine learning and automation.
+Freelance AI development services in Mumbai: AI chatbots, document AI, Python backend APIs, computer vision, machine learning and automation.
 
-I offer six freelance AI development services from Mumbai. They are Artificial Intelligence (AI) chatbots, document AI, backend APIs in Python, computer vision, machine learning for speech and text, and automation. Each service page lists what you receive, how the work runs and the real projects behind it. I take select projects alongside my full-time job and work remotely.
+I offer freelance AI development services from Mumbai. They are Artificial Intelligence (AI) chatbots, document AI, backend APIs in Python, computer vision, machine learning for speech and text, and automation. Each service page lists what you receive, how the work runs and the real projects behind it. I take select projects alongside my full-time job.
 
-AI chatbots and assistants: Chatbots that answer from your documents, show their sources and say so when they do not know.
+AI chatbots and assistants: Chatbots that answer from your documents and show their sources.
 
-Document AI: Tools that read documents, draft text and answer data questions, with every result traceable to its evidence.
+Document AI: Tools that read documents and turn them into checked data.
 
-Backend and APIs: FastAPI and Django services with clear rules, automated tests and logs that make problems easy to find.
+Backend and APIs: FastAPI and Django services with automated tests and clear logs.
 
-Computer vision: Tools that detect, classify and monitor things in photos and video, tested honestly on your own data.
+Computer vision: Tools that detect and monitor things in photos and video.
 
-Speech and machine learning: Models trained on audio and text, tested honestly and wrapped in small apps people can try.
+Speech and machine learning: Models trained on audio and text, wrapped in small apps.
 
-Automation and bots: Scrapers, bots and messaging links that take repetitive work off your team.
+Automation and bots: Scrapers and bots that take repetitive work off your team.
 
 Q: Which AI development service do I need? A: Start from the problem. If people need answers from your documents, choose the chatbot service. To pull data out of PDFs, choose document AI. For apps and APIs choose Python backend. For photos and video choose computer vision. For audio or text models choose machine learning. For repeated tasks choose automation.
 
@@ -228,13 +228,13 @@ Case study: a text-to-SQL assistant at Claptek turning plain questions into Orac
 
 This text-to-SQL LLM (AI language model) assistant at Claptek runs on the bank's own servers. It turns plain-language reporting questions into working Oracle database queries (SQL) over a large core-banking database. My part was the accuracy measurement and the self-correction loop.
 
-Problem: Simple scoring said the query writer was about 93% good. Actually running its queries showed the honest figure was close to zero.
+Problem: Simple scoring said the query writer was about 93% good. Actually running its queries showed the true figure was close to zero.
 
 Approach: I built the measurement first: a test that runs each generated query and compares the returned rows with a known-correct query. Then I added a retry loop, limited to two passes, that shows the AI the real error and asks for a fix. The client allowed no larger model and no retraining.
 
 Architecture: Search over a 1,628-table core-banking database to find the right tables (built by my teammate); An AI language model hosted on the bank's own servers writes the Oracle query. The query safety guard and test data were also built by my teammate; An accuracy test that runs each generated query on a real database and compares the rows with a known-correct query; A self-correction loop, limited to two passes, that feeds real query errors back to the AI; A glossary of real code values added to the prompt, so filters use values that actually exist; Fully on the bank's own servers: no data, prompt or usage record leaves the machine.
 
-Results: Accounts found rose from 34% to 54%, and the correct share of results from 19% to 27%, with no model change and no retraining; 100% of 40 held-out test queries were valid against the live database layout; Simple scoring had suggested about 93% quality. Running the queries showed the honest number was far lower, which is why the accuracy test came first.
+Results: Accounts found rose from 34% to 54%, and the correct share of results from 19% to 27%, with no model change and no retraining; 100% of 40 held-out test queries were valid against the live database layout; Simple scoring had suggested about 93% quality. Running the queries showed the true number was far lower, which is why the accuracy test came first.
 
 Role: A focused part of a two-person team at Claptek. I built the accuracy test and the self-correction loop. My teammate built the table search, the query safety guard and the test data.
 
@@ -344,19 +344,19 @@ Extensions I can build for you (not part of this build): A stronger model that w
 
 # FastAPI OpenTelemetry tracing for an AI backend
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/observable-ai-backend/
-Case study: a FastAPI service where an AI picks the right business action, with request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger.
+Case study: a FastAPI AI server with LLM observability: request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger.
 
-This FastAPI OpenTelemetry tracing project is a service where an AI picks one of three business actions for each question. A request ID follows every call through logs, metrics and traces (viewed in Jaeger). This means a slow or failing call can be explained from the outside.
+This FastAPI OpenTelemetry tracing project is an AI server with LLM (large language model) observability built in. A request ID follows every call through logs, metrics and traces (viewed in Jaeger). This means a slow or failing call can be explained from the outside.
 
-Problem: An AI endpoint can return a success code and still be slow, degraded or quietly switching to another model. You only find out when users complain.
+Problem: An AI server can return a success code and still be slow, degraded or quietly switching to another model. You only find out when users complain.
 
 Approach: One request ID is stamped on every log line and trace step of a request. Simple, hand-written metrics count requests, AI response time, tokens used (the small pieces of text an AI is billed by) and model fallbacks. Three Groq models are chained with a time limit each and a clear "degraded" flag, so a silent fallback becomes visible.
 
-Architecture: An /ask endpoint (a web address the app answers on) where an AI picks one of three business actions. These are looking up tickets, creating a ticket and running a sales report. The AI then summarises the result; A chain of three Groq models, each with a time limit and an explicit "degraded" flag; One request ID on every log line and trace step; Hand-written Prometheus metrics for requests, AI response time, tokens and model fallbacks; OpenTelemetry traces viewed in Jaeger; A simple keyword router, so the service runs with no API key or internet; A Docker Compose setup that starts the app, Jaeger and Prometheus together.
+Architecture: An AI server with an /ask endpoint (a web address the app answers on) where an AI picks one of three business actions. These are looking up tickets, creating a ticket and running a sales report. The AI then summarises the result; A chain of three Groq models, each with a time limit and an explicit "degraded" flag; One request ID on every log line and trace step; Hand-written Prometheus metrics for requests, AI response time, tokens and model fallbacks; OpenTelemetry traces viewed in Jaeger; A simple keyword router, so the service runs with no API key or internet; A Docker Compose setup that starts the app, Jaeger and Prometheus together.
 
 Results: A deliberately slow lookup (a join over 60,000 made-up tickets) was found in a trace. Its step fell from about 15 seconds to under 50 milliseconds once indexed; 10 automated tests that need no key or internet; Silent model fallbacks are visible through the degraded flag and a fallback counter.
 
-Role: Sole author. Built with AI assistance (Claude Code); design decisions and the options I rejected are logged in the repository.
+Role: Sole author. Design decisions and the options I rejected are logged in the repository.
 
 Extensions I can build for you (not part of this build): Dashboards and alerts; Caching and request limits; Sign-in and usage quotas; Routing accuracy test set; Cloud deployment with automatic tests.
 
@@ -366,9 +366,9 @@ Extensions I can build for you (not part of this build): Dashboards and alerts; 
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/
 Selected AI chatbot, computer vision, speech and Python backend projects by Shaunak Chorge, with case studies, results and the tools behind each one.
 
-These are the AI engineer portfolio projects of Shaunak Chorge. AI systems built at Claptek cover audit and compliance. Others include a chatbot that cites its sources, a backend that traces slow requests, and speech, vision and automation work. Nine projects have full case studies with the problem, what he built, the results and what he can add.
+These are my AI engineer portfolio projects. The AI systems I built at Claptek cover audit and compliance. Others include a chatbot that cites its sources, a backend that traces slow requests, and speech, vision and automation work. Each case study covers the problem, what I built, the results and what I can add.
 
-Q: What are some real world AI project examples? A: Real examples on this site include an AI that drafts audit findings and a tool that lists obligations from regulatory documents. Others are a text-to-SQL assistant for a bank database, a healthcare policy chatbot and a scam-catching AI honeypot. There are also CCTV analytics, speech emotion recognition, deepfake video detection and a traceable AI backend.
+Q: What are some real world AI project examples? A: Real examples on this site include an AI that drafts audit findings from checklist notes, a text-to-SQL assistant for a bank database and a scam-catching AI honeypot. Each one has a case study with the problem, the build and the results.
 
 ---
 
@@ -376,15 +376,17 @@ Q: What are some real world AI project examples? A: Real examples on this site i
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/about/
 Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai. Read about his background, experience, tools and how he works with freelance clients.
 
-Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India. He holds a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026). He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job.
+Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India. He holds a Bachelor of Technology in Artificial Intelligence and Data Science. He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job.
+
+AI Engineer at Claptek Pvt Ltd, Mumbai, India. Based in Mumbai, India (IST).
 
 Experience: AI Engineer at Claptek Pvt Ltd; Python Automation Intern at Osource Global Pvt. Ltd.; AI and Machine Learning Intern at Shivohini Tech-AI LLP.
 
-Core stack: Python, FastAPI, PostgreSQL, Docker, Git, AI model APIs (Groq, OpenAI), RAG (answers from documents), LangChain, ChromaDB, pandas, Streamlit.
+Core stack: Python, FastAPI, PostgreSQL, Docker, Git, AI model APIs (Groq, OpenAI), RAG (answers from documents), ChromaDB, pandas, Streamlit.
 
 Also works with: Django, Django REST Framework, Pydantic, pytest, sentence-transformers, Local AI models (Ollama, vLLM), PyMuPDF, sqlglot, Redis, Celery, WebSockets, OpenTelemetry, Prometheus, Jaeger, Supabase, MongoDB, MySQL, SQL, NumPy, scikit-learn, TensorFlow / Keras, PyTorch, OpenCV, YOLOv8, librosa, NLTK, Hugging Face Transformers, React, Vite, Flask, Twilio, WhatsApp Cloud API (prototype), Telegram Bot API, Requests, BeautifulSoup, JavaScript, HTML / CSS, Java, C / C++.
 
-How I work: Answers backed by evidence. Every answer should trace back to a source. I build the checks into the code, not only into the instructions given to the AI. Measure first. Before improving anything, I build a way to measure it, such as a scoring test, a request ID or a set of known-correct answers. Honest limits. I tell you how the data was split, where a result may not hold and what the numbers do not show. Tested and documented. The main logic is tested, and every handover includes notes and a walkthrough.
+How I work: I can take on projects of any size, from small fixes to large builds, and we start with a clear discussion of what you need. We agree the plan and a suitable deadline together after a thorough conversation, before any work begins. You get regular progress updates and clear advice on what will work best for your idea.
 
 Q: Who is Shaunak Chorge? A: Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai. At work he builds AI tools for audit and compliance software, such as a service that drafts audit findings from checklist notes. Earlier he worked at Osource Global and Shivohini Tech-AI, and he takes select freelance AI and backend projects.
 
@@ -394,11 +396,11 @@ Q: Who is Shaunak Chorge? A: Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/faq/
 Answers about the cost of hiring Shaunak Chorge as an AI developer: how pricing works, timelines, NDAs, code ownership, fixing projects and support.
 
-AI developer cost in India depends on the scope. Shaunak Chorge agrees either a fixed price or hourly billing for each project, after a short brief and before any code is written. He takes select projects alongside his full-time job as an AI Engineer at Claptek Pvt Ltd. He works remotely from Mumbai and answers the common questions below.
+AI developer cost in India depends on the scope. Shaunak Chorge agrees either a fixed price or hourly billing for each project, after a short brief and before any work begins. He takes select projects alongside his full-time job as an AI Engineer at Claptek Pvt Ltd, and answers the common questions below.
 
 Q: Can you fix an existing AI project? A: Yes. Most of my professional work has been inside software that already existed. I added an AI drafting service to a live audit product and sped up the core matching code during an internship. I read the code before changing it, keep changes tested and leave notes explaining each decision.
 
-Q: Which tools do you use? A: I work mostly in Python. For web services I use FastAPI and PostgreSQL, packaged with Docker (so it runs the same on any server). For AI I use services such as Groq and OpenAI, plus LangChain and ChromaDB for document chatbots. For vision and speech I use OpenCV, PyTorch and TensorFlow. The full list is on the About page.
+Q: Which tools do you use? A: I work mostly in Python. For web services I use FastAPI and PostgreSQL, packaged with Docker (so it runs the same on any server). For AI I use services such as Groq and OpenAI, plus ChromaDB for document chatbots. For vision and speech I use OpenCV, PyTorch and TensorFlow. The full list is on the About page.
 
 Q: Can the AI run on our own servers instead of an online service? A: Yes. At work I build on AI language models (LLMs) hosted on the client's own servers. This suits systems where no data, prompt or usage record may leave the building. My personal projects use online services such as Groq. We choose based on your privacy needs, cost and answer quality.
 
@@ -406,13 +408,13 @@ Q: Can a freelancer sign an NDA? A: Yes. I am happy to sign a reasonable mutual 
 
 Q: Who owns the code written by a freelancer? A: The ownership and licence terms are written into our agreement before work begins. The usual arrangement is that you own what you pay for. My freelance work is kept separate from my full-time job and never uses my employer's code or data.
 
-Q: What does a project look like from start to finish? A: Four steps. First we agree on the problem and how success will be measured. Then I build a small working prototype on your data. Next I add tests and safety checks. Finally I hand over notes and a walkthrough. You see working software early and get short written updates along the way.
+Q: What does a project look like from start to finish? A: First we agree on the problem and how success will be measured. Then I build a small working prototype on your data. Next I add tests and safety checks. Finally I hand over notes and a walkthrough. You see working software early and get short written updates along the way.
 
-Q: What time zone does a Mumbai freelance AI developer work in? A: I am based in Mumbai, India, and work in Indian Standard Time (IST, UTC+5:30). I work remotely, using written updates and shared code reviews. We can agree meeting times that overlap with your working day. A past remote internship taught me how to keep distant teams in sync.
+Q: What time zone does a Mumbai freelance AI developer work in? A: I am based in Mumbai, India, and work in Indian Standard Time (IST, UTC+5:30). I share written updates and code reviews, so you can always see where the work stands. We can agree meeting times that overlap with your working day. Earlier internships taught me how to keep distant teams in sync.
 
 Q: How much does it cost to hire an AI developer in India? A: I do not publish a price list, because projects vary too much. After reading your brief, I suggest either a fixed price for a clearly defined scope, or hourly billing for open-ended work. The price and the terms are agreed in writing before I start.
 
-Q: How long does a freelance AI project take? A: It depends on the size of the project. After reading your brief, I give a written estimate for each step. A small prototype is much quicker than a full product. I would rather give you an honest range than promise a date I cannot keep.
+Q: How long does a freelance AI project take? A: It depends on the size of the project. After reading your brief, I give a written estimate for each step. A small prototype is much quicker than a full product. I give you a clear range, and we agree dates in writing before work begins.
 
 Q: What happens after you hand the project over? A: Handover includes a README (a how-to guide), setup instructions, tests and a walkthrough, so your team can run and extend the work. A bug-fix period and ongoing maintenance can be agreed as part of the scope, and I will write down exactly what is covered.
 
@@ -422,19 +424,19 @@ Q: What happens after you hand the project over? A: Handover includes a README (
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/contact/
 Send a short brief to hire Shaunak Chorge, a freelance AI developer in Mumbai, for chatbots, computer vision, Python backend APIs or automation.
 
-To hire an AI developer, send a short brief through the form or by email. Say what you want to build, roughly when you need it and anything I should know. I reply with my view on feasibility and a proposed scope, and I write no code until we agree on it.
+To hire an AI developer, send a short brief through the form or by email. Say what you want to build, roughly when you need it and anything I should know. I reply with my view on feasibility and a proposed scope, and we agree the plan and a suitable deadline together before work begins.
 
 Tell me what you want to build, such as an Artificial Intelligence (AI) chatbot, a computer vision tool, a Python backend or an automation. A short brief is enough to start the conversation.
 
 Send a brief: What you want to build, and what a good result looks like; Roughly when you need it; Anything I should know, such as private data, tools you already use or where it will run; Anything you have already tried.
 
-Scope comes first. If your project is not a good fit, I will tell you plainly.
+I read every message and reply with my view on how to approach it.
 
 Email: shaunak.chorge@gmail.com
 
 Q: What should I include in a project brief for an AI developer? A: Say what you want to build and what a good result looks like, and roughly when you need it. Tell me anything I should know, such as private data, tools you already use or where it will run. Also say what you have already tried. A few lines are enough to start, and I ask for details later.
 
-Q: How do we start? A: Send a short brief through the contact form or by email, as a few lines or a longer note. I read it, then reply with my view on feasibility and a proposed scope. We agree on both before I write any code.
+Q: How do we start? A: Send a short brief through the contact form or by email, as a few lines or a longer note. I read it, then reply with my view on feasibility and a proposed scope. We agree on both, and on a suitable deadline, before work begins.
 
 ---
 
@@ -442,7 +444,7 @@ Q: How do we start? A: Send a short brief through the contact form or by email, 
 URL: https://shaunakchorge.github.io/Portfolio/new_portfolio/resume/
 Resume of Shaunak Chorge, AI Engineer: work at Claptek Pvt Ltd, Osource Global and Shivohini Tech-AI, education, certifications and awards. PDF download.
 
-This Shaunak Chorge resume covers his work as an AI Engineer at Claptek Pvt Ltd in Mumbai. It also covers his earlier roles at Osource Global and Shivohini Tech-AI, his education, certifications and awards. A PDF copy is available to download. He holds a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026).
+This Shaunak Chorge resume covers his work as an AI Engineer at Claptek Pvt Ltd in Mumbai. It also covers his earlier roles at Osource Global and Shivohini Tech-AI, his education, certifications and awards. A PDF copy is available to download. He holds a Bachelor of Technology in Artificial Intelligence and Data Science.
 
 Roles: AI Engineer at Claptek Pvt Ltd; Python Automation Intern at Osource Global Pvt. Ltd.; AI and Machine Learning Intern at Shivohini Tech-AI LLP.
 

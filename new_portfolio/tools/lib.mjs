@@ -18,10 +18,3 @@ export const escText = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;
 export const esc = s => escText(s).replace(/"/g, '&quot;');
 /** one icon from the inline sprite (shell.html); the build keeps only the symbols a page uses */
 export const icon = (name, cls = '') => `<svg class="icon${cls ? ' ' + cls : ''}" aria-hidden="true" focusable="false"><use href="#i-${name}"/></svg>`;
-
-/** the three numbers of the stats strip (home hero, /about/): computed, never typed. `selection` comes from tools/selection.mjs */
-export const statValues = (content, selection) => ({
-  roles: content.experience.filter(e => e.group === 'work').length,
-  podiums: content.achievements.length,
-  projects: selection.show.length,
-});

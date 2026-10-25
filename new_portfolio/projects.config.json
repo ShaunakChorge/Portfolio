@@ -1,17 +1,29 @@
 {
   "show": [
-    "ams-ai-finding-engine",
-    "obligation-management-system",
-    "finacle-text-to-sql",
     "ai-rag-healthcare-assistant",
-    "agentic-honeypot",
     "advanced-cctv-analytics",
     "speech-emotion-recognition",
-    "deepfake-video-detection",
     "observable-ai-backend",
-    "django-box-selection-api",
+    "obligation-management-system",
+    "ams-ai-finding-engine",
+    "finacle-text-to-sql",
+    "agentic-honeypot",
     "whatsapp-ai-agent-platform",
+    "deepfake-video-detection",
     "spam-classifier"
+  ],
+  "tile_size": {
+    "ai-rag-healthcare-assistant": "wide",
+    "advanced-cctv-analytics": "big",
+    "speech-emotion-recognition": "big",
+    "whatsapp-ai-agent-platform": "wide"
+  },
+  "desktop_grid": [
+    [1, 1, 2, 2],
+    [4, 5, 2, 2],
+    [3, 3, 6, 7],
+    [3, 3, 8, 10],
+    [9, 9, 11, 12]
   ],
   "casestudy": [
     "ams-ai-finding-engine",
@@ -24,7 +36,7 @@
     "deepfake-video-detection",
     "observable-ai-backend"
   ],
-  "more": [
+  "personal": [
     "house-price-predictor",
     "cv-fundamentals-yolov8",
     "zapvi-web-scraper",
@@ -34,15 +46,8 @@
     "qr-code-generator",
     "quiz-game-c",
     "tetris-raylib-cpp",
-    "password-generator"
-  ],
-  "home_featured": [
-    "ams-ai-finding-engine",
-    "obligation-management-system",
-    "ai-rag-healthcare-assistant",
-    "agentic-honeypot",
-    "advanced-cctv-analytics",
-    "speech-emotion-recognition"
+    "password-generator",
+    "django-box-selection-api"
   ],
   "footer_work": [
     "observable-ai-backend",

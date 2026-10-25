@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=fcec523d">
+  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=99f76e8a">
 
 <script type="application/ld+json">
 {
@@ -160,7 +160,7 @@
           "name": "Can it work with my own recordings?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It can be retrained on your recordings if they are labelled with the emotions you care about. Quality depends on the microphone, the language and the number of speakers. I would first test it on a sample of your audio and tell you honestly how well it holds."
+            "text": "It can be retrained on your recordings if they are labelled with the emotions you care about. Quality depends on the microphone, the language and the number of speakers. I would first test it on a sample of your audio and report how well it holds."
           }
         }
       ]
@@ -200,22 +200,17 @@
 
         <nav class="nav" aria-label="Primary">
           <ul class="nav__list">
-            <li><a class="nav__link" href="../../">Home</a></li>
             <li><a class="nav__link" href="../../projects/" aria-current="page">Projects</a></li>
             <li><a class="nav__link" href="../../services/">Services</a></li>
             <li><a class="nav__link" href="../../about/">About</a></li>
-            <li><a class="nav__link" href="../../faq/">FAQ</a></li>
-            <li><a class="nav__link" href="../../contact/">Contact</a></li>
+            <li><a class="nav__link" href="../../resume/">Resume</a></li>
           </ul>
           <span class="nav__ind" aria-hidden="true"></span>
         </nav>
 
         <div class="site-header__tools">
-          <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST" title="Local time in Mumbai">MUMBAI</span>
-          <button class="cmd" type="button" data-open-palette aria-label="Search, open command palette" aria-keyshortcuts="Control+K Meta+K">
+          <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
-            <span class="cmd__text">Search</span>
-            <kbd class="kbd" data-kbd aria-hidden="true">Ctrl K</kbd>
           </button>
           <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
@@ -228,10 +223,10 @@
 
   <nav class="drawer" id="drawer" aria-label="Mobile">
     <ul class="drawer__list">
-      <li><a class="drawer__link" href="../../" style="--i:0"><small>01</small>Home</a></li>
-      <li><a class="drawer__link" href="../../projects/" aria-current="page" style="--i:1"><small>02</small>Projects</a></li>
-      <li><a class="drawer__link" href="../../services/" style="--i:2"><small>03</small>Services</a></li>
-      <li><a class="drawer__link" href="../../about/" style="--i:3"><small>04</small>About</a></li>
+      <li><a class="drawer__link" href="../../projects/" aria-current="page" style="--i:0"><small>01</small>Projects</a></li>
+      <li><a class="drawer__link" href="../../services/" style="--i:1"><small>02</small>Services</a></li>
+      <li><a class="drawer__link" href="../../about/" style="--i:2"><small>03</small>About</a></li>
+      <li><a class="drawer__link" href="../../resume/" style="--i:3"><small>04</small>Resume</a></li>
       <li><a class="drawer__link" href="../../faq/" style="--i:4"><small>05</small>FAQ</a></li>
       <li><a class="drawer__link" href="../../contact/" style="--i:5"><small>06</small>Contact</a></li>
     </ul>
@@ -241,7 +236,6 @@
       <a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a>
       <a class="icon-btn" href="mailto:shaunak.chorge@gmail.com" aria-label="Email Shaunak"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
       <button type="button" class="btn btn--ghost btn--sm drawer__motion" data-motion-toggle aria-pressed="false" hidden><svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-pause"/></svg> Pause effects</button>
-      <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST">MUMBAI</span>
     </div>
   </nav>
 
@@ -301,7 +295,7 @@
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">Results</p>
-      <h2 id="results-h" class="section__title">Results and an honest test <span class="hl hl--magenta">note</span></h2>
+      <h2 id="results-h" class="section__title">Results and a test <span class="hl hl--magenta">note</span></h2>
       <p class="section__lead">Every number comes with how it was measured. The limits are part of the result.</p>
     </header>
 <div class="panel" data-tone="purple" data-reveal><ul class="dot-list pg-results"><li>Recognises seven emotions: angry, disgust, fear, happy, neutral, sad and surprise</li><li>93.87% accuracy and a weighted F1 score of 0.94 (one number that balances missed cases against false alarms) on a random 20% test split</li><li>Per-emotion F1 scores between 0.92 and 0.97</li><li>Caveat: altered copies of one clip can land on both sides of the split, so the result does not prove it works on new speakers</li><li>Live microphone detection in a notebook and in the Streamlit dashboard</li></ul></div>
@@ -322,7 +316,7 @@
       <h2 id="hire-for-h" class="section__title">Services behind <span class="hl hl--purple">this project</span></h2>
       
     </header>
-<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/speech-nlp-ml/" data-tone="purple"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-audio-waveform"/></svg></span><span><strong>Hire me for machine learning model development</strong><span class="pg-rel__t">Models trained on audio and text, tested honestly and wrapped in small apps people can try.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li></ul>
+<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/speech-nlp-ml/" data-tone="purple"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-audio-waveform"/></svg></span><span><strong>Hire me for machine learning model development</strong><span class="pg-rel__t">Models trained on audio and text, wrapped in small apps.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li></ul>
     <p class="pg-author" data-reveal>Built by <a class="link" href="../../about/">Shaunak Chorge</a>, Artificial Intelligence (AI) Engineer at Claptek Pvt Ltd in Mumbai.</p>
   </div>
 </section><section id="faq" class="section pg-sec section--tint" aria-labelledby="faq-h">
@@ -335,12 +329,12 @@
 <div class="pg-qas"><details class="pg-qa" id="speech-emotion-recognition-q1" open data-reveal>
       <summary class="pg-qa__q"><h3 class="pg-qa__h">What is speech emotion recognition?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>Speech emotion recognition is software that listens to a voice clip and guesses the emotion from tone, pitch and energy rather than the words. This project labels seven emotions: angry, disgust, fear, happy, neutral, sad and surprise. It reads features from the audio and passes them to a neural network.</p></div>
-    </details><details class="pg-qa" id="speech-emotion-recognition-q2" data-reveal style="--i:1">
+    </details><details class="pg-qa" id="speech-emotion-recognition-q2" open data-reveal style="--i:1">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">How accurate is speech emotion recognition?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>In this project, 93.87% on a random 20% test split. That figure does not cover new speakers, because altered copies of one clip can land on both sides of the split. Accuracy on unseen voices will be lower, so a client project would first measure it by splitting speakers apart.</p></div>
-    </details><details class="pg-qa" id="speech-emotion-recognition-q3" data-reveal style="--i:2">
+    </details><details class="pg-qa" id="speech-emotion-recognition-q3" open data-reveal style="--i:2">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Can it work with my own recordings?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>It can be retrained on your recordings if they are labelled with the emotions you care about. Quality depends on the microphone, the language and the number of speakers. I would first test it on a sample of your audio and tell you honestly how well it holds.</p></div>
+      <div class="pg-qa__a"><p>It can be retrained on your recordings if they are labelled with the emotions you care about. Quality depends on the microphone, the language and the number of speakers. I would first test it on a sample of your audio and report how well it holds.</p></div>
     </details></div>
   </div>
 </section><section class="section pg-sec pg-pnsec" aria-label="More case studies"><div class="container"><nav class="pg-pn" aria-label="More case studies">
@@ -357,7 +351,7 @@
       </div>
       <div class="pg-hire__act">
         <a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=speech-nlp-ml#hire" data-magnetic>Hire me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
-        <p class="pg-hire__alt"><a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a><span aria-hidden="true"> &middot; </span><a class="link" href="../../projects/">View work</a></p>
+        <p class="pg-hire__alt"><a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a><span aria-hidden="true"> &middot; </span><a class="link" href="../../projects/">See projects</a></p>
       </div>
     </div>
   </div>
@@ -383,7 +377,7 @@
           <span class="logo__word">SHAUNAK</span>
         </p>
         <p class="footer__blurb">AI Engineer at Claptek Pvt Ltd. Taking select freelance AI and backend projects.</p>
-        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India &ndash; working remotely (IST)</p>
+        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India (IST)</p>
         <ul class="footer__soc" aria-label="Profiles">
           <li><a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a></li>
           <li><a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a></li>
@@ -400,9 +394,10 @@
             <li><a href="../../projects/">Projects</a></li>
             <li><a href="../../services/">Services</a></li>
             <li><a href="../../about/">About</a></li>
+            <li><a href="../../about/#experience">Experience</a></li>
+            <li><a href="../../resume/">Resume</a></li>
             <li><a href="../../faq/">FAQ</a></li>
             <li><a href="../../contact/">Contact</a></li>
-            <li><a href="../../resume/">Resume</a></li>
           </ul>
         </nav>
 
@@ -421,7 +416,7 @@
         <nav class="footer__col" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../../projects/observable-ai-backend/">FastAPI tracing with OpenTelemetry</a></li>
+            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
             <li><a href="../../projects/agentic-honeypot/">AI scam honeypot</a></li>
             <li><a href="../../projects/deepfake-video-detection/">Deepfake video detection</a></li>
@@ -499,11 +494,11 @@
     <symbol id="i-loader" viewBox="0 0 24 24"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/></symbol>
   </svg>
 
-  <script defer src="../../assets/dist/js/core.min.js?v=53badac3"></script>
+  <script defer src="../../assets/dist/js/core.min.js?v=d41b0d5b"></script>
   <script defer src="../../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
   <script defer src="../../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../../assets/dist/js/fx.min.js?v=2e06fef0"></script>
-  <script defer src="../../assets/dist/js/pages.min.js?v=794591ab"></script>
-  <script defer src="../../assets/dist/js/visuals.min.js?v=341dbffd"></script>
+  <script defer src="../../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
+  <script defer src="../../assets/dist/js/pages.min.js?v=efc0e441"></script>
+  <script defer src="../../assets/dist/js/visuals.min.js?v=53b137f5"></script>
 </body>
 </html>

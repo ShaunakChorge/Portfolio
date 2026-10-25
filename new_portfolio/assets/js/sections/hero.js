@@ -22,23 +22,7 @@
 
   var qs = P.qs, qsa = P.qsa;
 
-  /* decorative photos start loading just after the first paint (markup holds data-src / data-srcset behind a 1px placeholder),
-     so they never compete with the CSS and fonts that paint the text. Runs even when the hero animation is off. */
-  function lateImages() {
-    qsa('[data-late]').forEach(function (pic) {
-      qsa('source[data-srcset]', pic).forEach(function (s) { s.srcset = s.getAttribute('data-srcset'); s.removeAttribute('data-srcset'); });
-      var img = qs('img[data-src]', pic);
-      if (img) { img.src = img.getAttribute('data-src'); img.removeAttribute('data-src'); }
-      pic.removeAttribute('data-late');
-    });
-  }
-  function scheduleLate() {
-    var go = function () { setTimeout(lateImages, 80); };
-    if (doc.readyState === 'complete') go(); else window.addEventListener('load', go, { once: true });
-  }
-
   function boot() {
-    scheduleLate();
     var root = doc.getElementById('home');
     if (!root) return;
 
@@ -103,7 +87,7 @@
     /* when the window is shorter than its text (phones), keep the line being typed in view */
     function followLine(i) {
       if (!editor) return;
-      if (i < 0) { editor.scrollTop = editor.scrollHeight; return; }   /* finished or skipped: show the end of the snippet */
+      if (i < 0) { editor.scrollTop = 0; return; }   /* finished or skipped: the whole snippet fits, so show it from line 1 */
       if (!lineEls[i]) return;
       var over = editor.scrollHeight - editor.clientHeight;
       if (over <= 1) { editor.scrollTop = 0; return; }
@@ -175,9 +159,9 @@
     }
 
     /* ------------------------------------------------------------ setup / reset (also used by replay) */
-    function prepare() {
+    function prepare(first) {   /* first: the page is still loading, so nothing reads or sets a scroll position (that would force a layout inside the start-up task) */
       codeList.innerHTML = pristine;
-      if (editor) editor.scrollTop = 0;
+      if (editor && !first) editor.scrollTop = 0;
       lineEls = qsa('.hero__line', codeList);
       var srcs = qsa('.hero__src', codeList);
       S.code = typer(buildUnits(srcs), CPS, LINE_PAUSE, setCurLine);
@@ -185,7 +169,7 @@
       if (roleEl && roles[0]) roleNode().data = roles[0];
       if (roleBox) roleBox.classList.remove('is-typing');
       dropCaret();
-      if (S.code.u.length) { moveCaret(S.code.u[0].typed); setCurLine(0); }   /* caret waits on line 1 */
+      if (S.code.u.length) { moveCaret(S.code.u[0].typed); if (first) lineEls[0].classList.add('is-cur'); else setCurLine(0); }   /* caret waits on line 1 */
       S.phase = 'delay'; S.delay = START_DELAY;
       setCtrl('skip');
     }
@@ -289,7 +273,7 @@
     /* OS "reduce motion" switched on while the page is open: finish at once */
     if (P.on) P.on('portfolio:motion', function (e) { if (e && e.detail && e.detail.reduced) finish(); });
 
-    prepare();
+    prepare(true);
     root.classList.add('is-ready');
     start();
 

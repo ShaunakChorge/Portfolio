@@ -65,6 +65,10 @@
   function txt(c, s, x, y, col, align, base) { var a = align || 'left', b = base || 'middle'; c.fillStyle = col; if (c.textAlign !== a) c.textAlign = a; if (c.textBaseline !== b) c.textBaseline = b; c.fillText(s, x, y); }
   /* a font size that scales with the visual but never gets unreadable (decorative text, >= 10px) */
   function fsz(v, base) { return clamp(base * v.s, 10, base * 1.75); }
+  function fitText(c, opts, maxW) {           /* the first option that fits maxW (the last one when none does); set font and tracking first */
+    for (var i = 0; i < opts.length - 1; i++) if (c.measureText(opts[i]).width <= maxW) return opts[i];
+    return opts[opts.length - 1];
+  }
   function wrap(c, text, maxW) {
     var words = String(text).split(' '), lines = [], cur = '';
     for (var i = 0; i < words.length; i++) {
@@ -395,20 +399,40 @@
     c.globalCompositeOperation = 'source-over';
     line(c, L.fx, sy, L.fx + L.fw, sy); c.strokeStyle = rgba(bright(tone, .5), .32); c.lineWidth = 1; c.stroke();
 
-    /* detection boxes */
-    var al = v.st.alive, fp = fsz(v, 8.5);
+    /* detection boxes. Brackets stay between the header row and the footer row (so none crosses the CLASS chip).
+       Two passes: first every box is laid out and its bracket drawn, then the P01 labels are placed last, on top. A label may only use a spot
+       that is clear of every other person's box (bracket lines and body cells), of the other labels and of the header and footer rows.
+       The spots tried are above the box, one step higher, below it and one step lower; a label that finds no free spot is skipped, so no text overlaps. */
+    var al = v.st.alive, fp = fsz(v, 8.5), lh = fp + 3, i, placed = [], boxes = [];
+    var hty = 13 * s + 1, fty = h - 11 * s;
+    var headBot = hty + Math.max(8, clamp(14 * s, 12, 20) * .5) + 2, boxTop = headBot + lh + 1, boxBot = fty - 10;
+    function hit(a, b, m) { return a.x < b.x + b.w + m && b.x < a.x + a.w + m && a.y < b.y + b.h + m && b.y < a.y + a.h + m; }
     font(c, fp, 700);
-    for (var i = 0; i < al.length; i++) {
+    for (i = 0; i < al.length; i++) {
       var a = al[i];
       var bx = L.fx + a.x * L.cs, by = L.gy + a.y * L.cs;
-      var bw = (1.7 * a.sc + 1.5) * L.cs, bh = (4.2 * a.sc + 1.2) * L.cs;
+      var bw = (1.7 * a.sc + 1.5) * L.cs, bh = Math.min((4.2 * a.sc + 1.2) * L.cs, Math.max(boxBot - boxTop, 12));
       var lag = a.dir * .12 * L.cs;
-      var x = bx - bw / 2 - lag, y = by - bh / 2;
+      var x = bx - bw / 2 - lag, y = clamp(by - bh / 2, boxTop, Math.max(boxTop, boxBot - bh));
       var bc = over && i % 2 === 0 ? PAL.amber : bright(tone, .12);
+      boxes.push({ x: x, y: y, w: bw, h: bh, bc: bc, k: a.k });
       brackets(c, x, y, bw, bh, Math.min(bw, bh) * .3, rgba(bc, .95), 1.4);
-      var id = 'P' + (a.k + 1 < 10 ? '0' : '') + (a.k + 1), lw = c.measureText(id).width + 6;
-      fillRR(c, x, y - fp - 3, lw, fp + 3, 2, rgba(bc, .92));
-      txt(c, id, x + 3, y - fp / 2 - 1.5, 'rgba(4,6,12,.95)', 'left');
+    }
+    for (i = 0; i < boxes.length; i++) {
+      var bo = boxes[i], id = 'P' + (bo.k + 1 < 10 ? '0' : '') + (bo.k + 1), lw = c.measureText(id).width + 6, lx = clamp(bo.x, 2, w - lw - 2);
+      var tries = [bo.y - lh - 1, bo.y - 2 * lh - 2, bo.y + bo.h + 1, bo.y + bo.h + lh + 2];
+      for (var q = 0; q < tries.length; q++) {
+        var rc = { x: lx, y: tries[q], w: lw, h: lh };
+        if (rc.y < headBot || rc.y + rc.h > fty - 9) continue;
+        var free = true;
+        for (var m = 0; m < boxes.length && free; m++) if (m !== i && hit(rc, boxes[m], 3)) free = false;
+        for (m = 0; m < placed.length && free; m++) if (hit(rc, placed[m], 3)) free = false;
+        if (!free) continue;
+        placed.push(rc);
+        fillRR(c, rc.x, rc.y, rc.w, rc.h, 2, rgba(bo.bc, .96));
+        txt(c, id, rc.x + 3, rc.y + lh / 2 - .5, 'rgba(4,6,12,.95)', 'left');
+        break;
+      }
     }
 
     /* header: crowd counter vs limit */
@@ -595,7 +619,7 @@
       strokeRR(c, x + .5, fy + .5, fw - 1, fh - 1, 4, rgba(edge, done || scanning ? .9 : .2), done || scanning ? 1.4 : 1);
       if (scanning) brackets(c, x - 2, fy - 2, fw + 4, fh + 4, 7, rgba(bright(tone, .4), 1), 1.4);
       /* label row */
-      var ly = fy + fh + L.labH / 2 + 1;
+      var ly = fy + fh + L.labH / 2 + 2;
       var lab = done ? (fake ? 'FAKE' : 'REAL') : (scanning ? 'SCAN' : '---');
       font(c, fp, 700); track(c, .8);
       txt(c, lab, x + fw / 2, ly, done ? rgba(bright(fake ? FAKE : REAL, .2), 1) : LBL, 'center'); track(c, 0);
@@ -604,22 +628,26 @@
     if (bu < 1 && bu > 0) {
       var bx = fx + bu * (w - L.pad * 2);
       c.globalCompositeOperation = 'lighter'; glow(c, bx, fy + fh / 2, fh * .7, tone, .35); c.globalCompositeOperation = 'source-over';
-      line(c, bx, fy - 4, bx, fy + fh + 4); c.strokeStyle = rgba(bright(tone, .7), .95); c.lineWidth = 1.3; c.stroke();
+      line(c, bx, fy - 3, bx, fy + fh + 2); c.strokeStyle = rgba(bright(tone, .7), .95); c.lineWidth = 1.3; c.stroke();
     }
     /* confidence plot (P(fake) per frame sample) */
     var px0 = L.pad, pw = w - L.pad * 2, py0 = L.plotY, ph = L.plotH;
     fillRR(c, px0, py0, pw, ph, 3, 'rgba(255,255,255,.03)');
-    c.setLineDash([3, 3]); line(c, px0, py0 + ph * .5, px0 + pw, py0 + ph * .5); c.strokeStyle = 'rgba(255,255,255,.2)'; c.lineWidth = 1; c.stroke(); c.setLineDash([]);
+    /* the P(FAKE) caption owns the left end of the plot: the midline and the sparkline both start after it, so no line runs through the text
+       (a short plot has no room for the caption at all) */
+    var capOn = ph >= 26, capW = 0;
+    if (capOn) { font(c, fsz(v, 8.5), 400); capW = c.measureText('P(FAKE)').width + 12; }
+    var sx0 = px0 + 4 + capW, sw2 = pw - 8 - capW;
+    c.setLineDash([3, 3]); line(c, px0 + capW, py0 + ph * .5, px0 + pw, py0 + ph * .5); c.strokeStyle = 'rgba(255,255,255,.2)'; c.lineWidth = 1; c.stroke(); c.setLineDash([]);
     var upto = Math.floor(bu * (M - 1)), vv;
     if (upto > 0 || bu >= 1) {
       c.beginPath();
-      for (j = 0; j <= upto; j++) { var X = px0 + 4 + (pw - 8) * (j / (M - 1)), Y = py0 + ph - 3 - vals[j] * (ph - 6); if (j) c.lineTo(X, Y); else c.moveTo(X, Y); }
+      for (j = 0; j <= upto; j++) { var X = sx0 + sw2 * (j / (M - 1)), Y = py0 + ph - 3 - vals[j] * (ph - 6); if (j) c.lineTo(X, Y); else c.moveTo(X, Y); }
       neon(c, vals[upto] > .5 ? FAKE : REAL, 1.4, .95);
-      var lx = px0 + 4 + (pw - 8) * (upto / (M - 1)), ly2 = py0 + ph - 3 - vals[upto] * (ph - 6);
+      var lx = sx0 + sw2 * (upto / (M - 1)), ly2 = py0 + ph - 3 - vals[upto] * (ph - 6);
       c.beginPath(); c.arc(lx, ly2, 2.4, 0, TAU); c.fillStyle = '#fff'; c.fill();
     }
-    font(c, fsz(v, 8.5), 400);
-    txt(c, 'P(FAKE)', px0 + 5, py0 + 8 * s, LBL, 'left');
+    if (capOn) { font(c, fsz(v, 8.5), 400); txt(c, 'P(FAKE)', px0 + 5, py0 + ph / 2, LBL, 'left'); }
 
     /* header */
     var ty = 13 * s + 1;
@@ -650,7 +678,7 @@
       var s = v.s, h = v.h, w = v.w, L = v.L = {};
       if (v.st.kind === 'df') {
         L.pad = 10 * s; L.n = w / h > 2.2 ? 5 : (w < 250 ? 3 : 4); L.gap = 6 * s;
-        L.frameY = 26 * s; L.labH = 13 * s; L.plotH = clamp(h * .2, 22, 44); L.plotY = h - L.plotH - 8 * s;
+        L.frameY = 26 * s; L.labH = 15 * s; L.plotH = clamp(h * .2, 22, 44); L.plotY = h - L.plotH - 8 * s;
         L.frameH = Math.max(30, L.plotY - 6 * s - L.labH - L.frameY);
       } else if (v.st.kind === 'yolo') sgLayout(v, 26 * s, 24 * s, 8.5);
       else sgLayout(v, 26 * s, 22 * s, 9);
@@ -666,7 +694,7 @@
      ===================================================================== */
   var CHAT_DEFS = {
     rag: {
-      name: 'POLICY ASSISTANT', tags: ['RAG', 'TOOL', 'CHAT'], hint: 'Ask about the policies...', cps: 34,
+      name: 'POLICY ASSISTANT', short: 'ASSISTANT', tags: ['RAG', 'TOOL', 'CHAT'], hint: 'Ask about the policies...', cps: 34,
       ex: [
         { route: 0, turns: [
           { who: 'u', text: 'How do refills work?', instant: true },
@@ -745,6 +773,40 @@
     def.period = t;
   }
 
+  /* a label that does not fit maxW loses its tail and gets an ellipsis (set font and tracking first) */
+  function ellipsize(c, str, maxW) {
+    if (c.measureText(str).width <= maxW) return str;
+    var n = str.length;
+    while (n > 1 && c.measureText(str.slice(0, n) + '…').width > maxW) n--;
+    return str.slice(0, n) + '…';
+  }
+  /* Header of the chat panel, decided once per size from measured text: the name, the route tags and the style pill never share pixels.
+     Order of preference: full name + every tag, short name + every tag, short name + only the active tag, short name alone. */
+  function chatHeaderFit(v, D, L) {
+    var c = v.ctx, s = v.s, w = v.w, avail = w - L.pad * 2 - 16 * s - 8 * s, i, names = D.short ? [D.name, D.short] : [D.name];
+    L.hdrName = D.name; L.hdrTags = D.tags ? 'all' : 'none'; L.hdrStyleLabel = true;
+    function nameW(n) { font(c, fsz(v, 9), 700); track(c, 1.2); var m = c.measureText(n).width; track(c, 0); return m; }
+    if (D.tags) {
+      var sumW = 0, maxW = 0;
+      font(c, fsz(v, 8), 700); track(c, .8);
+      D.tags.forEach(function (tg) { var tw = c.measureText(tg).width + 10; sumW += tw + 3 * s; maxW = Math.max(maxW, tw + 3 * s); });
+      track(c, 0);
+      var modes = [['all', sumW], ['one', maxW], ['none', 0]], m, k, done = false;
+      for (m = 0; m < modes.length && !done; m++) for (k = 0; k < names.length && !done; k++) {
+        if (nameW(names[k]) + modes[m][1] <= avail) { L.hdrName = names[k]; L.hdrTags = modes[m][0]; done = true; }
+      }
+      if (!done) { L.hdrName = names[names.length - 1]; L.hdrTags = 'none'; }
+    } else if (D.styles) {
+      var pw = 0, lw;
+      font(c, fsz(v, 8), 700); track(c, .8);
+      D.styles.forEach(function (st) { pw = Math.max(pw, c.measureText(st).width + 12); });
+      track(c, 0); font(c, fsz(v, 8), 400); lw = c.measureText('STYLE').width + 5;
+      L.hdrStyleLabel = nameW(D.name) + pw + lw <= avail;
+    }
+    L.hdrNameW = nameW(L.hdrName);
+    font(c, fsz(v, 8.5), 400); L.hdrSubFits = !D.sub || !D.styles && (L.hdrNameW + 6 * s + c.measureText(D.sub).width + 52 * s <= avail + 8 * s);
+  }
+
   function chatLayout(v) {
     var c = v.ctx, s = v.s, w = v.w, h = v.h, D = v.st.def, L = v.L = {};
     L.pad = 10 * s; L.fs = clamp(10 * s, 9.5, 15); L.lh = L.fs * 1.36; L.px = 7 * s; L.py = 4.6 * s; L.gap = 6 * s;
@@ -752,6 +814,7 @@
     L.maxW = (w - L.pad * 2) * .8;
     L.tagH = fsz(v, 8) * 1.25;
     L.chipH = 13 * s; L.btnH = 14 * s; L.fsMono = fsz(v, 8.5);
+    chatHeaderFit(v, D, L);
     D.ex.forEach(function (ex) {
       var y = 0;
       ex.turns.forEach(function (tn) {
@@ -765,11 +828,17 @@
         tn.tagOff = extra;
         var below = 0;
         if (tn.chips) {
+          /* chips flow left to right and wrap to a new row when the next one would leave the canvas; a label wider than a whole row is shortened with an ellipsis */
           font(c, L.fsMono, 700); track(c, .4);
-          var cx = 0; tn.chipX = [];
-          tn.chips.forEach(function (ch) { var cw = c.measureText(ch.t).width + 14 * s; tn.chipX.push([cx, cw]); cx += cw + 4 * s; });
+          var rowW = (tn.who === 'u' || tn.who === 'a' ? tn.bw : w - L.pad * 2), cx = 0, row = 0; tn.chipX = [];
+          tn.chips.forEach(function (ch) {
+            var label = ellipsize(c, ch.t, rowW - 14 * s), cw = c.measureText(label).width + 14 * s;
+            if (cx > 0 && cx + cw > rowW) { cx = 0; row++; }
+            tn.chipX.push([cx, cw, row, label]); cx += cw + 4 * s;
+          });
           track(c, 0);
-          below += 4 * s + L.chipH;
+          tn.chipRows = row + 1;
+          below += 4 * s + tn.chipRows * L.chipH + row * 3 * s;
         }
         if (tn.ghost) below += 4 * s + tn.ghost * (L.lh * .85);
         if (tn.kb) { tn.kbH = tn.kb.length * (L.btnH + 3 * s); below += 3 * s + tn.kbH; }
@@ -799,14 +868,18 @@
     c.strokeStyle = rgba(tone, .9); c.lineWidth = 1.2; c.stroke();
     c.globalCompositeOperation = 'lighter'; glow(c, L.pad + 6 * s, hy, 11 * s, tone, .3 + .1 * pulse(t, .6)); c.globalCompositeOperation = 'source-over';
     c.beginPath(); c.arc(L.pad + 6 * s, hy, 1.8 * s, 0, TAU); c.fillStyle = rgba(bright(tone, .6), 1); c.fill();
+    /* the name, the route tags and the style pill were measured in chatHeaderFit: a narrow panel shortens the name, then shows only the active tag, then none */
     font(c, fsz(v, 9), 700); track(c, 1.2);
-    txt(c, D.name, L.pad + 16 * s, hy + .5, 'rgba(226,234,244,.95)', 'left'); track(c, 0);
-    var nameW = c.measureText(D.name).width + D.name.length * 1.2;
-    if (D.sub) { font(c, fsz(v, 8.5), 400); txt(c, D.sub, L.pad + 16 * s + nameW + 6 * s, hy + .5, LBL, 'left'); }
+    var name = L.hdrName;
+    txt(c, name, L.pad + 16 * s, hy + .5, 'rgba(226,234,244,.95)', 'left'); track(c, 0);
+    var nameW = L.hdrNameW;
+    if (D.sub && L.hdrSubFits) { font(c, fsz(v, 8.5), 400); txt(c, D.sub, L.pad + 16 * s + nameW + 6 * s, hy + .5, LBL, 'left'); }
     var xr = w - L.pad;
     if (D.tags) {                                           /* route tags */
       font(c, fsz(v, 8), 700); track(c, .8);
+      var actTag = Math.max(0, curRoute);
       for (i = D.tags.length - 1; i >= 0; i--) {
+        if (L.hdrTags === 'none' || (L.hdrTags === 'one' && i !== actTag)) continue;
         var tw = c.measureText(D.tags[i]).width + 10, on = ex && curRoute === i;
         fillRR(c, xr - tw, hy - 6.5, tw, 13, 3, on ? rgba(tone, .22) : 'rgba(255,255,255,.03)');
         strokeRR(c, xr - tw + .5, hy - 6, tw - 1, 12, 3, on ? rgba(tone, .95) : 'rgba(255,255,255,.14)', 1);
@@ -820,7 +893,7 @@
       var sw = c.measureText(sty).width + 12;
       fillRR(c, xr - sw, hy - 6.5, sw, 13, 3, rgba(tone2, .15)); strokeRR(c, xr - sw + .5, hy - 6, sw - 1, 12, 3, rgba(tone2, .75), 1);
       txt(c, sty, xr - sw / 2 + .4, hy + .5, rgba(bright(tone2, .35), 1), 'center'); track(c, 0);
-      font(c, fsz(v, 8), 400); txt(c, 'STYLE', xr - sw - 5, hy + .5, LBL, 'right');
+      if (L.hdrStyleLabel) { font(c, fsz(v, 8), 400); txt(c, 'STYLE', xr - sw - 5, hy + .5, LBL, 'right'); }
     } else {
       c.beginPath(); c.arc(xr - 3 * s, hy, 2.6 * s, 0, TAU); c.fillStyle = rgba(PAL.green, .85); c.fill();
       font(c, fsz(v, 8.5), 400); txt(c, 'online', xr - 9 * s, hy + .5, LBL, 'right');
@@ -917,13 +990,13 @@
         font(c, L.fsMono, 700); track(c, .4);
         for (i = 0; i < tn.chips.length; i++) {
           var ca = easeBack((lt - tn.chipT - i * .22) / .3); if (ca <= 0) continue;
-          var ch = tn.chips[i], cc = ch.k === 'warn' ? PAL.amber : (ch.k === 'tool' ? tone2 : (ch.k === 'ok' ? PAL.green : tone)), cw2 = tn.chipX[i][1], cx3 = bx2 + tn.chipX[i][0];
+          var ch = tn.chips[i], cc = ch.k === 'warn' ? PAL.amber : (ch.k === 'tool' ? tone2 : (ch.k === 'ok' ? PAL.green : tone)), cw2 = tn.chipX[i][1], cx3 = bx2 + tn.chipX[i][0], cy3 = yb + tn.chipX[i][2] * (L.chipH + 3 * s);
           c.globalAlpha = fade * fin * Math.min(1, ca);
-          fillRR(c, cx3, yb, cw2, L.chipH, L.chipH / 2, rgba(cc, .13)); strokeRR(c, cx3 + .5, yb + .5, cw2 - 1, L.chipH - 1, L.chipH / 2, rgba(cc, .8), 1);
-          c.beginPath(); c.arc(cx3 + 6 * s, yb + L.chipH / 2, 1.7 * s, 0, TAU); c.fillStyle = rgba(cc, 1); c.fill();
-          txt(c, ch.t, cx3 + 10 * s, yb + L.chipH / 2 + .5, rgba(bright(cc, .35), 1), 'left');
+          fillRR(c, cx3, cy3, cw2, L.chipH, L.chipH / 2, rgba(cc, .13)); strokeRR(c, cx3 + .5, cy3 + .5, cw2 - 1, L.chipH - 1, L.chipH / 2, rgba(cc, .8), 1);
+          c.beginPath(); c.arc(cx3 + 6 * s, cy3 + L.chipH / 2, 1.7 * s, 0, TAU); c.fillStyle = rgba(cc, 1); c.fill();
+          txt(c, tn.chipX[i][3], cx3 + 10 * s, cy3 + L.chipH / 2 + .5, rgba(bright(cc, .35), 1), 'left');
         }
-        track(c, 0); yb += L.chipH + 4 * s; c.globalAlpha = fade * fin * appear;
+        track(c, 0); yb += tn.chipRows * L.chipH + (tn.chipRows - 1) * 3 * s + 4 * s; c.globalAlpha = fade * fin * appear;
       }
       if (tn.ghost && lt >= tn.ghostT) {
         for (i = 0; i < tn.ghost; i++) { var ga = easeOut((lt - tn.ghostT - i * .2) / .45); fillRR(c, bx2 + L.px, yb + i * L.lh * .85, (tn.bw - L.px * 2) * (i === tn.ghost - 1 ? .55 : .92) * ga, L.lh * .38, 2, 'rgba(255,255,255,.16)'); }
@@ -989,7 +1062,28 @@
       L.pad = 10 * s;
       L.nodeY = 25 * s; L.nodeH = 17 * s; L.gap = 11 * s;
       L.nw = (w - L.pad * 2 - L.gap * 4) / 5;
-      L.labW = clamp(70 * s, 56, 90);
+      /* everything below is measured, so a narrow tile drops or shortens a label instead of letting two texts share pixels */
+      var c = v.ctx;
+      font(c, fsz(v, 8.5), 700); track(c, .6);
+      /* the longest label tries the normal letter spacing, then none, then the short word */
+      L.nodeTrack = c.measureText('CLIENT').width + 5 > L.nw ? 0 : .6;
+      track(c, L.nodeTrack);
+      L.nodeLab = NET_NODES.map(function (n) { return n === 'CLIENT' && c.measureText(n).width + 5 > L.nw ? 'APP' : n; });
+      track(c, 0); font(c, fsz(v, 8.5), 400);
+      var rowW = 0; NET_ROWS.forEach(function (r, k) { rowW = Math.max(rowW, c.measureText(r).width + (k === 3 ? 8 * s : 0)); });
+      L.labW = Math.min(Math.max(clamp(70 * s, 56, 90), rowW + 8), Math.max(56, w - L.pad * 2 - 96));
+      L.rowTxt = NET_ROWS.map(function (r, k) { return ellipsize(c, r, L.labW - 6 - (k === 3 ? 8 * s : 0)); });
+      /* the header: TRACE + id on the left, JAEGER on the right, and the latency chip above the TOOL node between them */
+      font(c, fsz(v, 8.5), 700); track(c, 1.2); var trW = c.measureText('TRACE').width; track(c, 0);
+      font(c, fsz(v, 8.5), 400); var idW = c.measureText('a41f9c0e').width;
+      font(c, fsz(v, 8.5), 700); track(c, 1); var jW = c.measureText('JAEGER').width;
+      var chipW = 0; ['~15 s', '<50 ms'].forEach(function (t) { chipW = Math.max(chipW, c.measureText(t).width + 10); }); track(c, 0);
+      var idEnd = L.pad + trW + 6 * s + 5 + idW, jStart = w - L.pad - jW, toolCx = L.pad + 3 * (L.nw + L.gap) + L.nw / 2;
+      L.hdrId = true; L.hdrJaeger = true; L.chipW = chipW;
+      var lo = idEnd + 5, hi = jStart - 5;
+      if (hi - lo < chipW) { L.hdrJaeger = false; hi = w - L.pad; }
+      if (hi - lo < chipW) { L.hdrId = false; lo = L.pad + trW + 5; }
+      L.chipX = clamp(toolCx - chipW / 2, lo, Math.max(lo, hi - chipW));
       L.footY = h - 11 * s;
       L.wy = L.nodeY + L.nodeH + 12 * s;
       L.rowH = clamp((L.footY - 9 * s - L.wy) / 5, 10, 20 * s);
@@ -1007,11 +1101,10 @@
       /* header */
       var hy = 12 * s + 1;
       font(c, fsz(v, 8.5), 700); track(c, 1.2);
-      txt(c, 'TRACE', L.pad, hy, LBL, 'left'); track(c, 0);
-      font(c, fsz(v, 8.5), 400);
-      txt(c, 'a41f9c0e', L.pad + c.measureText('TRACE').width + 6 * s + 5, hy + .5, rgba(bright(tone, .4), .9), 'left');
-      font(c, fsz(v, 8.5), 700); track(c, 1);
-      txt(c, 'JAEGER', w - L.pad, hy, LBL, 'right'); track(c, 0);
+      txt(c, 'TRACE', L.pad, hy, LBL, 'left');
+      var trW = c.measureText('TRACE').width; track(c, 0);
+      if (L.hdrId) { font(c, fsz(v, 8.5), 400); txt(c, 'a41f9c0e', L.pad + trW + 6 * s + 5, hy + .5, rgba(bright(tone, .4), .9), 'left'); }
+      if (L.hdrJaeger) { font(c, fsz(v, 8.5), 700); track(c, 1); txt(c, 'JAEGER', w - L.pad, hy, LBL, 'right'); track(c, 0); }
 
       /* which nodes are active right now */
       var act = [0, 0, 0, 0, 0];
@@ -1020,12 +1113,12 @@
       /* node chain + packets */
       var ny = L.nodeY, nh = L.nodeH;
       for (i = 0; i < 4; i++) { var xa = L.pad + i * (L.nw + L.gap) + L.nw, xb = xa + L.gap; line(c, xa, ny + nh / 2, xb, ny + nh / 2); c.strokeStyle = 'rgba(255,255,255,.22)'; c.lineWidth = 1; c.stroke(); }
-      font(c, fsz(v, 8.5), 700); track(c, .6);
+      font(c, fsz(v, 8.5), 700); track(c, L.nodeTrack);
       for (i = 0; i < 5; i++) {
         var nx = L.pad + i * (L.nw + L.gap), on = act[i], isTool = i === 3, nc = isTool ? (slow ? BAD : GOOD) : (i === 2 ? LLM : BASE);
         fillRR(c, nx, ny, L.nw, nh, 4, rgba(nc, on ? .22 : .07));
         strokeRR(c, nx + .5, ny + .5, L.nw - 1, nh - 1, 4, rgba(nc, on ? .98 : .4), on ? 1.5 : 1);
-        txt(c, NET_NODES[i], nx + L.nw / 2 + .3, ny + nh / 2 + .5, on ? rgba(bright(nc, .45), 1) : LBL, 'center');
+        txt(c, L.nodeLab[i], nx + L.nw / 2 + .3, ny + nh / 2 + .5, on ? rgba(bright(nc, .45), 1) : LBL, 'center');
         if (on) { c.globalCompositeOperation = 'lighter'; glow(c, nx + L.nw / 2, ny + nh / 2, L.nw * .8, nc, .22); c.globalCompositeOperation = 'source-over'; }
       }
       track(c, 0);
@@ -1035,9 +1128,9 @@
       c.globalCompositeOperation = 'source-over';
       /* latency chip on the TOOL node */
       if (u >= spans[2][1] - .02) {
-        var chipT = slow ? '~15 s' : '<50 ms', cc = slow ? BAD : GOOD, cx = L.pad + 3 * (L.nw + L.gap) + L.nw / 2;
+        var chipT = slow ? '~15 s' : '<50 ms', cc = slow ? BAD : GOOD;
         font(c, fsz(v, 8.5), 700);
-        var cw = c.measureText(chipT).width + 10, ca = easeBack((u - spans[2][1]) / .08) , cy = ny - 3 * s;
+        var cw = c.measureText(chipT).width + 10, cx = L.chipX + L.chipW / 2, ca = easeBack((u - spans[2][1]) / .08) , cy = ny - 3 * s;
         c.globalAlpha = A * Math.min(1, ca);
         fillRR(c, cx - cw / 2, cy - 12 * s, cw, 12 * s, 3, 'rgba(5,6,10,.9)'); strokeRR(c, cx - cw / 2 + .5, cy - 11.5 * s, cw - 1, 11 * s, 3, rgba(cc, .95), 1);
         txt(c, chipT, cx + .3, cy - 6 * s + .5, rgba(bright(cc, .3), 1), 'center'); c.globalAlpha = 1;
@@ -1051,7 +1144,7 @@
       for (i = 0; i < 5; i++) {
         var ry = wy + i * L.rowH + L.rowH / 2, sp = spans[i];
         var nodeCol = i === 2 || i === 3 ? (slow ? BAD : GOOD) : (i === 1 || i === 4 ? LLM : BASE);
-        txt(c, NET_ROWS[i], L.pad + (i === 3 ? 8 * s : 0), ry + .5, 'rgba(200,211,224,.78)', 'left');
+        txt(c, L.rowTxt[i], L.pad + (i === 3 ? 8 * s : 0), ry + .5, 'rgba(200,211,224,.78)', 'left');
         var x0 = ax0 + aw * sp[0], x1 = ax0 + aw * Math.min(sp[1], u);
         if (u > sp[0] && x1 > x0 + .5) {
           var bw2 = x1 - x0, bt = ry - L.barH / 2;
@@ -1080,7 +1173,8 @@
       font(c, fsz(v, 8.5), 700); track(c, 1);
       txt(c, lab, L.pad + 10 * s, fy + .5, rgba(bright(lcol, .3), 1), 'left'); track(c, 0);
       font(c, fsz(v, 8), 400);
-      txt(c, 'SYNTHETIC DATA', w - L.pad, fy + .5, LBL, 'right');
+      var labEnd = L.pad + 10 * s + c.measureText(lab).width + 14;
+      txt(c, fitText(c, ['SYNTHETIC DATA', 'SYNTHETIC'], w - L.pad - labEnd), w - L.pad, fy + .5, LBL, 'right');
     }
   });
 
@@ -1495,7 +1589,7 @@
     [['@router', 'pur'], ['.post', 'cya'], ['("/findings/draft")', 'grn']],
     [['async def ', 'pur'], ['draft', 'cya'], ['(req: Finding):', 'txt']],
     [['    ', 'txt'], ['ctx ', 'txt'], ['= ', 'dim'], ['ground', 'cya'], ['(req.evidence)', 'txt']],
-    [['    ', 'txt'], ['out ', 'txt'], ['= ', 'dim'], ['llm.draft', 'cya'], ['(req, ctx, n=', 'txt'], ['3', 'amb'], [')', 'txt']],
+    [['    ', 'txt'], ['out ', 'txt'], ['= ', 'dim'], ['llm.draft', 'cya'], ['(req, ctx)', 'txt']],
     [['    ', 'txt'], ['gates.check', 'cya'], ['(out, ctx)', 'txt']],
     [['    ', 'txt'], ['return ', 'pur'], ['rank(out)', 'txt']]
   ];
@@ -1532,10 +1626,10 @@
       var maxCh = 10; v.st.lines.forEach(function (ln) { if (ln.len > maxCh) maxCh = ln.len; });
       L.gut = 22 * s;
       L.bodyX = L.px + L.gut + 6 * s; L.bodyW = L.pw - L.gut - 14 * s;
-      L.fs = clamp(Math.min(10.4 * s, L.bodyW / ((maxCh + 1) * .612)), 9, 16);
+      L.fs = clamp(Math.min(10.4 * s, L.bodyW / ((maxCh + 1) * .612)), 8, 16);
       L.lh = L.fs * 1.5; L.cw = L.fs * .612;
       var n = v.st.lines.length, bodyTop = L.py + 17 * s + 5 * s;
-      L.flow = !!v.st.flow && (L.ph - 22 * s - n * L.lh) > 20 * s;
+      L.flow = !!v.st.flow && (L.ph - n * L.lh) > 56 * s;   /* the stage labels sit above the chips: the strip needs a clear band under the last code line */
       L.bodyY = bodyTop; L.flowY = L.py + L.ph - 13 * s;
     },
     draw: function (v, c, t) {
@@ -2026,13 +2120,13 @@
         /* confusion matrix: [[896, 0], [30, 108]] on 1,034 held-out messages */
         var mx = lw + 14 * s, mw = iw - mx, cwd = Math.min(46 * s, (mw - 4) / 2), chh = Math.min(34 * s, (ih - 40 * s) / 2), my = 22 * s;
         var cells = [[896, PAL.green, .9], [0, PAL.red, .05], [30, PAL.amber, .22], [108, PAL.magenta, .6]], gx = mx + (mw - cwd * 2 - 4) / 2;
-        font(c, fsz(v, 8), 700); track(c, .8); txt(c, 'CONFUSION MATRIX', mx + mw / 2, 8 * s, LBL, 'center'); track(c, 0);
+        font(c, fsz(v, 8), 700); track(c, .8); txt(c, fitText(c, ['CONFUSION MATRIX', 'MATRIX'], mw), mx + mw / 2, 8 * s, LBL, 'center'); track(c, 0);
         for (i = 0; i < 4; i++) {
           var cxm = gx + (i % 2) * (cwd + 4), cym = my + Math.floor(i / 2) * (chh + 4), ca = easeOut((lc - 3.2 - i * .12) / .4);
           fillRR(c, cxm, cym, cwd, chh, 3, rgba(cells[i][1], .08 + .4 * cells[i][2] * ca)); strokeRR(c, cxm + .5, cym + .5, cwd - 1, chh - 1, 3, rgba(cells[i][1], .35 + .6 * cells[i][2]), 1);
           font(c, clamp(12 * s, 11, 17), 800, DISP); txt(c, String(Math.round(cells[i][0] * ca)), cxm + cwd / 2, cym + chh / 2 + .5, rgba(bright(cells[i][1], .3), Math.min(1, .35 + ca)), 'center');
         }
-        font(c, fsz(v, 8), 400); txt(c, '1,034 TEST MESSAGES', mx + mw / 2, my + chh * 2 + 14 * s, LBL, 'center');
+        font(c, fsz(v, 8), 400); txt(c, fitText(c, ['1,034 TEST MESSAGES', '1,034 TESTS'], mw), mx + mw / 2, my + chh * 2 + 14 * s, LBL, 'center');
       } else if (k === 'atm') {
         var phase = mod(t, 8) < 3.6 ? 0 : 1, pl = mod(t, 8), sw2 = iw * .56, sh = ih;
         fillRR(c, 0, 0, sw2, sh, 5, 'rgba(4,6,11,.85)'); strokeRR(c, .5, .5, sw2 - 1, sh - 1, 5, rgba(tone, .55), 1.2);
@@ -2262,7 +2356,7 @@
     var tag = doc.createElement('span');
     tag.className = 'pv-tag'; tag.setAttribute('aria-hidden', 'true'); tag.textContent = 'Illustration';
     el.appendChild(tag); el.classList.add('has-tag');
-    v.tagH = 22;
+    v.tagH = 18;
   }
   function mount(el) {
     if (!el || el.__pv || !el.getAttribute) return null;
@@ -2298,9 +2392,18 @@
     if (ioNear) ioNear.observe(el); else { v.near = true; }
     return v;
   }
+  /* tiles are mounted when they come within reach of the viewport (not all at once at load): the first paint stays light */
   function mountAll() {
     var list = doc.querySelectorAll('.pv');
-    for (var j = 0; j < list.length; j++) if (!list[j].__pv) mount(list[j]);
+    if (!('IntersectionObserver' in win)) { for (var j = 0; j < list.length; j++) if (!list[j].__pv) mount(list[j]); return; }
+    var ioMount = new IntersectionObserver(function (es) {
+      for (var i = 0; i < es.length; i++) {
+        if (!es[i].isIntersecting) continue;
+        ioMount.unobserve(es[i].target);
+        mount(es[i].target);
+      }
+    }, { rootMargin: '600px 0px', threshold: 0 });
+    for (var k = 0; k < list.length; k++) if (!list[k].__pv) ioMount.observe(list[k]);
   }
 
   /* ---------- global listeners ---------- */

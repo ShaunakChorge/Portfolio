@@ -122,7 +122,7 @@
     "projects/ai-rag-healthcare-assistant/": {
       "primary": "healthcare rag chatbot",
       "secondary": [
-        "rag chatbot langchain",
+        "rag chatbot with sources",
         "rag chatbot python",
         "rag chatbot architecture",
         "healthcare policy chatbot",
@@ -224,7 +224,9 @@
         "fastapi jaeger tracing",
         "prometheus metrics fastapi",
         "traceable ai backend",
-        "fastapi request id logging"
+        "fastapi request id logging",
+        "llm observability",
+        "ai server monitoring"
       ],
       "questions": [
         "What is observability in a FastAPI app?",
@@ -232,7 +234,7 @@
         "Can it run without an AI key?"
       ],
       "anchors": {
-        "footer": "FastAPI tracing with OpenTelemetry",
+        "footer": "Traceable AI Backend",
         "related": "An API you can debug from the outside"
       }
     },
@@ -249,7 +251,7 @@
       ],
       "anchors": {
         "other": [
-          "all six services",
+          "all the services",
           "what I can build for you",
           "freelance AI development services",
           "see the services"

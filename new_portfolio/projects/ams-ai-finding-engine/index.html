@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=fcec523d">
+  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=99f76e8a">
 
 <script type="application/ld+json">
 {
@@ -186,22 +186,17 @@
 
         <nav class="nav" aria-label="Primary">
           <ul class="nav__list">
-            <li><a class="nav__link" href="../../">Home</a></li>
             <li><a class="nav__link" href="../../projects/" aria-current="page">Projects</a></li>
             <li><a class="nav__link" href="../../services/">Services</a></li>
             <li><a class="nav__link" href="../../about/">About</a></li>
-            <li><a class="nav__link" href="../../faq/">FAQ</a></li>
-            <li><a class="nav__link" href="../../contact/">Contact</a></li>
+            <li><a class="nav__link" href="../../resume/">Resume</a></li>
           </ul>
           <span class="nav__ind" aria-hidden="true"></span>
         </nav>
 
         <div class="site-header__tools">
-          <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST" title="Local time in Mumbai">MUMBAI</span>
-          <button class="cmd" type="button" data-open-palette aria-label="Search, open command palette" aria-keyshortcuts="Control+K Meta+K">
+          <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
-            <span class="cmd__text">Search</span>
-            <kbd class="kbd" data-kbd aria-hidden="true">Ctrl K</kbd>
           </button>
           <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
@@ -214,10 +209,10 @@
 
   <nav class="drawer" id="drawer" aria-label="Mobile">
     <ul class="drawer__list">
-      <li><a class="drawer__link" href="../../" style="--i:0"><small>01</small>Home</a></li>
-      <li><a class="drawer__link" href="../../projects/" aria-current="page" style="--i:1"><small>02</small>Projects</a></li>
-      <li><a class="drawer__link" href="../../services/" style="--i:2"><small>03</small>Services</a></li>
-      <li><a class="drawer__link" href="../../about/" style="--i:3"><small>04</small>About</a></li>
+      <li><a class="drawer__link" href="../../projects/" aria-current="page" style="--i:0"><small>01</small>Projects</a></li>
+      <li><a class="drawer__link" href="../../services/" style="--i:1"><small>02</small>Services</a></li>
+      <li><a class="drawer__link" href="../../about/" style="--i:2"><small>03</small>About</a></li>
+      <li><a class="drawer__link" href="../../resume/" style="--i:3"><small>04</small>Resume</a></li>
       <li><a class="drawer__link" href="../../faq/" style="--i:4"><small>05</small>FAQ</a></li>
       <li><a class="drawer__link" href="../../contact/" style="--i:5"><small>06</small>Contact</a></li>
     </ul>
@@ -227,7 +222,6 @@
       <a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a>
       <a class="icon-btn" href="mailto:shaunak.chorge@gmail.com" aria-label="Email Shaunak"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
       <button type="button" class="btn btn--ghost btn--sm drawer__motion" data-motion-toggle aria-pressed="false" hidden><svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-pause"/></svg> Pause effects</button>
-      <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST">MUMBAI</span>
     </div>
   </nav>
 
@@ -256,7 +250,7 @@
       
     </header>
 <div class="pg-glance">
-      <dl class="panel pg-facts" data-tone="cyan" data-reveal><div class="pg-facts__row"><dt>Role</dt><dd>Sole engineer at Claptek. I built it end to end. That covers the data formats, the drafting process, the safety checks, bulk mode and the connection to the client's Java and React product.</dd></div><div class="pg-facts__row"><dt>Built at</dt><dd>Claptek Pvt Ltd, as AI Engineer</dd></div><div class="pg-facts__row"><dt>Repository</dt><dd>Private enterprise repository</dd></div>
+      <dl class="panel pg-facts" data-tone="cyan" data-reveal><div class="pg-facts__row"><dt>Role</dt><dd>Sole engineer at Claptek. I built it end to end. That covers the data formats, the drafting process, the safety checks, bulk mode and the connection to the client's Java and React product.</dd></div><div class="pg-facts__row"><dt>Built at</dt><dd>Claptek Pvt Ltd, as AI Engineer</dd></div><div class="pg-facts__row"><dt>Repository</dt><dd>Private repository</dd></div>
         <div class="pg-facts__row"><dt>Stack</dt><dd><ul class="tags pg-facts__tags" role="list" aria-label="Stack used in this build" data-tone="cyan"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Pydantic v2</li><li class="tag">TF-IDF</li><li class="tag">Local AI models</li><li class="tag">Spring Boot</li><li class="tag">React</li></ul></dd></div>
       </dl>
       <ul class="pg-metrics" role="list" data-reveal-group><li class="pg-metric" data-tone="cyan" style="--i:0"><span class="pg-metric__v">7.9 minutes to 16.9 seconds</span><span class="pg-metric__l">Time per request (about 28 times faster)</span></li><li class="pg-metric" data-tone="cyan" style="--i:1"><span class="pg-metric__v">0</span><span class="pg-metric__l">Invented facts across 27 checked drafts</span></li><li class="pg-metric" data-tone="cyan" style="--i:2"><span class="pg-metric__v">313</span><span class="pg-metric__l">Automated tests passing</span></li></ul>
@@ -308,7 +302,7 @@
       <h2 id="hire-for-h" class="section__title">Services behind <span class="hl hl--purple">this project</span></h2>
       
     </header>
-<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/ai-document-compliance-automation/" data-tone="purple"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-file-text"/></svg></span><span><strong>Hire me for document data extraction</strong><span class="pg-rel__t">Tools that read documents, draft text and answer data questions, with every result traceable to its evidence.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/llm-rag-development/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-brain-circuit"/></svg></span><span><strong>Hire me for AI chatbot development</strong><span class="pg-rel__t">Chatbots that answer from your documents, show their sources and say so when they do not know.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/ai-backend-fastapi-django/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-server"/></svg></span><span><strong>Hire me for Python and FastAPI backend development</strong><span class="pg-rel__t">FastAPI and Django services with clear rules, automated tests and logs that make problems easy to find.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li></ul>
+<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/ai-document-compliance-automation/" data-tone="purple"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-file-text"/></svg></span><span><strong>Hire me for document data extraction</strong><span class="pg-rel__t">Tools that read documents and turn them into checked data.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/llm-rag-development/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-brain-circuit"/></svg></span><span><strong>Hire me for AI chatbot development</strong><span class="pg-rel__t">Chatbots that answer from your documents and show their sources.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/ai-backend-fastapi-django/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-server"/></svg></span><span><strong>Hire me for Python and FastAPI backend development</strong><span class="pg-rel__t">FastAPI and Django services with automated tests and clear logs.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li></ul>
     <p class="pg-author" data-reveal>Built by <a class="link" href="../../about/">Shaunak Chorge</a>, AI Engineer at Claptek Pvt Ltd in Mumbai.</p>
   </div>
 </section><section id="faq" class="section pg-sec section--tint" aria-labelledby="faq-h">
@@ -321,7 +315,7 @@
 <div class="pg-qas"><details class="pg-qa" id="ams-ai-finding-engine-q1" open data-reveal>
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Can <span class="ai">AI</span> write audit findings without making things up?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>Yes, when code checks every draft. Every figure, date or owner in a draft must appear word for word in the auditor's own note. A check rejects any draft that adds one. Across 27 checked draft versions it produced no invented facts, though a person still reviews each finding.</p></div>
-    </details><details class="pg-qa" id="ams-ai-finding-engine-q2" data-reveal style="--i:1">
+    </details><details class="pg-qa" id="ams-ai-finding-engine-q2" open data-reveal style="--i:1">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Could the same approach work on my reports or tickets?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>The method is not specific to audit. It finds relevant evidence, uses an AI model hosted on your own machines and checks the output in code. I would first test it on a sample of your own documents to see how well it holds.</p></div>
     </details></div>
@@ -340,7 +334,7 @@
       </div>
       <div class="pg-hire__act">
         <a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=ai-document-compliance-automation#hire" data-magnetic>Hire me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
-        <p class="pg-hire__alt"><a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a><span aria-hidden="true"> &middot; </span><a class="link" href="../../projects/">View work</a></p>
+        <p class="pg-hire__alt"><a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a><span aria-hidden="true"> &middot; </span><a class="link" href="../../projects/">See projects</a></p>
       </div>
     </div>
   </div>
@@ -366,7 +360,7 @@
           <span class="logo__word">SHAUNAK</span>
         </p>
         <p class="footer__blurb">AI Engineer at Claptek Pvt Ltd. Taking select freelance AI and backend projects.</p>
-        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India &ndash; working remotely (IST)</p>
+        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India (IST)</p>
         <ul class="footer__soc" aria-label="Profiles">
           <li><a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a></li>
           <li><a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a></li>
@@ -383,9 +377,10 @@
             <li><a href="../../projects/">Projects</a></li>
             <li><a href="../../services/">Services</a></li>
             <li><a href="../../about/">About</a></li>
+            <li><a href="../../about/#experience">Experience</a></li>
+            <li><a href="../../resume/">Resume</a></li>
             <li><a href="../../faq/">FAQ</a></li>
             <li><a href="../../contact/">Contact</a></li>
-            <li><a href="../../resume/">Resume</a></li>
           </ul>
         </nav>
 
@@ -404,7 +399,7 @@
         <nav class="footer__col" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../../projects/observable-ai-backend/">FastAPI tracing with OpenTelemetry</a></li>
+            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
             <li><a href="../../projects/agentic-honeypot/">AI scam honeypot</a></li>
             <li><a href="../../projects/deepfake-video-detection/">Deepfake video detection</a></li>
@@ -481,11 +476,11 @@
     <symbol id="i-loader" viewBox="0 0 24 24"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/></symbol>
   </svg>
 
-  <script defer src="../../assets/dist/js/core.min.js?v=53badac3"></script>
+  <script defer src="../../assets/dist/js/core.min.js?v=d41b0d5b"></script>
   <script defer src="../../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
   <script defer src="../../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../../assets/dist/js/fx.min.js?v=2e06fef0"></script>
-  <script defer src="../../assets/dist/js/pages.min.js?v=794591ab"></script>
-  <script defer src="../../assets/dist/js/visuals.min.js?v=341dbffd"></script>
+  <script defer src="../../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
+  <script defer src="../../assets/dist/js/pages.min.js?v=efc0e441"></script>
+  <script defer src="../../assets/dist/js/visuals.min.js?v=53b137f5"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FastAPI OpenTelemetry Tracing Example | Shaunak Chorge</title>
-  <meta name="description" content="Case study: a FastAPI service where an AI picks the right business action, with request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger.">
+  <meta name="description" content="Case study: a FastAPI AI server with LLM observability: request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger.">
   <meta name="author" content="Shaunak Chorge">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="format-detection" content="telephone=no">
@@ -16,7 +16,7 @@
   <meta property="og:site_name" content="Shaunak Chorge">
   <meta property="og:locale" content="en_IN">
   <meta property="og:title" content="FastAPI OpenTelemetry Tracing Example | Shaunak Chorge">
-  <meta property="og:description" content="Case study: a FastAPI service where an AI picks the right business action, with request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger.">
+  <meta property="og:description" content="Case study: a FastAPI AI server with LLM observability: request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger.">
   <meta property="og:url" content="https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/observable-ai-backend/">
   <meta property="og:image" content="https://shaunakchorge.github.io/Portfolio/new_portfolio/assets/img/og-image.png">
   <meta property="og:image:type" content="image/png">
@@ -25,7 +25,7 @@
   <meta property="og:image:alt" content="Shaunak Chorge, freelance AI engineer in Mumbai">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="FastAPI OpenTelemetry Tracing Example | Shaunak Chorge">
-  <meta name="twitter:description" content="Case study: a FastAPI service where an AI picks the right business action, with request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger.">
+  <meta name="twitter:description" content="Case study: a FastAPI AI server with LLM observability: request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger.">
   <meta name="twitter:image" content="https://shaunakchorge.github.io/Portfolio/new_portfolio/assets/img/og-image.png">
   <meta name="twitter:image:alt" content="Shaunak Chorge, freelance AI engineer in Mumbai">
 
@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=fcec523d">
+  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=99f76e8a">
 
 <script type="application/ld+json">
 {
@@ -55,7 +55,7 @@
       "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/observable-ai-backend/#webpage",
       "url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/observable-ai-backend/",
       "name": "FastAPI OpenTelemetry Tracing Example | Shaunak Chorge",
-      "description": "Case study: a FastAPI service where an AI picks the right business action, with request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger.",
+      "description": "Case study: a FastAPI AI server with LLM observability: request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger.",
       "isPartOf": {
         "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/#website"
       },
@@ -70,9 +70,9 @@
       "@type": "CreativeWork",
       "@id": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/observable-ai-backend/#project",
       "name": "Traceable AI Backend",
-      "headline": "An API, routed by Artificial Intelligence (AI), that you can debug from the outside.",
-      "abstract": "This FastAPI OpenTelemetry tracing project is a service where an AI picks one of three business actions for each question. A request ID follows every call through logs, metrics and traces (viewed in Jaeger). This means a slow or failing call can be explained from the outside.",
-      "description": "Case study: a FastAPI service where an AI picks the right business action, with request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger.",
+      "headline": "An AI server you can debug from the outside, with LLM observability built in.",
+      "abstract": "This FastAPI OpenTelemetry tracing project is an AI server with LLM (large language model) observability built in. A request ID follows every call through logs, metrics and traces (viewed in Jaeger). This means a slow or failing call can be explained from the outside.",
+      "description": "Case study: a FastAPI AI server with LLM observability: request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger.",
       "url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/observable-ai-backend/",
       "genre": "Case study",
       "keywords": [
@@ -141,7 +141,7 @@
           "name": "What is observability in a FastAPI app?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Observability means you can tell what a running app is doing from the outside, using logs, metrics and traces. In this FastAPI service a request ID is stamped on every log line and trace step. Prometheus metrics count requests and AI response time. OpenTelemetry traces in Jaeger show where each request spent its time."
+            "text": "Observability means you can tell what a running app is doing from the outside, using logs, metrics and traces. For an AI server this is called LLM observability. A request ID is stamped on every log line and trace step. Prometheus metrics count requests, AI response time and tokens. OpenTelemetry traces in Jaeger show where each request spent its time."
           }
         },
         {
@@ -197,22 +197,17 @@
 
         <nav class="nav" aria-label="Primary">
           <ul class="nav__list">
-            <li><a class="nav__link" href="../../">Home</a></li>
             <li><a class="nav__link" href="../../projects/" aria-current="page">Projects</a></li>
             <li><a class="nav__link" href="../../services/">Services</a></li>
             <li><a class="nav__link" href="../../about/">About</a></li>
-            <li><a class="nav__link" href="../../faq/">FAQ</a></li>
-            <li><a class="nav__link" href="../../contact/">Contact</a></li>
+            <li><a class="nav__link" href="../../resume/">Resume</a></li>
           </ul>
           <span class="nav__ind" aria-hidden="true"></span>
         </nav>
 
         <div class="site-header__tools">
-          <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST" title="Local time in Mumbai">MUMBAI</span>
-          <button class="cmd" type="button" data-open-palette aria-label="Search, open command palette" aria-keyshortcuts="Control+K Meta+K">
+          <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
-            <span class="cmd__text">Search</span>
-            <kbd class="kbd" data-kbd aria-hidden="true">Ctrl K</kbd>
           </button>
           <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
@@ -225,10 +220,10 @@
 
   <nav class="drawer" id="drawer" aria-label="Mobile">
     <ul class="drawer__list">
-      <li><a class="drawer__link" href="../../" style="--i:0"><small>01</small>Home</a></li>
-      <li><a class="drawer__link" href="../../projects/" aria-current="page" style="--i:1"><small>02</small>Projects</a></li>
-      <li><a class="drawer__link" href="../../services/" style="--i:2"><small>03</small>Services</a></li>
-      <li><a class="drawer__link" href="../../about/" style="--i:3"><small>04</small>About</a></li>
+      <li><a class="drawer__link" href="../../projects/" aria-current="page" style="--i:0"><small>01</small>Projects</a></li>
+      <li><a class="drawer__link" href="../../services/" style="--i:1"><small>02</small>Services</a></li>
+      <li><a class="drawer__link" href="../../about/" style="--i:2"><small>03</small>About</a></li>
+      <li><a class="drawer__link" href="../../resume/" style="--i:3"><small>04</small>Resume</a></li>
       <li><a class="drawer__link" href="../../faq/" style="--i:4"><small>05</small>FAQ</a></li>
       <li><a class="drawer__link" href="../../contact/" style="--i:5"><small>06</small>Contact</a></li>
     </ul>
@@ -238,7 +233,6 @@
       <a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a>
       <a class="icon-btn" href="mailto:shaunak.chorge@gmail.com" aria-label="Email Shaunak"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
       <button type="button" class="btn btn--ghost btn--sm drawer__motion" data-motion-toggle aria-pressed="false" hidden><svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-pause"/></svg> Pause effects</button>
-      <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST">MUMBAI</span>
     </div>
   </nav>
 
@@ -252,8 +246,8 @@
       <div class="pg-head__main">
         <p class="eyebrow">Case study / AI and backend</p>
         <h1 class="pg-h1">FastAPI OpenTelemetry tracing for an <span class="ai">AI</span> backend</h1>
-        <p class="pg-lead">An API, routed by Artificial Intelligence (AI), that you can debug from the outside.</p>
-        <p class="pg-answer" data-answer>This FastAPI OpenTelemetry tracing project is a service where an AI picks one of three business actions for each question. A request ID follows every call through logs, metrics and traces (viewed in Jaeger). This means a slow or failing call can be explained from the outside.</p>
+        <p class="pg-lead">An AI server you can debug from the outside, with LLM observability built in.</p>
+        <p class="pg-answer" data-answer>This FastAPI OpenTelemetry tracing project is an AI server with LLM (large language model) observability built in. A request ID follows every call through logs, metrics and traces (viewed in Jaeger). This means a slow or failing call can be explained from the outside.</p>
         <div class="pg-actions"><a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=ai-backend-fastapi-django#hire">Hire me for something like this <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="btn btn--ghost btn--lg" href="../../projects/">All projects <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg></a></div>
       </div>
       <div class="pg-head__aside"><div class="pg-casevis"><div class="pv" data-visual="network" data-variant="observable-ai-backend" data-tone="blue" aria-hidden="true"></div></div></div>
@@ -267,7 +261,7 @@
       
     </header>
 <div class="pg-glance">
-      <dl class="panel pg-facts" data-tone="blue" data-reveal><div class="pg-facts__row"><dt>Role</dt><dd>Sole author. Built with AI assistance (Claude Code); design decisions and the options I rejected are logged in the repository.</dd></div><div class="pg-facts__row"><dt>Context</dt><dd>Job-application task</dd></div><div class="pg-facts__row"><dt>Repository</dt><dd>Private repository, available on request</dd></div>
+      <dl class="panel pg-facts" data-tone="blue" data-reveal><div class="pg-facts__row"><dt>Role</dt><dd>Sole author. Design decisions and the options I rejected are logged in the repository.</dd></div><div class="pg-facts__row"><dt>Context</dt><dd>Job-application task</dd></div><div class="pg-facts__row"><dt>Repository</dt><dd>Private repository, available on request</dd></div>
         <div class="pg-facts__row"><dt>Stack</dt><dd><ul class="tags pg-facts__tags" role="list" aria-label="Stack used in this build" data-tone="blue"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Pydantic</li><li class="tag">OpenTelemetry</li><li class="tag">Jaeger</li><li class="tag">Prometheus</li><li class="tag">Groq (AI routing)</li><li class="tag">httpx</li><li class="tag">Docker Compose</li><li class="tag">pytest</li></ul></dd></div>
       </dl>
       <ul class="pg-metrics" role="list" data-reveal-group><li class="pg-metric" data-tone="blue" style="--i:0"><span class="pg-metric__v">15 seconds to under 50 milliseconds</span><span class="pg-metric__l">Slow lookup, before and after the fix (made-up data)</span></li><li class="pg-metric" data-tone="blue" style="--i:1"><span class="pg-metric__v">10</span><span class="pg-metric__l">Tests that run offline, with no key or internet</span></li><li class="pg-metric" data-tone="blue" style="--i:2"><span class="pg-metric__v">60,000 tickets, 25,000 users</span><span class="pg-metric__l">Made-up sample data</span></li></ul>
@@ -277,11 +271,11 @@
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">The story</p>
-      <h2 id="story-h" class="section__title">The problem: <span class="ai">AI</span> services that are hard to <span class="hl hl--purple">debug</span></h2>
+      <h2 id="story-h" class="section__title">The problem: <span class="ai">AI</span> servers that are hard to <span class="hl hl--purple">debug</span></h2>
       
     </header>
 <div class="pg-two">
-      <div class="panel" data-tone="blue" data-reveal><h3 class="pg-panel__h">The problem</h3><p>An AI endpoint can return a success code and still be slow, degraded or quietly switching to another model. You only find out when users complain.</p></div>
+      <div class="panel" data-tone="blue" data-reveal><h3 class="pg-panel__h">The problem</h3><p>An AI server can return a success code and still be slow, degraded or quietly switching to another model. You only find out when users complain.</p></div>
       <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h">What I built</h3><p>One request ID is stamped on every log line and trace step of a request. Simple, hand-written metrics count requests, AI response time, tokens used (the small pieces of text an AI is billed by) and model fallbacks. Three Groq models are chained with a time limit each and a clear &quot;degraded&quot; flag, so a silent fallback becomes visible.</p></div>
     </div>
   </div>
@@ -292,7 +286,7 @@
       <h2 id="how-it-works-h" class="section__title">Request IDs, metrics and <span class="hl hl--blue">traces</span></h2>
       
     </header>
-<ol class="pg-arch" data-reveal-group><li class="pg-arch__item" data-tone="blue" style="--i:0"><span class="pg-arch__n" aria-hidden="true">01</span><p>An /ask endpoint (a web address the app answers on) where an AI picks one of three business actions. These are looking up tickets, creating a ticket and running a sales report. The AI then summarises the result</p></li><li class="pg-arch__item" data-tone="blue" style="--i:1"><span class="pg-arch__n" aria-hidden="true">02</span><p>A chain of three Groq models, each with a time limit and an explicit &quot;degraded&quot; flag</p></li><li class="pg-arch__item" data-tone="blue" style="--i:2"><span class="pg-arch__n" aria-hidden="true">03</span><p>One request ID on every log line and trace step</p></li><li class="pg-arch__item" data-tone="blue" style="--i:3"><span class="pg-arch__n" aria-hidden="true">04</span><p>Hand-written Prometheus metrics for requests, AI response time, tokens and model fallbacks</p></li><li class="pg-arch__item" data-tone="blue" style="--i:4"><span class="pg-arch__n" aria-hidden="true">05</span><p>OpenTelemetry traces viewed in Jaeger</p></li><li class="pg-arch__item" data-tone="blue" style="--i:5"><span class="pg-arch__n" aria-hidden="true">06</span><p>A simple keyword router, so the service runs with no API key or internet</p></li><li class="pg-arch__item" data-tone="blue" style="--i:5"><span class="pg-arch__n" aria-hidden="true">07</span><p>A Docker Compose setup that starts the app, Jaeger and Prometheus together</p></li></ol>
+<ol class="pg-arch" data-reveal-group><li class="pg-arch__item" data-tone="blue" style="--i:0"><span class="pg-arch__n" aria-hidden="true">01</span><p>An AI server with an /ask endpoint (a web address the app answers on) where an AI picks one of three business actions. These are looking up tickets, creating a ticket and running a sales report. The AI then summarises the result</p></li><li class="pg-arch__item" data-tone="blue" style="--i:1"><span class="pg-arch__n" aria-hidden="true">02</span><p>A chain of three Groq models, each with a time limit and an explicit &quot;degraded&quot; flag</p></li><li class="pg-arch__item" data-tone="blue" style="--i:2"><span class="pg-arch__n" aria-hidden="true">03</span><p>One request ID on every log line and trace step</p></li><li class="pg-arch__item" data-tone="blue" style="--i:3"><span class="pg-arch__n" aria-hidden="true">04</span><p>Hand-written Prometheus metrics for requests, AI response time, tokens and model fallbacks</p></li><li class="pg-arch__item" data-tone="blue" style="--i:4"><span class="pg-arch__n" aria-hidden="true">05</span><p>OpenTelemetry traces viewed in Jaeger</p></li><li class="pg-arch__item" data-tone="blue" style="--i:5"><span class="pg-arch__n" aria-hidden="true">06</span><p>A simple keyword router, so the service runs with no API key or internet</p></li><li class="pg-arch__item" data-tone="blue" style="--i:5"><span class="pg-arch__n" aria-hidden="true">07</span><p>A Docker Compose setup that starts the app, Jaeger and Prometheus together</p></li></ol>
   </div>
 </section><section id="results" class="section pg-sec" aria-labelledby="results-h">
   <div class="container">
@@ -319,7 +313,7 @@
       <h2 id="hire-for-h" class="section__title">Services behind <span class="hl hl--purple">this project</span></h2>
       
     </header>
-<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/ai-backend-fastapi-django/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-server"/></svg></span><span><strong>Hire me for Python and FastAPI backend development</strong><span class="pg-rel__t">FastAPI and Django services with clear rules, automated tests and logs that make problems easy to find.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/llm-rag-development/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-brain-circuit"/></svg></span><span><strong>Hire me for AI chatbot development</strong><span class="pg-rel__t">Chatbots that answer from your documents, show their sources and say so when they do not know.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li></ul>
+<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/ai-backend-fastapi-django/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-server"/></svg></span><span><strong>Hire me for Python and FastAPI backend development</strong><span class="pg-rel__t">FastAPI and Django services with automated tests and clear logs.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/llm-rag-development/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-brain-circuit"/></svg></span><span><strong>Hire me for AI chatbot development</strong><span class="pg-rel__t">Chatbots that answer from your documents and show their sources.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li></ul>
     <p class="pg-author" data-reveal>Built by <a class="link" href="../../about/">Shaunak Chorge</a>, AI Engineer at Claptek Pvt Ltd in Mumbai.</p>
   </div>
 </section><section id="faq" class="section pg-sec section--tint" aria-labelledby="faq-h">
@@ -331,11 +325,11 @@
     </header>
 <div class="pg-qas"><details class="pg-qa" id="observable-ai-backend-q1" open data-reveal>
       <summary class="pg-qa__q"><h3 class="pg-qa__h">What is observability in a FastAPI app?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>Observability means you can tell what a running app is doing from the outside, using logs, metrics and traces. In this FastAPI service a request ID is stamped on every log line and trace step. Prometheus metrics count requests and AI response time. OpenTelemetry traces in Jaeger show where each request spent its time.</p></div>
-    </details><details class="pg-qa" id="observable-ai-backend-q2" data-reveal style="--i:1">
+      <div class="pg-qa__a"><p>Observability means you can tell what a running app is doing from the outside, using logs, metrics and traces. For an AI server this is called LLM observability. A request ID is stamped on every log line and trace step. Prometheus metrics count requests, AI response time and tokens. OpenTelemetry traces in Jaeger show where each request spent its time.</p></div>
+    </details><details class="pg-qa" id="observable-ai-backend-q2" open data-reveal style="--i:1">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Is this a production system?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>No. It is a job-application task, not a production system. The slow lookup was planted on purpose to show how tracing finds it, and the timings come from made-up data. A real system would need your own traffic, security and hosting decisions.</p></div>
-    </details><details class="pg-qa" id="observable-ai-backend-q3" data-reveal style="--i:2">
+    </details><details class="pg-qa" id="observable-ai-backend-q3" open data-reveal style="--i:2">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Can it run without an <span class="ai">AI</span> key?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>Yes. With no key set it falls back to a simple keyword router, which is how the 10 offline tests run. That also means anyone can run the project and its tests on a laptop without an account or internet.</p></div>
     </details></div>
@@ -354,7 +348,7 @@
       </div>
       <div class="pg-hire__act">
         <a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=ai-backend-fastapi-django#hire" data-magnetic>Hire me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
-        <p class="pg-hire__alt"><a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a><span aria-hidden="true"> &middot; </span><a class="link" href="../../projects/">View work</a></p>
+        <p class="pg-hire__alt"><a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a><span aria-hidden="true"> &middot; </span><a class="link" href="../../projects/">See projects</a></p>
       </div>
     </div>
   </div>
@@ -380,7 +374,7 @@
           <span class="logo__word">SHAUNAK</span>
         </p>
         <p class="footer__blurb">AI Engineer at Claptek Pvt Ltd. Taking select freelance AI and backend projects.</p>
-        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India &ndash; working remotely (IST)</p>
+        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India (IST)</p>
         <ul class="footer__soc" aria-label="Profiles">
           <li><a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a></li>
           <li><a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a></li>
@@ -397,9 +391,10 @@
             <li><a href="../../projects/">Projects</a></li>
             <li><a href="../../services/">Services</a></li>
             <li><a href="../../about/">About</a></li>
+            <li><a href="../../about/#experience">Experience</a></li>
+            <li><a href="../../resume/">Resume</a></li>
             <li><a href="../../faq/">FAQ</a></li>
             <li><a href="../../contact/">Contact</a></li>
-            <li><a href="../../resume/">Resume</a></li>
           </ul>
         </nav>
 
@@ -418,7 +413,7 @@
         <nav class="footer__col" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../../projects/observable-ai-backend/">FastAPI tracing with OpenTelemetry</a></li>
+            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
             <li><a href="../../projects/agentic-honeypot/">AI scam honeypot</a></li>
             <li><a href="../../projects/deepfake-video-detection/">Deepfake video detection</a></li>
@@ -495,11 +490,11 @@
     <symbol id="i-loader" viewBox="0 0 24 24"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/></symbol>
   </svg>
 
-  <script defer src="../../assets/dist/js/core.min.js?v=53badac3"></script>
+  <script defer src="../../assets/dist/js/core.min.js?v=d41b0d5b"></script>
   <script defer src="../../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
   <script defer src="../../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../../assets/dist/js/fx.min.js?v=2e06fef0"></script>
-  <script defer src="../../assets/dist/js/pages.min.js?v=794591ab"></script>
-  <script defer src="../../assets/dist/js/visuals.min.js?v=341dbffd"></script>
+  <script defer src="../../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
+  <script defer src="../../assets/dist/js/pages.min.js?v=efc0e441"></script>
+  <script defer src="../../assets/dist/js/visuals.min.js?v=53b137f5"></script>
 </body>
 </html>

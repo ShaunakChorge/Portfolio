@@ -1,0 +1,110 @@
+/* =====================================================================
+   NEURAL NEON - collage.css   the project collage: the home page "Selected work" and the /projects/ page
+   Markup: projectCollage() in tools/pages/ui.mjs.  Order, tile sizes and the desktop grid come from projects.config.json
+   (the generator writes the grid as --areas on the list and --area on every tile). The DOM is in priority order, which is also the reading and tab order.
+   Desktop 4 columns x 5 rows, tablet 2 columns (wide and big tiles span both; a small tile that would sit alone in its row spans both too, see .tile--lone), one column below 40em
+   where every tile is as tall as its content (the canvas gets a fixed aspect ratio). The canvases are drawn for about 260 x 130px, so a small tile never gets less. Un-layered, so it wins over base.css (@layer pf).
+   Contents: 1 grid  2 tile  3 link tile  4 desktop  5 phones  6 filtered (/projects/)
+   ===================================================================== */
+
+/*#region 1 grid*/
+.collage {
+  --row: clamp(14rem, 11rem + 4vw, 15rem); --gap: clamp(.75rem, .5rem + 1vw, 1.25rem);
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: var(--row); grid-auto-flow: dense; gap: var(--gap);
+  margin: 0; padding: 0; list-style: none;
+}
+.tile { display: flex; min-width: 0; container: tile / inline-size; }
+.tile[hidden] { display: none; }
+@media (max-width: 69.99em) {
+  .collage { grid-auto-flow: row; }                       /* sparse: a tile never jumps ahead of one with a better rank */
+  .tile--wide, .tile--lone { grid-column: span 2; }
+  .tile--big { grid-column: span 2; grid-row: span 2; }
+  .tile--lone .tile__blurb { display: none; }              /* a small tile stretched over both columns keeps its small-tile height: the visual needs it */
+}
+@media (min-width: 40em) and (max-width: 69.99em) {
+  .tile:not(.tile--wide, .tile--big) .tile__blurb { display: none; }   /* a small tile is a fixed 14rem high: from 1036px its container is wide enough for the sentence, which would squeeze the visual to under 90px */
+}
+/*#endregion*/
+
+/*#region 2 tile: the visual above, the text below (text never sits on the canvas)*/
+.tile__card { flex: 1; min-width: 0; padding: 0; gap: 0; overflow: hidden; }
+.tile__media { position: relative; flex: 1 1 auto; min-height: 0; overflow: hidden; background: #05060a; border-bottom: 1px solid rgb(var(--tone) / .3); isolation: isolate; }
+.tile__media .pv { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; --pv-radius: 0; }   /* the canvas follows its box (visuals.js watches the size) */
+.tile__media::after {   /* neon scanlines */
+  content: ""; position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: .5;
+  background: repeating-linear-gradient(to bottom, transparent 0 3px, rgb(0 0 0 / .18) 3px 4px);
+}
+.tile__body { flex: none; display: grid; gap: .3rem; padding: .7rem .9rem .85rem; }
+.tile__meta { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .6rem; margin: 0; font: 700 .75rem/1.3 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: rgb(var(--tone-ink)); }
+.tile__origin { padding: .05rem .5rem; border: 1px solid rgb(var(--tone) / .45); border-radius: 999px; font-weight: 400; letter-spacing: .06em; color: var(--text-body); }
+.tile__title { margin: 0; font-size: clamp(.9375rem, .88rem + .3vw, 1.0625rem); line-height: 1.25; overflow-wrap: anywhere; text-wrap: balance; }
+.tile__blurb { display: none; margin: 0; font-size: var(--fs-sm); line-height: 1.55; color: var(--text-body); }
+.tile__note { margin: 0; font: 400 .75rem/1.4 var(--font-mono); color: var(--text-muted); }
+@container tile (min-width: 30rem) {   /* wide and big tiles have the room for a sentence and a larger title */
+  .tile__body { gap: .4rem; padding: .9rem 1.15rem 1.05rem; }
+  .tile__title { font-size: clamp(1.15rem, 1rem + .5vw, 1.45rem); }
+  .tile__blurb { display: block; }
+}
+/* a small tile on a desktop with the side rail is only about 220 to 270px wide: the category and origin tags get a compact style so they stay on one line in every tile */
+@container tile (max-width: 17.5rem) {
+  .tile__meta { flex-wrap: nowrap; gap: .2rem .4rem; font-size: .6875rem; letter-spacing: .04em; white-space: nowrap; }
+  .tile__origin { padding: .05rem .4rem; letter-spacing: .02em; }
+}
+/* a wide tile has one row only: the visual and the text sit side by side (phones stack them, see 5) */
+@media (min-width: 40em) {
+  .tile--wide .tile__card { flex-direction: row; }
+  .tile--wide .tile__media { flex: .85 1 0; border-bottom: 0; border-right: 1px solid rgb(var(--tone) / .3); }
+  .tile--wide .tile__body { flex: 1.15 1 0; align-content: center; }
+  .tile--wide .tile__title { font-size: clamp(1.05rem, .95rem + .4vw, 1.25rem); }
+}
+@media (hover: hover) { .tile__card:hover .tile__title { color: rgb(var(--tone-ink)); } }
+/* keyboard focus: a ring around the whole tile (the stretched link is its only focus stop); browsers without :has() keep the ring on the title */
+@supports selector(:has(a)) {
+  .tile__card:has(.card__link:focus-visible) { outline: 2px solid rgb(var(--tone)); outline-offset: 4px; }
+  .tile__card .card__link:focus-visible { outline: none; }
+}
+/*#endregion*/
+
+/*#region 3 the "All projects" link tile*/
+.tile__all {
+  display: flex; flex: 1; align-items: center; justify-content: center; gap: .6rem; min-width: 0; min-height: 44px; padding: .5rem; text-align: center;
+  border: 2px dashed rgb(var(--accent) / .5); border-radius: var(--radius-md); font: 700 .875rem/1.2 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: rgb(var(--accent-ink));
+  transition: background-color .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease), gap .3s var(--ease);
+}
+.tile__all .icon { flex: none; width: 1.1rem; height: 1.1rem; }
+.tile__all:is(:hover, :focus-visible) { gap: .9rem; border-color: rgb(var(--accent) / .85); background: rgb(var(--accent) / .08); box-shadow: 0 0 22px rgb(var(--accent) / .3); }
+/*#endregion*/
+
+/*#region 4 desktop: the explicit 4 x 5 map*/
+@media (min-width: 70em) {
+  .collage { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-areas: var(--areas); grid-auto-flow: row; }
+  .tile { grid-area: var(--area); }
+  .tile--wide .tile__blurb { display: block; }   /* a wide tile is two columns wide at every desktop width, so its sentence shows at every desktop width (with the side rail it is under 480px) */
+}
+/*#endregion*/
+
+/*#region 5 phones: one column, every tile as tall as its content; the big and wide tiles keep their one-sentence blurb*/
+@media (max-width: 39.99em) {
+  .collage { grid-template-columns: minmax(0, 1fr); grid-auto-rows: auto; --gap: .75rem; }
+  .tile--wide, .tile--big, .tile--lone { grid-column: auto; grid-row: auto; }
+  .tile__media { flex: none; aspect-ratio: 2.2; }
+  .tile--big .tile__media { aspect-ratio: 1.75; }
+  .tile--wide .tile__media { aspect-ratio: 2; }
+  .tile__body { padding: .6rem .8rem .8rem; }
+  .tile--big .tile__blurb, .tile--wide .tile__blurb { display: block; }
+}
+/*#endregion*/
+
+/*#region 6 filtered (/projects/ chips): tiles flow into the free cells, so hidden tiles leave no gap*/
+.collage[data-filtered] .tile--link { display: none; }
+.collage[data-filtered] { grid-auto-flow: dense; }
+.collage[data-filtered] .tile--lone { grid-column: auto; }
+@media (min-width: 70em) {
+  .collage[data-filtered] { grid-template-areas: none; grid-auto-flow: dense; }
+  .collage[data-filtered] .tile { grid-area: auto; }
+  .collage[data-filtered] .tile--wide { grid-column: span 2; }
+  .collage[data-filtered] .tile--big { grid-column: span 2; grid-row: span 2; }
+}
+@media (prefers-reduced-motion: reduce) { .tile__all { transition: none; } }
+@media (forced-colors: active) { .tile__all { border-color: CanvasText; } }
+/*#endregion*/

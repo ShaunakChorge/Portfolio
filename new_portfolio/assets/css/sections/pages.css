@@ -2,14 +2,12 @@
    NEURAL NEON - pages.css   inner pages: /projects/ /services/ /about/ /faq/ /contact/ /resume/ + case studies
    Generated markup: tools/pages/*.mjs  (never hand-edit the emitted index.html files)
    Prefix .pg-*  Keyframes pg-*   Un-layered, so it wins over base.css (@layer pf).
-   Reuses base.css components: .section .section__head .card .panel .btn .tag(s) .chip(s) .dot-list .timeline .stats .badge .link .link-arrow .icon-tile .grid--c*
+   Reuses base.css components: .section .section__head .card .panel .btn .tag(s) .chip(s) .dot-list .timeline .badge .link .link-arrow .icon-tile .grid--c*
    and the .contact__* form / channel rows (contact.css) + the generative .pv visuals (visuals.js).
    Contents: 0 page-level  1 head + breadcrumb  2 sections  3 cards  4 steps / lists / facts  5 accordion  6 terminal + brief  7 contact  8 hire band  9 motion
    ===================================================================== */
 
 /*#region 0 page-level*/
-/* base.css reserves these ids for the home sections (content-visibility:auto + a home-sized intrinsic height). Inner pages reuse a few of them as anchors (#stack, #contact...). */
-body:not([data-page="home"]) :is(#about, #build, #stack, #work, #journey, #contact) { content-visibility: visible; contain-intrinsic-size: none; }
 .pg-needs-js { display: inline-flex; }
 html:not(.js) .pg-needs-js { display: none; }
 /*#endregion*/
@@ -76,7 +74,13 @@ html:not(.js) .pg-needs-js { display: none; }
 .pg-panel__cap { margin: -.5rem 0 1rem; font-size: var(--fs-sm); color: var(--text-muted); }
 .panel p { color: var(--text-body); }
 .pg-prose { max-width: 68ch; }
-.pg-stats { margin-top: clamp(1.75rem, 1.2rem + 2vw, 3rem); }
+/* About: the story text with the portrait beside it at the same height (portrait.css .np--side); stacked on phones, portrait after the text */
+.pg-story { display: grid; gap: clamp(1.5rem, 1rem + 2vw, 3rem); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 56em) { .pg-story { grid-template-columns: minmax(0, 1fr) minmax(16rem, 26rem); align-items: stretch; } }
+.pg-hiw { padding: clamp(1.25rem, 1rem + 1.4vw, 2rem); }
+.pg-hiw .dot-list { gap: .9rem; }
+.pg-hiw .dot-list li { font-size: var(--fs-body); line-height: 1.6; }
+.pg-earlier { margin-top: clamp(1.75rem, 1.2rem + 2vw, 3rem); font-size: 1.15rem; line-height: 1.3; }
 .pg-author { margin-top: 1.5rem; font-size: var(--fs-sm); color: var(--text-muted); }
 .pg-smallrel { margin-top: 1.25rem; font-size: var(--fs-sm); color: var(--text-muted); }
 .pg-closing { padding-block: clamp(1.5rem, 1rem + 2vw, 2.5rem); }
@@ -91,25 +95,14 @@ html:not(.js) .pg-needs-js { display: none; }
 /*#region 3 cards*/
 .pg-cards { list-style: none; margin: 0; padding: 0; }
 .pg-svc .card__text { font-size: var(--fs-body); }
-.pg-grid { display: grid; gap: clamp(1rem, .6rem + 1.4vw, 2rem); margin: 0; padding: 0; list-style: none; grid-template-columns: minmax(0, 1fr); }
-@media (min-width: 40em) { .pg-grid--cases, .pg-grid--mini { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (min-width: 68em) { .pg-grid--cases, .pg-grid--mini { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.pg-grid__item { display: flex; min-width: 0; }
-.pg-grid__item[hidden] { display: none; }
-.pg-proj, .pg-mini, .pg-proof { width: 100%; }
-.pg-proj { padding: 0; gap: 0; overflow: hidden; }
-.pg-proj__media .pv { aspect-ratio: 16 / 9; --pv-radius: 0; }
-.pg-proj__body { display: flex; flex-direction: column; gap: .7rem; flex: 1; padding: clamp(1.1rem, .9rem + .8vw, 1.5rem); }
-.pg-mini, .pg-proof { gap: .7rem; }
+.pg-proof { width: 100%; gap: .7rem; }
 .pg-proj__meta { font: 700 .75rem/1.3 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: rgb(var(--tone-ink)); }
 .pg-proj__title { font-size: 1.2rem; line-height: 1.25; }
 .pg-proj__blurb { font-size: var(--fs-sm); color: var(--text-muted); }
 .pg-proj__stat { display: grid; gap: .1rem; padding: .6rem .8rem; border: 1px solid rgb(var(--tone) / .25); border-radius: var(--radius); background: rgb(var(--tone) / .06); }
 .pg-proj__num { font: 700 1rem/1.25 var(--font-display); color: rgb(var(--tone-ink)); overflow-wrap: anywhere; }
 .pg-proj__statlabel { font-size: .8125rem; line-height: 1.4; color: var(--text-muted); }
-.pg-proj__tags { margin-top: .1rem; }
 .pg-proj__foot { margin-top: auto; padding-top: .35rem; }
-.pg-proj__private { display: inline-flex; align-items: center; min-height: 44px; font: 400 .8125rem/1.3 var(--font-mono); color: var(--text-muted); }
 .pg-ext { list-style: none; margin: 0; padding: 0; }
 @media (min-width: 40em) { .pg-ext--n4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }   /* 2 or 4 cards: two columns, no empty cell */
 @media (min-width: 64em) {                                                                                        /* 5 cards: three on top, two wider below */
@@ -122,35 +115,21 @@ html:not(.js) .pg-needs-js { display: none; }
 .pg-ext__t { font-size: 1.05rem; line-height: 1.3; }
 .pg-ext__card p { font-size: var(--fs-sm); color: var(--text-muted); }
 .pg-ext__tags { margin-top: auto; }
-.pg-how { list-style: none; margin: 0; padding: 0; }
-.pg-how > li { display: flex; min-width: 0; }
-.pg-how .card { width: 100%; }
-.pg-how__t { font-size: 1.05rem; line-height: 1.3; }
 
-.pg-filterbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1.5rem; margin-bottom: clamp(1.25rem, 1rem + 1vw, 2rem); }
-.pg-filtercount { font: 400 .875rem/1.4 var(--font-mono); color: var(--text-muted); }
-.pg-filtercount strong { color: var(--text); }
+.pg-filterbar { margin-bottom: clamp(1.25rem, 1rem + 1vw, 2rem); }
 
-/* "More projects": one quiet list, closed by default, still in the DOM for crawlers */
-.pg-morebox { border: 1px solid var(--line-2); border-radius: var(--radius-md); background: rgb(10 10 15 / .6); }
-.pg-morebox[open] { border-color: rgb(var(--accent) / .35); }
-.pg-morebox__sum { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 56px; padding: .75rem 1.25rem; cursor: pointer; list-style: none; font: 700 .9375rem/1.3 var(--font-mono); letter-spacing: .04em; color: rgb(var(--accent-ink)); border-radius: var(--radius-md); }
-.pg-morebox__sum::-webkit-details-marker { display: none; }
-.pg-morebox__sum:focus-visible { outline: 2px solid rgb(var(--accent)); outline-offset: 2px; }
-.pg-morebox__chev { flex: none; transition: rotate .3s var(--ease); }
-.pg-morebox[open] > .pg-morebox__sum .pg-morebox__chev { rotate: 180deg; }
-.pg-morebox--sm { margin-top: 1.5rem; }
-.pg-more { list-style: none; margin: 0; padding: 0 1.25rem .75rem; }
-.pg-more__row { display: grid; gap: .5rem 1.5rem; padding: .95rem 0; border-top: 1px solid var(--line); }
-@media (min-width: 48em) { .pg-more__row:has(.pg-more__side) { grid-template-columns: minmax(0, 1fr) minmax(0, 15rem); } }
-.pg-more__t { color: var(--text); font-weight: 600; }
-.pg-more__d { font-size: var(--fs-sm); color: var(--text-muted); }
-.pg-more__side { display: grid; gap: .25rem; align-content: start; font: 400 .8125rem/1.4 var(--font-mono); color: var(--text-muted); }
-.pg-more__links { display: block; }
-.pg-more__links a { display: inline-flex; align-items: center; min-height: 24px; }
+/* "Personal builds" (and the resume's earlier internships): open rows, a title and one line each, quiet on purpose (two columns on wide screens) */
+.pg-builds { display: grid; grid-template-columns: minmax(0, 1fr); column-gap: clamp(1.5rem, 1rem + 3vw, 4rem); margin: 0; padding: 0; list-style: none; }
+@media (min-width: 56em) { .pg-builds { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.pg-builds__row { display: grid; align-content: start; gap: .15rem; padding: .95rem 0; border-top: 1px solid var(--line); }
+.pg-builds__t { color: var(--text); font-weight: 600; }
+.pg-builds__d { font-size: var(--fs-sm); color: var(--text-muted); }
+.pg-builds__links { margin-top: .15rem; font: 400 .8125rem/1.4 var(--font-mono); color: var(--text-muted); }
+.pg-builds__links a { display: inline-flex; align-items: center; min-height: 24px; }
+
 /* phones and touch screens: 44px tap areas for the small links (negative margins keep the page layout unchanged) */
 @media (max-width: 40em), (pointer: coarse) {
-  .pg-crumbs a, .pg-more__links a { min-height: 44px; min-width: 44px; justify-content: center; margin-block: -10px; }
+  .pg-crumbs a, .pg-builds__links a { min-height: 44px; min-width: 44px; justify-content: center; margin-block: -10px; }
   .pg-facts .link { display: inline-flex; align-items: center; min-height: 44px; }
 }
 /*#endregion*/
@@ -171,6 +150,7 @@ html:not(.js) .pg-needs-js { display: none; }
 .pg-plain__s { display: block; font-size: var(--fs-sm); color: var(--text-muted); }
 .panel > .pg-plain__s { margin-top: .15rem; }
 .pg-cred__tags { margin-top: 1rem; }
+.pg-cred__school { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--line); }
 .pg-cred > .panel { padding: clamp(1.25rem, 1rem + 1vw, 1.75rem); }
 
 .pg-tiers { display: grid; gap: clamp(1rem, .6rem + 1.4vw, 1.75rem); grid-template-columns: minmax(0, 1fr); }
@@ -270,6 +250,7 @@ html:not(.js) .pg-needs-js { display: none; }
 .pg-term__bar span { margin-left: .6rem; }
 .pg-term__body { display: grid; gap: .85rem; padding: 1rem 1.15rem 1.2rem; font: 400 .9375rem/1.6 var(--font-mono); color: var(--text); }
 .pg-term__prompt { overflow-wrap: anywhere; }
+.pg-term__cmd { white-space: nowrap; }                /* a narrow screen wraps before the command, never inside it */
 .pg-term__user { color: rgb(var(--green-ink)); }
 .pg-term__sym { margin: 0 .55rem; color: rgb(var(--accent-ink)); }
 .pg-term__kv { display: grid; gap: .7rem; margin: 0; }
@@ -278,7 +259,6 @@ html:not(.js) .pg-needs-js { display: none; }
 .pg-term__kv dt { color: rgb(var(--accent-ink)); }
 .pg-term__kv dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
 .pg-term__sub { color: var(--text-muted); font-size: .875rem; }
-.pg-term__list { display: flex; flex-wrap: wrap; gap: .1rem .85rem; margin: 0; padding: 0; list-style: none; }
 .pg-term__cursor { display: inline-block; width: .6em; height: 1.1em; vertical-align: -.2em; background: rgb(var(--accent)); animation: pg-blink 1.1s steps(2, jump-none) infinite; }
 .pg-term--brief .pg-term__body { gap: 1rem; }
 .pg-brief__kv { display: grid; gap: .55rem; margin: 0; }
@@ -325,11 +305,11 @@ html:not(.js) .pg-needs-js { display: none; }
 @keyframes pg-blink { to { visibility: hidden; } }
 @media (prefers-reduced-motion: reduce) {
   .pg-svcmark__ring, .pg-term__cursor { animation: none; }
-  .pg-qa__chev, .pg-morebox__chev, .pg-rel__link, .pg-rel__go { transition: none; }
+  .pg-qa__chev, .pg-rel__link, .pg-rel__go { transition: none; }
 }
 html.fx-paused .pg-svcmark__ring, html.fx-paused .pg-term__cursor { animation: none; }
 @media (forced-colors: active) {
-  .pg-qa, .pg-step, .pg-metric, .pg-arch__item, .pg-rel__link, .pg-pn__link, .pg-term, .pg-hire__band, .pg-morebox { border: 1px solid CanvasText; }
+  .pg-qa, .pg-step, .pg-metric, .pg-arch__item, .pg-rel__link, .pg-pn__link, .pg-term, .pg-hire__band { border: 1px solid CanvasText; }
   .pg-answer { border-left-color: Highlight; }
 }
 /*#endregion*/

@@ -108,7 +108,7 @@ body:has(.pg-hire) .footer__cta { display: none; }
 
 /*#region 5b floating "Let's talk" FAB (on every page; markup lives in footer.html; base.css provides .fab-wrap / .fab / .fab-tip; contact.js toggles .is-shown / .is-away)*/
 .contact-fab {
-  visibility: hidden; opacity: 0; translate: 0 18px; scale: .9;
+  visibility: hidden; opacity: 0; translate: 0 18px; scale: .95;
   transition: opacity .3s var(--ease-out), translate .4s var(--ease-expo), scale .4s var(--ease-expo), visibility 0s linear .4s;
 }
 html:not(.is-locked) .contact-fab.is-shown { visibility: visible; opacity: 1; translate: 0 0; scale: 1; transition: opacity .3s var(--ease-out), translate .4s var(--ease-expo), scale .4s var(--ease-expo), visibility 0s; }

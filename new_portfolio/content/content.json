@@ -12,7 +12,7 @@
     "deploy_root": false,
     "site_root_url": "https://shaunakchorge.github.io/Portfolio/",
     "deploy_root_note": "Leave deploy_root false while GitHub Pages serves the repository branch (the site lives at site_url). Set it to true ONLY at the moment Settings > Pages > Source is switched to GitHub Actions (the .github/workflows/pages.yml workflow publishes the new_portfolio folder as the site root): the base URL then becomes site_root_url, canonical links, Open Graph, JSON-LD, sitemap.xml, robots.txt and the llms files drop the /new_portfolio/ part, and sitemap.xml and robots.txt are written inside new_portfolio/. The workflow also sets PF_DEPLOY_ROOT=1 itself, so a deploy is correct even before the flag is committed.",
-    "entity": "Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India. He holds a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026). He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job."
+    "entity": "Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India. He holds a Bachelor of Technology in Artificial Intelligence and Data Science (2026). He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job."
   },
   "pages": {
     "home": {
@@ -23,26 +23,30 @@
       "h1": "Shaunak Chorge",
       "h1_sr_suffix": ", a freelance AI engineer in Mumbai taking select AI and backend projects",
       "h2": {
+        "stack": "Tools I work with",
+        "about": "About me",
         "offer": "What I build for clients",
         "work": "Selected AI and backend projects",
+        "roles": "Where I have worked",
         "process": "How a freelance project works",
         "faq": "Questions before you hire"
       }
     },
     "projects": {
       "path": "projects/",
-      "nav_label": "Work",
+      "nav_label": "Projects",
       "title": "AI Engineer Portfolio Projects | Shaunak Chorge",
       "description": "Selected AI chatbot, computer vision, speech and Python backend projects by Shaunak Chorge, with case studies, results and the tools behind each one.",
       "h1": "AI engineer portfolio projects and case studies",
-      "direct_answer": "These are the AI engineer portfolio projects of Shaunak Chorge. AI systems built at Claptek cover audit and compliance. Others include a chatbot that cites its sources, a backend that traces slow requests, and speech, vision and automation work. {Cases} have full case studies with the problem, what he built, the results and what he can add.",
+      "direct_answer": "These are my AI engineer portfolio projects. The AI systems I built at Claptek cover audit and compliance. Others include a chatbot that cites its sources, a backend that traces slow requests, and speech, vision and automation work. Each case study covers the problem, what I built, the results and what I can add.",
       "h2": {
-        "cases": "Case studies with results"
+        "work": "Selected projects",
+        "personal": "Personal builds"
       },
       "faqs": [
         {
           "q": "What are some real world AI project examples?",
-          "a": "Real examples on this site include an AI that drafts audit findings and a tool that lists obligations from regulatory documents. Others are a text-to-SQL assistant for a bank database, a healthcare policy chatbot and a scam-catching AI honeypot. There are also CCTV analytics, speech emotion recognition, deepfake video detection and a traceable AI backend."
+          "a": "Real examples on this site include an AI that drafts audit findings from checklist notes, a text-to-SQL assistant for a bank database and a scam-catching AI honeypot. Each one has a case study with the problem, the build and the results."
         }
       ]
     },
@@ -50,10 +54,9 @@
       "path": "services/",
       "nav_label": "Services",
       "title": "AI Development Services in Mumbai | Shaunak Chorge",
-      "description": "Six freelance AI development services in Mumbai: AI chatbots, document AI, Python backend APIs, computer vision, machine learning and automation.",
+      "description": "Freelance AI development services in Mumbai: AI chatbots, document AI, Python backend APIs, computer vision, machine learning and automation.",
       "h1": "Freelance AI development services in Mumbai",
-      "lead": "Six areas where I take select freelance projects, each backed by real work you can look at.",
-      "direct_answer": "I offer six freelance AI development services from Mumbai. They are Artificial Intelligence (AI) chatbots, document AI, backend APIs in Python, computer vision, machine learning for speech and text, and automation. Each service page lists what you receive, how the work runs and the real projects behind it. I take select projects alongside my full-time job and work remotely.",
+      "direct_answer": "I offer freelance AI development services from Mumbai. They are Artificial Intelligence (AI) chatbots, document AI, backend APIs in Python, computer vision, machine learning for speech and text, and automation. Each service page lists what you receive, how the work runs and the real projects behind it. I take select projects alongside my full-time job.",
       "h2": {
         "process": "How every project starts"
       },
@@ -70,10 +73,9 @@
       "title": "About Shaunak Chorge | AI Engineer in Mumbai",
       "description": "Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai. Read about his background, experience, tools and how he works with freelance clients.",
       "h1": "About Shaunak Chorge, AI engineer",
-      "lead": "My background, my work and how I collaborate with clients on Artificial Intelligence (AI) projects.",
+      "direct_answer": "I am Shaunak Chorge, an AI Engineer at Claptek Pvt Ltd in Mumbai, India. I build AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. I also take select freelance AI and backend projects alongside my full-time job.",
       "h2": {
         "story": "Who I am and what I do",
-        "how": "How I work with clients",
         "experience": "Where I have worked",
         "stack": "Tools I use every day"
       },
@@ -90,8 +92,7 @@
       "title": "AI Developer Cost in India: Freelance FAQ | Shaunak Chorge",
       "description": "Answers about the cost of hiring Shaunak Chorge as an AI developer: how pricing works, timelines, NDAs, code ownership, fixing projects and support.",
       "h1": "AI developer cost in India: freelance FAQ",
-      "lead": "Straight answers to the questions people ask before we work together.",
-      "direct_answer": "AI developer cost in India depends on the scope. Shaunak Chorge agrees either a fixed price or hourly billing for each project, after a short brief and before any code is written. He takes select projects alongside his full-time job as an AI Engineer at Claptek Pvt Ltd. He works remotely from Mumbai and answers the common questions below."
+      "direct_answer": "AI developer cost in India depends on the scope. Shaunak Chorge agrees either a fixed price or hourly billing for each project, after a short brief and before any work begins. He takes select projects alongside his full-time job as an AI Engineer at Claptek Pvt Ltd, and answers the common questions below."
     },
     "contact": {
       "path": "contact/",
@@ -106,8 +107,8 @@
         "Anything I should know, such as private data, tools you already use or where it will run",
         "Anything you have already tried"
       ],
-      "note": "Scope comes first. If your project is not a good fit, I will tell you plainly.",
-      "direct_answer": "To hire an AI developer, send a short brief through the form or by email. Say what you want to build, roughly when you need it and anything I should know. I reply with my view on feasibility and a proposed scope, and I write no code until we agree on it.",
+      "note": "I read every message and reply with my view on how to approach it.",
+      "direct_answer": "To hire an AI developer, send a short brief through the form or by email. Say what you want to build, roughly when you need it and anything I should know. I reply with my view on feasibility and a proposed scope, and we agree the plan and a suitable deadline together before work begins.",
       "h2": {
         "process": "What happens after you write",
         "faq": "Questions before you write"
@@ -119,8 +120,7 @@
       "title": "Shaunak Chorge Resume | AI Engineer",
       "description": "Resume of Shaunak Chorge, AI Engineer: work at Claptek Pvt Ltd, Osource Global and Shivohini Tech-AI, education, certifications and awards. PDF download.",
       "h1": "Shaunak Chorge resume: AI Engineer",
-      "lead": "Experience, education, certifications and awards. A PDF copy is available to download.",
-      "direct_answer": "This Shaunak Chorge resume covers his work as an AI Engineer at Claptek Pvt Ltd in Mumbai. It also covers his earlier roles at Osource Global and Shivohini Tech-AI, his education, certifications and awards. A PDF copy is available to download. He holds a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026).",
+      "direct_answer": "This Shaunak Chorge resume covers his work as an AI Engineer at Claptek Pvt Ltd in Mumbai. It also covers his earlier roles at Osource Global and Shivohini Tech-AI, his education, certifications and awards. A PDF copy is available to download. He holds a Bachelor of Technology in Artificial Intelligence and Data Science (2026).",
       "faqs": [
         {
           "q": "Where can I download the Shaunak Chorge resume?",
@@ -135,10 +135,10 @@
       "label": "Hire me"
     },
     "secondary": {
-      "label": "View work",
+      "label": "See projects",
       "href": "projects/"
     },
-    "line": "Select projects only, so each one gets my full attention"
+    "line": "Taking select freelance AI and backend projects"
   },
   "hero": {
     "headline_first": "Shaunak",
@@ -149,14 +149,14 @@
       "Python backend developer",
       "Computer vision builder"
     ],
-    "lede": "I am a freelance AI engineer in Mumbai. I build Artificial Intelligence (AI) chatbots that answer from your documents, computer vision tools and Python backend APIs. I do this next to my full-time job at Claptek Pvt Ltd.",
+    "lede": "I am a freelance AI engineer in Mumbai who builds chatbots that answer from your documents, computer vision tools and Python backends.",
     "freelance_line": "Taking select freelance AI and backend projects",
     "cta_primary": {
       "label": "Hire me",
       "href": "contact/"
     },
     "cta_secondary": {
-      "label": "View work",
+      "label": "See projects",
       "href": "projects/"
     },
     "code_snippet_file": "shaunak.py",
@@ -171,14 +171,14 @@
       "def start_project(idea):",
       "    for step in steps:",
       "        idea = do(step, idea)",
-      "    return idea  # a working product"
+      "    return idea  # live product"
     ]
   },
   "profile": {
     "name": "Shaunak Chorge",
     "tagline": "I turn AI models and messy workflows into software that actually runs.",
-    "summary_short": "Artificial Intelligence (AI) Engineer at Claptek Pvt Ltd in Mumbai, with a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026). I build trustworthy AI tools for audit and compliance software, and take select freelance projects: chatbots, computer vision, backend APIs and automation.",
-    "summary_long": "I am Shaunak, a software engineer who works mostly in Python on Artificial Intelligence (AI) and backend systems. I hold a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026). Today I am an AI Engineer at Claptek Pvt Ltd in Mumbai, where I build AI tools for audit and compliance software. One tool drafts findings and is not allowed to make things up. Another reads documents and points to its evidence. A third turns plain questions into database queries on a bank's own servers.\n\nBefore that, two internships showed me how real systems behave. At Osource Global I built backend APIs and document tools that use AI models running on company machines. At Shivohini Tech-AI I built AI chatbots for clients. Outside work I build whole projects myself. They include a chatbot that cites its sources or admits it does not know, and a backend that shows where each request slows down. I also built a scam-fighting AI with Prasanna Patil, plus speech and vision models inside small apps.\n\nAlongside my full-time job I take select freelance AI and backend projects. Need a chatbot, a document reader, a computer vision prototype or a Python backend built carefully? Reach me through the contact page, the fastest way to start.",
+    "summary_short": "Artificial Intelligence (AI) Engineer at Claptek Pvt Ltd in Mumbai, with a Bachelor of Technology in Artificial Intelligence and Data Science (2026). I build trustworthy AI tools for audit and compliance software, and take select freelance projects: chatbots, computer vision, backend APIs and automation.",
+    "summary_long": "I work mostly in Python on Artificial Intelligence (AI) and backend systems. My day job is building AI tools for audit and compliance software. One tool drafts findings and is not allowed to make things up. Another reads documents and points to its evidence. A third turns plain questions into database queries on a bank's own servers.\n\nBefore that, two internships showed me how real systems behave. At Osource Global I built backend APIs and document tools that use AI models running on company machines. At Shivohini Tech-AI I built AI chatbots for clients. Outside work I build whole projects myself. They include a chatbot that cites its sources or admits it does not know, and a backend that shows where each request slows down. I also built a scam-fighting AI with Prasanna Patil, plus speech and vision models inside small apps.\n\nNeed a chatbot, a document reader, a computer vision prototype or a Python backend built carefully? Reach me through the contact page, the fastest way to start.",
     "location": "Mumbai, India",
     "coords": {
       "lat": 19.076,
@@ -196,7 +196,7 @@
     "status_badge": {
       "text": "AI Engineer @ Claptek Pvt Ltd"
     },
-    "availability": "I take select freelance AI and backend projects alongside my full-time job as AI Engineer at Claptek Pvt Ltd. I am based in Mumbai and work remotely in Indian Standard Time (IST). The contact form or email is the fastest way to start.",
+    "availability": "I take select freelance AI and backend projects alongside my full-time job as AI Engineer at Claptek Pvt Ltd. I am based in Mumbai, India (IST). The contact form or email is the fastest way to start.",
     "freelance": {
       "line_short": "Taking select freelance AI and backend projects"
     },
@@ -204,13 +204,14 @@
     "title": "AI Engineer"
   },
   "about": {
-    "home_blurb": "I am Shaunak, an AI Engineer in Mumbai. I work mostly in Python on AI and backend systems, and I take select freelance projects alongside my full-time job.",
+    "home_blurb": "I work mostly in Python, building AI chatbots, computer vision tools and backend systems.",
     "whoami": {
       "prompt": "shaunak@mumbai:~/about",
       "script": "whoami.sh",
       "command": "whoami",
       "education": {
-        "degree": "Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026)",
+        "degree": "Bachelor of Technology in Artificial Intelligence and Data Science",
+        "year": "2026",
         "institution": "Dr. D. Y. Patil School of Science and Technology, DPU"
       },
       "focus": [
@@ -227,44 +228,16 @@
         "German",
         "French"
       ],
-      "now": "AI Engineer at Claptek Pvt Ltd"
+      "now": "AI Engineer at Claptek Pvt Ltd",
+      "now_full": "AI Engineer at Claptek Pvt Ltd, Mumbai, India",
+      "based": "Based in Mumbai, India (IST)"
     },
     "page": {
-      "how_i_work": [
-        {
-          "title": "Answers backed by evidence",
-          "detail": "Every answer should trace back to a source. I build the checks into the code, not only into the instructions given to the AI."
-        },
-        {
-          "title": "Measure first",
-          "detail": "Before improving anything, I build a way to measure it, such as a scoring test, a request ID or a set of known-correct answers."
-        },
-        {
-          "title": "Honest limits",
-          "detail": "I tell you how the data was split, where a result may not hold and what the numbers do not show."
-        },
-        {
-          "title": "Tested and documented",
-          "detail": "The main logic is tested, and every handover includes notes and a walkthrough."
-        }
-      ],
-      "stack_intro": "Tools I have used on the roles and projects on this site."
-    }
+      "stack_intro": "Tools I have used on the roles and projects on this site.",
+      "recognition": "Outside work, I have been first runner-up in coding contests and won my college's internal round of the Smart India Hackathon."
+    },
+    "home_prompt": "shaunak@portfolio:~/about"
   },
-  "stats": [
-    {
-      "id": "roles",
-      "label": "Industry roles"
-    },
-    {
-      "id": "podiums",
-      "label": "Contest and hackathon podium finishes"
-    },
-    {
-      "id": "projects",
-      "label": "Selected projects"
-    }
-  ],
   "services": [
     {
       "slug": "llm-apps-rag",
@@ -276,7 +249,7 @@
       "description": "Hire a freelance AI chatbot developer in Mumbai. Chatbots that answer from your own documents, show their sources and say \"I do not know\" when unsure.",
       "direct_answer": "As a freelance AI chatbot developer, I build Artificial Intelligence (AI) chatbots that answer from your own documents. Every answer shows its source, and when the documents do not contain the answer, the chatbot says so instead of guessing. The method is called RAG (retrieval-augmented generation). You receive a working service, a simple chat screen, tests and handover notes.",
       "intro": "Many chatbot demos break on the first question the documents do not cover. Mine check the evidence first, name the source they used and admit when they cannot find an answer.",
-      "blurb": "Chatbots that answer from your documents, show their sources and say so when they do not know.",
+      "blurb": "Chatbots that answer from your documents and show their sources.",
       "deliverables": [
         "A working chatbot service with clear instructions for connecting to it (an API)",
         "Your documents prepared so the chatbot finds the right passage",
@@ -311,7 +284,6 @@
       "tech": [
         "Python",
         "FastAPI",
-        "LangChain",
         "ChromaDB",
         "sentence-transformers",
         "AI model APIs (Groq, OpenAI)",
@@ -369,7 +341,7 @@
       "description": "Freelance document AI: tools that read PDFs and forms and pull out clean data, with a quote from the source for each fact and checks on AI drafts.",
       "direct_answer": "I build document data extraction with AI: tools that read PDFs, forms and reports and turn them into clean, checkable data. Every extracted fact links back to the exact quote in your document. When AI writes a draft, code checks it against the original notes. I measure accuracy on your own files.",
       "intro": "Audit and compliance teams do not need Artificial Intelligence (AI) that merely sounds right. They need answers they can check. I build tools where every result points to its evidence, and I test them on your own documents.",
-      "blurb": "Tools that read documents, draft text and answer data questions, with every result traceable to its evidence.",
+      "blurb": "Tools that read documents and turn them into checked data.",
       "deliverables": [
         "A service that reads your documents and returns clean, structured data",
         "Evidence links: each fact tied to the exact quote it came from",
@@ -428,7 +400,7 @@
         },
         {
           "q": "How accurate is AI data extraction from PDFs?",
-          "a": "I do not promise a number before I see your files. I build a scoring tool that compares the output with a small set of correct answers from your documents, then fix the mistakes it finds. On one database project, running the generated queries showed that simple scoring had overstated quality."
+          "a": "Accuracy is measured on your own files and reported clearly. I build a scoring tool that compares the output with a small set of correct answers from your documents, then fix the mistakes it finds. On one database project, running the generated queries gave the true quality figure."
         },
         {
           "q": "Can my documents stay on our own servers?",
@@ -461,7 +433,7 @@
       "description": "Hire a freelance FastAPI and Django developer in Mumbai. Python backend APIs with PostgreSQL, Docker, automated tests and logs for fast debugging.",
       "direct_answer": "Hire a FastAPI developer for the behind-the-scenes software (a backend API) that lets your website, app or Artificial Intelligence (AI) feature work with your data. I write it in Python with FastAPI or Django, store data in PostgreSQL and package it with Docker. I add automated tests and clear logs so problems can be found quickly.",
       "intro": "A good backend is boring to run. I focus on clear rules for how apps talk to it and honest error messages. I add enough logging that a slow or failing request can be explained without guessing.",
-      "blurb": "FastAPI and Django services with clear rules, automated tests and logs that make problems easy to find.",
+      "blurb": "FastAPI and Django services with automated tests and clear logs.",
       "deliverables": [
         "A backend API with documented endpoints, meaning the web addresses your app calls (FastAPI or Django REST Framework)",
         "A PostgreSQL database design, with scripts to update it safely",
@@ -473,7 +445,7 @@
       "process": [
         {
           "step": "Scope",
-          "detail": "We define the endpoints, the data and how errors are reported before any code is written."
+          "detail": "We define the endpoints, the data and how errors are reported before building starts."
         },
         {
           "step": "Build",
@@ -550,9 +522,9 @@
       "nav_label": "Computer vision",
       "title": "Computer Vision Development Services | Shaunak Chorge",
       "description": "Freelance computer vision developer in Mumbai. Tools that detect, count and classify things in photos and video with OpenCV, PyTorch and YOLOv8.",
-      "direct_answer": "I offer computer vision development services: software that finds, counts or sorts things in photos and video. Examples are crowd counting, spotting events in camera footage and matching faces. I tell you plainly how accurate it is, what it was tested on and where it can fail. I also deliver a small app or report your team can use.",
-      "intro": "Vision projects succeed or fail on the quality of the data and the testing, not on model names. I start from your footage or images, agree how success is measured and say plainly what the numbers do and do not show.",
-      "blurb": "Tools that detect, classify and monitor things in photos and video, tested honestly on your own data.",
+      "direct_answer": "I offer computer vision development services: software that finds, counts or sorts things in photos and video. Examples are crowd counting, spotting events in camera footage and matching faces. I measure how accurate it is on your own footage and report what it was tested on. I also deliver a small app or report your team can use.",
+      "intro": "Vision projects succeed or fail on the quality of the data and the testing, not on model names. I start from your footage or images, agree how success is measured and report what the numbers show.",
+      "blurb": "Tools that detect and monitor things in photos and video.",
       "deliverables": [
         "A detection or classification tool for your images or video",
         "Code that samples video frames and cleans them up first (OpenCV)",
@@ -572,7 +544,7 @@
         },
         {
           "step": "Evaluate",
-          "detail": "Accuracy measured on data the model has not seen, with the limits written down."
+          "detail": "Accuracy measured on data the model has not seen, with the data split stated."
         },
         {
           "step": "Package",
@@ -608,7 +580,7 @@
         },
         {
           "q": "How accurate is computer vision?",
-          "a": "I will not promise a number before I see your data. I measure on data the model has not seen and state exactly how it was split. My deepfake detector reports 74.16% on a random frame-level split, and says what that does not prove."
+          "a": "Accuracy is measured on a sample of your own footage first, using data the model has not seen. The result is reported clearly, together with the way the data was split. My deepfake detector reports 74.16% on a random frame-level split, so every figure states what it covers."
         },
         {
           "q": "How much does a computer vision project cost?",
@@ -642,14 +614,14 @@
       "h1": "Machine learning model development for speech, text and data",
       "nav_label": "Speech and machine learning",
       "title": "Machine Learning Model Development | Shaunak Chorge",
-      "description": "Freelance machine learning developer in Mumbai. Models that learn from audio, text or spreadsheet data, with honest accuracy figures and a small web app.",
-      "direct_answer": "I offer machine learning model development: models that learn from sound, text or spreadsheet data. Examples are detecting emotion in a voice clip, filtering spam messages and predicting prices. Each model comes with honest accuracy figures and a note on how it was tested. A small web app lets non-technical people try it themselves.",
+      "description": "Freelance machine learning developer in Mumbai. Models that learn from audio, text or spreadsheet data, with accuracy tested on your data and a web app.",
+      "direct_answer": "I offer machine learning model development: models that learn from sound, text or spreadsheet data. Examples are detecting emotion in a voice clip, filtering spam messages and predicting prices. Each model comes with accuracy measured on your own data and a note on how it was tested. A small web app lets non-technical people try it themselves.",
       "intro": "A model is only useful if people trust its numbers and can try it. I pair the training code with a clear results note and a small app, so results are easy to review and demonstrate.",
-      "blurb": "Models trained on audio and text, tested honestly and wrapped in small apps people can try.",
+      "blurb": "Models trained on audio and text, wrapped in small apps.",
       "deliverables": [
         "Data preparation and feature extraction (librosa for audio, word-frequency scoring for text, pandas for tables)",
         "Model training, with a comparison against a simple baseline",
-        "A results report that states how the data was split and what that limits",
+        "A results report that states how the data was split",
         "A Streamlit app: upload, record or paste, then see the result",
         "A saved model and a script that uses it",
         "A reproducible notebook and a README"
@@ -665,7 +637,7 @@
         },
         {
           "step": "Train and test",
-          "detail": "The stronger model, with the data split and its limits stated."
+          "detail": "The stronger model, with the data split stated."
         },
         {
           "step": "Package",
@@ -674,7 +646,7 @@
       ],
       "good_fit": [
         "Teams with labelled audio, text or spreadsheet data and a clear thing to predict",
-        "Projects that need a quick, honest proof of concept before investing further",
+        "Projects that need a quick proof of concept before investing further",
         "Students and researchers who want a documented, reproducible workflow"
       ],
       "tech": [
@@ -700,7 +672,7 @@
         },
         {
           "q": "How much data do I need to train a model?",
-          "a": "It depends on the task. Simple tasks with clear categories may need a few hundred labelled examples per category, while audio or images usually need thousands. I count your examples before training and tell you honestly if there are too few. A ready-made model can often reduce the amount you need."
+          "a": "It depends on the task. Simple tasks with clear categories may need a few hundred labelled examples per category, while audio or images usually need thousands. I count your examples before training and tell you early if there are too few. A ready-made model can often reduce the amount you need."
         },
         {
           "q": "Can you classify my own audio or text data?",
@@ -708,7 +680,7 @@
         },
         {
           "q": "How do you report accuracy?",
-          "a": "With the data split stated. My speech emotion model reaches 93.87% on a random 20% test split. I also say that altered copies of one clip can land on both sides, so it does not prove the model works on new speakers."
+          "a": "Every figure comes with the data split it was measured on. My speech emotion model reaches 93.87% on a random 20% test split. On your own recordings, accuracy is measured and reported the same way, including tests on speakers the model has not heard."
         },
         {
           "q": "Do you use ready-made models?",
@@ -733,7 +705,7 @@
       "description": "Freelance Python automation in Mumbai: web scrapers, Telegram and WhatsApp bots and tool-to-tool links, with background jobs, error handling and logs.",
       "direct_answer": "I offer Python automation services for repetitive work: web scrapers that save clean tables, Telegram and WhatsApp bots, and links between your tools. Slow jobs run in the background so replies stay quick. Every automation includes error handling and logs, so you can see what happened if something goes wrong.",
       "intro": "Repetitive copy-and-paste work, manual replies and spreadsheet chores are good candidates for a small, reliable script or bot. I build them with input checks, logging and clear setup notes, so they keep working.",
-      "blurb": "Scrapers, bots and messaging links that take repetitive work off your team.",
+      "blurb": "Scrapers and bots that take repetitive work off your team.",
       "deliverables": [
         "A scraper or data flow that exports to CSV, a database or an API",
         "A Telegram or WhatsApp bot with checked, step-by-step conversations",
@@ -828,7 +800,6 @@
       "Git",
       "AI model APIs (Groq, OpenAI)",
       "RAG (answers from documents)",
-      "LangChain",
       "ChromaDB",
       "pandas",
       "Streamlit"
@@ -883,7 +854,107 @@
         "title": "Also work with",
         "caption": "Other tools I have used across these projects and roles."
       }
-    }
+    },
+    "ribbon": [
+      {
+        "name": "Python",
+        "tone": "cyan",
+        "daily": true
+      },
+      {
+        "name": "FastAPI",
+        "tone": "blue",
+        "daily": true
+      },
+      {
+        "name": "PostgreSQL",
+        "tone": "blue",
+        "daily": true
+      },
+      {
+        "name": "Docker",
+        "tone": "blue",
+        "daily": true
+      },
+      {
+        "name": "Git",
+        "tone": "blue",
+        "daily": true
+      },
+      {
+        "name": "AI model APIs (Groq, OpenAI)",
+        "tone": "cyan",
+        "daily": true
+      },
+      {
+        "name": "RAG (answers from documents)",
+        "tone": "cyan",
+        "daily": true
+      },
+      {
+        "name": "ChromaDB",
+        "tone": "cyan",
+        "daily": true
+      },
+      {
+        "name": "pandas",
+        "tone": "purple",
+        "daily": true
+      },
+      {
+        "name": "Streamlit",
+        "tone": "purple",
+        "daily": true
+      },
+      {
+        "name": "Django",
+        "tone": "blue"
+      },
+      {
+        "name": "Pydantic",
+        "tone": "blue"
+      },
+      {
+        "name": "pytest",
+        "tone": "blue"
+      },
+      {
+        "name": "Redis",
+        "tone": "blue"
+      },
+      {
+        "name": "React",
+        "tone": "blue"
+      },
+      {
+        "name": "scikit-learn",
+        "tone": "purple"
+      },
+      {
+        "name": "PyTorch",
+        "tone": "purple"
+      },
+      {
+        "name": "TensorFlow / Keras",
+        "tone": "purple"
+      },
+      {
+        "name": "librosa",
+        "tone": "purple"
+      },
+      {
+        "name": "OpenCV",
+        "tone": "magenta"
+      },
+      {
+        "name": "YOLOv8",
+        "tone": "magenta"
+      },
+      {
+        "name": "Local AI models (Ollama, vLLM)",
+        "tone": "cyan"
+      }
+    ]
   },
   "project_filters": [
     {
@@ -909,10 +980,6 @@
     {
       "id": "automation",
       "label": "Automation"
-    },
-    {
-      "id": "web-tools",
-      "label": "Web, tools and games"
     }
   ],
   "projects": [
@@ -934,7 +1001,7 @@
       ],
       "repo": null,
       "live": null,
-      "status": "Private enterprise repo",
+      "status": "Private client repo",
       "role": "Sole engineer at Claptek. I built it end to end. That covers the data formats, the drafting process, the safety checks, bulk mode and the connection to the client's Java and React product.",
       "stack": [
         "Python",
@@ -1047,7 +1114,7 @@
           "a": "The method is not specific to audit. It finds relevant evidence, uses an AI model hosted on your own machines and checks the output in code. I would first test it on a sample of your own documents to see how well it holds."
         }
       ],
-      "source_count": 2
+      "origin": "Client"
     },
     {
       "collaborators": [],
@@ -1067,7 +1134,7 @@
       ],
       "repo": null,
       "live": null,
-      "status": "Private enterprise repo",
+      "status": "Private client repo",
       "role": "Primary engineer at Claptek. I wrote nearly all of the code; one colleague helped scope the early intake step.",
       "stack": [
         "Python",
@@ -1183,8 +1250,8 @@
           "a": "No. It is not tied to one domain. The same process has read environmental permits, banking master directions, Basel III circulars and KYC rules without any domain-specific code. A new client could bring their own documents, though I would first check results on a sample."
         }
       ],
-      "source_count": 2,
-      "visual_variant": "generic-obligation-management-system"
+      "visual_variant": "generic-obligation-management-system",
+      "origin": "Client"
     },
     {
       "collaborators": [
@@ -1206,7 +1273,7 @@
       ],
       "repo": null,
       "live": null,
-      "status": "Private enterprise repo",
+      "status": "Private client repo",
       "role": "A focused part of a two-person team at Claptek. I built the accuracy test and the self-correction loop. My teammate built the table search, the query safety guard and the test data.",
       "stack": [
         "Python",
@@ -1233,7 +1300,7 @@
       ],
       "case_study": {
         "summary": "This text-to-SQL LLM (AI language model) assistant at Claptek runs on the bank's own servers. It turns plain-language reporting questions into working Oracle database queries (SQL) over a large core-banking database. My part was the accuracy measurement and the self-correction loop.",
-        "problem": "Simple scoring said the query writer was about 93% good. Actually running its queries showed the honest figure was close to zero.",
+        "problem": "Simple scoring said the query writer was about 93% good. Actually running its queries showed the true figure was close to zero.",
         "approach": "I built the measurement first: a test that runs each generated query and compares the returned rows with a known-correct query. Then I added a retry loop, limited to two passes, that shows the AI the real error and asks for a fix. The client allowed no larger model and no retraining.",
         "architecture": [
           "Search over a 1,628-table core-banking database to find the right tables (built by my teammate)",
@@ -1246,7 +1313,7 @@
         "results": [
           "Accounts found rose from 34% to 54%, and the correct share of results from 19% to 27%, with no model change and no retraining",
           "100% of 40 held-out test queries were valid against the live database layout",
-          "Simple scoring had suggested about 93% quality. Running the queries showed the honest number was far lower, which is why the accuracy test came first"
+          "Simple scoring had suggested about 93% quality. Running the queries showed the true number was far lower, which is why the accuracy test came first"
         ],
         "seo": {
           "title": "Text to SQL with an LLM for Banking | Shaunak Chorge",
@@ -1322,7 +1389,7 @@
           "a": "No. The assistant runs fully on the bank's own servers, so no data, prompt or usage record leaves the machine. The AI model is hosted there too, so no online AI service is involved. For a new client, we would first check that your servers are strong enough to run the model."
         }
       ],
-      "source_count": 2
+      "origin": "Client"
     },
     {
       "collaborators": [],
@@ -1347,11 +1414,11 @@
       "tagline": "Cited answers, or an honest \"not found\".",
       "category": "AI chatbot",
       "status": "Public repo | take-home prototype",
+      "origin": "Personal",
       "description_short": "A chatbot (FastAPI, ChromaDB, Groq) that answers from six sample healthcare policies, cites its source and confidence, and refuses out-of-scope questions.",
       "stack": [
         "Python",
         "FastAPI",
-        "LangChain",
         "ChromaDB",
         "sentence-transformers",
         "Groq",
@@ -1470,8 +1537,7 @@
           "q": "Does it use real patient data?",
           "a": "No. It is a prototype built on six made-up policy documents and uses no real patient data. A real deployment would need your own documents, a privacy and legal review, and proper testing with the staff who will use it."
         }
-      ],
-      "source_count": 6
+      ]
     },
     {
       "collaborators": [
@@ -1498,6 +1564,7 @@
       "tagline": "An Artificial Intelligence (AI) victim that keeps scammers talking and takes notes.",
       "category": "AI agent",
       "status": "Public repo | team hackathon build",
+      "origin": "Academic",
       "description_short": "A counter-scam system: an AI plays an easily fooled target, keeps scammers talking and records the UPI payment IDs, links and phone numbers they reveal.",
       "stack": [
         "Python",
@@ -1612,8 +1679,7 @@
           "q": "How well does it resist prompt injection?",
           "a": "It has a keyword filter and a request limiter. That is a first line of defence, not a complete solution, because a determined attacker can word a trick in ways a keyword list misses. A client project would add a proper test suite of attack attempts."
         }
-      ],
-      "source_count": 4
+      ]
     },
     {
       "collaborators": [
@@ -1749,7 +1815,7 @@
           "a": "No. It was a team project, co-built with Prasanna Patil for the Smart India Hackathon, and I describe it that way. I was a member of the team and I do not claim sole credit for any module. It won the college's internal round of the hackathon."
         }
       ],
-      "source_count": 5
+      "origin": "Academic"
     },
     {
       "collaborators": [],
@@ -1823,7 +1889,7 @@
         "h2": {
           "story": "The problem: finding the mood in a voice",
           "arch": "Four public datasets, seven emotions",
-          "results": "Results and an honest test note",
+          "results": "Results and a test note",
           "ext": "What I can add for your recordings",
           "faq": "Questions about emotion recognition"
         }
@@ -1873,10 +1939,10 @@
         },
         {
           "q": "Can it work with my own recordings?",
-          "a": "It can be retrained on your recordings if they are labelled with the emotions you care about. Quality depends on the microphone, the language and the number of speakers. I would first test it on a sample of your audio and tell you honestly how well it holds."
+          "a": "It can be retrained on your recordings if they are labelled with the emotions you care about. Quality depends on the microphone, the language and the number of speakers. I would first test it on a sample of your audio and report how well it holds."
         }
       ],
-      "source_count": 7
+      "origin": "Personal"
     },
     {
       "collaborators": [
@@ -1943,7 +2009,7 @@
         "h2": {
           "story": "The problem: telling real video from fake",
           "arch": "How each frame gets a verdict",
-          "results": "Honest accuracy and limits",
+          "results": "Accuracy and test notes",
           "ext": "What I can add for your videos",
           "faq": "Questions about deepfake detection"
         }
@@ -2008,7 +2074,7 @@
           "a": "A three-person college team: Prasanna Patil, a classmate and me. The repository is published from my account. The team's report does not record who did which part, so I describe it as shared work rather than claiming a particular module as mine."
         }
       ],
-      "source_count": 5
+      "origin": "Academic"
     },
     {
       "collaborators": [],
@@ -2030,10 +2096,11 @@
       "live": null,
       "id": "observable-ai-backend",
       "title": "Traceable AI Backend",
-      "tagline": "An API, routed by Artificial Intelligence (AI), that you can debug from the outside.",
+      "tagline": "An AI server you can debug from the outside, with LLM observability built in.",
       "category": "AI and backend",
       "status": "Private repo | job-application task",
-      "description_short": "A FastAPI service where an AI picks the right business action for each question, with request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger.",
+      "origin": "Personal",
+      "description_short": "A FastAPI AI server where an AI picks the right business action for each question, with request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger for large language model (LLM) observability.",
       "stack": [
         "Python",
         "FastAPI",
@@ -2046,9 +2113,9 @@
         "Docker Compose",
         "pytest"
       ],
-      "role": "Sole author. Built with AI assistance (Claude Code); design decisions and the options I rejected are logged in the repository.",
+      "role": "Sole author. Design decisions and the options I rejected are logged in the repository.",
       "visual_hint": "network",
-      "card_blurb": "An AI-routed backend that shows exactly where each request goes and where it slows down, with request IDs, metrics and traces.",
+      "card_blurb": "An AI server that shows exactly where each request goes and where it slows down, with request IDs, metrics and traces for LLM observability.",
       "category_group": "backend",
       "tone": "blue",
       "slug": "observable-ai-backend",
@@ -2057,11 +2124,11 @@
         "llm-apps-rag"
       ],
       "case_study": {
-        "summary": "This FastAPI OpenTelemetry tracing project is a service where an AI picks one of three business actions for each question. A request ID follows every call through logs, metrics and traces (viewed in Jaeger). This means a slow or failing call can be explained from the outside.",
-        "problem": "An AI endpoint can return a success code and still be slow, degraded or quietly switching to another model. You only find out when users complain.",
+        "summary": "This FastAPI OpenTelemetry tracing project is an AI server with LLM (large language model) observability built in. A request ID follows every call through logs, metrics and traces (viewed in Jaeger). This means a slow or failing call can be explained from the outside.",
+        "problem": "An AI server can return a success code and still be slow, degraded or quietly switching to another model. You only find out when users complain.",
         "approach": "One request ID is stamped on every log line and trace step of a request. Simple, hand-written metrics count requests, AI response time, tokens used (the small pieces of text an AI is billed by) and model fallbacks. Three Groq models are chained with a time limit each and a clear \"degraded\" flag, so a silent fallback becomes visible.",
         "architecture": [
-          "An /ask endpoint (a web address the app answers on) where an AI picks one of three business actions. These are looking up tickets, creating a ticket and running a sales report. The AI then summarises the result",
+          "An AI server with an /ask endpoint (a web address the app answers on) where an AI picks one of three business actions. These are looking up tickets, creating a ticket and running a sales report. The AI then summarises the result",
           "A chain of three Groq models, each with a time limit and an explicit \"degraded\" flag",
           "One request ID on every log line and trace step",
           "Hand-written Prometheus metrics for requests, AI response time, tokens and model fallbacks",
@@ -2076,11 +2143,11 @@
         ],
         "seo": {
           "title": "FastAPI OpenTelemetry Tracing Example | Shaunak Chorge",
-          "description": "Case study: a FastAPI service where an AI picks the right business action, with request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger.",
+          "description": "Case study: a FastAPI AI server with LLM observability: request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger.",
           "h1": "FastAPI OpenTelemetry tracing for an AI backend"
         },
         "h2": {
-          "story": "The problem: AI services that are hard to debug",
+          "story": "The problem: AI servers that are hard to debug",
           "arch": "Request IDs, metrics and traces",
           "results": "A slow step found in a trace",
           "ext": "What this adds to your backend",
@@ -2131,7 +2198,7 @@
       "faq": [
         {
           "q": "What is observability in a FastAPI app?",
-          "a": "Observability means you can tell what a running app is doing from the outside, using logs, metrics and traces. In this FastAPI service a request ID is stamped on every log line and trace step. Prometheus metrics count requests and AI response time. OpenTelemetry traces in Jaeger show where each request spent its time."
+          "a": "Observability means you can tell what a running app is doing from the outside, using logs, metrics and traces. For an AI server this is called LLM observability. A request ID is stamped on every log line and trace step. Prometheus metrics count requests, AI response time and tokens. OpenTelemetry traces in Jaeger show where each request spent its time."
         },
         {
           "q": "Is this a production system?",
@@ -2141,8 +2208,7 @@
           "q": "Can it run without an AI key?",
           "a": "Yes. With no key set it falls back to a simple keyword router, which is how the 10 offline tests run. That also means anyone can run the project and its tests on a laptop without an account or internet."
         }
-      ],
-      "source_count": 7
+      ]
     },
     {
       "collaborators": [],
@@ -2171,7 +2237,7 @@
         "SQLite",
         "Django test runner"
       ],
-      "role": "Sole committer (4 commits). Planned with Claude and built with Google's Antigravity coding agent; I set the input-validation rules, fixed a settings mistake and saved the test log. AI_USAGE.md in the repository records what was accepted, rejected and checked.",
+      "role": "Sole committer (4 commits). I set the input-validation rules, fixed a settings mistake and saved the test log.",
       "visual_hint": "bars",
       "card_blurb": "Give it an order and this Django API picks the fewest, cheapest shipping boxes. It tries every rotation, and 27 tests pass.",
       "category_group": "backend",
@@ -2180,14 +2246,14 @@
       "service_tags": [
         "python-backend-apis"
       ],
-      "source_count": 6
+      "personal_line": "A Django API that recommends the fewest, cheapest shipping boxes for an order."
     },
     {
       "collaborators": [],
       "metrics": [],
       "repo": null,
       "live": null,
-      "status": "Private enterprise repo",
+      "status": "Private client repo",
       "role": "Built during my AI and Machine Learning internship at Shivohini Tech-AI, for a client.",
       "stack": [
         "Python",
@@ -2206,7 +2272,7 @@
       "title": "WhatsApp Automation and AI Agent Platform",
       "tagline": "AI agents that reply on WhatsApp without keeping customers waiting.",
       "category": "Automation",
-      "card_blurb": "A client WhatsApp platform: AI replies run in the background, each chat is tracked and human operators get alerts.",
+      "card_blurb": "AI replies run in the background, every chat is tracked and human operators get alerts.",
       "description_short": "A client platform that receives WhatsApp messages, tracks each conversation and replies through AI agents in the background.",
       "slug": "whatsapp-ai-agent-platform",
       "service_tags": [
@@ -2214,7 +2280,7 @@
         "python-backend-apis",
         "llm-apps-rag"
       ],
-      "source_count": 1
+      "origin": "Client"
     },
     {
       "collaborators": [],
@@ -2235,6 +2301,7 @@
       "tagline": "A spam filter with zero false alarms on its test set.",
       "category": "Natural language",
       "status": "Public repo | internship project",
+      "origin": "Academic",
       "description_short": "A spam detector using NLTK, TF-IDF and Naive Bayes: 97.1% accuracy and 100% precision on 1,034 test messages, in a Streamlit app.",
       "stack": [
         "Python",
@@ -2254,8 +2321,7 @@
       "slug": "spam-classifier",
       "service_tags": [
         "speech-nlp-ml"
-      ],
-      "source_count": 5
+      ]
     },
     {
       "collaborators": [],
@@ -2296,7 +2362,7 @@
       "service_tags": [
         "speech-nlp-ml"
       ],
-      "source_count": 4
+      "personal_line": "Predicts house prices from eight features and compares models."
     },
     {
       "collaborators": [],
@@ -2331,7 +2397,7 @@
       "service_tags": [
         "computer-vision"
       ],
-      "source_count": 2
+      "personal_line": "Basic image steps, then object detection with YOLOv8 on video frames."
     },
     {
       "collaborators": [],
@@ -2360,7 +2426,7 @@
       "service_tags": [
         "automation-integrations"
       ],
-      "source_count": 4
+      "personal_line": "Collects product names, prices and links from an online store into a table."
     },
     {
       "collaborators": [],
@@ -2393,7 +2459,7 @@
       "service_tags": [
         "automation-integrations"
       ],
-      "source_count": 4
+      "personal_line": "A Telegram bot that returns the daily horoscope for a sign and date."
     },
     {
       "collaborators": [],
@@ -2429,7 +2495,7 @@
       "service_tags": [
         "speech-nlp-ml"
       ],
-      "source_count": 3
+      "personal_line": "Predicts insurance costs from patient records with linear regression."
     },
     {
       "collaborators": [],
@@ -2460,7 +2526,7 @@
       "tone": "blue",
       "slug": "atm-simulator",
       "service_tags": [],
-      "source_count": 3
+      "personal_line": "A Java desktop ATM backed by a MySQL database."
     },
     {
       "collaborators": [],
@@ -2486,7 +2552,7 @@
       "tone": "blue",
       "slug": "qr-code-generator",
       "service_tags": [],
-      "source_count": 3
+      "personal_line": "Turns short text or a link into a scannable QR code."
     },
     {
       "collaborators": [],
@@ -2516,7 +2582,7 @@
       "tone": "blue",
       "slug": "quiz-game-c",
       "service_tags": [],
-      "source_count": 4
+      "personal_line": "A console quiz in C with accounts and a saved leaderboard."
     },
     {
       "collaborators": [],
@@ -2546,7 +2612,7 @@
       "tone": "blue",
       "slug": "tetris-raylib-cpp",
       "service_tags": [],
-      "source_count": 3
+      "personal_line": "Tetris in C++ with the raylib library."
     },
     {
       "collaborators": [],
@@ -2571,7 +2637,7 @@
       "tone": "blue",
       "slug": "password-generator",
       "service_tags": [],
-      "source_count": 3
+      "personal_line": "Generates random passwords of a chosen length."
     }
   ],
   "experience": [
@@ -2585,7 +2651,7 @@
         "Made it about 28 times faster (7.9 minutes down to 16.9 seconds). I found hidden extra processing in how the system called the AI models and compared four candidate models, with accuracy unchanged.",
         "Built a service that reads regulatory documents and lists the obligations in them. 97.2% of 1,266 production records link to the exact, highlightable passage in the source PDF.",
         "On an assistant that turns plain questions into database queries for core-banking reports, I built the accuracy test and a self-correction step. It runs on the bank's own servers. Account recall rose from 34% to 54% with no change of AI model and no retraining.",
-        "Developing monitoring for the AI servers: resource use, service status and alerts."
+        "Added resource use, service status and alerts to the LLM observability of the AI servers."
       ],
       "tags": [
         "Python",
@@ -2735,7 +2801,8 @@
   "education": [
     {
       "institution": "Dr. D. Y. Patil School of Science and Technology, DPU",
-      "degree": "Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026)",
+      "degree": "Bachelor of Technology in Artificial Intelligence and Data Science",
+      "year": "2026",
       "period": "Four-year degree programme",
       "coursework": [
         "Machine Learning",
@@ -2820,17 +2887,17 @@
         {
           "id": "fulltime",
           "q": "Can I hire an AI engineer who also has a full-time job?",
-          "a": "Yes. I work as an AI Engineer at Claptek Pvt Ltd and take select freelance AI and backend projects alongside that job. I keep the number of clients small so each project gets proper attention. I am upfront about scope and timelines before we agree to work together."
+          "a": "Yes. I am an AI Engineer at Claptek Pvt Ltd and take select freelance AI and backend projects alongside that job. We agree scope and timelines before work begins, and you get regular progress updates and clear advice on what will work best for your idea."
         },
         {
           "id": "freelance",
           "q": "Do you take on freelance projects?",
-          "a": "Yes, a small number at a time. To start, send a short brief through the contact form or by email. I reply with any questions and a first view of scope and timeline. Nothing is built until we agree the plan in writing. I work remotely from Mumbai."
+          "a": "Yes. Send a short brief through the contact form or by email. I reply with questions and a first view of scope and timeline, and we agree the plan before work begins. I can take on projects of any size, from small fixes to large builds."
         },
         {
           "id": "what-i-build",
           "q": "What kinds of projects do you build?",
-          "a": "I build AI chatbots that answer from your documents, tools that read and extract data from documents, and Python backend APIs. I also build computer vision, speech and text models, and automation such as web scrapers and Telegram or WhatsApp bots. Each area has its own page under Services, with examples of real work."
+          "a": "I build AI chatbots that answer from your documents, tools that extract data from documents and Python backend APIs. I also build computer vision, speech and text models, and automation such as scrapers and Telegram or WhatsApp bots. Each area has its own page under Services."
         }
       ]
     },
@@ -2846,7 +2913,7 @@
         {
           "id": "how-to-start",
           "q": "How do we start?",
-          "a": "Send a short brief through the contact form or by email, as a few lines or a longer note. I read it, then reply with my view on feasibility and a proposed scope. We agree on both before I write any code."
+          "a": "Send a short brief through the contact form or by email, as a few lines or a longer note. I read it, then reply with my view on feasibility and a proposed scope. We agree on both, and on a suitable deadline, before work begins."
         }
       ]
     },
@@ -2861,7 +2928,7 @@
         {
           "id": "stack",
           "q": "Which tools do you use?",
-          "a": "I work mostly in Python. For web services I use FastAPI and PostgreSQL, packaged with Docker (so it runs the same on any server). For AI I use services such as Groq and OpenAI, plus LangChain and ChromaDB for document chatbots. For vision and speech I use OpenCV, PyTorch and TensorFlow. The full list is on the About page."
+          "a": "I work mostly in Python. For web services I use FastAPI and PostgreSQL, packaged with Docker (so it runs the same on any server). For AI I use services such as Groq and OpenAI, plus ChromaDB for document chatbots. For vision and speech I use OpenCV, PyTorch and TensorFlow. The full list is on the About page."
         },
         {
           "id": "local-models",
@@ -2886,12 +2953,12 @@
         {
           "id": "process",
           "q": "What does a project look like from start to finish?",
-          "a": "Four steps. First we agree on the problem and how success will be measured. Then I build a small working prototype on your data. Next I add tests and safety checks. Finally I hand over notes and a walkthrough. You see working software early and get short written updates along the way."
+          "a": "First we agree on the problem and how success will be measured. Then I build a small working prototype on your data. Next I add tests and safety checks. Finally I hand over notes and a walkthrough. You see working software early and get short written updates along the way."
         },
         {
           "id": "location",
           "q": "What time zone does a Mumbai freelance AI developer work in?",
-          "a": "I am based in Mumbai, India, and work in Indian Standard Time (IST, UTC+5:30). I work remotely, using written updates and shared code reviews. We can agree meeting times that overlap with your working day. A past remote internship taught me how to keep distant teams in sync."
+          "a": "I am based in Mumbai, India, and work in Indian Standard Time (IST, UTC+5:30). I share written updates and code reviews, so you can always see where the work stands. We can agree meeting times that overlap with your working day. Earlier internships taught me how to keep distant teams in sync."
         }
       ]
     },
@@ -2906,7 +2973,7 @@
         {
           "id": "timeline",
           "q": "How long does a freelance AI project take?",
-          "a": "It depends on the size of the project. After reading your brief, I give a written estimate for each step. A small prototype is much quicker than a full product. I would rather give you an honest range than promise a date I cannot keep."
+          "a": "It depends on the size of the project. After reading your brief, I give a written estimate for each step. A small prototype is much quicker than a full product. I give you a clear range, and we agree dates in writing before work begins."
         }
       ]
     },
@@ -2920,5 +2987,13 @@
         }
       ]
     }
-  ]
+  ],
+  "how_i_work": {
+    "title": "How I work",
+    "lines": [
+      "I can take on projects of any size, from small fixes to large builds, and we start with a clear discussion of what you need.",
+      "We agree the plan and a suitable deadline together after a thorough conversation, before any work begins.",
+      "You get regular progress updates and clear advice on what will work best for your idea."
+    ]
+  }
 }

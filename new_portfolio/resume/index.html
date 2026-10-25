@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../assets/dist/site.inner.min.css?v=fcec523d">
+  <link rel="stylesheet" href="../assets/dist/site.inner.min.css?v=99f76e8a">
 
 <script type="application/ld+json">
 {
@@ -151,22 +151,17 @@
 
         <nav class="nav" aria-label="Primary">
           <ul class="nav__list">
-            <li><a class="nav__link" href="../">Home</a></li>
             <li><a class="nav__link" href="../projects/">Projects</a></li>
             <li><a class="nav__link" href="../services/">Services</a></li>
             <li><a class="nav__link" href="../about/">About</a></li>
-            <li><a class="nav__link" href="../faq/">FAQ</a></li>
-            <li><a class="nav__link" href="../contact/">Contact</a></li>
+            <li><a class="nav__link" href="../resume/" aria-current="page">Resume</a></li>
           </ul>
           <span class="nav__ind" aria-hidden="true"></span>
         </nav>
 
         <div class="site-header__tools">
-          <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST" title="Local time in Mumbai">MUMBAI</span>
-          <button class="cmd" type="button" data-open-palette aria-label="Search, open command palette" aria-keyshortcuts="Control+K Meta+K">
+          <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
-            <span class="cmd__text">Search</span>
-            <kbd class="kbd" data-kbd aria-hidden="true">Ctrl K</kbd>
           </button>
           <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
@@ -179,10 +174,10 @@
 
   <nav class="drawer" id="drawer" aria-label="Mobile">
     <ul class="drawer__list">
-      <li><a class="drawer__link" href="../" style="--i:0"><small>01</small>Home</a></li>
-      <li><a class="drawer__link" href="../projects/" style="--i:1"><small>02</small>Projects</a></li>
-      <li><a class="drawer__link" href="../services/" style="--i:2"><small>03</small>Services</a></li>
-      <li><a class="drawer__link" href="../about/" style="--i:3"><small>04</small>About</a></li>
+      <li><a class="drawer__link" href="../projects/" style="--i:0"><small>01</small>Projects</a></li>
+      <li><a class="drawer__link" href="../services/" style="--i:1"><small>02</small>Services</a></li>
+      <li><a class="drawer__link" href="../about/" style="--i:2"><small>03</small>About</a></li>
+      <li><a class="drawer__link" href="../resume/" aria-current="page" style="--i:3"><small>04</small>Resume</a></li>
       <li><a class="drawer__link" href="../faq/" style="--i:4"><small>05</small>FAQ</a></li>
       <li><a class="drawer__link" href="../contact/" style="--i:5"><small>06</small>Contact</a></li>
     </ul>
@@ -192,7 +187,6 @@
       <a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a>
       <a class="icon-btn" href="mailto:shaunak.chorge@gmail.com" aria-label="Email Shaunak"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
       <button type="button" class="btn btn--ghost btn--sm drawer__motion" data-motion-toggle aria-pressed="false" hidden><svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-pause"/></svg> Pause effects</button>
-      <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST">MUMBAI</span>
     </div>
   </nav>
 
@@ -206,8 +200,8 @@
       <div class="pg-head__main">
         <p class="eyebrow">Resume</p>
         <h1 class="pg-h1">Shaunak Chorge resume: <span class="ai">AI</span> Engineer</h1>
-        <p class="pg-lead">Experience, education, certifications and awards. A PDF copy is available to download.</p>
-        <p class="pg-answer" data-answer>This Shaunak Chorge resume covers his work as an AI Engineer at Claptek Pvt Ltd in Mumbai. It also covers his earlier roles at Osource Global and Shivohini Tech-AI, his education, certifications and awards. A PDF copy is available to download. He holds a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026).</p>
+        
+        <p class="pg-answer" data-answer>This Shaunak Chorge resume covers his work as an AI Engineer at Claptek Pvt Ltd in Mumbai. It also covers his earlier roles at Osource Global and Shivohini Tech-AI, his education, certifications and awards. A PDF copy is available to download. He holds a Bachelor of Technology in Artificial Intelligence and Data Science (2026).</p>
         <div class="pg-actions"><a class="btn btn--solid btn--lg btn--glow" href="../assets/Shaunak-Chorge-Resume.pdf" download="Shaunak-Chorge-Resume.pdf">Download PDF <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-download"/></svg></a><a class="btn btn--ghost btn--lg" href="../contact/#hire">Hire me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
       </div>
       
@@ -222,7 +216,7 @@
     </header>
 <div class="pg-jobs"><article class="pg-job" data-tone="cyan" data-reveal>
         <header class="pg-job__head"><h3 class="pg-job__t"><span class="ai">AI</span> Engineer</h3><p class="pg-job__org">Claptek Pvt Ltd</p><p class="pg-job__meta">Jul 2026 - Present &middot; Mumbai, India</p></header>
-        <ul class="dot-list pg-job__list" data-tone="cyan"><li>Sole engineer on an AI service that drafts audit findings from short checklist notes. It writes three versions of each finding, drafts whole spreadsheets in one go and builds summary reports. Code-level checks reject any draft that invents a figure, date or owner. The client's audit product adopted it the day after handover.</li><li>Made it about 28 times faster (7.9 minutes down to 16.9 seconds). I found hidden extra processing in how the system called the AI models and compared four candidate models, with accuracy unchanged.</li><li>Built a service that reads regulatory documents and lists the obligations in them. 97.2% of 1,266 production records link to the exact, highlightable passage in the source PDF.</li><li>On an assistant that turns plain questions into database queries for core-banking reports, I built the accuracy test and a self-correction step. It runs on the bank's own servers. Account recall rose from 34% to 54% with no change of AI model and no retraining.</li><li>Developing monitoring for the AI servers: resource use, service status and alerts.</li></ul>
+        <ul class="dot-list pg-job__list" data-tone="cyan"><li>Sole engineer on an AI service that drafts audit findings from short checklist notes. It writes three versions of each finding, drafts whole spreadsheets in one go and builds summary reports. Code-level checks reject any draft that invents a figure, date or owner. The client's audit product adopted it the day after handover.</li><li>Made it about 28 times faster (7.9 minutes down to 16.9 seconds). I found hidden extra processing in how the system called the AI models and compared four candidate models, with accuracy unchanged.</li><li>Built a service that reads regulatory documents and lists the obligations in them. 97.2% of 1,266 production records link to the exact, highlightable passage in the source PDF.</li><li>On an assistant that turns plain questions into database queries for core-banking reports, I built the accuracy test and a self-correction step. It runs on the bank's own servers. Account recall rose from 34% to 54% with no change of AI model and no retraining.</li><li>Added resource use, service status and alerts to the LLM observability of the AI servers.</li></ul>
         <ul class="tags pg-job__tags" role="list" aria-label="Tools" data-tone="cyan"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Pydantic</li><li class="tag">Local AI models</li><li class="tag">RAG (answers from documents)</li><li class="tag">React</li></ul>
       </article><article class="pg-job" data-tone="blue" data-reveal>
         <header class="pg-job__head"><h3 class="pg-job__t">Python Automation Intern</h3><p class="pg-job__org">Osource Global Pvt. Ltd.</p><p class="pg-job__meta">Mar 2026 - Jun 2026 &middot; Mumbai, India</p></header>
@@ -233,10 +227,8 @@
         <ul class="dot-list pg-job__list" data-tone="purple"><li>Built and launched AI chatbots for clients using LLaMA, the OpenAI API and retrieval (answers drawn from stored documents).</li><li>Designed PostgreSQL and Supabase databases for chat history and user profiles, so bots can remember each conversation.</li><li>Designed conversation flows around what the customer wants, which reduced bot failures during complex bookings.</li><li>Built a WhatsApp automation and AI agent platform: it receives messages, tracks each user and replies in the background, using FastAPI, Redis and Celery.</li><li>Connected the Meta WhatsApp Business API and Twilio for operator alerts and automatic customer messages.</li></ul>
         <ul class="tags pg-job__tags" role="list" aria-label="Tools" data-tone="purple"><li class="tag">LLaMA</li><li class="tag">OpenAI API</li><li class="tag">RAG (answers from documents)</li><li class="tag">Supabase</li><li class="tag">PostgreSQL</li><li class="tag">Redis</li><li class="tag">Celery</li><li class="tag">FastAPI</li></ul>
       </article></div>
-    <details class="pg-morebox pg-morebox--sm" data-reveal>
-      <summary class="pg-morebox__sum"><span>Earlier internships and programmes (5)</span><svg class="icon pg-morebox__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <ul class="pg-more" role="list"><li class="pg-more__row"><div><p class="pg-more__t">AI and Data Analytics Green Skills Intern, Edunet</p><p class="pg-more__d">Jan 2025 - Feb 2025 &middot; Built a TensorFlow neural network that classifies plastic-waste images for recycling workflows.</p></div></li><li class="pg-more__row"><div><p class="pg-more__t">AI and Transformative Learning Intern, TechSaksham (AICTE internship, a Microsoft and SAP CSR initiative)</p><p class="pg-more__d">Dec 2024 - Jan 2025 &middot; Completed the AICTE internship on AI, delivered with TechSaksham. Built an SMS and email spam detector (NLTK, TF-IDF, Naive Bayes) with a Streamlit app and a formal project report.</p></div></li><li class="pg-more__row"><div><p class="pg-more__t">Python Automation Developer Intern, Osource India Pvt. Ltd.</p><p class="pg-more__d">Jul 2024 - Aug 2024</p></div></li><li class="pg-more__row"><div><p class="pg-more__t">Front-End Development Intern, IBM SkillsBuild</p><p class="pg-more__d">Jun 2024 - Jul 2024 &middot; Front-end development internship covering HTML, CSS and JavaScript. Published a static streaming-style web page on GitHub Pages as the internship project.</p></div></li><li class="pg-more__row"><div><p class="pg-more__t">AI and Python Intern, Academor</p><p class="pg-more__d">Jan 2023</p></div></li></ul>
-    </details>
+    <h3 class="pg-earlier" data-reveal>Earlier internships and programmes</h3>
+    <ul class="pg-builds" role="list" data-reveal><li class="pg-builds__row"><p class="pg-builds__t">AI and Data Analytics Green Skills Intern, Edunet</p><p class="pg-builds__d">Jan 2025 - Feb 2025 &middot; Built a TensorFlow neural network that classifies plastic-waste images for recycling workflows.</p></li><li class="pg-builds__row"><p class="pg-builds__t">AI and Transformative Learning Intern, TechSaksham (AICTE internship, a Microsoft and SAP CSR initiative)</p><p class="pg-builds__d">Dec 2024 - Jan 2025 &middot; Completed the AICTE internship on AI, delivered with TechSaksham. Built an SMS and email spam detector (NLTK, TF-IDF, Naive Bayes) with a Streamlit app and a formal project report.</p></li><li class="pg-builds__row"><p class="pg-builds__t">Python Automation Developer Intern, Osource India Pvt. Ltd.</p><p class="pg-builds__d">Jul 2024 - Aug 2024</p></li><li class="pg-builds__row"><p class="pg-builds__t">Front-End Development Intern, IBM SkillsBuild</p><p class="pg-builds__d">Jun 2024 - Jul 2024 &middot; Front-end development internship covering HTML, CSS and JavaScript. Published a static streaming-style web page on GitHub Pages as the internship project.</p></li><li class="pg-builds__row"><p class="pg-builds__t">AI and Python Intern, Academor</p><p class="pg-builds__d">Jan 2023</p></li></ul>
   </div>
 </section><section id="education" class="section pg-sec section--tint" aria-labelledby="education-h">
   <div class="container">
@@ -246,7 +238,7 @@
       
     </header>
 <div class="pg-two">
-      <div class="panel" data-tone="cyan" data-reveal><h3 class="pg-panel__h">Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026)</h3><p class="pg-plain__t">Dr. D. Y. Patil School of Science and Technology, DPU</p><p class="pg-plain__s">Four-year degree programme</p>
+      <div class="panel" data-tone="cyan" data-reveal><h3 class="pg-panel__h">Bachelor of Technology in Artificial Intelligence and Data Science, 2026</h3><p class="pg-plain__t">Dr. D. Y. Patil School of Science and Technology, DPU</p><p class="pg-plain__s">Four-year degree programme</p>
         <ul class="tags pg-cred__tags" role="list" aria-label="Coursework" data-tone="cyan"><li class="tag">Machine Learning</li><li class="tag">Software Engineering</li><li class="tag">Database Systems</li><li class="tag">Web Development</li><li class="tag">System Design</li></ul></div>
       <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h">Earlier schooling</h3>
         <ul class="pg-plain" role="list"><li><span class="pg-plain__t">Kishinchand Chellaram College</span><span class="pg-plain__s">Higher secondary education, Completed 2022</span></li><li><span class="pg-plain__t">Cumballa Hill High School</span><span class="pg-plain__s">Secondary school, Completed 2020</span></li></ul></div>
@@ -272,7 +264,7 @@
       
     </header>
 <div class="pg-tiers">
-      <div class="panel" data-tone="cyan" data-reveal><h3 class="pg-panel__h">Core stack</h3><p class="pg-panel__cap">What I reach for first on a new build.</p><ul class="tags pg-tier" role="list" aria-label="Core stack" data-tone="cyan"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">PostgreSQL</li><li class="tag">Docker</li><li class="tag">Git</li><li class="tag">AI model APIs (Groq, OpenAI)</li><li class="tag">RAG (answers from documents)</li><li class="tag">LangChain</li><li class="tag">ChromaDB</li><li class="tag">pandas</li><li class="tag">Streamlit</li></ul></div>
+      <div class="panel" data-tone="cyan" data-reveal><h3 class="pg-panel__h">Core stack</h3><p class="pg-panel__cap">What I reach for first on a new build.</p><ul class="tags pg-tier" role="list" aria-label="Core stack" data-tone="cyan"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">PostgreSQL</li><li class="tag">Docker</li><li class="tag">Git</li><li class="tag">AI model APIs (Groq, OpenAI)</li><li class="tag">RAG (answers from documents)</li><li class="tag">ChromaDB</li><li class="tag">pandas</li><li class="tag">Streamlit</li></ul></div>
       <div class="panel" data-tone="purple" data-reveal style="--i:1"><h3 class="pg-panel__h">Also work with</h3><p class="pg-panel__cap">Other tools I have used across these projects and roles.</p><ul class="tags pg-tier" role="list" aria-label="Also work with" data-tone="purple"><li class="tag tag--dim">Django</li><li class="tag tag--dim">Django REST Framework</li><li class="tag tag--dim">Pydantic</li><li class="tag tag--dim">pytest</li><li class="tag tag--dim">sentence-transformers</li><li class="tag tag--dim">Local AI models (Ollama, vLLM)</li><li class="tag tag--dim">PyMuPDF</li><li class="tag tag--dim">sqlglot</li><li class="tag tag--dim">Redis</li><li class="tag tag--dim">Celery</li><li class="tag tag--dim">WebSockets</li><li class="tag tag--dim">OpenTelemetry</li><li class="tag tag--dim">Prometheus</li><li class="tag tag--dim">Jaeger</li><li class="tag tag--dim">Supabase</li><li class="tag tag--dim">MongoDB</li><li class="tag tag--dim">MySQL</li><li class="tag tag--dim">SQL</li><li class="tag tag--dim">NumPy</li><li class="tag tag--dim">scikit-learn</li><li class="tag tag--dim">TensorFlow / Keras</li><li class="tag tag--dim">PyTorch</li><li class="tag tag--dim">OpenCV</li><li class="tag tag--dim">YOLOv8</li><li class="tag tag--dim">librosa</li><li class="tag tag--dim">NLTK</li><li class="tag tag--dim">Hugging Face Transformers</li><li class="tag tag--dim">React</li><li class="tag tag--dim">Vite</li><li class="tag tag--dim">Flask</li><li class="tag tag--dim">Twilio</li><li class="tag tag--dim">WhatsApp Cloud API (prototype)</li><li class="tag tag--dim">Telegram Bot API</li><li class="tag tag--dim">Requests</li><li class="tag tag--dim">BeautifulSoup</li><li class="tag tag--dim">JavaScript</li><li class="tag tag--dim">HTML / CSS</li><li class="tag tag--dim">Java</li><li class="tag tag--dim">C / C++</li></ul></div>
     </div>
   </div>
@@ -283,7 +275,7 @@
       <h2 id="projects-h" class="section__title">Projects <span class="hl hl--magenta">worth a read</span></h2>
       
     </header>
-<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../projects/ams-ai-finding-engine/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-folder"/></svg></span><span><strong>AI Audit Finding Drafting Engine</strong><span class="pg-rel__t">Turns short audit notes into three draft findings, with code that blocks any invented fact. Drafts whole spreadsheets in bulk.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../projects/ai-rag-healthcare-assistant/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-folder"/></svg></span><span><strong>Healthcare Policy Chatbot</strong><span class="pg-rel__t">A chatbot over healthcare policy documents that cites its source, or says it does not know.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../projects/observable-ai-backend/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-folder"/></svg></span><span><strong>Traceable AI Backend</strong><span class="pg-rel__t">An AI-routed backend that shows exactly where each request goes and where it slows down, with request IDs, metrics and traces.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../projects/agentic-honeypot/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-folder"/></svg></span><span><strong>Scam-Catching AI Honeypot</strong><span class="pg-rel__t">An AI plays an easily fooled victim, keeps scammers chatting and logs the payment IDs, links and phone numbers they reveal.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li></ul>
+<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../projects/ams-ai-finding-engine/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-folder"/></svg></span><span><strong>AI Audit Finding Drafting Engine</strong><span class="pg-rel__t">Turns short audit notes into three draft findings, with code that blocks any invented fact. Drafts whole spreadsheets in bulk.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../projects/ai-rag-healthcare-assistant/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-folder"/></svg></span><span><strong>Healthcare Policy Chatbot</strong><span class="pg-rel__t">A chatbot over healthcare policy documents that cites its source, or says it does not know.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../projects/observable-ai-backend/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-folder"/></svg></span><span><strong>Traceable AI Backend</strong><span class="pg-rel__t">An AI server that shows exactly where each request goes and where it slows down, with request IDs, metrics and traces for LLM observability.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../projects/agentic-honeypot/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-folder"/></svg></span><span><strong>Scam-Catching AI Honeypot</strong><span class="pg-rel__t">An AI plays an easily fooled victim, keeps scammers chatting and logs the payment IDs, links and phone numbers they reveal.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li></ul>
     <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../projects/">All projects <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../services/">Freelance services <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
   </div>
 </section><section id="faq" class="section pg-sec" aria-labelledby="faq-h">
@@ -309,7 +301,7 @@
       </div>
       <div class="pg-hire__act">
         <a class="btn btn--solid btn--lg btn--glow" href="../contact/#hire" data-magnetic>Hire me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
-        <p class="pg-hire__alt"><a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a><span aria-hidden="true"> &middot; </span><a class="link" href="../projects/">View work</a></p>
+        <p class="pg-hire__alt"><a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a><span aria-hidden="true"> &middot; </span><a class="link" href="../projects/">See projects</a></p>
       </div>
     </div>
   </div>
@@ -335,7 +327,7 @@
           <span class="logo__word">SHAUNAK</span>
         </p>
         <p class="footer__blurb">AI Engineer at Claptek Pvt Ltd. Taking select freelance AI and backend projects.</p>
-        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India &ndash; working remotely (IST)</p>
+        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India (IST)</p>
         <ul class="footer__soc" aria-label="Profiles">
           <li><a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a></li>
           <li><a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a></li>
@@ -352,9 +344,10 @@
             <li><a href="../projects/">Projects</a></li>
             <li><a href="../services/">Services</a></li>
             <li><a href="../about/">About</a></li>
+            <li><a href="../about/#experience">Experience</a></li>
+            <li><a href="../resume/">Resume</a></li>
             <li><a href="../faq/">FAQ</a></li>
             <li><a href="../contact/">Contact</a></li>
-            <li><a href="../resume/">Resume</a></li>
           </ul>
         </nav>
 
@@ -373,7 +366,7 @@
         <nav class="footer__col" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../projects/observable-ai-backend/">FastAPI tracing with OpenTelemetry</a></li>
+            <li><a href="../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
             <li><a href="../projects/agentic-honeypot/">AI scam honeypot</a></li>
             <li><a href="../projects/deepfake-video-detection/">Deepfake video detection</a></li>
@@ -451,10 +444,10 @@
     <symbol id="i-loader" viewBox="0 0 24 24"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/></symbol>
   </svg>
 
-  <script defer src="../assets/dist/js/core.min.js?v=53badac3"></script>
+  <script defer src="../assets/dist/js/core.min.js?v=d41b0d5b"></script>
   <script defer src="../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
   <script defer src="../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../assets/dist/js/fx.min.js?v=2e06fef0"></script>
-  <script defer src="../assets/dist/js/pages.min.js?v=794591ab"></script>
+  <script defer src="../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
+  <script defer src="../assets/dist/js/pages.min.js?v=efc0e441"></script>
 </body>
 </html>

@@ -16,7 +16,7 @@ function page() {
   const url = abs(cfg, m.path);
   const crumbItems = [{ name: 'Home', path: '' }, { name: 'Resume', path: m.path }];
   const head = pageHead({
-    crumbItems, b, eyebrow: 'Resume', h1: esc(m.h1), lead: m.lead,
+    crumbItems, b, eyebrow: 'Resume', h1: esc(m.h1),
     answer: m.direct_answer,
     actions: `<a class="btn btn--solid btn--lg btn--glow" href="${b}${RESUME_PDF}" download="Shaunak-Chorge-Resume.pdf">Download PDF ${ico('download', 'icon--still')}</a>` + btn('Hire me', hireHref(b), { v: 'ghost', size: 'lg' }),
   });
@@ -31,10 +31,8 @@ function page() {
   const exp = section({
     id: 'experience', eyebrow: 'Experience', title: `Work <span class="hl">experience</span>`,
     body: `<div class="pg-jobs">${work.map(job).join('')}</div>
-    <details class="pg-morebox pg-morebox--sm" data-reveal>
-      <summary class="pg-morebox__sum"><span>Earlier internships and programmes (${prog.length})</span>${ico('chevron-down', 'pg-morebox__chev')}</summary>
-      <ul class="pg-more" role="list">${prog.map(e => `<li class="pg-more__row"><div><p class="pg-more__t">${esc(e.role)}, ${esc(e.org)}</p><p class="pg-more__d">${esc(e.period)}${e.bullets.length ? ' &middot; ' + esc(e.bullets.join(' ')) : ''}</p></div></li>`).join('')}</ul>
-    </details>`,
+    <h3 class="pg-earlier" data-reveal>Earlier internships and programmes</h3>
+    <ul class="pg-builds" role="list" data-reveal>${prog.map(e => `<li class="pg-builds__row"><p class="pg-builds__t">${esc(e.role)}, ${esc(e.org)}</p><p class="pg-builds__d">${esc(e.period)}${e.bullets.length ? ' &middot; ' + esc(e.bullets.join(' ')) : ''}</p></li>`).join('')}</ul>`,
   });
 
   const edu = education.filter(e => !e.minor)[0];
@@ -42,7 +40,7 @@ function page() {
   const eduSec = section({
     id: 'education', eyebrow: 'Education', title: `<span class="hl hl--purple">Education</span>`, tint: true,
     body: `<div class="pg-two">
-      <div class="panel" data-tone="cyan" data-reveal><h3 class="pg-panel__h">${esc(edu.degree)}</h3><p class="pg-plain__t">${esc(edu.institution)}</p><p class="pg-plain__s">${esc(edu.period)}</p>
+      <div class="panel" data-tone="cyan" data-reveal><h3 class="pg-panel__h">${esc(edu.degree)}, ${esc(edu.year)}</h3><p class="pg-plain__t">${esc(edu.institution)}</p><p class="pg-plain__s">${esc(edu.period)}</p>
         ${tags(edu.coursework, { tone: 'cyan', cls: 'pg-cred__tags', label: 'Coursework' })}</div>
       <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h">Earlier schooling</h3>
         <ul class="pg-plain" role="list">${minor.map(e => `<li><span class="pg-plain__t">${esc(e.institution)}</span><span class="pg-plain__s">${esc(e.degree)}, ${esc(e.period)}</span></li>`).join('')}</ul></div>
@@ -72,7 +70,7 @@ function page() {
   const faqItems = (m.faqs || []).map((f, i) => ({ id: `q${i + 1}`, q: f.q, a: f.a }));
   const faq = faqItems.length ? section({
     id: 'faq', eyebrow: 'FAQ', title: 'Quick <span class="hl">answer</span>',
-    body: qaList(faqItems, { idPrefix: 'resume', openFirst: true }),
+    body: qaList(faqItems, { idPrefix: 'resume' }),
   }) : '';
 
   const contact = `<p class="pg-resume-contact" data-reveal><a class="link" href="mailto:${EMAIL}">${EMAIL}</a><span aria-hidden="true"> &middot; </span><a class="link" href="${LINKEDIN}" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a><span aria-hidden="true"> &middot; </span><a class="link" href="${GITHUB}" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a><span aria-hidden="true"> &middot; </span>Mumbai, India</p>`;

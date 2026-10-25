@@ -11,12 +11,10 @@ export const IN_REPO = !cfg.deployRoot && fs.existsSync(path.join(REPO_ROOT, 'in
 export const SITEMAP_URL = IN_REPO ? cfg.url.replace(/new_portfolio\/$/, '') + 'sitemap.xml' : abs(cfg, 'sitemap.xml');
 
 const xml = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-/** llms files carry no years: drop "(May 2026)" style dates and bare 19xx/20xx tokens */
+/** llms files carry no years: drop "(2026)" and "(May 2026)" style dates and bare 19xx/20xx tokens (with the comma before them) */
 const noYears = s => String(s)
-  .replace(/\(graduated May 2026\)/g, '@@DEG@@')            // the one dated phrase that stays everywhere: the degree line
   .replace(/\s*\(\s*(?:[A-Za-z]{3,9}\s+)?(?:19|20)\d\d\s*\)/g, '')
-  .replace(/\s*\b(?:19|20)\d\d\b/g, '')
-  .replace(/@@DEG@@/g, '(graduated May 2026)');
+  .replace(/,?\s*\b(?:19|20)\d\d\b/g, '');
 const oneLine = s => noYears(String(s)).replace(/\s+/g, ' ').trim();
 
 export function sitemap(paths) {
@@ -39,9 +37,9 @@ export function llmsTxt(records) {
   const hub = [by('services/'), by('projects/')].filter(Boolean);
   return `# ${cfg.name} - AI Engineer at ${cfg.person.employer} (Mumbai, India)
 
-> ${ENTITY}
+> ${oneLine(ENTITY)}
 
-Facts: role AI Engineer; employer ${cfg.person.employer}; location Mumbai, Maharashtra, India (IST, UTC+5:30); education ${DEGREE}, ${cfg.person.alumniOf}; works remotely; takes select freelance AI and backend projects.
+Facts: role AI Engineer; employer ${cfg.person.employer}; location Mumbai, Maharashtra, India (IST, UTC+5:30); education ${DEGREE}, ${cfg.person.alumniOf}; takes select freelance AI and backend projects.
 Contact: ${abs(cfg, 'contact/')} - ${EMAIL}
 Profiles: ${GITHUB} - ${LINKEDIN} - ${INSTAGRAM}
 
@@ -65,5 +63,5 @@ export function llmsFull(records) {
   const order = [...services.map(s => s.path), 'services/', ...caseStudies.map(p => p.path), 'projects/', 'about/', 'faq/', 'contact/', 'resume/'];
   const sorted = [...records].sort((a, b) => order.indexOf(a.path) - order.indexOf(b.path));
   const body = sorted.map(r => `# ${r.heading}\nURL: ${r.url}\n${oneLine(r.desc)}\n\n${r.text.map(oneLine).filter(Boolean).join('\n\n')}`).join('\n\n---\n\n');
-  return `# ${cfg.name} - full text\n\n> ${ENTITY}\n\nNote: summary lines are written about Shaunak in the third person. Answers marked "A:" are in his own voice (first person).\n\nContact: ${abs(cfg, 'contact/')} - ${EMAIL}\n\n---\n\n${body}\n`;
+  return `# ${cfg.name} - full text\n\n> ${oneLine(ENTITY)}\n\nNote: summary lines are written about Shaunak in the third person. Answers marked "A:" are in his own voice (first person).\n\nContact: ${abs(cfg, 'contact/')} - ${EMAIL}\n\n---\n\n${body}\n`;
 }

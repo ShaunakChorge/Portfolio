@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../assets/dist/site.inner.min.css?v=fcec523d">
+  <link rel="stylesheet" href="../assets/dist/site.inner-portrait.min.css?v=ac01208a">
 
 <script type="application/ld+json">
 {
@@ -74,7 +74,7 @@
       "url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/",
       "image": "https://shaunakchorge.github.io/Portfolio/new_portfolio/assets/img/portrait/portrait-800.webp",
       "jobTitle": "AI Engineer",
-      "description": "Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India. He holds a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026). He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job.",
+      "description": "Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India. He holds a Bachelor of Technology in Artificial Intelligence and Data Science (2026). He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job.",
       "email": "mailto:shaunak.chorge@gmail.com",
       "worksFor": {
         "@type": "Organization",
@@ -97,7 +97,6 @@
         "Docker",
         "Large language models (AI language models)",
         "Retrieval-augmented generation (AI that answers from your own documents)",
-        "LangChain",
         "Computer vision",
         "OpenCV",
         "PyTorch",
@@ -228,22 +227,17 @@
 
         <nav class="nav" aria-label="Primary">
           <ul class="nav__list">
-            <li><a class="nav__link" href="../">Home</a></li>
             <li><a class="nav__link" href="../projects/">Projects</a></li>
             <li><a class="nav__link" href="../services/">Services</a></li>
             <li><a class="nav__link" href="../about/" aria-current="page">About</a></li>
-            <li><a class="nav__link" href="../faq/">FAQ</a></li>
-            <li><a class="nav__link" href="../contact/">Contact</a></li>
+            <li><a class="nav__link" href="../resume/">Resume</a></li>
           </ul>
           <span class="nav__ind" aria-hidden="true"></span>
         </nav>
 
         <div class="site-header__tools">
-          <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST" title="Local time in Mumbai">MUMBAI</span>
-          <button class="cmd" type="button" data-open-palette aria-label="Search, open command palette" aria-keyshortcuts="Control+K Meta+K">
+          <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
-            <span class="cmd__text">Search</span>
-            <kbd class="kbd" data-kbd aria-hidden="true">Ctrl K</kbd>
           </button>
           <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
@@ -256,10 +250,10 @@
 
   <nav class="drawer" id="drawer" aria-label="Mobile">
     <ul class="drawer__list">
-      <li><a class="drawer__link" href="../" style="--i:0"><small>01</small>Home</a></li>
-      <li><a class="drawer__link" href="../projects/" style="--i:1"><small>02</small>Projects</a></li>
-      <li><a class="drawer__link" href="../services/" style="--i:2"><small>03</small>Services</a></li>
-      <li><a class="drawer__link" href="../about/" aria-current="page" style="--i:3"><small>04</small>About</a></li>
+      <li><a class="drawer__link" href="../projects/" style="--i:0"><small>01</small>Projects</a></li>
+      <li><a class="drawer__link" href="../services/" style="--i:1"><small>02</small>Services</a></li>
+      <li><a class="drawer__link" href="../about/" aria-current="page" style="--i:2"><small>03</small>About</a></li>
+      <li><a class="drawer__link" href="../resume/" style="--i:3"><small>04</small>Resume</a></li>
       <li><a class="drawer__link" href="../faq/" style="--i:4"><small>05</small>FAQ</a></li>
       <li><a class="drawer__link" href="../contact/" style="--i:5"><small>06</small>Contact</a></li>
     </ul>
@@ -269,7 +263,6 @@
       <a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a>
       <a class="icon-btn" href="mailto:shaunak.chorge@gmail.com" aria-label="Email Shaunak"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
       <button type="button" class="btn btn--ghost btn--sm drawer__motion" data-motion-toggle aria-pressed="false" hidden><svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-pause"/></svg> Pause effects</button>
-      <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST">MUMBAI</span>
     </div>
   </nav>
 
@@ -283,19 +276,17 @@
       <div class="pg-head__main">
         <p class="eyebrow">About</p>
         <h1 class="pg-h1">About Shaunak Chorge, <span class="ai">AI</span> engineer</h1>
-        <p class="pg-lead">My background, my work and how I collaborate with clients on Artificial Intelligence (AI) projects.</p>
-        <p class="pg-answer" data-answer>Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India. He holds a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026). He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job.</p>
+        
+        <p class="pg-answer" data-answer>I am Shaunak Chorge, an AI Engineer at Claptek Pvt Ltd in Mumbai, India. I build AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. I also take select freelance AI and backend projects alongside my full-time job.</p>
         <div class="pg-actions"><a class="btn btn--solid btn--lg btn--glow" href="../contact/#hire">Hire me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="btn btn--ghost btn--lg" href="../resume/">Read the resume <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-file-text"/></svg></a></div>
       </div>
       <div class="pg-head__aside"><div class="pg-term" role="group" aria-label="Quick facts about Shaunak">
         <div class="pg-term__bar" aria-hidden="true"><i></i><i></i><i></i><span>whoami.sh</span></div>
         <div class="pg-term__body">
-          <p class="pg-term__prompt"><span class="pg-term__user">shaunak@mumbai:~/about</span><span class="pg-term__sym" aria-hidden="true">$</span><span class="pg-term__cmd">whoami</span></p>
+          <p class="pg-term__prompt"><span class="pg-term__user">shaunak@mumbai:~/about</span><span class="pg-term__sym" aria-hidden="true">$</span> <span class="pg-term__cmd">whoami</span></p>
           <dl class="pg-term__kv">
-            <div><dt>education</dt><dd>Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026)<br><span class="pg-term__sub">Dr. D. Y. Patil School of Science and Technology, DPU</span></dd></div>
-            <div><dt>focus</dt><dd><ul class="pg-term__list" role="list"><li>AI chatbots</li><li>Backend APIs</li><li>Computer vision</li><li>Speech, text and machine learning</li><li>Automation</li></ul></dd></div>
-            <div><dt>now</dt><dd>AI Engineer at Claptek Pvt Ltd</dd></div>
-            <div><dt>freelance</dt><dd>Taking select freelance AI and backend projects</dd></div>
+            <div><dt>education</dt><dd>Bachelor of Technology in Artificial Intelligence and Data Science, 2026<br><span class="pg-term__sub">Dr. D. Y. Patil School of Science and Technology, DPU</span></dd></div>
+            <div><dt>focus</dt><dd>AI chatbots, Backend APIs, Computer vision, Speech, text and machine learning, Automation</dd></div>
           </dl>
           <p class="pg-term__prompt" aria-hidden="true"><span class="pg-term__user">shaunak@mumbai:~/about</span><span class="pg-term__sym">$</span><span class="pg-term__cursor"></span></p>
         </div>
@@ -309,38 +300,86 @@
       <h2 id="story-h" class="section__title">Who I am and what I <span class="hl">do</span></h2>
       
     </header>
-<div class="pg-story"><div class="prose pg-prose" data-reveal><p>I am Shaunak, a software engineer who works mostly in Python on Artificial Intelligence (AI) and backend systems. I hold a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026). Today I am an AI Engineer at Claptek Pvt Ltd in Mumbai, where I build AI tools for audit and compliance software. One tool drafts findings and is not allowed to make things up. Another reads documents and points to its evidence. A third turns plain questions into database queries on a bank's own servers.</p><p>Before that, two internships showed me how real systems behave. At Osource Global I built backend APIs and document tools that use AI models running on company machines. At Shivohini Tech-AI I built AI chatbots for clients. Outside work I build whole projects myself. They include a chatbot that cites its sources or admits it does not know, and a backend that shows where each request slows down. I also built a scam-fighting AI with Prasanna Patil, plus speech and vision models inside small apps.</p><p>Alongside my full-time job I take select freelance AI and backend projects. Need a chatbot, a document reader, a computer vision prototype or a Python backend built carefully? Reach me through <a href="../contact/#hire">the contact page</a>, the fastest way to start.</p></div></div>
-    <div class="stats pg-stats" data-reveal="scale"><div class="stat" data-tone="cyan"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-briefcase"/></svg><span class="stat__num" data-count="3">3</span><span class="stat__label">Industry roles</span></div><div class="stat" data-tone="magenta"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trophy"/></svg><span class="stat__num" data-count="3">3</span><span class="stat__label">Contest and hackathon podium finishes</span></div><div class="stat" data-tone="purple"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-folder"/></svg><span class="stat__num" data-count="12">12</span><span class="stat__label">Selected projects</span></div></div>
+<div class="pg-story"><div class="prose pg-prose" data-reveal><p>I work mostly in Python on Artificial Intelligence (AI) and backend systems. My day job is building AI tools for audit and compliance software. One tool drafts findings and is not allowed to make things up. Another reads documents and points to its evidence. A third turns plain questions into database queries on a bank's own servers.</p><p>Before that, two internships showed me how real systems behave. At Osource Global I built backend APIs and document tools that use AI models running on company machines. At Shivohini Tech-AI I built AI chatbots for clients. Outside work I build whole projects myself. They include a chatbot that cites its sources or admits it does not know, and a backend that shows where each request slows down. I also built a scam-fighting AI with Prasanna Patil, plus speech and vision models inside small apps.</p><p>Need a chatbot, a document reader, a computer vision prototype or a Python backend built carefully? Reach me through <a href="../contact/#hire">the contact page</a>, the fastest way to start.</p></div><figure class="np np--side" data-neon-portrait data-reveal="scale">
+            <div class="np__stage">
+              <div class="np__back" aria-hidden="true">
+                <span class="np__grid"></span>
+                <span class="np__ring np__ring--a"></span>
+                <span class="np__ring np__ring--b"></span>
+                <span class="np__light"></span>
+              </div>
+              <div class="np__tilt">
+                <div class="np__float">
+                  <div class="np__fig">
+                    <picture class="np__pic">
+                      <source type="image/avif" srcset="../assets/img/portrait/portrait-480.avif 480w, ../assets/img/portrait/portrait-800.avif 800w" sizes="(min-width: 56em) 22rem, 17rem">
+                      <source type="image/webp" srcset="../assets/img/portrait/portrait-480.webp 480w, ../assets/img/portrait/portrait-800.webp 800w" sizes="(min-width: 56em) 22rem, 17rem">
+                      <img class="np__img" src="../assets/img/portrait/portrait-800.webp" width="800" height="1067" loading="lazy" decoding="async" alt="Illustrated portrait of Shaunak Chorge, a freelance AI engineer in Mumbai, smiling and wearing glasses and a dark jacket with arms crossed">
+                    </picture>
+                    <picture class="np__rim" aria-hidden="true">
+                      <source type="image/avif" srcset="../assets/img/portrait/rim-480.avif 480w, ../assets/img/portrait/rim-800.avif 800w" sizes="(min-width: 56em) 22rem, 17rem">
+                      <source type="image/webp" srcset="../assets/img/portrait/rim-480.webp 480w, ../assets/img/portrait/rim-800.webp 800w" sizes="(min-width: 56em) 22rem, 17rem">
+                      <img src="../assets/img/portrait/rim-800.webp" width="800" height="1067" loading="lazy" decoding="async" alt="">
+                    </picture>
+                    <span class="np__scan"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="np__dust" aria-hidden="true">
+                <i style="--x:12%;--s:3px;--d:9s;--t:0s;--c:var(--cyan,0 255 255)"></i>
+                <i style="--x:24%;--s:2px;--d:11s;--t:-3s;--c:var(--magenta,255 0 110)"></i>
+                <i style="--x:36%;--s:4px;--d:13s;--t:-6s;--c:var(--purple,181 83 242)"></i>
+                <i style="--x:48%;--s:2px;--d:10s;--t:-1s;--c:var(--cyan,0 255 255)"></i>
+                <i style="--x:60%;--s:3px;--d:12s;--t:-8s;--c:var(--magenta,255 0 110)"></i>
+                <i style="--x:72%;--s:2px;--d:9.5s;--t:-4s;--c:var(--cyan,0 255 255)"></i>
+                <i style="--x:84%;--s:4px;--d:14s;--t:-10s;--c:var(--purple,181 83 242)"></i>
+                <i style="--x:92%;--s:2px;--d:11.5s;--t:-2s;--c:var(--cyan,0 255 255)"></i>
+                <i style="--x:18%;--s:2px;--d:12.5s;--t:-7s;--c:var(--purple,181 83 242)"></i>
+                <i style="--x:66%;--s:3px;--d:10.5s;--t:-5s;--c:var(--magenta,255 0 110)"></i>
+              </div>
+              <div class="np__hud" aria-hidden="true">
+                <span class="np__corner np__corner--tl"></span>
+                <span class="np__corner np__corner--tr"></span>
+                <span class="np__corner np__corner--bl"></span>
+                <span class="np__corner np__corner--br"></span>
+              </div>
+              <span class="np__tag"><span class="np__dot" aria-hidden="true"></span>Mumbai, India &middot; IST</span>
+            </div>
+          </figure></div>
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../resume/">Resume <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../projects/">Projects <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../faq/">FAQ <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="link-arrow" href="../contact/#hire">Contact <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
   </div>
 </section><section id="how-i-work" class="section pg-sec section--tint" aria-labelledby="how-i-work-h">
   <div class="container">
     <header class="section__head" data-reveal>
-      <p class="eyebrow">Principles</p>
-      <h2 id="how-i-work-h" class="section__title">How I work with <span class="hl hl--purple">clients</span></h2>
+      <p class="eyebrow">Working together</p>
+      <h2 id="how-i-work-h" class="section__title">How I <span class="hl hl--purple">work</span></h2>
       
     </header>
-<ul class="grid grid--c4 pg-how" role="list"><li><article class="card card--flat" data-tone="cyan" data-reveal style="--i:0"><h3 class="pg-how__t">Answers backed by evidence</h3><p class="card__text">Every answer should trace back to a source. I build the checks into the code, not only into the instructions given to the AI.</p></article></li><li><article class="card card--flat" data-tone="purple" data-reveal style="--i:1"><h3 class="pg-how__t">Measure first</h3><p class="card__text">Before improving anything, I build a way to measure it, such as a scoring test, a request ID or a set of known-correct answers.</p></article></li><li><article class="card card--flat" data-tone="magenta" data-reveal style="--i:2"><h3 class="pg-how__t">Honest limits</h3><p class="card__text">I tell you how the data was split, where a result may not hold and what the numbers do not show.</p></article></li><li><article class="card card--flat" data-tone="blue" data-reveal style="--i:3"><h3 class="pg-how__t">Tested and documented</h3><p class="card__text">The main logic is tested, and every handover includes notes and a walkthrough.</p></article></li></ul>
+<div class="panel pg-hiw" data-tone="purple" data-reveal><ul class="dot-list"><li>I can take on projects of any size, from small fixes to large builds, and we start with a clear discussion of what you need.</li><li>We agree the plan and a suitable deadline together after a thorough conversation, before any work begins.</li><li>You get regular progress updates and clear advice on what will work best for your idea.</li></ul></div>
   </div>
 </section><section id="experience" class="section pg-sec" aria-labelledby="experience-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">Experience</p>
       <h2 id="experience-h" class="section__title">Where I have <span class="hl hl--blue">worked</span></h2>
-      <p class="section__lead">Three industry roles. The full detail is on the resume.</p>
+      <p class="section__lead">My roles so far, newest first. The full detail is on the resume.</p>
     </header>
 <ol class="timeline pg-timeline" data-fill><li class="timeline__item timeline__item--now" data-tone="cyan" data-reveal>
-        <p class="timeline__meta">Jul 2026 - Present &middot; Mumbai, India</p>
+        <p class="timeline__meta">Jul 2026 - Present</p>
         <h3 class="timeline__title"><span class="ai">AI</span> Engineer <span class="pg-at">at Claptek Pvt Ltd</span></h3>
+        <p class="timeline__loc">Mumbai, India</p>
         <ul class="dot-list pg-tl__list" data-tone="cyan"><li>Sole engineer on an AI service that drafts audit findings from short checklist notes. It writes three versions of each finding, drafts whole spreadsheets in one go and builds summary reports. Code-level checks reject any draft that invents a figure, date or owner. The client's audit product adopted it the day after handover.</li><li>Made it about 28 times faster (7.9 minutes down to 16.9 seconds). I found hidden extra processing in how the system called the AI models and compared four candidate models, with accuracy unchanged.</li><li>Built a service that reads regulatory documents and lists the obligations in them. 97.2% of 1,266 production records link to the exact, highlightable passage in the source PDF.</li></ul>
         <ul class="tags pg-tl__tags" role="list" aria-label="Tools" data-tone="cyan"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Pydantic</li><li class="tag">Local AI models</li><li class="tag">RAG (answers from documents)</li><li class="tag">React</li></ul>
       </li><li class="timeline__item" data-tone="blue" data-reveal>
-        <p class="timeline__meta">Mar 2026 - Jun 2026 &middot; Mumbai, India</p>
+        <p class="timeline__meta">Mar 2026 - Jun 2026</p>
         <h3 class="timeline__title">Python Automation Intern <span class="pg-at">at Osource Global Pvt. Ltd.</span></h3>
+        <p class="timeline__loc">Mumbai, India</p>
         <ul class="dot-list pg-tl__list" data-tone="blue"><li>Built backend APIs in Python, FastAPI and PostgreSQL that sync data between internal company systems.</li><li>Connected AI models running on company machines to a document tool that turns unformatted input into structured business reports.</li><li>Set up background workers (Celery and Redis) so heavy jobs do not slow down the main API.</li></ul>
         <ul class="tags pg-tl__tags" role="list" aria-label="Tools" data-tone="blue"><li class="tag">FastAPI</li><li class="tag">PostgreSQL</li><li class="tag">Celery</li><li class="tag">Redis</li><li class="tag">Local AI models</li><li class="tag">WebSockets</li><li class="tag">NumPy</li><li class="tag">Agile</li></ul>
       </li><li class="timeline__item" data-tone="purple" data-reveal>
-        <p class="timeline__meta">Sep 2025 - Mar 2026 &middot; Remote, India</p>
+        <p class="timeline__meta">Sep 2025 - Mar 2026</p>
         <h3 class="timeline__title"><span class="ai">AI</span> and Machine Learning Intern <span class="pg-at">at Shivohini Tech-<span class="ai">AI</span> LLP</span></h3>
+        <p class="timeline__loc">Remote, India</p>
         <ul class="dot-list pg-tl__list" data-tone="purple"><li>Built and launched AI chatbots for clients using LLaMA, the OpenAI API and retrieval (answers drawn from stored documents).</li><li>Designed PostgreSQL and Supabase databases for chat history and user profiles, so bots can remember each conversation.</li><li>Designed conversation flows around what the customer wants, which reduced bot failures during complex bookings.</li></ul>
         <ul class="tags pg-tl__tags" role="list" aria-label="Tools" data-tone="purple"><li class="tag">LLaMA</li><li class="tag">OpenAI API</li><li class="tag">RAG (answers from documents)</li><li class="tag">Supabase</li><li class="tag">PostgreSQL</li><li class="tag">Redis</li><li class="tag">Celery</li><li class="tag">FastAPI</li></ul>
       </li></ol>
@@ -354,7 +393,7 @@
       <p class="section__lead">Tools I have used on the roles and projects on this site.</p>
     </header>
 <div class="pg-tiers">
-      <div class="panel" data-tone="cyan" data-reveal><h3 class="pg-panel__h">Core stack</h3><p class="pg-panel__cap">What I reach for first on a new build.</p><ul class="tags pg-tier" role="list" aria-label="Core stack" data-tone="cyan"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">PostgreSQL</li><li class="tag">Docker</li><li class="tag">Git</li><li class="tag">AI model APIs (Groq, OpenAI)</li><li class="tag">RAG (answers from documents)</li><li class="tag">LangChain</li><li class="tag">ChromaDB</li><li class="tag">pandas</li><li class="tag">Streamlit</li></ul></div>
+      <div class="panel" data-tone="cyan" data-reveal><h3 class="pg-panel__h">Core stack</h3><p class="pg-panel__cap">What I reach for first on a new build.</p><ul class="tags pg-tier" role="list" aria-label="Core stack" data-tone="cyan"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">PostgreSQL</li><li class="tag">Docker</li><li class="tag">Git</li><li class="tag">AI model APIs (Groq, OpenAI)</li><li class="tag">RAG (answers from documents)</li><li class="tag">ChromaDB</li><li class="tag">pandas</li><li class="tag">Streamlit</li></ul></div>
       <div class="panel" data-tone="purple" data-reveal style="--i:1"><h3 class="pg-panel__h">Also work with</h3><p class="pg-panel__cap">Other tools I have used across these projects and roles.</p><ul class="tags pg-tier" role="list" aria-label="Also work with" data-tone="purple"><li class="tag tag--dim">Django</li><li class="tag tag--dim">Django REST Framework</li><li class="tag tag--dim">Pydantic</li><li class="tag tag--dim">pytest</li><li class="tag tag--dim">sentence-transformers</li><li class="tag tag--dim">Local AI models (Ollama, vLLM)</li><li class="tag tag--dim">PyMuPDF</li><li class="tag tag--dim">sqlglot</li><li class="tag tag--dim">Redis</li><li class="tag tag--dim">Celery</li><li class="tag tag--dim">WebSockets</li><li class="tag tag--dim">OpenTelemetry</li><li class="tag tag--dim">Prometheus</li><li class="tag tag--dim">Jaeger</li><li class="tag tag--dim">Supabase</li><li class="tag tag--dim">MongoDB</li><li class="tag tag--dim">MySQL</li><li class="tag tag--dim">SQL</li><li class="tag tag--dim">NumPy</li><li class="tag tag--dim">scikit-learn</li><li class="tag tag--dim">TensorFlow / Keras</li><li class="tag tag--dim">PyTorch</li><li class="tag tag--dim">OpenCV</li><li class="tag tag--dim">YOLOv8</li><li class="tag tag--dim">librosa</li><li class="tag tag--dim">NLTK</li><li class="tag tag--dim">Hugging Face Transformers</li><li class="tag tag--dim">React</li><li class="tag tag--dim">Vite</li><li class="tag tag--dim">Flask</li><li class="tag tag--dim">Twilio</li><li class="tag tag--dim">WhatsApp Cloud API (prototype)</li><li class="tag tag--dim">Telegram Bot API</li><li class="tag tag--dim">Requests</li><li class="tag tag--dim">BeautifulSoup</li><li class="tag tag--dim">JavaScript</li><li class="tag tag--dim">HTML / CSS</li><li class="tag tag--dim">Java</li><li class="tag tag--dim">C / C++</li></ul></div>
     </div>
   </div>
@@ -367,11 +406,12 @@
     </header>
 <div class="grid grid--c3 pg-cred">
       <div class="panel" data-tone="cyan" data-reveal><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-graduation-cap"/></svg> Education</h3>
-        <p class="pg-plain__t">Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026)</p><p class="pg-plain__s">Dr. D. Y. Patil School of Science and Technology, DPU</p><p class="pg-plain__s">Four-year degree programme</p>
+        <p class="pg-plain__t">Bachelor of Technology in Artificial Intelligence and Data Science, 2026</p><p class="pg-plain__s">Dr. D. Y. Patil School of Science and Technology, DPU</p><p class="pg-plain__s">Four-year degree programme</p>
         <ul class="tags pg-cred__tags" role="list" aria-label="Coursework" data-tone="cyan"><li class="tag">Machine Learning</li><li class="tag">Software Engineering</li><li class="tag">Database Systems</li><li class="tag">Web Development</li><li class="tag">System Design</li></ul>
-        <p class="pg-plain__s">Activities: Binary Brains (college tech club)</p></div>
+        <p class="pg-plain__s">Activities: Binary Brains (college tech club)</p>
+        <ul class="pg-plain pg-cred__school" role="list"><li><span class="pg-plain__t">Kishinchand Chellaram College</span><span class="pg-plain__s">Higher secondary education, completed 2022</span></li><li><span class="pg-plain__t">Cumballa Hill High School</span><span class="pg-plain__s">Secondary school, completed 2020</span></li></ul></div>
       <div class="panel" data-tone="purple" data-reveal style="--i:1"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-award"/></svg> Certifications</h3><ul class="pg-plain" role="list"><li><span class="pg-plain__t">Oracle Cloud Infrastructure 2025 Certified Generative AI Professional</span><span class="pg-plain__s">Oracle</span></li><li><span class="pg-plain__t">Generative AI Certification</span><span class="pg-plain__s">GeeksforGeeks</span></li><li><span class="pg-plain__t">IgniteX Program Participant</span><span class="pg-plain__s">Wadhwani Foundation</span></li><li><span class="pg-plain__t">Python for Data Science</span><span class="pg-plain__s">Infosys Springboard</span></li><li><span class="pg-plain__t">Python Django</span><span class="pg-plain__s">SimpliLearn</span></li><li><span class="pg-plain__t">Introduction to SQL</span><span class="pg-plain__s">SimpliLearn</span></li><li><span class="pg-plain__t"><a class="link" href="https://www.credly.com/go/9bDtdZKi" target="_blank" rel="noopener noreferrer">Getting Started with Enterprise Data Science (digital badge)<span class="sr-only"> (opens in a new tab)</span></a></span><span class="pg-plain__s">IBM SkillsBuild</span></li></ul></div>
-      <div class="panel" data-tone="magenta" data-reveal style="--i:2"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-trophy"/></svg> Awards</h3><ul class="pg-plain" role="list"><li><span class="pg-plain__t">First runner-up, Code Golf (INNIXO - SWASTIK)</span><span class="pg-plain__s">Coding contest.</span></li><li><span class="pg-plain__t">First runner-up, Code Quest Infinity</span><span class="pg-plain__s">Coding contest.</span></li><li><span class="pg-plain__t">Winners, Smart India Hackathon internal round</span><span class="pg-plain__s">Won the college's internal round of the Smart India Hackathon.</span></li></ul></div>
+      <div class="panel" data-tone="magenta" data-reveal style="--i:2"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-trophy"/></svg> Awards</h3><p class="pg-panel__cap">Outside work, I have been first runner-up in coding contests and won my college's internal round of the Smart India Hackathon.</p><ul class="pg-plain" role="list"><li><span class="pg-plain__t">First runner-up, Code Golf (INNIXO - SWASTIK)</span><span class="pg-plain__s">Coding contest.</span></li><li><span class="pg-plain__t">First runner-up, Code Quest Infinity</span><span class="pg-plain__s">Coding contest.</span></li><li><span class="pg-plain__t">Winners, Smart India Hackathon internal round</span><span class="pg-plain__s">Won the college's internal round of the Smart India Hackathon.</span></li></ul></div>
     </div>
   </div>
 </section><section id="faq" class="section pg-sec section--tint" aria-labelledby="faq-h">
@@ -397,7 +437,7 @@
       </div>
       <div class="pg-hire__act">
         <a class="btn btn--solid btn--lg btn--glow" href="../contact/#hire" data-magnetic>Hire me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
-        <p class="pg-hire__alt"><a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a><span aria-hidden="true"> &middot; </span><a class="link" href="../projects/">View work</a></p>
+        <p class="pg-hire__alt"><a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a><span aria-hidden="true"> &middot; </span><a class="link" href="../projects/">See projects</a></p>
       </div>
     </div>
   </div>
@@ -423,7 +463,7 @@
           <span class="logo__word">SHAUNAK</span>
         </p>
         <p class="footer__blurb">AI Engineer at Claptek Pvt Ltd. Taking select freelance AI and backend projects.</p>
-        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India &ndash; working remotely (IST)</p>
+        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India (IST)</p>
         <ul class="footer__soc" aria-label="Profiles">
           <li><a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a></li>
           <li><a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a></li>
@@ -440,9 +480,10 @@
             <li><a href="../projects/">Projects</a></li>
             <li><a href="../services/">Services</a></li>
             <li><a href="../about/">About</a></li>
+            <li><a href="../about/#experience">Experience</a></li>
+            <li><a href="../resume/">Resume</a></li>
             <li><a href="../faq/">FAQ</a></li>
             <li><a href="../contact/">Contact</a></li>
-            <li><a href="../resume/">Resume</a></li>
           </ul>
         </nav>
 
@@ -461,7 +502,7 @@
         <nav class="footer__col" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../projects/observable-ai-backend/">FastAPI tracing with OpenTelemetry</a></li>
+            <li><a href="../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
             <li><a href="../projects/agentic-honeypot/">AI scam honeypot</a></li>
             <li><a href="../projects/deepfake-video-detection/">Deepfake video detection</a></li>
@@ -540,10 +581,11 @@
     <symbol id="i-loader" viewBox="0 0 24 24"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/></symbol>
   </svg>
 
-  <script defer src="../assets/dist/js/core.min.js?v=53badac3"></script>
+  <script defer src="../assets/dist/js/core.min.js?v=d41b0d5b"></script>
   <script defer src="../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
   <script defer src="../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../assets/dist/js/fx.min.js?v=2e06fef0"></script>
-  <script defer src="../assets/dist/js/pages.min.js?v=794591ab"></script>
+  <script defer src="../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
+  <script defer src="../assets/dist/js/pages.min.js?v=efc0e441"></script>
+  <script defer src="../assets/dist/js/portrait.min.js?v=6985e5e0"></script>
 </body>
 </html>

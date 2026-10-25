@@ -1,6 +1,6 @@
 // data.mjs - loads content.json + the project selection (tools/selection.mjs) and normalises them into the model the page modules render.
 // No page module reads the JSON directly: everything display-facing comes through here.
-import { readContent, statValues } from '../lib.mjs';
+import { readContent } from '../lib.mjs';
 import { loadConfig, abs } from '../../build.mjs';
 import { loadSelection } from '../selection.mjs';
 import { loadKeywords } from './keywords.mjs';
@@ -16,7 +16,8 @@ export const LINKEDIN = content.profile.links.linkedin;
 export const INSTAGRAM = content.profile.links.instagram;
 export const FREELANCE_LINE = content.profile.freelance.line_short;     // "Taking select freelance AI and backend projects"
 export const CTA_TEXT = content.cta.text;                                // the one "send a short brief" sentence used by every hire band
-export const DEGREE = content.about.whoami.education.degree;            // Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026)
+export const DEGREE = content.about.whoami.education.degree;            // Bachelor of Technology in Artificial Intelligence and Data Science (the year is DEGREE_YEAR)
+export const DEGREE_YEAR = content.about.whoami.education.year;         // 2026
 export const LASTMOD = process.env.PF_LASTMOD || (content.meta && content.meta.generated) || new Date().toISOString().slice(0, 10);   // sitemap <lastmod>: content.meta.generated (deterministic builds)
 export const RESUME_PDF = content.profile.links.resume_pdf_relative;     // assets/Shaunak-Chorge-Resume.pdf
 export const ENTITY = cfg.person.description;   // the one entity sentence (about lead, llms.txt, Person.description): content.seo.entity, put there by loadConfig
@@ -43,7 +44,7 @@ const projectById = Object.fromEntries(content.projects.map(p => [p.id, p]));
 function repoState(p) {
   const first = String(p.status || '').split('|')[0].trim();
   if (p.repo) return { kind: 'public', text: 'Public repository', href: p.repo };
-  if (/^Private enterprise/i.test(first)) return { kind: 'private', text: 'Private enterprise repository' };
+  if (/^Private (client|enterprise) repo/i.test(first)) return { kind: 'private', text: 'Private repository' };
   if (/^Private repo/i.test(first)) return { kind: 'private', text: 'Private repository, available on request' };
   if (/^Assignment|^Course case study/i.test(first)) return { kind: 'none', text: first === 'Assignment' ? 'Notebook assignment' : 'Course notebook' };
   return { kind: 'none', text: '' };
@@ -65,23 +66,21 @@ function model(id) {
     svc: svcKeys.map(k => serviceByKey[k]),
     primarySvc: serviceByKey[svcKeys[0]] || services[0],
     atClaptek: claptekIds.has(p.id),
+    origin: p.origin || '',                                       // Client | Academic | Personal, or '' when the facts do not say
     inShow: showSet.has(p.id),
     tone: p.tone || 'cyan',
   };
 }
 export const caseStudies = selection.casestudy.map(model);
-export const showProjects = selection.show.map(model);
-export const showOnly = showProjects.filter(p => !p.hasCase);            // cards without a case study page
-export const moreProjects = selection.more.map(model);
-export const projectModel = Object.fromEntries([...showProjects, ...moreProjects].map(p => [p.id, p]));
+export const showProjects = selection.show.map(model);                   // the selected projects in priority order (rank 1 first)
+export const personalProjects = selection.personal.map(model);          // "Personal builds": open rows on /projects/ only
+export const projectModel = Object.fromEntries([...showProjects, ...personalProjects].map(p => [p.id, p]));
+/** the collage: one tile per selected project ({ ...project, rank, size: 'small' | 'wide' | 'big' }) + the desktop grid (see tools/selection.mjs) */
+export const collage = { ...selection.collage, tiles: selection.collage.tiles.map(t => ({ ...projectModel[t.id], rank: t.rank, size: t.size })) };
 export const resumeProjects = selection.resumeFeatured.map(id => projectModel[id]);   // the featured case studies of the resume page and the PDF
 
-/* where a project link should point (case study page > card anchor > more list) */
-export function projectHref(p, base) {
-  if (p.hasCase) return base + p.path;
-  if (showSet.has(p.id)) return base + 'projects/#p-' + p.id;
-  return base + 'projects/#more';
-}
+/* where a project link should point: its case study page, else its tile or row on /projects/ (every collage tile and every personal build has id="p-<id>") */
+export const projectHref = (p, base) => base + (p.hasCase ? p.path : 'projects/#p-' + p.id);
 
 /* ---------- misc content ---------- */
 export const filters = content.project_filters;
@@ -96,8 +95,6 @@ export const faqFor = page => content.faq_all.filter(g => g.page === page).flatM
 export const profile = content.profile;
 export const aboutPage = content.about;
 export const pagesMeta = content.pages;
-const statNumbers = statValues(content, selection);
-export const stats = content.stats.map(s => ({ id: s.id, label: s.label, value: statNumbers[s.id] }));
 
 /* ---------- text helpers ---------- */
 export const words = s => String(s).trim().split(/\s+/).filter(Boolean).length;

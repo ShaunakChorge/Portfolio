@@ -73,7 +73,7 @@ export function buildPages({ min = true, check = false } = {}) {
   };
   for (const [f, txt] of Object.entries(files)) {
     if (/llms/.test(f)) {
-      if (YEAR_RE.test(txt.replace(/\(graduated May 2026\)/g, ''))) warn(path.basename(f), 'contains a year');
+      if (YEAR_RE.test(txt)) warn(path.basename(f), 'contains a year');
       const bad = findBanned(txt, { languages: true });
       if (bad) warn(path.basename(f), `banned string "${bad}"`);
     }
@@ -98,7 +98,7 @@ export function buildPages({ min = true, check = false } = {}) {
   }
 
   const kb = records.reduce((n, r) => n + r.html.length, 0) / 1024;
-  const summary = `${check ? 'checked' : 'wrote'} ${records.length} pages (${kb.toFixed(0)} KB) + sitemap/robots/llms | selection: projects.config.json (${selection.show.length} selected, ${caseStudies.length} case studies, ${selection.more.length} more) | ${min ? 'min assets' : 'readable assets'} | ${problems} problem(s)`;
+  const summary = `${check ? 'checked' : 'wrote'} ${records.length} pages (${kb.toFixed(0)} KB) + sitemap/robots/llms | selection: projects.config.json (${selection.show.length} selected, ${caseStudies.length} case studies, ${selection.personal.length} personal) | ${min ? 'min assets' : 'readable assets'} | ${problems} problem(s)`;
   return { paths, problems, summary };
 }
 

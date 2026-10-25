@@ -73,22 +73,17 @@
 
         <nav class="nav" aria-label="Primary">
           <ul class="nav__list">
-            <li><a class="nav__link" href="{{home}}"{{aria:home}}>Home</a></li>
             <li><a class="nav__link" href="{{base}}projects/"{{aria:projects}}>Projects</a></li>
             <li><a class="nav__link" href="{{base}}services/"{{aria:services}}>Services</a></li>
             <li><a class="nav__link" href="{{base}}about/"{{aria:about}}>About</a></li>
-            <li><a class="nav__link" href="{{base}}faq/"{{aria:faq}}>FAQ</a></li>
-            <li><a class="nav__link" href="{{base}}contact/"{{aria:contact}}>Contact</a></li>
+            <li><a class="nav__link" href="{{base}}resume/"{{aria:resume}}>Resume</a></li>
           </ul>
           <span class="nav__ind" aria-hidden="true"></span>
         </nav>
 
         <div class="site-header__tools">
-          <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST" title="Local time in Mumbai">MUMBAI</span>
-          <button class="cmd" type="button" data-open-palette aria-label="Search, open command palette" aria-keyshortcuts="Control+K Meta+K">
+          <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
-            <span class="cmd__text">Search</span>
-            <kbd class="kbd" data-kbd aria-hidden="true">Ctrl K</kbd>
           </button>
           <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="{{base}}contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
@@ -101,10 +96,10 @@
 
   <nav class="drawer" id="drawer" aria-label="Mobile">
     <ul class="drawer__list">
-      <li><a class="drawer__link" href="{{home}}"{{aria:home}} style="--i:0"><small>01</small>Home</a></li>
-      <li><a class="drawer__link" href="{{base}}projects/"{{aria:projects}} style="--i:1"><small>02</small>Projects</a></li>
-      <li><a class="drawer__link" href="{{base}}services/"{{aria:services}} style="--i:2"><small>03</small>Services</a></li>
-      <li><a class="drawer__link" href="{{base}}about/"{{aria:about}} style="--i:3"><small>04</small>About</a></li>
+      <li><a class="drawer__link" href="{{base}}projects/"{{aria:projects}} style="--i:0"><small>01</small>Projects</a></li>
+      <li><a class="drawer__link" href="{{base}}services/"{{aria:services}} style="--i:1"><small>02</small>Services</a></li>
+      <li><a class="drawer__link" href="{{base}}about/"{{aria:about}} style="--i:2"><small>03</small>About</a></li>
+      <li><a class="drawer__link" href="{{base}}resume/"{{aria:resume}} style="--i:3"><small>04</small>Resume</a></li>
       <li><a class="drawer__link" href="{{base}}faq/"{{aria:faq}} style="--i:4"><small>05</small>FAQ</a></li>
       <li><a class="drawer__link" href="{{base}}contact/"{{aria:contact}} style="--i:5"><small>06</small>Contact</a></li>
     </ul>
@@ -114,7 +109,6 @@
       <a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a>
       <a class="icon-btn" href="mailto:shaunak.chorge@gmail.com" aria-label="Email Shaunak"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
       <button type="button" class="btn btn--ghost btn--sm drawer__motion" data-motion-toggle aria-pressed="false" hidden><svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-pause"/></svg> Pause effects</button>
-      <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST">MUMBAI</span>
     </div>
   </nav>
 
@@ -182,7 +176,6 @@
     <symbol id="i-audio-waveform" viewBox="0 0 24 24"><path d="M2 13a2 2 0 0 0 2-2V7a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0V4a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0v-4a2 2 0 0 1 2-2"/></symbol>
     <symbol id="i-trending-up" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
-    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
     <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
     <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>

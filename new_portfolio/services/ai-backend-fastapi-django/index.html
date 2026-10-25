@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=fcec523d">
+  <link rel="stylesheet" href="../../assets/dist/site.inner.min.css?v=99f76e8a">
 
 <script type="application/ld+json">
 {
@@ -205,22 +205,17 @@
 
         <nav class="nav" aria-label="Primary">
           <ul class="nav__list">
-            <li><a class="nav__link" href="../../">Home</a></li>
             <li><a class="nav__link" href="../../projects/">Projects</a></li>
             <li><a class="nav__link" href="../../services/" aria-current="page">Services</a></li>
             <li><a class="nav__link" href="../../about/">About</a></li>
-            <li><a class="nav__link" href="../../faq/">FAQ</a></li>
-            <li><a class="nav__link" href="../../contact/">Contact</a></li>
+            <li><a class="nav__link" href="../../resume/">Resume</a></li>
           </ul>
           <span class="nav__ind" aria-hidden="true"></span>
         </nav>
 
         <div class="site-header__tools">
-          <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST" title="Local time in Mumbai">MUMBAI</span>
-          <button class="cmd" type="button" data-open-palette aria-label="Search, open command palette" aria-keyshortcuts="Control+K Meta+K">
+          <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
-            <span class="cmd__text">Search</span>
-            <kbd class="kbd" data-kbd aria-hidden="true">Ctrl K</kbd>
           </button>
           <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
@@ -233,10 +228,10 @@
 
   <nav class="drawer" id="drawer" aria-label="Mobile">
     <ul class="drawer__list">
-      <li><a class="drawer__link" href="../../" style="--i:0"><small>01</small>Home</a></li>
-      <li><a class="drawer__link" href="../../projects/" style="--i:1"><small>02</small>Projects</a></li>
-      <li><a class="drawer__link" href="../../services/" aria-current="page" style="--i:2"><small>03</small>Services</a></li>
-      <li><a class="drawer__link" href="../../about/" style="--i:3"><small>04</small>About</a></li>
+      <li><a class="drawer__link" href="../../projects/" style="--i:0"><small>01</small>Projects</a></li>
+      <li><a class="drawer__link" href="../../services/" aria-current="page" style="--i:1"><small>02</small>Services</a></li>
+      <li><a class="drawer__link" href="../../about/" style="--i:2"><small>03</small>About</a></li>
+      <li><a class="drawer__link" href="../../resume/" style="--i:3"><small>04</small>Resume</a></li>
       <li><a class="drawer__link" href="../../faq/" style="--i:4"><small>05</small>FAQ</a></li>
       <li><a class="drawer__link" href="../../contact/" style="--i:5"><small>06</small>Contact</a></li>
     </ul>
@@ -246,7 +241,6 @@
       <a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a>
       <a class="icon-btn" href="mailto:shaunak.chorge@gmail.com" aria-label="Email Shaunak"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
       <button type="button" class="btn btn--ghost btn--sm drawer__motion" data-motion-toggle aria-pressed="false" hidden><svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-pause"/></svg> Pause effects</button>
-      <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST">MUMBAI</span>
     </div>
   </nav>
 
@@ -286,35 +280,29 @@
       <h2 id="process-h" class="section__title">How a backend project <span class="hl hl--purple">runs</span></h2>
       
     </header>
-<ol class="pg-steps" data-reveal-group><li class="pg-step" style="--i:0"><span class="pg-step__n" aria-hidden="true">01</span><h3 class="pg-step__t">Scope</h3><p>We define the endpoints, the data and how errors are reported before any code is written.</p></li><li class="pg-step" style="--i:1"><span class="pg-step__n" aria-hidden="true">02</span><h3 class="pg-step__t">Build</h3><p>The core logic first, as plain tested code, then the API layer on top.</p></li><li class="pg-step" style="--i:2"><span class="pg-step__n" aria-hidden="true">03</span><h3 class="pg-step__t">Verify</h3><p>Automated tests, realistic sample data and edge cases, with logging switched on.</p></li><li class="pg-step" style="--i:3"><span class="pg-step__n" aria-hidden="true">04</span><h3 class="pg-step__t">Hand over</h3><p>Documentation, a ready-to-run Docker setup and a walkthrough.</p></li></ol>
+<ol class="pg-steps" data-reveal-group><li class="pg-step" style="--i:0"><span class="pg-step__n" aria-hidden="true">01</span><h3 class="pg-step__t">Scope</h3><p>We define the endpoints, the data and how errors are reported before building starts.</p></li><li class="pg-step" style="--i:1"><span class="pg-step__n" aria-hidden="true">02</span><h3 class="pg-step__t">Build</h3><p>The core logic first, as plain tested code, then the API layer on top.</p></li><li class="pg-step" style="--i:2"><span class="pg-step__n" aria-hidden="true">03</span><h3 class="pg-step__t">Verify</h3><p>Automated tests, realistic sample data and edge cases, with logging switched on.</p></li><li class="pg-step" style="--i:3"><span class="pg-step__n" aria-hidden="true">04</span><h3 class="pg-step__t">Hand over</h3><p>Documentation, a ready-to-run Docker setup and a walkthrough.</p></li></ol>
   </div>
 </section><section id="proof" class="section pg-sec section--tint" aria-labelledby="proof-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">Proof from real work</p>
       <h2 id="proof-h" class="section__title">Real projects behind this <span class="hl hl--magenta">service</span></h2>
-      <p class="section__lead">Real projects, with the numbers and their limits on each page.</p>
+      <p class="section__lead">Real projects, each with its results on its own page.</p>
     </header>
-<div class="grid grid--c3 pg-cards"><article class="card pg-proof" data-tone="blue" data-tilt data-reveal style="--i:0" aria-labelledby="pf-django-box-selection-api">
-        <p class="pg-proj__meta">Backend</p>
-        <h3 class="pg-proj__title" id="pf-django-box-selection-api">Box Selection API</h3>
-        <p class="pg-proj__blurb">Give it an order and this Django API picks the fewest, cheapest shipping boxes. It tries every rotation, and 27 tests pass.</p>
-        <p class="pg-proj__stat"><span class="pg-proj__num">27</span><span class="pg-proj__statlabel">Passing tests (11 logic, 16 API)</span></p>
-        <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/#p-django-box-selection-api">See project<span class="sr-only">: Box Selection API</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
-      </article><article class="card pg-proof" data-tone="blue" data-tilt data-reveal style="--i:1" aria-labelledby="pf-observable-ai-backend">
+<div class="grid grid--c3 pg-cards"><article class="card pg-proof" data-tone="blue" data-tilt data-reveal style="--i:0" aria-labelledby="pf-observable-ai-backend">
         <p class="pg-proj__meta">AI and backend</p>
         <h3 class="pg-proj__title" id="pf-observable-ai-backend">Traceable <span class="ai">AI</span> Backend</h3>
-        <p class="pg-proj__blurb">An AI-routed backend that shows exactly where each request goes and where it slows down, with request IDs, metrics and traces.</p>
+        <p class="pg-proj__blurb">An AI server that shows exactly where each request goes and where it slows down, with request IDs, metrics and traces for LLM observability.</p>
         <p class="pg-proj__stat"><span class="pg-proj__num">15 seconds to under 50 milliseconds</span><span class="pg-proj__statlabel">Slow lookup, before and after the fix (made-up data)</span></p>
         <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/observable-ai-backend/">Read case study<span class="sr-only">: Traceable AI Backend</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
-      </article><article class="card pg-proof" data-tone="blue" data-tilt data-reveal style="--i:2" aria-labelledby="pf-whatsapp-ai-agent-platform">
+      </article><article class="card pg-proof" data-tone="blue" data-tilt data-reveal style="--i:1" aria-labelledby="pf-whatsapp-ai-agent-platform">
         <p class="pg-proj__meta">Automation</p>
         <h3 class="pg-proj__title" id="pf-whatsapp-ai-agent-platform">WhatsApp Automation and <span class="ai">AI</span> Agent Platform</h3>
-        <p class="pg-proj__blurb">A client WhatsApp platform: AI replies run in the background, each chat is tracked and human operators get alerts.</p>
+        <p class="pg-proj__blurb">AI replies run in the background, every chat is tracked and human operators get alerts.</p>
         
         <div class="pg-proj__foot"><a class="link-arrow card__link" href="../../projects/#p-whatsapp-ai-agent-platform">See project<span class="sr-only">: WhatsApp Automation and AI Agent Platform</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
       </article></div>
-    
+    <p class="pg-smallrel" data-reveal>Related personal builds: <a class="link" href="../../projects/#p-django-box-selection-api">Box Selection API</a>.</p>
     <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../projects/">See all case studies <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
   </div>
 </section><section id="tools" class="section pg-sec" aria-labelledby="tools-h">
@@ -336,16 +324,16 @@
 <div class="pg-qas"><details class="pg-qa" id="ai-backend-fastapi-django-q1" open data-reveal>
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Is FastAPI used in production?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>Yes. Many companies use FastAPI in production for web services and AI features. It is fast, checks incoming data automatically and writes API documentation for you. At work I built an AI drafting service in FastAPI that runs next to a live product. I use it for real systems, not only for demos.</p></div>
-    </details><details class="pg-qa" id="ai-backend-fastapi-django-q2" data-reveal style="--i:1">
+    </details><details class="pg-qa" id="ai-backend-fastapi-django-q2" open data-reveal style="--i:1">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Which is better, FastAPI or Django?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>FastAPI suits services built around an API, including AI features. Django with Django REST Framework suits products that also need an admin area, user accounts and a built-in database layer. I use both and will recommend one after reading your requirements.</p></div>
-    </details><details class="pg-qa" id="ai-backend-fastapi-django-q3" data-reveal style="--i:2">
+    </details><details class="pg-qa" id="ai-backend-fastapi-django-q3" open data-reveal style="--i:2">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Can you take over an existing Python backend?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>Yes. Much of my professional work has been inside existing systems. I read the code before changing it and keep changes covered by tests. I also leave a clear decision log in the repository, so your team knows what changed and why.</p></div>
-    </details><details class="pg-qa" id="ai-backend-fastapi-django-q4" data-reveal style="--i:3">
+    </details><details class="pg-qa" id="ai-backend-fastapi-django-q4" open data-reveal style="--i:3">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Can you set up background jobs and live progress updates?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>Yes. I have used Celery and Redis to move slow work away from the main API. I have also used WebSockets to stream the progress of long-running jobs to a React web screen. Users see live status instead of waiting, and the main API stays responsive for everyone else.</p></div>
-    </details><details class="pg-qa" id="ai-backend-fastapi-django-q5" data-reveal style="--i:4">
+    </details><details class="pg-qa" id="ai-backend-fastapi-django-q5" open data-reveal style="--i:4">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Will the API come with tests?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>Yes. My own backend projects ship with tests for the core logic and for each endpoint, and I take the same approach on client work. Tests make later changes safer and cheaper, and they show your team how each part is meant to behave.</p></div>
     </details></div>
@@ -357,7 +345,7 @@
       <h2 id="related-h" class="section__title">Related <span class="hl hl--purple">services</span></h2>
       
     </header>
-<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/llm-rag-development/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-brain-circuit"/></svg></span><span><strong>Freelance chatbot developer</strong><span class="pg-rel__t">Chatbots that answer from your documents, show their sources and say so when they do not know.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/python-automation-integrations/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-workflow"/></svg></span><span><strong>Web scrapers and chat bots</strong><span class="pg-rel__t">Scrapers, bots and messaging links that take repetitive work off your team.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
+<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/llm-rag-development/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-brain-circuit"/></svg></span><span><strong>Freelance chatbot developer</strong><span class="pg-rel__t">Chatbots that answer from your documents and show their sources.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/python-automation-integrations/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-workflow"/></svg></span><span><strong>Web scrapers and chat bots</strong><span class="pg-rel__t">Scrapers and bots that take repetitive work off your team.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
       <li><a class="pg-rel__link" href="../../faq/" data-tone="green"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></span><span><strong>Freelance FAQ</strong><span class="pg-rel__t">Cost, how to start, NDAs and ownership.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
     </ul>
     <p class="pg-linkrow" data-reveal><a class="link-arrow" href="../../services/">All services <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></p>
@@ -373,7 +361,7 @@
       </div>
       <div class="pg-hire__act">
         <a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=ai-backend-fastapi-django#hire" data-magnetic>Hire me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
-        <p class="pg-hire__alt"><a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a><span aria-hidden="true"> &middot; </span><a class="link" href="../../projects/">View work</a></p>
+        <p class="pg-hire__alt"><a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a><span aria-hidden="true"> &middot; </span><a class="link" href="../../projects/">See projects</a></p>
       </div>
     </div>
   </div>
@@ -399,7 +387,7 @@
           <span class="logo__word">SHAUNAK</span>
         </p>
         <p class="footer__blurb">AI Engineer at Claptek Pvt Ltd. Taking select freelance AI and backend projects.</p>
-        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India &ndash; working remotely (IST)</p>
+        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India (IST)</p>
         <ul class="footer__soc" aria-label="Profiles">
           <li><a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a></li>
           <li><a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a></li>
@@ -416,9 +404,10 @@
             <li><a href="../../projects/">Projects</a></li>
             <li><a href="../../services/">Services</a></li>
             <li><a href="../../about/">About</a></li>
+            <li><a href="../../about/#experience">Experience</a></li>
+            <li><a href="../../resume/">Resume</a></li>
             <li><a href="../../faq/">FAQ</a></li>
             <li><a href="../../contact/">Contact</a></li>
-            <li><a href="../../resume/">Resume</a></li>
           </ul>
         </nav>
 
@@ -437,7 +426,7 @@
         <nav class="footer__col" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../../projects/observable-ai-backend/">FastAPI tracing with OpenTelemetry</a></li>
+            <li><a href="../../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
             <li><a href="../../projects/agentic-honeypot/">AI scam honeypot</a></li>
             <li><a href="../../projects/deepfake-video-detection/">Deepfake video detection</a></li>
@@ -513,10 +502,10 @@
     <symbol id="i-loader" viewBox="0 0 24 24"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/></symbol>
   </svg>
 
-  <script defer src="../../assets/dist/js/core.min.js?v=53badac3"></script>
+  <script defer src="../../assets/dist/js/core.min.js?v=d41b0d5b"></script>
   <script defer src="../../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
   <script defer src="../../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../../assets/dist/js/fx.min.js?v=2e06fef0"></script>
-  <script defer src="../../assets/dist/js/pages.min.js?v=794591ab"></script>
+  <script defer src="../../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
+  <script defer src="../../assets/dist/js/pages.min.js?v=efc0e441"></script>
 </body>
 </html>

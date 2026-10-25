@@ -4,6 +4,7 @@ import {
   esc, ico, tags, btn, pageHead, section, hireBand, qaList, hireHref, title as ttl,
   ctx, crumbNode, webPage, faqNode, personMini, PERSON_ID,
 } from './ui.mjs';
+import { howIWork } from './p-about.mjs';
 
 const SIBLINGS = {
   'llm-apps-rag': ['document-ai-extraction', 'python-backend-apis'],
@@ -20,12 +21,6 @@ const PROCESS = [
   { step: 'Prototype', detail: 'A small working version on your data, so you see real software early.' },
   { step: 'Harden', detail: 'Tests and safety checks, plus short written updates along the way.' },
   { step: 'Hand over', detail: 'Notes, setup instructions and a walkthrough so your team can run it.' },
-];
-/* honest limits - every line is a fact from content (faq / contact note / CV faq) */
-const LIMITS = [
-  'I keep the number of projects small, so each one gets proper attention alongside my full-time job.',
-  'I will not promise an accuracy number before I have seen your data.',
-  'I write no code before we agree on the scope, and I will say plainly if a project is not a good fit.',
 ];
 
 const stepsHtml = (steps, extra = '') => `<ol class="pg-steps${extra}" data-reveal-group>${steps.map((s, i) =>
@@ -46,12 +41,11 @@ function hub() {
   const url = abs(cfg, m.path);
   const crumbItems = [{ name: 'Home', path: '' }, { name: 'Services', path: m.path }];
   const head = pageHead({
-    crumbItems, b, eyebrow: 'Freelance services', h1: esc(m.h1), lead: m.lead, answer: m.direct_answer,
-    actions: btn('Hire me', hireHref(b), { v: 'solid', size: 'lg' }) + btn('View work', b + 'projects/', { v: 'ghost', size: 'lg', icon: 'arrow-right' }),
+    crumbItems, b, eyebrow: 'Freelance services', h1: esc(m.h1), answer: m.direct_answer,
+    actions: btn('Hire me', hireHref(b), { v: 'solid', size: 'lg' }) + btn('See projects', b + 'projects/', { v: 'ghost', size: 'lg', icon: 'arrow-right' }),
   });
   const cards = section({
-    id: 'all-services', eyebrow: 'Six services', title: 'What I can build <span class="hl">for you</span>',
-    lead: 'Each service has its own page. It lists what you get, how the work runs, the tools and the real projects behind it.',
+    id: 'all-services', eyebrow: 'Services', title: 'What I can build <span class="hl">for you</span>',
     body: `<div class="grid grid--c3 pg-cards">${services.map((s, i) => serviceCard(s, b, i)).join('')}</div>`,
   });
   const process = section({
@@ -59,15 +53,13 @@ function hub() {
     lead: 'Four steps, in this order. You see working software early, and I share progress in short written updates.',
     body: stepsHtml(PROCESS),
   });
-  const limits = section({
-    id: 'limits', eyebrow: 'Straight talk', title: 'Honest <span class="hl hl--magenta">limits</span>', tint: true,
-    body: `<div class="panel pg-limits" data-tone="magenta" data-reveal><ul class="dot-list">${LIMITS.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>
-    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="${b}projects/">See the projects behind these services ${ico('arrow-right')}</a><a class="link-arrow" href="${b}faq/">Read the freelance FAQ ${ico('arrow-right')}</a></p>`,
+  const how = howIWork({
+    extra: `<p class="pg-linkrow" data-reveal><a class="link-arrow" href="${b}projects/">See the projects behind these services ${ico('arrow-right')}</a><a class="link-arrow" href="${b}faq/">Read the freelance FAQ ${ico('arrow-right')}</a></p>`,
   });
   const faqItems = (m.faqs || []).map((f, i) => ({ id: `q${i + 1}`, q: f.q, a: f.a }));
   const faq = faqItems.length ? section({
     id: 'faq', eyebrow: 'FAQ', title: 'Choosing <span class="hl">a service</span>',
-    body: qaList(faqItems, { idPrefix: 'services', openFirst: true }),
+    body: qaList(faqItems, { idPrefix: 'services' }),
   }) : '';
   const jsonld = ctx([
     webPage(url, m.title, m.description, { '@type': 'CollectionPage', mainEntity: { '@id': url + '#services' }, about: { '@id': PERSON_ID } }),
@@ -78,7 +70,7 @@ function hub() {
   ]);
   return {
     path: m.path, current: 'services', title: m.title, description: m.description, jsonld,
-    content: head + cards + process + limits + faq + hireBand({ b, heading: 'Have a project in <span class="hl">mind?</span>', text: CTA_TEXT }),
+    content: head + cards + process + how + faq + hireBand({ b, heading: 'Have a project in <span class="hl">mind?</span>', text: CTA_TEXT }),
     llms: { heading: m.h1, url, desc: m.description, text: [m.direct_answer, ...services.map(s => `${s.name}: ${s.blurb}`), ...faqItems.map(f => `Q: ${f.q} A: ${f.a}`)] },
   };
 }
@@ -127,9 +119,9 @@ function servicePage(s) {
   const small = rel.filter(p => !(p.hasCase || p.inShow));
   const proof = section({
     id: 'proof', eyebrow: 'Proof from real work', title: ttl(s.h2 && s.h2.proof, 'Work behind <span class="hl hl--magenta">this service</span>', 'hl--magenta'), tint: true,
-    lead: 'Real projects, with the numbers and their limits on each page.',
+    lead: 'Real projects, each with its results on its own page.',
     body: `<div class="grid grid--c3 pg-cards">${cards.map((p, i) => proofCard(p, b, i)).join('')}</div>
-    ${small.length ? `<p class="pg-smallrel" data-reveal>Smaller related builds: ${small.map(p => `<a class="link" href="${b}projects/#more">${esc(p.title)}</a>`).join(', ')}.</p>` : ''}
+    ${small.length ? `<p class="pg-smallrel" data-reveal>Related personal builds: ${small.map(p => `<a class="link" href="${projectHref(p, b)}">${esc(p.title)}</a>`).join(', ')}.</p>` : ''}
     <p class="pg-linkrow" data-reveal><a class="link-arrow" href="${b}projects/">See all case studies ${ico('arrow-right')}</a></p>`,
   });
 
@@ -141,7 +133,7 @@ function servicePage(s) {
   const faqItems = s.faqs.map((f, i) => ({ id: `q${i + 1}`, q: f.q, a: f.a }));
   const faq = section({
     id: 'faq', eyebrow: 'FAQ', title: ttl(s.h2 && s.h2.faq, `Questions about <span class="hl">${esc(s.name)}</span>`),
-    body: qaList(faqItems, { idPrefix: s.slug, openFirst: true }),
+    body: qaList(faqItems, { idPrefix: s.slug }),
   });
 
   const sibs = SIBLINGS[s.key].map(k => serviceByKey[k]);
@@ -163,7 +155,7 @@ function servicePage(s) {
     crumbNode(url, crumbItems),
     faqNode(url, faqItems),
   ]);
-  const tail = hireBand({ b, heading: `Discuss ${esc(anchors(s.path).hire || s.name)} <span class="hl">with me</span>`, text: CTA_TEXT, topic: s.slug, secondary: { label: 'View work', href: b + 'projects/' } });
+  const tail = hireBand({ b, heading: `Discuss ${esc(anchors(s.path).hire || s.name)} <span class="hl">with me</span>`, text: CTA_TEXT, topic: s.slug });
   return {
     path: s.path, current: 'services', title, description: s.description, jsonld,
     content: head + what + process + proof + toolsSec + faq + related + tail,

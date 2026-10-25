@@ -1,7 +1,7 @@
 // ui.mjs - small HTML fragment helpers shared by every page module. Pure string templates, no dependencies.
 import { breadcrumb, abs } from '../../build.mjs';
 import { esc, icon } from '../lib.mjs';
-import { cfg, EMAIL, FREELANCE_LINE, LASTMOD, profile } from './data.mjs';
+import { cfg, collage, EMAIL, FREELANCE_LINE, LASTMOD, profile } from './data.mjs';
 
 export { esc, abs, cfg };
 
@@ -81,7 +81,7 @@ export function title(override, fallbackHtml, cls = '') {
 /* ---------- hire band: the closing block of every page ---------- */
 export function hireBand({ b, heading, text, topic = '', secondary = null }) {
   const href = hireHref(b, topic);
-  const sec = secondary || { label: 'View work', href: `${b}projects/` };
+  const sec = secondary || { label: 'See projects', href: `${b}projects/` };
   return `<section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
   <div class="container">
     <div class="pg-hire__band" data-reveal="scale">
@@ -100,56 +100,58 @@ export function hireBand({ b, heading, text, topic = '', secondary = null }) {
 </section>`;
 }
 
-/* ---------- FAQ accordion (native <details>, readable without JS) ---------- */
-export function qaList(items, { idPrefix = 'q', openFirst = false, links = {} } = {}) {
+/* ---------- FAQ accordion (native <details>, every answer open on load; the visitor can close any) ---------- */
+export function qaList(items, { idPrefix = 'q', links = {} } = {}) {
   return `<div class="pg-qas">` + items.map((it, i) => {
     const id = it.id ? `${idPrefix}-${it.id}` : `${idPrefix}-${i + 1}`;
     const l = links[it.id];
-    return `<details class="pg-qa" id="${id}"${openFirst && i === 0 ? ' open' : ''} data-reveal${i ? ` style="--i:${Math.min(i, 4)}"` : ''}>
+    return `<details class="pg-qa" id="${id}" open data-reveal${i ? ` style="--i:${Math.min(i, 4)}"` : ''}>
       <summary class="pg-qa__q"><h3 class="pg-qa__h">${esc(it.q)}</h3>${ico('chevron-down', 'pg-qa__chev')}</summary>
       <div class="pg-qa__a"><p>${esc(it.a)}</p>${l ? `<p class="pg-qa__more"><a class="link-arrow" href="${l.href}">${esc(l.label)} ${ico('arrow-right')}</a></p>` : ''}</div>
     </details>`;
   }).join('') + `</div>`;
 }
 
-/* ---------- project cards ---------- */
+/* ---------- project visuals and the collage ---------- */
 /** visual thumbnail (generative canvas, decorative) */
 export function pv(p, extra = '') {
   return `<div class="pv${extra ? ' ' + extra : ''}" data-visual="${esc(p.visual_hint || 'generic')}" data-variant="${esc(p.visual_variant || p.id)}" data-tone="${esc(p.tone)}" aria-hidden="true"></div>`;
 }
 
-/** a card for a project that has its own case study page */
-export function caseCard(p, b, i = 0) {
-  const m = (p.metrics || [])[0];
-  return `<li class="pg-grid__item" data-pid="${esc(p.id)}" data-cat="${esc(p.category_group)}">
-      <article class="card pg-proj" data-tone="${esc(p.tone)}" data-tilt data-reveal style="--i:${i % 3}" aria-labelledby="pj-${esc(p.id)}">
-        <div class="pg-proj__media">${pv(p)}</div>
-        <div class="pg-proj__body">
-          <p class="pg-proj__meta">${esc(p.category)}</p>
-          <h3 class="pg-proj__title" id="pj-${esc(p.id)}">${esc(p.title)}</h3>
-          <p class="pg-proj__blurb">${esc(p.card_blurb)}</p>
-          ${m ? `<p class="pg-proj__stat"><span class="pg-proj__num">${esc(m.value)}</span><span class="pg-proj__statlabel">${esc(m.label)}</span></p>` : ''}
-          ${tags((p.stack || []).slice(0, 4), { cls: 'pg-proj__tags', label: 'Main tools' })}
-          <div class="pg-proj__foot"><a class="link-arrow card__link" href="${b}${p.path}">Read case study<span class="sr-only">: ${esc(p.title)}</span> ${ico('arrow-right')}</a></div>
+/** one collage tile: the visual, a small category + origin line, the title and (wide and big tiles only, see collage.css) the blurb.
+ *  A project with a case study links to it. Without one, a public repository is the link and a private one is a plain label. */
+function tile(p, b, i, filterable, lone) {
+  const href = p.hasCase ? b + p.path : p.repoInfo.kind === 'public' ? p.repoInfo.href : '';
+  const name = !href ? esc(p.title)
+    : p.hasCase ? `<a class="card__link" href="${href}">${esc(p.title)}<span class="sr-only"> case study</span></a>`
+      : `<a class="card__link" href="${href}" target="_blank" rel="noopener noreferrer">${esc(p.title)}<span class="sr-only"> on GitHub (opens in a new tab)</span></a>`;
+  return `<li class="tile${p.size === 'small' ? '' : ' tile--' + p.size}${lone ? ' tile--lone' : ''}" id="p-${esc(p.id)}" data-rank="${p.rank}" data-pid="${esc(p.id)}"${filterable ? ` data-cat="${esc(p.category_group)}"` : ''} style="--area:p${p.rank}">
+      <article class="card tile__card" data-tone="${esc(p.tone)}" data-tilt${p.hasCase ? ' data-cursor="case"' : ''} data-reveal style="--i:${i % 4}" aria-labelledby="pj-${esc(p.id)}">
+        <div class="tile__media">${pv(p)}</div>
+        <div class="tile__body">
+          <p class="tile__meta"><span class="tile__cat">${esc(p.category)}</span>${p.origin ? `<span class="tile__origin">${esc(p.origin)}</span>` : ''}</p>
+          <h3 class="tile__title" id="pj-${esc(p.id)}">${name}</h3>
+          <p class="tile__blurb">${esc(p.card_blurb)}</p>${href ? '' : `\n          <p class="tile__note">${esc(p.repoInfo.text || 'Private')}</p>`}
         </div>
       </article>
     </li>`;
 }
 
-/** a compact card for a selected project without a case study (no art, repo link only) */
-export function miniCard(p, b, i = 0) {
-  const link = p.repoInfo.kind === 'public'
-    ? `<a class="link-arrow" href="${p.repoInfo.href}" target="_blank" rel="noopener noreferrer">View code on GitHub<span class="sr-only"> for ${esc(p.title)} (opens in a new tab)</span> ${ico('arrow-up-right')}</a>`
-    : `<span class="pg-proj__private">${esc(p.repoInfo.text || 'Private')}</span>`;
-  return `<li class="pg-grid__item" data-pid="${esc(p.id)}" data-cat="${esc(p.category_group)}" id="p-${esc(p.id)}">
-      <article class="card pg-mini card--flat" data-tone="${esc(p.tone)}" data-reveal style="--i:${i % 3}" aria-labelledby="pj-${esc(p.id)}">
-        <p class="pg-proj__meta">${esc(p.category)}</p>
-        <h3 class="pg-proj__title" id="pj-${esc(p.id)}">${esc(p.title)}</h3>
-        <p class="pg-proj__blurb">${esc(p.card_blurb)}</p>
-        ${tags((p.stack || []).slice(0, 4), { cls: 'pg-proj__tags', label: 'Main tools' })}
-        <div class="pg-proj__foot">${link}</div>
-      </article>
-    </li>`;
+/** the selected projects as a collage of mixed tile sizes (tools/selection.mjs and projects.config.json decide order, sizes and the desktop grid)
+ *  plus the plain link tile that closes it; `all` = { href, label, icon } for that tile; `filterable` adds the category data the chips on /projects/ use */
+export function projectCollage({ b, all, filterable = false }) {
+  const rows = collage.areas.map(r => `'${r}'`).join(' ');
+  /* the two-column (tablet) layout keeps the rank order: a small tile left alone in its row, because a wide or big tile (or the end) follows, spans both columns */
+  const lone = new Set();
+  let col = 0;
+  [...collage.tiles, { rank: collage.linkRank, size: 'small' }].forEach(t => {
+    if (t.size === 'small') { col ^= 1; if (col) lone.add(t.rank); else lone.delete(t.rank - 1); }
+    else col = 0;
+  });
+  return `<ul class="collage" role="list"${filterable ? ' data-filterable' : ''} style="--areas:${rows}">
+    ${collage.tiles.map((p, i) => tile(p, b, i, filterable, lone.has(p.rank))).join('\n    ')}
+    <li class="tile tile--link${lone.has(collage.linkRank) ? ' tile--lone' : ''}" data-rank="${collage.linkRank}" style="--area:p${collage.linkRank}" data-reveal><a class="tile__all" href="${all.href}"><span>${esc(all.label)}</span>${ico(all.icon || 'arrow-right')}</a></li>
+  </ul>`;
 }
 
 /* ---------- JSON-LD helpers ---------- */

@@ -5,7 +5,7 @@ import { esc, btn, pageHead, hireBand, qaList, hireHref, ctx, crumbNode, personM
 /* one descriptive internal link under selected answers (internal linking, not part of the FAQPage text) */
 const MORE = b => ({
   freelance: { label: 'See the freelance services', href: b + 'services/' },
-  'what-i-build': { label: 'Browse the six services', href: b + 'services/' },
+  'what-i-build': { label: 'Browse the services', href: b + 'services/' },
   'existing-code': { label: 'Python backend and API work', href: b + serviceByKey['python-backend-apis'].path },
   timeline: { label: 'Send a brief for an estimate', href: b + 'contact/#hire' },
   'how-to-start': { label: 'Send a brief', href: b + 'contact/#hire' },
@@ -25,11 +25,11 @@ function page() {
   const url = abs(cfg, m.path);
   const crumbItems = [{ name: 'Home', path: '' }, { name: 'FAQ', path: m.path }];
   const head = pageHead({
-    crumbItems, b, eyebrow: 'FAQ', h1: esc(m.h1), lead: m.lead, answer: m.direct_answer,
+    crumbItems, b, eyebrow: 'FAQ', h1: esc(m.h1), answer: m.direct_answer,
     actions: btn('Hire me', hireHref(b), { v: 'solid', size: 'lg' }) + btn('See services', b + 'services/', { v: 'ghost', size: 'lg' }),
   });
   const more = MORE(b);
-  const groups = faqAll.map((g, i) => `<div class="pg-qgroup"><h2 class="pg-qgroup__h" data-reveal>${esc(g.group)}</h2>${qaList(g.items, { idPrefix: 'faq', openFirst: i === 0, links: more })}</div>`).join('');
+  const groups = faqAll.map(g => `<div class="pg-qgroup"><h2 class="pg-qgroup__h" data-reveal>${esc(g.group)}</h2>${qaList(g.items, { idPrefix: 'faq', links: more })}</div>`).join('');
   const body = `<section class="section pg-sec" aria-label="Questions and answers"><div class="container"><div class="pg-faqcol">${groups}</div></div></section>`;
 
   const all = faqAll.flatMap(g => g.items);

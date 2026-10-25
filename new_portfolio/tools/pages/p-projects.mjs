@@ -1,14 +1,11 @@
 // p-projects.mjs - /projects/ (hub) and /projects/<slug>/ for every case study of projects.config.json
 import {
-  cfg, abs, CTA_TEXT, caseStudies, showProjects, showOnly, moreProjects, filters, pagesMeta, anchors,
+  cfg, abs, CTA_TEXT, caseStudies, showProjects, personalProjects, filters, pagesMeta, anchors,
 } from './data.mjs';
 import {
-  esc, ico, tags, btn, pageHead, section, hireBand, qaList, hireHref, caseCard, miniCard, pv, title as ttl,
+  esc, ico, tags, btn, pageHead, section, hireBand, qaList, hireHref, projectCollage, pv, title as ttl,
   ctx, crumbNode, webPage, faqNode, personRef, personMini, WEBSITE_ID, PERSON_ID,
 } from './ui.mjs';
-
-const NUM_WORD = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
-const numWord = n => NUM_WORD[n] || String(n);
 
 /* projects adapted from public work: Shaunak is a contributor, not the original author (the page text says so) */
 const ADAPTED = { 'speech-emotion-recognition': 'A public training recipe from Kaggle, adapted and extended' };
@@ -18,60 +15,48 @@ function hub() {
   const b = '../';
   const url = abs(cfg, m.path);
   const crumbItems = [{ name: 'Home', path: '' }, { name: 'Projects', path: m.path }];
-  const nCase = caseStudies.length;
-  const lead = `A selection of the Artificial Intelligence (AI) chatbot, computer vision, speech and backend work I have built, at my job and on my own.`;
-  const answer = m.direct_answer.replace('{Cases}', numWord(nCase)[0].toUpperCase() + numWord(nCase).slice(1) + ' projects');
+  const answer = m.direct_answer;
   const head = pageHead({
-    crumbItems, b, eyebrow: 'Projects', h1: esc(m.h1), lead, answer,
+    crumbItems, b, eyebrow: 'Projects', h1: esc(m.h1), answer,
     actions: btn('Hire me', hireHref(b), { v: 'solid', size: 'lg' }) + btn('See services', b + 'services/', { v: 'ghost', size: 'lg' }),
   });
 
-  // filter chips: only groups that have selected projects; JS-free fallback shows everything
-  const counts = {};
-  for (const p of showProjects) counts[p.category_group] = (counts[p.category_group] || 0) + 1;
-  const chips = filters.filter(f => f.id === 'all' || counts[f.id]).map(f => {
-    const n = f.id === 'all' ? showProjects.length : counts[f.id];
-    const tone = { llm: 'cyan', vision: 'magenta', 'speech-ml': 'purple', backend: 'blue', automation: 'blue', 'web-tools': 'blue' }[f.id];
-    return `<li><button type="button" class="chip" data-filter="${f.id}"${tone ? ` data-tone="${tone}"` : ''} aria-pressed="${f.id === 'all'}">${esc(f.label)} <span class="chip__count" aria-hidden="true">${n}</span><span class="sr-only">(${n} ${n === 1 ? 'project' : 'projects'})</span></button></li>`;
+  // filter chips: only groups that have selected projects, labels only; JS-free fallback shows everything
+  const groups = new Set(showProjects.map(p => p.category_group));
+  const chips = filters.filter(f => f.id === 'all' || groups.has(f.id)).map(f => {
+    const tone = { llm: 'cyan', vision: 'magenta', 'speech-ml': 'purple', backend: 'blue', automation: 'blue' }[f.id];
+    return `<li><button type="button" class="chip" data-filter="${f.id}"${tone ? ` data-tone="${tone}"` : ''} aria-pressed="${f.id === 'all'}">${esc(f.label)}</button></li>`;
   }).join('');
   const filterBar = `<div class="pg-filterbar" data-filterbar hidden data-reveal>
       <div role="group" aria-label="Filter selected projects by category"><ul class="chips" role="list">${chips}</ul></div>
-      <p class="pg-filtercount" data-filtercount role="status" aria-live="polite" aria-atomic="true">Showing <strong>${showProjects.length}</strong> of ${showProjects.length} projects</p>
     </div>`;
 
-  const cases = section({
-    id: 'case-studies', eyebrow: 'Case studies', title: ttl(m.h2 && m.h2.cases, 'Case studies with <span class="hl">the evidence</span>'),
-    lead: 'Each one covers the problem, what I built, what it does and what the results do not show.',
+  const selected = section({
+    id: 'selected-projects', eyebrow: 'Work', title: ttl(m.h2.work, 'Selected <span class="hl">projects</span>'),
     body: `${filterBar}
-    <ul class="pg-grid pg-grid--cases" role="list" data-filterable>${caseStudies.map((p, i) => caseCard(p, b, i)).join('')}</ul>`,
+    ${projectCollage({ b, filterable: true, all: { href: '#personal-builds', label: 'Personal builds', icon: 'arrow-right' } })}`,
   });
-  const also = showOnly.length ? section({
-    id: 'also-selected', eyebrow: 'Also selected', title: `Client and personal <span class="hl hl--blue">builds</span>`, tint: true,
-    lead: 'Smaller builds, and client work, that do not have a full write-up.',
-    body: `<ul class="pg-grid pg-grid--mini" role="list" data-filterable>${showOnly.map((p, i) => miniCard(p, b, i)).join('')}</ul>`,
-  }) : '';
 
-  const rows = moreProjects.map(p => {
+  /* Personal builds: small projects, open rows (a short line, repository and live links when they exist), low-key on purpose */
+  const rows = personalProjects.map(p => {
     const links = [];
     if (p.repoInfo.kind === 'public') links.push(`<a class="link" href="${p.repoInfo.href}" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for ${esc(p.title)} (opens in a new tab)</span></a>`);
     if (p.live) links.push(`<a class="link" href="${p.live}" target="_blank" rel="noopener noreferrer">Live<span class="sr-only"> demo of ${esc(p.title)} (opens in a new tab)</span></a>`);
-    return `<li class="pg-more__row" id="m-${esc(p.id)}">
-          <div><p class="pg-more__t">${esc(p.title)}</p><p class="pg-more__d">${esc(p.card_blurb)}</p></div>
-          <div class="pg-more__side"><span class="pg-more__tech">${esc((p.stack || []).slice(0, 3).join(' / '))}</span>${links.length ? `<span class="pg-more__links">${links.join('<span aria-hidden="true"> &middot; </span>')}</span>` : ''}</div>
+    return `<li class="pg-builds__row" id="p-${esc(p.id)}">
+          <p class="pg-builds__t">${esc(p.title)}</p>
+          <p class="pg-builds__d">${esc(p.personal_line)}</p>
+          ${links.length ? `<p class="pg-builds__links">${links.join('<span aria-hidden="true"> &middot; </span>')}</p>` : ''}
         </li>`;
   }).join('');
-  const more = moreProjects.length ? section({
-    id: 'more-projects', eyebrow: 'Smaller builds', title: `Compact <span class="hl hl--purple">project list</span>`,
-    body: `<details class="pg-morebox" id="more" data-reveal>
-      <summary class="pg-morebox__sum"><span>Show the ${moreProjects.length} smaller projects</span>${ico('chevron-down', 'pg-morebox__chev')}</summary>
-      <ul class="pg-more" role="list">${rows}</ul>
-    </details>`,
-  }) : '';
+  const personal = section({
+    id: 'personal-builds', eyebrow: 'On my own', title: ttl(m.h2.personal, 'Personal <span class="hl hl--purple">builds</span>', 'hl--purple'), tint: true,
+    body: `<ul class="pg-builds" role="list" data-reveal>${rows}</ul>`,
+  });
 
   const faqItems = (m.faqs || []).map((f, i) => ({ id: `q${i + 1}`, q: f.q, a: f.a }));
   const faq = faqItems.length ? section({
-    id: 'faq', eyebrow: 'FAQ', title: 'About these <span class="hl">projects</span>', tint: true,
-    body: qaList(faqItems, { idPrefix: 'projects', openFirst: true }),
+    id: 'faq', eyebrow: 'FAQ', title: 'About these <span class="hl">projects</span>',
+    body: qaList(faqItems, { idPrefix: 'projects' }),
   }) : '';
   const jsonld = ctx([
     webPage(url, m.title, m.description, { '@type': 'CollectionPage', mainEntity: { '@id': url + '#cases' }, about: { '@id': PERSON_ID } }),
@@ -82,7 +67,7 @@ function hub() {
   ]);
   return {
     path: m.path, current: 'projects', title: m.title, description: m.description, jsonld,
-    content: head + cases + also + more + faq + hireBand({ b, heading: 'Want something <span class="hl">like this built?</span>', text: CTA_TEXT }),
+    content: head + selected + personal + faq + hireBand({ b, heading: 'Want something <span class="hl">like this built?</span>', text: CTA_TEXT }),
     llms: { heading: m.h1, url, desc: m.description, text: [answer, ...faqItems.map(f => `Q: ${f.q} A: ${f.a}`)] },
   };
 }
@@ -159,7 +144,7 @@ function casePage(p, idx) {
   const faqItems = (p.faq || []).map((f, i) => ({ id: `q${i + 1}`, q: f.q, a: f.a }));
   const faq = faqItems.length ? section({
     id: 'faq', eyebrow: 'FAQ', title: ttl(h2.faq, 'Questions about <span class="hl">this project</span>'), tint: true,
-    body: qaList(faqItems, { idPrefix: p.id, openFirst: true }),
+    body: qaList(faqItems, { idPrefix: p.id }),
   }) : '';
 
   const prev = caseStudies[(idx - 1 + caseStudies.length) % caseStudies.length];

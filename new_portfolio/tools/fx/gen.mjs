@@ -29,12 +29,12 @@ const data = {
   gh: p.links.github, li: p.links.linkedin, ig: p.links.instagram, resume: p.links.resume_pdf_relative,
   bio: p.summary_long.split(/\n+/),
   freelance: p.freelance.line_short,
-  degree: whoami.education.degree, school: whoami.education.institution,
+  degree: `${whoami.education.degree}, ${whoami.education.year}`, school: whoami.education.institution,
   hero: { stack: c.skills.core.slice(0, 4) },
   skills: { core: c.skills.core, also: c.skills.also, labels: c.skills.tier_labels },
   pages: PAGE_KEYS.map(k => ({ path: c.pages[k].path, label: c.pages[k].nav_label, hint: c.pages[k].h1, kw: k })),
   services: c.services.map(s => ({ slug: s.slug, label: s.nav_label, blurb: s.blurb })),
-  projects: [...sel.show, ...sel.more].map(proj),
+  projects: [...sel.show, ...sel.personal].map(proj),
   exp: c.experience.map(e => ({
     o: e.org, r: e.role, p: e.period, g: e.group,
     b: e.group === 'work' ? e.bullets.slice(0, 2) : []

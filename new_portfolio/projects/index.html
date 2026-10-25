@@ -44,7 +44,7 @@
     try { var a = localStorage.getItem('pf:accent'); if (a && /^(cyan|magenta|purple|green)$/.test(a)) document.documentElement.setAttribute('data-accent', a); } catch (e) {}
     try { if (localStorage.getItem('pf:motion') === 'paused') document.documentElement.classList.add('fx-paused'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="../assets/dist/site.inner.min.css?v=fcec523d">
+  <link rel="stylesheet" href="../assets/dist/site.inner.min.css?v=99f76e8a">
 
 <script type="application/ld+json">
 {
@@ -157,7 +157,7 @@
           "name": "What are some real world AI project examples?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Real examples on this site include an AI that drafts audit findings and a tool that lists obligations from regulatory documents. Others are a text-to-SQL assistant for a bank database, a healthcare policy chatbot and a scam-catching AI honeypot. There are also CCTV analytics, speech emotion recognition, deepfake video detection and a traceable AI backend."
+            "text": "Real examples on this site include an AI that drafts audit findings from checklist notes, a text-to-SQL assistant for a bank database and a scam-catching AI honeypot. Each one has a case study with the problem, the build and the results."
           }
         }
       ]
@@ -208,22 +208,17 @@
 
         <nav class="nav" aria-label="Primary">
           <ul class="nav__list">
-            <li><a class="nav__link" href="../">Home</a></li>
             <li><a class="nav__link" href="../projects/" aria-current="page">Projects</a></li>
             <li><a class="nav__link" href="../services/">Services</a></li>
             <li><a class="nav__link" href="../about/">About</a></li>
-            <li><a class="nav__link" href="../faq/">FAQ</a></li>
-            <li><a class="nav__link" href="../contact/">Contact</a></li>
+            <li><a class="nav__link" href="../resume/">Resume</a></li>
           </ul>
           <span class="nav__ind" aria-hidden="true"></span>
         </nav>
 
         <div class="site-header__tools">
-          <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST" title="Local time in Mumbai">MUMBAI</span>
-          <button class="cmd" type="button" data-open-palette aria-label="Search, open command palette" aria-keyshortcuts="Control+K Meta+K">
+          <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
-            <span class="cmd__text">Search</span>
-            <kbd class="kbd" data-kbd aria-hidden="true">Ctrl K</kbd>
           </button>
           <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
@@ -236,10 +231,10 @@
 
   <nav class="drawer" id="drawer" aria-label="Mobile">
     <ul class="drawer__list">
-      <li><a class="drawer__link" href="../" style="--i:0"><small>01</small>Home</a></li>
-      <li><a class="drawer__link" href="../projects/" aria-current="page" style="--i:1"><small>02</small>Projects</a></li>
-      <li><a class="drawer__link" href="../services/" style="--i:2"><small>03</small>Services</a></li>
-      <li><a class="drawer__link" href="../about/" style="--i:3"><small>04</small>About</a></li>
+      <li><a class="drawer__link" href="../projects/" aria-current="page" style="--i:0"><small>01</small>Projects</a></li>
+      <li><a class="drawer__link" href="../services/" style="--i:1"><small>02</small>Services</a></li>
+      <li><a class="drawer__link" href="../about/" style="--i:2"><small>03</small>About</a></li>
+      <li><a class="drawer__link" href="../resume/" style="--i:3"><small>04</small>Resume</a></li>
       <li><a class="drawer__link" href="../faq/" style="--i:4"><small>05</small>FAQ</a></li>
       <li><a class="drawer__link" href="../contact/" style="--i:5"><small>06</small>Contact</a></li>
     </ul>
@@ -249,7 +244,6 @@
       <a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a>
       <a class="icon-btn" href="mailto:shaunak.chorge@gmail.com" aria-label="Email Shaunak"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
       <button type="button" class="btn btn--ghost btn--sm drawer__motion" data-motion-toggle aria-pressed="false" hidden><svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-pause"/></svg> Pause effects</button>
-      <span class="clock" data-clock="Asia/Kolkata" data-clock-label="Mumbai" data-clock-suffix="IST">MUMBAI</span>
     </div>
   </nav>
 
@@ -263,210 +257,192 @@
       <div class="pg-head__main">
         <p class="eyebrow">Projects</p>
         <h1 class="pg-h1"><span class="ai">AI</span> engineer portfolio projects and case studies</h1>
-        <p class="pg-lead">A selection of the Artificial Intelligence (AI) chatbot, computer vision, speech and backend work I have built, at my job and on my own.</p>
-        <p class="pg-answer" data-answer>These are the AI engineer portfolio projects of Shaunak Chorge. AI systems built at Claptek cover audit and compliance. Others include a chatbot that cites its sources, a backend that traces slow requests, and speech, vision and automation work. Nine projects have full case studies with the problem, what he built, the results and what he can add.</p>
+        
+        <p class="pg-answer" data-answer>These are my AI engineer portfolio projects. The AI systems I built at Claptek cover audit and compliance. Others include a chatbot that cites its sources, a backend that traces slow requests, and speech, vision and automation work. Each case study covers the problem, what I built, the results and what I can add.</p>
         <div class="pg-actions"><a class="btn btn--solid btn--lg btn--glow" href="../contact/#hire">Hire me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="btn btn--ghost btn--lg" href="../services/">See services <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
       </div>
       
     </div>
   </div>
-</section><section id="case-studies" class="section pg-sec" aria-labelledby="case-studies-h">
+</section><section id="selected-projects" class="section pg-sec" aria-labelledby="selected-projects-h">
   <div class="container">
     <header class="section__head" data-reveal>
-      <p class="eyebrow">Case studies</p>
-      <h2 id="case-studies-h" class="section__title">Case studies with <span class="hl">results</span></h2>
-      <p class="section__lead">Each one covers the problem, what I built, what it does and what the results do not show.</p>
-    </header>
-<div class="pg-filterbar" data-filterbar hidden data-reveal>
-      <div role="group" aria-label="Filter selected projects by category"><ul class="chips" role="list"><li><button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="chip__count" aria-hidden="true">12</span><span class="sr-only">(12 projects)</span></button></li><li><button type="button" class="chip" data-filter="llm" data-tone="cyan" aria-pressed="false">AI chatbots and agents <span class="chip__count" aria-hidden="true">4</span><span class="sr-only">(4 projects)</span></button></li><li><button type="button" class="chip" data-filter="vision" data-tone="magenta" aria-pressed="false">Computer vision <span class="chip__count" aria-hidden="true">2</span><span class="sr-only">(2 projects)</span></button></li><li><button type="button" class="chip" data-filter="speech-ml" data-tone="purple" aria-pressed="false">Machine learning and speech <span class="chip__count" aria-hidden="true">2</span><span class="sr-only">(2 projects)</span></button></li><li><button type="button" class="chip" data-filter="backend" data-tone="blue" aria-pressed="false">Backend and APIs <span class="chip__count" aria-hidden="true">3</span><span class="sr-only">(3 projects)</span></button></li><li><button type="button" class="chip" data-filter="automation" data-tone="blue" aria-pressed="false">Automation <span class="chip__count" aria-hidden="true">1</span><span class="sr-only">(1 project)</span></button></li></ul></div>
-      <p class="pg-filtercount" data-filtercount role="status" aria-live="polite" aria-atomic="true">Showing <strong>12</strong> of 12 projects</p>
-    </div>
-    <ul class="pg-grid pg-grid--cases" role="list" data-filterable><li class="pg-grid__item" data-pid="ams-ai-finding-engine" data-cat="llm">
-      <article class="card pg-proj" data-tone="cyan" data-tilt data-reveal style="--i:0" aria-labelledby="pj-ams-ai-finding-engine">
-        <div class="pg-proj__media"><div class="pv" data-visual="code" data-variant="ams-ai-finding-engine" data-tone="cyan" aria-hidden="true"></div></div>
-        <div class="pg-proj__body">
-          <p class="pg-proj__meta">AI and backend</p>
-          <h3 class="pg-proj__title" id="pj-ams-ai-finding-engine"><span class="ai">AI</span> Audit Finding Drafting Engine</h3>
-          <p class="pg-proj__blurb">Turns short audit notes into three draft findings, with code that blocks any invented fact. Drafts whole spreadsheets in bulk.</p>
-          <p class="pg-proj__stat"><span class="pg-proj__num">7.9 minutes to 16.9 seconds</span><span class="pg-proj__statlabel">Time per request (about 28 times faster)</span></p>
-          <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Pydantic v2</li><li class="tag">TF-IDF</li></ul>
-          <div class="pg-proj__foot"><a class="link-arrow card__link" href="../projects/ams-ai-finding-engine/">Read case study<span class="sr-only">: AI Audit Finding Drafting Engine</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
-        </div>
-      </article>
-    </li><li class="pg-grid__item" data-pid="obligation-management-system" data-cat="llm">
-      <article class="card pg-proj" data-tone="cyan" data-tilt data-reveal style="--i:1" aria-labelledby="pj-obligation-management-system">
-        <div class="pg-proj__media"><div class="pv" data-visual="screenshot" data-variant="generic-obligation-management-system" data-tone="cyan" aria-hidden="true"></div></div>
-        <div class="pg-proj__body">
-          <p class="pg-proj__meta">AI and documents</p>
-          <h3 class="pg-proj__title" id="pj-obligation-management-system">Obligation Management System</h3>
-          <p class="pg-proj__blurb">Reads regulatory PDFs and lists every obligation, each linked to the exact highlighted passage. 97.2% of 1,266 records located.</p>
-          <p class="pg-proj__stat"><span class="pg-proj__num">97.2% of 1,266</span><span class="pg-proj__statlabel">Records linked to an exact passage</span></p>
-          <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Ollama</li><li class="tag">PyMuPDF</li></ul>
-          <div class="pg-proj__foot"><a class="link-arrow card__link" href="../projects/obligation-management-system/">Read case study<span class="sr-only">: Obligation Management System</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
-        </div>
-      </article>
-    </li><li class="pg-grid__item" data-pid="finacle-text-to-sql" data-cat="backend">
-      <article class="card pg-proj" data-tone="blue" data-tilt data-reveal style="--i:2" aria-labelledby="pj-finacle-text-to-sql">
-        <div class="pg-proj__media"><div class="pv" data-visual="terminal" data-variant="finacle-text-to-sql" data-tone="blue" aria-hidden="true"></div></div>
-        <div class="pg-proj__body">
-          <p class="pg-proj__meta">AI and data</p>
-          <h3 class="pg-proj__title" id="pj-finacle-text-to-sql">Core-Banking Text-to-SQL Assistant</h3>
-          <p class="pg-proj__blurb">Turns plain questions into database queries for core-banking reports, on the bank's own servers, with a self-correcting loop.</p>
-          <p class="pg-proj__stat"><span class="pg-proj__num">34% to 54%</span><span class="pg-proj__statlabel">Accounts found (recall)</span></p>
-          <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">sqlglot</li><li class="tag">Oracle</li></ul>
-          <div class="pg-proj__foot"><a class="link-arrow card__link" href="../projects/core-banking-text-to-sql/">Read case study<span class="sr-only">: Core-Banking Text-to-SQL Assistant</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
-        </div>
-      </article>
-    </li><li class="pg-grid__item" data-pid="ai-rag-healthcare-assistant" data-cat="llm">
-      <article class="card pg-proj" data-tone="cyan" data-tilt data-reveal style="--i:0" aria-labelledby="pj-ai-rag-healthcare-assistant">
-        <div class="pg-proj__media"><div class="pv" data-visual="chat" data-variant="ai-rag-healthcare-assistant" data-tone="cyan" aria-hidden="true"></div></div>
-        <div class="pg-proj__body">
-          <p class="pg-proj__meta">AI chatbot</p>
-          <h3 class="pg-proj__title" id="pj-ai-rag-healthcare-assistant">Healthcare Policy Chatbot</h3>
-          <p class="pg-proj__blurb">A chatbot over healthcare policy documents that cites its source, or says it does not know.</p>
-          <p class="pg-proj__stat"><span class="pg-proj__num">6</span><span class="pg-proj__statlabel">Sample policy documents (made up, no real patient data)</span></p>
-          <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">LangChain</li><li class="tag">ChromaDB</li></ul>
-          <div class="pg-proj__foot"><a class="link-arrow card__link" href="../projects/ai-rag-healthcare-assistant/">Read case study<span class="sr-only">: Healthcare Policy Chatbot</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
-        </div>
-      </article>
-    </li><li class="pg-grid__item" data-pid="agentic-honeypot" data-cat="llm">
-      <article class="card pg-proj" data-tone="cyan" data-tilt data-reveal style="--i:1" aria-labelledby="pj-agentic-honeypot">
-        <div class="pg-proj__media"><div class="pv" data-visual="chat" data-variant="agentic-honeypot" data-tone="cyan" aria-hidden="true"></div></div>
-        <div class="pg-proj__body">
-          <p class="pg-proj__meta">AI agent</p>
-          <h3 class="pg-proj__title" id="pj-agentic-honeypot">Scam-Catching <span class="ai">AI</span> Honeypot</h3>
-          <p class="pg-proj__blurb">An AI plays an easily fooled victim, keeps scammers chatting and logs the payment IDs, links and phone numbers they reveal.</p>
-          <p class="pg-proj__stat"><span class="pg-proj__num">4 written, 4 merged</span><span class="pg-proj__statlabel">My contributions (19 changes in total)</span></p>
-          <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Pydantic</li><li class="tag">Groq API</li></ul>
-          <div class="pg-proj__foot"><a class="link-arrow card__link" href="../projects/agentic-honeypot/">Read case study<span class="sr-only">: Scam-Catching AI Honeypot</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
-        </div>
-      </article>
-    </li><li class="pg-grid__item" data-pid="advanced-cctv-analytics" data-cat="vision">
-      <article class="card pg-proj" data-tone="magenta" data-tilt data-reveal style="--i:2" aria-labelledby="pj-advanced-cctv-analytics">
-        <div class="pg-proj__media"><div class="pv" data-visual="scan-grid" data-variant="advanced-cctv-analytics" data-tone="magenta" aria-hidden="true"></div></div>
-        <div class="pg-proj__body">
-          <p class="pg-proj__meta">Computer vision</p>
-          <h3 class="pg-proj__title" id="pj-advanced-cctv-analytics">CCTV Crime and Crowd Analytics</h3>
-          <p class="pg-proj__blurb">Smart India Hackathon team prototype: crowd-limit alerts, crime detection from video frames and face recognition on one camera feed.</p>
-          <p class="pg-proj__stat"><span class="pg-proj__num">14</span><span class="pg-proj__statlabel">Crime categories recognised</span></p>
-          <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">OpenCV</li><li class="tag">PyTorch</li><li class="tag">Hugging Face Transformers (ViT)</li></ul>
-          <div class="pg-proj__foot"><a class="link-arrow card__link" href="../projects/advanced-cctv-analytics/">Read case study<span class="sr-only">: CCTV Crime and Crowd Analytics</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
-        </div>
-      </article>
-    </li><li class="pg-grid__item" data-pid="speech-emotion-recognition" data-cat="speech-ml">
-      <article class="card pg-proj" data-tone="purple" data-tilt data-reveal style="--i:0" aria-labelledby="pj-speech-emotion-recognition">
-        <div class="pg-proj__media"><div class="pv" data-visual="waveform" data-variant="speech-emotion-recognition" data-tone="purple" aria-hidden="true"></div></div>
-        <div class="pg-proj__body">
-          <p class="pg-proj__meta">Speech and machine learning</p>
-          <h3 class="pg-proj__title" id="pj-speech-emotion-recognition">Speech Emotion Recognition</h3>
-          <p class="pg-proj__blurb">Detects seven emotions in a voice clip with a neural network: 93.87% on a random test split, with live microphone input.</p>
-          <p class="pg-proj__stat"><span class="pg-proj__num">93.87%</span><span class="pg-proj__statlabel">Accuracy on a random 20% test split</span></p>
-          <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">TensorFlow / Keras</li><li class="tag">librosa</li><li class="tag">scikit-learn</li></ul>
-          <div class="pg-proj__foot"><a class="link-arrow card__link" href="../projects/speech-emotion-recognition/">Read case study<span class="sr-only">: Speech Emotion Recognition</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
-        </div>
-      </article>
-    </li><li class="pg-grid__item" data-pid="deepfake-video-detection" data-cat="vision">
-      <article class="card pg-proj" data-tone="magenta" data-tilt data-reveal style="--i:1" aria-labelledby="pj-deepfake-video-detection">
-        <div class="pg-proj__media"><div class="pv" data-visual="scan-grid" data-variant="deepfake-video-detection" data-tone="magenta" aria-hidden="true"></div></div>
-        <div class="pg-proj__body">
-          <p class="pg-proj__meta">Computer vision</p>
-          <h3 class="pg-proj__title" id="pj-deepfake-video-detection">DeepFake Video Detection</h3>
-          <p class="pg-proj__blurb">Scores each frame of a video as real or fake, with a web app and PDF report. College team project, 74.16% accuracy.</p>
-          <p class="pg-proj__stat"><span class="pg-proj__num">74.16%</span><span class="pg-proj__statlabel">Test accuracy (random frame split)</span></p>
-          <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">TensorFlow / Keras</li><li class="tag">OpenCV</li><li class="tag">Streamlit</li></ul>
-          <div class="pg-proj__foot"><a class="link-arrow card__link" href="../projects/deepfake-video-detection/">Read case study<span class="sr-only">: DeepFake Video Detection</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
-        </div>
-      </article>
-    </li><li class="pg-grid__item" data-pid="observable-ai-backend" data-cat="backend">
-      <article class="card pg-proj" data-tone="blue" data-tilt data-reveal style="--i:2" aria-labelledby="pj-observable-ai-backend">
-        <div class="pg-proj__media"><div class="pv" data-visual="network" data-variant="observable-ai-backend" data-tone="blue" aria-hidden="true"></div></div>
-        <div class="pg-proj__body">
-          <p class="pg-proj__meta">AI and backend</p>
-          <h3 class="pg-proj__title" id="pj-observable-ai-backend">Traceable <span class="ai">AI</span> Backend</h3>
-          <p class="pg-proj__blurb">An AI-routed backend that shows exactly where each request goes and where it slows down, with request IDs, metrics and traces.</p>
-          <p class="pg-proj__stat"><span class="pg-proj__num">15 seconds to under 50 milliseconds</span><span class="pg-proj__statlabel">Slow lookup, before and after the fix (made-up data)</span></p>
-          <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Pydantic</li><li class="tag">OpenTelemetry</li></ul>
-          <div class="pg-proj__foot"><a class="link-arrow card__link" href="../projects/observable-ai-backend/">Read case study<span class="sr-only">: Traceable AI Backend</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></div>
-        </div>
-      </article>
-    </li></ul>
-  </div>
-</section><section id="also-selected" class="section pg-sec section--tint" aria-labelledby="also-selected-h">
-  <div class="container">
-    <header class="section__head" data-reveal>
-      <p class="eyebrow">Also selected</p>
-      <h2 id="also-selected-h" class="section__title">Client and personal <span class="hl hl--blue">builds</span></h2>
-      <p class="section__lead">Smaller builds, and client work, that do not have a full write-up.</p>
-    </header>
-<ul class="pg-grid pg-grid--mini" role="list" data-filterable><li class="pg-grid__item" data-pid="django-box-selection-api" data-cat="backend" id="p-django-box-selection-api">
-      <article class="card pg-mini card--flat" data-tone="blue" data-reveal style="--i:0" aria-labelledby="pj-django-box-selection-api">
-        <p class="pg-proj__meta">Backend</p>
-        <h3 class="pg-proj__title" id="pj-django-box-selection-api">Box Selection API</h3>
-        <p class="pg-proj__blurb">Give it an order and this Django API picks the fewest, cheapest shipping boxes. It tries every rotation, and 27 tests pass.</p>
-        <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python 3.12</li><li class="tag">Django 5</li><li class="tag">Django REST Framework</li><li class="tag">SQLite</li></ul>
-        <div class="pg-proj__foot"><a class="link-arrow" href="https://github.com/ShaunakChorge/PythonDjangoAssignment" target="_blank" rel="noopener noreferrer">View code on GitHub<span class="sr-only"> for Box Selection API (opens in a new tab)</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-up-right"/></svg></a></div>
-      </article>
-    </li><li class="pg-grid__item" data-pid="whatsapp-ai-agent-platform" data-cat="automation" id="p-whatsapp-ai-agent-platform">
-      <article class="card pg-mini card--flat" data-tone="blue" data-reveal style="--i:1" aria-labelledby="pj-whatsapp-ai-agent-platform">
-        <p class="pg-proj__meta">Automation</p>
-        <h3 class="pg-proj__title" id="pj-whatsapp-ai-agent-platform">WhatsApp Automation and <span class="ai">AI</span> Agent Platform</h3>
-        <p class="pg-proj__blurb">A client WhatsApp platform: AI replies run in the background, each chat is tracked and human operators get alerts.</p>
-        <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">PostgreSQL</li><li class="tag">Supabase</li></ul>
-        <div class="pg-proj__foot"><span class="pg-proj__private">Private enterprise repository</span></div>
-      </article>
-    </li><li class="pg-grid__item" data-pid="spam-classifier" data-cat="speech-ml" id="p-spam-classifier">
-      <article class="card pg-mini card--flat" data-tone="purple" data-reveal style="--i:2" aria-labelledby="pj-spam-classifier">
-        <p class="pg-proj__meta">Natural language</p>
-        <h3 class="pg-proj__title" id="pj-spam-classifier">Email and SMS Spam Classifier</h3>
-        <p class="pg-proj__blurb">Spots spam in texts and emails: 97.1% accurate on 1,034 test messages, and it never flagged a genuine message.</p>
-        <ul class="tags pg-proj__tags" role="list" aria-label="Main tools"><li class="tag">Python</li><li class="tag">NLTK</li><li class="tag">scikit-learn</li><li class="tag">TF-IDF</li></ul>
-        <div class="pg-proj__foot"><a class="link-arrow" href="https://github.com/ShaunakChorge/Spam-Classifier" target="_blank" rel="noopener noreferrer">View code on GitHub<span class="sr-only"> for Email and SMS Spam Classifier (opens in a new tab)</span> <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-up-right"/></svg></a></div>
-      </article>
-    </li></ul>
-  </div>
-</section><section id="more-projects" class="section pg-sec" aria-labelledby="more-projects-h">
-  <div class="container">
-    <header class="section__head" data-reveal>
-      <p class="eyebrow">Smaller builds</p>
-      <h2 id="more-projects-h" class="section__title">Compact <span class="hl hl--purple">project list</span></h2>
+      <p class="eyebrow">Work</p>
+      <h2 id="selected-projects-h" class="section__title">Selected <span class="hl">projects</span></h2>
       
     </header>
-<details class="pg-morebox" id="more" data-reveal>
-      <summary class="pg-morebox__sum"><span>Show the 10 smaller projects</span><svg class="icon pg-morebox__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <ul class="pg-more" role="list"><li class="pg-more__row" id="m-house-price-predictor">
-          <div><p class="pg-more__t">House Price Predictor</p><p class="pg-more__d">Predicts house prices from eight features. A Random Forest beats a simple baseline (R-squared 0.89, where 1.0 is perfect).</p></div>
-          <div class="pg-more__side"><span class="pg-more__tech">Python / pandas / NumPy</span><span class="pg-more__links"><a class="link" href="https://github.com/ShaunakChorge/HousePricePredictor" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for House Price Predictor (opens in a new tab)</span></a></span></div>
-        </li><li class="pg-more__row" id="m-cv-fundamentals-yolov8">
-          <div><p class="pg-more__t">Computer Vision Basics and YOLOv8 on Video</p><p class="pg-more__d">Basic image steps (grayscale, resize, blur), then object detection with Faster R-CNN on an image and YOLOv8n on video frames.</p></div>
-          <div class="pg-more__side"><span class="pg-more__tech">Python / OpenCV / Matplotlib</span></div>
-        </li><li class="pg-more__row" id="m-zapvi-web-scraper">
-          <div><p class="pg-more__t">Zapvi Web Scraper</p><p class="pg-more__d">Collects product names, prices and links from online store pages into a clean table and CSV file.</p></div>
-          <div class="pg-more__side"><span class="pg-more__tech">Python / Requests / BeautifulSoup</span><span class="pg-more__links"><a class="link" href="https://github.com/ShaunakChorge/Zapvi-Web-Scrapper" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for Zapvi Web Scraper (opens in a new tab)</span></a></span></div>
-        </li><li class="pg-more__row" id="m-astra-telegram-bot">
-          <div><p class="pg-more__t">ASTRA Telegram Bot</p><p class="pg-more__d">A Telegram bot: pick a zodiac sign and a date, and get the day's horoscope, with friendly error messages.</p></div>
-          <div class="pg-more__side"><span class="pg-more__tech">Python / pyTelegramBotAPI / requests</span></div>
-        </li><li class="pg-more__row" id="m-medical-insurance-cost-prediction">
-          <div><p class="pg-more__t">Medical Insurance Cost Prediction</p><p class="pg-more__d">Studies 1,338 insurance records and predicts costs with linear regression: R-squared 0.74 on test data.</p></div>
-          <div class="pg-more__side"><span class="pg-more__tech">Python / pandas / NumPy</span></div>
-        </li><li class="pg-more__row" id="m-atm-simulator">
-          <div><p class="pg-more__t">ATM Simulator (Java desktop app)</p><p class="pg-more__d">A Java desktop ATM with MySQL: signup, card and PIN login, deposits, withdrawals, mini statement and PIN change.</p></div>
-          <div class="pg-more__side"><span class="pg-more__tech">Java / Swing / AWT / JDBC</span><span class="pg-more__links"><a class="link" href="https://github.com/ShaunakChorge/ATM-Simulator" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for ATM Simulator (Java desktop app) (opens in a new tab)</span></a></span></div>
-        </li><li class="pg-more__row" id="m-qr-code-generator">
-          <div><p class="pg-more__t">QR Code Generator</p><p class="pg-more__d">Type a short text or a link and get a scannable QR code. No dependencies, live on GitHub Pages.</p></div>
-          <div class="pg-more__side"><span class="pg-more__tech">HTML / CSS / JavaScript</span><span class="pg-more__links"><a class="link" href="https://github.com/ShaunakChorge/QR-Code-Generator" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for QR Code Generator (opens in a new tab)</span></a><span aria-hidden="true"> &middot; </span><a class="link" href="https://shaunakchorge.github.io/QR-Code-Generator/" target="_blank" rel="noopener noreferrer">Live<span class="sr-only"> demo of QR Code Generator (opens in a new tab)</span></a></span></div>
-        </li><li class="pg-more__row" id="m-quiz-game-c">
-          <div><p class="pg-more__t">Ultimate Quiz Game (C)</p><p class="pg-more__d">A quiz game in C with accounts, six topics, two difficulty levels and a saved leaderboard.</p></div>
-          <div class="pg-more__side"><span class="pg-more__tech">C / GCC / File I/O</span><span class="pg-more__links"><a class="link" href="https://github.com/ShaunakChorge/Quiz-Game" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for Ultimate Quiz Game (C) (opens in a new tab)</span></a></span></div>
-        </li><li class="pg-more__row" id="m-tetris-raylib-cpp">
-          <div><p class="pg-more__t">Tetris (C++ and raylib)</p><p class="pg-more__d">Tetris in C++ with raylib: rotation, line clearing, scoring, next-piece preview and sound.</p></div>
-          <div class="pg-more__side"><span class="pg-more__tech">C++ / raylib / Make / g++</span><span class="pg-more__links"><a class="link" href="https://github.com/ShaunakChorge/Tetris-Game" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for Tetris (C++ and raylib) (opens in a new tab)</span></a></span></div>
-        </li><li class="pg-more__row" id="m-password-generator">
-          <div><p class="pg-more__t">Password Generator</p><p class="pg-more__d">A first-year Python mini-project: random passwords of a chosen length, saved to a text file.</p></div>
-          <div class="pg-more__side"><span class="pg-more__tech">Python / OOP / File I/O</span><span class="pg-more__links"><a class="link" href="https://github.com/ShaunakChorge/Password-Generator" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for Password Generator (opens in a new tab)</span></a></span></div>
-        </li></ul>
-    </details>
+<div class="pg-filterbar" data-filterbar hidden data-reveal>
+      <div role="group" aria-label="Filter selected projects by category"><ul class="chips" role="list"><li><button type="button" class="chip" data-filter="all" aria-pressed="true">All</button></li><li><button type="button" class="chip" data-filter="llm" data-tone="cyan" aria-pressed="false">AI chatbots and agents</button></li><li><button type="button" class="chip" data-filter="vision" data-tone="magenta" aria-pressed="false">Computer vision</button></li><li><button type="button" class="chip" data-filter="speech-ml" data-tone="purple" aria-pressed="false">Machine learning and speech</button></li><li><button type="button" class="chip" data-filter="backend" data-tone="blue" aria-pressed="false">Backend and APIs</button></li><li><button type="button" class="chip" data-filter="automation" data-tone="blue" aria-pressed="false">Automation</button></li></ul></div>
+    </div>
+    <ul class="collage" role="list" data-filterable style="--areas:'p1 p1 p2 p2' 'p4 p5 p2 p2' 'p3 p3 p6 p7' 'p3 p3 p8 p10' 'p9 p9 p11 p12'">
+    <li class="tile tile--wide" id="p-ai-rag-healthcare-assistant" data-rank="1" data-pid="ai-rag-healthcare-assistant" data-cat="llm" style="--area:p1">
+      <article class="card tile__card" data-tone="cyan" data-tilt data-cursor="case" data-reveal style="--i:0" aria-labelledby="pj-ai-rag-healthcare-assistant">
+        <div class="tile__media"><div class="pv" data-visual="chat" data-variant="ai-rag-healthcare-assistant" data-tone="cyan" aria-hidden="true"></div></div>
+        <div class="tile__body">
+          <p class="tile__meta"><span class="tile__cat">AI chatbot</span><span class="tile__origin">Personal</span></p>
+          <h3 class="tile__title" id="pj-ai-rag-healthcare-assistant"><a class="card__link" href="../projects/ai-rag-healthcare-assistant/">Healthcare Policy Chatbot<span class="sr-only"> case study</span></a></h3>
+          <p class="tile__blurb">A chatbot over healthcare policy documents that cites its source, or says it does not know.</p>
+        </div>
+      </article>
+    </li>
+    <li class="tile tile--big" id="p-advanced-cctv-analytics" data-rank="2" data-pid="advanced-cctv-analytics" data-cat="vision" style="--area:p2">
+      <article class="card tile__card" data-tone="magenta" data-tilt data-cursor="case" data-reveal style="--i:1" aria-labelledby="pj-advanced-cctv-analytics">
+        <div class="tile__media"><div class="pv" data-visual="scan-grid" data-variant="advanced-cctv-analytics" data-tone="magenta" aria-hidden="true"></div></div>
+        <div class="tile__body">
+          <p class="tile__meta"><span class="tile__cat">Computer vision</span><span class="tile__origin">Academic</span></p>
+          <h3 class="tile__title" id="pj-advanced-cctv-analytics"><a class="card__link" href="../projects/advanced-cctv-analytics/">CCTV Crime and Crowd Analytics<span class="sr-only"> case study</span></a></h3>
+          <p class="tile__blurb">Smart India Hackathon team prototype: crowd-limit alerts, crime detection from video frames and face recognition on one camera feed.</p>
+        </div>
+      </article>
+    </li>
+    <li class="tile tile--big" id="p-speech-emotion-recognition" data-rank="3" data-pid="speech-emotion-recognition" data-cat="speech-ml" style="--area:p3">
+      <article class="card tile__card" data-tone="purple" data-tilt data-cursor="case" data-reveal style="--i:2" aria-labelledby="pj-speech-emotion-recognition">
+        <div class="tile__media"><div class="pv" data-visual="waveform" data-variant="speech-emotion-recognition" data-tone="purple" aria-hidden="true"></div></div>
+        <div class="tile__body">
+          <p class="tile__meta"><span class="tile__cat">Speech and machine learning</span><span class="tile__origin">Personal</span></p>
+          <h3 class="tile__title" id="pj-speech-emotion-recognition"><a class="card__link" href="../projects/speech-emotion-recognition/">Speech Emotion Recognition<span class="sr-only"> case study</span></a></h3>
+          <p class="tile__blurb">Detects seven emotions in a voice clip with a neural network: 93.87% on a random test split, with live microphone input.</p>
+        </div>
+      </article>
+    </li>
+    <li class="tile" id="p-observable-ai-backend" data-rank="4" data-pid="observable-ai-backend" data-cat="backend" style="--area:p4">
+      <article class="card tile__card" data-tone="blue" data-tilt data-cursor="case" data-reveal style="--i:3" aria-labelledby="pj-observable-ai-backend">
+        <div class="tile__media"><div class="pv" data-visual="network" data-variant="observable-ai-backend" data-tone="blue" aria-hidden="true"></div></div>
+        <div class="tile__body">
+          <p class="tile__meta"><span class="tile__cat">AI and backend</span><span class="tile__origin">Personal</span></p>
+          <h3 class="tile__title" id="pj-observable-ai-backend"><a class="card__link" href="../projects/observable-ai-backend/">Traceable <span class="ai">AI</span> Backend<span class="sr-only"> case study</span></a></h3>
+          <p class="tile__blurb">An AI server that shows exactly where each request goes and where it slows down, with request IDs, metrics and traces for LLM observability.</p>
+        </div>
+      </article>
+    </li>
+    <li class="tile" id="p-obligation-management-system" data-rank="5" data-pid="obligation-management-system" data-cat="llm" style="--area:p5">
+      <article class="card tile__card" data-tone="cyan" data-tilt data-cursor="case" data-reveal style="--i:0" aria-labelledby="pj-obligation-management-system">
+        <div class="tile__media"><div class="pv" data-visual="screenshot" data-variant="generic-obligation-management-system" data-tone="cyan" aria-hidden="true"></div></div>
+        <div class="tile__body">
+          <p class="tile__meta"><span class="tile__cat">AI and documents</span><span class="tile__origin">Client</span></p>
+          <h3 class="tile__title" id="pj-obligation-management-system"><a class="card__link" href="../projects/obligation-management-system/">Obligation Management System<span class="sr-only"> case study</span></a></h3>
+          <p class="tile__blurb">Reads regulatory PDFs and lists every obligation, each linked to the exact highlighted passage. 97.2% of 1,266 records located.</p>
+        </div>
+      </article>
+    </li>
+    <li class="tile" id="p-ams-ai-finding-engine" data-rank="6" data-pid="ams-ai-finding-engine" data-cat="llm" style="--area:p6">
+      <article class="card tile__card" data-tone="cyan" data-tilt data-cursor="case" data-reveal style="--i:1" aria-labelledby="pj-ams-ai-finding-engine">
+        <div class="tile__media"><div class="pv" data-visual="code" data-variant="ams-ai-finding-engine" data-tone="cyan" aria-hidden="true"></div></div>
+        <div class="tile__body">
+          <p class="tile__meta"><span class="tile__cat">AI and backend</span><span class="tile__origin">Client</span></p>
+          <h3 class="tile__title" id="pj-ams-ai-finding-engine"><a class="card__link" href="../projects/ams-ai-finding-engine/"><span class="ai">AI</span> Audit Finding Drafting Engine<span class="sr-only"> case study</span></a></h3>
+          <p class="tile__blurb">Turns short audit notes into three draft findings, with code that blocks any invented fact. Drafts whole spreadsheets in bulk.</p>
+        </div>
+      </article>
+    </li>
+    <li class="tile" id="p-finacle-text-to-sql" data-rank="7" data-pid="finacle-text-to-sql" data-cat="backend" style="--area:p7">
+      <article class="card tile__card" data-tone="blue" data-tilt data-cursor="case" data-reveal style="--i:2" aria-labelledby="pj-finacle-text-to-sql">
+        <div class="tile__media"><div class="pv" data-visual="terminal" data-variant="finacle-text-to-sql" data-tone="blue" aria-hidden="true"></div></div>
+        <div class="tile__body">
+          <p class="tile__meta"><span class="tile__cat">AI and data</span><span class="tile__origin">Client</span></p>
+          <h3 class="tile__title" id="pj-finacle-text-to-sql"><a class="card__link" href="../projects/core-banking-text-to-sql/">Core-Banking Text-to-SQL Assistant<span class="sr-only"> case study</span></a></h3>
+          <p class="tile__blurb">Turns plain questions into database queries for core-banking reports, on the bank's own servers, with a self-correcting loop.</p>
+        </div>
+      </article>
+    </li>
+    <li class="tile tile--lone" id="p-agentic-honeypot" data-rank="8" data-pid="agentic-honeypot" data-cat="llm" style="--area:p8">
+      <article class="card tile__card" data-tone="cyan" data-tilt data-cursor="case" data-reveal style="--i:3" aria-labelledby="pj-agentic-honeypot">
+        <div class="tile__media"><div class="pv" data-visual="chat" data-variant="agentic-honeypot" data-tone="cyan" aria-hidden="true"></div></div>
+        <div class="tile__body">
+          <p class="tile__meta"><span class="tile__cat">AI agent</span><span class="tile__origin">Academic</span></p>
+          <h3 class="tile__title" id="pj-agentic-honeypot"><a class="card__link" href="../projects/agentic-honeypot/">Scam-Catching <span class="ai">AI</span> Honeypot<span class="sr-only"> case study</span></a></h3>
+          <p class="tile__blurb">An AI plays an easily fooled victim, keeps scammers chatting and logs the payment IDs, links and phone numbers they reveal.</p>
+        </div>
+      </article>
+    </li>
+    <li class="tile tile--wide" id="p-whatsapp-ai-agent-platform" data-rank="9" data-pid="whatsapp-ai-agent-platform" data-cat="automation" style="--area:p9">
+      <article class="card tile__card" data-tone="blue" data-tilt data-reveal style="--i:0" aria-labelledby="pj-whatsapp-ai-agent-platform">
+        <div class="tile__media"><div class="pv" data-visual="generic" data-variant="whatsapp-ai-agent-platform" data-tone="blue" aria-hidden="true"></div></div>
+        <div class="tile__body">
+          <p class="tile__meta"><span class="tile__cat">Automation</span><span class="tile__origin">Client</span></p>
+          <h3 class="tile__title" id="pj-whatsapp-ai-agent-platform">WhatsApp Automation and <span class="ai">AI</span> Agent Platform</h3>
+          <p class="tile__blurb">AI replies run in the background, every chat is tracked and human operators get alerts.</p>
+          <p class="tile__note">Private repository</p>
+        </div>
+      </article>
+    </li>
+    <li class="tile" id="p-deepfake-video-detection" data-rank="10" data-pid="deepfake-video-detection" data-cat="vision" style="--area:p10">
+      <article class="card tile__card" data-tone="magenta" data-tilt data-cursor="case" data-reveal style="--i:1" aria-labelledby="pj-deepfake-video-detection">
+        <div class="tile__media"><div class="pv" data-visual="scan-grid" data-variant="deepfake-video-detection" data-tone="magenta" aria-hidden="true"></div></div>
+        <div class="tile__body">
+          <p class="tile__meta"><span class="tile__cat">Computer vision</span><span class="tile__origin">Academic</span></p>
+          <h3 class="tile__title" id="pj-deepfake-video-detection"><a class="card__link" href="../projects/deepfake-video-detection/">DeepFake Video Detection<span class="sr-only"> case study</span></a></h3>
+          <p class="tile__blurb">Scores each frame of a video as real or fake, with a web app and PDF report. College team project, 74.16% accuracy.</p>
+        </div>
+      </article>
+    </li>
+    <li class="tile" id="p-spam-classifier" data-rank="11" data-pid="spam-classifier" data-cat="speech-ml" style="--area:p11">
+      <article class="card tile__card" data-tone="purple" data-tilt data-reveal style="--i:2" aria-labelledby="pj-spam-classifier">
+        <div class="tile__media"><div class="pv" data-visual="screenshot" data-variant="spam-classifier" data-tone="purple" aria-hidden="true"></div></div>
+        <div class="tile__body">
+          <p class="tile__meta"><span class="tile__cat">Natural language</span><span class="tile__origin">Academic</span></p>
+          <h3 class="tile__title" id="pj-spam-classifier"><a class="card__link" href="https://github.com/ShaunakChorge/Spam-Classifier" target="_blank" rel="noopener noreferrer">Email and SMS Spam Classifier<span class="sr-only"> on GitHub (opens in a new tab)</span></a></h3>
+          <p class="tile__blurb">Spots spam in texts and emails: 97.1% accurate on 1,034 test messages, and it never flagged a genuine message.</p>
+        </div>
+      </article>
+    </li>
+    <li class="tile tile--link tile--lone" data-rank="12" style="--area:p12" data-reveal><a class="tile__all" href="#personal-builds"><span>Personal builds</span><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li>
+  </ul>
   </div>
-</section><section id="faq" class="section pg-sec section--tint" aria-labelledby="faq-h">
+</section><section id="personal-builds" class="section pg-sec section--tint" aria-labelledby="personal-builds-h">
+  <div class="container">
+    <header class="section__head" data-reveal>
+      <p class="eyebrow">On my own</p>
+      <h2 id="personal-builds-h" class="section__title">Personal <span class="hl hl--purple">builds</span></h2>
+      
+    </header>
+<ul class="pg-builds" role="list" data-reveal><li class="pg-builds__row" id="p-house-price-predictor">
+          <p class="pg-builds__t">House Price Predictor</p>
+          <p class="pg-builds__d">Predicts house prices from eight features and compares models.</p>
+          <p class="pg-builds__links"><a class="link" href="https://github.com/ShaunakChorge/HousePricePredictor" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for House Price Predictor (opens in a new tab)</span></a></p>
+        </li><li class="pg-builds__row" id="p-cv-fundamentals-yolov8">
+          <p class="pg-builds__t">Computer Vision Basics and YOLOv8 on Video</p>
+          <p class="pg-builds__d">Basic image steps, then object detection with YOLOv8 on video frames.</p>
+          
+        </li><li class="pg-builds__row" id="p-zapvi-web-scraper">
+          <p class="pg-builds__t">Zapvi Web Scraper</p>
+          <p class="pg-builds__d">Collects product names, prices and links from an online store into a table.</p>
+          <p class="pg-builds__links"><a class="link" href="https://github.com/ShaunakChorge/Zapvi-Web-Scrapper" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for Zapvi Web Scraper (opens in a new tab)</span></a></p>
+        </li><li class="pg-builds__row" id="p-astra-telegram-bot">
+          <p class="pg-builds__t">ASTRA Telegram Bot</p>
+          <p class="pg-builds__d">A Telegram bot that returns the daily horoscope for a sign and date.</p>
+          
+        </li><li class="pg-builds__row" id="p-medical-insurance-cost-prediction">
+          <p class="pg-builds__t">Medical Insurance Cost Prediction</p>
+          <p class="pg-builds__d">Predicts insurance costs from patient records with linear regression.</p>
+          
+        </li><li class="pg-builds__row" id="p-atm-simulator">
+          <p class="pg-builds__t">ATM Simulator (Java desktop app)</p>
+          <p class="pg-builds__d">A Java desktop ATM backed by a MySQL database.</p>
+          <p class="pg-builds__links"><a class="link" href="https://github.com/ShaunakChorge/ATM-Simulator" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for ATM Simulator (Java desktop app) (opens in a new tab)</span></a></p>
+        </li><li class="pg-builds__row" id="p-qr-code-generator">
+          <p class="pg-builds__t">QR Code Generator</p>
+          <p class="pg-builds__d">Turns short text or a link into a scannable QR code.</p>
+          <p class="pg-builds__links"><a class="link" href="https://github.com/ShaunakChorge/QR-Code-Generator" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for QR Code Generator (opens in a new tab)</span></a><span aria-hidden="true"> &middot; </span><a class="link" href="https://shaunakchorge.github.io/QR-Code-Generator/" target="_blank" rel="noopener noreferrer">Live<span class="sr-only"> demo of QR Code Generator (opens in a new tab)</span></a></p>
+        </li><li class="pg-builds__row" id="p-quiz-game-c">
+          <p class="pg-builds__t">Ultimate Quiz Game (C)</p>
+          <p class="pg-builds__d">A console quiz in C with accounts and a saved leaderboard.</p>
+          <p class="pg-builds__links"><a class="link" href="https://github.com/ShaunakChorge/Quiz-Game" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for Ultimate Quiz Game (C) (opens in a new tab)</span></a></p>
+        </li><li class="pg-builds__row" id="p-tetris-raylib-cpp">
+          <p class="pg-builds__t">Tetris (C++ and raylib)</p>
+          <p class="pg-builds__d">Tetris in C++ with the raylib library.</p>
+          <p class="pg-builds__links"><a class="link" href="https://github.com/ShaunakChorge/Tetris-Game" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for Tetris (C++ and raylib) (opens in a new tab)</span></a></p>
+        </li><li class="pg-builds__row" id="p-password-generator">
+          <p class="pg-builds__t">Password Generator</p>
+          <p class="pg-builds__d">Generates random passwords of a chosen length.</p>
+          <p class="pg-builds__links"><a class="link" href="https://github.com/ShaunakChorge/Password-Generator" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for Password Generator (opens in a new tab)</span></a></p>
+        </li><li class="pg-builds__row" id="p-django-box-selection-api">
+          <p class="pg-builds__t">Box Selection API</p>
+          <p class="pg-builds__d">A Django API that recommends the fewest, cheapest shipping boxes for an order.</p>
+          <p class="pg-builds__links"><a class="link" href="https://github.com/ShaunakChorge/PythonDjangoAssignment" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> repository for Box Selection API (opens in a new tab)</span></a></p>
+        </li></ul>
+  </div>
+</section><section id="faq" class="section pg-sec" aria-labelledby="faq-h">
   <div class="container">
     <header class="section__head" data-reveal>
       <p class="eyebrow">FAQ</p>
@@ -475,7 +451,7 @@
     </header>
 <div class="pg-qas"><details class="pg-qa" id="projects-q1" open data-reveal>
       <summary class="pg-qa__q"><h3 class="pg-qa__h">What are some real world <span class="ai">AI</span> project examples?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>Real examples on this site include an AI that drafts audit findings and a tool that lists obligations from regulatory documents. Others are a text-to-SQL assistant for a bank database, a healthcare policy chatbot and a scam-catching AI honeypot. There are also CCTV analytics, speech emotion recognition, deepfake video detection and a traceable AI backend.</p></div>
+      <div class="pg-qa__a"><p>Real examples on this site include an AI that drafts audit findings from checklist notes, a text-to-SQL assistant for a bank database and a scam-catching AI honeypot. Each one has a case study with the problem, the build and the results.</p></div>
     </details></div>
   </div>
 </section><section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
@@ -489,7 +465,7 @@
       </div>
       <div class="pg-hire__act">
         <a class="btn btn--solid btn--lg btn--glow" href="../contact/#hire" data-magnetic>Hire me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
-        <p class="pg-hire__alt"><a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a><span aria-hidden="true"> &middot; </span><a class="link" href="../projects/">View work</a></p>
+        <p class="pg-hire__alt"><a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a><span aria-hidden="true"> &middot; </span><a class="link" href="../projects/">See projects</a></p>
       </div>
     </div>
   </div>
@@ -515,7 +491,7 @@
           <span class="logo__word">SHAUNAK</span>
         </p>
         <p class="footer__blurb">AI Engineer at Claptek Pvt Ltd. Taking select freelance AI and backend projects.</p>
-        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India &ndash; working remotely (IST)</p>
+        <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India (IST)</p>
         <ul class="footer__soc" aria-label="Profiles">
           <li><a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a></li>
           <li><a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a></li>
@@ -532,9 +508,10 @@
             <li><a href="../projects/">Projects</a></li>
             <li><a href="../services/">Services</a></li>
             <li><a href="../about/">About</a></li>
+            <li><a href="../about/#experience">Experience</a></li>
+            <li><a href="../resume/">Resume</a></li>
             <li><a href="../faq/">FAQ</a></li>
             <li><a href="../contact/">Contact</a></li>
-            <li><a href="../resume/">Resume</a></li>
           </ul>
         </nav>
 
@@ -553,7 +530,7 @@
         <nav class="footer__col" aria-labelledby="footer-work-h">
           <p class="footer__h" id="footer-work-h">Work</p>
           <ul class="footer__links">
-            <li><a href="../projects/observable-ai-backend/">FastAPI tracing with OpenTelemetry</a></li>
+            <li><a href="../projects/observable-ai-backend/">Traceable AI Backend</a></li>
             <li><a href="../projects/ai-rag-healthcare-assistant/">Healthcare policy chatbot</a></li>
             <li><a href="../projects/agentic-honeypot/">AI scam honeypot</a></li>
             <li><a href="../projects/deepfake-video-detection/">Deepfake video detection</a></li>
@@ -629,11 +606,11 @@
     <symbol id="i-loader" viewBox="0 0 24 24"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/></symbol>
   </svg>
 
-  <script defer src="../assets/dist/js/core.min.js?v=53badac3"></script>
+  <script defer src="../assets/dist/js/core.min.js?v=d41b0d5b"></script>
   <script defer src="../assets/dist/js/contact.min.js?v=a2cd83b8"></script>
   <script defer src="../assets/dist/js/footer.min.js?v=89f1750f"></script>
-  <script defer src="../assets/dist/js/fx.min.js?v=2e06fef0"></script>
-  <script defer src="../assets/dist/js/pages.min.js?v=794591ab"></script>
-  <script defer src="../assets/dist/js/visuals.min.js?v=341dbffd"></script>
+  <script defer src="../assets/dist/js/fx.min.js?v=4f4a04f8"></script>
+  <script defer src="../assets/dist/js/pages.min.js?v=efc0e441"></script>
+  <script defer src="../assets/dist/js/visuals.min.js?v=53b137f5"></script>
 </body>
 </html>

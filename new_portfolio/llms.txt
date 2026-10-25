@@ -1,18 +1,18 @@
 # Shaunak Chorge - AI Engineer at Claptek Pvt Ltd (Mumbai, India)
 
-> Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India. He holds a Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026). He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job.
+> Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India. He holds a Bachelor of Technology in Artificial Intelligence and Data Science. He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job.
 
-Facts: role AI Engineer; employer Claptek Pvt Ltd; location Mumbai, Maharashtra, India (IST, UTC+5:30); education Bachelor of Technology in Artificial Intelligence and Data Science (graduated May 2026), Dr. D. Y. Patil School of Science and Technology; works remotely; takes select freelance AI and backend projects.
+Facts: role AI Engineer; employer Claptek Pvt Ltd; location Mumbai, Maharashtra, India (IST, UTC+5:30); education Bachelor of Technology in Artificial Intelligence and Data Science, Dr. D. Y. Patil School of Science and Technology; takes select freelance AI and backend projects.
 Contact: https://shaunakchorge.github.io/Portfolio/new_portfolio/contact/ - shaunak.chorge@gmail.com
 Profiles: https://github.com/ShaunakChorge - https://www.linkedin.com/in/shaunak-chorge - https://www.instagram.com/_shaunakkk/
 
 ## Hire (freelance services)
-- [All services](https://shaunakchorge.github.io/Portfolio/new_portfolio/services/): Six freelance AI development services in Mumbai: AI chatbots, document AI, Python backend APIs, computer vision, machine learning and automation.
+- [All services](https://shaunakchorge.github.io/Portfolio/new_portfolio/services/): Freelance AI development services in Mumbai: AI chatbots, document AI, Python backend APIs, computer vision, machine learning and automation.
 - [Freelance AI chatbot developer for document assistants](https://shaunakchorge.github.io/Portfolio/new_portfolio/services/llm-rag-development/): Hire a freelance AI chatbot developer in Mumbai. Chatbots that answer from your own documents, show their sources and say "I do not know" when unsure.
 - [Document data extraction with AI](https://shaunakchorge.github.io/Portfolio/new_portfolio/services/ai-document-compliance-automation/): Freelance document AI: tools that read PDFs and forms and pull out clean data, with a quote from the source for each fact and checks on AI drafts.
 - [Hire a FastAPI developer for Python backends and APIs](https://shaunakchorge.github.io/Portfolio/new_portfolio/services/ai-backend-fastapi-django/): Hire a freelance FastAPI and Django developer in Mumbai. Python backend APIs with PostgreSQL, Docker, automated tests and logs for fast debugging.
 - [Computer vision development services](https://shaunakchorge.github.io/Portfolio/new_portfolio/services/computer-vision/): Freelance computer vision developer in Mumbai. Tools that detect, count and classify things in photos and video with OpenCV, PyTorch and YOLOv8.
-- [Machine learning model development for speech, text and data](https://shaunakchorge.github.io/Portfolio/new_portfolio/services/speech-nlp-ml/): Freelance machine learning developer in Mumbai. Models that learn from audio, text or spreadsheet data, with honest accuracy figures and a small web app.
+- [Machine learning model development for speech, text and data](https://shaunakchorge.github.io/Portfolio/new_portfolio/services/speech-nlp-ml/): Freelance machine learning developer in Mumbai. Models that learn from audio, text or spreadsheet data, with accuracy tested on your data and a web app.
 - [Python automation services: scrapers, bots and integrations](https://shaunakchorge.github.io/Portfolio/new_portfolio/services/python-automation-integrations/): Freelance Python automation in Mumbai: web scrapers, Telegram and WhatsApp bots and tool-to-tool links, with background jobs, error handling and logs.
 
 ## Case studies
@@ -25,7 +25,7 @@ Profiles: https://github.com/ShaunakChorge - https://www.linkedin.com/in/shaunak
 - [CCTV video analytics in Python: crowds, crime and faces](https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/advanced-cctv-analytics/): Case study: a Smart India Hackathon team project that watches one CCTV video three ways: crowd-limit alerts, crime labels and face recognition.
 - [Speech emotion recognition project](https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/speech-emotion-recognition/): Case study: a neural network that labels seven emotions in speech, trained on four public datasets. 93.87% on a random test split, with a live mic demo.
 - [Deepfake video detection project](https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/deepfake-video-detection/): Case study: a small neural network scores each video frame as real or fake, with a Streamlit app, confidence chart and PDF report. 74.16% test accuracy.
-- [FastAPI OpenTelemetry tracing for an AI backend](https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/observable-ai-backend/): Case study: a FastAPI service where an AI picks the right business action, with request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger.
+- [FastAPI OpenTelemetry tracing for an AI backend](https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/observable-ai-backend/): Case study: a FastAPI AI server with LLM observability: request IDs in logs, Prometheus metrics and OpenTelemetry traces in Jaeger.
 
 ## About and contact
 - [Home](https://shaunakchorge.github.io/Portfolio/new_portfolio/): Freelance AI engineer in Mumbai. I build AI chatbots that answer from your documents, computer vision tools and Python backend APIs. Send a short brief.
