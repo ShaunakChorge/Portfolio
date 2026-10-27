@@ -26,7 +26,7 @@ function page() {
   const crumbItems = [{ name: 'Home', path: '' }, { name: 'FAQ', path: m.path }];
   const head = pageHead({
     crumbItems, b, eyebrow: 'FAQ', h1: esc(m.h1), answer: m.direct_answer,
-    actions: btn('Contact me', hireHref(b), { v: 'solid', size: 'lg' }) + btn('See services', b + 'services/', { v: 'ghost', size: 'lg' }),
+    actions: btn('Hire me', hireHref(b), { v: 'solid', size: 'lg' }) + btn('See services', b + 'services/', { v: 'ghost', size: 'lg' }),
   });
   const more = MORE(b);
   const groups = faqAll.map(g => `<div class="pg-qgroup"><h2 class="pg-qgroup__h" data-reveal>${esc(g.group)}</h2>${qaList(g.items, { idPrefix: 'faq', links: more })}</div>`).join('');

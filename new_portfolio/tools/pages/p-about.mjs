@@ -27,7 +27,7 @@ function terminal() {
 
 /* ---------- the neon portrait (portrait.css and portrait.js load on this page because the markup has class="np") ---------- */
 const SIZES = '(min-width: 80em) 25rem, 21rem';
-const ALT = 'Illustrated portrait of Shaunak Chorge, an AI engineer in Mumbai, smiling and wearing glasses and a dark jacket with arms crossed';
+const ALT = 'Illustrated portrait of Shaunak Chorge, a freelance AI engineer in Mumbai, smiling and wearing glasses and a dark jacket with arms crossed';
 const pic = (b, name, cls, { alt = '', attrs = '' } = {}) => `<picture class="${cls}"${attrs}>
                       <source type="image/avif" srcset="${b}assets/img/portrait/${name}-480.avif 480w, ${b}assets/img/portrait/${name}-800.avif 800w" sizes="${SIZES}">
                       <source type="image/webp" srcset="${b}assets/img/portrait/${name}-480.webp 480w, ${b}assets/img/portrait/${name}-800.webp 800w" sizes="${SIZES}">
@@ -121,7 +121,7 @@ function page() {
   const crumbItems = [{ name: 'Home', path: '' }, { name: 'About', path: m.path }];
   const head = pageHead({
     crumbItems, b, eyebrow: 'About', h1: esc(m.h1), answer: m.direct_answer, aside: terminal(),
-    actions: btn('Contact me', hireHref(b), { v: 'solid', size: 'lg' }) + btn('Read the resume', b + 'resume/', { v: 'ghost', size: 'lg', icon: 'file-text' }),
+    actions: btn('Hire me', hireHref(b), { v: 'solid', size: 'lg' }) + btn('Read the resume', b + 'resume/', { v: 'ghost', size: 'lg', icon: 'file-text' }),
   });
 
   // story: profile.summary_long, three paragraphs (the last one links to the contact page). From 80em the portrait frame stands on the right and runs the whole

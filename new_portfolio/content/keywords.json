@@ -20,23 +20,24 @@
   },
   "pages": {
     "/": {
-      "primary": "ai engineer mumbai",
+      "primary": "freelance ai engineer mumbai",
       "secondary": [
         "ai developer in mumbai",
         "ai developer in india",
         "ai engineer in india",
+        "freelance ai developer",
         "shaunak chorge portfolio",
         "remote ai engineer india"
       ],
       "questions": [
-        "What kinds of projects do you build?",
         "Can I hire an AI engineer who also has a full-time job?",
-        "Do you take on freelance projects?"
+        "Do you take on freelance projects?",
+        "What kinds of projects do you build?"
       ],
       "anchors": {
         "other": [
           "Shaunak Chorge",
-          "AI engineer in Mumbai",
+          "freelance AI engineer in Mumbai",
           "home page",
           "back to the portfolio"
         ]

@@ -48,7 +48,7 @@ function hub() {
   const crumbItems = [{ name: 'Home', path: '' }, { name: 'Services', path: m.path }];
   const head = pageHead({
     crumbItems, b, eyebrow: 'Freelance services', h1: esc(m.h1), answer: m.direct_answer,
-    actions: btn('Contact me', hireHref(b), { v: 'solid', size: 'lg' }) + btn('See projects', b + 'projects/', { v: 'ghost', size: 'lg', icon: 'arrow-right' }),
+    actions: btn('Hire me', hireHref(b), { v: 'solid', size: 'lg' }) + btn('See projects', b + 'projects/', { v: 'ghost', size: 'lg', icon: 'arrow-right' }),
   });
   const cards = section({
     id: 'all-services', eyebrow: 'Services', title: 'What I can build <span class="hl">for you</span>',
@@ -131,7 +131,7 @@ function servicePage(s) {
   const head = pageHead({
     crumbItems, b, tone: s.tone, eyebrow: 'Freelance service', h1: esc(s.h1), lead: s.intro, answer: s.direct_answer,
     aside: `<div class="pg-svcmark" data-tone="${s.tone}" aria-hidden="true"><span class="pg-svcmark__ring"></span><span class="icon-tile pg-svcmark__tile">${ico(s.icon)}</span></div>`,
-    actions: btn('Discuss this service', hireHref(b, s.slug), { v: 'solid', size: 'lg' }) + btn('See the work', '#proof', { v: 'ghost', size: 'lg', icon: 'arrow-right' }),
+    actions: btn('Hire me for this', hireHref(b, s.slug), { v: 'solid', size: 'lg' }) + btn('See the work', '#proof', { v: 'ghost', size: 'lg', icon: 'arrow-right' }),
   });
 
   /* who it is for */

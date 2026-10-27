@@ -22,12 +22,12 @@
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Shaunak Chorge, AI engineer in Mumbai">
+  <meta property="og:image:alt" content="Shaunak Chorge, freelance AI engineer in Mumbai">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Speech Emotion Recognition Project | Shaunak Chorge">
   <meta name="twitter:description" content="Case study: a neural network that labels seven emotions in speech, trained on four public datasets. 93.87% on a random test split, with a live mic demo.">
   <meta name="twitter:image" content="https://shaunakchorge.github.io/Portfolio/new_portfolio/assets/img/og-image.png">
-  <meta name="twitter:image:alt" content="Shaunak Chorge, AI engineer in Mumbai">
+  <meta name="twitter:image:alt" content="Shaunak Chorge, freelance AI engineer in Mumbai">
 
   <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../../assets/img/favicon.ico" sizes="32x32">
@@ -154,7 +154,7 @@
           "name": "How accurate is speech emotion recognition?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "In this project, 93.87% on a random 20% test split of 9,730 samples. That figure does not cover new speakers, because altered copies of one clip can land on both sides of the split. Accuracy on unseen voices is likely to be lower, so a real project would first measure it by splitting speakers apart."
+            "text": "In this project, 93.87% on a random 20% test split of 9,730 samples. That figure does not cover new speakers, because altered copies of one clip can land on both sides of the split. Accuracy on unseen voices is likely to be lower, so a client project would first measure it by splitting speakers apart."
           }
         },
         {
@@ -243,7 +243,7 @@
         </nav>
 
         <div class="site-header__tools">
-          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Contact me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
           </button>
@@ -265,7 +265,7 @@
       <li><a class="drawer__link" href="../../contact/" style="--i:5"><small>06</small>Contact</a></li>
     </ul>
     <div class="drawer__foot">
-      <a class="btn btn--solid btn--glow btn--sm drawer__hire" href="../../contact/#hire">Contact me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+      <a class="btn btn--solid btn--glow btn--sm drawer__hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
       <a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a>
       <a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a>
       <a class="icon-btn" href="mailto:shaunak.chorge@gmail.com" aria-label="Email Shaunak"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
@@ -284,7 +284,7 @@
         <h1 class="pg-h1">Speech emotion recognition project</h1>
         <p class="pg-lead">Hear the mood in a voice clip, live from the mic.</p>
         <p class="pg-answer" data-answer>This speech emotion recognition project is a neural network (a 1-D CNN, which reads audio as a sequence) that labels seven emotions in speech clips. It was trained on four public datasets and scored 93.87% on a random 20% test split. It comes with live microphone input and a web dashboard.</p>
-        <div class="pg-actions"><a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=speech-nlp-ml#hire">Ask about this project <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="btn btn--ghost btn--lg" href="../../projects/">All projects <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg></a></div>
+        <div class="pg-actions"><a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=speech-nlp-ml#hire">Hire me for something like this <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="btn btn--ghost btn--lg" href="../../projects/">All projects <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg></a></div>
       </div>
       <div class="pg-head__aside"><div class="pg-casevis"><div class="pv" data-visual="waveform" data-variant="speech-emotion-recognition" data-tone="purple" aria-hidden="true"></div></div></div>
     </div>
@@ -367,7 +367,7 @@
     </header>
 <div class="pg-two">
       <div class="panel" data-tone="purple" data-reveal><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-circle-check"/></svg> Results</h3><ul class="dot-list pg-results"><li>Seven emotions are recognised: angry, disgust, fear, happy, neutral, sad and surprise.</li><li>93.87% accuracy and a weighted F1 score of 0.94 (one number that balances missed cases against false alarms) on a random 20% test split of 9,730 samples.</li><li>Per-emotion F1 scores run from 0.92 (sad) to 0.97 (surprise), measured on the same test split.</li><li>The score is for the final model, the one that is saved and used. An earlier training pass reached 95.24% on the same split; I quote the final figure because picking the best pass would flatter the model.</li><li>Caution: the test split can hold altered copies of clips that were also used in training, so the score does not show how it performs on new speakers.</li><li>Live microphone detection runs in a notebook and in the Streamlit dashboard. It has not been scored, so no accuracy figure is claimed for live speech.</li></ul></div>
-      <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-info"/></svg> Limits to keep in mind</h3><ul class="dot-list pg-results"><li>The test is not fully independent. Altered copies of one clip, and the same speakers, appear on both sides of the split, and the test split doubled as the validation set during training. Accuracy on new voices is likely to be lower.</li><li>Every clip is a speaker reading fixed words or sentences in a requested emotion. Real calls bring background noise, phone-quality audio, other languages and mixed feelings, none of which this model has been tested on.</li><li>It reads a 2.5-second window and picks one of seven labels. Longer speech, changing emotion and labels outside the seven are not handled, and live microphone use has not been scored.</li><li>The dashboard is a local prototype, and the large trained weights are not in the public repository, so a production build would start from a fresh, tested package with its own accuracy check.</li></ul></div>
+      <div class="panel" data-tone="blue" data-reveal style="--i:1"><h3 class="pg-panel__h"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-info"/></svg> Limits to keep in mind</h3><ul class="dot-list pg-results"><li>The test is not fully independent. Altered copies of one clip, and the same speakers, appear on both sides of the split, and the test split doubled as the validation set during training. Accuracy on new voices is likely to be lower.</li><li>Every clip is a speaker reading fixed words or sentences in a requested emotion. Real calls bring background noise, phone-quality audio, other languages and mixed feelings, none of which this model has been tested on.</li><li>It reads a 2.5-second window and picks one of seven labels. Longer speech, changing emotion and labels outside the seven are not handled, and live microphone use has not been scored.</li><li>The dashboard is a local prototype, and the large trained weights are not in the public repository, so a client build would start from a fresh, tested package with its own accuracy check.</li></ul></div>
     </div>
   </div>
 </section><section id="where-it-fits" class="section pg-sec" aria-labelledby="where-it-fits-h">
@@ -382,20 +382,20 @@
 </section><section id="extensions" class="section pg-sec section--tint" aria-labelledby="extensions-h">
   <div class="container">
     <header class="section__head" data-reveal>
-      <p class="eyebrow">Next steps</p>
+      <p class="eyebrow">For your project</p>
       <h2 id="extensions-h" class="section__title">What I can add for your <span class="hl">recordings</span></h2>
-      <p class="section__lead">Not part of this project. These are ways the same work could be taken further.</p>
+      <p class="section__lead">Not part of this project. These are add-ons I can build for a client.</p>
     </header>
 <ul class="grid grid--c3 pg-ext pg-ext--n5" role="list"><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="purple"><h3 class="pg-ext__t">Testing on voices it has never heard</h3><p>I can split the data by speaker, so the accuracy you see is measured on voices the model has never heard.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">testing by speaker (grouped cross-validation)</li><li class="tag tag--dashed">scikit-learn</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="purple"><h3 class="pg-ext__t">Pretrained speech model comparison</h3><p>I can compare ready-made speech models against this network and keep whichever performs better on your data.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">wav2vec 2.0 (ready-made speech model)</li><li class="tag tag--dashed">Hugging Face Transformers</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:2"><article class="card card--flat pg-ext__card" data-tone="purple"><h3 class="pg-ext__t">Prediction API</h3><p>I can wrap the model in a tested API with a Docker setup, ready to call from your application.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">FastAPI</li><li class="tag tag--dashed">Docker</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="purple"><h3 class="pg-ext__t">Live browser microphone</h3><p>I can add microphone input from the browser, with results streamed back as the person speaks.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">WebSockets</li><li class="tag tag--dashed">React</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="purple"><h3 class="pg-ext__t">Testing on real call audio</h3><p>I can test the model on noisy, phone-quality recordings from your own calls, so you see how it behaves outside the public datasets used here.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">librosa</li><li class="tag tag--dashed">scikit-learn</li></ul></article></li></ul>
   </div>
 </section><section id="hire-for" class="section pg-sec" aria-labelledby="hire-for-h">
   <div class="container">
     <header class="section__head" data-reveal>
-      <p class="eyebrow">Services</p>
+      <p class="eyebrow">Hire me</p>
       <h2 id="hire-for-h" class="section__title">Services behind <span class="hl hl--purple">this project</span></h2>
       
     </header>
-<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/speech-nlp-ml/" data-tone="purple"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-audio-waveform"/></svg></span><span><strong>Related service: machine learning model development</strong><span class="pg-rel__t">Models trained on audio and text, wrapped in small apps.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li></ul>
+<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/speech-nlp-ml/" data-tone="purple"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-audio-waveform"/></svg></span><span><strong>Hire me for machine learning model development</strong><span class="pg-rel__t">Models trained on audio and text, wrapped in small apps.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li></ul>
     <p class="pg-author" data-reveal>Built by <a class="link" href="../../about/">Shaunak Chorge</a>, Artificial Intelligence (AI) Engineer at Claptek Pvt Ltd in Mumbai.</p>
   </div>
 </section><section id="faq" class="section pg-sec section--tint" aria-labelledby="faq-h">
@@ -410,7 +410,7 @@
       <div class="pg-qa__a"><p>Speech emotion recognition is software that listens to a voice clip and guesses the emotion from tone, pitch and energy rather than the words. This project labels seven emotions: angry, disgust, fear, happy, neutral, sad and surprise. It reads numbers that describe the sound from the audio and passes them to a neural network.</p></div>
     </details><details class="pg-qa" id="speech-emotion-recognition-q2" open data-reveal style="--i:1">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">How accurate is speech emotion recognition?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>In this project, 93.87% on a random 20% test split of 9,730 samples. That figure does not cover new speakers, because altered copies of one clip can land on both sides of the split. Accuracy on unseen voices is likely to be lower, so a real project would first measure it by splitting speakers apart.</p></div>
+      <div class="pg-qa__a"><p>In this project, 93.87% on a random 20% test split of 9,730 samples. That figure does not cover new speakers, because altered copies of one clip can land on both sides of the split. Accuracy on unseen voices is likely to be lower, so a client project would first measure it by splitting speakers apart.</p></div>
     </details><details class="pg-qa" id="speech-emotion-recognition-q3" open data-reveal style="--i:2">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Can it work with my own recordings?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>It can be retrained on your recordings if they are labelled with the emotions you care about. Quality depends on the microphone, the language and the number of speakers. I would first test it on a sample of your audio and report how well it holds.</p></div>
@@ -480,12 +480,12 @@
     <div class="pg-hire__band" data-reveal="scale">
       <span class="pg-hire__line" aria-hidden="true"></span>
       <div class="pg-hire__text">
-        <p class="badge badge--accent"><span class="badge__dot" aria-hidden="true"></span>Open to select AI and backend projects</p>
-        <h2 id="hire-band-h" class="pg-hire__title">Want to talk about <span class="hl">this work?</span></h2>
-        <p class="pg-hire__lead">Send a short note about your idea or question and I will reply by email.</p>
+        <p class="badge badge--accent"><span class="badge__dot" aria-hidden="true"></span>Taking select freelance AI and backend projects</p>
+        <h2 id="hire-band-h" class="pg-hire__title">Need something <span class="hl">like this built?</span></h2>
+        <p class="pg-hire__lead">Send a short brief: what you want to build, roughly when you need it and anything I should know.</p>
       </div>
       <div class="pg-hire__act">
-        <a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=speech-nlp-ml#hire" data-magnetic>Contact me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+        <a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=speech-nlp-ml#hire" data-magnetic>Hire me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
         <p class="pg-hire__alt"><a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a><span aria-hidden="true"> &middot; </span><a class="link" href="../../projects/">See projects</a></p>
       </div>
     </div>
@@ -499,8 +499,8 @@
 
     <!-- closing hire strip (hidden on /contact/, which is the form itself) -->
     <div class="footer__cta">
-      <p class="footer__cta-text"><strong>Have a project in mind?</strong> Send me a short note.</p>
-      <a class="btn btn--solid btn--glow btn--sm" href="../../contact/#hire">Contact me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+      <p class="footer__cta-text"><strong>Ready to start?</strong> Tell me what you need built.</p>
+      <a class="btn btn--solid btn--glow btn--sm" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
     </div>
 
     <div class="footer__grid">
@@ -511,7 +511,7 @@
           <svg class="footer__mark" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false"><defs><linearGradient id="ftm-g" x1="6" y1="2" x2="58" y2="62" gradientUnits="userSpaceOnUse"><stop stop-color="#00FFFF"/><stop offset=".52" stop-color="#B553F2"/><stop offset="1" stop-color="#FF006E"/></linearGradient></defs><path d="M44.76 1L3 7.32L3 15.5L39.02 38.91L3 61.49L3 63L9.03 63L61 43L61 36.5L27.4 14.66L61 2.07L61 1Z" fill="url(#ftm-g)"/></svg>
           <span class="logo__word">SHAUNAK</span>
         </p>
-        <p class="footer__blurb">AI Engineer at Claptek Pvt Ltd. Open to select AI and backend projects.</p>
+        <p class="footer__blurb">AI Engineer at Claptek Pvt Ltd. Taking select freelance AI and backend projects.</p>
         <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India (IST)</p>
         <ul class="footer__soc" aria-label="Profiles">
           <li><a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a></li>
@@ -592,7 +592,7 @@
             <li><a class="connect__item" href="mailto:shaunak.chorge@gmail.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span><strong>Email</strong><small>Write to me</small></span></a></li>
       </ul>
     </div>
-    <a class="fab" href="../../contact/#hire" aria-label="Contact me" data-connect-toggle><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></a>
+    <a class="fab" href="../../contact/#hire" aria-label="Hire me" data-connect-toggle><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg></a>
     <div class="fab-tip" aria-hidden="true">Let&rsquo;s talk</div>
   </div>
 </footer>
@@ -647,7 +647,7 @@
   <script defer src="../../assets/dist/js/core.min.js?v=6d3f6aa2"></script>
   <script defer src="../../assets/dist/js/contact.min.js?v=e16d51ee"></script>
   <script defer src="../../assets/dist/js/footer.min.js?v=f0044425"></script>
-  <script defer src="../../assets/dist/js/fx.min.js?v=0da7fe7f"></script>
+  <script defer src="../../assets/dist/js/fx.min.js?v=a0339b5b"></script>
   <script defer src="../../assets/dist/js/pages.min.js?v=514d4156"></script>
   <script defer src="../../assets/dist/js/visuals.min.js?v=364afef6"></script>
 </body>

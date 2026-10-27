@@ -20,7 +20,7 @@ function page() {
   const head = pageHead({
     crumbItems, b, eyebrow: 'Resume', h1: esc(m.h1),
     answer: m.direct_answer,
-    actions: `<a class="btn btn--solid btn--lg btn--glow" href="${b}${RESUME_PDF}" download="Shaunak-Chorge-Resume.pdf">Download PDF ${ico('download', 'icon--still')}</a>` + btn('Contact me', hireHref(b), { v: 'ghost', size: 'lg' }),
+    actions: `<a class="btn btn--solid btn--lg btn--glow" href="${b}${RESUME_PDF}" download="Shaunak-Chorge-Resume.pdf">Download PDF ${ico('download', 'icon--still')}</a>` + btn('Hire me', hireHref(b), { v: 'ghost', size: 'lg' }),
   });
 
   const work = experience.filter(e => e.group === 'work');
@@ -50,7 +50,7 @@ function page() {
   const proj = feat.length ? section({
     id: 'projects', eyebrow: 'Selected projects', title: `Projects <span class="hl hl--magenta">worth a read</span>`,
     body: `<ul class="pg-rel" role="list" data-reveal-group>${feat.map(p => `<li><a class="pg-rel__link" href="${b}${p.path}" data-tone="${esc(p.tone)}"><span class="icon-tile">${ico('folder')}</span><span><strong>${esc(p.title)}</strong><span class="pg-rel__t">${esc(p.card_blurb)}</span></span>${ico('arrow-right', 'pg-rel__go')}</a></li>`).join('')}</ul>
-    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="${b}projects/">All projects ${ico('arrow-right')}</a><a class="link-arrow" href="${b}services/">Services ${ico('arrow-right')}</a></p>`,
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="${b}projects/">All projects ${ico('arrow-right')}</a><a class="link-arrow" href="${b}services/">Freelance services ${ico('arrow-right')}</a></p>`,
   }) : '';
 
   const faqItems = (m.faqs || []).map((f, i) => ({ id: `q${i + 1}`, q: f.q, a: f.a }));
@@ -70,7 +70,7 @@ function page() {
   return {
     path: m.path, current: 'resume', title: m.title, description: m.description, jsonld,
     content: head + `<div class="container pg-resume-top">${contact}</div>` + exp + cred + skillsSec + proj + faq +
-      hireBand({ b, heading: 'Let’s <span class="hl">talk</span>', text: CTA_TEXT }),
+      hireBand({ b, heading: 'Hiring, or have <span class="hl">a project?</span>', text: CTA_TEXT }),
     llms: {
       heading: 'Resume', url, desc: m.description,
       text: [m.direct_answer, 'Roles: ' + work.map(e => `${e.role} at ${e.org}`).join('; ') + '.', 'Certifications: ' + certifications.map(c => `${c.name} (${c.issuer})`).join('; ') + '.', 'Awards: ' + achievements.map(a => a.title).join('; ') + '.', ...faqItems.map(f => `Q: ${f.q} A: ${f.a}`)],

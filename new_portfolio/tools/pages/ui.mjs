@@ -106,7 +106,7 @@ export function hireBand({ b, heading, text, topic = '', secondary = null }) {
         <p class="pg-hire__lead">${esc(text)}</p>
       </div>
       <div class="pg-hire__act">
-        <a class="btn btn--solid btn--lg btn--glow" href="${href}" data-magnetic>Contact me ${ico('arrow-right', 'icon--still')}</a>
+        <a class="btn btn--solid btn--lg btn--glow" href="${href}" data-magnetic>Hire me ${ico('arrow-right', 'icon--still')}</a>
         <p class="pg-hire__alt"><a class="link" href="mailto:${EMAIL}">${EMAIL}</a><span aria-hidden="true"> &middot; </span><a class="link" href="${sec.href}">${esc(sec.label)}</a></p>
       </div>
     </div>

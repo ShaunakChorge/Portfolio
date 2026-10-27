@@ -1,6 +1,6 @@
 {
   "name": "Shaunak Chorge",
-  "tagline": "AI Engineer in Mumbai building AI-powered applications and solutions: RAG chatbots, computer vision models, machine learning apps and backend APIs.",
+  "tagline": "AI Engineer and freelance developer in Mumbai: AI chatbots, Python backend APIs, computer vision and automation.",
   "og_image": "assets/img/og-image.png",
   "portrait_image": "assets/img/portrait/portrait-800.webp",
   "person": {
@@ -18,7 +18,6 @@
       "Large language models (AI language models)",
       "Retrieval-augmented generation (AI that answers from your own documents)",
       "Computer vision",
-      "Machine learning",
       "OpenCV",
       "PyTorch",
       "TensorFlow",

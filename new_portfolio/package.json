@@ -1,7 +1,7 @@
 {
   "name": "shaunak-chorge-portfolio",
   "private": true,
-  "description": "Static portfolio site. Build: node build.mjs",
+  "description": "Static portfolio and freelance site. Build: node build.mjs",
   "scripts": {
     "build": "node build.mjs",
     "build:dev": "node build.mjs --dev",

@@ -185,8 +185,7 @@ try {
     const cmd = (home.match(/<button class="cmd"[\s\S]*?<\/button>/) || [''])[0];
     check(/aria-label="Search"/.test(cmd) && /data-open-palette/.test(cmd) && !/>\s*[A-Za-z]/.test(cmd.replace(/<svg[\s\S]*?<\/svg>/, '').replace(/^<button[^>]*>/, '')), 'the search button is an icon with aria-label="Search" and no text or hint');
     check(!/class="np[ "_]|hero__photo/.test(home), 'the home page has no portrait photo');
-    check(/shaunak\.py/.test(home) && /See projects/.test(home) && /Contact me/.test(home) && !/Hire me/.test(home), 'the home hero keeps the shaunak.py window and the See projects and Contact me buttons (no Hire me label)');
-    { const lede = (home.match(/<p class="hero__lede"[^>]*>([\s\S]*?)<\/p>/) || [])[1] || ''; check(/^I am an AI Engineer based in Mumbai who builds AI-powered applications and solutions/.test(lede) && !/freelanc/i.test(lede), 'the home intro leads with AI-powered applications and solutions and does not say freelance'); }
+    check(/shaunak\.py/.test(home) && /See projects/.test(home) && /Hire me/.test(home), 'the home hero keeps the shaunak.py window and the See projects and Hire me buttons');
     check(/class="np[ "_]/.test(about), 'the portrait is on the About page');
 
     /* round 8: a polygon portrait frame with the whole picture, no pause or accent buttons anywhere, a ribbon that does not clip a hovered chip, no removed certificates */

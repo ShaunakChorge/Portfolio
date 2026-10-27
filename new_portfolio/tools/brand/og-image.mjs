@@ -46,9 +46,9 @@ html, body { width: 1200px; height: 630px; background: #05060d; overflow: hidden
 <div class="dot" style="right:78px;top:515px;width:14px;height:14px;background:#b553f2;box-shadow:0 0 18px #b553f2"></div>
 <p class="loc"><i>//</i>Mumbai, India</p>
 <h1 class="name">SHAUNAK<span>CHORGE</span></h1>
-<p class="role"><b>AI Engineer</b> building AI solutions</p>
-<p class="what">AI applications<i>&middot;</i>RAG chatbots<i>&middot;</i>Computer vision<i>&middot;</i>Backend APIs</p>
-<p class="foot"><span>AI Engineer at Claptek Pvt Ltd, Mumbai</span><span>Open to <em>select</em> AI and backend projects</span></p>
+<p class="role"><b>AI Engineer</b> and Freelance Developer</p>
+<p class="what">AI chatbots<i>&middot;</i>Computer vision<i>&middot;</i>Python backend APIs<i>&middot;</i>Automation</p>
+<p class="foot"><span>AI Engineer at Claptek Pvt Ltd, Mumbai</span><span>Taking select <em>freelance</em> projects</span></p>
 </div></body></html>`;
 
 const tmp = path.join(SITE, 'tools/brand/og-image.tmp.html');

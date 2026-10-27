@@ -1,6 +1,6 @@
 # Shaunak Chorge - Portfolio
 
-Portfolio of **Shaunak Chorge**, AI Engineer at Claptek Pvt Ltd, based in Mumbai, India. He builds AI-powered applications and solutions: computer vision, speech and machine learning, RAG chatbots that answer from your own documents, FastAPI and Django backend services, and automation. Open to select AI and backend projects.
+Portfolio and freelance site of **Shaunak Chorge**, AI Engineer at Claptek Pvt Ltd, based in Mumbai, India. He takes select freelance AI and backend projects: AI chatbots and AI language model apps, AI that answers from your own documents, computer vision, speech and machine learning, FastAPI and Django backend services, and automation.
 
 Live: <https://shaunakchorge.github.io/Portfolio/new_portfolio/> - Code: <https://github.com/ShaunakChorge/Portfolio>
 

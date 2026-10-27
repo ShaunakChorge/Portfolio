@@ -25,7 +25,7 @@ function hub() {
   const answer = m.direct_answer;
   const head = pageHead({
     crumbItems, b, eyebrow: 'Projects', h1: esc(m.h1), answer,
-    actions: btn('Contact me', hireHref(b), { v: 'solid', size: 'lg' }) + btn('See services', b + 'services/', { v: 'ghost', size: 'lg' }),
+    actions: btn('Hire me', hireHref(b), { v: 'solid', size: 'lg' }) + btn('See services', b + 'services/', { v: 'ghost', size: 'lg' }),
   });
 
   // filter chips: only groups that have selected projects, labels only; JS-free fallback shows everything
@@ -90,7 +90,7 @@ function hub() {
   ]);
   return {
     path: m.path, current: 'projects', title: m.title, description: m.description, jsonld,
-    content: head + selected + needs + reading + personal + faq + askBox({ b, ref: m.path, about: 'Projects', prompts: ['Which project is closest to my idea?', 'Can I see how a result was measured?', 'Which of these are client projects?'], title: 'Questions about these projects?' }) + hireBand({ b, heading: 'Want to talk about <span class="hl">this work?</span>', text: CTA_TEXT }),
+    content: head + selected + needs + reading + personal + faq + askBox({ b, ref: m.path, about: 'Projects', prompts: ['Which project is closest to my idea?', 'Can I see how a result was measured?', 'Which of these are client projects?'], title: 'Not sure which project fits your idea?' }) + hireBand({ b, heading: 'Want something <span class="hl">like this built?</span>', text: CTA_TEXT }),
     llms: {
       heading: m.h1, url, desc: m.description,
       text: [answer, ...(m.needs || []).map(n => `${n.need}: ${n.text}`), ...faqItems.map(f => `Q: ${f.q} A: ${f.a}`)],
@@ -116,7 +116,7 @@ function casePage(p, idx) {
   const head = pageHead({
     crumbItems, b, tone: p.tone, eyebrow: `Case study / ${p.category}`, h1: esc(cs.seo.h1), lead: p.tagline, answer: cs.summary,
     aside: `<div class="pg-casevis">${pv(p)}</div>`,
-    actions: btn('Ask about this project', hireHref(b, p.primarySvc.slug), { v: 'solid', size: 'lg' }) + btn('All projects', b + 'projects/', { v: 'ghost', size: 'lg', icon: 'arrow-left' }),
+    actions: btn('Hire me for something like this', hireHref(b, p.primarySvc.slug), { v: 'solid', size: 'lg' }) + btn('All projects', b + 'projects/', { v: 'ghost', size: 'lg', icon: 'arrow-left' }),
   });
 
   /* key facts (no year) */
@@ -205,15 +205,15 @@ function casePage(p, idx) {
   if (uses) jump.push(['where-it-fits', 'Where it fits']);
 
   const ext = section({
-    id: 'extensions', eyebrow: 'Next steps', title: ttl(h2.ext, 'Possible <span class="hl">extensions</span>'), tint: alt(),
-    lead: 'Not part of this project. These are ways the same work could be taken further.',
+    id: 'extensions', eyebrow: 'For your project', title: ttl(h2.ext, 'Extensions I can build <span class="hl">for you</span>'), tint: alt(),
+    lead: 'Not part of this project. These are add-ons I can build for a client.',
     body: `<ul class="grid grid--c3 pg-ext pg-ext--n${(p.extensions || []).length}" role="list">${(p.extensions || []).map((e, i) => `<li class="pg-ext__item" data-reveal style="--i:${i % 3}"><article class="card card--flat pg-ext__card" data-tone="${p.tone}"><h3 class="pg-ext__t">${esc(e.title)}</h3><p>${esc(e.benefit)}</p>${tags(e.tech || [], { cls: 'pg-ext__tags', label: 'Possible tools', itemCls: 'tag--dashed' })}</article></li>`).join('')}</ul>`,
   });
   jump.push(['extensions', 'Extensions']);
 
   const svcCards = section({
-    id: 'hire-for', eyebrow: 'Services', title: `Services behind <span class="hl hl--purple">this project</span>`, tint: alt(),
-    body: `<ul class="pg-rel" role="list" data-reveal-group>${p.svc.map(x => `<li><a class="pg-rel__link" href="${b}${x.path}" data-tone="${x.tone}"><span class="icon-tile">${ico(x.icon)}</span><span><strong>Related service: ${esc(anchors(x.path).hire || x.name)}</strong><span class="pg-rel__t">${esc(x.blurb)}</span></span>${ico('arrow-right', 'pg-rel__go')}</a></li>`).join('')}</ul>
+    id: 'hire-for', eyebrow: 'Hire me', title: `Services behind <span class="hl hl--purple">this project</span>`, tint: alt(),
+    body: `<ul class="pg-rel" role="list" data-reveal-group>${p.svc.map(x => `<li><a class="pg-rel__link" href="${b}${x.path}" data-tone="${x.tone}"><span class="icon-tile">${ico(x.icon)}</span><span><strong>Hire me for ${esc(anchors(x.path).hire || x.name)}</strong><span class="pg-rel__t">${esc(x.blurb)}</span></span>${ico('arrow-right', 'pg-rel__go')}</a></li>`).join('')}</ul>
     <p class="pg-author" data-reveal>Built by <a class="link" href="${b}about/">Shaunak Chorge</a>, ${/\bAI\b/.test((head + glance + overview + story + scope + arch + decisions + results + uses + ext).replace(/<[^>]+>/g, ' ')) ? 'AI' : 'Artificial Intelligence (AI)'} Engineer at Claptek Pvt Ltd in Mumbai.</p>`,
   });
 
@@ -261,7 +261,7 @@ function casePage(p, idx) {
     personMini(),
   ];
   if (faqItems.length) nodes.push(faqNode(url, faqItems));
-  const tail = hireBand({ b, heading: 'Want to talk about <span class="hl">this work?</span>', text: 'Send a short note about your idea or question and I will reply by email.', topic: p.primarySvc.slug });
+  const tail = hireBand({ b, heading: 'Need something <span class="hl">like this built?</span>', text: CTA_TEXT, topic: p.primarySvc.slug });
   return {
     path: p.path, current: 'projects', title, description, og_type: 'article', jsonld: ctx(nodes),
     content: head + toc(jump) + glance + overview + story + scope + arch + decisions + results + uses + ext + svcCards + faq + related + pn + ask + tail,
@@ -280,7 +280,7 @@ function casePage(p, idx) {
         ...(cs.limits || []).length ? ['Limits: ' + cs.limits.join(' ')] : [],
         ...(cs.use_cases || []).length ? ['Where this fits: ' + cs.use_cases.map(u => `${u.who}: ${u.need}`).join(' ')] : [],
         'Role: ' + p.role,
-        'Possible extensions (not part of this build): ' + (p.extensions || []).map(e => e.title).join('; ') + '.',
+        'Extensions I can build for you (not part of this build): ' + (p.extensions || []).map(e => e.title).join('; ') + '.',
         ...faqItems.map(f => `Q: ${f.q} A: ${f.a}`)],
     },
   };
