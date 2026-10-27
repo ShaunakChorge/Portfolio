@@ -1,4 +1,4 @@
-# Shaunak Chorge - portfolio and freelance site
+# Shaunak Chorge - portfolio site
 
 The source of <https://shaunakchorge.github.io/Portfolio/new_portfolio/>: a home page plus dedicated pages for services, projects (with case studies), about, FAQ, contact and a resume view. The pages are generated from one content file and one project list, so changing a sentence or a project is a one-file edit followed by one command.
 

@@ -81,13 +81,14 @@ ${aboutLinks.map(([label, href], i) => `          <li><a class="link-arrow" href
 `;
 
 /* ------------------------------------------------------------------ 04  OFFER (what I can build for you; tone and icon come from content.services[]) */
-const offerRows = C.services.map((s, i) => {
+const SVC_ORDER = ['document-ai-extraction', 'computer-vision', 'llm-apps-rag', 'python-backend-apis', 'speech-nlp-ml', 'automation-integrations'];   // chatbots are one of several, not the first card
+const offerRows = [...C.services].sort((a, b) => SVC_ORDER.indexOf(a.slug) - SVC_ORDER.indexOf(b.slug)).map((s, i) => {
   const href = `{{base}}services/${SERVICE_SLUG[s.slug] || s.slug}/`;
   return `      <li class="hm-svc__item" data-reveal style="--i:${i % 3}">
         <article class="card hm-svc" data-tone="${s.tone}">
           <div class="icon-tile">${icon(s.icon)}</div>
           <div class="hm-svc__text">
-            <h3 class="hm-svc__title"><a class="card__link" href="${href}">${esc(s.nav_label.replace(' & ', ' & '))}<span class="sr-only"> freelance service</span></a></h3>
+            <h3 class="hm-svc__title"><a class="card__link" href="${href}">${esc(s.nav_label.replace(' & ', ' & '))}<span class="sr-only"> service</span></a></h3>
             <p class="hm-svc__blurb">${esc(curly(s.blurb))}</p>
           </div>
         </article>
@@ -97,7 +98,7 @@ const offer = `<section id="offer" class="section section--alt hm-offer hm-cv" d
   <div class="container">
     <header class="section__head">
       <p class="eyebrow">Services</p>
-      <h2 id="offer-title" class="section__title" data-reveal="scan">${ttl(H2.offer, 'What I <span class="hl hl--purple">build</span> for clients', 'hl--purple')}</h2>
+      <h2 id="offer-title" class="section__title" data-reveal="scan">${ttl(H2.offer, 'What I <span class="hl hl--purple">build</span>', 'hl--purple')}</h2>
     </header>
     <ul class="hm-svcs" role="list">
 ${offerRows}
@@ -206,7 +207,7 @@ const contact = `<section id="contact" class="section contact hm-cv" data-num="0
       <div class="bg-circuit" aria-hidden="true"></div>
       <div class="contact__band-in hm-band">
         <header class="contact__head">
-          <p class="eyebrow">Hire me</p>
+          <p class="eyebrow">Contact</p>
           <h2 id="contact-title" class="contact__title">Have an AI or backend project <span class="hl">in mind?</span></h2>
           <p class="contact__lead">${esc(C.cta.text)}</p>
           <div class="contact__actions">
