@@ -81,7 +81,9 @@ ${aboutLinks.map(([label, href], i) => `          <li><a class="link-arrow" href
 `;
 
 /* ------------------------------------------------------------------ 04  OFFER (what I can build for you; tone and icon come from content.services[]) */
-const offerRows = C.services.map((s, i) => {
+// home cards only: vision and ML first, chatbots after; the shared services list keeps its order
+const HOME_ORDER = ['computer-vision', 'speech-nlp-ml', 'llm-apps-rag', 'document-ai-extraction', 'python-backend-apis', 'automation-integrations'];
+const offerRows = [...C.services].sort((a, b) => HOME_ORDER.indexOf(a.slug) - HOME_ORDER.indexOf(b.slug)).map((s, i) => {
   const href = `{{base}}services/${SERVICE_SLUG[s.slug] || s.slug}/`;
   return `      <li class="hm-svc__item" data-reveal style="--i:${i % 3}">
         <article class="card hm-svc" data-tone="${s.tone}">
