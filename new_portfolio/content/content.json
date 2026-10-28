@@ -1864,45 +1864,57 @@
       "Streamlit"
     ],
     "also": [
+      "SQL",
+      "R",
+      "JavaScript",
+      "C / C++",
+      "HTML / CSS",
+      "React",
+      "Vite",
       "Django",
-      "Django REST Framework",
-      "Pydantic",
-      "pytest",
-      "sentence-transformers",
-      "Local AI models (Ollama, vLLM)",
-      "PyMuPDF",
-      "sqlglot",
-      "Redis",
-      "Celery",
+      "Flask",
+      "REST API",
       "WebSockets",
+      "Pydantic",
+      "Java",
+      "Celery",
+      "Redis",
+      "JWT",
+      "pytest",
+      "Linux",
+      "AWS Bedrock",
+      "AWS S3",
       "OpenTelemetry",
       "Prometheus",
       "Jaeger",
-      "Supabase",
-      "MongoDB",
-      "MySQL",
-      "SQL",
-      "NumPy",
-      "scikit-learn",
-      "TensorFlow / Keras",
+      "Twilio",
+      "Telegram Bot API",
+      "TensorFlow",
+      "Keras",
       "PyTorch",
+      "scikit-learn",
+      "Hugging Face Transformers",
+      "NLTK",
+      "NumPy",
+      "Matplotlib",
       "OpenCV",
       "YOLOv8",
       "librosa",
-      "NLTK",
-      "Hugging Face Transformers",
-      "React",
-      "Vite",
-      "Flask",
-      "Twilio",
-      "WhatsApp Cloud API (prototype)",
-      "Telegram Bot API",
-      "Requests",
+      "LLMs",
+      "LLaMA",
+      "Ollama",
+      "vLLM",
+      "OpenAI",
+      "Gemini API",
+      "Groq",
+      "PyMuPDF",
       "BeautifulSoup",
-      "JavaScript",
-      "HTML / CSS",
-      "Java",
-      "C / C++"
+      "Oracle",
+      "MS SQL Server",
+      "MySQL",
+      "MongoDB",
+      "Supabase",
+      "Power BI"
     ],
     "tier_labels": {
       "core": {
@@ -1921,19 +1933,89 @@
         "daily": true
       },
       {
-        "name": "FastAPI",
+        "name": "SQL",
+        "tone": "blue"
+      },
+      {
+        "name": "R",
+        "tone": "purple"
+      },
+      {
+        "name": "JavaScript",
+        "tone": "magenta"
+      },
+      {
+        "name": "C / C++",
+        "tone": "green"
+      },
+      {
+        "name": "HTML / CSS",
+        "tone": "cyan"
+      },
+      {
+        "name": "React",
         "tone": "blue",
         "daily": true
       },
       {
-        "name": "PostgreSQL",
+        "name": "Vite",
+        "tone": "purple"
+      },
+      {
+        "name": "FastAPI",
+        "tone": "magenta",
+        "daily": true
+      },
+      {
+        "name": "Django",
+        "tone": "green",
+        "daily": true
+      },
+      {
+        "name": "Flask",
+        "tone": "cyan"
+      },
+      {
+        "name": "REST API",
+        "tone": "blue"
+      },
+      {
+        "name": "WebSockets",
+        "tone": "purple"
+      },
+      {
+        "name": "Pydantic",
+        "tone": "magenta"
+      },
+      {
+        "name": "Java",
+        "tone": "green"
+      },
+      {
+        "name": "Celery",
+        "tone": "cyan"
+      },
+      {
+        "name": "Redis",
         "tone": "blue",
         "daily": true
+      },
+      {
+        "name": "JWT",
+        "tone": "purple"
+      },
+      {
+        "name": "pytest",
+        "tone": "magenta"
       },
       {
         "name": "Docker",
-        "tone": "blue",
+        "tone": "green",
         "daily": true
+      },
+      {
+        "name": "Linux",
+        "tone": "cyan"
       },
       {
         "name": "Git",
@@ -1941,24 +2023,64 @@
         "daily": true
       },
       {
-        "name": "Groq",
+        "name": "AWS Bedrock",
+        "tone": "purple"
+      },
+      {
+        "name": "AWS S3",
+        "tone": "magenta"
+      },
+      {
+        "name": "OpenTelemetry",
+        "tone": "green"
+      },
+      {
+        "name": "Prometheus",
+        "tone": "cyan"
+      },
+      {
+        "name": "Jaeger",
+        "tone": "blue"
+      },
+      {
+        "name": "Twilio",
+        "tone": "purple"
+      },
+      {
+        "name": "Telegram Bot API",
+        "tone": "magenta"
+      }
+    ],
+    "ribbon2": [
+      {
+        "name": "TensorFlow",
         "tone": "cyan",
         "daily": true
       },
       {
-        "name": "OpenAI",
-        "tone": "cyan",
+        "name": "Keras",
+        "tone": "blue"
+      },
+      {
+        "name": "PyTorch",
+        "tone": "purple",
         "daily": true
       },
       {
-        "name": "RAG",
-        "tone": "cyan",
-        "daily": true
+        "name": "scikit-learn",
+        "tone": "magenta"
       },
       {
-        "name": "ChromaDB",
-        "tone": "cyan",
-        "daily": true
+        "name": "Hugging Face Transformers",
+        "tone": "green"
+      },
+      {
+        "name": "NLTK",
+        "tone": "cyan"
+      },
+      {
+        "name": "NumPy",
+        "tone": "blue"
       },
       {
         "name": "pandas",
@@ -1966,65 +2088,94 @@
         "daily": true
       },
       {
-        "name": "Streamlit",
-        "tone": "purple",
-        "daily": true
-      },
-      {
-        "name": "Django",
-        "tone": "blue"
-      },
-      {
-        "name": "Pydantic",
-        "tone": "blue"
-      },
-      {
-        "name": "pytest",
-        "tone": "blue"
-      },
-      {
-        "name": "Redis",
-        "tone": "blue"
-      },
-      {
-        "name": "React",
-        "tone": "blue"
-      },
-      {
-        "name": "scikit-learn",
-        "tone": "purple"
-      },
-      {
-        "name": "PyTorch",
-        "tone": "purple"
-      },
-      {
-        "name": "TensorFlow",
-        "tone": "purple"
-      },
-      {
-        "name": "Keras",
-        "tone": "purple"
-      },
-      {
-        "name": "librosa",
-        "tone": "purple"
-      },
-      {
-        "name": "OpenCV",
+        "name": "Matplotlib",
         "tone": "magenta"
       },
       {
+        "name": "OpenCV",
+        "tone": "green"
+      },
+      {
         "name": "YOLOv8",
+        "tone": "cyan"
+      },
+      {
+        "name": "librosa",
+        "tone": "blue"
+      },
+      {
+        "name": "LLMs",
+        "tone": "purple"
+      },
+      {
+        "name": "LLaMA",
         "tone": "magenta"
       },
       {
         "name": "Ollama",
-        "tone": "cyan"
+        "tone": "green"
       },
       {
         "name": "vLLM",
         "tone": "cyan"
+      },
+      {
+        "name": "OpenAI",
+        "tone": "blue",
+        "daily": true
+      },
+      {
+        "name": "Gemini API",
+        "tone": "purple"
+      },
+      {
+        "name": "Groq",
+        "tone": "magenta"
+      },
+      {
+        "name": "ChromaDB",
+        "tone": "green"
+      },
+      {
+        "name": "Streamlit",
+        "tone": "cyan"
+      },
+      {
+        "name": "PyMuPDF",
+        "tone": "blue"
+      },
+      {
+        "name": "BeautifulSoup",
+        "tone": "purple"
+      },
+      {
+        "name": "PostgreSQL",
+        "tone": "magenta",
+        "daily": true
+      },
+      {
+        "name": "Oracle",
+        "tone": "green"
+      },
+      {
+        "name": "MS SQL Server",
+        "tone": "cyan"
+      },
+      {
+        "name": "MySQL",
+        "tone": "blue"
+      },
+      {
+        "name": "MongoDB",
+        "tone": "purple"
+      },
+      {
+        "name": "Supabase",
+        "tone": "magenta"
+      },
+      {
+        "name": "Power BI",
+        "tone": "green"
       }
     ]
   },

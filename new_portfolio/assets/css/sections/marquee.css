@@ -58,4 +58,11 @@
 }
 /*#endregion*/
 
+/*#region two rows: the second scrolls the other way*/
+.mq__stage--rows { display: flex; flex-direction: column; gap: .75rem; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .mq__track--rev { animation-direction: reverse; }
+}
+/*#endregion*/
+
 @media (forced-colors: active) { .mq__chip { border-color: CanvasText; } }

@@ -892,7 +892,7 @@ Experience: AI Engineer at Claptek Pvt Ltd; Python Automation Intern at Osource 
 
 Core stack: Python, FastAPI, PostgreSQL, Docker, Git, AI model APIs (Groq, OpenAI), RAG (answers from documents), ChromaDB, pandas, Streamlit.
 
-Also works with: Django, Django REST Framework, Pydantic, pytest, sentence-transformers, Local AI models (Ollama, vLLM), PyMuPDF, sqlglot, Redis, Celery, WebSockets, OpenTelemetry, Prometheus, Jaeger, Supabase, MongoDB, MySQL, SQL, NumPy, scikit-learn, TensorFlow / Keras, PyTorch, OpenCV, YOLOv8, librosa, NLTK, Hugging Face Transformers, React, Vite, Flask, Twilio, WhatsApp Cloud API (prototype), Telegram Bot API, Requests, BeautifulSoup, JavaScript, HTML / CSS, Java, C / C++.
+Also works with: SQL, R, JavaScript, C / C++, HTML / CSS, React, Vite, Django, Flask, REST API, WebSockets, Pydantic, Java, Celery, Redis, JWT, pytest, Linux, AWS Bedrock, AWS S3, OpenTelemetry, Prometheus, Jaeger, Twilio, Telegram Bot API, TensorFlow, Keras, PyTorch, scikit-learn, Hugging Face Transformers, NLTK, NumPy, Matplotlib, OpenCV, YOLOv8, librosa, LLMs, LLaMA, Ollama, vLLM, OpenAI, Gemini API, Groq, PyMuPDF, BeautifulSoup, Oracle, MS SQL Server, MySQL, MongoDB, Supabase, Power BI.
 
 How I work: I can take on projects of any size, from small fixes to large builds, and we start with a clear discussion of what you need. We agree the plan and a suitable deadline together after a thorough conversation, before any work begins. You get regular progress updates and clear advice on what will work best for your idea.
 

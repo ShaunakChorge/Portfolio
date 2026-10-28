@@ -14,15 +14,17 @@
 
   function boot() {
     var root = doc.getElementById('stack');
-    var track = root && root.querySelector('.mq__track');
-    if (!track) return;
+    var tracks = root ? [].slice.call(root.querySelectorAll('.mq__track')) : [];
+    if (!tracks.length) return;
 
     function measure() {
-      var animated = window.getComputedStyle(track).animationName !== 'none';
-      if (!animated) { track.style.removeProperty('--mq-dur'); return; }
-      /* the loop distance is -50% of the track (a translation does not change the rect width) */
-      var w = track.getBoundingClientRect().width / 2;
-      if (w > 0) track.style.setProperty('--mq-dur', Math.max(24, Math.round(w / SPEED)) + 's');
+      tracks.forEach(function (track) {
+        var animated = window.getComputedStyle(track).animationName !== 'none';
+        if (!animated) { track.style.removeProperty('--mq-dur'); return; }
+        /* the loop distance is -50% of the track (a translation does not change the rect width) */
+        var w = track.getBoundingClientRect().width / 2;
+        if (w > 0) track.style.setProperty('--mq-dur', Math.max(24, Math.round(w / SPEED)) + 's');
+      });
     }
     measure();
     if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(measure, function () {});

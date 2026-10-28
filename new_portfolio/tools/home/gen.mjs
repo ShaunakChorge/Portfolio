@@ -26,17 +26,18 @@ const need = (cond, msg) => { if (!cond) { console.error('GEN ERROR:', msg); pro
 /* The strip is decorative (aria-hidden): the same tools are written once for screen readers. Two identical sets make the CSS loop seamless
    (marquee.css moves the track by half its width); only the first set is shown without JavaScript or with reduced motion. */
 const ribbon = C.skills.ribbon;
+const ribbon2 = Array.isArray(C.skills.ribbon2) ? C.skills.ribbon2 : [];   // second row, scrolls the opposite way
 need(Array.isArray(ribbon) && ribbon.length >= 8, 'skills.ribbon: the tool ribbon needs at least 8 tools');
-const chips = ribbon.map(t => `<li class="mq__chip" data-tone="${t.tone}"${t.daily ? ' data-tier="daily"' : ''}><i class="mq__dot"></i>${esc(t.name)}</li>`).join('');
-const sets = [0, 1].map(i => `<ul class="mq__set"${i ? ' data-clone' : ''}>${chips}</ul>`).join('\n          ');
+const chipRow = row => row.map(t => `<li class="mq__chip" data-tone="${t.tone}"${t.daily ? ' data-tier="daily"' : ''}><i class="mq__dot"></i>${esc(t.name)}</li>`).join('');
+const mqTrack = (row, rev) => `<div class="mq__track${rev ? ' mq__track--rev' : ''}">
+        ${[0, 1].map(i => `<ul class="mq__set"${i ? ' data-clone' : ''}>${chipRow(row)}</ul>`).join('\n          ')}
+      </div>`;
 const stack = `<section id="stack" class="mq section--alt" data-num="02" data-rail="02·stack" aria-labelledby="stack-title">
   <h2 id="stack-title" class="sr-only">${esc(H2.stack || 'Tools I work with')}</h2>
-  <p class="sr-only">${esc(ribbon.map(t => t.name).join(', '))}.</p>
+  <p class="sr-only">${esc([...ribbon, ...ribbon2].map(t => t.name).join(', '))}.</p>
   <div class="container mq__bar">
-    <div class="mq__stage" aria-hidden="true" data-reveal="fade">
-      <div class="mq__track">
-        ${sets}
-      </div>
+    <div class="mq__stage${ribbon2.length ? ' mq__stage--rows' : ''}" aria-hidden="true" data-reveal="fade">
+      ${mqTrack(ribbon, false)}${ribbon2.length ? '\n      ' + mqTrack(ribbon2, true) : ''}
     </div>
   </div>
 </section>
