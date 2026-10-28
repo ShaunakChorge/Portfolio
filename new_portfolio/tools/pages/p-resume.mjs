@@ -50,7 +50,7 @@ function page() {
   const proj = feat.length ? section({
     id: 'projects', eyebrow: 'Selected projects', title: `Projects <span class="hl hl--magenta">worth a read</span>`,
     body: `<ul class="pg-rel" role="list" data-reveal-group>${feat.map(p => `<li><a class="pg-rel__link" href="${b}${p.path}" data-tone="${esc(p.tone)}"><span class="icon-tile">${ico('folder')}</span><span><strong>${esc(p.title)}</strong><span class="pg-rel__t">${esc(p.card_blurb)}</span></span>${ico('arrow-right', 'pg-rel__go')}</a></li>`).join('')}</ul>
-    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="${b}projects/">All projects ${ico('arrow-right')}</a><a class="link-arrow" href="${b}services/">Freelance services ${ico('arrow-right')}</a></p>`,
+    <p class="pg-linkrow" data-reveal><a class="link-arrow" href="${b}projects/">All projects ${ico('arrow-right')}</a><a class="link-arrow" href="${b}services/">Services for projects ${ico('arrow-right')}</a></p>`,
   }) : '';
 
   const faqItems = (m.faqs || []).map((f, i) => ({ id: `q${i + 1}`, q: f.q, a: f.a }));

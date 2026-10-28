@@ -330,6 +330,10 @@
         {
           "q": "Where can I download the Shaunak Chorge resume?",
           "a": "Use the Download PDF button at the top of this page. It saves a PDF copy of this resume, with the same work experience, education, certifications and awards. No sign-up is needed. If the file does not open, write to me through the contact page and I will send it."
+        },
+        {
+          "q": "Are you open to full-time roles?",
+          "a": "Yes. I am an AI Engineer at Claptek Pvt Ltd in Mumbai and I am open to full-time roles in AI engineering, machine learning, backend development and Python automation. This resume covers my experience, education, certifications and awards, and a PDF copy is at the top of the page."
         }
       ]
     }
@@ -5749,6 +5753,11 @@
           "id": "fulltime",
           "q": "Can I hire an AI engineer who also has a full-time job?",
           "a": "Yes. I am an AI Engineer at Claptek Pvt Ltd and take projects alongside the job. I am also open to full-time roles. For projects, we agree scope and timelines before work begins and you get regular progress updates. For roles, see my resume or write to me."
+        },
+        {
+          "id": "can-i-hire-you-as-a-full-time-",
+          "q": "Can I hire you as a full-time AI Engineer?",
+          "a": "Yes, I am open to the right full-time role. I currently work as an AI Engineer at Claptek Pvt Ltd in Mumbai. My resume, experience and project case studies are on this site. Send me a message and I will reply with my availability."
         },
         {
           "id": "freelance",

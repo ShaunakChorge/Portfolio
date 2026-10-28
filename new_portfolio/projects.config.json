@@ -52,9 +52,9 @@
     "django-box-selection-api"
   ],
   "resume_featured": [
-    "ams-ai-finding-engine",
-    "ai-rag-healthcare-assistant",
+    "advanced-cctv-analytics",
     "observable-ai-backend",
-    "agentic-honeypot"
+    "speech-emotion-recognition",
+    "ai-rag-healthcare-assistant"
   ]
 }

@@ -31,6 +31,7 @@
       ],
       "questions": [
         "Can I hire an AI engineer who also has a full-time job?",
+        "Can I hire you as a full-time AI Engineer?",
         "Do you take on freelance projects?",
         "What kinds of projects do you build?"
       ],
@@ -562,7 +563,8 @@
         "shaunak chorge shivohini tech-ai"
       ],
       "questions": [
-        "Where can I download the Shaunak Chorge resume?"
+        "Where can I download the Shaunak Chorge resume?",
+        "Are you open to full-time roles?"
       ],
       "anchors": {
         "other": [

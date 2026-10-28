@@ -516,6 +516,7 @@ export function contactList({ group = false, location = false, b = '' } = {}) {
 ${row('green', 'phone', 'Phone', `<a class="contact__value" href="${esc(profile.phone_tel)}">${esc(profile.phone)}</a>`)}
 ${row('blue', 'linkedin', 'LinkedIn', out(L.linkedin, L.linkedin.replace(/^https?:\/\/(www\.)?/, '')))}
 ${row('purple', 'github', 'GitHub', out(L.github, L.github.replace(/^https?:\/\//, '')))}
+${row('cyan', 'file-text', 'Resume', `<a class="contact__value" href="${b}resume/">View my resume</a>`)}
 ${row('magenta', 'download', 'Contact card', `<a class="contact__value" href="${b}${esc(content.connect.vcard)}" download="Shaunak-Chorge.vcf">Save my contact to your phone</a>`)}${location ? '\n' + row('cyan', 'map-pin', 'Based in', `<span class="contact__value">Mumbai, India &middot; <span data-clock="Asia/Kolkata" data-clock-label="Local time" data-clock-suffix="IST">IST</span></span>`, { go: false, cls: ' contact__row--static' }) : ''}
         </ul>`;
 }

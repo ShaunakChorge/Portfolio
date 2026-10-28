@@ -963,3 +963,5 @@ Certifications: Oracle Cloud Infrastructure Certified Generative AI Professional
 Awards: First runner-up, Code Golf (INNIXO - SWASTIK); First runner-up, Code Quest Infinity; Winners, Smart India Hackathon internal round.
 
 Q: Where can I download the Shaunak Chorge resume? A: Use the Download PDF button at the top of this page. It saves a PDF copy of this resume, with the same work experience, education, certifications and awards. No sign-up is needed. If the file does not open, write to me through the contact page and I will send it.
+
+Q: Are you open to full-time roles? A: Yes. I am an AI Engineer at Claptek Pvt Ltd in Mumbai and I am open to full-time roles in AI engineering, machine learning, backend development and Python automation. This resume covers my experience, education, certifications and awards, and a PDF copy is at the top of the page.
