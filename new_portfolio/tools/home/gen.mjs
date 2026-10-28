@@ -208,7 +208,7 @@ const contact = `<section id="contact" class="section contact hm-cv" data-num="0
       <div class="bg-circuit" aria-hidden="true"></div>
       <div class="contact__band-in hm-band">
         <header class="contact__head">
-          <p class="eyebrow">Hire me</p>
+          <p class="eyebrow">Get in touch</p>
           <h2 id="contact-title" class="contact__title">Have an AI or backend project <span class="hl">in mind?</span></h2>
           <p class="contact__lead">${esc(C.cta.text)}</p>
           <div class="contact__actions">

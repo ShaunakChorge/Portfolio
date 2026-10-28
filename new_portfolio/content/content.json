@@ -4,33 +4,33 @@
   },
   "site": {
     "footer": {
-      "note": "Taking select freelance AI and backend projects."
+      "note": "Open to freelance work and full-time roles."
     }
   },
   "seo": {
-    "tab_title": "Shaunak Chorge | AI Engineer & Freelance Developer",
+    "tab_title": "Shaunak Chorge | AI Engineer and Python Developer",
     "site_url": "https://shaunakchorge.github.io/Portfolio/new_portfolio/",
     "deploy_root": false,
     "site_root_url": "https://shaunakchorge.github.io/Portfolio/",
     "deploy_root_note": "Leave deploy_root false while GitHub Pages serves the repository branch (the site lives at site_url). Set it to true ONLY at the moment Settings > Pages > Source is switched to GitHub Actions (the .github/workflows/pages.yml workflow publishes the new_portfolio folder as the site root): the base URL then becomes site_root_url, canonical links, Open Graph, JSON-LD, sitemap.xml, robots.txt and the llms files drop the /new_portfolio/ part, and sitemap.xml and robots.txt are written inside new_portfolio/. The workflow also sets PF_DEPLOY_ROOT=1 itself, so a deploy is correct even before the flag is committed.",
-    "entity": "Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India. He holds a Bachelor of Technology in Artificial Intelligence and Data Science (2026). He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job."
+    "entity": "Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India. I hold a Bachelor of Technology in Artificial Intelligence and Data Science (2026). He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job."
   },
   "pages": {
     "home": {
       "path": "",
       "nav_label": "Home",
-      "title": "Shaunak Chorge | Freelance AI Engineer in Mumbai",
-      "description": "Freelance AI engineer in Mumbai. I build AI chatbots that answer from your documents, computer vision tools and Python backend APIs. Send a short brief.",
+      "title": "Shaunak Chorge | AI Engineer in Mumbai, Open to Work",
+      "description": "AI engineer in Mumbai building chatbots that answer from documents, computer vision and Python backends. Open to full-time roles and freelance projects.",
       "h1": "Shaunak Chorge",
-      "h1_sr_suffix": ", a freelance AI engineer in Mumbai taking select AI and backend projects",
+      "h1_sr_suffix": ", an AI engineer in Mumbai building AI-powered applications and solutions, open for freelance work and full-time roles",
       "h2": {
         "stack": "Tools I work with",
         "about": "About me",
-        "offer": "What I build for clients",
-        "work": "Selected AI and backend projects",
+        "offer": "What I can build",
+        "work": "AI and backend projects",
         "roles": "Where I have worked",
-        "process": "How a freelance project works",
-        "faq": "Questions before you hire"
+        "process": "How I take a project from idea to handover",
+        "faq": "Questions about working together"
       }
     },
     "projects": {
@@ -39,10 +39,10 @@
       "title": "AI Engineer Portfolio Projects | Shaunak Chorge",
       "description": "Selected AI chatbot, computer vision, speech and Python backend projects by Shaunak Chorge, with case studies, results and the tools behind each one.",
       "h1": "AI engineer portfolio projects and case studies",
-      "direct_answer": "These are my AI engineer portfolio projects. The AI systems I built at Claptek cover audit and compliance. Others include a chatbot that cites its sources, a backend that traces slow requests, and speech, vision and automation work. Each case study covers the problem, what I built, the results and what I can add.",
+      "direct_answer": "These are the AI engineer portfolio projects I have worked on so far. They show the AI systems I built for audit and compliance features, conversational AI that cites its sources, a backend that traces slow requests, and speech, vision and automation work. Each case study covers the problem, what I built, the results and what I can add next.",
       "h2": {
         "work": "Selected projects",
-        "personal": "Personal builds"
+        "personal": "More builds"
       },
       "faqs": [
         {
@@ -51,7 +51,7 @@
         },
         {
           "q": "Which projects are client work and which are personal builds?",
-          "a": "The audit drafting, obligation extraction and text-to-SQL case studies are client work at Claptek, and the WhatsApp platform was a client build during an internship. The others are personal or academic builds, including hackathon and job-application work. Every case study states its origin and my role, so you can see how much of it is mine."
+          "a": "The audit drafting, obligation extraction and text-to-SQL case studies are my recent work at Claptek. The others are internship work and personal or academic builds, including hackathon and assignment work. Every case study states its origin and my role, so you can see my own part in it."
         },
         {
           "q": "Why are the client projects described without names?",
@@ -72,7 +72,7 @@
       ],
       "needs": [
         {
-          "need": "Answers from your own documents",
+          "need": "Answers grounded in documents",
           "text": "Staff and customers need quick answers from long policies and regulations, with the source shown. The healthcare chatbot cites its source or says \"not found\", and the obligation system lists the duties in a regulation, each linked to its passage.",
           "ids": [
             "ai-rag-healthcare-assistant",
@@ -276,9 +276,9 @@
       "path": "about/",
       "nav_label": "About",
       "title": "About Shaunak Chorge | AI Engineer in Mumbai",
-      "description": "Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai. Read about his background, experience, tools and how he works with freelance clients.",
-      "h1": "About Shaunak Chorge, AI engineer",
-      "direct_answer": "I am Shaunak Chorge, an AI Engineer at Claptek Pvt Ltd in Mumbai, India. I build AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. I also take select freelance AI and backend projects alongside my full-time job.",
+      "description": "Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai. Read about his background, experience and tools. Open to full-time roles and freelance work.",
+      "h1": "About Shaunak Chorge",
+      "direct_answer": "I am Shaunak Chorge, an AI Engineer at Claptek Pvt Ltd in Mumbai, India. I build AI-powered applications and solutions, including RAG-based conversational AI answering from documents, computer vision and speech models, and Python backend APIs. You can work with me in a full-time role or on a project basis.",
       "h2": {
         "story": "Who I am and what I do",
         "experience": "Where I have worked",
@@ -287,24 +287,24 @@
       "faqs": [
         {
           "q": "Who is Shaunak Chorge?",
-          "a": "Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai. At work he builds AI tools for audit and compliance software, such as a service that drafts audit findings from checklist notes. Earlier he worked at Osource Global and Shivohini Tech-AI, and he takes select freelance AI and backend projects."
+          "a": "Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai. At work he builds AI tools for audit and compliance software, such as a service that drafts audit findings from checklist notes. Earlier he worked at Osource Global and Shivohini Tech-AI. He is open to full-time roles and takes freelance AI and backend projects alongside his job."
         }
       ]
     },
     "faq": {
       "path": "faq/",
       "nav_label": "FAQ",
-      "title": "AI Developer Cost in India: Freelance FAQ | Shaunak Chorge",
-      "description": "Answers about the cost of hiring Shaunak Chorge as an AI developer: how pricing works, timelines, NDAs, code ownership, fixing projects and support.",
-      "h1": "AI developer cost in India: freelance FAQ",
+      "title": "AI Developer Cost in India: FAQ | Shaunak Chorge",
+      "description": "Answers about the cost of hiring Shaunak Chorge as an AI developer: pricing, timelines, confidentiality, code ownership and support.",
+      "h1": "AI developer cost in India: questions and answers",
       "direct_answer": "AI developer cost in India depends on the scope. Shaunak Chorge agrees either a fixed price or hourly billing for each project, after a short brief and before any work begins. He takes select projects alongside his full-time job as an AI Engineer at Claptek Pvt Ltd, and answers the common questions below."
     },
     "contact": {
       "path": "contact/",
       "nav_label": "Contact",
       "title": "Hire an AI Developer | Shaunak Chorge",
-      "description": "Send a short brief to hire Shaunak Chorge, a freelance AI developer in Mumbai, for chatbots, computer vision, Python backend APIs or automation.",
-      "h1": "Hire an AI developer for your project",
+      "description": "Contact Shaunak Chorge, an AI developer in Mumbai, about a project or a full-time role. Chatbots, computer vision, Python backends and automation.",
+      "h1": "Hire an AI developer, or talk about a role",
       "lead": "Tell me what you want to build, such as an Artificial Intelligence (AI) chatbot, a computer vision tool, a Python backend or an automation. A short brief is enough to start the conversation.",
       "brief_checklist": [
         "What you want to build, and what a good result looks like",
@@ -313,7 +313,7 @@
         "Anything you have already tried"
       ],
       "note": "I read every message and reply with my view on how to approach it.",
-      "direct_answer": "To hire an AI developer, send a short brief through the form or by email. Say what you want to build, roughly when you need it and anything I should know. I reply with my view on feasibility and a proposed scope, and we agree the plan and a suitable deadline together before work begins.",
+      "direct_answer": "To hire an AI developer, send a short brief or a role description through the form or by email. Say what you want to build or the role you are hiring for, roughly when you need it, and anything I should know. I reply with my view and a next step, and a project starts once we agree the plan.",
       "h2": {
         "process": "What happens after you write",
         "faq": "Questions before you write"
@@ -323,41 +323,42 @@
       "path": "resume/",
       "nav_label": "Resume",
       "title": "Shaunak Chorge Resume | AI Engineer",
-      "description": "Resume of Shaunak Chorge, AI Engineer: work at Claptek Pvt Ltd, Osource Global and Shivohini Tech-AI, education, certifications and awards. PDF download.",
+      "description": "Resume of Shaunak Chorge, AI Engineer in Mumbai, open to full-time roles. Work at Claptek Pvt Ltd, Osource Global and Shivohini Tech-AI. PDF download.",
       "h1": "Shaunak Chorge resume: AI Engineer",
-      "direct_answer": "This Shaunak Chorge resume covers his work as an AI Engineer at Claptek Pvt Ltd in Mumbai. It also covers his earlier roles at Osource Global and Shivohini Tech-AI, his education, certifications and awards. A PDF copy is available to download. He holds a Bachelor of Technology in Artificial Intelligence and Data Science (2026).",
+      "direct_answer": "This Shaunak Chorge resume covers my work as an AI Engineer at Claptek Pvt Ltd in Mumbai and my earlier roles at Osource Global and Shivohini Tech-AI, with my education, certifications and awards. I have over a year of industry experience and a Bachelor of Technology in Artificial Intelligence and Data Science (2026). A PDF copy is available to download.",
       "faqs": [
         {
           "q": "Where can I download the Shaunak Chorge resume?",
-          "a": "Use the Download PDF button at the top of this page. It saves a PDF copy of this resume, with the same work experience, education, certifications and awards. If the file does not open, write to me through the contact page and I will send it."
+          "a": "Use the Download PDF button at the top of this page. It saves a PDF copy of this resume, with the same work experience, education, certifications and awards. No sign-up is needed. If the file does not open, write to me through the contact page and I will send it."
         }
       ]
     }
   },
   "cta": {
-    "text": "Send a short brief: what you want to build, roughly when you need it and anything I should know.",
+    "text": "Send a short note about what you need to build, roughly when you need it and anything I should know.",
     "primary": {
-      "label": "Hire me"
+      "label": "Get in touch"
     },
     "secondary": {
       "label": "See projects",
       "href": "projects/"
     },
-    "line": "Taking select freelance AI and backend projects"
+    "line": "Open to work with you"
   },
   "hero": {
     "headline_first": "Shaunak",
     "headline_second": "Chorge",
     "roles": [
       "AI Engineer",
-      "Freelance AI developer",
       "Python backend developer",
-      "Computer vision builder"
+      "Computer vision builder",
+      "Machine learning developer",
+      "Freelancer"
     ],
     "lede": "I am an AI Engineer based in Mumbai who builds AI-powered applications and solutions, including RAG chatbots, computer vision and other machine learning models, and backends for applications.",
-    "freelance_line": "Taking select freelance AI and backend projects",
+    "freelance_line": "Open to work with you",
     "cta_primary": {
-      "label": "Hire me",
+      "label": "Get in touch",
       "href": "contact/"
     },
     "cta_secondary": {
@@ -383,7 +384,7 @@
     "name": "Shaunak Chorge",
     "tagline": "I turn AI models and messy workflows into software that actually runs.",
     "summary_short": "Artificial Intelligence (AI) Engineer at Claptek Pvt Ltd in Mumbai, with a Bachelor of Technology in Artificial Intelligence and Data Science (2026). I build trustworthy AI tools for audit and compliance software, and take select freelance projects: chatbots, computer vision, backend APIs and automation.",
-    "summary_long": "I work mostly in Python on Artificial Intelligence (AI) and backend systems. My day job is building AI tools for audit and compliance software. One tool drafts findings and is not allowed to make things up. Another reads documents and points to its evidence. A third turns plain questions into database queries on a bank's own servers.\n\nBefore that, two internships showed me how real systems behave. At Osource Global I built backend APIs and document tools that use AI models running on company machines. At Shivohini Tech-AI I built AI chatbots for clients. Outside work I build whole projects myself. They include a chatbot that cites its sources or admits it does not know, and a backend that shows where each request slows down. I also built a scam-fighting AI with Prasanna Patil, plus speech and vision models inside small apps.\n\nNeed a chatbot, a document reader, a computer vision prototype or a Python backend built carefully? Reach me through the contact page, the fastest way to start.",
+    "summary_long": "I am a Bachelor of Technology graduate with more than a year of industry experience, and I am currently an AI Engineer at Claptek Pvt Ltd. I work mostly in Python on Artificial Intelligence (AI) and backend systems. By day I build AI-powered tools and features for audit and compliance software in the banking, financial services and insurance sector. My work includes drafting reports, reading documents and regulations with the sources shown, and answering questions from data in plain language. These tools include a document reader that points to its evidence and an assistant that turns plain questions into database queries on a bank's own servers.\n\nBefore that, my internships showed me how real systems behave. At Osource Global I built backend APIs and document tools that use AI models running on company machines. At Shivohini Tech-AI I built AI chatbots for clients. Outside work I build whole projects myself. They include a chatbot that cites its sources or admits it does not know, and a backend that shows where each request slows down. I also built a scam-fighting AI with Prasanna Patil, plus speech and vision models inside small apps.\n\nNeed a chatbot, a document reader, a computer vision prototype or a Python backend built carefully? Reach me through the contact page, the fastest way to start.",
     "location": "Mumbai, India",
     "coords": {
       "lat": 19.076,
@@ -403,7 +404,7 @@
     },
     "availability": "I take select freelance AI and backend projects alongside my full-time job as AI Engineer at Claptek Pvt Ltd. I am based in Mumbai, India (IST). The contact form or email is the fastest way to start.",
     "freelance": {
-      "line_short": "Taking select freelance AI and backend projects"
+      "line_short": "Open to work with you"
     },
     "phone_tel": "tel:+919920644655",
     "title": "AI Engineer"
@@ -447,8 +448,8 @@
     "home_card": {
       "title": "About",
       "lead": [
-        "By day I build AI tools for audit and compliance software: a drafting engine that cannot invent a figure, a document reader that points to its evidence and a text-to-SQL assistant that runs on a bank's own servers.",
-        "On the side I take select freelance projects: chatbots, computer vision, speech and machine learning models, and Python backends."
+        "By day I build AI-powered tools and features for audit and compliance software in the banking, financial services and insurance sector. My work includes drafting reports, reading documents and regulations with the sources shown, and answering questions from data in plain language.",
+        "Alongside my job I also take freelance projects: chatbots, computer vision, speech and machine learning models, and Python backends."
       ],
       "links_label": "find me"
     }
@@ -1273,7 +1274,7 @@
         },
         {
           "problem": "Accuracy figures that do not hold up",
-          "approach": "For client work I keep test footage apart from training footage, split by video, and state the split beside every figure. The team deepfake detector's 74.16% is labelled as a random frame-level split, because near-identical frames from one video can sit on both sides."
+          "approach": "In project work I keep test footage apart from training footage, split by video, and state the split beside every figure. The team deepfake detector's 74.16% is labelled as a random frame-level split, because near-identical frames from one video can sit on both sides."
         },
         {
           "problem": "Busy, dark or blurry scenes confuse the model",
@@ -1463,7 +1464,7 @@
         },
         {
           "q": "How do you check a model has not just memorised its data?",
-          "a": "I keep a test set the model never trains on and compare its score there with its training score. A large gap means it has memorised. The speech network I retrained also uses dropout (switching off random parts during training) to limit this. For client audio, altered copies of a clip stay on one side of the split."
+          "a": "I keep a test set the model never trains on and compare its score there with its training score. A large gap means it has memorised. The speech network I retrained also uses dropout (switching off random parts during training) to limit this. For your audio, altered copies of a clip stay on one side of the split."
         },
         {
           "q": "Can you check the accuracy of a model someone else built?",
@@ -1498,7 +1499,7 @@
       "problems": [
         {
           "problem": "A model's accuracy figure cannot be trusted",
-          "approach": "For client work I hold back a test set the model never sees, split by speaker or source where possible, and state the split. I report precision (how many flags were right) and recall (how many real cases were found), not accuracy alone."
+          "approach": "In project work I hold back a test set the model never sees, split by speaker or source where possible, and state the split. I report precision (how many flags were right) and recall (how many real cases were found), not accuracy alone."
         },
         {
           "problem": "It is unclear whether a complex model is needed",
@@ -1568,7 +1569,7 @@
         },
         {
           "title": "Test on new speakers or random samples",
-          "text": "A random split is quick, but it can flatter the result when one speaker or source appears on both sides. Splitting by speaker, customer or source gives a lower, fairer number. On client data I split that way where possible; my speech project used a random split."
+          "text": "A random split is quick, but it can flatter the result when one speaker or source appears on both sides. Splitting by speaker, customer or source gives a lower, fairer number. On your data I split that way where possible; my speech project used a random split."
         },
         {
           "title": "Fewer wrong blocks or fewer misses",
@@ -2123,7 +2124,7 @@
           "story": "The problem: slow, uneven audit write-ups",
           "arch": "How the audit drafting service works",
           "results": "Results: no invented facts, much faster",
-          "ext": "What I can add for your team",
+          "ext": "Where I would take this next",
           "faq": "Questions about the audit drafting engine"
         },
         "context": [
@@ -2404,7 +2405,7 @@
           "story": "The problem: obligations hidden in long documents",
           "arch": "From regulation to checked obligation list",
           "results": "Results: obligations linked to their source",
-          "ext": "What I can add to your compliance work",
+          "ext": "Where I would take this next",
           "faq": "Questions about obligation extraction"
         },
         "context": [
@@ -2589,7 +2590,7 @@
         },
         {
           "q": "Does it only work for one kind of regulation?",
-          "a": "No. It is not tied to one domain. The same process has read environmental permits, banking master directions, Basel III circulars and KYC rules without any domain-specific code. A new client could bring their own documents, though I would first check results on a sample."
+          "a": "No. It is not tied to one domain. The same process has read environmental permits, banking master directions, Basel III circulars and KYC rules without any domain-specific code. Other documents could work too, though I would first check results on a sample."
         },
         {
           "q": "What counts as an obligation in a regulatory document?",
@@ -2605,7 +2606,7 @@
         },
         {
           "q": "Where does the AI model run when it reads my documents?",
-          "a": "In this project the AI language model runs on Claptek's own servers, not on an online AI service. For a new client, I would check what hardware you have, because larger models need stronger machines, and then run the model where your documents are allowed to stay."
+          "a": "In this project the AI language model runs on Claptek's own servers, not on an online AI service. For other similar projects, I would check what hardware is available, because larger models need stronger machines, and then run the model where the documents are allowed to stay."
         }
       ],
       "visual_variant": "generic-obligation-management-system"
@@ -2684,7 +2685,7 @@
           "story": "The problem: answers locked in a huge database",
           "arch": "How a question becomes a checked SQL query",
           "results": "Results from running the queries",
-          "ext": "What carries over to your database",
+          "ext": "Where I would take this next",
           "faq": "Questions about text to SQL"
         },
         "context": [
@@ -2874,7 +2875,7 @@
         },
         {
           "q": "Does any data leave the machine?",
-          "a": "No. The assistant runs fully on the bank's own servers, so no data, prompt or usage record leaves the machine. The AI model is hosted there too, so no online AI service is involved. For a new client, the first step is to check that your servers are strong enough to run the model."
+          "a": "No. The assistant runs fully on the bank's own servers, so no data, prompt or usage record leaves the machine. The AI model is hosted there too, so no online AI service is involved. For another project, the first step is to check that the servers are strong enough to run the model."
         },
         {
           "q": "Why did the first accuracy score say 93% when real accuracy was far lower?",
@@ -2965,7 +2966,7 @@
           "story": "The problem: policy answers buried in documents",
           "arch": "How the chatbot finds and cites an answer",
           "results": "Saying \"not found\" instead of guessing",
-          "ext": "What I would add for a real deployment",
+          "ext": "Where I would take this next",
           "faq": "Questions about this chatbot"
         },
         "context": [
@@ -3153,7 +3154,7 @@
         },
         {
           "q": "How do you evaluate a RAG chatbot?",
-          "a": "Check three things. Does each answer cite the right source? Do out-of-scope questions get a plain \"not found\"? Are weak matches dropped before the AI is called? This prototype has 6 quick automated tests and a manual list of sample questions, but no scored check of answer quality. I would add that first for a client."
+          "a": "Check three things. Does each answer cite the right source? Do out-of-scope questions get a plain \"not found\"? Are weak matches dropped before the AI is called? This prototype has 6 quick automated tests and a manual list of sample questions, but no scored check of answer quality. I would add that first for any real use."
         },
         {
           "q": "What happens when the answer is not in the documents?",
@@ -3161,11 +3162,11 @@
         },
         {
           "q": "Does it use real patient data?",
-          "a": "No. It is a prototype built on six made-up policy documents and uses no real patient data. A real deployment would need your own documents, encrypted and access-controlled hosting, a privacy and legal review, agreements with any cloud provider that sees the data, and proper testing with the staff who will use it."
+          "a": "No. It is a prototype built on six made-up policy documents and uses no real patient data. A real deployment would need the organisation's own documents, encrypted and access-controlled hosting, a privacy and legal review, agreements with any cloud provider that sees the data, and proper testing with the staff who will use it."
         },
         {
           "q": "Can this chatbot book real appointments?",
-          "a": "No. The scheduling tool is a mock. It picks a department and a day out of the question and returns four example time slots, marked as illustrative, with a note to call or use the patient portal to confirm. Real booking would mean connecting it to your own scheduling system, which I can build."
+          "a": "No. The scheduling tool is a mock. It picks a department and a day out of the question and returns four example time slots, marked as illustrative, with a note to call or use the patient portal to confirm. Real booking would mean connecting it to a real scheduling system, which I could build."
         },
         {
           "q": "Does the chatbot remember earlier questions in a chat?",
@@ -3173,7 +3174,7 @@
         },
         {
           "q": "What does the chatbot send to the hosted AI service?",
-          "a": "At question time, only the last step goes online. The model that searches the documents runs on the server's own processor. For each question, the question text and the few matching passages are sent to the hosted Groq model, which writes the answer. For private data you would use a model on your own servers."
+          "a": "At question time, only the last step goes online. The model that searches the documents runs on the server's own processor. For each question, the question text and the few matching passages are sent to the hosted Groq model, which writes the answer. For private data, a model on the organisation's own servers would be used."
         }
       ]
     },
@@ -3442,7 +3443,7 @@
         },
         {
           "q": "How well does it resist prompt injection?",
-          "a": "It has a keyword filter for five phrases, such as \"ignore previous instructions\", and a request limiter. On a match, the bot sends a canned reply and the text never reaches the model. That is a first line of defence, not a complete solution, because a determined attacker can reword a trick. A client project would add attack tests."
+          "a": "It has a keyword filter for five phrases, such as \"ignore previous instructions\", and a request limiter. On a match, the bot sends a canned reply and the text never reaches the model. That is a first line of defence, not a complete solution, because a determined attacker can reword a trick. A real project would add attack tests."
         },
         {
           "q": "What details does the honeypot record from a scammer?",
@@ -3450,11 +3451,11 @@
         },
         {
           "q": "How does the bot remember a conversation?",
-          "a": "Each conversation is stored in server memory under its ID, with every message, the scam score, the current style and the details found. For each reply the AI model sees the last 10 messages. Because the store is in memory, a restart clears everything. A client version would use a database."
+          "a": "Each conversation is stored in server memory under its ID, with every message, the scam score, the current style and the details found. For each reply the AI model sees the last 10 messages. Because the store is in memory, a restart clears everything. A real version would use a database."
         },
         {
           "q": "Does the honeypot report scammers anywhere?",
-          "a": "No. Apart from the request to the AI model, it makes no outgoing calls. The collected details stay in the reply it returns, in server memory and on the dashboard. Sending them to a fraud team, a block list or a case system would be an addition I can build for a client."
+          "a": "No. Apart from the request to the AI model, it makes no outgoing calls. The collected details stay in the reply it returns, in server memory and on the dashboard. Sending them to a fraud team, a block list or a case system would be an addition I can build if a project needs it."
         }
       ]
     },
@@ -3714,7 +3715,7 @@
         },
         {
           "q": "How accurate is the crime classifier?",
-          "a": "I do not quote an accuracy figure, because I did not measure one on labelled footage. The module uses a pre-trained Vision Transformer with 14 UCF-Crime labels and checks one frame every 3 seconds. A client project would start by measuring it on footage from your own site, then tune the alert rules."
+          "a": "I do not quote an accuracy figure, because I did not measure one on labelled footage. The module uses a pre-trained Vision Transformer with 14 UCF-Crime labels and checks one frame every 3 seconds. A real project would start by measuring it on footage from your own site, then tune the alert rules."
         },
         {
           "q": "Did you build all of it yourself?",
@@ -3905,7 +3906,7 @@
           "The test is not fully independent. Altered copies of one clip, and the same speakers, appear on both sides of the split, and the test split doubled as the validation set during training. Accuracy on new voices is likely to be lower.",
           "Every clip is a speaker reading fixed words or sentences in a requested emotion. Real calls bring background noise, phone-quality audio, other languages and mixed feelings, none of which this model has been tested on.",
           "It reads a 2.5-second window and picks one of seven labels. Longer speech, changing emotion and labels outside the seven are not handled, and live microphone use has not been scored.",
-          "The dashboard is a local prototype, and the large trained weights are not in the public repository, so a client build would start from a fresh, tested package with its own accuracy check."
+          "The dashboard is a local prototype, and the large trained weights are not in the public repository, so a real build would start from a fresh, tested package with its own accuracy check."
         ],
         "use_cases": [
           {
@@ -3994,7 +3995,7 @@
         },
         {
           "q": "How accurate is speech emotion recognition?",
-          "a": "In this project, 93.87% on a random 20% test split of 9,730 samples. That figure does not cover new speakers, because altered copies of one clip can land on both sides of the split. Accuracy on unseen voices is likely to be lower, so a client project would first measure it by splitting speakers apart."
+          "a": "In this project, 93.87% on a random 20% test split of 9,730 samples. That figure does not cover new speakers, because altered copies of one clip can land on both sides of the split. Accuracy on unseen voices is likely to be lower, so a real project would first measure it by splitting speakers apart."
         },
         {
           "q": "Can it work with my own recordings?",
@@ -4051,7 +4052,7 @@
       ],
       "role": "Member of a three-person college team. The repository is published from my account.",
       "visual_hint": "scan-grid",
-      "card_blurb": "Scores each frame of a video as real or fake, with a web app and PDF report. College team project, 74.16% accuracy.",
+      "card_blurb": "Scores each frame of a video as real or fake, with a web app and PDF report. College project, 74.16% accuracy.",
       "category_group": "vision",
       "tone": "magenta",
       "slug": "deepfake-video-detection",
@@ -4366,7 +4367,7 @@
           "story": "The problem: AI servers that are hard to debug",
           "arch": "Request IDs, metrics and traces",
           "results": "A slow step found in a trace",
-          "ext": "What this adds to your backend",
+          "ext": "Where I would take this next",
           "faq": "Questions about this backend"
         },
         "context": [
@@ -4549,7 +4550,7 @@
         },
         {
           "q": "Is this a production system?",
-          "a": "No. The traceable AI server is a job-application task, not a production system. The slow lookup was planted on purpose and the timings come from made-up data. The monitoring I added at work was for real company servers, but it is confidential and not shown here. A real system for you would need your own traffic, security and hosting decisions."
+          "a": "No. The traceable AI server is a job-application task, not a production system. The slow lookup was planted on purpose and the timings come from made-up data. The monitoring I added at work was for real company servers, but it is confidential and not shown here. A real system would need its own traffic, security and hosting decisions."
         },
         {
           "q": "Can it run without an AI key?",
@@ -4617,7 +4618,7 @@
       "repo": null,
       "live": null,
       "status": "Private client repo",
-      "role": "Built during my AI and Machine Learning internship at Shivohini Tech-AI, for a client.",
+      "role": "Internship project at Shivohini Tech-AI, built for a client.",
       "stack": [
         "Python",
         "FastAPI",
@@ -4803,11 +4804,11 @@
         },
         {
           "q": "Do human operators get alerts from the platform?",
-          "a": "Yes. The platform connected the Meta WhatsApp Business API and Twilio for automatic customer messages and for alerts to human operators. Which situations should alert a person is a business rule. For a new project I would agree that list with you first, before building anything."
+          "a": "Yes. The platform connected the Meta WhatsApp Business API and Twilio for automatic customer messages and for alerts to human operators. Which situations should alert a person is a business rule. For a new project, that list would be agreed first, before building anything."
         },
         {
           "q": "Can I see the code for this WhatsApp project?",
-          "a": "No. It was a client project built during an internship, and the repository is private, so I cannot share the code, screenshots or the client's name. I can explain the design on a call, and I can build something similar for you from scratch, using your own accounts and data."
+          "a": "No. It was a client project built during an internship, and the repository is private, so I cannot share the code, screenshots or the client's name. I can explain the design in an interview or on a call, and I can build something similar from scratch with its own accounts and data."
         },
         {
           "q": "What should I prepare before building a WhatsApp AI agent?",
@@ -5747,12 +5748,12 @@
         {
           "id": "fulltime",
           "q": "Can I hire an AI engineer who also has a full-time job?",
-          "a": "Yes. I am an AI Engineer at Claptek Pvt Ltd and take select freelance AI and backend projects alongside that job. We agree scope and timelines before work begins, and you get regular progress updates and clear advice on what will work best for your idea."
+          "a": "Yes. I am an AI Engineer at Claptek Pvt Ltd and take projects alongside the job. I am also open to full-time roles. For projects, we agree scope and timelines before work begins and you get regular progress updates. For roles, see my resume or write to me."
         },
         {
           "id": "freelance",
           "q": "Do you take on freelance projects?",
-          "a": "Yes. Send a short brief through the contact form or by email. I reply with questions and a first view of scope and timeline, and we agree the plan before work begins. I can take on projects of any size, from small fixes to large builds."
+          "a": "Yes. I take projects alongside my job. Send a short brief through the contact form or by email. I reply with questions and a first view of scope and timeline, and we agree the plan before work begins. I can take on work from small fixes to larger builds if the timeline fits."
         },
         {
           "id": "what-i-build",
@@ -5797,12 +5798,12 @@
         },
         {
           "id": "nda",
-          "q": "Can a freelancer sign an NDA?",
+          "q": "Can you sign a confidentiality agreement?",
           "a": "Yes. I am happy to sign a reasonable mutual NDA (a confidentiality agreement) before we discuss private details. I do not reuse client data or code in other projects. I only name a client or show their work in my portfolio with written approval."
         },
         {
           "id": "ownership",
-          "q": "Who owns the code written by a freelancer?",
+          "q": "Who owns the code you write for a project?",
           "a": "The ownership and licence terms are written into our agreement before work begins. The usual arrangement is that you own what you pay for. My freelance work is kept separate from my full-time job and never uses my employer's code or data."
         }
       ]
@@ -5817,7 +5818,7 @@
         },
         {
           "id": "location",
-          "q": "What time zone does a Mumbai freelance AI developer work in?",
+          "q": "What time zone does a Mumbai AI developer work in?",
           "a": "I am based in Mumbai, India, and work in Indian Standard Time (IST, UTC+5:30). I share written updates and code reviews, so you can always see where the work stands. We can agree meeting times that overlap with your working day. Earlier internships taught me how to keep distant teams in sync."
         }
       ]
@@ -5832,7 +5833,7 @@
         },
         {
           "id": "timeline",
-          "q": "How long does a freelance AI project take?",
+          "q": "How long does an AI project take?",
           "a": "It depends on the size of the project. After reading your brief, I give a written estimate for each step. A small prototype is much quicker than a full product. I give you a clear range, and we agree dates in writing before work begins."
         }
       ]
@@ -5911,7 +5912,7 @@
     }
   },
   "connect": {
-    "whatsapp_text": "Hi Shaunak, I found your portfolio and would like to talk about a project.",
+    "whatsapp_text": "Hi Shaunak, I found your portfolio and would like to get in touch.",
     "vcard": "assets/Shaunak-Chorge.vcf",
     "actions": [
       {
@@ -5922,7 +5923,7 @@
       },
       {
         "id": "brief",
-        "label": "Send a brief",
+        "label": "Send a message",
         "hint": "Tell me what you need",
         "icon": "send"
       },

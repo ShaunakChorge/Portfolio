@@ -48,7 +48,7 @@ function hub() {
   const crumbItems = [{ name: 'Home', path: '' }, { name: 'Services', path: m.path }];
   const head = pageHead({
     crumbItems, b, eyebrow: 'Freelance services', h1: esc(m.h1), answer: m.direct_answer,
-    actions: btn('Hire me', hireHref(b), { v: 'solid', size: 'lg' }) + btn('See projects', b + 'projects/', { v: 'ghost', size: 'lg', icon: 'arrow-right' }),
+    actions: btn('Get in touch', hireHref(b), { v: 'solid', size: 'lg' }) + btn('See projects', b + 'projects/', { v: 'ghost', size: 'lg', icon: 'arrow-right' }),
   });
   const cards = section({
     id: 'all-services', eyebrow: 'Services', title: 'What I can build <span class="hl">for you</span>',
@@ -131,7 +131,7 @@ function servicePage(s) {
   const head = pageHead({
     crumbItems, b, tone: s.tone, eyebrow: 'Freelance service', h1: esc(s.h1), lead: s.intro, answer: s.direct_answer,
     aside: `<div class="pg-svcmark" data-tone="${s.tone}" aria-hidden="true"><span class="pg-svcmark__ring"></span><span class="icon-tile pg-svcmark__tile">${ico(s.icon)}</span></div>`,
-    actions: btn('Hire me for this', hireHref(b, s.slug), { v: 'solid', size: 'lg' }) + btn('See the work', '#proof', { v: 'ghost', size: 'lg', icon: 'arrow-right' }),
+    actions: btn("Let's talk", hireHref(b, s.slug), { v: 'solid', size: 'lg' }) + btn('See the work', '#proof', { v: 'ghost', size: 'lg', icon: 'arrow-right' }),
   });
 
   /* who it is for */
@@ -219,7 +219,7 @@ function servicePage(s) {
   const related = section({
     id: 'related', eyebrow: 'Related', title: 'Related <span class="hl hl--purple">services</span>', tint: alt(),
     body: `<ul class="pg-rel" role="list" data-reveal-group>${sibs.map(x => `<li><a class="pg-rel__link" href="${b}${x.path}" data-tone="${x.tone}"><span class="icon-tile">${ico(x.icon)}</span><span><strong>${esc(anchors(x.path).related || x.name)}</strong><span class="pg-rel__t">${esc(why[x.key] || x.blurb)}</span></span>${ico('arrow-right', 'pg-rel__go')}</a></li>`).join('')}
-      <li><a class="pg-rel__link" href="${b}faq/" data-tone="green"><span class="icon-tile">${ico('message-circle')}</span><span><strong>Freelance FAQ</strong><span class="pg-rel__t">Cost, how to start, NDAs and ownership.</span></span>${ico('arrow-right', 'pg-rel__go')}</a></li>
+      <li><a class="pg-rel__link" href="${b}faq/" data-tone="green"><span class="icon-tile">${ico('message-circle')}</span><span><strong>Questions about working together</strong><span class="pg-rel__t">Cost, how to start, confidentiality agreements and ownership.</span></span>${ico('arrow-right', 'pg-rel__go')}</a></li>
     </ul>
     <p class="pg-linkrow" data-reveal><a class="link-arrow" href="${b}services/">All services ${ico('arrow-right')}</a><a class="link-arrow" href="${b}services/#which-service">Which service fits you? ${ico('arrow-right')}</a></p>`,
   });

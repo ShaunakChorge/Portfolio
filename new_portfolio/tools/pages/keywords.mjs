@@ -97,6 +97,7 @@ export function keywordProblems({ site = SITE, paths, keywords = loadKeywords(),
   for (const key of Object.keys(entries)) if (!pages[key]) bad(key, 'listed in content/keywords.json but the page is not built');
 
   const phraseOwner = new Map(), titles = new Map(), descs = new Map(), questions = new Map(), primaries = new Map();
+  const OWNER = norm(((readContent().profile || {}).name) || '');   // the owner's name repeats legitimately on their own page: exempt it from the stuffing checks
   for (const [key, pg] of Object.entries(pages)) {
     const e = entries[key];
     if (!e) continue;
@@ -121,7 +122,7 @@ export function keywordProblems({ site = SITE, paths, keywords = loadKeywords(),
     if (!hasPhrase(pg.h1, e.primary)) bad(key, `primary keyword "${e.primary}" is not in the H1 "${pg.h1}"`);
     if (!hasPhrase(pg.answer, e.primary)) bad(key, `primary keyword "${e.primary}" is not in the first paragraph`);
     const n = countPhrase(pg.body, e.primary);
-    if (n > 3) bad(key, `primary keyword "${e.primary}" appears ${n} times in the page body (max 3)`);
+    if (n > 3 && norm(e.primary) !== OWNER) bad(key, `primary keyword "${e.primary}" appears ${n} times in the page body (max 3)`);
     // the first paragraph is a direct answer
     const aw = words(pg.answer);
     if (key !== '/' && (aw < 40 || aw > 60)) bad(key, `first paragraph is ${aw} words (want 40-60)`);
@@ -142,7 +143,7 @@ export function keywordProblems({ site = SITE, paths, keywords = loadKeywords(),
   // exact-match anchor stuffing: a link text equal to a primary keyword, used more than twice across the site
   const exact = new Map();
   for (const pg of Object.values(pages)) for (const l of pg.links) { const n = norm(l.text); if (primaries.has(n)) exact.set(n, (exact.get(n) || 0) + 1); }
-  for (const [n, c] of exact) if (c > 2) bad(primaries.get(n), `the link text "${n}" (the primary keyword) is used ${c} times in page bodies (max 2): vary the anchors`);
+  for (const [n, c] of exact) if (c > 2 && n !== OWNER) bad(primaries.get(n), `the link text "${n}" (the primary keyword) is used ${c} times in page bodies (max 2): vary the anchors`);
   return problems;
 }
 

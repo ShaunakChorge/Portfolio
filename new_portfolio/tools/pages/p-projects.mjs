@@ -25,7 +25,7 @@ function hub() {
   const answer = m.direct_answer;
   const head = pageHead({
     crumbItems, b, eyebrow: 'Projects', h1: esc(m.h1), answer,
-    actions: btn('Hire me', hireHref(b), { v: 'solid', size: 'lg' }) + btn('See services', b + 'services/', { v: 'ghost', size: 'lg' }),
+    actions: btn('Get in touch', hireHref(b), { v: 'solid', size: 'lg' }) + btn('See services', b + 'services/', { v: 'ghost', size: 'lg' }),
   });
 
   // filter chips: only groups that have selected projects, labels only; JS-free fallback shows everything
@@ -90,7 +90,7 @@ function hub() {
   ]);
   return {
     path: m.path, current: 'projects', title: m.title, description: m.description, jsonld,
-    content: head + selected + needs + reading + personal + faq + askBox({ b, ref: m.path, about: 'Projects', prompts: ['Which project is closest to my idea?', 'Can I see how a result was measured?', 'Which of these are client projects?'], title: 'Not sure which project fits your idea?' }) + hireBand({ b, heading: 'Want something <span class="hl">like this built?</span>', text: CTA_TEXT }),
+    content: head + selected + needs + reading + personal + faq + askBox({ b, ref: m.path, about: 'Projects', prompts: ['Which project is closest to my idea?', 'Can I see how a result was measured?', 'Which of these are client projects?'], title: 'Not sure which project fits your idea?' }) + hireBand({ b, heading: 'Need something <span class="hl">like this built,</span> or have a project?', text: CTA_TEXT, cta: "Let's talk", secondary: { label: 'View resume', href: b + 'resume/' } }),
     llms: {
       heading: m.h1, url, desc: m.description,
       text: [answer, ...(m.needs || []).map(n => `${n.need}: ${n.text}`), ...faqItems.map(f => `Q: ${f.q} A: ${f.a}`)],
@@ -116,7 +116,7 @@ function casePage(p, idx) {
   const head = pageHead({
     crumbItems, b, tone: p.tone, eyebrow: `Case study / ${p.category}`, h1: esc(cs.seo.h1), lead: p.tagline, answer: cs.summary,
     aside: `<div class="pg-casevis">${pv(p)}</div>`,
-    actions: btn('Hire me for something like this', hireHref(b, p.primarySvc.slug), { v: 'solid', size: 'lg' }) + btn('All projects', b + 'projects/', { v: 'ghost', size: 'lg', icon: 'arrow-left' }),
+    actions: btn('Discuss something like this', hireHref(b, p.primarySvc.slug), { v: 'solid', size: 'lg' }) + btn('All projects', b + 'projects/', { v: 'ghost', size: 'lg', icon: 'arrow-left' }),
   });
 
   /* key facts (no year) */
@@ -205,16 +205,16 @@ function casePage(p, idx) {
   if (uses) jump.push(['where-it-fits', 'Where it fits']);
 
   const ext = section({
-    id: 'extensions', eyebrow: 'For your project', title: ttl(h2.ext, 'Extensions I can build <span class="hl">for you</span>'), tint: alt(),
-    lead: 'Not part of this project. These are add-ons I can build for a client.',
+    id: 'extensions', eyebrow: 'Next steps beyond', title: ttl(h2.ext, 'Extensions I can build <span class="hl">for you</span>'), tint: alt(),
+    lead: 'Not part of this project. These are further pieces I could build on top of it.',
     body: `<ul class="grid grid--c3 pg-ext pg-ext--n${(p.extensions || []).length}" role="list">${(p.extensions || []).map((e, i) => `<li class="pg-ext__item" data-reveal style="--i:${i % 3}"><article class="card card--flat pg-ext__card" data-tone="${p.tone}"><h3 class="pg-ext__t">${esc(e.title)}</h3><p>${esc(e.benefit)}</p>${tags(e.tech || [], { cls: 'pg-ext__tags', label: 'Possible tools', itemCls: 'tag--dashed' })}</article></li>`).join('')}</ul>`,
   });
   jump.push(['extensions', 'Extensions']);
 
   const svcCards = section({
-    id: 'hire-for', eyebrow: 'Hire me', title: `Services behind <span class="hl hl--purple">this project</span>`, tint: alt(),
-    body: `<ul class="pg-rel" role="list" data-reveal-group>${p.svc.map(x => `<li><a class="pg-rel__link" href="${b}${x.path}" data-tone="${x.tone}"><span class="icon-tile">${ico(x.icon)}</span><span><strong>Hire me for ${esc(anchors(x.path).hire || x.name)}</strong><span class="pg-rel__t">${esc(x.blurb)}</span></span>${ico('arrow-right', 'pg-rel__go')}</a></li>`).join('')}</ul>
-    <p class="pg-author" data-reveal>Built by <a class="link" href="${b}about/">Shaunak Chorge</a>, ${/\bAI\b/.test((head + glance + overview + story + scope + arch + decisions + results + uses + ext).replace(/<[^>]+>/g, ' ')) ? 'AI' : 'Artificial Intelligence (AI)'} Engineer at Claptek Pvt Ltd in Mumbai.</p>`,
+    id: 'hire-for', eyebrow: 'What I offer', title: `Services behind <span class="hl hl--purple">this project</span>`, tint: alt(),
+    body: `<ul class="pg-rel" role="list" data-reveal-group>${p.svc.map(x => `<li><a class="pg-rel__link" href="${b}${x.path}" data-tone="${x.tone}"><span class="icon-tile">${ico(x.icon)}</span><span><strong>${esc(anchors(x.path).hire || x.name)}</strong><span class="pg-rel__t">${esc(x.blurb)}</span></span>${ico('arrow-right', 'pg-rel__go')}</a></li>`).join('')}</ul>
+    <p class="pg-author" data-reveal>Built by <a class="link" href="${b}about/">Shaunak Chorge</a>, AI Engineer.</p>`,
   });
 
   const faqItems = (p.faq || []).map((f, i) => ({ id: `q${i + 1}`, q: f.q, a: f.a }));
@@ -261,7 +261,7 @@ function casePage(p, idx) {
     personMini(),
   ];
   if (faqItems.length) nodes.push(faqNode(url, faqItems));
-  const tail = hireBand({ b, heading: 'Need something <span class="hl">like this built?</span>', text: CTA_TEXT, topic: p.primarySvc.slug });
+  const tail = hireBand({ b, heading: 'Need something <span class="hl">like this built,</span> or have a project?', text: CTA_TEXT, topic: p.primarySvc.slug, cta: "Let's talk" });
   return {
     path: p.path, current: 'projects', title, description, og_type: 'article', jsonld: ctx(nodes),
     content: head + toc(jump) + glance + overview + story + scope + arch + decisions + results + uses + ext + svcCards + faq + related + pn + ask + tail,

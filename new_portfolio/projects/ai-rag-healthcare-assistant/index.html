@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Shaunak Chorge | AI Engineer &amp; Freelance Developer</title>
+  <title>Shaunak Chorge | AI Engineer and Python Developer</title>
   <meta name="description" content="Case study: a chatbot using FastAPI, ChromaDB and Groq that answers from six made-up health policies, cites its source and refuses off-topic questions.">
   <meta name="author" content="Shaunak Chorge">
   <meta name="robots" content="index, follow, max-image-preview:large">
@@ -152,7 +152,7 @@
           "name": "How do you evaluate a RAG chatbot?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Check three things. Does each answer cite the right source? Do out-of-scope questions get a plain \"not found\"? Are weak matches dropped before the AI is called? This prototype has 6 quick automated tests and a manual list of sample questions, but no scored check of answer quality. I would add that first for a client."
+            "text": "Check three things. Does each answer cite the right source? Do out-of-scope questions get a plain \"not found\"? Are weak matches dropped before the AI is called? This prototype has 6 quick automated tests and a manual list of sample questions, but no scored check of answer quality. I would add that first for any real use."
           }
         },
         {
@@ -168,7 +168,7 @@
           "name": "Does it use real patient data?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. It is a prototype built on six made-up policy documents and uses no real patient data. A real deployment would need your own documents, encrypted and access-controlled hosting, a privacy and legal review, agreements with any cloud provider that sees the data, and proper testing with the staff who will use it."
+            "text": "No. It is a prototype built on six made-up policy documents and uses no real patient data. A real deployment would need the organisation's own documents, encrypted and access-controlled hosting, a privacy and legal review, agreements with any cloud provider that sees the data, and proper testing with the staff who will use it."
           }
         },
         {
@@ -176,7 +176,7 @@
           "name": "Can this chatbot book real appointments?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. The scheduling tool is a mock. It picks a department and a day out of the question and returns four example time slots, marked as illustrative, with a note to call or use the patient portal to confirm. Real booking would mean connecting it to your own scheduling system, which I can build."
+            "text": "No. The scheduling tool is a mock. It picks a department and a day out of the question and returns four example time slots, marked as illustrative, with a note to call or use the patient portal to confirm. Real booking would mean connecting it to a real scheduling system, which I could build."
           }
         },
         {
@@ -192,7 +192,7 @@
           "name": "What does the chatbot send to the hosted AI service?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "At question time, only the last step goes online. The model that searches the documents runs on the server's own processor. For each question, the question text and the few matching passages are sent to the hosted Groq model, which writes the answer. For private data you would use a model on your own servers."
+            "text": "At question time, only the last step goes online. The model that searches the documents runs on the server's own processor. For each question, the question text and the few matching passages are sent to the hosted Groq model, which writes the answer. For private data, a model on the organisation's own servers would be used."
           }
         }
       ]
@@ -241,7 +241,7 @@
         </nav>
 
         <div class="site-header__tools">
-          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Let's talk <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
           </button>
@@ -263,7 +263,7 @@
       <li><a class="drawer__link" href="../../contact/" style="--i:5"><small>06</small>Contact</a></li>
     </ul>
     <div class="drawer__foot">
-      <a class="btn btn--solid btn--glow btn--sm drawer__hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+      <a class="btn btn--solid btn--glow btn--sm drawer__hire" href="../../contact/#hire">Let's talk <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
       <a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a>
       <a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a>
       <a class="icon-btn" href="mailto:shaunak.chorge@gmail.com" aria-label="Email Shaunak"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
@@ -282,7 +282,7 @@
         <h1 class="pg-h1">Healthcare RAG chatbot that cites its sources</h1>
         <p class="pg-lead">Cited answers, or an honest &quot;not found&quot;.</p>
         <p class="pg-answer" data-answer>This healthcare RAG chatbot answers questions from six made-up healthcare policy documents. RAG means it looks up the right passages first and then writes the answer from them. It returns its source and a confidence label, and refuses out-of-scope questions instead of guessing.</p>
-        <div class="pg-actions"><a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=llm-rag-development#hire">Hire me for something like this <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="btn btn--ghost btn--lg" href="../../projects/">All projects <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg></a></div>
+        <div class="pg-actions"><a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=llm-rag-development#hire">Discuss something like this <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="btn btn--ghost btn--lg" href="../../projects/">All projects <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg></a></div>
       </div>
       <div class="pg-head__aside"><div class="pg-casevis"><div class="pv" data-visual="chat" data-variant="ai-rag-healthcare-assistant" data-tone="cyan" aria-hidden="true"></div></div></div>
     </div>
@@ -380,21 +380,21 @@
 </section><section id="extensions" class="section pg-sec section--tint" aria-labelledby="extensions-h">
   <div class="container">
     <header class="section__head" data-reveal>
-      <p class="eyebrow">For your project</p>
-      <h2 id="extensions-h" class="section__title">What I would add for a real <span class="hl">deployment</span></h2>
-      <p class="section__lead">Not part of this project. These are add-ons I can build for a client.</p>
+      <p class="eyebrow">Next steps beyond</p>
+      <h2 id="extensions-h" class="section__title">Where I would take this <span class="hl">next</span></h2>
+      <p class="section__lead">Not part of this project. These are further pieces I could build on top of it.</p>
     </header>
 <ul class="grid grid--c3 pg-ext pg-ext--n5" role="list"><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">Reading real document sets</h3><p>I can build an intake step that reads PDFs and office documents into well-organised, labelled pieces.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">LlamaIndex</li><li class="tag tag--dashed">PyMuPDF</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">Agents that use your tools</h3><p>I can add agents that use your internal tools, such as real scheduling in place of the mock, lookups or ticket creation, with guarded permissions.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">LangChain agents</li><li class="tag tag--dashed">function calling</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:2"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">Better search and reranking</h3><p>I can build hybrid search with a reranking step, so exact policy codes and reworded questions both find the right passage, and the best passage reaches the AI first, on infrastructure that scales.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">BM25 (keyword search)</li><li class="tag tag--dashed">managed vector database</li><li class="tag tag--dashed">metadata filters</li><li class="tag tag--dashed">reranker (re-orders search results)</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">Scored question set and stricter checks</h3><p>I can build a set of test questions with scoring, plus stricter output checks, so answer quality is tracked over time.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">pytest</li><li class="tag tag--dashed">question set</li><li class="tag tag--dashed">output checks</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">Speed and usage dashboards</h3><p>I can add tracking and dashboards for speed and AI usage, so every answer can be inspected end to end.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">OpenTelemetry</li><li class="tag tag--dashed">Jaeger</li><li class="tag tag--dashed">Prometheus</li></ul></article></li></ul>
   </div>
 </section><section id="hire-for" class="section pg-sec" aria-labelledby="hire-for-h">
   <div class="container">
     <header class="section__head" data-reveal>
-      <p class="eyebrow">Hire me</p>
+      <p class="eyebrow">What I offer</p>
       <h2 id="hire-for-h" class="section__title">Services behind <span class="hl hl--purple">this project</span></h2>
       
     </header>
-<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/llm-rag-development/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-brain-circuit"/></svg></span><span><strong>Hire me for AI chatbot development</strong><span class="pg-rel__t">Chatbots that answer from your documents and show their sources.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/ai-backend-fastapi-django/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-server"/></svg></span><span><strong>Hire me for Python and FastAPI backend development</strong><span class="pg-rel__t">FastAPI and Django services with automated tests and clear logs.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li></ul>
-    <p class="pg-author" data-reveal>Built by <a class="link" href="../../about/">Shaunak Chorge</a>, AI Engineer at Claptek Pvt Ltd in Mumbai.</p>
+<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/llm-rag-development/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-brain-circuit"/></svg></span><span><strong>Conversational AI development</strong><span class="pg-rel__t">Chatbots that answer from your documents and show their sources.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/ai-backend-fastapi-django/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-server"/></svg></span><span><strong>Python and FastAPI backend development</strong><span class="pg-rel__t">FastAPI and Django services with automated tests and clear logs.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li></ul>
+    <p class="pg-author" data-reveal>Built by <a class="link" href="../../about/">Shaunak Chorge</a>, AI Engineer.</p>
   </div>
 </section><section id="faq" class="section pg-sec section--tint" aria-labelledby="faq-h">
   <div class="container">
@@ -408,22 +408,22 @@
       <div class="pg-qa__a"><p>Cut your documents into chunks, turn each chunk into numbers a search index can compare, and store them. When a question arrives, find the best matching chunks, then ask an AI model to answer only from them. Here that used chunks of 500 with an overlap of 50, ChromaDB and the top 3 matches.</p></div>
     </details><details class="pg-qa" id="ai-rag-healthcare-assistant-q2" open data-reveal style="--i:1">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">How do you evaluate a RAG chatbot?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>Check three things. Does each answer cite the right source? Do out-of-scope questions get a plain &quot;not found&quot;? Are weak matches dropped before the AI is called? This prototype has 6 quick automated tests and a manual list of sample questions, but no scored check of answer quality. I would add that first for a client.</p></div>
+      <div class="pg-qa__a"><p>Check three things. Does each answer cite the right source? Do out-of-scope questions get a plain &quot;not found&quot;? Are weak matches dropped before the AI is called? This prototype has 6 quick automated tests and a manual list of sample questions, but no scored check of answer quality. I would add that first for any real use.</p></div>
     </details><details class="pg-qa" id="ai-rag-healthcare-assistant-q3" open data-reveal style="--i:2">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">What happens when the answer is not in the documents?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>The chatbot says so. Weak matches are dropped before the AI is called, and the AI is told to use an exact fallback sentence when nothing relevant remains. That is how an out-of-scope question is meant to get a plain &quot;not found&quot; reply, pointing the person to the facility, instead of a confident guess.</p></div>
     </details><details class="pg-qa" id="ai-rag-healthcare-assistant-q4" open data-reveal style="--i:3">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Does it use real patient data?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>No. It is a prototype built on six made-up policy documents and uses no real patient data. A real deployment would need your own documents, encrypted and access-controlled hosting, a privacy and legal review, agreements with any cloud provider that sees the data, and proper testing with the staff who will use it.</p></div>
+      <div class="pg-qa__a"><p>No. It is a prototype built on six made-up policy documents and uses no real patient data. A real deployment would need the organisation's own documents, encrypted and access-controlled hosting, a privacy and legal review, agreements with any cloud provider that sees the data, and proper testing with the staff who will use it.</p></div>
     </details><details class="pg-qa" id="ai-rag-healthcare-assistant-q5" open data-reveal style="--i:4">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Can this chatbot book real appointments?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>No. The scheduling tool is a mock. It picks a department and a day out of the question and returns four example time slots, marked as illustrative, with a note to call or use the patient portal to confirm. Real booking would mean connecting it to your own scheduling system, which I can build.</p></div>
+      <div class="pg-qa__a"><p>No. The scheduling tool is a mock. It picks a department and a day out of the question and returns four example time slots, marked as illustrative, with a note to call or use the patient portal to confirm. Real booking would mean connecting it to a real scheduling system, which I could build.</p></div>
     </details><details class="pg-qa" id="ai-rag-healthcare-assistant-q6" open data-reveal style="--i:4">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Does the chatbot remember earlier questions in a chat?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>No. The chat screen shows the conversation so far, but the backend answers each question on its own, so a follow-up such as &quot;and what about children?&quot; carries no context. Adding memory is the improvement I listed for this project, and it needs care so old answers do not mix with new passages.</p></div>
     </details><details class="pg-qa" id="ai-rag-healthcare-assistant-q7" open data-reveal style="--i:4">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">What does the chatbot send to the hosted <span class="ai">AI</span> service?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>At question time, only the last step goes online. The model that searches the documents runs on the server's own processor. For each question, the question text and the few matching passages are sent to the hosted Groq model, which writes the answer. For private data you would use a model on your own servers.</p></div>
+      <div class="pg-qa__a"><p>At question time, only the last step goes online. The model that searches the documents runs on the server's own processor. For each question, the question text and the few matching passages are sent to the hosted Groq model, which writes the answer. For private data, a model on the organisation's own servers would be used.</p></div>
     </details></div>
   </div>
 </section><section id="related" class="section pg-sec" aria-labelledby="related-h">
@@ -478,12 +478,12 @@
     <div class="pg-hire__band" data-reveal="scale">
       <span class="pg-hire__line" aria-hidden="true"></span>
       <div class="pg-hire__text">
-        <p class="badge badge--accent"><span class="badge__dot" aria-hidden="true"></span>Taking select freelance AI and backend projects</p>
-        <h2 id="hire-band-h" class="pg-hire__title">Need something <span class="hl">like this built?</span></h2>
-        <p class="pg-hire__lead">Send a short brief: what you want to build, roughly when you need it and anything I should know.</p>
+        <p class="badge badge--accent"><span class="badge__dot" aria-hidden="true"></span>Open to work with you</p>
+        <h2 id="hire-band-h" class="pg-hire__title">Need something <span class="hl">like this built,</span> or have a project?</h2>
+        <p class="pg-hire__lead">Send a short note about what you need to build, roughly when you need it and anything I should know.</p>
       </div>
       <div class="pg-hire__act">
-        <a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=llm-rag-development#hire" data-magnetic>Hire me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+        <a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=llm-rag-development#hire" data-magnetic>Let's talk <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
         <p class="pg-hire__alt"><a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a><span aria-hidden="true"> &middot; </span><a class="link" href="../../projects/">See projects</a></p>
       </div>
     </div>
@@ -509,7 +509,7 @@
           <svg class="footer__mark" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false"><defs><linearGradient id="ftm-g" x1="6" y1="2" x2="58" y2="62" gradientUnits="userSpaceOnUse"><stop stop-color="#00FFFF"/><stop offset=".52" stop-color="#B553F2"/><stop offset="1" stop-color="#FF006E"/></linearGradient></defs><path d="M44.76 1L3 7.32L3 15.5L39.02 38.91L3 61.49L3 63L9.03 63L61 43L61 36.5L27.4 14.66L61 2.07L61 1Z" fill="url(#ftm-g)"/></svg>
           <span class="logo__word">SHAUNAK</span>
         </p>
-        <p class="footer__blurb">AI Engineer at Claptek Pvt Ltd. Taking select freelance AI and backend projects.</p>
+        <p class="footer__blurb">AI Engineer at Claptek Pvt Ltd. Open to freelance work and full-time roles.</p>
         <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India (IST)</p>
         <ul class="footer__soc" aria-label="Profiles">
           <li><a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a></li>
@@ -585,8 +585,8 @@
       <p class="connect__h" id="connect-h">Let&rsquo;s talk</p>
       <ul class="connect__list" aria-labelledby="connect-h">
             <li><a class="connect__item" href="../../contact/#book"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><span><strong>Book a call</strong><small>Pick a day and time</small></span></a></li>
-            <li><a class="connect__item" href="../../contact/#hire"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg><span><strong>Send a brief</strong><small>Tell me what you need</small></span></a></li>
-            <li><a class="connect__item" href="https://wa.me/919920644655?text=Hi%20Shaunak%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg><span><strong>WhatsApp</strong><small>Message me directly</small></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="connect__item" href="../../contact/#hire"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg><span><strong>Send a message</strong><small>Tell me what you need</small></span></a></li>
+            <li><a class="connect__item" href="https://wa.me/919920644655?text=Hi%20Shaunak%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20get%20in%20touch." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg><span><strong>WhatsApp</strong><small>Message me directly</small></span><span class="sr-only"> (opens in a new tab)</span></a></li>
             <li><a class="connect__item" href="mailto:shaunak.chorge@gmail.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span><strong>Email</strong><small>Write to me</small></span></a></li>
       </ul>
     </div>
@@ -645,7 +645,7 @@
   <script defer src="../../assets/dist/js/core.min.js?v=6d3f6aa2"></script>
   <script defer src="../../assets/dist/js/contact.min.js?v=e16d51ee"></script>
   <script defer src="../../assets/dist/js/footer.min.js?v=f0044425"></script>
-  <script defer src="../../assets/dist/js/fx.min.js?v=a0339b5b"></script>
+  <script defer src="../../assets/dist/js/fx.min.js?v=c5331ab3"></script>
   <script defer src="../../assets/dist/js/pages.min.js?v=514d4156"></script>
   <script defer src="../../assets/dist/js/visuals.min.js?v=364afef6"></script>
 </body>

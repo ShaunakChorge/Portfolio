@@ -121,7 +121,7 @@ function page() {
   const crumbItems = [{ name: 'Home', path: '' }, { name: 'About', path: m.path }];
   const head = pageHead({
     crumbItems, b, eyebrow: 'About', h1: esc(m.h1), answer: m.direct_answer, aside: terminal(),
-    actions: btn('Hire me', hireHref(b), { v: 'solid', size: 'lg' }) + btn('Read the resume', b + 'resume/', { v: 'ghost', size: 'lg', icon: 'file-text' }),
+    actions: btn('Get in touch', hireHref(b), { v: 'solid', size: 'lg' }) + btn('Read the resume', b + 'resume/', { v: 'ghost', size: 'lg', icon: 'file-text' }),
   });
 
   // story: profile.summary_long, three paragraphs (the last one links to the contact page). From 80em the portrait frame stands on the right and runs the whole

@@ -18,7 +18,7 @@ function page() {
   const url = abs(cfg, m.path);
   const crumbItems = [{ name: 'Home', path: '' }, { name: 'Contact', path: m.path }];
   const head = pageHead({
-    crumbItems, b, eyebrow: 'Hire me', h1: esc(m.h1), answer: m.direct_answer,
+    crumbItems, b, eyebrow: 'Get in touch', h1: esc(m.h1), answer: m.direct_answer,
     actions: `<p class="badge badge--accent"><span class="badge__dot" aria-hidden="true"></span>${esc(FREELANCE_LINE)}</p>`,
   });
 

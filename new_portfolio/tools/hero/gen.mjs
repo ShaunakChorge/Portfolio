@@ -154,6 +154,7 @@ const hero = `<section id="home" class="hero" data-rail="01·intro" aria-labelle
         <div class="hero__cta" data-hero-in style="--d:420">
           <a class="btn btn--solid btn--glow" href="{{base}}${esc(H.cta_secondary.href)}" data-magnetic>${esc(H.cta_secondary.label)} ${icon('arrow-right')}</a>
           <a class="btn btn--purple" href="{{base}}${esc(H.cta_primary.href)}#hire" data-magnetic>${esc(H.cta_primary.label)} ${icon('arrow-right')}</a>
+          <a class="btn btn--ghost" href="{{base}}resume/" data-magnetic>View resume ${icon('file-text')}</a>
           <p class="hero__free"><span class="hero__free-dot" aria-hidden="true"></span>${esc(H.freelance_line)}</p>
         </div>
       </div>

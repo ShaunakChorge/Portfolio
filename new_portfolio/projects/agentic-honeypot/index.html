@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Shaunak Chorge | AI Engineer &amp; Freelance Developer</title>
+  <title>Shaunak Chorge | AI Engineer and Python Developer</title>
   <meta name="description" content="Case study: an AI that plays an easily fooled target, keeps scammers talking and records the UPI payment IDs, links and phone numbers they reveal.">
   <meta name="author" content="Shaunak Chorge">
   <meta name="robots" content="index, follow, max-image-preview:large">
@@ -174,7 +174,7 @@
           "name": "How well does it resist prompt injection?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It has a keyword filter for five phrases, such as \"ignore previous instructions\", and a request limiter. On a match, the bot sends a canned reply and the text never reaches the model. That is a first line of defence, not a complete solution, because a determined attacker can reword a trick. A client project would add attack tests."
+            "text": "It has a keyword filter for five phrases, such as \"ignore previous instructions\", and a request limiter. On a match, the bot sends a canned reply and the text never reaches the model. That is a first line of defence, not a complete solution, because a determined attacker can reword a trick. A real project would add attack tests."
           }
         },
         {
@@ -190,7 +190,7 @@
           "name": "How does the bot remember a conversation?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Each conversation is stored in server memory under its ID, with every message, the scam score, the current style and the details found. For each reply the AI model sees the last 10 messages. Because the store is in memory, a restart clears everything. A client version would use a database."
+            "text": "Each conversation is stored in server memory under its ID, with every message, the scam score, the current style and the details found. For each reply the AI model sees the last 10 messages. Because the store is in memory, a restart clears everything. A real version would use a database."
           }
         },
         {
@@ -198,7 +198,7 @@
           "name": "Does the honeypot report scammers anywhere?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Apart from the request to the AI model, it makes no outgoing calls. The collected details stay in the reply it returns, in server memory and on the dashboard. Sending them to a fraud team, a block list or a case system would be an addition I can build for a client."
+            "text": "No. Apart from the request to the AI model, it makes no outgoing calls. The collected details stay in the reply it returns, in server memory and on the dashboard. Sending them to a fraud team, a block list or a case system would be an addition I can build if a project needs it."
           }
         }
       ]
@@ -247,7 +247,7 @@
         </nav>
 
         <div class="site-header__tools">
-          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+          <a class="btn btn--sm btn--solid btn--glow hdr-hire" href="../../contact/#hire">Let's talk <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
           <button class="cmd" type="button" data-open-palette aria-label="Search">
             <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>
           </button>
@@ -269,7 +269,7 @@
       <li><a class="drawer__link" href="../../contact/" style="--i:5"><small>06</small>Contact</a></li>
     </ul>
     <div class="drawer__foot">
-      <a class="btn btn--solid btn--glow btn--sm drawer__hire" href="../../contact/#hire">Hire me <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+      <a class="btn btn--solid btn--glow btn--sm drawer__hire" href="../../contact/#hire">Let's talk <svg class="icon icon--sm icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
       <a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a>
       <a class="icon-btn" href="https://www.linkedin.com/in/shaunak-chorge" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-linkedin"/></svg></a>
       <a class="icon-btn" href="mailto:shaunak.chorge@gmail.com" aria-label="Email Shaunak"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></a>
@@ -288,7 +288,7 @@
         <h1 class="pg-h1"><span class="ai">AI</span> scam honeypot that keeps scammers talking</h1>
         <p class="pg-lead">An Artificial Intelligence (AI) victim that keeps scammers talking and takes notes.</p>
         <p class="pg-answer" data-answer>This AI scam honeypot is a counter-scam system co-built with Prasanna Patil. An AI plays an easily fooled victim, keeps scammers talking and records the UPI payment IDs, links and phone numbers they reveal. A rule-based selector changes its style as scam risk grows, and a live dashboard shows what it collects.</p>
-        <div class="pg-actions"><a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=llm-rag-development#hire">Hire me for something like this <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="btn btn--ghost btn--lg" href="../../projects/">All projects <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg></a></div>
+        <div class="pg-actions"><a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=llm-rag-development#hire">Discuss something like this <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a><a class="btn btn--ghost btn--lg" href="../../projects/">All projects <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-left"/></svg></a></div>
       </div>
       <div class="pg-head__aside"><div class="pg-casevis"><div class="pv" data-visual="chat" data-variant="agentic-honeypot" data-tone="cyan" aria-hidden="true"></div></div></div>
     </div>
@@ -386,21 +386,21 @@
 </section><section id="extensions" class="section pg-sec section--tint" aria-labelledby="extensions-h">
   <div class="container">
     <header class="section__head" data-reveal>
-      <p class="eyebrow">For your project</p>
+      <p class="eyebrow">Next steps beyond</p>
       <h2 id="extensions-h" class="section__title">What I can add for your <span class="hl">project</span></h2>
-      <p class="section__lead">Not part of this project. These are add-ons I can build for a client.</p>
+      <p class="section__lead">Not part of this project. These are further pieces I could build on top of it.</p>
     </header>
 <ul class="grid grid--c3 pg-ext pg-ext--n5" role="list"><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">A learned scam detector with scoring</h3><p>I can add a trained detector alongside the pattern rules and measure it on a labelled set of conversations.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">embeddings</li><li class="tag tag--dashed">scikit-learn</li><li class="tag tag--dashed">labelled test set</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">Memory and tools for the agent</h3><p>I can give the persona longer memory and tools, such as looking up earlier chats with the same sender.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">LangChain agents</li><li class="tag tag--dashed">vector database</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:2"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">Searchable conversation store</h3><p>I can save every conversation and collected detail so analysts can search and export them, or send them to a fraud team's system.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">PostgreSQL</li><li class="tag tag--dashed">full-text search</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:0"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">Attack-testing suite</h3><p>I can build automated tests of injection attempts and stronger output checks, going beyond the keyword filter.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">pytest</li><li class="tag tag--dashed">output checks</li></ul></article></li><li class="pg-ext__item" data-reveal style="--i:1"><article class="card card--flat pg-ext__card" data-tone="cyan"><h3 class="pg-ext__t">Tracking and analytics dashboards</h3><p>I can add dashboards for chat length, detail-collection rate and AI response time.</p><ul class="tags pg-ext__tags" role="list" aria-label="Possible tools"><li class="tag tag--dashed">OpenTelemetry</li><li class="tag tag--dashed">Prometheus</li></ul></article></li></ul>
   </div>
 </section><section id="hire-for" class="section pg-sec" aria-labelledby="hire-for-h">
   <div class="container">
     <header class="section__head" data-reveal>
-      <p class="eyebrow">Hire me</p>
+      <p class="eyebrow">What I offer</p>
       <h2 id="hire-for-h" class="section__title">Services behind <span class="hl hl--purple">this project</span></h2>
       
     </header>
-<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/llm-rag-development/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-brain-circuit"/></svg></span><span><strong>Hire me for AI chatbot development</strong><span class="pg-rel__t">Chatbots that answer from your documents and show their sources.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/ai-backend-fastapi-django/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-server"/></svg></span><span><strong>Hire me for Python and FastAPI backend development</strong><span class="pg-rel__t">FastAPI and Django services with automated tests and clear logs.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li></ul>
-    <p class="pg-author" data-reveal>Built by <a class="link" href="../../about/">Shaunak Chorge</a>, AI Engineer at Claptek Pvt Ltd in Mumbai.</p>
+<ul class="pg-rel" role="list" data-reveal-group><li><a class="pg-rel__link" href="../../services/llm-rag-development/" data-tone="cyan"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-brain-circuit"/></svg></span><span><strong>Conversational AI development</strong><span class="pg-rel__t">Chatbots that answer from your documents and show their sources.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li><li><a class="pg-rel__link" href="../../services/ai-backend-fastapi-django/" data-tone="blue"><span class="icon-tile"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-server"/></svg></span><span><strong>Python and FastAPI backend development</strong><span class="pg-rel__t">FastAPI and Django services with automated tests and clear logs.</span></span><svg class="icon pg-rel__go" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a></li></ul>
+    <p class="pg-author" data-reveal>Built by <a class="link" href="../../about/">Shaunak Chorge</a>, AI Engineer.</p>
   </div>
 </section><section id="faq" class="section pg-sec section--tint" aria-labelledby="faq-h">
   <div class="container">
@@ -420,16 +420,16 @@
       <div class="pg-qa__a"><p>It was co-built with Prasanna Patil. Prasanna wrote the first version, the Docker setup and the README. I added the injection filter and the request limiter, moved the AI from Gemini to Groq, and rewrote the persona prompts and the link and phone patterns. Of the 19 changes in the shared history, I wrote 4 and merged 4.</p></div>
     </details><details class="pg-qa" id="agentic-honeypot-q4" open data-reveal style="--i:3">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">How well does it resist prompt injection?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>It has a keyword filter for five phrases, such as &quot;ignore previous instructions&quot;, and a request limiter. On a match, the bot sends a canned reply and the text never reaches the model. That is a first line of defence, not a complete solution, because a determined attacker can reword a trick. A client project would add attack tests.</p></div>
+      <div class="pg-qa__a"><p>It has a keyword filter for five phrases, such as &quot;ignore previous instructions&quot;, and a request limiter. On a match, the bot sends a canned reply and the text never reaches the model. That is a first line of defence, not a complete solution, because a determined attacker can reword a trick. A real project would add attack tests.</p></div>
     </details><details class="pg-qa" id="agentic-honeypot-q5" open data-reveal style="--i:4">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">What details does the honeypot record from a scammer?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
       <div class="pg-qa__a"><p>It records UPI IDs, links and phone numbers found in the scammer's messages. Each record keeps its type, the value, a fixed confidence level and the turn where it appeared. It does not look for bank account numbers or card numbers. Records stay in server memory until the server restarts, and the dashboard shows them as they arrive.</p></div>
     </details><details class="pg-qa" id="agentic-honeypot-q6" open data-reveal style="--i:4">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">How does the bot remember a conversation?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>Each conversation is stored in server memory under its ID, with every message, the scam score, the current style and the details found. For each reply the AI model sees the last 10 messages. Because the store is in memory, a restart clears everything. A client version would use a database.</p></div>
+      <div class="pg-qa__a"><p>Each conversation is stored in server memory under its ID, with every message, the scam score, the current style and the details found. For each reply the AI model sees the last 10 messages. Because the store is in memory, a restart clears everything. A real version would use a database.</p></div>
     </details><details class="pg-qa" id="agentic-honeypot-q7" open data-reveal style="--i:4">
       <summary class="pg-qa__q"><h3 class="pg-qa__h">Does the honeypot report scammers anywhere?</h3><svg class="icon pg-qa__chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"/></svg></summary>
-      <div class="pg-qa__a"><p>No. Apart from the request to the AI model, it makes no outgoing calls. The collected details stay in the reply it returns, in server memory and on the dashboard. Sending them to a fraud team, a block list or a case system would be an addition I can build for a client.</p></div>
+      <div class="pg-qa__a"><p>No. Apart from the request to the AI model, it makes no outgoing calls. The collected details stay in the reply it returns, in server memory and on the dashboard. Sending them to a fraud team, a block list or a case system would be an addition I can build if a project needs it.</p></div>
     </details></div>
   </div>
 </section><section id="related" class="section pg-sec" aria-labelledby="related-h">
@@ -484,12 +484,12 @@
     <div class="pg-hire__band" data-reveal="scale">
       <span class="pg-hire__line" aria-hidden="true"></span>
       <div class="pg-hire__text">
-        <p class="badge badge--accent"><span class="badge__dot" aria-hidden="true"></span>Taking select freelance AI and backend projects</p>
-        <h2 id="hire-band-h" class="pg-hire__title">Need something <span class="hl">like this built?</span></h2>
-        <p class="pg-hire__lead">Send a short brief: what you want to build, roughly when you need it and anything I should know.</p>
+        <p class="badge badge--accent"><span class="badge__dot" aria-hidden="true"></span>Open to work with you</p>
+        <h2 id="hire-band-h" class="pg-hire__title">Need something <span class="hl">like this built,</span> or have a project?</h2>
+        <p class="pg-hire__lead">Send a short note about what you need to build, roughly when you need it and anything I should know.</p>
       </div>
       <div class="pg-hire__act">
-        <a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=llm-rag-development#hire" data-magnetic>Hire me <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+        <a class="btn btn--solid btn--lg btn--glow" href="../../contact/?topic=llm-rag-development#hire" data-magnetic>Let's talk <svg class="icon icon--still" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
         <p class="pg-hire__alt"><a class="link" href="mailto:shaunak.chorge@gmail.com">shaunak.chorge@gmail.com</a><span aria-hidden="true"> &middot; </span><a class="link" href="../../projects/">See projects</a></p>
       </div>
     </div>
@@ -515,7 +515,7 @@
           <svg class="footer__mark" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false"><defs><linearGradient id="ftm-g" x1="6" y1="2" x2="58" y2="62" gradientUnits="userSpaceOnUse"><stop stop-color="#00FFFF"/><stop offset=".52" stop-color="#B553F2"/><stop offset="1" stop-color="#FF006E"/></linearGradient></defs><path d="M44.76 1L3 7.32L3 15.5L39.02 38.91L3 61.49L3 63L9.03 63L61 43L61 36.5L27.4 14.66L61 2.07L61 1Z" fill="url(#ftm-g)"/></svg>
           <span class="logo__word">SHAUNAK</span>
         </p>
-        <p class="footer__blurb">AI Engineer at Claptek Pvt Ltd. Taking select freelance AI and backend projects.</p>
+        <p class="footer__blurb">AI Engineer at Claptek Pvt Ltd. Open to freelance work and full-time roles.</p>
         <p class="footer__loc"><svg class="icon icon--sm" aria-hidden="true" focusable="false"><use href="#i-map-pin"/></svg>Mumbai, India (IST)</p>
         <ul class="footer__soc" aria-label="Profiles">
           <li><a class="icon-btn" href="https://github.com/ShaunakChorge" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-github"/></svg></a></li>
@@ -591,8 +591,8 @@
       <p class="connect__h" id="connect-h">Let&rsquo;s talk</p>
       <ul class="connect__list" aria-labelledby="connect-h">
             <li><a class="connect__item" href="../../contact/#book"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><span><strong>Book a call</strong><small>Pick a day and time</small></span></a></li>
-            <li><a class="connect__item" href="../../contact/#hire"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg><span><strong>Send a brief</strong><small>Tell me what you need</small></span></a></li>
-            <li><a class="connect__item" href="https://wa.me/919920644655?text=Hi%20Shaunak%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg><span><strong>WhatsApp</strong><small>Message me directly</small></span><span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="connect__item" href="../../contact/#hire"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-send"/></svg><span><strong>Send a message</strong><small>Tell me what you need</small></span></a></li>
+            <li><a class="connect__item" href="https://wa.me/919920644655?text=Hi%20Shaunak%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20get%20in%20touch." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-message-circle"/></svg><span><strong>WhatsApp</strong><small>Message me directly</small></span><span class="sr-only"> (opens in a new tab)</span></a></li>
             <li><a class="connect__item" href="mailto:shaunak.chorge@gmail.com"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span><strong>Email</strong><small>Write to me</small></span></a></li>
       </ul>
     </div>
@@ -650,7 +650,7 @@
   <script defer src="../../assets/dist/js/core.min.js?v=6d3f6aa2"></script>
   <script defer src="../../assets/dist/js/contact.min.js?v=e16d51ee"></script>
   <script defer src="../../assets/dist/js/footer.min.js?v=f0044425"></script>
-  <script defer src="../../assets/dist/js/fx.min.js?v=a0339b5b"></script>
+  <script defer src="../../assets/dist/js/fx.min.js?v=c5331ab3"></script>
   <script defer src="../../assets/dist/js/pages.min.js?v=514d4156"></script>
   <script defer src="../../assets/dist/js/visuals.min.js?v=364afef6"></script>
 </body>

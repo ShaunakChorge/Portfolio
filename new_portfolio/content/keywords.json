@@ -323,8 +323,8 @@
       ],
       "anchors": {
         "footer": "AI chatbot development",
-        "related": "Freelance chatbot developer",
-        "hire": "AI chatbot development",
+        "related": "AI chatbots and assistants",
+        "hire": "Conversational AI development",
         "other": [
           "a chatbot that answers from your documents",
           "RAG chatbot service",
@@ -353,8 +353,8 @@
       ],
       "anchors": {
         "footer": "Document data extraction",
-        "related": "Pull data out of PDFs with AI",
-        "hire": "document data extraction",
+        "related": "Document data extraction",
+        "hire": "Document data extraction",
         "other": [
           "document extraction service",
           "AI for compliance documents",
@@ -384,7 +384,7 @@
       ],
       "anchors": {
         "footer": "FastAPI backend development",
-        "related": "Hire a FastAPI developer",
+        "related": "Backend and APIs",
         "hire": "Python and FastAPI backend development",
         "other": [
           "backend APIs in Python",
@@ -412,8 +412,8 @@
       ],
       "anchors": {
         "footer": "Computer vision development",
-        "related": "Object detection and video analytics",
-        "hire": "computer vision development",
+        "related": "Computer vision",
+        "hire": "Computer vision development",
         "other": [
           "freelance computer vision developer",
           "tools that count and detect in video",
@@ -443,8 +443,8 @@
       ],
       "anchors": {
         "footer": "Machine learning development",
-        "related": "Speech and text machine learning",
-        "hire": "machine learning model development",
+        "related": "Speech and machine learning",
+        "hire": "Machine learning model development",
         "other": [
           "freelance machine learning developer",
           "models for audio, text and spreadsheets",
@@ -473,7 +473,7 @@
       ],
       "anchors": {
         "footer": "Python automation and bots",
-        "related": "Web scrapers and chat bots",
+        "related": "Python automation and bots",
         "hire": "Python automation",
         "other": [
           "automate repetitive work with Python",
@@ -483,7 +483,7 @@
       }
     },
     "about/": {
-      "primary": "shaunak chorge ai engineer",
+      "primary": "shaunak chorge",
       "secondary": [
         "shaunak chorge claptek",
         "shaunak chorge mumbai",
@@ -514,12 +514,12 @@
         "Can you fix an existing AI project?",
         "Which tools do you use?",
         "Can the AI run on our own servers instead of an online service?",
-        "Can a freelancer sign an NDA?",
-        "Who owns the code written by a freelancer?",
+        "Can you sign a confidentiality agreement?",
+        "Who owns the code you write for a project?",
         "What does a project look like from start to finish?",
-        "What time zone does a Mumbai freelance AI developer work in?",
+        "What time zone does a Mumbai AI developer work in?",
         "How much does it cost to hire an AI developer in India?",
-        "How long does a freelance AI project take?",
+        "How long does an AI project take?",
         "What happens after you hand the project over?"
       ],
       "anchors": {

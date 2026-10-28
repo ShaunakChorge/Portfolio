@@ -20,7 +20,7 @@ function page() {
   const head = pageHead({
     crumbItems, b, eyebrow: 'Resume', h1: esc(m.h1),
     answer: m.direct_answer,
-    actions: `<a class="btn btn--solid btn--lg btn--glow" href="${b}${RESUME_PDF}" download="Shaunak-Chorge-Resume.pdf">Download PDF ${ico('download', 'icon--still')}</a>` + btn('Hire me', hireHref(b), { v: 'ghost', size: 'lg' }),
+    actions: `<a class="btn btn--solid btn--lg btn--glow" href="${b}${RESUME_PDF}" download="Shaunak-Chorge-Resume.pdf">Download PDF ${ico('download', 'icon--still')}</a>` + btn('Get in touch', hireHref(b), { v: 'ghost', size: 'lg' }),
   });
 
   const work = experience.filter(e => e.group === 'work');

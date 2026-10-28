@@ -1,6 +1,6 @@
 # Shaunak Chorge - AI Engineer at Claptek Pvt Ltd (Mumbai, India)
 
-> Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India. He holds a Bachelor of Technology in Artificial Intelligence and Data Science. He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job.
+> Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai, India. I hold a Bachelor of Technology in Artificial Intelligence and Data Science. He builds AI chatbots that answer from your own documents, Python backend APIs, and computer vision and speech models. He also takes select freelance AI and backend projects alongside his full-time job.
 
 Facts: role AI Engineer; employer Claptek Pvt Ltd; location Mumbai, Maharashtra, India (IST, UTC+5:30); education Bachelor of Technology in Artificial Intelligence and Data Science, Dr. D. Y. Patil School of Science and Technology; takes select freelance AI and backend projects.
 Contact: https://shaunakchorge.github.io/Portfolio/new_portfolio/contact/ - shaunak.chorge@gmail.com
@@ -30,11 +30,11 @@ Profiles: https://github.com/ShaunakChorge - https://www.linkedin.com/in/shaunak
 - [SMS spam classifier project built with Naive Bayes](https://shaunakchorge.github.io/Portfolio/new_portfolio/projects/spam-classifier/): SMS spam classifier project: TF-IDF and Naive Bayes on 5,169 text messages. 97.1% accuracy and no false alarms on 1,034 test messages.
 
 ## About and contact
-- [Home](https://shaunakchorge.github.io/Portfolio/new_portfolio/): Freelance AI engineer in Mumbai. I build AI chatbots that answer from your documents, computer vision tools and Python backend APIs. Send a short brief.
-- [About Shaunak Chorge, AI engineer](https://shaunakchorge.github.io/Portfolio/new_portfolio/about/): Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai. Read about his background, experience, tools and how he works with freelance clients.
-- [Resume](https://shaunakchorge.github.io/Portfolio/new_portfolio/resume/): Resume of Shaunak Chorge, AI Engineer: work at Claptek Pvt Ltd, Osource Global and Shivohini Tech-AI, education, certifications and awards. PDF download.
-- [AI developer cost in India: freelance FAQ](https://shaunakchorge.github.io/Portfolio/new_portfolio/faq/): Answers about the cost of hiring Shaunak Chorge as an AI developer: how pricing works, timelines, NDAs, code ownership, fixing projects and support.
-- [Hire an AI developer for your project](https://shaunakchorge.github.io/Portfolio/new_portfolio/contact/): Send a short brief to hire Shaunak Chorge, a freelance AI developer in Mumbai, for chatbots, computer vision, Python backend APIs or automation.
+- [Home](https://shaunakchorge.github.io/Portfolio/new_portfolio/): AI engineer in Mumbai building chatbots that answer from documents, computer vision and Python backends. Open to full-time roles and freelance projects.
+- [About Shaunak Chorge](https://shaunakchorge.github.io/Portfolio/new_portfolio/about/): Shaunak Chorge is an AI Engineer at Claptek Pvt Ltd in Mumbai. Read about his background, experience and tools. Open to full-time roles and freelance work.
+- [Resume](https://shaunakchorge.github.io/Portfolio/new_portfolio/resume/): Resume of Shaunak Chorge, AI Engineer in Mumbai, open to full-time roles. Work at Claptek Pvt Ltd, Osource Global and Shivohini Tech-AI. PDF download.
+- [AI developer cost in India: questions and answers](https://shaunakchorge.github.io/Portfolio/new_portfolio/faq/): Answers about the cost of hiring Shaunak Chorge as an AI developer: pricing, timelines, confidentiality, code ownership and support.
+- [Hire an AI developer, or talk about a role](https://shaunakchorge.github.io/Portfolio/new_portfolio/contact/): Contact Shaunak Chorge, an AI developer in Mumbai, about a project or a full-time role. Chatbots, computer vision, Python backends and automation.
 
 ## Optional
 - [Full text of these pages](https://shaunakchorge.github.io/Portfolio/new_portfolio/llms-full.txt): plain-text version of every page: services, case studies, about, FAQ, contact and resume

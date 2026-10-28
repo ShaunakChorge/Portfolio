@@ -93,7 +93,7 @@ export function title(override, fallbackHtml, cls = '') {
 }
 
 /* ---------- hire band: the closing block of every page ---------- */
-export function hireBand({ b, heading, text, topic = '', secondary = null }) {
+export function hireBand({ b, heading, text, topic = '', secondary = null, cta = 'Get in touch' }) {
   const href = hireHref(b, topic);
   const sec = secondary || { label: 'See projects', href: `${b}projects/` };
   return `<section class="section pg-sec pg-hire" aria-labelledby="hire-band-h">
@@ -106,7 +106,7 @@ export function hireBand({ b, heading, text, topic = '', secondary = null }) {
         <p class="pg-hire__lead">${esc(text)}</p>
       </div>
       <div class="pg-hire__act">
-        <a class="btn btn--solid btn--lg btn--glow" href="${href}" data-magnetic>Hire me ${ico('arrow-right', 'icon--still')}</a>
+        <a class="btn btn--solid btn--lg btn--glow" href="${href}" data-magnetic>${esc(cta)} ${ico('arrow-right', 'icon--still')}</a>
         <p class="pg-hire__alt"><a class="link" href="mailto:${EMAIL}">${EMAIL}</a><span aria-hidden="true"> &middot; </span><a class="link" href="${sec.href}">${esc(sec.label)}</a></p>
       </div>
     </div>
@@ -224,7 +224,7 @@ export function bookingPanel() {
               <div class="field" data-field="name"><label for="bk-name">Name</label><input class="input" id="bk-name" name="name" type="text" autocomplete="name" autocapitalize="words" maxlength="80" required placeholder="Your name" aria-describedby="bk-name-err">${fieldError('bk-name-err')}</div>
               <div class="field" data-field="email"><label for="bk-email">Email</label><input class="input" id="bk-email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" maxlength="120" required placeholder="you@example.com" aria-describedby="bk-email-err">${fieldError('bk-email-err')}</div>
             </div>
-            <div class="field"><label for="bk-type">What is it about?</label><select class="input" id="bk-type" name="project_type"><option value="">Choose one (optional)</option>${opts}<option value="other">Something else</option></select></div>
+            <div class="field"><label for="bk-type">What is it about?</label><select class="input" id="bk-type" name="project_type"><option value="">Choose one (optional)</option>${opts}<option value="role">Full-time role or job opportunity</option><option value="other">Something else</option></select></div>
             <div class="field" data-field="message"><label class="label" for="bk-note">Anything I should read first? <span class="book__opt">(optional)</span></label><textarea class="input" id="bk-note" name="message" rows="3" maxlength="800" placeholder="A line or two about what you want to talk about"></textarea></div>
             <div class="hp" aria-hidden="true" inert><label for="bk-website">Leave this field empty</label><input id="bk-website" type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>
 
@@ -438,6 +438,7 @@ ${typeOptions ? `
                 <select class="input" id="cf-type" name="project_type">
                   <option value="">Choose one (optional)</option>
                   ${typeOptions}
+                  <option value="role">Full-time role or job opportunity</option>
                   <option value="other">Something else</option>
                 </select>
               </div>
